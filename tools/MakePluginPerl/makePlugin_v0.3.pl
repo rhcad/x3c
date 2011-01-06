@@ -2,12 +2,14 @@
 ####################################################################################
 # Description: X3框架插件创建脚本
 # Usage:          
-# Creator:     Huangye
+# Creator:     thinkhy
 # Date:        2010.10.13 
 #
-# ChangeList:  1. 更改接口文件，替换GUID, 完成脚本的基本功能。  [Huangye 10/10/19]
-#              2. 增加了对配置文件(config.h)的支持。            [Huangye 10/10/21]
-#              3. 更改资源文件版本信息                          [Huangye 10/11/15]
+# ChangeList:  1. 更改接口文件，替换GUID, 完成脚本的基本功能。  [thinkhy 10/10/19]
+#              2. 增加了对配置文件(config.h)的支持。            [thinkhy 10/10/21]
+#              3. 更改资源文件版本信息                          [thinkhy 10/11/15]
+#
+#  TODO: 1. Remove all the SVN information  in the directory of the generated plugin。 [thinkhy 11/01/06]
 ####################################################################################
 use strict;
 use warnings;
