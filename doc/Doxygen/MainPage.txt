@@ -1,0 +1,41 @@
+/*!
+	\defgroup _GROUP_PLUGIN_CORE_ 插件内核基本部分
+	\defgroup _GROUP_PLUGIN_CORE2_ 插件内核其余部分
+	\defgroup _GROUP_PLUGIN_LOG_ 日志输出
+	\defgroup _GROUP_CHANGE_OBSERVER_ 改变通知
+	\defgroup _GROUP_PLUGIN_XML_ XML接口
+	\defgroup _GROUP_UTILFUNC 实用函数
+	\defgroup _GROUP_UTILITY_ 实用技术
+	\defgroup _GROUP_APPUI_ 程序界面
+*/
+
+/*! \mainpage X3插件框架 接口说明文档
+
+	\section sectinoIntro 概述
+
+	X3插件框架是一套C++通用插件开发框架。各个应用程序可复用此框架，基于此框架快速开发。\n
+	X3插件框架内核包含 PluginManager、ChangeManager、LogManager、StringTable、ConfigXml 等通用轻量级C++插件。
+	
+	X3插件框架内核接口说明分为以下部分：
+
+	- \ref _GROUP_PLUGIN_CORE_ "插件内核" \n
+		插件的基本接口和宏，是开发插件的基础。\n\n
+		
+	- \ref _GROUP_PLUGIN_LOG_ "日志输出" \n
+		各种日志输出宏和相应接口，实现插件一般都需要使用这些宏。\n\n
+	
+	- \ref _GROUP_CHANGE_OBSERVER_ "改变通知" \n
+		改变通知观察者类和辅助函数，使用该Observer机制可优化职责链的实现处理。\n\n
+
+	- \ref _GROUP_PLUGIN_XML_ "XML接口" \n
+		常用的 XML 文件操作的插件接口，可用于数据读写和数据对象管理。\n\n
+		
+	- \ref _GROUP_UTILFUNC "实用函数" \n
+		插件开发常用的实用函数。\n\n
+		
+	- \ref _GROUP_UTILITY_ "实用技术" \n
+		常用的实用技术的插件接口。\n\n
+		
+	- \ref _GROUP_APPUI_ "通用程序界面" \n
+		主程序界面的插件接口，实现了主框架窗口、界面布局、界面自定义等功能。\n\n
+*/

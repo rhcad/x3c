@@ -1,0 +1,10 @@
+// TextUtility.rc - resource script.
+//
+
+#include <afxres.h>
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(936)
+#include "Version.rc2"
+#endif
