@@ -1,0 +1,8 @@
+X3 C++ PluginFramework
+https://sourceforge.net/projects/x3c/
+
+A plugin-framework using VC++ and STL, not using MFC/ATL/COM. 
+It has many frequently-used and lightweight plugins. 
+We can use it to develop more plugins and windows applications easily. 
+
+License: Apache License V2.0.
