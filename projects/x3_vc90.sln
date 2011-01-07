@@ -1,59 +1,58 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
+﻿Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Example", "pkg_Example", "{DCB7E9CB-9405-45AD-8585-8D8662F2B357}"
 	ProjectSection(SolutionItems) = preProject
-		code\pkg_Example\Readme.txt = code\pkg_Example\Readme.txt
+		..\code\pkg_Example\Readme.txt = ..\code\pkg_Example\Readme.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Utility", "pkg_Utility", "{0ED0E7DC-EB46-4C14-A562-3427886E2415}"
 	ProjectSection(SolutionItems) = preProject
-		code\pkg_Utility\Readme.txt = code\pkg_Utility\Readme.txt
+		..\code\pkg_Utility\Readme.txt = ..\code\pkg_Utility\Readme.txt
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32DllTempl", "code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl_vc90.vcproj", "{24CFB065-736B-4230-AF7E-5C3C3ABF8D41}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32DllTempl", "..\code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl_vc90.vcproj", "{24CFB065-736B-4230-AF7E-5C3C3ABF8D41}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MFCExtTempl", "code\pkg_Example\Modules\MFCExtTempl\MFCExtTempl_vc90.vcproj", "{651F7373-89B1-4E67-AE79-599D8ABB59DC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MFCExtTempl", "..\code\pkg_Example\Modules\MFCExtTempl\MFCExtTempl_vc90.vcproj", "{651F7373-89B1-4E67-AE79-599D8ABB59DC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleUse", "code\pkg_Example\Modules\SimpleUse\SimpleUse_vc90.vcproj", "{F5022746-4449-44F3-A10A-641ADE2CFEB4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleUse", "..\code\pkg_Example\Modules\SimpleUse\SimpleUse_vc90.vcproj", "{F5022746-4449-44F3-A10A-641ADE2CFEB4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleApp", "code\pkg_Example\Modules\SimpleApp\SimpleApp_vc90.vcproj", "{411B7A4B-EA8C-4868-BF47-9CBFADCA81BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleApp", "..\code\pkg_Example\Modules\SimpleApp\SimpleApp_vc90.vcproj", "{411B7A4B-EA8C-4868-BF47-9CBFADCA81BF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeObserverExample", "code\pkg_Example\Modules\ChangeObserverExample\ChangeObserverExample_vc90.vcproj", "{147FB08D-271B-45CB-A2A1-48CFE4D2AB98}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeObserverExample", "..\code\pkg_Example\Modules\ChangeObserverExample\ChangeObserverExample_vc90.vcproj", "{147FB08D-271B-45CB-A2A1-48CFE4D2AB98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Core", "pkg_Core", "{E20E78F8-8C7C-4DE5-B6FF-13DC09F4FBE9}"
 	ProjectSection(SolutionItems) = preProject
-		code\pkg_Core\Readme.txt = code\pkg_Core\Readme.txt
+		..\code\pkg_Core\Readme.txt = ..\code\pkg_Core\Readme.txt
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeManager", "code\pkg_Core\Modules\ChangeManager\ChangeManager_vc90.vcproj", "{F490531F-5245-4D7C-8C39-9CA5CC075C23}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeManager", "..\code\pkg_Core\Modules\ChangeManager\ChangeManager_vc90.vcproj", "{F490531F-5245-4D7C-8C39-9CA5CC075C23}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringTable", "code\pkg_Core\Modules\StringTable\StringTable_vc90.vcproj", "{116253AA-964C-43AF-8840-B6A73CBA5B88}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringTable", "..\code\pkg_Core\Modules\StringTable\StringTable_vc90.vcproj", "{116253AA-964C-43AF-8840-B6A73CBA5B88}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginManager", "code\pkg_Core\Modules\PluginManager\PluginManager_vc90.vcproj", "{686F7780-B33C-40B5-BBF6-06C3F782E6EC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginManager", "..\code\pkg_Core\Modules\PluginManager\PluginManager_vc90.vcproj", "{686F7780-B33C-40B5-BBF6-06C3F782E6EC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogManager", "code\pkg_Core\Modules\LogManager\LogManager_vc90.vcproj", "{8B8DE09B-41A4-49AA-B2EE-84A16925A9D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogManager", "..\code\pkg_Core\Modules\LogManager\LogManager_vc90.vcproj", "{8B8DE09B-41A4-49AA-B2EE-84A16925A9D6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConfigXml", "code\pkg_Core\Modules\ConfigXml\ConfigXml_vc90.vcproj", "{4FC1867D-DA2A-40A1-B2AB-CCD1C099C96C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConfigXml", "..\code\pkg_Core\Modules\ConfigXml\ConfigXml_vc90.vcproj", "{4FC1867D-DA2A-40A1-B2AB-CCD1C099C96C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConfigDB", "code\pkg_Utility\Modules\ConfigDB\ConfigDB_vc90.vcproj", "{37157F4B-3CE5-4112-8905-5F5610D9DC5C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConfigDB", "..\code\pkg_Utility\Modules\ConfigDB\ConfigDB_vc90.vcproj", "{37157F4B-3CE5-4112-8905-5F5610D9DC5C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextUtility", "code\pkg_Utility\Modules\TextUtility\TextUtility_vc90.vcproj", "{F394F1CA-6694-4FAA-AE8B-68D71FFBE405}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextUtility", "..\code\pkg_Utility\Modules\TextUtility\TextUtility_vc90.vcproj", "{F394F1CA-6694-4FAA-AE8B-68D71FFBE405}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogWriter", "code\pkg_Utility\Modules\LogWriter\LogWriter_vc90.vcproj", "{78541BB2-523B-475B-9BAC-49632B228043}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogWriter", "..\code\pkg_Utility\Modules\LogWriter\LogWriter_vc90.vcproj", "{78541BB2-523B-475B-9BAC-49632B228043}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileUtility", "code\pkg_Utility\Modules\FileUtility\FileUtility_vc90.vcproj", "{503629A7-8C6B-41CD-87D5-64FF2A214A87}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileUtility", "..\code\pkg_Utility\Modules\FileUtility\FileUtility_vc90.vcproj", "{503629A7-8C6B-41CD-87D5-64FF2A214A87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_UnitTest", "pkg_UnitTest", "{A2AEF2DD-3E35-47E7-A9E7-8FBB0B58A5DA}"
 	ProjectSection(SolutionItems) = preProject
-		code\pkg_UnitTest\Readme.txt = code\pkg_UnitTest\Readme.txt
+		..\code\pkg_UnitTest\Readme.txt = ..\code\pkg_UnitTest\Readme.txt
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCore", "code\pkg_UnitTest\Modules\TestCore\TestCore_vc90.vcproj", "{D26563C9-C48F-45FB-8EB6-1560B663F353}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCore", "..\code\pkg_UnitTest\Modules\TestCore\TestCore_vc90.vcproj", "{D26563C9-C48F-45FB-8EB6-1560B663F353}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_AppUI", "pkg_AppUI", "{912655C8-FC42-4541-9A9A-284A334EECCE}"
 	ProjectSection(SolutionItems) = preProject
-		code\pkg_AppUI\Readme.txt = code\pkg_AppUI\Readme.txt
+		..\code\pkg_AppUI\Readme.txt = ..\code\pkg_AppUI\Readme.txt
 	EndProjectSection
 EndProject
 Global

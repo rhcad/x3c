@@ -5,4 +5,15 @@ A plugin-framework using VC++ and STL, not using MFC/ATL/COM.
 It has many frequently-used and lightweight plugins. 
 We can use it to develop more plugins and windows applications easily. 
 
-License: Apache License V2.0.
+License: Apache License V2.0
+
+Bug reports are welcome.  Please use the SourceForge bug tracking
+system at https://sourceforge.net/projects/x3c/.
+
+Email to the current maintainers may be sent to
+<ooyg@users.sourceforge.net>.
+
+projects: VC++ workspace files.
+code: source code of plugins.
+doc: development documents and doxygen files.
+tools: some useful tools for development.

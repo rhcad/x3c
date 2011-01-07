@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "ChangeManager"=.\code\pkg_Core\Modules\ChangeManager\ChangeManager.dsp - Package Owner=<4>
+Project: "ChangeManager"=..\code\pkg_Core\Modules\ChangeManager\ChangeManager.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -15,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ChangeObserverExample"=.\code\pkg_Example\Modules\ChangeObserverExample\ChangeObserverExample.dsp - Package Owner=<4>
+Project: "ChangeObserverExample"=..\code\pkg_Example\Modules\ChangeObserverExample\ChangeObserverExample.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -27,7 +27,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ConfigDB"=.\code\pkg_Utility\Modules\ConfigDB\ConfigDB.dsp - Package Owner=<4>
+Project: "ConfigDB"=..\code\pkg_Utility\Modules\ConfigDB\ConfigDB.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -39,7 +39,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ConfigXml"=.\code\pkg_Core\Modules\ConfigXml\ConfigXml.dsp - Package Owner=<4>
+Project: "ConfigXml"=..\code\pkg_Core\Modules\ConfigXml\ConfigXml.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -51,7 +51,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "FileUtility"=.\code\pkg_Utility\Modules\FileUtility\FileUtility.dsp - Package Owner=<4>
+Project: "FileUtility"=..\code\pkg_Utility\Modules\FileUtility\FileUtility.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -63,7 +63,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "LogManager"=.\code\pkg_Core\Modules\LogManager\LogManager.dsp - Package Owner=<4>
+Project: "LogManager"=..\code\pkg_Core\Modules\LogManager\LogManager.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -75,7 +75,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "LogWriter"=.\code\pkg_Utility\Modules\LogWriter\LogWriter.dsp - Package Owner=<4>
+Project: "LogWriter"=..\code\pkg_Utility\Modules\LogWriter\LogWriter.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -87,7 +87,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "MFCExtTempl"=.\code\pkg_Example\Modules\MFCExtTempl\MFCExtTempl.dsp - Package Owner=<4>
+Project: "MFCExtTempl"=..\code\pkg_Example\Modules\MFCExtTempl\MFCExtTempl.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -99,7 +99,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "PluginManager"=.\code\pkg_Core\Modules\PluginManager\PluginManager.dsp - Package Owner=<4>
+Project: "PluginManager"=..\code\pkg_Core\Modules\PluginManager\PluginManager.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -111,7 +111,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "SimpleApp"=.\code\pkg_Example\Modules\SimpleApp\SimpleApp.dsp - Package Owner=<4>
+Project: "SimpleApp"=..\code\pkg_Example\Modules\SimpleApp\SimpleApp.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -123,7 +123,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "SimpleUse"=.\code\pkg_Example\Modules\SimpleUse\SimpleUse.dsp - Package Owner=<4>
+Project: "SimpleUse"=..\code\pkg_Example\Modules\SimpleUse\SimpleUse.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -135,7 +135,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "StringTable"=.\code\pkg_Core\Modules\StringTable\StringTable.dsp - Package Owner=<4>
+Project: "StringTable"=..\code\pkg_Core\Modules\StringTable\StringTable.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -147,7 +147,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TestCore"=.\code\pkg_UnitTest\Modules\TestCore\TestCore.dsp - Package Owner=<4>
+Project: "TestCore"=..\code\pkg_UnitTest\Modules\TestCore\TestCore.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -159,7 +159,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TextUtility"=.\code\pkg_Utility\Modules\TextUtility\TextUtility.dsp - Package Owner=<4>
+Project: "TextUtility"=..\code\pkg_Utility\Modules\TextUtility\TextUtility.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -171,7 +171,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "Win32DllTempl"=.\code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl.dsp - Package Owner=<4>
+Project: "Win32DllTempl"=..\code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
