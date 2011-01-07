@@ -2,14 +2,25 @@ X3 C++ PluginFramework
 
 2011-01-06, Zhang Yun Gui <rhcad@hotmail.com>
 
-    ChangeManager v1.0.0.2
-        Cx_ChangeManager: change std::multimap to std::hash_multimap, remove my hash function.
-        
-    PluginManager v1.0.0.2
-        Cx_ObjectFactory: change class-table from std::map to std::hash_map.
-        add 'Tao Jian Lin' to author list.
-    
-    Interface.doxyfile: change to relative paths.
+	* Move VC++ workspace files (x3_vc*.sln) to 'projects' folder.
+	* Release vesion 1.0.2 (tags/x3-1.0.2)
+
+2011-01-06, Huang Ye <think.hy@gmail.com>
+
+	* Add a tool in 'tools\MakePluginPerl'.
+
+2011-01-05, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * ChangeManager v1.0.0.2:
+    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.h and cpp:
+    change std::multimap to std::hash_multimap, remove my hash function.
+
+    * PluginManager v1.0.0.2:
+    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h and cpp:
+    	change class-table from std::map to std::hash_map. add 'Tao Jian Lin' to author list.
+
+    * doc\Doxygen\Interface.doxyfile: change include files to relative paths.
 
 2011-01-04, Zhang Yun Gui <rhcad@hotmail.com>
-    First release (x3_r01).
+
+    * First release (x3_r01).
