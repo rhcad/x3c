@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-01-09, Zhang Yun Gui <rhcad@hotmail.com>
+
+	* ConfigXml v1.0.0.2:
+	* pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h: automatic call CoInitializeEx to avoid caller forget it.
+
 2011-01-06, Zhang Yun Gui <rhcad@hotmail.com>
 
 	* Move VC++ workspace files (x3_vc*.sln) to 'projects' folder.
@@ -8,6 +13,7 @@ X3 C++ PluginFramework
 2011-01-06, Huang Ye <think.hy@gmail.com>
 
 	* Add a tool in 'tools\MakePluginPerl'.
+	It's a tool writing in perl for auto-generating plugin project.
 
 2011-01-05, Zhang Yun Gui <rhcad@hotmail.com>
 

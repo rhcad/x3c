@@ -16,6 +16,8 @@
 #ifndef _X3_CONFIGXML_CONFIGXMLIMPL_H
 #define _X3_CONFIGXML_CONFIGXMLIMPL_H
 
+#include <comdef.h>
+
 interface IFileCryptHandler;
 interface Ix_ConfigData;
 
@@ -34,6 +36,7 @@ struct ConfigXmlImpl
 	CXTPDOMElementPtr	m_xmlRoot;
 	IFileCryptHandler*	m_pCryptHandler;
 	Ix_ConfigData*		m_pThis;
+	bool				m_bInitCom;
 
 	ConfigXmlImpl(Ix_ConfigData* pThis) : m_pThis(pThis)
 	{
@@ -43,6 +46,17 @@ struct ConfigXmlImpl
 		m_bNeedLoad = true;
 		m_strEncoding = L"UTF-8";
 		m_pCryptHandler = NULL;
+		m_bInitCom = SUCCEEDED(CoInitializeEx(NULL, COINIT_MULTITHREADED));
+	}
+
+	~ConfigXmlImpl()
+	{
+		m_xmlRoot.Release();
+		m_xmlDoc.Release();
+		if (m_bInitCom)
+		{
+			CoUninitialize();
+		}
 	}
 
 	CXTPDOMElementPtr GetRoot()

@@ -13,7 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if _MSC_VER >= 1600 // VC2010
+#define  _WIN32_WINNT   0x0400
+#if _MSC_VER >= 1600		// VC2010
 #include <SDKDDKVer.h>		// Defines the highest available Windows platform.
 #endif
 
