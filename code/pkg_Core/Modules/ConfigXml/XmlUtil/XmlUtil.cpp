@@ -14,6 +14,8 @@
 // limitations under the License.
 
 // XmlUtil.cpp: implementation of the CXmlUtil class.
+// changes:
+//    2011-01-10, Zhang Yun Gui: support MSXML6 and MSXML4
 //
 
 #include "stdafx.h"
@@ -39,7 +41,9 @@ static inline bool IsNotEmpty(LPCWSTR sz)
 	return sz != NULL && *sz != 0;
 }
 
-static const CLSID CLSID_XmlDocument = 
+static const CLSID CLSID_XmlDocument60 = 
+	{ 0x88d96a05, 0xf192, 0x11d4,{0xa6,0x5f,0x00,0x40,0x96,0x32,0x51,0xe5}};
+static const CLSID CLSID_XmlDocument40 = 
 	{ 0x88d969c0, 0xf192, 0x11d4,{0xa6,0x5f,0x00,0x40,0x96,0x32,0x51,0xe5}};
 
 class LocalHResult
@@ -79,7 +83,8 @@ bool CXmlUtil::NewXMLFile(CXTPDOMDocumentPtr& doc,
 	LocalHResult hr;
 
 	doc = NULL;
-	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument)))
+	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
+		&& FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
 	{
 #ifdef LOGHEAD
 		LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
@@ -154,7 +159,8 @@ bool CXmlUtil::LoadXMLFile(CXTPDOMDocumentPtr& doc,
 	VARIANT_BOOL bLoad;
 	
 	doc = NULL;
-	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument)))
+	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
+		&& FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
 	{
 #ifdef LOGHEAD
 		LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
@@ -243,7 +249,8 @@ bool CXmlUtil::LoadXMLFromString(CXTPDOMDocumentPtr& doc, LPCSTR pszXML)
 	}
 	
 	doc = NULL;
-	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument)))
+	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
+		&& FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
 	{
 #ifdef LOGHEAD
 		LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
@@ -272,7 +279,8 @@ bool CXmlUtil::LoadXMLFromString(CXTPDOMDocumentPtr& doc, LPCWSTR pszXML)
 	}
 	
 	doc = NULL;
-	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument)))
+	if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
+		&& FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
 	{
 #ifdef LOGHEAD
 		LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
