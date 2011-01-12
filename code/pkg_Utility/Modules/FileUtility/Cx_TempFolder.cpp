@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,82 +26,82 @@ Cx_TempFolder::Cx_TempFolder()
 
 Cx_TempFolder::~Cx_TempFolder()
 {
-	DeleteFolder();
+    DeleteFolder();
 }
 
 bool Cx_TempFolder::DeleteFolder()
 {
-	bool bRet = false;
+    bool bRet = false;
 
-	if (!m_wstrPath.empty())
-	{
-		Cx_Interface<Ix_FileTransaction> pIFTransaction(CLSID_FileTransaction);
-		bRet = pIFTransaction->DeletePathFile(m_wstrPath.c_str());
-		if (bRet)
-			m_wstrPath.resize(0);
-		else
-			c_arrToDel.push_back(m_wstrPath);
-	}
+    if (!m_wstrPath.empty())
+    {
+        Cx_Interface<Ix_FileTransaction> pIFTransaction(CLSID_FileTransaction);
+        bRet = pIFTransaction->DeletePathFile(m_wstrPath.c_str());
+        if (bRet)
+            m_wstrPath.resize(0);
+        else
+            c_arrToDel.push_back(m_wstrPath);
+    }
 
-	return bRet;
+    return bRet;
 }
 
 void Cx_TempFolder::DeleteFolders()
 {
-	while (!c_arrToDel.empty())
-	{
-		std::wstring wstrPath(c_arrToDel.back());
-		c_arrToDel.pop_back();
-		FileUtility()->DeletePathFile(wstrPath.c_str());
-	}
+    while (!c_arrToDel.empty())
+    {
+        std::wstring wstrPath(c_arrToDel.back());
+        c_arrToDel.pop_back();
+        FileUtility()->DeletePathFile(wstrPath.c_str());
+    }
 }
 
 void Cx_TempFolder::SetRootPath(const std::wstring& wstrPath)
 {
-	m_wstrRootPath = wstrPath;
+    m_wstrRootPath = wstrPath;
 }
 
 std::wstring Cx_TempFolder::CreateFolder(const std::wstring& wstrPrefix)
 {
-	ASSERT(!m_wstrRootPath.empty());
+    ASSERT(!m_wstrRootPath.empty());
 
-	Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
 
-	DeleteFolder();
-	for (int i = 1; i < 9999; i++)
-	{
-		WCHAR szFileName[MAX_PATH] = { 0 };
-		swprintf_s(szFileName, _countof(szFileName), L"%s%03d", wstrPrefix.c_str(), i);
-		std::wstring wstrPath (pIFUtility->RelToAbs(szFileName, false, m_wstrRootPath.c_str(), false));
+    DeleteFolder();
+    for (int i = 1; i < 9999; i++)
+    {
+        WCHAR szFileName[MAX_PATH] = { 0 };
+        swprintf_s(szFileName, _countof(szFileName), L"%s%03d", wstrPrefix.c_str(), i);
+        std::wstring wstrPath (pIFUtility->RelToAbs(szFileName, false, m_wstrRootPath.c_str(), false));
 
-		if (!pIFUtility->IsPathFileExists(wstrPath.c_str()))
-		{
-			m_wstrPath = wstrPath;
-			break;
-		}
-	}
+        if (!pIFUtility->IsPathFileExists(wstrPath.c_str()))
+        {
+            m_wstrPath = wstrPath;
+            break;
+        }
+    }
 
-	bool bRet = !m_wstrPath.empty() && pIFUtility->CreateDirectory(m_wstrPath.c_str(), true);
-	return bRet ? m_wstrPath : L"?";
+    bool bRet = !m_wstrPath.empty() && pIFUtility->CreateDirectory(m_wstrPath.c_str(), true);
+    return bRet ? m_wstrPath : L"?";
 }
 
 std::wstring Cx_TempFolder::GetPath() const
 {
-	return m_wstrPath;
+    return m_wstrPath;
 }
 
 std::wstring Cx_TempFolder::CreateFileName(const std::wstring& wstrPrefix, 
-										   const std::wstring& wstrExtName)
+                                           const std::wstring& wstrExtName)
 {
-	Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
 
-	std::wstring strFileName;
-	
-	if (!m_wstrPath.empty())
-	{
-		strFileName = pIFUtility->CreateFileName(m_wstrPath, wstrPrefix, wstrExtName);
-		strFileName = pIFUtility->RelToAbs(strFileName.c_str(), true, m_wstrPath.c_str(), false);
-	}
+    std::wstring strFileName;
+    
+    if (!m_wstrPath.empty())
+    {
+        strFileName = pIFUtility->CreateFileName(m_wstrPath, wstrPrefix, wstrExtName);
+        strFileName = pIFUtility->RelToAbs(strFileName.c_str(), true, m_wstrPath.c_str(), false);
+    }
 
-	return strFileName;
+    return strFileName;
 }

@@ -5,20 +5,20 @@ void Test();
 
 int main()
 {
-	CPluginManager loader;
+    CPluginManager loader;
 
-	if (loader.LoadPluginManager(L"../Plugins"))
-	{
-		loader.GetPluginLoader()->LoadPluginFiles(L"../Plugins", 
-			L"Win32DllTempl.plugin.dll");
-		loader.GetPluginLoader()->InitializePlugins();
+    if (loader.LoadPluginManager(L"../Plugins"))
+    {
+        loader.GetPluginLoader()->LoadPluginFiles(L"../Plugins", 
+            L"Win32DllTempl.plugin.dll");
+        loader.GetPluginLoader()->InitializePlugins();
 
-		Test();
+        Test();
 
-		loader.Unload();
-	}
+        loader.Unload();
+    }
 
-	return 0;
+    return 0;
 }
 
 
@@ -36,7 +36,7 @@ void MyFunc2(const Cx_Ptr& obj)
 
 void Test()
 {
-	// 使用类ID和接口创建对象
+    // 使用类ID和接口创建对象
     Cx_Interface<Ix_Example> pIFExample(CLSID_Example);
     if (pIFExample)
     {

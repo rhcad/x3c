@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,18 +21,18 @@
 class Cx_FileTransaction : public Ix_FileTransaction
 {
 public:
-	Cx_FileTransaction();
-	virtual ~Cx_FileTransaction();
+    Cx_FileTransaction();
+    virtual ~Cx_FileTransaction();
 
 public:
-	// From Ix_FileTransaction
-	virtual void Rollback();
-	virtual long GetLevel() const;
-	virtual bool IsRollbacking() const;
-	virtual bool DeletePathFile(LPCWSTR pszFileName, bool bRecycle = false);
+    // From Ix_FileTransaction
+    virtual void Rollback();
+    virtual long GetLevel() const;
+    virtual bool IsRollbacking() const;
+    virtual bool DeletePathFile(LPCWSTR pszFileName, bool bRecycle = false);
 
 private:
-	long		m_lLevel;
+    long        m_lLevel;
 };
 
 #endif // _X3_UTILITY_FILETRANSACTION_H

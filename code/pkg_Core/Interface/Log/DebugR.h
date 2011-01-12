@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,16 +30,16 @@ int XCrtDbgReport(const char* file, long line, const char* msg);
 #undef ASSERT
 #undef VERIFY
 
-#define ASSERT(expr)	\
-	(void) ((!!(expr)) || \
-	(1 != XCrtDbgReport(__FILE__, __LINE__, #expr)) || \
-	(__debugbreak(), 0))
+#define ASSERT(expr)    \
+    (void) ((!!(expr)) || \
+    (1 != XCrtDbgReport(__FILE__, __LINE__, #expr)) || \
+    (__debugbreak(), 0))
 
-#define VERIFY	ASSERT
+#define VERIFY  ASSERT
 
-#define ASSERT_MESSAGE(expr, msg)	\
-	(void) ((!!(expr)) || \
-	(1 != XCrtDbgReport(__FILE__, __LINE__, msg)) || \
-	(__debugbreak(), 0))
+#define ASSERT_MESSAGE(expr, msg)   \
+    (void) ((!!(expr)) || \
+    (1 != XCrtDbgReport(__FILE__, __LINE__, msg)) || \
+    (__debugbreak(), 0))
 
 #endif // X3_LOG_DEBUGR_H_

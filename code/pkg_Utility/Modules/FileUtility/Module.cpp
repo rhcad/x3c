@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 #include "Cx_TempFolder.h"
 
 XBEGIN_DEFINE_MODULE()
-	XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_FileUtility, Cx_FileUtility)
-	XDEFINE_CLASSMAP_ENTRY(CLSID_FileTransaction, Cx_FileTransaction)
-	XDEFINE_CLASSMAP_ENTRY(CLSID_TempFolder, Cx_TempFolder)
+    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_FileUtility, Cx_FileUtility)
+    XDEFINE_CLASSMAP_ENTRY(CLSID_FileTransaction, Cx_FileTransaction)
+    XDEFINE_CLASSMAP_ENTRY(CLSID_TempFolder, Cx_TempFolder)
 XEND_DEFINE_MODULE_WIN32DLL()

@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,16 +25,16 @@ class ChangeNotifyData;
 
 //! 改变通知观察者的接口
 /*!
-	\interface Ix_ChangeObserver
-	\ingroup _GROUP_CHANGE_OBSERVER_
+    \interface Ix_ChangeObserver
+    \ingroup _GROUP_CHANGE_OBSERVER_
 */
 interface Ix_ChangeObserver
 {
-	//! 改变的通知
-	/*!
-		\param data 通知参数，一般为一个局部变量的地址
-	*/
-	virtual void Update(ChangeNotifyData* data) = 0;
+    //! 改变的通知
+    /*!
+        \param data 通知参数，一般为一个局部变量的地址
+    */
+    virtual void Update(ChangeNotifyData* data) = 0;
 };
 
 #endif // X3_OBSERVER_ICHANGEOBSERVER_H_

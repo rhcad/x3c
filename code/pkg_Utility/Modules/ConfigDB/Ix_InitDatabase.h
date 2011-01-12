@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ interface Ix_SQLParser;
 //! 初始化数据库访问对象的接口
 interface Ix_InitDatabase
 {
-	//! 指定SQL连接串打开数据库
-	virtual bool OpenConnection(const std::wstring& wstrConnection, 
-		Ix_SQLParser* pSQLParser) = 0;
+    //! 指定SQL连接串打开数据库
+    virtual bool OpenConnection(const std::wstring& wstrConnection, 
+        Ix_SQLParser* pSQLParser) = 0;
 };

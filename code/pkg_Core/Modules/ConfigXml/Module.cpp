@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,6 @@
 #include "XmlUtil/XmlUtil.cpp"
 
 XBEGIN_DEFINE_MODULE()
-	XDEFINE_CLASSMAP_ENTRY(CLSID_ConfigXmlFile, Cx_ConfigXml)
-	XDEFINE_CLASSMAP_ENTRY(XCLSID(), Cx_XmlSection)
+    XDEFINE_CLASSMAP_ENTRY(CLSID_ConfigXmlFile, Cx_ConfigXml)
+    XDEFINE_CLASSMAP_ENTRY(XCLSID(), Cx_XmlSection)
 XEND_DEFINE_MODULE_WIN32DLL()

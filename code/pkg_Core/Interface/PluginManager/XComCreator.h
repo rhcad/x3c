@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,8 @@
 // limitations under the License.
 
 /*! \file XComCreator.h
- *  \brief 实现 xCreateObject 函数以便可使用 Cx_Interface
+ *  \brief Implement xCreateObject() to use Cx_Interface. XModuleMacro.h and XModuleImpl.h are not needed.
+ *
  *  \note 本文件用于那些不需要实现组件类，仅需要使用组件接口的工程，不需要包含
  *        XModuleMacro.h 和 XModuleImpl.h 等文件。\n
  *        这些工程一般是单元测试程序、非插件体系的程序、COM控件、简单EXE工程。\n
@@ -34,44 +35,44 @@
 
 HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
-	if (NULL == ppv)
-		return E_POINTER;
-	*ppv = NULL;
+    if (NULL == ppv)
+        return E_POINTER;
+    *ppv = NULL;
 
-	typedef Ix_ObjectFactory* (*FUNC_GET)();
-	FUNC_GET pfn = (FUNC_GET)GetProcAddress(
-		GetModuleHandleW(L"PluginManagerX3.dll"), "xGetRegisterBank");
+    typedef Ix_ObjectFactory* (*FUNC_GET)();
+    FUNC_GET pfn = (FUNC_GET)GetProcAddress(
+        GetModuleHandleW(L"PluginManagerX3.dll"), "xGetRegisterBank");
 
-	Ix_ObjectFactory* pFactory = pfn ? (*pfn)() : NULL;
-	if (NULL == pFactory)
-		return E_FAIL;	// 需要使用 PluginManager.h 加载插件
+    Ix_ObjectFactory* pFactory = pfn ? (*pfn)() : NULL;
+    if (NULL == pFactory)
+        return E_FAIL;  // plugins must are already loaded using PluginManager.h
 
-	return pFactory->CreateObject(clsid, ppv, NULL);
+    return pFactory->CreateObject(clsid, ppv, NULL);
 }
 
 #else // USE_ONE_PLUGIN
 
-// 定义 USE_ONE_PLUGIN 后包含本文件，在外部使用 LoadLibrary 为 g_hPluginDll 赋值，
-//   然后xCreateObject就可以正常工作，可以使用 Cx_Interface
+// Define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll,
+// thus xCreateObject() can work and Cx_Interface can be used.
 
-HMODULE		g_hPluginDll = NULL;
+HMODULE     g_hPluginDll = NULL;
 
 HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
-	if (NULL == ppv)
-		return E_POINTER;
-	*ppv = NULL;
+    if (NULL == ppv)
+        return E_POINTER;
+    *ppv = NULL;
 
-	typedef HRESULT (*FUNC_CREATE)(const char*, Ix_Object**, HMODULE);
-	FUNC_CREATE pfn = (FUNC_CREATE)GetProcAddress(
-		g_hPluginDll, "_xInternalCreateObject");
+    typedef HRESULT (*FUNC_CREATE)(const char*, Ix_Object**, HMODULE);
+    FUNC_CREATE pfn = (FUNC_CREATE)GetProcAddress(
+        g_hPluginDll, "_xInternalCreateObject");
 
-	return pfn ? (*pfn)(clsid.str(), ppv, NULL) : E_FAIL;
+    return pfn ? (*pfn)(clsid.str(), ppv, NULL) : E_FAIL;
 }
 
 #endif // USE_ONE_PLUGIN
 
 HMODULE xGetModuleHandle()
 {
-	return NULL;
+    return NULL;
 }

@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 #include "Cx_ClipboardUtil.h"
 
 XBEGIN_DEFINE_MODULE()
-	XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_TextUtil, Cx_TextUtil)
-	XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_GuidGenerator, Cx_GuidGenerator)
-	XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_ClipboardUtil, Cx_ClipboardUtil)
+    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_TextUtil, Cx_TextUtil)
+    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_GuidGenerator, Cx_GuidGenerator)
+    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_ClipboardUtil, Cx_ClipboardUtil)
 XEND_DEFINE_MODULE_WIN32DLL()

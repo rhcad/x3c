@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@ TestLoadPlugin::TestLoadPlugin()
 
 void TestLoadPlugin::setUp()
 {
-	VERIFY(LoadPlugins(L"", false) > 0);
+    VERIFY(LoadPlugins(L"", false) > 0);
 }
 
 void TestLoadPlugin::tearDown()
 {
-	UnloadPlugins();
+    UnloadPlugins();
 }
 
 void TestLoadPlugin::testLoadByNames()

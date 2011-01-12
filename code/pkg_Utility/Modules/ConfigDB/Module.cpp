@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,6 @@
 #include "Cx_CfgDatabase.h"
 
 XBEGIN_DEFINE_MODULE()
-	XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_ConfigDBFactory, Cx_ConfigFactory)
-	XDEFINE_CLASSMAP_ENTRY(CLSID_CfgDatabase, Cx_CfgDatabase)
+    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_ConfigDBFactory, Cx_ConfigFactory)
+    XDEFINE_CLASSMAP_ENTRY(CLSID_CfgDatabase, Cx_CfgDatabase)
 XEND_DEFINE_MODULE_MFCEXTDLL()

@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,14 +21,14 @@
 class Cx_ClipboardUtil : public Ix_ClipboardUtil
 {
 public:
-	Cx_ClipboardUtil() {}
-	virtual ~Cx_ClipboardUtil() {}
+    Cx_ClipboardUtil() {}
+    virtual ~Cx_ClipboardUtil() {}
 
 public:
-	// From Ix_ClipboardUtil
-	virtual bool CopyText(HWND wndOwner, const std::wstring& text);
-	virtual bool PasteText(HWND wndOwner, std::wstring& text, bool clear = false);
-	virtual bool CanPasteText();
+    // From Ix_ClipboardUtil
+    virtual bool CopyText(HWND wndOwner, const std::wstring& text);
+    virtual bool PasteText(HWND wndOwner, std::wstring& text, bool clear = false);
+    virtual bool CanPasteText();
 };
 
 #endif // _X3_UTILITY_CLIPBOARDUTIL_H

@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,37 +33,37 @@ interface Ix_ObjectFactory;
  */
 interface Ix_Module
 {
-	//! 在卸载模块前释放所有单实例对象
-	virtual void ClearModuleItems() = 0;
+    //! 在卸载模块前释放所有单实例对象
+    virtual void ClearModuleItems() = 0;
 
-	//! 返回未释放的对象个数
-	virtual long GetUnfreeObjectCount() = 0;
+    //! 返回未释放的对象个数
+    virtual long GetUnfreeObjectCount() = 0;
 
-	//! 返回插件管理器对象
-	virtual Ix_ObjectFactory* GetObjectFactory() const = 0;
+    //! 返回插件管理器对象
+    virtual Ix_ObjectFactory* GetObjectFactory() const = 0;
 
-	//! 返回本模块DLL句柄
-	virtual HMODULE GetModuleInstance() const = 0;
+    //! 返回本模块DLL句柄
+    virtual HMODULE GetModuleInstance() const = 0;
 
-	//! 返回本模块资源句柄
-	virtual HMODULE GetModuleResourceHandle() const = 0;
+    //! 返回本模块资源句柄
+    virtual HMODULE GetModuleResourceHandle() const = 0;
 
-	//! 设置本模块的资源句柄，当需要支持本地化资源时调用
-	virtual HMODULE SetModuleResourceHandle(HMODULE hResource) = 0;
+    //! 设置本模块的资源句柄，当需要支持本地化资源时调用
+    virtual HMODULE SetModuleResourceHandle(HMODULE hResource) = 0;
 };
 
 //! 返回当前工程内的模块对象
 /*!
-	\ingroup _GROUP_PLUGIN_CORE_
-	\return 当前插件模块中唯一的模块对象
+    \ingroup _GROUP_PLUGIN_CORE_
+    \return 当前插件模块中唯一的模块对象
 */
 Ix_Module* xGetCurrentModule();
 
 //! 返回指定的组件类ID是否已经注册类工厂函数
 /*!
-	\ingroup _GROUP_PLUGIN_CORE_
-	\param clsid 组件类ID
-	\return 该组件类是否已经注册(即是否已加载其插件)
+    \ingroup _GROUP_PLUGIN_CORE_
+    \param clsid 组件类ID
+    \return 该组件类是否已经注册(即是否已加载其插件)
 */
 bool xIsCreatorRegister(const XCLSID& clsid);
 

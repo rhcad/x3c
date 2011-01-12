@@ -1,1 +1,1 @@
-pkg_AppUI: 程序界面插件
+pkg_AppUI: application UI plugins.

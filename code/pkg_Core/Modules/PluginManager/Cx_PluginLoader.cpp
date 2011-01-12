@@ -1,4 +1,4 @@
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 #include "Cx_PluginLoader.h"
 
 Cx_PluginLoader::Cx_PluginLoader()
-	: m_instance(NULL)
+    : m_instance(NULL)
 {
 }
 
@@ -29,309 +29,309 @@ Cx_PluginLoader::~Cx_PluginLoader()
 
 HMODULE Cx_PluginLoader::GetMainModuleHandle()
 {
-	return m_instance;
+    return m_instance;
 }
 
 static void ReplaceSlashes(LPWSTR filename)
 {
-	for (; *filename; ++filename)
-	{
-		if ('/' == *filename)
-		{
-			*filename = '\\';
-		}
-	}
+    for (; *filename; ++filename)
+    {
+        if ('/' == *filename)
+        {
+            *filename = '\\';
+        }
+    }
 }
 
 long Cx_PluginLoader::LoadPlugins(HMODULE instance, LPCWSTR path, 
-								  LPCWSTR ext, bool recursive)
+                                  LPCWSTR ext, bool recursive)
 {
-	WCHAR fullpath[MAX_PATH];
+    WCHAR fullpath[MAX_PATH];
 
-	m_instance = instance;
-	GetModuleFileNameW(instance, fullpath, MAX_PATH);
-	PathRemoveFileSpecW(fullpath);
-	PathAppendW(fullpath, path);
+    m_instance = instance;
+    GetModuleFileNameW(instance, fullpath, MAX_PATH);
+    PathRemoveFileSpecW(fullpath);
+    PathAppendW(fullpath, path);
 
-	return LoadPlugins(fullpath, ext, recursive);
+    return LoadPlugins(fullpath, ext, recursive);
 }
 
 long Cx_PluginLoader::LoadPlugins(LPCWSTR path, LPCWSTR ext, bool recursive)
 {
-	WIN32_FIND_DATAW fd;
-	WCHAR rootpath[MAX_PATH];
-	WCHAR filename[MAX_PATH];
-	long count = 0;
-	const int extlen = lstrlenW(ext);
-	std::vector<std::wstring> subpaths;
+    WIN32_FIND_DATAW fd;
+    WCHAR rootpath[MAX_PATH];
+    WCHAR filename[MAX_PATH];
+    long count = 0;
+    const int extlen = lstrlenW(ext);
+    std::vector<std::wstring> subpaths;
 
-	if (PathIsRelativeW(path) || 0 == path[0])
-	{
-		GetModuleFileNameW(NULL, rootpath, MAX_PATH);
-		PathRemoveFileSpecW(rootpath);
-		PathAppendW(rootpath, path);
-	}
-	else
-	{
-		StrCpyNW(rootpath, path, MAX_PATH);
-	}
+    if (PathIsRelativeW(path) || 0 == path[0])
+    {
+        GetModuleFileNameW(NULL, rootpath, MAX_PATH);
+        PathRemoveFileSpecW(rootpath);
+        PathAppendW(rootpath, path);
+    }
+    else
+    {
+        StrCpyNW(rootpath, path, MAX_PATH);
+    }
 
-	ReplaceSlashes(rootpath);
-	StrCpyNW(filename, rootpath, MAX_PATH);
-	PathAppendW(filename, L"*.*");
-	
-	HANDLE hFind = ::FindFirstFileW(filename, &fd);
-	BOOL bContinue = (hFind != INVALID_HANDLE_VALUE);
+    ReplaceSlashes(rootpath);
+    StrCpyNW(filename, rootpath, MAX_PATH);
+    PathAppendW(filename, L"*.*");
+    
+    HANDLE hFind = ::FindFirstFileW(filename, &fd);
+    BOOL bContinue = (hFind != INVALID_HANDLE_VALUE);
 
-	while (bContinue)
-	{
-		if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-		{
-			if (fd.cFileName[0] != '.' && recursive)
-			{
-				StrCpyNW(filename, rootpath, MAX_PATH);
-				PathAppendW(filename, fd.cFileName);
-				subpaths.push_back(filename);
-			}
-		}
-		else
-		{
-			int len = lstrlenW(fd.cFileName);
+    while (bContinue)
+    {
+        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+        {
+            if (fd.cFileName[0] != '.' && recursive)
+            {
+                StrCpyNW(filename, rootpath, MAX_PATH);
+                PathAppendW(filename, fd.cFileName);
+                subpaths.push_back(filename);
+            }
+        }
+        else
+        {
+            int len = lstrlenW(fd.cFileName);
 
-			if (StrCmpIW(&fd.cFileName[max(0, len - extlen)], ext) == 0)
-			{
-				StrCpyNW(filename, rootpath, MAX_PATH);
-				PathAppendW(filename, fd.cFileName);
-				if (LoadPlugin(filename))
-				{
-					count++;
-				}
-			}
-		}
-		bContinue = ::FindNextFileW(hFind, &fd);
-	}
-	::FindClose(hFind);
-	
-	std::vector<std::wstring>::const_iterator it = subpaths.begin();
-	for (; it != subpaths.end(); ++it)
-	{
-		count += LoadPlugins(it->c_str(), ext, recursive);
-	}
-	
-	return count;
+            if (StrCmpIW(&fd.cFileName[max(0, len - extlen)], ext) == 0)
+            {
+                StrCpyNW(filename, rootpath, MAX_PATH);
+                PathAppendW(filename, fd.cFileName);
+                if (LoadPlugin(filename))
+                {
+                    count++;
+                }
+            }
+        }
+        bContinue = ::FindNextFileW(hFind, &fd);
+    }
+    ::FindClose(hFind);
+    
+    std::vector<std::wstring>::const_iterator it = subpaths.begin();
+    for (; it != subpaths.end(); ++it)
+    {
+        count += LoadPlugins(it->c_str(), ext, recursive);
+    }
+    
+    return count;
 }
 
 long Cx_PluginLoader::LoadPluginFiles(LPCWSTR path, LPCWSTR files, HMODULE instance)
 {
-	WCHAR filename[MAX_PATH];
-	WCHAR apppath[MAX_PATH];
+    WCHAR filename[MAX_PATH];
+    WCHAR apppath[MAX_PATH];
 
-	m_instance = instance;
-	GetModuleFileNameW(instance, apppath, MAX_PATH);
-	PathRemoveFileSpecW(apppath);
+    m_instance = instance;
+    GetModuleFileNameW(instance, apppath, MAX_PATH);
+    PathRemoveFileSpecW(apppath);
 
-	StrCpyNW(filename, apppath, MAX_PATH);
-	PathAppendW(filename, path);
-	PathAddBackslashW(filename);
-	
-	const int len0 = lstrlenW(filename);
-	LPWSTR nameend = filename + len0;
+    StrCpyNW(filename, apppath, MAX_PATH);
+    PathAppendW(filename, path);
+    PathAddBackslashW(filename);
+    
+    const int len0 = lstrlenW(filename);
+    LPWSTR nameend = filename + len0;
 
-	std::vector<std::wstring> filenames;
-	int i, j;
+    std::vector<std::wstring> filenames;
+    int i, j;
 
-	for (i = 0; files[i] != 0; )
-	{
-		while (issep(files[i]))
-		{
-			i++;
-		}
-		for (j = i; files[j] != 0 && !issep(files[j]); j++)
-		{
-		}
-		if (j > i)
-		{
-			lstrcpynW(nameend, files + i, min(MAX_PATH - len0, 1 + j - i));
-			ReplaceSlashes(filename);
-			filenames.push_back(filename);
-		}
-		i = j;
-	}
+    for (i = 0; files[i] != 0; )
+    {
+        while (issep(files[i]))
+        {
+            i++;
+        }
+        for (j = i; files[j] != 0 && !issep(files[j]); j++)
+        {
+        }
+        if (j > i)
+        {
+            lstrcpynW(nameend, files + i, min(MAX_PATH - len0, 1 + j - i));
+            ReplaceSlashes(filename);
+            filenames.push_back(filename);
+        }
+        i = j;
+    }
 
-	int count = 0;
-	std::vector<std::wstring>::const_iterator it = filenames.begin();
+    int count = 0;
+    std::vector<std::wstring>::const_iterator it = filenames.begin();
 
-	for (; it != filenames.end(); ++it)
-	{
-		if (LoadPlugin(it->c_str()))
-		{
-			count++;
-		}
-	}
+    for (; it != filenames.end(); ++it)
+    {
+        if (LoadPlugin(it->c_str()))
+        {
+            count++;
+        }
+    }
 
-	return count;
+    return count;
 }
 
 long Cx_PluginLoader::InitializePlugins()
 {
-	long nSuccessLoadNum = 0;
+    long nSuccessLoadNum = 0;
 
-	for (unsigned int i = 0; i < m_vecModule.size(); i++)
-	{
-		if (m_vecModule[i].bInit)
-		{
-			continue;
-		}
+    for (unsigned int i = 0; i < m_vecModule.size(); i++)
+    {
+        if (m_vecModule[i].bInit)
+        {
+            continue;
+        }
 
-		typedef bool (*FUNC_PLUGINLOAD)();
-		FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
-			m_vecModule[i].hModule, "InitializePlugin");
+        typedef bool (*FUNC_PLUGINLOAD)();
+        FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
+            m_vecModule[i].hModule, "InitializePlugin");
 
-		if (!pfn || (*pfn)())
-		{
-			nSuccessLoadNum++;
-			m_vecModule[i].bInit = true;
-		}
-	}
+        if (!pfn || (*pfn)())
+        {
+            nSuccessLoadNum++;
+            m_vecModule[i].bInit = true;
+        }
+    }
 
-	return nSuccessLoadNum;
+    return nSuccessLoadNum;
 }
 
 bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
 {
-	if (FindModule(instance) >= 0)
-	{
-		return true;
-	}
+    if (FindModule(instance) >= 0)
+    {
+        return true;
+    }
 
-	Ix_Module* pModule = GetModule(instance);
+    Ix_Module* pModule = GetModule(instance);
 
-	if (pModule != NULL)
-	{
-		MODULEINFO moduleInfo;
+    if (pModule != NULL)
+    {
+        MODULEINFO moduleInfo;
 
-		moduleInfo.hModule = instance;
-		moduleInfo.pModule = pModule;
-		moduleInfo.bOwner = false;
-		moduleInfo.bInit = false;
-		m_vecModule.push_back(moduleInfo);
+        moduleInfo.hModule = instance;
+        moduleInfo.pModule = pModule;
+        moduleInfo.bOwner = false;
+        moduleInfo.bInit = false;
+        m_vecModule.push_back(moduleInfo);
 
-		RegisterClassEntryTable(instance);
+        RegisterClassEntryTable(instance);
 
-		return true;
-	}
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 bool Cx_PluginLoader::LoadPlugin(LPCWSTR filename)
 {
-	bool bOwner = false;
-	HMODULE hModule = GetModuleHandleW(filename);
+    bool bOwner = false;
+    HMODULE hModule = GetModuleHandleW(filename);
 
-	if (!hModule)
-	{
-		hModule = LoadLibraryExW(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-		if (!hModule)
-		{
-			return false;
-		}
-		bOwner = true;
-	}
+    if (!hModule)
+    {
+        hModule = LoadLibraryExW(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+        if (!hModule)
+        {
+            return false;
+        }
+        bOwner = true;
+    }
 
-	int moduleIndex = FindModule(hModule);
-	if (moduleIndex < 0 && RegisterPlugin(hModule))
-	{
-		moduleIndex = FindModule(hModule);
-		ASSERT(moduleIndex >= 0);
-		m_vecModule[moduleIndex].bOwner = bOwner;
-	}
-	else if (bOwner)
-	{
-		FreeLibrary(hModule);
-	}
+    int moduleIndex = FindModule(hModule);
+    if (moduleIndex < 0 && RegisterPlugin(hModule))
+    {
+        moduleIndex = FindModule(hModule);
+        ASSERT(moduleIndex >= 0);
+        m_vecModule[moduleIndex].bOwner = bOwner;
+    }
+    else if (bOwner)
+    {
+        FreeLibrary(hModule);
+    }
 
-	return moduleIndex >= 0;
+    return moduleIndex >= 0;
 }
 
 bool Cx_PluginLoader::UnloadPlugin(LPCWSTR name)
 {
-	HMODULE hModule = GetModuleHandleW(name);
+    HMODULE hModule = GetModuleHandleW(name);
 
-	if (!hModule || FindModule(hModule) < 0)
-	{
-		return false;
-	}
+    if (!hModule || FindModule(hModule) < 0)
+    {
+        return false;
+    }
 
-	typedef bool (*FUNC_CANUNLOAD)();
-	FUNC_CANUNLOAD pfnCan = (FUNC_CANUNLOAD)GetProcAddress(hModule, "xCanUnloadPlugin");
+    typedef bool (*FUNC_CANUNLOAD)();
+    FUNC_CANUNLOAD pfnCan = (FUNC_CANUNLOAD)GetProcAddress(hModule, "xCanUnloadPlugin");
 
-	if (pfnCan && !pfnCan())
-	{
-		return false;
-	}
+    if (pfnCan && !pfnCan())
+    {
+        return false;
+    }
 
-	typedef void (*FUNC_UNLOAD)();
-	FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(hModule, "UninitializePlugin");
-	if (pfnUnload)
-	{
-		pfnUnload();
-	}
+    typedef void (*FUNC_UNLOAD)();
+    FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(hModule, "UninitializePlugin");
+    if (pfnUnload)
+    {
+        pfnUnload();
+    }
 
-	VERIFY(ClearModuleItems(hModule));
-	ReleaseModule(hModule);
+    VERIFY(ClearModuleItems(hModule));
+    ReleaseModule(hModule);
 
-	return true;
+    return true;
 }
 
 long Cx_PluginLoader::UnloadPlugins()
 {
-	int i = 0;
-	int nUnLoadPluginNum = 0;
+    int i = 0;
+    int nUnLoadPluginNum = 0;
 
-	for (i = m_vecModule.size() - 1; i >= 0; i--)
-	{
-		typedef void (*FUNC_UNLOAD)();
-		FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
-			m_vecModule[i].hModule, "UninitializePlugin");
-		if (pfnUnload)
-		{
-			pfnUnload();
-		}
-	}
+    for (i = m_vecModule.size() - 1; i >= 0; i--)
+    {
+        typedef void (*FUNC_UNLOAD)();
+        FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
+            m_vecModule[i].hModule, "UninitializePlugin");
+        if (pfnUnload)
+        {
+            pfnUnload();
+        }
+    }
 
-	for (i = m_vecModule.size() - 1; i >= 0; i--)
-	{
-		if (ClearModuleItems(m_vecModule[i].hModule))
-		{
-			nUnLoadPluginNum++;
-		}
-	}
+    for (i = m_vecModule.size() - 1; i >= 0; i--)
+    {
+        if (ClearModuleItems(m_vecModule[i].hModule))
+        {
+            nUnLoadPluginNum++;
+        }
+    }
 
-	for (i = m_vecModule.size() - 1; i >= 0; i--)
-	{
-		ReleaseModule(m_vecModule[i].hModule);
-	}
+    for (i = m_vecModule.size() - 1; i >= 0; i--)
+    {
+        ReleaseModule(m_vecModule[i].hModule);
+    }
 
-	return nUnLoadPluginNum;
+    return nUnLoadPluginNum;
 }
 
 bool Cx_PluginLoader::issep(WCHAR c)
 {
-	return ',' == c || ';' == c || iswspace(c);
+    return ',' == c || ';' == c || iswspace(c);
 }
 
 bool Cx_PluginLoader::ClearModuleItems(HMODULE hModule)
 {
-	ASSERT(hModule);
+    ASSERT(hModule);
 
-	Ix_Module* pModule = GetModule(hModule);
+    Ix_Module* pModule = GetModule(hModule);
 
-	if (pModule)
-	{
-		pModule->ClearModuleItems();
-		return true;
-	}
+    if (pModule)
+    {
+        pModule->ClearModuleItems();
+        return true;
+    }
 
-	return false;
+    return false;
 }

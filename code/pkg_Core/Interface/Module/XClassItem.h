@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ typedef long (STDMETHODCALLTYPE *PFNXGetObjectCount)();
 //! 组件类对象被其他模块使用计数函数
 typedef long (STDMETHODCALLTYPE *PFNXRefCountByOthers)();
 
-#define MIN_SINGLETON_TYPE	10
+#define MIN_SINGLETON_TYPE  10
 
 #pragma pack(push, 8)
 
@@ -42,41 +42,41 @@ typedef long (STDMETHODCALLTYPE *PFNXRefCountByOthers)();
  */
 struct _XCLASSMETA_ENTRY
 {
-	BYTE				type;				//!< 项类型, 见 MIN_SINGLETON_TYPE, XModuleMacro.h
-	LPCSTR				className;			//!< 实现类的类名
-	XCLSID				clsid;				//!< 组件类ID
-	const char*			iidSpecial;			//!< 特定的单实例接口
-	PFNXObjectCreator	pfnObjectCreator;	//!< 对象创建函数的地址
-	PFNXGetObjectCount	pfnGetObjectCount;	//!< 未释放的对象个数
-	PFNXRefCountByOthers	pfnRefCountByOthers;	//!< 被其他模块使用计数
+    BYTE                type;               //!< 项类型, 见 MIN_SINGLETON_TYPE, XModuleMacro.h
+    LPCSTR              className;          //!< 实现类的类名
+    XCLSID              clsid;              //!< 组件类ID
+    const char*         iidSpecial;         //!< 特定的单实例接口
+    PFNXObjectCreator   pfnObjectCreator;   //!< 对象创建函数的地址
+    PFNXGetObjectCount  pfnGetObjectCount;  //!< 未释放的对象个数
+    PFNXRefCountByOthers    pfnRefCountByOthers;    //!< 被其他模块使用计数
 
-	//! 供 XDEFINE_CLASSMAP_ENTRY 等宏使用的构造函数
-	_XCLASSMETA_ENTRY(BYTE      _type, 
-		LPCSTR                  _className, 
-		const XCLSID&           _clsid, 
-		const char*             _iidSpecial, 
-		PFNXObjectCreator       _pfnObjectCreator, 
-		PFNXGetObjectCount      _pfnGetObjectCount = NULL, 
-		PFNXRefCountByOthers    _pfnRefCountByOthers = NULL)
+    //! 供 XDEFINE_CLASSMAP_ENTRY 等宏使用的构造函数
+    _XCLASSMETA_ENTRY(BYTE      _type, 
+        LPCSTR                  _className, 
+        const XCLSID&           _clsid, 
+        const char*             _iidSpecial, 
+        PFNXObjectCreator       _pfnObjectCreator, 
+        PFNXGetObjectCount      _pfnGetObjectCount = NULL, 
+        PFNXRefCountByOthers    _pfnRefCountByOthers = NULL)
 
-		: type(_type), className(_className)
-		, clsid(_clsid), iidSpecial(_iidSpecial)
-		, pfnObjectCreator(_pfnObjectCreator)
-		, pfnGetObjectCount(_pfnGetObjectCount)
-		, pfnRefCountByOthers(_pfnRefCountByOthers)
-	{
-	}
+        : type(_type), className(_className)
+        , clsid(_clsid), iidSpecial(_iidSpecial)
+        , pfnObjectCreator(_pfnObjectCreator)
+        , pfnGetObjectCount(_pfnGetObjectCount)
+        , pfnRefCountByOthers(_pfnRefCountByOthers)
+    {
+    }
 
-	//! 默认构造函数，供 XEND_DEFINE_MODULE 使用
-	_XCLASSMETA_ENTRY()
-		: type(0), className(""), clsid(""), iidSpecial("")
-		, pfnObjectCreator(NULL), pfnGetObjectCount(NULL)
-		, pfnRefCountByOthers(NULL)
-	{
-	}
+    //! 默认构造函数，供 XEND_DEFINE_MODULE 使用
+    _XCLASSMETA_ENTRY()
+        : type(0), className(""), clsid(""), iidSpecial("")
+        , pfnObjectCreator(NULL), pfnGetObjectCount(NULL)
+        , pfnRefCountByOthers(NULL)
+    {
+    }
 
-	//! 组件类信息项的数组，由 XBEGIN_DEFINE_MODULE 填充元素
-	static const _XCLASSMETA_ENTRY s_classes[];
+    //! 组件类信息项的数组，由 XBEGIN_DEFINE_MODULE 填充元素
+    static const _XCLASSMETA_ENTRY s_classes[];
 };
 
 #pragma pack(pop)

@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,15 +21,15 @@
 class Cx_GuidGenerator : public Ix_GuidGenerator
 {
 public:
-	Cx_GuidGenerator() {}
-	virtual ~Cx_GuidGenerator() {}
+    Cx_GuidGenerator() {}
+    virtual ~Cx_GuidGenerator() {}
 
 public:
-	// From Ix_GuidGenerator
-	virtual std::wstring CreateGuid(bool withBrackets = false);
-	virtual std::wstring RemoveGuidBrackets(const std::wstring& uid);
-	virtual std::wstring GetCurrentTimeString(bool hasYear = true);
-	virtual ULONG CreateID(long type = 0);
+    // From Ix_GuidGenerator
+    virtual std::wstring CreateGuid(bool withBrackets = false);
+    virtual std::wstring RemoveGuidBrackets(const std::wstring& uid);
+    virtual std::wstring GetCurrentTimeString(bool hasYear = true);
+    virtual ULONG CreateID(long type = 0);
 };
 
 #endif // _X3_UTILITY_GUIDGENERATOR_H

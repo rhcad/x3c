@@ -1,35 +1,35 @@
 #include "stdafx.h"
 
-extern HMODULE g_hPluginDll;	// 见 XComCreator.h
+extern HMODULE g_hPluginDll;    // 见 XComCreator.h
 
 bool LoadPlugin(LPCWSTR filename);
 void Test();
 
 int main()
 {
-	if (LoadPlugin( L"../Plugins/Win32DllTempl.plugin.dll") )
-	{
-		Test();
+    if (LoadPlugin( L"../Plugins/Win32DllTempl.plugin.dll") )
+    {
+        Test();
 
-		FreeLibrary(g_hPluginDll);
-		g_hPluginDll = NULL;
-	}
-	if (LoadPlugin( L"../Plugins/MFCExtTempl.plugin.dll") )
-	{
-		Test();
+        FreeLibrary(g_hPluginDll);
+        g_hPluginDll = NULL;
+    }
+    if (LoadPlugin( L"../Plugins/MFCExtTempl.plugin.dll") )
+    {
+        Test();
 
-		FreeLibrary(g_hPluginDll);
-		g_hPluginDll = NULL;
-	}
+        FreeLibrary(g_hPluginDll);
+        g_hPluginDll = NULL;
+    }
 
-	return 0;
+    return 0;
 }
 
 bool LoadPlugin(LPCWSTR filename)
 {
-	g_hPluginDll = LoadLibraryW(filename);
+    g_hPluginDll = LoadLibraryW(filename);
 
-	return g_hPluginDll != NULL;
+    return g_hPluginDll != NULL;
 }
 
 
@@ -47,7 +47,7 @@ void MyFunc2(const Cx_Ptr& obj)
 
 void Test()
 {
-	// 使用类ID和接口创建对象
+    // 使用类ID和接口创建对象
     Cx_Interface<Ix_Example> pIFExample(CLSID_Example);
     if (pIFExample)
     {

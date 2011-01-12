@@ -5,46 +5,46 @@
 class CNodeSelectionTestOnlyReceive : private NodeSelectionObserver
 {
 public:
-	CNodeSelectionTestOnlyReceive()
-	{
-	}
+    CNodeSelectionTestOnlyReceive()
+    {
+    }
 
 private:
-	virtual void OnNodeSelection(ULONG objid, void* sender)
-	{
-		objid; sender;
-	}
+    virtual void OnNodeSelection(ULONG objid, void* sender)
+    {
+        objid; sender;
+    }
 };
 
 class CNodeSelectionTestSendReceive : private NodeSelectionObserver
 {
 public:
-	CNodeSelectionTestSendReceive()
-	{
-	}
+    CNodeSelectionTestSendReceive()
+    {
+    }
 
-	void OnChanged()
-	{
-		if (!NodeSelectionObserver::IsUpdating())
-		{
-			ULONG objid = 1234;
-			RefreshView(objid);
-			NodeSelectionObserver::Data(objid, this).Notify();
-		}
-	}
+    void OnChanged()
+    {
+        if (!NodeSelectionObserver::IsUpdating())
+        {
+            ULONG objid = 1234;
+            RefreshView(objid);
+            NodeSelectionObserver::Data(objid, this).Notify();
+        }
+    }
 
 private:
-	virtual void OnNodeSelection(ULONG objid, void* sender)
-	{
-		if (this != sender)
-		{
-			OnChanged();
-			RefreshView(objid);
-		}
-	}
+    virtual void OnNodeSelection(ULONG objid, void* sender)
+    {
+        if (this != sender)
+        {
+            OnChanged();
+            RefreshView(objid);
+        }
+    }
 
-	void RefreshView(ULONG objid)
-	{
-		objid;
-	}
+    void RefreshView(ULONG objid)
+    {
+        objid;
+    }
 };

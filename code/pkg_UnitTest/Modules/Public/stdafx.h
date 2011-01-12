@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,17 +18,17 @@
 
 #define VC_EXTRALEAN        // Exclude rarely-used stuff from Windows headers
 
-#if _MSC_VER >= 1600		// VC2010
-#include <SDKDDKVer.h>		// Defines the highest available Windows platform.
+#if _MSC_VER >= 1600        // VC2010
+#include <SDKDDKVer.h>      // Defines the highest available Windows platform.
 #endif
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
 #include <afxdisp.h>        // MFC Automation classes
-#include <shlwapi.h>		// Windows light-weight utility APIs
+#include <shlwapi.h>        // Windows light-weight utility APIs
 
-#pragma warning(disable:4786)	// identifier was truncated
-#pragma warning(disable:4097)	// typedef-name used as synonym for TestFixture class
+#pragma warning(disable:4786)   // identifier was truncated
+#pragma warning(disable:4097)   // typedef-name used as synonym for TestFixture class
 #pragma warning (push, 3)
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>

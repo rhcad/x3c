@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ static CLogObserver* s_pObserver = NULL;
 
 extern "C" __declspec(dllexport) bool InitializePlugin()
 {
-	ASSERT(!s_pObserver);
-	s_pObserver = new CLogObserver;
+    ASSERT(!s_pObserver);
+    s_pObserver = new CLogObserver;
 
-	return true;
+    return true;
 }
 
 extern "C" __declspec(dllexport) void UninitializePlugin()
 {
-	SafeDelete(s_pObserver);
+    SafeDelete(s_pObserver);
 }

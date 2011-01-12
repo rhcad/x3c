@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 // limitations under the License.
 
 #if _MSC_VER >= 1600 // VC2010
-#include <SDKDDKVer.h>		// Defines the highest available Windows platform.
+#include <SDKDDKVer.h>      // Defines the highest available Windows platform.
 #endif
 
-#define WIN32_LEAN_AND_MEAN	// Exclude rarely-used stuff from Windows headers
-#include <windows.h>		// Windows master include file
-#include <shlwapi.h>		// Windows light-weight utility APIs
+#define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
+#include <windows.h>        // Windows master include file
+#include <shlwapi.h>        // Windows light-weight utility APIs
 
-#include <vecfunc.h>		// STL master include file and functions
-#include <Log/DebugR.h>		// ASSERT, VERIFY and ASSERT_MESSAGE
-#include <XComPtr.h>		// Cx_Interface & Cx_Ptr
+#include <vecfunc.h>        // STL master include file and functions
+#include <Log/DebugR.h>     // ASSERT, VERIFY and ASSERT_MESSAGE
+#include <XComPtr.h>        // Cx_Interface & Cx_Ptr

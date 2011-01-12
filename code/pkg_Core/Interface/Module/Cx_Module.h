@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,24 +30,24 @@
 class Cx_Module : public Ix_Module
 {
 public:
-	Cx_Module();
-	~Cx_Module();
+    Cx_Module();
+    ~Cx_Module();
 
-	//! 初始化本插件，供 _xGetModuleInterface() 调用
-	void Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule);
+    //! 初始化本插件，供 _xGetModuleInterface() 调用
+    void Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule);
 
 public:
-	void ClearModuleItems();
-	long GetUnfreeObjectCount();
-	Ix_ObjectFactory* GetObjectFactory() const { return m_pFactory; }
-	HMODULE GetModuleInstance() const { return m_hModule; }
-	HMODULE GetModuleResourceHandle() const { return m_hResource; }
-	HMODULE SetModuleResourceHandle(HMODULE hResource);
+    void ClearModuleItems();
+    long GetUnfreeObjectCount();
+    Ix_ObjectFactory* GetObjectFactory() const { return m_pFactory; }
+    HMODULE GetModuleInstance() const { return m_hModule; }
+    HMODULE GetModuleResourceHandle() const { return m_hResource; }
+    HMODULE SetModuleResourceHandle(HMODULE hResource);
 
 private:
-	Ix_ObjectFactory*	m_pFactory;
-	HMODULE			m_hModule;
-	HMODULE			m_hResource;
+    Ix_ObjectFactory*   m_pFactory;
+    HMODULE         m_hModule;
+    HMODULE         m_hResource;
 };
 
 #endif // X3_PLUGINIMPL_MODULE_H_

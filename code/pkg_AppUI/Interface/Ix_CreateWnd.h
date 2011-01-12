@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,25 +24,25 @@
 
 //! 窗口创建的接口
 /*! 窗口类采用 Cx_CreateWnd 来实现本接口，父窗口类在创建子窗口时不需要关心子窗口类型和细节。
-	\interface Ix_CreateWnd
-	\ingroup _GROUP_VIEW_
+    \interface Ix_CreateWnd
+    \ingroup _GROUP_VIEW_
 */
 interface Ix_CreateWnd
 {
-	//! 返回窗口句柄
-	virtual HWND GetWindow() const = 0;
-	
-	//! 创建窗口
-	virtual bool CreateWnd(HWND hwndParent, UINT nID) = 0;
+    //! 返回窗口句柄
+    virtual HWND GetWindow() const = 0;
+    
+    //! 创建窗口
+    virtual bool CreateWnd(HWND hwndParent, UINT nID) = 0;
 
-	//! 销毁窗口
-	virtual void DestroyWnd() = 0;
-	
-	//! 传递 OnCmdMsg 通知
-	virtual BOOL DoCmdMsg(UINT nID, int nCode, void* pExtra, void* pInfo) = 0;
+    //! 销毁窗口
+    virtual void DestroyWnd() = 0;
+    
+    //! 传递 OnCmdMsg 通知
+    virtual BOOL DoCmdMsg(UINT nID, int nCode, void* pExtra, void* pInfo) = 0;
 
-	//! 刷新显示内容
-	virtual void Refresh() = 0;
+    //! 刷新显示内容
+    virtual void Refresh() = 0;
 };
 
 #endif // X3_VIEW_ICREATEWND_H_

@@ -1,4 +1,4 @@
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,5 +14,5 @@
 
 #include "stdafx.h"
 
-#define NOUSER		// 改由LogManager显示断言消息框
+#define NOUSER      // 改由LogManager显示断言消息框
 #include <Log/DebugR.cpp>

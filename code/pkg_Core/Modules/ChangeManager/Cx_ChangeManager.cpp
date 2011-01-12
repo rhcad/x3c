@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,47 +29,47 @@ Cx_ChangeManager::~Cx_ChangeManager()
 
 void Cx_ChangeManager::RegisterObserver(const char* type, Ix_ChangeObserver* observer)
 {
-	ASSERT(observer && type);
+    ASSERT(observer && type);
 
-	std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
+    std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
 
-	for (MAP_IT it = range.first; it != range.second; ++it)
-	{
-		if (NULL == it->second)
-		{
-			it->second = observer;
-			return;
-		}
-	}
+    for (MAP_IT it = range.first; it != range.second; ++it)
+    {
+        if (NULL == it->second)
+        {
+            it->second = observer;
+            return;
+        }
+    }
 
-	m_observers.insert(ObserverPair(type, observer));
+    m_observers.insert(ObserverPair(type, observer));
 }
 
 void Cx_ChangeManager::UnRegisterObserver(const char* type, Ix_ChangeObserver* observer)
 {
-	std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
+    std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
 
-	for (MAP_IT it = range.first; it != range.second; ++it)
-	{
-		if (it->second == observer)
-		{
-			it->second = NULL;	//m_observers.erase(it);
-			break;
-		}
-	}
+    for (MAP_IT it = range.first; it != range.second; ++it)
+    {
+        if (it->second == observer)
+        {
+            it->second = NULL;  //m_observers.erase(it);
+            break;
+        }
+    }
 }
 
 void Cx_ChangeManager::ChangeNotify(const char* type, ChangeNotifyData* data)
 {
-	ASSERT(data != NULL);
+    ASSERT(data != NULL);
 
-	std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
+    std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
 
-	for (ObserverMap::const_iterator it = range.first; it != range.second; ++it)
-	{
-		if (it->second)
-		{
-			it->second->Update(data);
-		}
-	}
+    for (ObserverMap::const_iterator it = range.first; it != range.second; ++it)
+    {
+        if (it->second)
+        {
+            it->second->Update(data);
+        }
+    }
 }

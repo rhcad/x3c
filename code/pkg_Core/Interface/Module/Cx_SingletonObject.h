@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,97 +36,97 @@ HMODULE xGetModuleHandle();
  */
 template <class ClsType>
 class Cx_SingletonObject
-	: public ClsType
-	, public Ix_Object
-	, public CModuleItem
+    : public ClsType
+    , public Ix_Object
+    , public CModuleItem
 {
 protected:
-	Cx_SingletonObject(bool bRef = true) : m_lRefCount(bRef ? 1 : 0)
-	{
-	}
+    Cx_SingletonObject(bool bRef = true) : m_lRefCount(bRef ? 1 : 0)
+    {
+    }
 
-	virtual ~Cx_SingletonObject()
-	{
-		if (Instance() == this)
-		{
-			Instance() = NULL;
-		}
-	}
+    virtual ~Cx_SingletonObject()
+    {
+        if (Instance() == this)
+        {
+            Instance() = NULL;
+        }
+    }
 
 protected:
-	virtual void AddRef(HMODULE fromdll)
-	{
-		if (fromdll != xGetModuleHandle())
-		{
-			InterlockedIncrement(&RefCountByOthers());
-		}
-		InterlockedIncrement(&m_lRefCount);
-	}
+    virtual void AddRef(HMODULE fromdll)
+    {
+        if (fromdll != xGetModuleHandle())
+        {
+            InterlockedIncrement(&RefCountByOthers());
+        }
+        InterlockedIncrement(&m_lRefCount);
+    }
 
-	virtual void Release(HMODULE fromdll)
-	{
-		if (fromdll != xGetModuleHandle())
-		{
-			InterlockedDecrement(&RefCountByOthers());
-		}
-		InterlockedDecrement(&m_lRefCount);
-	}
+    virtual void Release(HMODULE fromdll)
+    {
+        if (fromdll != xGetModuleHandle())
+        {
+            InterlockedDecrement(&RefCountByOthers());
+        }
+        InterlockedDecrement(&m_lRefCount);
+    }
 
-	virtual const char* GetClassName() const
-	{
-		return typeid(*this).name();
-	}
+    virtual const char* GetClassName() const
+    {
+        return typeid(*this).name();
+    }
 
 public:
-	static Ix_Object* STDMETHODCALLTYPE CreateObject(HMODULE fromdll)
-	{
-		if (NULL == Instance())
-		{
-			Cx_SingletonObject<ClsType>* p = new Cx_SingletonObject<ClsType>(false);
+    static Ix_Object* STDMETHODCALLTYPE CreateObject(HMODULE fromdll)
+    {
+        if (NULL == Instance())
+        {
+            Cx_SingletonObject<ClsType>* p = new Cx_SingletonObject<ClsType>(false);
 
 #ifdef InterlockedCompareExchangePointer
-			if (InterlockedCompareExchangePointer(
-				(PVOID volatile *)(&Instance()), p, NULL) == NULL)
+            if (InterlockedCompareExchangePointer(
+                (PVOID volatile *)(&Instance()), p, NULL) == NULL)
 #else
-			if (InterlockedCompareExchange((void**)(&Instance()), p, NULL) == NULL)
+            if (InterlockedCompareExchange((void**)(&Instance()), p, NULL) == NULL)
 #endif
-			{
-				p->AddRef(fromdll);
-				p->AddModuleItem();
-			}
-			else
-			{
-				delete p;	// has created by another thread
-			}
-		}
+            {
+                p->AddRef(fromdll);
+                p->AddModuleItem();
+            }
+            else
+            {
+                delete p;   // has created by another thread
+            }
+        }
 
-		return Instance();
-	}
+        return Instance();
+    }
 
-	static long STDMETHODCALLTYPE GetObjectCount()
-	{
-		return (Instance() && Instance()->m_lRefCount > 0) ? 1 : 0;
-	}
+    static long STDMETHODCALLTYPE GetObjectCount()
+    {
+        return (Instance() && Instance()->m_lRefCount > 0) ? 1 : 0;
+    }
 
-	static long STDMETHODCALLTYPE GetRefCountByOthers()
-	{
-		return RefCountByOthers();
-	}
+    static long STDMETHODCALLTYPE GetRefCountByOthers()
+    {
+        return RefCountByOthers();
+    }
 
 private:
-	long		m_lRefCount;
+    long        m_lRefCount;
 
-	static Cx_SingletonObject<ClsType>*& Instance()
-	{
-		static Cx_SingletonObject<ClsType>* s_pSingleton = NULL;
-		return s_pSingleton;
-	}
+    static Cx_SingletonObject<ClsType>*& Instance()
+    {
+        static Cx_SingletonObject<ClsType>* s_pSingleton = NULL;
+        return s_pSingleton;
+    }
 
-	static long& RefCountByOthers()
-	{
-		static long s_lRefCount = 0;
-		return s_lRefCount;
-	}
+    static long& RefCountByOthers()
+    {
+        static long s_lRefCount = 0;
+        return s_lRefCount;
+    }
 };
 
 #endif // X3_CX_SINGLETONOBJECT_H_

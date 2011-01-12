@@ -1,0 +1,40 @@
+X3 C++ PluginFramework
+
+2011-01-12, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * Rename text files(add .txt).
+    * Replace tab char to space char in *.h and *.cpp.
+    
+2011-01-09, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * ConfigXml v1.0.0.2:
+    * pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h: 
+        automatic call CoInitializeEx to avoid caller forget it.
+    * pkg_Core\Modules\ConfigXml\XmlUtil\XmlUtil.cpp: support MSXML6 and MSXML4.
+    * add InitXMLDLL.h for applications to Ensure MSXML correctly initialized.
+
+2011-01-06, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * Move VC++ workspace files (x3_vc*.sln) to 'projects' folder.
+    * Release vesion 1.0.2 (tags/x3-1.0.2)
+
+2011-01-06, Huang Ye <think.hy@gmail.com>
+
+    * Add a tool in 'tools\MakePluginPerl'.
+    It's a tool writing in perl for auto-generating plugin project.
+
+2011-01-05, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * ChangeManager v1.0.0.2:
+    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.h and cpp:
+    change std::multimap to std::hash_multimap, remove my hash function.
+
+    * PluginManager v1.0.0.2:
+    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h and cpp:
+        change class-table from std::map to std::hash_map. add 'Tao Jian Lin' to author list.
+
+    * doc\Doxygen\Interface.doxyfile: change include files to relative paths.
+
+2011-01-04, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * First release (x3_r01).

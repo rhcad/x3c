@@ -1,9 +1,10 @@
-pkg_Utility: 实用技术插件
+pkg_Utility: frequently-used utility plugins.
 
-FileUtility: 文件操作实用技术插件
-TextUtility: 文本操作实用技术插件
-LogWriter: 日志保存插件，采用log4cplus实现的日志输出观察者
-ConfigDB: 数据库操作封装插件
+FileUtility: file and folder operation plugin.
+TextUtility: text content and file operation plugin.
+LogWriter: logging writer plugin using log4cplus.
+ConfigDB: database operation wrapper plugin.
 
-LogWriter所需的log4cplus文件请从官方网站下载：
-http://sourceforge.net/projects/log4cplus 复制include和src目录到 LogWriter\log4cplus
+LogWriter plugin need log4cplus:
+http://sourceforge.net/projects/log4cplus
+Copy it's folders (include and src) to LogWriter\log4cplus.

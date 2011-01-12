@@ -1,5 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// https://sourceforge.net/projects/x3c/
+// http://sourceforge.net/projects/x3c/
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,5 +20,5 @@
 #include "Cx_LogManager.h"
 
 XBEGIN_DEFINE_MODULE()
-	XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_LogManager, Cx_LogManager)
+    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_LogManager, Cx_LogManager)
 XEND_DEFINE_MODULE_WIN32DLL()
