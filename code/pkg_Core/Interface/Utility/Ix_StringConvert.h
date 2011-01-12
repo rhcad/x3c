@@ -37,7 +37,7 @@ interface Ix_StringConvert
         \param[in] targets 要去掉字符的字符集合，为NULL则取为默认的空白字符
         \return 是否改变了文本
     */
-    virtual bool TrimSpace(std::wstring& text, LPCWSTR targets = NULL) = 0;
+    virtual bool TrimSpace(std::wstring& text, const wchar_t* targets = NULL) = 0;
 
     //! 去掉文字开头的空白字符（半角空格、全角空格、换行符）
     /*!
@@ -45,7 +45,7 @@ interface Ix_StringConvert
         \param[in] targets 要去掉字符的字符集合，为NULL则取为默认的空白字符
         \return 是否改变了文本
     */
-    virtual bool TrimLeft(std::wstring& text, LPCWSTR targets = NULL) = 0;
+    virtual bool TrimLeft(std::wstring& text, const wchar_t* targets = NULL) = 0;
 
     //! 去掉文字末尾的空白字符（半角空格、全角空格、换行符）
     /*!
@@ -53,7 +53,7 @@ interface Ix_StringConvert
         \param[in] targets 要去掉字符的字符集合，为NULL则取为默认的空白字符
         \return 是否改变了文本
     */
-    virtual bool TrimRight(std::wstring& text, LPCWSTR targets = NULL) = 0;
+    virtual bool TrimRight(std::wstring& text, const wchar_t* targets = NULL) = 0;
 
     //! 去掉非法字符
     /*! 去掉ASCII码小于0x20的字符（制表符、换行符和回车符除外）
@@ -61,7 +61,7 @@ interface Ix_StringConvert
         \param[in] targets 要去掉字符的字符集合，为NULL则取为小于0x20的字符
         \return 是否改变了文本
     */
-    virtual bool RemoveInvalidChars(std::wstring& text, LPCWSTR targets = NULL) = 0;
+    virtual bool RemoveInvalidChars(std::wstring& text, const wchar_t* targets = NULL) = 0;
 
     //! 替换文本，将找到的所有子串替换为新的内容
     /*!
@@ -118,7 +118,9 @@ interface Ix_StringConvert
 inline Cx_Interface<Ix_StringConvert> StringConvert()
 {
     Cx_Interface<Ix_StringConvert> pIFUtility(CLSID_TextUtil);
+#ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
+#endif
     return pIFUtility;
 }
 

@@ -41,8 +41,8 @@ interface Ix_PluginLoader
         \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
-    virtual long LoadPlugins(HMODULE instance, LPCWSTR path, 
-        LPCWSTR ext = L".plugin.dll", bool recursive = true) = 0;
+    virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
+        const wchar_t* ext = L".plugin.dll", bool recursive = true) = 0;
 
     //! 加载当前EXE的指定目录下的所有插件
     /*!
@@ -54,8 +54,8 @@ interface Ix_PluginLoader
         \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
-    virtual long LoadPlugins(LPCWSTR path, 
-        LPCWSTR ext = L".plugin.dll", bool recursive = true) = 0;
+    virtual long LoadPlugins(const wchar_t* path, 
+        const wchar_t* ext = L".plugin.dll", bool recursive = true) = 0;
 
     //! 加载指定模块的同目录下的多个插件
     /*!
@@ -66,7 +66,7 @@ interface Ix_PluginLoader
         \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
         \see InitializePlugins, LoadPlugins
     */
-    virtual long LoadPluginFiles(LPCWSTR path, LPCWSTR files, HMODULE instance = NULL) = 0;
+    virtual long LoadPluginFiles(const wchar_t* path, const wchar_t* files, HMODULE instance = NULL) = 0;
 
     //! 初始化所有新加载的插件
     /*! 调用插件的 InitializePlugin 函数，不会重复初始化已有插件
@@ -90,14 +90,14 @@ interface Ix_PluginLoader
         \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
         \see InitializePlugins
     */
-    virtual bool LoadPlugin(LPCWSTR filename) = 0;
+    virtual bool LoadPlugin(const wchar_t* filename) = 0;
 
     //! 卸载指定名称的插件
     /*!
         \param name 插件文件名，没有路径，例如“MyData.plugin.dll”
         \return 是否卸载成功
     */
-    virtual bool UnloadPlugin(LPCWSTR name) = 0;
+    virtual bool UnloadPlugin(const wchar_t* name) = 0;
 
     //! 卸载所有插件
     /*! 不再需要插件时调用，一般在程序退出时调用

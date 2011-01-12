@@ -27,7 +27,7 @@
     \param signchar 整数是否允许包含正负号，如果为false则仅当为数字才返回true
     \return 是否为形成整数的字符
 */
-inline bool IsIntChar(WCHAR c, bool signchar = false)
+inline bool IsIntChar(wchar_t c, bool signchar = false)
 {
     return iswdigit(c) || signchar && ('+' == c || '-' == c);
 }
@@ -43,7 +43,7 @@ inline bool IsIntChar(WCHAR c, bool signchar = false)
     \see IsIntChar
 */
 template <class IntType> inline
-long ReadInts(LPCWSTR str, IntType* arr, long size, bool signchar = false)
+long ReadInts(const wchar_t* str, IntType* arr, long size, bool signchar = false)
 {
     if (NULL == str)
     {
@@ -51,7 +51,7 @@ long ReadInts(LPCWSTR str, IntType* arr, long size, bool signchar = false)
     }
 
     int i, j, count;
-    WCHAR buf[13];
+    wchar_t buf[13];
 
     for (i = 0, count = 0; str[i] != 0 && count < size; )
     {
@@ -74,7 +74,7 @@ long ReadInts(LPCWSTR str, IntType* arr, long size, bool signchar = false)
 }
 
 //! 返回一个字符是否为形成浮点数的字符
-inline bool IsDblChar(WCHAR c)
+inline bool IsDblChar(wchar_t c)
 {
     return iswdigit(c) || '+' == c || '-' == c
         || '.' == c || 'E' == c || 'e' == c;
@@ -89,7 +89,7 @@ inline bool IsDblChar(WCHAR c)
     \return 分离出的浮点数个数
     \see IsDblChar
 */
-inline long ReadDoubleArray(LPCWSTR str, double* arr, long size)
+inline long ReadDoubleArray(const wchar_t* str, double* arr, long size)
 {
     if (NULL == str)
     {
@@ -97,8 +97,8 @@ inline long ReadDoubleArray(LPCWSTR str, double* arr, long size)
     }
 
     int i, j, count;
-    WCHAR buf[32];
-    LPWSTR endptr;
+    wchar_t buf[32];
+    wchar_t* endptr;
 
     for (i = 0, count = 0; str[i] != 0 && count < size; )
     {
@@ -111,7 +111,7 @@ inline long ReadDoubleArray(LPCWSTR str, double* arr, long size)
         }
         if (j > i)
         {
-            lstrcpynW(buf, str + i, min(_countof(buf), 1 + j - i));
+            lstrcpynW(buf, str + i, min(32, 1 + j - i));
             arr[count++] = wcstod(buf, &endptr);
         }
         i = j;

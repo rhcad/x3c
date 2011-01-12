@@ -192,26 +192,26 @@ Cx_Section Cx_CfgDatabase::OpenRecordset(const std::wstring& sqlSelect)
     return pIFRet;
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(LPCWSTR sqlSelect, bool)
+Cx_Section Cx_CfgDatabase::GetSection(const wchar_t* sqlSelect, bool)
 {
     return OpenRecordset(sqlSelect);
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, LPCWSTR sqlSelect, 
-                                      LPCWSTR field, ULONG condValue, bool)
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect, 
+                                      const wchar_t* field, ULONG condValue, bool)
 {
     return GetSection(pParent, sqlSelect, field, condValue, L"", 0L);
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, LPCWSTR pszNodeName, 
-                                      LPCWSTR field, LPCWSTR pszAttrValue, bool)
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* pszNodeName, 
+                                      const wchar_t* field, const wchar_t* pszAttrValue, bool)
 {
     return GetSection(pParent, pszNodeName, field, pszAttrValue, L"", L"");
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, LPCWSTR sqlSelect, 
-                                      LPCWSTR field, LPCWSTR condValue, 
-                                      LPCWSTR field2Name, LPCWSTR condValue2, bool)
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect, 
+                                      const wchar_t* field, const wchar_t* condValue, 
+                                      const wchar_t* field2Name, const wchar_t* condValue2, bool)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::GetSection(pParent, ...): pParent must be NULL");
     
@@ -240,9 +240,9 @@ Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, LPCWSTR sqlSele
     return OpenRecordset(sql.str());
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, LPCWSTR sqlSelect, 
-                                      LPCWSTR field, ULONG condValue, 
-                                      LPCWSTR field2Name, ULONG condValue2, bool)
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect, 
+                                      const wchar_t* field, ULONG condValue, 
+                                      const wchar_t* field2Name, ULONG condValue2, bool)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::GetSection(pParent, ...): pParent must be NULL");
     
@@ -271,7 +271,7 @@ Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, LPCWSTR sqlSele
     return OpenRecordset(sql.str());
 }
 
-long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, LPCWSTR)
+long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, const wchar_t*)
 {
     Cx_CfgRecordset* pRecordset = dynamic_cast<Cx_CfgRecordset*>(pParent);
     ASSERT_MESSAGE(pRecordset != NULL, "Database::GetSectionCount(pParent, ...): "
@@ -280,7 +280,7 @@ long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, LPCWSTR)
     return pRecordset->GetRecordCount();
 }
 
-Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, LPCWSTR, long nIndex)
+Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, const wchar_t*, long nIndex)
 {
     Cx_CfgRecordset* pRecordset = dynamic_cast<Cx_CfgRecordset*>(pParent);
     ASSERT_MESSAGE(pRecordset != NULL, "Database::GetSectionByIndex(pParent, ...): "
@@ -311,7 +311,7 @@ Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, LPCWSTR,
     return pIFRet;
 }
 
-Cx_Section Cx_CfgDatabase::AddSection(Ix_ConfigSection* pParent, LPCWSTR table)
+Cx_Section Cx_CfgDatabase::AddSection(Ix_ConfigSection* pParent, const wchar_t* table)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::AddSection(pParent, ...): pParent must be NULL");
     ASSERT_MESSAGE(DbFunc::IsDBName(table), "Invalid table name.");
@@ -336,8 +336,8 @@ Cx_Section Cx_CfgDatabase::GetParentSection(Ix_ConfigSection*)
     return Cx_Section();
 }
 
-long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, LPCWSTR table, 
-                                    LPCWSTR field, LPCWSTR condValue)
+long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table, 
+                                    const wchar_t* field, const wchar_t* condValue)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::RemoveChildren(pParent, ...): pParent must be NULL");
     ASSERT_MESSAGE(DbFunc::IsDBName(table), "Invalid table name.");
@@ -358,8 +358,8 @@ long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, LPCWSTR table,
     return 0;
 }
 
-long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, LPCWSTR table, 
-                                    LPCWSTR field, ULONG condValue)
+long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table, 
+                                    const wchar_t* field, ULONG condValue)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::RemoveChildren(pParent, ...): pParent must be NULL");
     ASSERT_MESSAGE(DbFunc::IsDBName(table), "Invalid table name.");

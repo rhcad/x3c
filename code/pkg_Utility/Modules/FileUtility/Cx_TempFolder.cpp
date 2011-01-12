@@ -70,7 +70,7 @@ std::wstring Cx_TempFolder::CreateFolder(const std::wstring& wstrPrefix)
     DeleteFolder();
     for (int i = 1; i < 9999; i++)
     {
-        WCHAR szFileName[MAX_PATH] = { 0 };
+        wchar_t szFileName[MAX_PATH] = { 0 };
         swprintf_s(szFileName, _countof(szFileName), L"%s%03d", wstrPrefix.c_str(), i);
         std::wstring wstrPath (pIFUtility->RelToAbs(szFileName, false, m_wstrRootPath.c_str(), false));
 

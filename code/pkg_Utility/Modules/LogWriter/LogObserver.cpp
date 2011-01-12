@@ -70,7 +70,7 @@ void CLogObserver::InitLogFile()
             pIFUtility->CreateDirectory(m_wstrPath.c_str(), true);
         }
 
-        WCHAR szPropFile[MAX_PATH] = {0};
+        wchar_t szPropFile[MAX_PATH] = {0};
         lstrcpynW(szPropFile, m_wstrPath.c_str(), MAX_PATH);
         PathAppendW(szPropFile, m_wstrAppName.c_str());
         StrCatW(szPropFile, L".properties");
@@ -86,7 +86,7 @@ void CLogObserver::InitLogFile()
 
 void CLogObserver::MakerInitVars()
 {
-    WCHAR szPath[MAX_PATH] = {0};
+    wchar_t szPath[MAX_PATH] = {0};
     
     if (m_wstrPath.empty())
     {
@@ -104,13 +104,13 @@ void CLogObserver::MakerInitVars()
     if (m_wstrAppName.empty())
     {
         GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
-        LPWSTR pszName = PathFindFileNameW(szPath);
+        wchar_t* pszName = PathFindFileNameW(szPath);
         PathRemoveExtensionW(pszName);
         m_wstrAppName = helpers::toLower(pszName);
     }
 }
 
-void CLogObserver::WritePropFile(LPCWSTR pszFileName)
+void CLogObserver::WritePropFile(const wchar_t* pszFileName)
 {
     std::wostringstream buf;
 

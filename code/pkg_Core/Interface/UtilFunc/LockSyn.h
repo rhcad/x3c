@@ -222,7 +222,9 @@ public:
         {
             bRet = true;
             if (0 == InterlockedDecrement(&nReadCount)) // 减少读计数，没有读操作了
-                bRet = ::ReleaseSemaphore(hDataLock, 1, &lPrevCount);   // 允许写
+            {
+                bRet = !!ReleaseSemaphore(hDataLock, 1, &lPrevCount);   // 允许写
+            }
             ::ReleaseMutex(hMutex);                     // 解除互斥量锁定
         }
         
@@ -265,7 +267,7 @@ public:
         {
             InterlockedDecrement(&nWriterSeqNum);       // 取消序列号的增加
         }
-        bRet = ::ReleaseSemaphore(hDataLock, 1, &lPrevCount);   // 允许读写
+        bRet = !!ReleaseSemaphore(hDataLock, 1, &lPrevCount);   // 允许读写
 #ifdef TRACE0
         if (0 != lPrevCount)
         {
@@ -312,8 +314,15 @@ public:
         bRet = Wait(hMutex, nMaxWait);                  // 锁定读计数互斥量
         if (bRet)
         {
-            VERIFY(1 == InterlockedIncrement(&nReadCount)); // 增加读计数
-            ::ReleaseMutex(hMutex);                     // 解除互斥量锁定
+            long n = InterlockedIncrement(&nReadCount); // 增加读计数
+#ifdef VERIFY
+            VERIFY(1 == n);
+#endif
+            bRet = (1 == n);
+            if (bRet)
+            {
+                ::ReleaseMutex(hMutex);                 // 解除互斥量锁定
+            }
         }
 
         return bRet;
@@ -481,8 +490,6 @@ public:
     */
     bool UpgradeToWriterLock(DWORD nMaxWait = 15000)
     {
-        ASSERT(m_pData != NULL);
-
         bool bRet = m_bWriter;
 
         if (!m_bWriter)
@@ -508,8 +515,6 @@ public:
     */
     bool DowngradeFromWriterLock(DWORD nMaxWait = 15000)
     {
-        ASSERT(m_pData != NULL);
-
         bool bRet = !m_bWriter;
 
         if (m_bWriter)

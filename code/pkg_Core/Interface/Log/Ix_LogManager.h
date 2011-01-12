@@ -67,7 +67,7 @@ interface Ix_LogManager
         \return 是否执行成功
         \see CAutoLogGroup, PopGroup
     */
-    virtual bool PushGroup(LPCWSTR msg, LPCWSTR extra) = 0;
+    virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra) = 0;
 
     //! 结束一组日志
     /*!
@@ -86,8 +86,8 @@ interface Ix_LogManager
         \return 是否执行成功
         \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
     */
-    virtual bool WriteLog(kLogType type, LPCWSTR msg, 
-        LPCWSTR extra, LPCSTR file, long line) = 0;
+    virtual bool WriteLog(kLogType type, const wchar_t* msg, 
+        const wchar_t* extra, LPCSTR file, long line) = 0;
 
     //! 输出日志信息(ANSI串)
     /*!

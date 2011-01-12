@@ -21,6 +21,8 @@
 #ifndef X3_XML_ISTRINGTABLE_H_
 #define X3_XML_ISTRINGTABLE_H_
 
+#include "Ix_Object.h"
+
 const XCLSID CLSID_StringTable("b8c36b29-59c3-4db2-be43-fd4982e6e71d");
 
 //! 本地化字符串表的接口

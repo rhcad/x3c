@@ -30,7 +30,7 @@ public:
 class CTransDeleteFile : public CTransStep
 {
 public:
-    CTransDeleteFile(LPCWSTR pszFileName, bool bRecycle)
+    CTransDeleteFile(const wchar_t* pszFileName, bool bRecycle)
         : m_wstrFileName(pszFileName), m_bRecycle(bRecycle)
     {
     }
@@ -48,7 +48,7 @@ private:
 class CTransRenameFile : public CTransStep
 {
 public:
-    CTransRenameFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile)
+    CTransRenameFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile)
         : m_wstrOldFile(pszOldFile), m_wstrNewFile(pszNewFile)
     {
     }

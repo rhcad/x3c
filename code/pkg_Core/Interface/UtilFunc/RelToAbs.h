@@ -21,6 +21,7 @@
 #ifndef UTILFUNC_RELTOABS_H_
 #define UTILFUNC_RELTOABS_H_
 
+#include "XComPtr.h"
 #include <shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
 
@@ -41,9 +42,9 @@ inline HMODULE GetMainModuleHandle()
     \return 转换后的绝对路径，如果isfile为false则绝对路径末尾有斜号
     \see FileNameRelToAbs
 */
-inline std::wstring RelToAbsWithPlugin(LPCWSTR relname, bool isfile = true)
+inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = true)
 {
-    WCHAR path[MAX_PATH] = { 0 };
+    wchar_t path[MAX_PATH] = { 0 };
     
     GetModuleFileNameW(xGetModuleHandle(), path, MAX_PATH);
     PathRemoveFileSpecW(path);
@@ -66,9 +67,9 @@ inline std::wstring RelToAbsWithPlugin(LPCWSTR relname, bool isfile = true)
     \return 转换后的绝对路径，如果isfile为false则绝对路径末尾有斜号
     \see GetMainModuleHandle
 */
-inline std::wstring FileNameRelToAbs(LPCWSTR relname, bool isfile = true)
+inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
 {
-    WCHAR path[MAX_PATH] = { 0 };
+    wchar_t path[MAX_PATH] = { 0 };
     
     GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
     PathRemoveFileSpecW(path);
@@ -91,10 +92,10 @@ inline std::wstring FileNameRelToAbs(LPCWSTR relname, bool isfile = true)
     \return 转换后的绝对路径，如果isfile为false则绝对路径末尾有斜号
     \see GetMainModuleHandle
 */
-inline std::wstring MakeTempFileName(LPCWSTR relname = L"", bool isfile = true)
+inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile = true)
 {
-    WCHAR path[MAX_PATH] = { 0 };
-    WCHAR exename[MAX_PATH] = { 0 };
+    wchar_t path[MAX_PATH] = { 0 };
+    wchar_t exename[MAX_PATH] = { 0 };
     
     GetModuleFileNameW(GetMainModuleHandle(), exename, MAX_PATH);
     PathStripPath(exename);
@@ -126,7 +127,7 @@ inline std::wstring EnsurePathHasSlash(std::wstring& wstrPath)
 {
     if (!wstrPath.empty())
     {
-        WCHAR c = wstrPath[wstrPath.size() - 1];
+        wchar_t c = wstrPath[wstrPath.size() - 1];
         if (c != '\\' && c != '/')
         {
             wstrPath += '\\';

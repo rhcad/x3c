@@ -92,7 +92,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigIOSection GetSection(LPCWSTR sqlSelect, bool ignore = true);
+    ConfigIOSection GetSection(const wchar_t* sqlSelect, bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
     /*! 本函数可用于根据编号条件查找并修改记录，例如： \code
@@ -111,8 +111,8 @@ protected:
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
     ConfigIOSection GetSection(
-        Ix_ConfigSection* nullP, LPCWSTR sqlSelect, 
-        LPCWSTR field, ULONG condValue, 
+        Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
+        const wchar_t* field, ULONG condValue, 
         bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
@@ -125,8 +125,8 @@ protected:
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
     ConfigIOSection GetSection(
-        Ix_ConfigSection* nullP, LPCWSTR sqlSelect, 
-        LPCWSTR field, LPCWSTR condValue, 
+        Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
+        const wchar_t* field, const wchar_t* condValue, 
         bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
@@ -141,9 +141,9 @@ protected:
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
     ConfigIOSection GetSection(
-        Ix_ConfigSection* nullP, LPCWSTR sqlSelect, 
-        LPCWSTR field, LPCWSTR condValue, 
-        LPCWSTR fieldName2, LPCWSTR condValue2, 
+        Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
+        const wchar_t* field, const wchar_t* condValue, 
+        const wchar_t* fieldName2, const wchar_t* condValue2, 
         bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
@@ -158,9 +158,9 @@ protected:
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
     ConfigIOSection GetSection(
-        Ix_ConfigSection* nullP, LPCWSTR sqlSelect, 
-        LPCWSTR field, ULONG condValue, 
-        LPCWSTR fieldName2, ULONG condValue2, 
+        Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
+        const wchar_t* field, ULONG condValue, 
+        const wchar_t* fieldName2, ULONG condValue2, 
         bool ignore = true);
 
     //! 返回记录集的记录条数
@@ -172,7 +172,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录条数
     */
-    long GetSectionCount(Ix_ConfigSection* pRecordset, LPCWSTR ignore);
+    long GetSectionCount(Ix_ConfigSection* pRecordset, const wchar_t* ignore);
 
     //! 返回一个记录集的指定序号的记录对象
     /*! 本函数用于对记录集进行遍历读取，代码示例： \code
@@ -193,7 +193,7 @@ protected:
         \return 记录对象 Cx_CfgRecord ,不为空
     */
     ConfigIOSection GetSectionByIndex(
-        Ix_ConfigSection* pRecordset, LPCWSTR ignore, long index);
+        Ix_ConfigSection* pRecordset, const wchar_t* ignore, long index);
 
     //! 增加一个新记录，待设置各个字段的值
     /*! 此时还未在数据库中增加记录。
@@ -208,7 +208,7 @@ protected:
         \param table 数据库表名，例如“book”
         \return 新记录对象 Cx_CfgRecord
     */
-    ConfigIOSection AddSection(Ix_ConfigSection* nullP, LPCWSTR table);
+    ConfigIOSection AddSection(Ix_ConfigSection* nullP, const wchar_t* table);
 
     //! 不支持本函数
     bool RemoveSection(Ix_ConfigSection*);
@@ -223,8 +223,8 @@ protected:
         \param condValue field对应的值，用于在查询中比较相等
         \return 删除的记录数
     */
-    long RemoveChildren(Ix_ConfigSection* nullP, LPCWSTR table, 
-        LPCWSTR field = L"", LPCWSTR condValue = L"");
+    long RemoveChildren(Ix_ConfigSection* nullP, const wchar_t* table, 
+        const wchar_t* field = L"", const wchar_t* condValue = L"");
 
     //! 删除指定条件的记录
     /*! 代码示例： \code
@@ -236,8 +236,8 @@ protected:
         \param condValue field对应的值，用于在查询中比较相等
         \return 删除的记录数
     */
-    long RemoveChildren(Ix_ConfigSection* nullP, LPCWSTR table, 
-        LPCWSTR field, ULONG condValue);
+    long RemoveChildren(Ix_ConfigSection* nullP, const wchar_t* table, 
+        const wchar_t* field, ULONG condValue);
 
     //! 得到一个数据节点的上一级节点(本函数不支持)
     ConfigIOSection GetParentSection(Ix_ConfigSection*);

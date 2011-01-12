@@ -28,7 +28,7 @@ _STD_BEGIN
     \param codepage 目标ANSI串的编码，例如 CP_UTF8 表示UTF-8格式编码
     \return 目标ANSI串
 */
-inline std::string w2a(LPCWSTR s, UINT codepage = CP_ACP)
+inline std::string w2a(const wchar_t* s, UINT codepage = CP_ACP)
 {
     std::string str;
     int wlen = (NULL == s) ? 0 : (int)wcslen(s);
@@ -73,7 +73,7 @@ inline std::wstring a2w(LPCSTR s, UINT codepage = CP_ACP)
         int wlen = MultiByteToWideChar(codepage, 0, s, len, NULL, 0);
         wstr.resize(wlen);
         MultiByteToWideChar(codepage, 0, s, len, 
-            const_cast<LPWSTR>(wstr.data()), wlen);
+            const_cast<wchar_t*>(wstr.data()), wlen);
     }
 
     return wstr;
@@ -92,11 +92,11 @@ inline std::wstring a2w(const std::string& s, UINT codepage = CP_ACP)
 }
 
 #ifdef _UNICODE
-inline std::wstring w2t(LPCWSTR s) { return s; }
+inline std::wstring w2t(const wchar_t* s) { return s; }
 inline std::wstring w2t(const std::wstring& s) { return s; }
 inline std::wstring t2w(LPCTSTR s) { return s; }
 #else
-inline std::string w2t(LPCWSTR s) { return w2a(s); }
+inline std::string w2t(const wchar_t* s) { return w2a(s); }
 inline std::string w2t(const std::wstring& s) { return w2a(s); }
 inline std::wstring t2w(LPCTSTR s) { return a2w(s); }
 #endif

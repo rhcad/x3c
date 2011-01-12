@@ -79,7 +79,7 @@ ULONG Cx_CfgRecord::GetModifiedCount()
     return static_cast<ULONG>(m_arrValue.size());
 }
 
-static std::wstring GetSQLFunc(LPCWSTR pszFunc, Ix_SQLParser* pParser)
+static std::wstring GetSQLFunc(const wchar_t* pszFunc, Ix_SQLParser* pParser)
 {
     if (StrCmpIW(pszFunc, L"CURDATE()") == 0)
         return pParser->GetFunc_CURDATE();
@@ -114,7 +114,7 @@ long Cx_CfgRecord::SubmitRecord()
     {
         ASSERT(StrStrIW(m_wstrSQL.c_str(), L"SELECT ") == m_wstrSQL.c_str());
 
-        LPCWSTR pszFrom = StrStrIW(m_wstrSQL.c_str(), L"FROM ");
+        const wchar_t* pszFrom = StrStrIW(m_wstrSQL.c_str(), L"FROM ");
         ASSERT_MESSAGE(pszFrom != NULL, "The SQL command must contains 'FROM' keyword.");
 
         std::wstring table(DbFunc::GetLevel1Name(pszFrom + 5));
@@ -140,7 +140,7 @@ long Cx_CfgRecord::SubmitRecord()
                 return 0;
             }
 
-            WCHAR szNum[35];
+            wchar_t szNum[35];
             _ltow_s(m_nKeyNewID, szNum, _countof(szNum), 10);
             wstrValue = szNum;
         }
@@ -173,7 +173,7 @@ long Cx_CfgRecord::SubmitRecord()
     {
         sql << ssValues.str();
 
-        LPCWSTR pszWhere = StrStrIW(m_wstrSQL.c_str(), L" WHERE");
+        const wchar_t* pszWhere = StrStrIW(m_wstrSQL.c_str(), L" WHERE");
         if (pszWhere != NULL)
         {
             sql << pszWhere;
@@ -219,7 +219,7 @@ bool Cx_CfgRecord::AddFieldValue(const std::wstring& wstrField,
     return true;
 }
 
-std::wstring Cx_CfgRecord::GetString(LPCWSTR pszEntry, LPCWSTR pszDefault)
+std::wstring Cx_CfgRecord::GetString(const wchar_t* pszEntry, const wchar_t* pszDefault)
 {
     ASSERT_MESSAGE(m_pRs != NULL, "The record is write-only.");
 
@@ -236,7 +236,7 @@ std::wstring Cx_CfgRecord::GetString(LPCWSTR pszEntry, LPCWSTR pszDefault)
     return pszDefault;
 }
 
-bool Cx_CfgRecord::SetString(LPCWSTR pszEntry, LPCWSTR pszValue)
+bool Cx_CfgRecord::SetString(const wchar_t* pszEntry, const wchar_t* pszValue)
 {
     std::wstring wstrValue;
 
@@ -254,7 +254,7 @@ bool Cx_CfgRecord::SetString(LPCWSTR pszEntry, LPCWSTR pszValue)
     return AddFieldValue(pszEntry, wstrValue);
 }
 
-int Cx_CfgRecord::GetInt(LPCWSTR pszEntry, int nDefault)
+int Cx_CfgRecord::GetInt(const wchar_t* pszEntry, int nDefault)
 {
     if (StrCmpIW(m_wstrKeyField.c_str(), pszEntry) == 0)
     {
@@ -276,62 +276,62 @@ int Cx_CfgRecord::GetInt(LPCWSTR pszEntry, int nDefault)
     return nDefault;
 }
 
-bool Cx_CfgRecord::SetInt(LPCWSTR pszEntry, int nValue)
+bool Cx_CfgRecord::SetInt(const wchar_t* pszEntry, int nValue)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _itow_s(nValue, szNum, _countof(szNum), 10);
     return AddFieldValue(pszEntry, szNum);
 }
 
-long Cx_CfgRecord::GetInt32(LPCWSTR pszEntry, long nDefault)
+long Cx_CfgRecord::GetInt32(const wchar_t* pszEntry, long nDefault)
 {
     return GetInt(pszEntry, nDefault);
 }
 
-bool Cx_CfgRecord::SetInt32(LPCWSTR pszEntry, long nValue)
+bool Cx_CfgRecord::SetInt32(const wchar_t* pszEntry, long nValue)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _ltow_s(nValue, szNum, _countof(szNum), 10);
     return AddFieldValue(pszEntry, szNum);
 }
 
-ULONG Cx_CfgRecord::GetUInt32(LPCWSTR pszEntry, ULONG nDefault)
+ULONG Cx_CfgRecord::GetUInt32(const wchar_t* pszEntry, ULONG nDefault)
 {
     return GetInt(pszEntry, nDefault);
 }
 
-bool Cx_CfgRecord::SetUInt32(LPCWSTR pszEntry, ULONG nValue)
+bool Cx_CfgRecord::SetUInt32(const wchar_t* pszEntry, ULONG nValue)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _ultow_s(nValue, szNum, _countof(szNum), 10);
     return AddFieldValue(pszEntry, szNum);
 }
 
-short Cx_CfgRecord::GetInt16(LPCWSTR pszEntry, short nDefault)
+short Cx_CfgRecord::GetInt16(const wchar_t* pszEntry, short nDefault)
 {
     return (short)GetInt(pszEntry, nDefault);
 }
 
-bool Cx_CfgRecord::SetInt16(LPCWSTR pszEntry, short nValue)
+bool Cx_CfgRecord::SetInt16(const wchar_t* pszEntry, short nValue)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _itow_s(nValue, szNum, _countof(szNum), 10);
     return AddFieldValue(pszEntry, szNum);
 }
 
-WORD Cx_CfgRecord::GetUInt16(LPCWSTR pszEntry, WORD nDefault)
+WORD Cx_CfgRecord::GetUInt16(const wchar_t* pszEntry, WORD nDefault)
 {
     return (WORD)GetInt(pszEntry, nDefault);
 }
 
-bool Cx_CfgRecord::SetUInt16(LPCWSTR pszEntry, WORD nValue)
+bool Cx_CfgRecord::SetUInt16(const wchar_t* pszEntry, WORD nValue)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _ultow_s(nValue, szNum, _countof(szNum), 10);
     return AddFieldValue(pszEntry, szNum);
 }
 
-bool Cx_CfgRecord::GetBool(LPCWSTR pszEntry, BOOL bDefault)
+bool Cx_CfgRecord::GetBool(const wchar_t* pszEntry, BOOL bDefault)
 {
     ASSERT_MESSAGE(m_pRs != NULL, "The record is write-only.");
 
@@ -348,12 +348,12 @@ bool Cx_CfgRecord::GetBool(LPCWSTR pszEntry, BOOL bDefault)
     return !!bDefault;
 }
 
-bool Cx_CfgRecord::SetBool(LPCWSTR pszEntry, BOOL bValue)
+bool Cx_CfgRecord::SetBool(const wchar_t* pszEntry, BOOL bValue)
 {
     return AddFieldValue(pszEntry, bValue ? L"'y'" : L"'n'");
 }
 
-double Cx_CfgRecord::GetDouble(LPCWSTR pszEntry, double dDefault)
+double Cx_CfgRecord::GetDouble(const wchar_t* pszEntry, double dDefault)
 {
     ASSERT_MESSAGE(m_pRs != NULL, "The record is write-only.");
 
@@ -370,32 +370,32 @@ double Cx_CfgRecord::GetDouble(LPCWSTR pszEntry, double dDefault)
     return dDefault;
 }
 
-bool Cx_CfgRecord::SetDouble(LPCWSTR pszEntry, double dValue)
+bool Cx_CfgRecord::SetDouble(const wchar_t* pszEntry, double dValue)
 {
     return AddFieldValue(pszEntry, RoundStr(dValue, 5).c_str());
 }
 
-float Cx_CfgRecord::GetFloat(LPCWSTR pszEntry, float fDefault)
+float Cx_CfgRecord::GetFloat(const wchar_t* pszEntry, float fDefault)
 {
     return (float)GetDouble(pszEntry, fDefault);
 }
 
-bool Cx_CfgRecord::SetFloat(LPCWSTR pszEntry, float fValue)
+bool Cx_CfgRecord::SetFloat(const wchar_t* pszEntry, float fValue)
 {
     return AddFieldValue(pszEntry, RoundStr(fValue, 5).c_str());
 }
 
-COLORREF Cx_CfgRecord::GetRGB(LPCWSTR pszEntry, COLORREF crDefault)
+COLORREF Cx_CfgRecord::GetRGB(const wchar_t* pszEntry, COLORREF crDefault)
 {
     return GetUInt32(pszEntry, crDefault);
 }
 
-bool Cx_CfgRecord::SetRGB(LPCWSTR pszEntry, COLORREF crValue)
+bool Cx_CfgRecord::SetRGB(const wchar_t* pszEntry, COLORREF crValue)
 {
     return SetUInt32(pszEntry, crValue);
 }
 
-bool Cx_CfgRecord::GetCMYK(LPCWSTR pszEntry, WORD& c, WORD& m, WORD& y, WORD& k)
+bool Cx_CfgRecord::GetCMYK(const wchar_t* pszEntry, WORD& c, WORD& m, WORD& y, WORD& k)
 {
     WORD nums[4] = { 0, 0, 0, 0 };
     bool bRet = (ReadInts(GetString(pszEntry).c_str(), nums, 4) == 4);
@@ -409,14 +409,14 @@ bool Cx_CfgRecord::GetCMYK(LPCWSTR pszEntry, WORD& c, WORD& m, WORD& y, WORD& k)
     return bRet;
 }
 
-bool Cx_CfgRecord::SetCMYK(LPCWSTR pszEntry, WORD c, WORD m, WORD y, WORD k)
+bool Cx_CfgRecord::SetCMYK(const wchar_t* pszEntry, WORD c, WORD m, WORD y, WORD k)
 {
-    WCHAR szBuf[60];
+    wchar_t szBuf[60];
     swprintf_s(szBuf, _countof(szBuf), L"'%d-%d-%d-%d'", c, m, y, k);
     return AddFieldValue(pszEntry, szBuf);
 }
 
-bool Cx_CfgRecord::GetDate(LPCWSTR pszEntry, int& year, int& month, int& day)
+bool Cx_CfgRecord::GetDate(const wchar_t* pszEntry, int& year, int& month, int& day)
 {
     ASSERT_MESSAGE(m_pRs != NULL, "The record is write-only.");
 
@@ -442,14 +442,14 @@ bool Cx_CfgRecord::GetDate(LPCWSTR pszEntry, int& year, int& month, int& day)
     return false;
 }
 
-bool Cx_CfgRecord::SetDate(LPCWSTR pszEntry, int year, int month, int day)
+bool Cx_CfgRecord::SetDate(const wchar_t* pszEntry, int year, int month, int day)
 {
-    WCHAR szBuf[60];
+    wchar_t szBuf[60];
     swprintf_s(szBuf, _countof(szBuf), L"'%d-%d-%d'", year, month, day);
     return AddFieldValue(pszEntry, szBuf);
 }
 
-bool Cx_CfgRecord::GetDateTime(LPCWSTR pszEntry, int& year, int& month, int& day, 
+bool Cx_CfgRecord::GetDateTime(const wchar_t* pszEntry, int& year, int& month, int& day, 
                                   int& hour, int& minute, int& second)
 {
     ASSERT_MESSAGE(m_pRs != NULL, "The record is write-only.");
@@ -479,51 +479,51 @@ bool Cx_CfgRecord::GetDateTime(LPCWSTR pszEntry, int& year, int& month, int& day
     return false;
 }
 
-bool Cx_CfgRecord::SetDateTime(LPCWSTR pszEntry, int year, int month, int day, 
+bool Cx_CfgRecord::SetDateTime(const wchar_t* pszEntry, int year, int month, int day, 
                                int hour, int minute, int second)
 {
-    WCHAR szBuf[60];
+    wchar_t szBuf[60];
     swprintf_s(szBuf, _countof(szBuf), L"'%d-%d-%d %d:%d:%d'", 
         year, month, day, hour, minute, second);
     return AddFieldValue(pszEntry, szBuf);
 }
 
-long Cx_CfgRecord::GetDoubleArray(LPCWSTR pszEntry, double* pItems, long count)
+long Cx_CfgRecord::GetDoubleArray(const wchar_t* pszEntry, double* pItems, long count)
 {
     pszEntry;pItems;count;
     ASSERT_MESSAGE(0, "TODO: GetDoubleArray 还未实现");
     return false;
 }
 
-bool Cx_CfgRecord::SetDoubleArray(LPCWSTR pszEntry, const double* pItems, long count)
+bool Cx_CfgRecord::SetDoubleArray(const wchar_t* pszEntry, const double* pItems, long count)
 {
     pszEntry;pItems;count;
     ASSERT_MESSAGE(0, "TODO: SetDoubleArray 还未实现");
     return false;
 }
 
-long Cx_CfgRecord::GetIntArray(LPCWSTR pszEntry, long* pItems, long count)
+long Cx_CfgRecord::GetIntArray(const wchar_t* pszEntry, long* pItems, long count)
 {
     pszEntry;pItems;count;
     ASSERT_MESSAGE(0, "TODO: GetIntArray 还未实现");
     return false;
 }
 
-bool Cx_CfgRecord::SetIntArray(LPCWSTR pszEntry, const long* pItems, long count)
+bool Cx_CfgRecord::SetIntArray(const wchar_t* pszEntry, const long* pItems, long count)
 {
     pszEntry;pItems;count;
     ASSERT_MESSAGE(0, "TODO: SetIntArray 还未实现");
     return false;
 }
 
-long Cx_CfgRecord::GetBinary(LPCWSTR pszEntry, LPVOID pBuf, long nSize)
+long Cx_CfgRecord::GetBinary(const wchar_t* pszEntry, LPVOID pBuf, long nSize)
 {
     pszEntry;pBuf;nSize;
     ASSERT_MESSAGE(0, "TODO: GetBinary 还未实现");
     return false;
 }
 
-bool Cx_CfgRecord::SetBinary(LPCWSTR pszEntry, LPCVOID pBuf, long nSize)
+bool Cx_CfgRecord::SetBinary(const wchar_t* pszEntry, LPCVOID pBuf, long nSize)
 {
     pszEntry;pBuf;nSize;
     ASSERT_MESSAGE(0, "TODO: SetBinary 还未实现");

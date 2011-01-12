@@ -23,20 +23,20 @@ class DbFunc
 {
 public:
     //! 显示COM错误信息
-    static void PrintComError(_com_error &e, LPCSTR file, long lLine, LPCWSTR pszSQL = NULL);
+    static void PrintComError(_com_error &e, LPCSTR file, long lLine, const wchar_t* pszSQL = NULL);
 
     //! 显示错误信息
     static void PrintError(CException* e, LPCSTR file, long lLine);
 
     //! 显示信息文字
-    static void PrintInfo(LPCWSTR pszMsg, LPCSTR file, long lLine, bool bError = false);
+    static void PrintInfo(const wchar_t* pszMsg, LPCSTR file, long lLine, bool bError = false);
 
     //! 返回斜号分隔的第一部分子串
-    static std::wstring GetLevel1Name(LPCWSTR name);
+    static std::wstring GetLevel1Name(const wchar_t* name);
 
-    static bool IsDBName(LPCWSTR name);
+    static bool IsDBName(const wchar_t* name);
 
-    static bool IsSelectSQL(LPCWSTR name);
+    static bool IsSelectSQL(const wchar_t* name);
 
     //! BOOL值转换为字符'y'或'n'
     static CHAR BoolToChar(BOOL bValue);

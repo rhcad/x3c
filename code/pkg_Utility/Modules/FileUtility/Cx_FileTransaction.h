@@ -29,7 +29,7 @@ public:
     virtual void Rollback();
     virtual long GetLevel() const;
     virtual bool IsRollbacking() const;
-    virtual bool DeletePathFile(LPCWSTR pszFileName, bool bRecycle = false);
+    virtual bool DeletePathFile(const wchar_t* pszFileName, bool bRecycle = false);
 
 private:
     long        m_lLevel;

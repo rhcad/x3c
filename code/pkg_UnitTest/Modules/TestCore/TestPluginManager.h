@@ -59,5 +59,5 @@ private:
     Ix_PluginLoader* GetManagerLoader(void);
     Ix_ObjectFactory* GetManagerObjectFactory(void);
 
-    long GetPluginsNum(LPCWSTR path, LPCWSTR ext = L".plugin.dll", bool recursive = true);
+    long GetPluginsNum(const wchar_t* path, const wchar_t* ext = L".plugin.dll", bool recursive = true);
 };

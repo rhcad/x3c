@@ -21,6 +21,8 @@
 #ifndef X3_UTIL_IFILEVERSION_H_
 #define X3_UTIL_IFILEVERSION_H_
 
+#include "Ix_Object.h"
+
 //! 获取文件版本号的接口
 /*!
     \interface Ix_FileVersion

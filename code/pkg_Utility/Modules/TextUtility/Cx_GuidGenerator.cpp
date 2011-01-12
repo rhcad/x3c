@@ -21,7 +21,7 @@
 #pragma comment(lib,"Rpcrt4.lib")
 
 #if _MSC_VER < 1400 // not VC8
-typedef LPWSTR RPC_WSTR;
+typedef wchar_t* RPC_WSTR;
 #endif // _MSC_VER
 
 std::wstring Cx_GuidGenerator::CreateGuid(bool withBrackets)
@@ -39,12 +39,12 @@ std::wstring Cx_GuidGenerator::CreateGuid(bool withBrackets)
         if (withBrackets)
         {
             wstrGuid = L"{";
-            wstrGuid += (LPCWSTR)pszGuid;
+            wstrGuid += (const wchar_t*)pszGuid;
             wstrGuid += L"}";
         }
         else
         {
-            wstrGuid += (LPCWSTR)pszGuid;
+            wstrGuid += (const wchar_t*)pszGuid;
         }
 
         RpcStringFreeW(&pszGuid);
@@ -100,7 +100,7 @@ ULONG Cx_GuidGenerator::CreateID(long type)
 
 std::wstring Cx_GuidGenerator::GetCurrentTimeString(bool hasYear)
 {
-    WCHAR szTime[30] = { 0, 0, 0, 0, 0, 0 };
+    wchar_t szTime[30] = { 0, 0, 0, 0, 0, 0 };
     
 #if _MSC_VER < 1400 // not VC8
     time_t tim = ::time(NULL);

@@ -45,15 +45,15 @@ private:
     virtual bool AnsiToUnicode(const std::wstring& filename, UINT codepage = CP_ACP);
     virtual long GetLineCount(const std::wstring& text);
     virtual std::wstring GetLine(const std::wstring& text, 
-        long line, LPCWSTR* nextLine = NULL);
+        long line, const wchar_t** nextLine = NULL);
     virtual bool IsSpaceLine(const std::wstring& text);
 
     // From Ix_StringConvert
     //
-    virtual bool TrimSpace(std::wstring& text, LPCWSTR targets);
-    virtual bool TrimLeft(std::wstring& text, LPCWSTR targets);
-    virtual bool TrimRight(std::wstring& text, LPCWSTR targets);
-    virtual bool RemoveInvalidChars(std::wstring& text, LPCWSTR targets);
+    virtual bool TrimSpace(std::wstring& text, const wchar_t* targets);
+    virtual bool TrimLeft(std::wstring& text, const wchar_t* targets);
+    virtual bool TrimRight(std::wstring& text, const wchar_t* targets);
+    virtual bool RemoveInvalidChars(std::wstring& text, const wchar_t* targets);
     virtual bool ReplaceAll(std::wstring& text, 
         const std::wstring& match, 
         const std::wstring& newtext);

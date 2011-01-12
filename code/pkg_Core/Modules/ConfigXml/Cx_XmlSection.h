@@ -43,7 +43,7 @@ protected:
     //
     virtual void UseSubElement(bool element);
     virtual std::wstring GetText();
-    virtual bool SetText(LPCWSTR value, bool cdata = false);
+    virtual bool SetText(const wchar_t* value, bool cdata = false);
     virtual IUnknown* GetDOMElement(bool addRef = false);
     virtual IUnknown* GetDOMDocument(bool addRef = false);
 
@@ -57,40 +57,40 @@ protected:
     //
     virtual Ix_ConfigData* GetData() const;
     virtual bool IsValid() const;
-    virtual std::wstring GetString(LPCWSTR name, LPCWSTR defValue = L"");
-    virtual bool SetString(LPCWSTR name, LPCWSTR value);
-    virtual int GetInt(LPCWSTR name, int defValue = 0);
-    virtual bool SetInt(LPCWSTR name, int value);
-    virtual long GetInt32(LPCWSTR name, long defValue = 0);
-    virtual bool SetInt32(LPCWSTR name, long value);
-    virtual ULONG GetUInt32(LPCWSTR name, ULONG defValue = 0);
-    virtual bool SetUInt32(LPCWSTR name, ULONG value);
-    virtual short GetInt16(LPCWSTR name, short defValue = 0);
-    virtual bool SetInt16(LPCWSTR name, short value);
-    virtual WORD GetUInt16(LPCWSTR name, WORD defValue = 0);
-    virtual bool SetUInt16(LPCWSTR name, WORD value);
-    virtual bool GetBool(LPCWSTR name, BOOL defValue);
-    virtual bool SetBool(LPCWSTR name, BOOL value);
-    virtual double GetDouble(LPCWSTR name, double defValue = 0);
-    virtual bool SetDouble(LPCWSTR name, double value);
-    virtual float GetFloat(LPCWSTR name, float defValue = 0);
-    virtual bool SetFloat(LPCWSTR name, float value);
-    virtual COLORREF GetRGB(LPCWSTR name, COLORREF defValue);
-    virtual bool SetRGB(LPCWSTR name, COLORREF value);
-    virtual bool GetCMYK(LPCWSTR name, WORD& c, WORD& m, WORD& y, WORD& k);
-    virtual bool SetCMYK(LPCWSTR name, WORD c, WORD m, WORD y, WORD k);
-    virtual bool GetDate(LPCWSTR name, int& year, int& month, int& day);
-    virtual bool SetDate(LPCWSTR name, int year, int month, int day);
-    virtual bool GetDateTime(LPCWSTR name, int& year, int& month, int& day, 
+    virtual std::wstring GetString(const wchar_t* name, const wchar_t* defValue = L"");
+    virtual bool SetString(const wchar_t* name, const wchar_t* value);
+    virtual int GetInt(const wchar_t* name, int defValue = 0);
+    virtual bool SetInt(const wchar_t* name, int value);
+    virtual long GetInt32(const wchar_t* name, long defValue = 0);
+    virtual bool SetInt32(const wchar_t* name, long value);
+    virtual ULONG GetUInt32(const wchar_t* name, ULONG defValue = 0);
+    virtual bool SetUInt32(const wchar_t* name, ULONG value);
+    virtual short GetInt16(const wchar_t* name, short defValue = 0);
+    virtual bool SetInt16(const wchar_t* name, short value);
+    virtual WORD GetUInt16(const wchar_t* name, WORD defValue = 0);
+    virtual bool SetUInt16(const wchar_t* name, WORD value);
+    virtual bool GetBool(const wchar_t* name, BOOL defValue);
+    virtual bool SetBool(const wchar_t* name, BOOL value);
+    virtual double GetDouble(const wchar_t* name, double defValue = 0);
+    virtual bool SetDouble(const wchar_t* name, double value);
+    virtual float GetFloat(const wchar_t* name, float defValue = 0);
+    virtual bool SetFloat(const wchar_t* name, float value);
+    virtual COLORREF GetRGB(const wchar_t* name, COLORREF defValue);
+    virtual bool SetRGB(const wchar_t* name, COLORREF value);
+    virtual bool GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD& k);
+    virtual bool SetCMYK(const wchar_t* name, WORD c, WORD m, WORD y, WORD k);
+    virtual bool GetDate(const wchar_t* name, int& year, int& month, int& day);
+    virtual bool SetDate(const wchar_t* name, int year, int month, int day);
+    virtual bool GetDateTime(const wchar_t* name, int& year, int& month, int& day, 
         int& hour, int& minute, int& second);
-    virtual bool SetDateTime(LPCWSTR name, int year, int month, int day, 
+    virtual bool SetDateTime(const wchar_t* name, int year, int month, int day, 
         int hour, int minute, int second);
-    virtual long GetDoubleArray(LPCWSTR name, double* items, long count);
-    virtual bool SetDoubleArray(LPCWSTR name, const double* items, long count);
-    virtual long GetIntArray(LPCWSTR name, long* items, long count);
-    virtual bool SetIntArray(LPCWSTR name, const long* items, long count);
-    virtual long GetBinary(LPCWSTR name, LPVOID buf, long size);
-    virtual bool SetBinary(LPCWSTR name, LPCVOID buf, long size);
+    virtual long GetDoubleArray(const wchar_t* name, double* items, long count);
+    virtual bool SetDoubleArray(const wchar_t* name, const double* items, long count);
+    virtual long GetIntArray(const wchar_t* name, long* items, long count);
+    virtual bool SetIntArray(const wchar_t* name, const long* items, long count);
+    virtual long GetBinary(const wchar_t* name, LPVOID buf, long size);
+    virtual bool SetBinary(const wchar_t* name, LPCVOID buf, long size);
 };
 
 #endif // _X3_CONFIGXML_XMLSECTION_H

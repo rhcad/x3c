@@ -187,7 +187,7 @@ public:
         \param msg 日志组的文字，如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
         \param extra 附加的上下文信息
     */
-    CAutoLogGroup(LPCWSTR msg, LPCWSTR extra = NULL)
+    CAutoLogGroup(const wchar_t* msg, const wchar_t* extra = NULL)
     {
         Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
         if (pIFManager.IsNotNull())

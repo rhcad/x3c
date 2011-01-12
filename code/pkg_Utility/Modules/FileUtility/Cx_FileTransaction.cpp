@@ -52,7 +52,7 @@ bool Cx_FileTransaction::IsRollbacking() const
     return CFileTransactions::Instance().IsRollbacking();
 }
 
-bool Cx_FileTransaction::DeletePathFile(LPCWSTR pszFileName, bool bRecycle)
+bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycle)
 {
     Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
 
@@ -69,7 +69,7 @@ bool Cx_FileTransaction::DeletePathFile(LPCWSTR pszFileName, bool bRecycle)
     std::wstring wstrPath = pIFUtility->GetPathOfFile(pszFileName);
     std::wstring wstrName = pIFUtility->GetFileName(pszFileName);
 
-    WCHAR szTmpFile[MAX_PATH] = { 0 };
+    wchar_t szTmpFile[MAX_PATH] = { 0 };
 
     for (int i = 1; i < 1000; i++)
     {

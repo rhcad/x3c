@@ -58,7 +58,7 @@ public:
     void testRecordsetTransaction();
 
 private:
-    Cx_Ptr GetDatabase(LPCWSTR filename = L"TestAccess.mdb");
+    Cx_Ptr GetDatabase(const wchar_t* filename = L"TestAccess.mdb");
 
 private:
     std::wstring    m_dbfile;

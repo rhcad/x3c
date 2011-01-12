@@ -37,7 +37,7 @@ interface Ix_UIConfig
     virtual Ix_ConfigData* GetUIConfig() = 0;
 
     //! 返回指定名称的界面配置节点
-    virtual CConfigIOSection GetUISection(LPCWSTR name) = 0;
+    virtual CConfigIOSection GetUISection(const wchar_t* name) = 0;
 
     //! 立即保持改变了的配置数据
     virtual bool Save() = 0;

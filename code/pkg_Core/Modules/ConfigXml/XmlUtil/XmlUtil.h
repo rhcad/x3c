@@ -30,14 +30,14 @@ interface IXmlFileCrypt
         \param[in] pszFileName 文件全名，可以是能输出XML内容的URL地址
         \return 是否装载成功，如果失败将由CXmlUtil按普通方式装载
     */
-    virtual bool Decrypt(CXTPDOMDocumentPtr& doc, LPCWSTR pszFileName) = 0;
+    virtual bool Decrypt(CXTPDOMDocumentPtr& doc, const wchar_t* pszFileName) = 0;
 
     //! 对一个刚保存的XML文件进行加密
     /*! 
         \param[in] pszFileName 本地的文件全名
         \return 是否执行成功
     */
-    virtual bool CryptFile(LPCWSTR pszFileName) = 0;
+    virtual bool CryptFile(const wchar_t* pszFileName) = 0;
 };
 
 //! MSXML4.0 DOM 操作类, 不需要MFC支持
@@ -60,10 +60,10 @@ public:
     */
     static bool NewXMLFile(
         CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszRootName, 
-        LPCWSTR pszEncoding = L"UTF-8", 
-        LPCWSTR pszNameSpace = L"", 
-        LPCWSTR pszComment = L"");
+        const wchar_t* pszRootName, 
+        const wchar_t* pszEncoding = L"UTF-8", 
+        const wchar_t* pszNameSpace = L"", 
+        const wchar_t* pszComment = L"");
     
     //! 创建一个XML文档对象，并得到根节点
     /*! 新创建的XML文档对象还未保存到文件中
@@ -77,9 +77,9 @@ public:
     static bool NewXMLFile2(
         CXTPDOMDocumentPtr& doc, 
         CXTPDOMElementPtr& root, 
-        LPCWSTR pszRootName, 
-        LPCWSTR pszEncoding = L"UTF-8", 
-        LPCWSTR pszNameSpace = L"");
+        const wchar_t* pszRootName, 
+        const wchar_t* pszEncoding = L"UTF-8", 
+        const wchar_t* pszNameSpace = L"");
     
     //! 装载一个XML文件
     /*! 
@@ -90,7 +90,7 @@ public:
     */
     static bool LoadXMLFile(
         CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszFileName, 
+        const wchar_t* pszFileName, 
         IXmlFileCrypt* pCryptHandler = NULL);
     
     //! 装载一个XML文件，并检查根节点
@@ -104,9 +104,9 @@ public:
     */
     static bool LoadXMLFile(
         CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszFileName, 
+        const wchar_t* pszFileName, 
         CXTPDOMElementPtr& root, 
-        LPCWSTR pszRootName, 
+        const wchar_t* pszRootName, 
         IXmlFileCrypt* pCryptHandler = NULL);
     
     //! 保存到一个XML文件
@@ -118,7 +118,7 @@ public:
     */
     static bool SaveXMLFile(
         const CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszFileName, 
+        const wchar_t* pszFileName, 
         IXmlFileCrypt* pCryptHandler = NULL);
     
     //! 从字符串中装载XML文件
@@ -139,7 +139,7 @@ public:
     */
     static bool LoadXMLFromString(
         CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszXML);
+        const wchar_t* pszXML);
     
     //! 获取XML字符串
     /*! 
@@ -174,7 +174,7 @@ public:
     static bool GetRoot(
         CXTPDOMElementPtr& root, 
         const CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszRootName);
+        const wchar_t* pszRootName);
     
     //! 得到子节点个数
     /*! 
@@ -184,7 +184,7 @@ public:
     */
     static long GetChildCount(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszChildName);
+        const wchar_t* pszChildName);
     
     //! 得到一个子节点
     /*! 
@@ -197,7 +197,7 @@ public:
     static bool GetChild(
         CXTPDOMElementPtr& outEle, 
         const CXTPDOMElementPtr& parent, 
-        LPCWSTR pszChildName, 
+        const wchar_t* pszChildName, 
         long nIndex = 0);
     
     //! 得到或创建一个子节点
@@ -212,7 +212,7 @@ public:
         CXTPDOMElementPtr& outEle, 
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& parent, 
-        LPCWSTR pszChildName);
+        const wchar_t* pszChildName);
     
     //! 添加一个子节点
     /*! 
@@ -226,7 +226,7 @@ public:
         CXTPDOMElementPtr& outEle, 
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszChildName);
+        const wchar_t* pszChildName);
     
     //! 删除一个子节点
     /*! 
@@ -237,7 +237,7 @@ public:
     */
     static bool DelChild(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszChildName, 
+        const wchar_t* pszChildName, 
         long nIndex);
 
     //! 删除一个子节点
@@ -260,8 +260,8 @@ public:
     */
     static long DelChildren(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszChildName, 
-        LPCWSTR pszAttrName = L"", LPCWSTR pszAttrValue = L"");
+        const wchar_t* pszChildName, 
+        const wchar_t* pszAttrName = L"", const wchar_t* pszAttrValue = L"");
     
     //! 查找节点数组中的子节点序号
     /*! 
@@ -275,9 +275,9 @@ public:
     static long FindElement(
         CXTPDOMElementPtr& outEle, 
         const CXTPDOMElementPtr& parent, 
-        LPCWSTR pszElement, 
-        LPCWSTR pszField, 
-        LPCWSTR pszValue);
+        const wchar_t* pszElement, 
+        const wchar_t* pszField, 
+        const wchar_t* pszValue);
     
     //! 查找节点数组中的子节点序号
     /*! 查找元素parent的子元素节点，条件是该子元素中有名称为pszAttr1、
@@ -302,11 +302,11 @@ public:
     static long FindElementByAttr(
         CXTPDOMElementPtr& outEle, 
         const CXTPDOMElementPtr& parent, 
-        LPCWSTR pszElement, 
-        LPCWSTR pszAttr1, 
-        LPCWSTR pszValue1, 
-        LPCWSTR pszAttr2, 
-        LPCWSTR pszValue2);
+        const wchar_t* pszElement, 
+        const wchar_t* pszAttr1, 
+        const wchar_t* pszValue1, 
+        const wchar_t* pszAttr2, 
+        const wchar_t* pszValue2);
     
 //--------------------------------------
 // 节点内容
@@ -329,7 +329,7 @@ public:
     */
     static std::wstring GetText(
         const CXTPDOMNodePtr& pNode, 
-        LPCWSTR pszDefault = L"");
+        const wchar_t* pszDefault = L"");
 
     //! 得到一个节点的CDATA值
     /*! 
@@ -339,7 +339,7 @@ public:
     */
     static std::wstring GetTextCDATA(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszDefault = L"");
+        const wchar_t* pszDefault = L"");
     
     //! 设置节点内容
     /*! 
@@ -349,7 +349,7 @@ public:
     */
     static bool SetText(
         const CXTPDOMNodePtr& pNode, 
-        LPCWSTR pszText);
+        const wchar_t* pszText);
     
     //! 设置节点内容
     /*! 
@@ -366,7 +366,7 @@ public:
     */
     static bool SetTextW(
         const CXTPDOMNodePtr& pNode, 
-        LPCWSTR pszText);
+        const wchar_t* pszText);
 
     //! 设置一个节点的CDATA值
     /*! 
@@ -378,7 +378,7 @@ public:
     static bool SetTextCDATA(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszValue);
+        const wchar_t* pszValue);
 
     //! 获取一个节点的XML字符串
     /*! 
@@ -401,7 +401,7 @@ public:
     */
     static bool DelAttribute(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName);
+        const wchar_t* pszName);
     
     //! 得到一个属性节点内容
     /*! 
@@ -412,8 +412,8 @@ public:
     */
     static std::wstring GetAttribute(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
-        LPCWSTR pszDefault = L"");
+        const wchar_t* pszName, 
+        const wchar_t* pszDefault = L"");
     
     //! 得到一个属性节点整数内容
     /*! 
@@ -424,7 +424,7 @@ public:
     */
     static UINT GetAttributeInt(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
+        const wchar_t* pszName, 
         INT nDef = 0);
     
     //! 得到一个属性节点布尔值内容
@@ -436,7 +436,7 @@ public:
     */
     static bool GetAttributeBool(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
+        const wchar_t* pszName, 
         BOOL bDef = FALSE);
     
     //! 得到一个属性节点浮点型内容
@@ -449,7 +449,7 @@ public:
     */
     static double GetAttributeFloat(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
+        const wchar_t* pszName, 
         double dDef = 0, 
         std::wstring* pstrUnit = NULL);
     
@@ -464,8 +464,8 @@ public:
     static bool SetAttribute(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
-        LPCWSTR pszValue);
+        const wchar_t* pszName, 
+        const wchar_t* pszValue);
     
     //! 设置一个属性节点整数内容
     /*! 
@@ -478,7 +478,7 @@ public:
     static bool SetAttributeInt(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
+        const wchar_t* pszName, 
         INT nVal);
     
     //! 设置一个属性节点布尔值属性值
@@ -492,7 +492,7 @@ public:
     static bool SetAttributeBool(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
+        const wchar_t* pszName, 
         BOOL bVal);
     
     //! 设置一个属性节点浮点型内容
@@ -508,9 +508,9 @@ public:
     static bool SetAttributeFloat(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszName, 
+        const wchar_t* pszName, 
         double dVal, 
-        LPCWSTR pszUnit = L"", 
+        const wchar_t* pszUnit = L"", 
         int decimal = 4);
     
     //! 得到一个节点的属性值，识别CDATA
@@ -522,8 +522,8 @@ public:
     */
     static std::wstring GetField(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
-        LPCWSTR pszDefault = L"");
+        const wchar_t* pszFieldName, 
+        const wchar_t* pszDefault = L"");
     
     //! 设置一个节点的属性值
     /*! 
@@ -536,8 +536,8 @@ public:
     static bool SetField(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
-        LPCWSTR pszValue);
+        const wchar_t* pszFieldName, 
+        const wchar_t* pszValue);
     
     //! 得到一个节点的整数属性值，识别十六进制数
     /*! 
@@ -548,7 +548,7 @@ public:
     */
     static UINT GetFieldInt(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         INT nDef = 0);
     
     //! 得到一个节点的布尔值属性值
@@ -560,7 +560,7 @@ public:
     */
     static bool GetFieldBool(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         BOOL bDef = FALSE);
     
     //! 得到一个节点的浮点型属性值
@@ -573,7 +573,7 @@ public:
     */
     static double GetFieldFloat(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         double dDef = 0, 
         std::wstring* pstrUnit = NULL);
     
@@ -588,7 +588,7 @@ public:
     static bool SetFieldInt(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         INT nVal);
     
     //! 设置一个节点的布尔值属性值
@@ -602,7 +602,7 @@ public:
     static bool SetFieldBool(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         BOOL bVal);
     
     //! 设置一个节点的浮点型属性值
@@ -618,9 +618,9 @@ public:
     static bool SetFieldFloat(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         double dVal, 
-        LPCWSTR pszUnit = L"", 
+        const wchar_t* pszUnit = L"", 
         int decimal = 4);
     
     //! 设置一个节点的十六进制属性值
@@ -635,7 +635,7 @@ public:
     static bool SetFieldHex(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
+        const wchar_t* pszFieldName, 
         INT nVal, 
         INT nDigits = 0);
     
@@ -648,8 +648,8 @@ public:
     */
     static std::wstring GetFieldCDATA(
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
-        LPCWSTR pszDefault = L"");
+        const wchar_t* pszFieldName, 
+        const wchar_t* pszDefault = L"");
     
     //! 设置一个节点的CDATA属性值
     /*! 
@@ -662,8 +662,8 @@ public:
     static bool SetFieldCDATA(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszFieldName, 
-        LPCWSTR pszValue);
+        const wchar_t* pszFieldName, 
+        const wchar_t* pszValue);
     
 //--------------------------------------
 // 其他操作
@@ -680,7 +680,7 @@ public:
     */
     static bool CreateDocComment(
         const CXTPDOMDocumentPtr& doc, 
-        LPCWSTR pszComment);
+        const wchar_t* pszComment);
 
     //! 在指定节点前创建注释节点
     /*! 
@@ -692,7 +692,7 @@ public:
     static bool CreateNodeComment(
         const CXTPDOMDocumentPtr& doc, 
         const CXTPDOMElementPtr& ele, 
-        LPCWSTR pszComment);
+        const wchar_t* pszComment);
 
     //! 得到四舍五入的字符串（去掉小数点后末尾的'0'）
     /*! 

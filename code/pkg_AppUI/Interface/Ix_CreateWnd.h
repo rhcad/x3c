@@ -20,7 +20,6 @@
  */
 #ifndef X3_VIEW_ICREATEWND_H_
 #define X3_VIEW_ICREATEWND_H_
-#pragma once
 
 //! 窗口创建的接口
 /*! 窗口类采用 Cx_CreateWnd 来实现本接口，父窗口类在创建子窗口时不需要关心子窗口类型和细节。

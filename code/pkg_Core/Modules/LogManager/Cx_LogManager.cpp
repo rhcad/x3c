@@ -43,7 +43,7 @@ void Cx_LogManager::UnRegisterObserver(ILogObserver* observer)
     erase_value(m_arrObserver, observer);
 }
 
-bool Cx_LogManager::PushGroup(LPCWSTR pszMsg, LPCWSTR pszExtra)
+bool Cx_LogManager::PushGroup(const wchar_t* pszMsg, const wchar_t* pszExtra)
 {
     std::wstring wstrMsg, wstrExtra, wstrModule, wstrID;
     CheckMsgParam(wstrMsg, wstrExtra, wstrModule, wstrID, pszMsg, pszExtra);
@@ -68,8 +68,8 @@ bool Cx_LogManager::PopGroup()
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType nType, LPCWSTR pszMsg, 
-    LPCWSTR pszExtra, LPCSTR pszFile, long nLine)
+bool Cx_LogManager::WriteLog(kLogType nType, const wchar_t* pszMsg, 
+    const wchar_t* pszExtra, LPCSTR pszFile, long nLine)
 {
     std::wstring wstrFile(std::a2w(TrimFileName(pszFile)));
     std::wstring wstrMsg, wstrExtra, wstrModule, wstrID;
@@ -82,7 +82,7 @@ bool Cx_LogManager::WriteLog(kLogType nType, LPCWSTR pszMsg,
     }
 
 #ifdef _DEBUG
-    LPCWSTR names[] = { L"> LogInfo: ", 
+    const wchar_t* names[] = { L"> LogInfo: ", 
         L"> LogWarning: ", L"> LogError: ", L"> LogError: " };
     if (nType >= kLogType_Info && nType <= kLogType_Fatal)
     {
@@ -112,7 +112,7 @@ int Cx_LogManager::CrtDbgReport(LPCSTR szMsg, LPCSTR szFile, long nLine)
     WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED", 
         std::a2w(szMsg).c_str(), szFile, nLine);
 
-    WCHAR buf[512];
+    wchar_t buf[512];
 
     swprintf_s(buf, 512, 
         L"Debug Assertion Failed!\n"
@@ -152,7 +152,7 @@ LPCSTR Cx_LogManager::TrimFileName(LPCSTR pszFile)
 
 bool Cx_LogManager::CheckMsgParam(std::wstring& wstrMsg, 
     std::wstring& wstrExtra, std::wstring& wstrModule, std::wstring& wstrID, 
-    LPCWSTR pszMsg, LPCWSTR pszExtra)
+    const wchar_t* pszMsg, const wchar_t* pszExtra)
 {
     bool ret = false;
 

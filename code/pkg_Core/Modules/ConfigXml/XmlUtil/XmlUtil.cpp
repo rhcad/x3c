@@ -27,16 +27,16 @@
 
 static HRESULT s_hr = S_OK;
 
-static inline void NL(LPCWSTR& psz)
+static inline void NL(const wchar_t*& psz)
 {
     if (NULL == psz)
     {
-        static const WCHAR nullStr[] = L"";
+        static const wchar_t nullStr[] = L"";
         psz = nullStr;
     }
 }
 
-static inline bool IsNotEmpty(LPCWSTR sz)
+static inline bool IsNotEmpty(const wchar_t* sz)
 {
     return sz != NULL && *sz != 0;
 }
@@ -75,10 +75,10 @@ HRESULT CXmlUtil::GetLastErrorResult()
 }
 
 bool CXmlUtil::NewXMLFile(CXTPDOMDocumentPtr& doc, 
-                          LPCWSTR pszRootName, 
-                          LPCWSTR pszEncoding, 
-                          LPCWSTR pszNameSpace, 
-                          LPCWSTR pszComment)
+                          const wchar_t* pszRootName, 
+                          const wchar_t* pszEncoding, 
+                          const wchar_t* pszNameSpace, 
+                          const wchar_t* pszComment)
 {
     LocalHResult hr;
 
@@ -129,9 +129,9 @@ bool CXmlUtil::NewXMLFile(CXTPDOMDocumentPtr& doc,
 
 bool CXmlUtil::NewXMLFile2(CXTPDOMDocumentPtr& doc, 
                            CXTPDOMElementPtr& root, 
-                           LPCWSTR pszRootName, 
-                           LPCWSTR pszEncoding, 
-                           LPCWSTR pszNameSpace)
+                           const wchar_t* pszRootName, 
+                           const wchar_t* pszEncoding, 
+                           const wchar_t* pszNameSpace)
 {
     root = NULL;
     if (NewXMLFile(doc, pszRootName, pszEncoding, pszNameSpace))
@@ -143,7 +143,7 @@ bool CXmlUtil::NewXMLFile2(CXTPDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::LoadXMLFile(CXTPDOMDocumentPtr& doc, 
-                           LPCWSTR pszFileName, 
+                           const wchar_t* pszFileName, 
                            IXmlFileCrypt* pCryptHandler)
 {
     LocalHResult hr;
@@ -192,9 +192,9 @@ bool CXmlUtil::LoadXMLFile(CXTPDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::LoadXMLFile(CXTPDOMDocumentPtr& doc, 
-                           LPCWSTR pszFileName, 
+                           const wchar_t* pszFileName, 
                            CXTPDOMElementPtr& root, 
-                           LPCWSTR pszRootName, 
+                           const wchar_t* pszRootName, 
                            IXmlFileCrypt* pCryptHandler)
 {
     root = NULL;
@@ -207,7 +207,7 @@ bool CXmlUtil::LoadXMLFile(CXTPDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::SaveXMLFile(const CXTPDOMDocumentPtr& doc, 
-                           LPCWSTR pszFileName, 
+                           const wchar_t* pszFileName, 
                            IXmlFileCrypt* pCryptHandler)
 {
     LocalHResult hr;
@@ -268,7 +268,7 @@ bool CXmlUtil::LoadXMLFromString(CXTPDOMDocumentPtr& doc, LPCSTR pszXML)
     return doc != NULL;
 }
 
-bool CXmlUtil::LoadXMLFromString(CXTPDOMDocumentPtr& doc, LPCWSTR pszXML)
+bool CXmlUtil::LoadXMLFromString(CXTPDOMDocumentPtr& doc, const wchar_t* pszXML)
 {
     LocalHResult hr;
 
@@ -345,7 +345,7 @@ std::wstring CXmlUtil::GetRootName(const CXTPDOMDocumentPtr& doc)
 }
 
 bool CXmlUtil::CreateDocComment(const CXTPDOMDocumentPtr& doc, 
-                                LPCWSTR pszComment)
+                                const wchar_t* pszComment)
 {
     LocalHResult hr;
     if (doc != NULL && IsNotEmpty(pszComment))
@@ -369,7 +369,7 @@ bool CXmlUtil::CreateDocComment(const CXTPDOMDocumentPtr& doc,
 
 bool CXmlUtil::CreateNodeComment(const CXTPDOMDocumentPtr& doc, 
                                  const CXTPDOMElementPtr& ele, 
-                                 LPCWSTR pszComment)
+                                 const wchar_t* pszComment)
 {
     LocalHResult hr;
     if (doc != NULL && ele != NULL && IsNotEmpty(pszComment))
@@ -390,7 +390,7 @@ bool CXmlUtil::CreateNodeComment(const CXTPDOMDocumentPtr& doc,
 
 bool CXmlUtil::GetRoot(CXTPDOMElementPtr& root, 
                        const CXTPDOMDocumentPtr& doc, 
-                       LPCWSTR pszRootName)
+                       const wchar_t* pszRootName)
 {
     LocalHResult hr;
     XTPXML::IXMLDOMNodeListPtr nl;
@@ -413,7 +413,7 @@ bool CXmlUtil::GetRoot(CXTPDOMElementPtr& root,
 }
 
 static long GetChildIndex(const CXTPDOMElementPtr& ele, 
-                          LPCWSTR pszChildName, 
+                          const wchar_t* pszChildName, 
                           long nMaxIndex, 
                           XTPXML::IXMLDOMNodePtr& pRet)
 {
@@ -457,7 +457,7 @@ static long GetChildIndex(const CXTPDOMElementPtr& ele,
 }
 
 long CXmlUtil::GetChildCount(const CXTPDOMElementPtr& ele, 
-                             LPCWSTR pszChildName)
+                             const wchar_t* pszChildName)
 {
     XTPXML::IXMLDOMNodePtr pRet = NULL;
     return GetChildIndex(ele, pszChildName, 99999, pRet);
@@ -465,7 +465,7 @@ long CXmlUtil::GetChildCount(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::GetChild(CXTPDOMElementPtr& outEle, 
                         const CXTPDOMElementPtr& parent, 
-                        LPCWSTR pszChildName, 
+                        const wchar_t* pszChildName, 
                         long nIndex)
 {
     XTPXML::IXMLDOMNodePtr pRet = NULL;
@@ -477,7 +477,7 @@ bool CXmlUtil::GetChild(CXTPDOMElementPtr& outEle,
 bool CXmlUtil::GetChildOrAdd(CXTPDOMElementPtr& outEle, 
                              const CXTPDOMDocumentPtr& doc, 
                              const CXTPDOMElementPtr& parent, 
-                             LPCWSTR pszChildName)
+                             const wchar_t* pszChildName)
 {
     LocalHResult hr;
     outEle = NULL;
@@ -501,7 +501,7 @@ bool CXmlUtil::GetChildOrAdd(CXTPDOMElementPtr& outEle,
 bool CXmlUtil::AddChild(CXTPDOMElementPtr& outEle, 
                         const CXTPDOMDocumentPtr& doc, 
                         const CXTPDOMElementPtr& ele, 
-                        LPCWSTR pszChildName)
+                        const wchar_t* pszChildName)
 {
     LocalHResult hr;
     CXTPDOMElementPtr pRet = NULL;
@@ -519,7 +519,7 @@ bool CXmlUtil::AddChild(CXTPDOMElementPtr& outEle,
 }
 
 bool CXmlUtil::DelChild(const CXTPDOMElementPtr& ele, 
-                        LPCWSTR pszChildName, 
+                        const wchar_t* pszChildName, 
                         long nIndex)
 {
     LocalHResult hr;
@@ -557,8 +557,8 @@ bool CXmlUtil::DelChild(const CXTPDOMElementPtr& parent,
 }
 
 long CXmlUtil::DelChildren(const CXTPDOMElementPtr& ele, 
-                           LPCWSTR pszChildName, 
-                           LPCWSTR pszAttrName, LPCWSTR pszAttrValue)
+                           const wchar_t* pszChildName, 
+                           const wchar_t* pszAttrName, const wchar_t* pszAttrValue)
 {
     LocalHResult hr;
     CXTPDOMElementPtr pSubItem;
@@ -584,9 +584,9 @@ long CXmlUtil::DelChildren(const CXTPDOMElementPtr& ele,
 
 long CXmlUtil::FindElement(CXTPDOMElementPtr& outEle, 
                            const CXTPDOMElementPtr& parent, 
-                           LPCWSTR pszElement, 
-                           LPCWSTR pszField, 
-                           LPCWSTR pszValue)
+                           const wchar_t* pszElement, 
+                           const wchar_t* pszField, 
+                           const wchar_t* pszValue)
 {
     NL(pszValue);
     CXTPDOMElementPtr ele;
@@ -609,11 +609,11 @@ long CXmlUtil::FindElement(CXTPDOMElementPtr& outEle,
 
 long CXmlUtil::FindElementByAttr(CXTPDOMElementPtr& outEle, 
                                  const CXTPDOMElementPtr& parent, 
-                                 LPCWSTR pszElement, 
-                                 LPCWSTR pszAttr1, 
-                                 LPCWSTR pszValue1, 
-                                 LPCWSTR pszAttr2, 
-                                 LPCWSTR pszValue2)
+                                 const wchar_t* pszElement, 
+                                 const wchar_t* pszAttr1, 
+                                 const wchar_t* pszValue1, 
+                                 const wchar_t* pszAttr2, 
+                                 const wchar_t* pszValue2)
 {
     NL(pszAttr1); NL(pszValue1); NL(pszAttr2); NL(pszValue2);
     CXTPDOMElementPtr ele;
@@ -654,7 +654,7 @@ std::wstring CXmlUtil::GetTagName(const CXTPDOMElementPtr& ele)
     return wstrTagName;
 }
 
-std::wstring CXmlUtil::GetText(const CXTPDOMNodePtr& pNode, LPCWSTR pszDefault)
+std::wstring CXmlUtil::GetText(const CXTPDOMNodePtr& pNode, const wchar_t* pszDefault)
 {
     LocalHResult hr;
     NL(pszDefault);
@@ -681,7 +681,7 @@ std::wstring CXmlUtil::GetText(const CXTPDOMNodePtr& pNode, LPCWSTR pszDefault)
     return strText;
 }
 
-bool CXmlUtil::SetText(const CXTPDOMNodePtr& pNode, LPCWSTR pszText)
+bool CXmlUtil::SetText(const CXTPDOMNodePtr& pNode, const wchar_t* pszText)
 {
     LocalHResult hr;
     bool bRet = false;
@@ -690,7 +690,7 @@ bool CXmlUtil::SetText(const CXTPDOMNodePtr& pNode, LPCWSTR pszText)
     return bRet;
 }
 
-bool CXmlUtil::SetTextW(const CXTPDOMNodePtr& pNode, LPCWSTR pszText)
+bool CXmlUtil::SetTextW(const CXTPDOMNodePtr& pNode, const wchar_t* pszText)
 {
     LocalHResult hr;
     bool bRet = false;
@@ -700,7 +700,7 @@ bool CXmlUtil::SetTextW(const CXTPDOMNodePtr& pNode, LPCWSTR pszText)
 }
 
 bool CXmlUtil::DelAttribute(const CXTPDOMElementPtr& ele, 
-                            LPCWSTR pszName)
+                            const wchar_t* pszName)
 {
     LocalHResult hr;
     XTPXML::IXMLDOMAttributePtr pNode = NULL;
@@ -718,8 +718,8 @@ bool CXmlUtil::DelAttribute(const CXTPDOMElementPtr& ele,
 }
 
 std::wstring CXmlUtil::GetAttribute(const CXTPDOMElementPtr& ele, 
-                                    LPCWSTR pszName, 
-                                    LPCWSTR pszDefault)
+                                    const wchar_t* pszName, 
+                                    const wchar_t* pszDefault)
 {
     NL(pszDefault);
     std::wstring strValue (pszDefault);
@@ -744,8 +744,8 @@ std::wstring CXmlUtil::GetAttribute(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetAttribute(const CXTPDOMDocumentPtr&, 
                             const CXTPDOMElementPtr& ele, 
-                            LPCWSTR pszName, 
-                            LPCWSTR pszValue)
+                            const wchar_t* pszName, 
+                            const wchar_t* pszValue)
 {
     LocalHResult hr;
     bool bRet = false;
@@ -760,7 +760,7 @@ bool CXmlUtil::SetAttribute(const CXTPDOMDocumentPtr&,
 }
 
 UINT CXmlUtil::GetAttributeInt(const CXTPDOMElementPtr& ele, 
-                               LPCWSTR pszName, 
+                               const wchar_t* pszName, 
                                INT nDef)
 {
     UINT nRet = nDef;
@@ -779,25 +779,25 @@ UINT CXmlUtil::GetAttributeInt(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetAttributeInt(const CXTPDOMDocumentPtr& doc, 
                                const CXTPDOMElementPtr& ele, 
-                               LPCWSTR pszName, 
+                               const wchar_t* pszName, 
                                INT nVal)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _itow_s(nVal, szNum, 35, 10);
     return SetAttribute(doc, ele, pszName, szNum);
 }
 
 bool CXmlUtil::SetAttributeBool(const CXTPDOMDocumentPtr& doc, 
                                 const CXTPDOMElementPtr& ele, 
-                                LPCWSTR pszName, 
+                                const wchar_t* pszName, 
                                 BOOL bVal)
 {
     return SetAttribute(doc, ele, pszName, bVal ? L"true" : L"false");
 }
 
 std::wstring CXmlUtil::GetField(const CXTPDOMElementPtr& ele, 
-                                LPCWSTR pszFieldName, 
-                                LPCWSTR pszDefault)
+                                const wchar_t* pszFieldName, 
+                                const wchar_t* pszDefault)
 {
     NL(pszDefault);
     std::wstring strValue (pszDefault);
@@ -828,8 +828,8 @@ std::wstring CXmlUtil::GetField(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetField(const CXTPDOMDocumentPtr& doc, 
                         const CXTPDOMElementPtr& ele, 
-                        LPCWSTR pszFieldName, 
-                        LPCWSTR pszValue)
+                        const wchar_t* pszFieldName, 
+                        const wchar_t* pszValue)
 {
     bool bRet = false;
     CXTPDOMElementPtr pNode;
@@ -844,14 +844,14 @@ bool CXmlUtil::SetField(const CXTPDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::GetFieldBool(const CXTPDOMElementPtr& ele, 
-                            LPCWSTR pszFieldName, 
+                            const wchar_t* pszFieldName, 
                             BOOL bDef)
 {
     return GetFieldInt(ele, pszFieldName, bDef) != 0;
 }
 
 UINT CXmlUtil::GetFieldInt(const CXTPDOMElementPtr& ele, 
-                           LPCWSTR pszFieldName, 
+                           const wchar_t* pszFieldName, 
                            INT nDef)
 {
     UINT nRet = nDef;
@@ -864,7 +864,7 @@ UINT CXmlUtil::GetFieldInt(const CXTPDOMElementPtr& ele,
     
     if (!str.empty())
     {
-        LPWSTR endptr;
+        wchar_t* endptr;
         if (_wcsnicmp(str.c_str(), L"0x", 2) == 0)
             nRet = wcstol(str.c_str(), &endptr, 16);
         else
@@ -876,17 +876,17 @@ UINT CXmlUtil::GetFieldInt(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetFieldInt(const CXTPDOMDocumentPtr& doc, 
                            const CXTPDOMElementPtr& ele, 
-                           LPCWSTR pszFieldName, 
+                           const wchar_t* pszFieldName, 
                            INT nVal)
 {
-    WCHAR szNum[35];
+    wchar_t szNum[35];
     _itow_s(nVal, szNum, 35, 10);
     return SetField(doc, ele, pszFieldName, szNum);
 }
 
 bool CXmlUtil::SetFieldBool(const CXTPDOMDocumentPtr& doc, 
                             const CXTPDOMElementPtr& ele, 
-                            LPCWSTR pszFieldName, 
+                            const wchar_t* pszFieldName, 
                             BOOL bVal)
 {
     return SetField(doc, ele, pszFieldName, bVal ? L"true" : L"false");
@@ -894,11 +894,11 @@ bool CXmlUtil::SetFieldBool(const CXTPDOMDocumentPtr& doc,
 
 bool CXmlUtil::SetFieldHex(const CXTPDOMDocumentPtr& doc, 
                            const CXTPDOMElementPtr& ele, 
-                           LPCWSTR pszFieldName, 
+                           const wchar_t* pszFieldName, 
                            INT nVal, 
                            INT nDigits)
 {
-    WCHAR buf[20] = L"0x000000";
+    wchar_t buf[20] = L"0x000000";
     
     if (nDigits > 0 && nDigits <= 6)
     {
@@ -916,7 +916,7 @@ bool CXmlUtil::SetFieldHex(const CXTPDOMDocumentPtr& doc,
     return SetField(doc, ele, pszFieldName, buf);
 }
 
-std::wstring CXmlUtil::GetTextCDATA(const CXTPDOMElementPtr& ele, LPCWSTR pszDefault)
+std::wstring CXmlUtil::GetTextCDATA(const CXTPDOMElementPtr& ele, const wchar_t* pszDefault)
 {
     NL(pszDefault);
     std::wstring strValue (pszDefault);
@@ -947,8 +947,8 @@ std::wstring CXmlUtil::GetTextCDATA(const CXTPDOMElementPtr& ele, LPCWSTR pszDef
 }
 
 std::wstring CXmlUtil::GetFieldCDATA(const CXTPDOMElementPtr& ele, 
-                                     LPCWSTR pszFieldName, 
-                                     LPCWSTR pszDefault)
+                                     const wchar_t* pszFieldName, 
+                                     const wchar_t* pszDefault)
 {
     XTPXML::IXMLDOMNodePtr pRet = NULL;
     GetChildIndex(ele, pszFieldName, 0, pRet);
@@ -957,7 +957,7 @@ std::wstring CXmlUtil::GetFieldCDATA(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetTextCDATA(const CXTPDOMDocumentPtr& doc, 
                             const CXTPDOMElementPtr& ele, 
-                            LPCWSTR pszValue)
+                            const wchar_t* pszValue)
 {
     bool bRet = false;
     VARIANT_BOOL bHasChild;
@@ -990,8 +990,8 @@ bool CXmlUtil::SetTextCDATA(const CXTPDOMDocumentPtr& doc,
 
 bool CXmlUtil::SetFieldCDATA(const CXTPDOMDocumentPtr& doc, 
                              const CXTPDOMElementPtr& ele, 
-                             LPCWSTR pszFieldName, 
-                             LPCWSTR pszValue)
+                             const wchar_t* pszFieldName, 
+                             const wchar_t* pszValue)
 {
     bool bRet = false;
     CXTPDOMElementPtr pChild;
@@ -1005,18 +1005,18 @@ bool CXmlUtil::SetFieldCDATA(const CXTPDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::GetAttributeBool(const CXTPDOMElementPtr& ele, 
-                                LPCWSTR pszName, 
+                                const wchar_t* pszName, 
                                 BOOL bDef)
 {
     return GetAttributeInt(ele, pszName, bDef) != 0;
 }
 
 double CXmlUtil::GetAttributeFloat(const CXTPDOMElementPtr& ele, 
-                                   LPCWSTR pszName, 
+                                   const wchar_t* pszName, 
                                    double dDef, 
                                    std::wstring* pstrUnit)
 {
-    LPWSTR endptr = NULL;
+    wchar_t* endptr = NULL;
     std::wstring str = GetAttribute(ele, pszName);
     if (!str.empty())
         dDef = wcstod(str.c_str(), &endptr);
@@ -1027,9 +1027,9 @@ double CXmlUtil::GetAttributeFloat(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetAttributeFloat(const CXTPDOMDocumentPtr& doc, 
                                  const CXTPDOMElementPtr& ele, 
-                                 LPCWSTR pszName, 
+                                 const wchar_t* pszName, 
                                  double dVal, 
-                                 LPCWSTR pszUnit, 
+                                 const wchar_t* pszUnit, 
                                  int decimal)
 {
     std::wstring str (RoundStr(dVal, decimal));
@@ -1038,11 +1038,11 @@ bool CXmlUtil::SetAttributeFloat(const CXTPDOMDocumentPtr& doc,
 }
 
 double CXmlUtil::GetFieldFloat(const CXTPDOMElementPtr& ele, 
-                               LPCWSTR pszFieldName, 
+                               const wchar_t* pszFieldName, 
                                double dDef, 
                                std::wstring* pstrUnit)
 {
-    LPWSTR endptr = NULL;
+    wchar_t* endptr = NULL;
     std::wstring str = GetField(ele, pszFieldName);
     if (!str.empty())
         dDef = wcstod(str.c_str(), &endptr);
@@ -1053,9 +1053,9 @@ double CXmlUtil::GetFieldFloat(const CXTPDOMElementPtr& ele,
 
 bool CXmlUtil::SetFieldFloat(const CXTPDOMDocumentPtr& doc, 
                              const CXTPDOMElementPtr& ele, 
-                             LPCWSTR pszFieldName, 
+                             const wchar_t* pszFieldName, 
                              double dVal, 
-                             LPCWSTR pszUnit, 
+                             const wchar_t* pszUnit, 
                              int decimal)
 {
     std::wstring str (RoundStr(dVal, decimal));
@@ -1065,19 +1065,19 @@ bool CXmlUtil::SetFieldFloat(const CXTPDOMDocumentPtr& doc,
 
 std::wstring CXmlUtil::RoundStr(double value, int decimal)
 {
-    WCHAR buf[65] = { 0 };
+    wchar_t buf[65] = { 0 };
     
-    WCHAR szFmt[] = L"%.2lf";
+    wchar_t szFmt[] = L"%.2lf";
     if (decimal < 1) decimal = 1;
     if (decimal > 5) decimal = 5;
-    szFmt[2] = (WCHAR)('0' + decimal);
+    szFmt[2] = (wchar_t)('0' + decimal);
 #if _MSC_VER <= 1200 // VC6
     swprintf(buf, szFmt, value);
 #else
     swprintf_s(buf, 65, szFmt, value);  
 #endif
     
-    LPWSTR p = wcschr(buf, '.');
+    wchar_t* p = wcschr(buf, '.');
     if (p != NULL)
     {
         int i = decimal;

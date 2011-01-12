@@ -32,20 +32,20 @@ public:
 
     HMODULE GetMainModuleHandle();
 
-    virtual long LoadPlugins(HMODULE instance, LPCWSTR path, 
-        LPCWSTR ext = L".plugin.dll", bool recursive = true);
-    virtual long LoadPlugins(LPCWSTR path, 
-        LPCWSTR ext = L".plugin.dll", bool recursive = true);
-    virtual long LoadPluginFiles(LPCWSTR path, 
-        LPCWSTR files, HMODULE instance = NULL);
+    virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
+        const wchar_t* ext = L".plugin.dll", bool recursive = true);
+    virtual long LoadPlugins(const wchar_t* path, 
+        const wchar_t* ext = L".plugin.dll", bool recursive = true);
+    virtual long LoadPluginFiles(const wchar_t* path, 
+        const wchar_t* files, HMODULE instance = NULL);
     virtual long InitializePlugins();
     virtual bool RegisterPlugin(HMODULE instance);
-    virtual bool LoadPlugin(LPCWSTR filename);
-    virtual bool UnloadPlugin(LPCWSTR name);
+    virtual bool LoadPlugin(const wchar_t* filename);
+    virtual bool UnloadPlugin(const wchar_t* name);
     virtual long UnloadPlugins();
 
 private:
-    bool issep(WCHAR c);
+    bool issep(wchar_t c);
     bool ClearModuleItems(HMODULE hModule);
 
 private:

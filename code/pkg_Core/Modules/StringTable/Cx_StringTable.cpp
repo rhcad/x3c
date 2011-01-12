@@ -53,7 +53,7 @@ bool Cx_StringTable::GetValue(std::wstring& value, const std::wstring& name,
     if (name.size() > 1 && '@' == name[0] &&
         StrChrW(name.c_str(), ':') != NULL)
     {
-        LPCWSTR p = StrChrW(name.c_str(), ':');
+        const wchar_t* p = StrChrW(name.c_str(), ':');
 
         module = std::wstring(name.c_str() + 1, (size_t)(p - name.c_str() - 1));
         id = p + 1;
@@ -68,7 +68,7 @@ static void ReplaceLf(std::wstring& text)
 {
     for (int i = static_cast<int>(text.size()) - 1; i > 0; --i)
     {
-        WCHAR c = text[i];
+        wchar_t c = text[i];
         if ('\\' == text[i - 1] && ('n' == c || 'r' == c || 't' == c))
         {
             switch (c)

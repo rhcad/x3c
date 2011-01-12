@@ -43,7 +43,7 @@ interface Ix_ConfigData
         \return 新的数据节点，不存在时根据autoCreate自动添加
     */
     virtual ConfigIOSection GetSection(
-        LPCWSTR name, bool autoCreate = true) = 0;
+        const wchar_t* name, bool autoCreate = true) = 0;
     
     //! 得到带整数标识属性参数的一个数据节点
     /*!
@@ -55,8 +55,8 @@ interface Ix_ConfigData
         \return 新的数据节点，不存在则自动添加
     */
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue, 
         bool autoCreate = true) = 0;
 
     //! 得到带属性参数的一个数据节点
@@ -69,8 +69,8 @@ interface Ix_ConfigData
         \return 新的数据节点，不存在则自动添加
     */
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, LPCWSTR attrValue, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, const wchar_t* attrValue, 
         bool autoCreate = true) = 0;
 
     //! 得到带属性参数的一个数据节点
@@ -85,9 +85,9 @@ interface Ix_ConfigData
         \return 新的数据节点，不存在则自动添加
     */
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, LPCWSTR attrValue, 
-        LPCWSTR attrName2, LPCWSTR attrValue2, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, const wchar_t* attrValue, 
+        const wchar_t* attrName2, const wchar_t* attrValue2, 
         bool autoCreate = true) = 0;
 
     //! 得到带整数标识属性参数的一个数据节点
@@ -102,9 +102,9 @@ interface Ix_ConfigData
         \return 新的数据节点，不存在则自动添加
     */
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue, 
-        LPCWSTR attrName2, ULONG attrValue2, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue, 
+        const wchar_t* attrName2, ULONG attrValue2, 
         bool autoCreate = true) = 0;
 
     //! 得到节点名对应的子节点个数
@@ -115,7 +115,7 @@ interface Ix_ConfigData
         \see GetSectionByIndex
     */
     virtual long GetSectionCount(
-        Ix_ConfigSection* parent, LPCWSTR name) = 0;
+        Ix_ConfigSection* parent, const wchar_t* name) = 0;
 
     //! 在节点名对应的子节点中得到指定序号的子数据节点
     /*!
@@ -126,7 +126,7 @@ interface Ix_ConfigData
         \see GetSectionCount
     */
     virtual ConfigIOSection GetSectionByIndex(
-        Ix_ConfigSection* parent, LPCWSTR name, long index) = 0;
+        Ix_ConfigSection* parent, const wchar_t* name, long index) = 0;
     
     //! 添加一个数据节点
     /*!
@@ -135,7 +135,7 @@ interface Ix_ConfigData
         \return 新的数据节点
     */
     virtual ConfigIOSection AddSection(
-        Ix_ConfigSection* parent, LPCWSTR name) = 0;
+        Ix_ConfigSection* parent, const wchar_t* name) = 0;
 
     //! 删除一个数据节点
     /*!
@@ -152,8 +152,8 @@ interface Ix_ConfigData
         \param attrValue 标识属性名对应的值，attrName不为空时有效
         \return 删除的子节点个数
     */
-    virtual long RemoveChildren(Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName = L"", LPCWSTR attrValue = L"") = 0;
+    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName = L"", const wchar_t* attrValue = L"") = 0;
 
     //! 删除指定的数据节点的所有子节点
     /*!
@@ -163,8 +163,8 @@ interface Ix_ConfigData
         \param attrValue 标识属性名attrName对应的值
         \return 删除的子节点个数
     */
-    virtual long RemoveChildren(Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue) = 0;
+    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue) = 0;
 
     //! 得到一个数据节点的上一级节点
     /*!

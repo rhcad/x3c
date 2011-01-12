@@ -63,7 +63,7 @@ public:
     }
 
     //! Load plugin manager.
-    bool LoadPluginManager(LPCWSTR subdir, HMODULE instance = NULL)
+    bool LoadPluginManager(const wchar_t* subdir, HMODULE instance = NULL)
     {
         GetModuleFileNameW(instance, m_filename, MAX_PATH);
         PathRemoveFileSpecW(m_filename);
@@ -80,7 +80,7 @@ public:
     }
 
     //! Load plugin manager and core plugins.
-    bool LoadCorePlugins(LPCWSTR subdir, HMODULE instance = NULL)
+    bool LoadCorePlugins(const wchar_t* subdir, HMODULE instance = NULL)
     {
         if (!LoadPluginManager(subdir, instance))
         {
@@ -126,7 +126,7 @@ public:
 
 private:
     HMODULE     m_dll;
-    WCHAR       m_filename[MAX_PATH];
+    wchar_t       m_filename[MAX_PATH];
 };
 
 #endif // X3_MANAGER_PLUGINMANAGER_H_

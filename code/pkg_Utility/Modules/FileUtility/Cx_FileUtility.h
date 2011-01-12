@@ -29,25 +29,25 @@ public:
 
 public:
     // From Ix_FileUtility
-    virtual bool IsPathFileExists(LPCWSTR pszFileName, bool bWrite = false);
-    virtual bool IsPath(LPCWSTR pszFileName, bool bCheckExists = false);
-    virtual bool CreateDirectory(LPCWSTR pszFileName, bool bIsPath);
-    virtual bool VerifyFileCanWrite(LPCWSTR pszFileName);
-    virtual bool DeletePathFile(LPCWSTR pszFileName, bool bRecycle = false);
-    virtual bool MovePathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile);
-    virtual bool RenamePathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile);
-    virtual bool CopyPathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile);
+    virtual bool IsPathFileExists(const wchar_t* pszFileName, bool bWrite = false);
+    virtual bool IsPath(const wchar_t* pszFileName, bool bCheckExists = false);
+    virtual bool CreateDirectory(const wchar_t* pszFileName, bool bIsPath);
+    virtual bool VerifyFileCanWrite(const wchar_t* pszFileName);
+    virtual bool DeletePathFile(const wchar_t* pszFileName, bool bRecycle = false);
+    virtual bool MovePathFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile);
+    virtual bool RenamePathFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile);
+    virtual bool CopyPathFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile);
     virtual void SetMsgBoxOwnerWnd(HWND hWnd);
     virtual HWND GetMsgBoxOwnerWnd();
-    virtual std::wstring RelToAbs(LPCWSTR pszRel, bool bRelIsFile, 
-        LPCWSTR pszBase = NULL, bool bBaseIsFile = true);
-    virtual std::wstring AbsToRel(LPCWSTR pszAbs, bool bAbsIsFile, 
-        LPCWSTR pszBase = NULL, bool bBaseIsFile = true);
-    virtual std::wstring ChangeFileNameSuffix(LPCWSTR pszFileName, LPCWSTR pszSuffix);
-    virtual std::wstring GetFileTitle(LPCWSTR pszFileName);
-    virtual std::wstring GetFileName(LPCWSTR pszFileName);
-    virtual std::wstring GetExtension(LPCWSTR pszFileName);
-    virtual std::wstring GetPathOfFile(LPCWSTR pszFileName);
+    virtual std::wstring RelToAbs(const wchar_t* pszRel, bool bRelIsFile, 
+        const wchar_t* pszBase = NULL, bool bBaseIsFile = true);
+    virtual std::wstring AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile, 
+        const wchar_t* pszBase = NULL, bool bBaseIsFile = true);
+    virtual std::wstring ChangeFileNameSuffix(const wchar_t* pszFileName, const wchar_t* pszSuffix);
+    virtual std::wstring GetFileTitle(const wchar_t* pszFileName);
+    virtual std::wstring GetFileName(const wchar_t* pszFileName);
+    virtual std::wstring GetExtension(const wchar_t* pszFileName);
+    virtual std::wstring GetPathOfFile(const wchar_t* pszFileName);
     virtual std::wstring MakeFileName(const std::wstring& wstrPath, 
         const std::wstring& wstrFileTitle, const std::wstring& wstrExtName);
     virtual std::wstring CreateFileName(const std::wstring& wstrPath, 
@@ -55,7 +55,7 @@ public:
         bool bReturnRel = true);
     virtual std::wstring GetModifyTime(const std::wstring& wstrFileName);
     virtual ULONG GetFileSize(const std::wstring& wstrFileName);
-    virtual int CompareFileName(LPCWSTR pszFileName1, LPCWSTR pszFileName2, 
+    virtual int CompareFileName(const wchar_t* pszFileName1, const wchar_t* pszFileName2, 
         long* pSamePartCount = NULL);
 
     // From Ix_FileVersion
@@ -65,7 +65,7 @@ public:
     virtual bool GetFileDescription(std::wstring& description, const std::wstring& filename);
 
 private:
-    bool TwoFileOperation(LPCWSTR pszOldFile, LPCWSTR pszNewFile, UINT wFunc);
+    bool TwoFileOperation(const wchar_t* pszOldFile, const wchar_t* pszNewFile, UINT wFunc);
 
 private:
     HWND    m_hMsgBoxOwnerWnd;

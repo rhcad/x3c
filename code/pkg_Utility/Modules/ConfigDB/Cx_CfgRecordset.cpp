@@ -38,7 +38,7 @@ void Cx_CfgRecordset::InitializeBySQL(Cx_CfgDatabase* pDB,
 
 std::wstring Cx_CfgRecordset::GetTableName() const
 {
-    LPCWSTR pszFrom = StrStrIW(m_wstrSQL.c_str(), L"FROM ");
+    const wchar_t* pszFrom = StrStrIW(m_wstrSQL.c_str(), L"FROM ");
     if (pszFrom != NULL)
     {
         return DbFunc::GetLevel1Name(pszFrom + 5);
@@ -122,193 +122,193 @@ bool Cx_CfgRecordset::IsValid() const
     return m_pDB && !m_wstrSQL.empty();
 }
 
-std::wstring Cx_CfgRecordset::GetString(LPCWSTR, LPCWSTR)
+std::wstring Cx_CfgRecordset::GetString(const wchar_t*, const wchar_t*)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return L"";
 }
 
-bool Cx_CfgRecordset::SetString(LPCWSTR, LPCWSTR)
+bool Cx_CfgRecordset::SetString(const wchar_t*, const wchar_t*)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-int Cx_CfgRecordset::GetInt(LPCWSTR, int)
+int Cx_CfgRecordset::GetInt(const wchar_t*, int)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetInt(LPCWSTR, int)
+bool Cx_CfgRecordset::SetInt(const wchar_t*, int)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-long Cx_CfgRecordset::GetInt32(LPCWSTR, long)
+long Cx_CfgRecordset::GetInt32(const wchar_t*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetInt32(LPCWSTR, long)
+bool Cx_CfgRecordset::SetInt32(const wchar_t*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-ULONG Cx_CfgRecordset::GetUInt32(LPCWSTR, ULONG)
+ULONG Cx_CfgRecordset::GetUInt32(const wchar_t*, ULONG)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetUInt32(LPCWSTR, ULONG)
+bool Cx_CfgRecordset::SetUInt32(const wchar_t*, ULONG)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-short Cx_CfgRecordset::GetInt16(LPCWSTR, short)
+short Cx_CfgRecordset::GetInt16(const wchar_t*, short)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetInt16(LPCWSTR, short)
+bool Cx_CfgRecordset::SetInt16(const wchar_t*, short)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-WORD Cx_CfgRecordset::GetUInt16(LPCWSTR, WORD)
+WORD Cx_CfgRecordset::GetUInt16(const wchar_t*, WORD)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetUInt16(LPCWSTR, WORD)
+bool Cx_CfgRecordset::SetUInt16(const wchar_t*, WORD)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::GetBool(LPCWSTR, BOOL)
+bool Cx_CfgRecordset::GetBool(const wchar_t*, BOOL)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetBool(LPCWSTR, BOOL)
+bool Cx_CfgRecordset::SetBool(const wchar_t*, BOOL)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-double Cx_CfgRecordset::GetDouble(LPCWSTR, double)
+double Cx_CfgRecordset::GetDouble(const wchar_t*, double)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetDouble(LPCWSTR, double)
+bool Cx_CfgRecordset::SetDouble(const wchar_t*, double)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-float Cx_CfgRecordset::GetFloat(LPCWSTR, float)
+float Cx_CfgRecordset::GetFloat(const wchar_t*, float)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetFloat(LPCWSTR, float)
+bool Cx_CfgRecordset::SetFloat(const wchar_t*, float)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-COLORREF Cx_CfgRecordset::GetRGB(LPCWSTR, COLORREF)
+COLORREF Cx_CfgRecordset::GetRGB(const wchar_t*, COLORREF)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return 0;
 }
 
-bool Cx_CfgRecordset::SetRGB(LPCWSTR, COLORREF)
+bool Cx_CfgRecordset::SetRGB(const wchar_t*, COLORREF)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::GetCMYK(LPCWSTR, WORD&, WORD&, WORD&, WORD&)
+bool Cx_CfgRecordset::GetCMYK(const wchar_t*, WORD&, WORD&, WORD&, WORD&)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetCMYK(LPCWSTR, WORD, WORD, WORD, WORD)
+bool Cx_CfgRecordset::SetCMYK(const wchar_t*, WORD, WORD, WORD, WORD)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::GetDate(LPCWSTR, int&, int&, int&)
+bool Cx_CfgRecordset::GetDate(const wchar_t*, int&, int&, int&)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetDate(LPCWSTR, int, int, int)
+bool Cx_CfgRecordset::SetDate(const wchar_t*, int, int, int)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::GetDateTime(LPCWSTR, int&, int&, int&, int&, int&, int&)
+bool Cx_CfgRecordset::GetDateTime(const wchar_t*, int&, int&, int&, int&, int&, int&)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-bool Cx_CfgRecordset::SetDateTime(LPCWSTR, int, int, int, int, int, int)
+bool Cx_CfgRecordset::SetDateTime(const wchar_t*, int, int, int, int, int, int)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-long Cx_CfgRecordset::GetDoubleArray(LPCWSTR, double*, long)
+long Cx_CfgRecordset::GetDoubleArray(const wchar_t*, double*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return 0;
 }
 
-bool Cx_CfgRecordset::SetDoubleArray(LPCWSTR, const double*, long)
+bool Cx_CfgRecordset::SetDoubleArray(const wchar_t*, const double*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-long Cx_CfgRecordset::GetIntArray(LPCWSTR, long*, long)
+long Cx_CfgRecordset::GetIntArray(const wchar_t*, long*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return 0;
 }
 
-bool Cx_CfgRecordset::SetIntArray(LPCWSTR, const long*, long)
+bool Cx_CfgRecordset::SetIntArray(const wchar_t*, const long*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;
 }
 
-long Cx_CfgRecordset::GetBinary(LPCWSTR, LPVOID, long)
+long Cx_CfgRecordset::GetBinary(const wchar_t*, LPVOID, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return 0;
 }
 
-bool Cx_CfgRecordset::SetBinary(LPCWSTR, LPCVOID, long)
+bool Cx_CfgRecordset::SetBinary(const wchar_t*, LPCVOID, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;

@@ -39,7 +39,7 @@ interface Ix_FileUtility1
         \param checkWrite 是否检查可写
         \return 目录或文件是否存在，如果checkWrite为true则同时要求可读写
     */
-    virtual bool IsPathFileExists(LPCWSTR filename, bool checkWrite = false) = 0;
+    virtual bool IsPathFileExists(const wchar_t* filename, bool checkWrite = false) = 0;
 
     //! 检查是否为目录名
     /*!
@@ -48,7 +48,7 @@ interface Ix_FileUtility1
         \param checkExists 是否根据实际文件存在情况决定是否为目录名
         \return true:目录, false:文件
     */
-    virtual bool IsPath(LPCWSTR filename, bool checkExists = false) = 0;
+    virtual bool IsPath(const wchar_t* filename, bool checkExists = false) = 0;
 
     //! 返回文件修改日期时间
     /*!
@@ -80,14 +80,14 @@ interface Ix_FileUtility2
         \param isPath 给定的filename是路径名还是文件名
         \return 是否创建成功
     */
-    virtual bool CreateDirectory(LPCWSTR filename, bool isPath) = 0;
+    virtual bool CreateDirectory(const wchar_t* filename, bool isPath) = 0;
 
     //! 确保一个文件名是可写的(自动创建目录和去掉只读属性)
     /*! 失败时会用 LOG_ERROR2 记录日志
         \param filename 文件全名
         \return 是否可创建文件或可改写
     */
-    virtual bool VerifyFileCanWrite(LPCWSTR filename) = 0;
+    virtual bool VerifyFileCanWrite(const wchar_t* filename) = 0;
 
     //! 删除一个目录或文件
     /*! 失败时会用 LOG_ERROR2 记录日志
@@ -95,7 +95,7 @@ interface Ix_FileUtility2
         \param recycle true表示放进回收站，false表示直接删除
         \return 是否执行成功. 文件全名为空或文件不存在则返回true
     */
-    virtual bool DeletePathFile(LPCWSTR filename, bool recycle = false) = 0;
+    virtual bool DeletePathFile(const wchar_t* filename, bool recycle = false) = 0;
 
     //! 移动一个目录或文件
     /*! 失败时会用 LOG_ERROR2 记录日志，自动创建目标文件的文件夹
@@ -103,7 +103,7 @@ interface Ix_FileUtility2
         \param newFile 新的目录或文件的文件全名
         \return 是否执行成功. oldFile为空或原文件不存在则返回true
     */
-    virtual bool MovePathFile(LPCWSTR oldFile, LPCWSTR newFile) = 0;
+    virtual bool MovePathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
     //! 重命名一个目录或文件
     /*! 失败时会用 LOG_ERROR2 记录日志
@@ -111,7 +111,7 @@ interface Ix_FileUtility2
         \param newFile 新的目录或文件的文件全名
         \return 是否执行成功. oldFile为空或原文件不存在则返回true
     */
-    virtual bool RenamePathFile(LPCWSTR oldFile, LPCWSTR newFile) = 0;
+    virtual bool RenamePathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
     //! 复制一个目录或文件
     /*! 失败时会用 LOG_ERROR2 记录日志，自动创建目标文件的文件夹
@@ -119,7 +119,7 @@ interface Ix_FileUtility2
         \param newFile 新的目录或文件的文件全名
         \return 是否执行成功. oldFile为空或原文件不存在则返回true
     */
-    virtual bool CopyPathFile(LPCWSTR oldFile, LPCWSTR newFile) = 0;
+    virtual bool CopyPathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
     //! 设置消息框的拥有者窗口
     virtual void SetMsgBoxOwnerWnd(HWND hwnd) = 0;
@@ -144,8 +144,8 @@ interface Ix_FileUtility3
         \param baseIsFile 参考路径是文件名还是路径名
         \return 转换后的绝对路径，如果relIsFile为false则绝对路径末尾有斜号
     */
-    virtual std::wstring RelToAbs(LPCWSTR relFile, bool relIsFile, 
-        LPCWSTR baseFile = NULL, bool baseIsFile = true) = 0;
+    virtual std::wstring RelToAbs(const wchar_t* relFile, bool relIsFile, 
+        const wchar_t* baseFile = NULL, bool baseIsFile = true) = 0;
 
     //! 绝对路径转换为相对路径
     /*! 将一个绝对路径转换为相对于给定参考路径的相对路径
@@ -156,8 +156,8 @@ interface Ix_FileUtility3
         \return 转换后的相对路径，如果relIsFile为false则绝对路径末尾有斜号，
             如果失败则和原来路径相同
     */
-    virtual std::wstring AbsToRel(LPCWSTR absFile, bool absIsFile, 
-        LPCWSTR baseFile = NULL, bool baseIsFile = true) = 0;
+    virtual std::wstring AbsToRel(const wchar_t* absFile, bool absIsFile, 
+        const wchar_t* baseFile = NULL, bool baseIsFile = true) = 0;
 
     //! 改变文件全名的后缀名
     /*!
@@ -166,7 +166,7 @@ interface Ix_FileUtility3
         \return 新的文件全名
     */
     virtual std::wstring ChangeFileNameSuffix(
-        LPCWSTR filename, LPCWSTR suffix) = 0;
+        const wchar_t* filename, const wchar_t* suffix) = 0;
 
     //! 根据路径、文件名、后缀名形成一个文件全名
     /*!
@@ -201,20 +201,20 @@ interface Ix_FileUtility3
 interface Ix_FileUtility4
 {
     //! 得到文件名标题，无路径和后缀名
-    virtual std::wstring GetFileTitle(LPCWSTR filename) = 0;
+    virtual std::wstring GetFileTitle(const wchar_t* filename) = 0;
 
     //! 得到文件或目录的文件名，无路径
-    virtual std::wstring GetFileName(LPCWSTR filename) = 0;
+    virtual std::wstring GetFileName(const wchar_t* filename) = 0;
 
     //! 得到文件扩展名，含有点号
-    virtual std::wstring GetExtension(LPCWSTR filename) = 0;
+    virtual std::wstring GetExtension(const wchar_t* filename) = 0;
 
     //! 得到文件或目录所在的目录，末尾有斜号
     /*!
         \param filename 文件或目录的文件全名，目录末尾的斜号可有可无
         \return 所在的目录，末尾有斜号
     */
-    virtual std::wstring GetPathOfFile(LPCWSTR filename) = 0;
+    virtual std::wstring GetPathOfFile(const wchar_t* filename) = 0;
 
     //! 判断两个文件名是否相同
     /*! 本函数比较两个文件全名或两个相对文件名，自动区分目录分隔符
@@ -224,7 +224,7 @@ interface Ix_FileUtility4
             其中文件全名的各部分是指中间文件夹名及文件标题名
         \return 0表示文件名相同，1或-1表示文件名不同
     */
-    virtual int CompareFileName(LPCWSTR filename1, LPCWSTR filename2, 
+    virtual int CompareFileName(const wchar_t* filename1, const wchar_t* filename2, 
         long* samePartCount = NULL) = 0;
 };
 
@@ -251,7 +251,9 @@ interface Ix_FileUtility
 inline Cx_Interface<Ix_FileUtility> FileUtility()
 {
     Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+#ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
+#endif
     return pIFUtility;
 }
 

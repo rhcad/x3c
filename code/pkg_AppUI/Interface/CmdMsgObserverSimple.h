@@ -18,9 +18,8 @@
  *  \author Zhang Yun Gui, C++ Plugin Framework
  *  \date   2010.10.29
  */
-#ifndef X3_OBSERVER_CMDMSGOBSERVERSIMPLE_H_
-#define X3_OBSERVER_CMDMSGOBSERVERSIMPLE_H_
-#pragma once
+#ifndef X3_OBSERVER_CMDMSG_OBSERVER_SIMPLE_H_
+#define X3_OBSERVER_CMDMSG_OBSERVER_SIMPLE_H_
 
 #include <RawCmdMsgObserver.h>
 
@@ -232,4 +231,4 @@ inline bool CmdMsgObserverSimple::OnRawUpdateCmdUI(
     return pMsgMap[i].id != 0;
 }
 
-#endif // X3_OBSERVER_CMDMSGOBSERVERSIMPLE_H_
+#endif // X3_OBSERVER_CMDMSG_OBSERVER_SIMPLE_H_

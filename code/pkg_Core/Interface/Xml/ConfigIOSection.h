@@ -71,7 +71,7 @@ public:
         \return 新的数据节点，不存在则自动添加
     */
     CConfigIOSection GetSection(
-        LPCWSTR name, bool autoCreate = true) const
+        const wchar_t* name, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->GetSection(P(), name, L"", L"", autoCreate);
@@ -85,8 +85,8 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue, bool autoCreate = true) const
+    CConfigIOSection GetSection(const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->GetSection(P(), name, attrName, attrValue, autoCreate);
@@ -100,8 +100,8 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(LPCWSTR name, 
-        LPCWSTR attrName, LPCWSTR attrValue, 
+    CConfigIOSection GetSection(const wchar_t* name, 
+        const wchar_t* attrName, const wchar_t* attrValue, 
         bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -118,9 +118,9 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(LPCWSTR name, 
-        LPCWSTR attrName, LPCWSTR attrValue, 
-        LPCWSTR attrName2, LPCWSTR attrValue2, 
+    CConfigIOSection GetSection(const wchar_t* name, 
+        const wchar_t* attrName, const wchar_t* attrValue, 
+        const wchar_t* attrName2, const wchar_t* attrValue2, 
         bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -138,9 +138,9 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue, 
-        LPCWSTR attrName2, ULONG attrValue2, 
+    CConfigIOSection GetSection(const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue, 
+        const wchar_t* attrName2, ULONG attrValue2, 
         bool autoCreate = true)
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -154,7 +154,7 @@ public:
         \return 子数据节点的个数
         \see GetSectionByIndex
     */
-    long GetSectionCount(LPCWSTR name) const
+    long GetSectionCount(const wchar_t* name) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->GetSectionCount(P(), name);
@@ -167,7 +167,7 @@ public:
         \return 新的数据节点，如果不存在则对该对象的读写操作将忽略，可以用 IsValid() 来检查是否为无效节点
         \see GetSectionCount
     */
-    CConfigIOSection GetSectionByIndex(LPCWSTR name, long index) const
+    CConfigIOSection GetSectionByIndex(const wchar_t* name, long index) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->GetSectionByIndex(P(), name, index);
@@ -178,7 +178,7 @@ public:
         \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
         \return 新的数据节点
     */
-    CConfigIOSection AddSection(LPCWSTR name)
+    CConfigIOSection AddSection(const wchar_t* name)
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->AddSection(P(), name);
@@ -191,7 +191,7 @@ public:
         \param attrValue 标识属性名对应的值，attrName不为空时有效
         \return 删除的子节点个数
     */
-    long RemoveChildren(LPCWSTR name, LPCWSTR attrName = L"", LPCWSTR attrValue = L"")
+    long RemoveChildren(const wchar_t* name, const wchar_t* attrName = L"", const wchar_t* attrValue = L"")
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->RemoveChildren(P(), name, attrName, attrValue);
@@ -204,7 +204,7 @@ public:
         \param attrValue 标识属性名attrName对应的值
         \return 删除的子节点个数
     */
-    long RemoveChildren(LPCWSTR name, LPCWSTR attrName, ULONG attrValue)
+    long RemoveChildren(const wchar_t* name, const wchar_t* attrName, ULONG attrValue)
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->RemoveChildren(P(), name, attrName, attrValue);

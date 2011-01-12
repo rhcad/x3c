@@ -152,11 +152,11 @@ Ix_ObjectFactory* TestPluginManager::GetManagerObjectFactory(void)
 }
 
 
-long TestPluginManager::GetPluginsNum(LPCWSTR path, 
-        LPCWSTR ext, bool recursive)
+long TestPluginManager::GetPluginsNum(const wchar_t* path, 
+        const wchar_t* ext, bool recursive)
 {
     WIN32_FIND_DATAW fd;
-    WCHAR szFileName[MAX_PATH];
+    wchar_t szFileName[MAX_PATH];
     std::vector<std::wstring> arrSubPath;
     long nCount = 0;
     long nExtLen = lstrlenW(ext);

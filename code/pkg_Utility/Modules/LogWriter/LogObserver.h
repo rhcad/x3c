@@ -41,7 +41,7 @@ private:
     Logger GetLogger();
     void InitLogFile();
     void MakerInitVars();
-    void WritePropFile(LPCWSTR pszFileName);
+    void WritePropFile(const wchar_t* pszFileName);
 
 private:
     std::wstring    m_wstrPath;         // 日志文件目录，末尾有斜杠号

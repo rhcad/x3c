@@ -18,9 +18,8 @@
  *  \author Zhang Yun Gui, C++ Plugin Framework
  *  \date   2010.10.29
  */
-#ifndef X3_OBSERVER_RAWCMDMSGOBSERVER_H_
-#define X3_OBSERVER_RAWCMDMSGOBSERVER_H_
-#pragma once
+#ifndef X3_OBSERVER_RAWCMDMSG_OBSERVER_H_
+#define X3_OBSERVER_RAWCMDMSG_OBSERVER_H_
 
 #include <ChangeNotifyData.h>
 
@@ -116,7 +115,9 @@ private:
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
         RawCmdMsgEventData* mydata = dynamic_cast<RawCmdMsgEventData*>(data);
+#ifdef ASSERT
         ASSERT(mydata);
+#endif
 
         if (mydata->enabled)
         {
@@ -131,4 +132,4 @@ private:
     }
 };
 
-#endif // X3_OBSERVER_RAWCMDMSGOBSERVER_H_
+#endif // X3_OBSERVER_RAWCMDMSG_OBSERVER_H_

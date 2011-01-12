@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * Rename text files(add .txt).
     * Replace tab char to space char in *.h and *.cpp.
+    * Replace LPWSTR to wchar*
     
 2011-01-09, Zhang Yun Gui <rhcad@hotmail.com>
 

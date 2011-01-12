@@ -110,7 +110,7 @@ bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, UI
     if (0xFF == buf[0] && 0xFE == buf[1])   // UTF-16 (little-endian)
     {
         content.resize((size - 2) / 2);
-        memcpy((LPVOID)content.c_str(), buf + 2, content.size() * sizeof(WCHAR));
+        memcpy((LPVOID)content.c_str(), buf + 2, content.size() * sizeof(wchar_t));
     }
     else            // ANSI/ASCII
     {
@@ -217,7 +217,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
             BYTE head[] = { 0xFF, 0xFE };
             ::WriteFile(hFile, head, 2, &dwBytes, NULL);
             
-            dwLen = (DWORD)(content.size() * sizeof(WCHAR));
+            dwLen = (DWORD)(content.size() * sizeof(wchar_t));
             ::WriteFile(hFile, content.c_str(), dwLen, &dwBytes, NULL);
             bRet = (dwBytes == dwLen);
         }
@@ -262,7 +262,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
             BYTE head[] = { 0xFF, 0xFE };
             ::WriteFile(hFile, head, 2, &dwBytes, NULL);
 
-            dwLen = (DWORD)(wstrUnicode.size() * sizeof(WCHAR));
+            dwLen = (DWORD)(wstrUnicode.size() * sizeof(wchar_t));
             ::WriteFile(hFile, wstrUnicode.c_str(), dwLen, &dwBytes, NULL);
             bRet = (dwBytes == dwLen);
         }
@@ -287,8 +287,8 @@ long Cx_TextUtil::GetLineCount(const std::wstring& text)
     }
 
     long nCount = 1;
-    LPCWSTR pszStart = text.c_str();
-    LPCWSTR pszEnd;
+    const wchar_t* pszStart = text.c_str();
+    const wchar_t* pszEnd;
 
     for (; (pszEnd = StrStrW(pszStart, L"\n\r")) != NULL; nCount++)
     {
@@ -304,7 +304,7 @@ long Cx_TextUtil::GetLineCount(const std::wstring& text)
 }
 
 std::wstring Cx_TextUtil::GetLine(const std::wstring& text, 
-                                  long line, LPCWSTR* nextline)
+                                  long line, const wchar_t** nextline)
 {
     if (line < 0)
     {
@@ -316,8 +316,8 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
     }
 
     long nCount = 0;
-    LPCWSTR pszStart = text.c_str();
-    LPCWSTR pszEnd = pszStart + StrCSpnW(pszStart, L"\n\r");
+    const wchar_t* pszStart = text.c_str();
+    const wchar_t* pszEnd = pszStart + StrCSpnW(pszStart, L"\n\r");
 
     while (line > nCount && *pszEnd != 0)
     {
@@ -339,7 +339,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
         }
         else
         {
-            LPCWSTR p = pszEnd + 1;
+            const wchar_t* p = pszEnd + 1;
             if (*p != *pszEnd && ('\n' == *p || '\r' == *p))
             {
                 p++;
@@ -351,7 +351,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
     return std::wstring(pszStart, pszEnd - pszStart);
 }
 
-static inline bool IsSpaceChar(WCHAR cChar, LPCWSTR targets = NULL)
+static inline bool IsSpaceChar(wchar_t cChar, const wchar_t* targets = NULL)
 {
     return targets ? (StrChrW(targets, cChar) != NULL)
         : (0x0020 == cChar || 0x3000 == cChar || '\t' == cChar);
@@ -364,7 +364,7 @@ bool Cx_TextUtil::IsSpaceLine(const std::wstring& text)
     return i < 0;
 }
 
-bool Cx_TextUtil::TrimSpace(std::wstring& text, LPCWSTR targets)
+bool Cx_TextUtil::TrimSpace(std::wstring& text, const wchar_t* targets)
 {
     const int nOldLen = GetSize(text);
     int i = nOldLen;
@@ -386,7 +386,7 @@ bool Cx_TextUtil::TrimSpace(std::wstring& text, LPCWSTR targets)
     return nOldLen > GetSize(text);
 }
 
-bool Cx_TextUtil::TrimLeft(std::wstring& text, LPCWSTR targets)
+bool Cx_TextUtil::TrimLeft(std::wstring& text, const wchar_t* targets)
 {
     const int len = GetSize(text);
     int i = 0;
@@ -400,7 +400,7 @@ bool Cx_TextUtil::TrimLeft(std::wstring& text, LPCWSTR targets)
     return i > 0;
 }
 
-bool Cx_TextUtil::TrimRight(std::wstring& text, LPCWSTR targets)
+bool Cx_TextUtil::TrimRight(std::wstring& text, const wchar_t* targets)
 {
     const int len = GetSize(text);
     int i = len;
@@ -414,14 +414,14 @@ bool Cx_TextUtil::TrimRight(std::wstring& text, LPCWSTR targets)
     return i + 1 < len;
 }
 
-bool Cx_TextUtil::RemoveInvalidChars(std::wstring& text, LPCWSTR targets)
+bool Cx_TextUtil::RemoveInvalidChars(std::wstring& text, const wchar_t* targets)
 {
     std::vector<long> arrIndex;
     long i = GetSize(text);
 
     while (--i >= 0)
     {
-        WCHAR ch = text[i];
+        wchar_t ch = text[i];
 
         if (targets && IsSpaceChar(ch, targets)
             || !targets && ((ch >= 0x0001 && ch <= 0x0008)
@@ -487,25 +487,25 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
     }
     else if (!text.empty())
     {
-        LPCWSTR psrc = text.c_str();
-        LPWSTR pdest = &dest[0];
+        const wchar_t* psrc = text.c_str();
+        wchar_t* pdest = &dest[0];
         int i = 0, n = 0;
 
         for (; psrc[i] != 0; i++)
         {
             if (psrc[i] >= 0xA3B0 && psrc[i] <= 0xA3B9)     // £°..£¹
             {
-                pdest[i] = WCHAR('0' + psrc[i] - 0xA3B0);
+                pdest[i] = wchar_t('0' + psrc[i] - 0xA3B0);
                 n++;
             }
             else if (psrc[i] >= 0xA3C1 && psrc[i] <= 0xA3DA)    // £Á..£Ú
             {
-                pdest[i] = WCHAR('A' + psrc[i] - 0xA3C1);
+                pdest[i] = wchar_t('A' + psrc[i] - 0xA3C1);
                 n++;
             }
             else if (psrc[i] >= 0xA3E1 && psrc[i] <= 0xA3FA)    // £á..£ú
             {
-                pdest[i] = WCHAR('a' + psrc[i] - 0xA3E1);
+                pdest[i] = wchar_t('a' + psrc[i] - 0xA3E1);
                 n++;
             }
             else

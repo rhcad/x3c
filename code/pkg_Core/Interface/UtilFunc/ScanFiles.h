@@ -21,6 +21,8 @@
 #ifndef UTILFUNC_SCANFILES_H_
 #define UTILFUNC_SCANFILES_H_
 
+#include <shlwapi.h>
+
 //! 扫描目录文件时的回调接口
 interface IScanFilesCallback
 {
@@ -30,7 +32,7 @@ interface IScanFilesCallback
         \param[in,out] recursive 是否扫描该子目录下的文件，默认为 ScanFiles() 传入的值
         \param[in,out] cancel 如果要停止所有扫描则设置为 true
     */
-    virtual void OnCheckPath(LPCWSTR path, bool& recursive, bool& cancel) = 0;
+    virtual void OnCheckPath(const wchar_t* path, bool& recursive, bool& cancel) = 0;
 
     //! 扫描到一个文件的通知
     /*!
@@ -38,7 +40,7 @@ interface IScanFilesCallback
         \param[in] ext 如果有后缀名则以点号开头，否则为空串
         \param[in,out] cancel 如果要停止所有扫描则设置为 true
     */
-    virtual void OnCheckFile(LPCWSTR filename, LPCWSTR ext, bool& cancel) = 0;
+    virtual void OnCheckFile(const wchar_t* filename, const wchar_t* ext, bool& cancel) = 0;
 };
 
 //! 扫描目录文件时的回调接口的默认实现类
@@ -52,9 +54,9 @@ public:
     CScanFilesCallback() {}
     virtual ~CScanFilesCallback() {}
 
-    virtual void OnCheckPath(LPCWSTR path, bool& recursive, bool& cancel)
+    virtual void OnCheckPath(const wchar_t* path, bool& recursive, bool& cancel)
         { path; recursive; cancel; }
-    virtual void OnCheckFile(LPCWSTR filename, LPCWSTR ext, bool& cancel)
+    virtual void OnCheckFile(const wchar_t* filename, const wchar_t* ext, bool& cancel)
         { filename; ext; cancel; }
 };
 
@@ -68,10 +70,10 @@ public:
     \see CScanFilesCallback
 */
 inline long ScanFiles(IScanFilesCallback* back, 
-                      LPCWSTR path, bool recursive)
+                      const wchar_t* path, bool recursive)
 {
     WIN32_FIND_DATAW fd;
-    WCHAR filename[MAX_PATH];
+    wchar_t filename[MAX_PATH];
     long count = 0;
     
     StrCpyNW(filename, path, MAX_PATH);
@@ -138,11 +140,10 @@ public:
     CScanFilesByExtension(std::vector<std::wstring>* files, const std::wstring& ext)
         : m_files(files), m_ext(ext)
     {
-        ASSERT(m_files != NULL);
     }
 
 protected:
-    virtual void OnCheckFile(LPCWSTR filename, LPCWSTR ext, bool& cancel)
+    virtual void OnCheckFile(const wchar_t* filename, const wchar_t* ext, bool& cancel)
     {
         cancel;
         if (StrCmpIW(m_ext.c_str(), ext) == 0)

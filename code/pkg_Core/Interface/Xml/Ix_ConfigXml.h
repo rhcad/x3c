@@ -48,7 +48,7 @@ interface Ix_ConfigXml
     /*! 读写XML文件之前必须设置文件全名
         \param filename 文件全名，也可以是WebService的URL
     */
-    virtual void SetFileName(LPCWSTR filename) = 0;
+    virtual void SetFileName(const wchar_t* filename) = 0;
 
     //! 返回实际根节点名称
     /*! 没有装载XML文件时会临时加载XML文件
@@ -65,16 +65,16 @@ interface Ix_ConfigXml
         \param nmspace XML命名空间，新建XML文件时使用
         \see GetRootName, Reload
     */
-    virtual void SetRootName(LPCWSTR rootName = L"root", 
-        LPCWSTR encoding = L"UTF-8", 
-        LPCWSTR nmspace = L"") = 0;
+    virtual void SetRootName(const wchar_t* rootName = L"root", 
+        const wchar_t* encoding = L"UTF-8", 
+        const wchar_t* nmspace = L"") = 0;
 
     //! 设置引用的Schema文件的位置
     /*! 如果设置了该属性，则在新建XML文档时使用
         \param location Schema文件的位置，可以为相对文件名
         \see GetRootName, Reload
     */
-    virtual void SetSchemaLocation(LPCWSTR location) = 0;
+    virtual void SetSchemaLocation(const wchar_t* location) = 0;
 
     //! 重新装载XML文件
     /*! 放弃当前XML文档的内容，重新装载XML文档。
@@ -89,7 +89,7 @@ interface Ix_ConfigXml
         \param filename 文件全名，空串表示使用当前文件全名
         \return 是否保存成功
     */
-    virtual bool Save(LPCWSTR filename = L"") const = 0;
+    virtual bool Save(const wchar_t* filename = L"") const = 0;
 
     //! 得到整个文档的XML内容
     /*! 如果还未新建或加载XML文件，则自动调用 Reload()

@@ -16,7 +16,7 @@
 #ifndef X3_UNITTEST_BASETEST_H_
 #define X3_UNITTEST_BASETEST_H_
 
-const LPCWSTR PLUGINS_DIR = L"../Plugins";
+const const wchar_t* PLUGINS_DIR = L"../Plugins";
 interface Ix_PluginLoader;
 
 //! 测试用例基类
@@ -32,7 +32,7 @@ protected:
         \param loadCore 是否加载插件框架内核的插件(LogManager.plugin.dll等)
         \return 在plugins所指定的插件中，加载成功的插件个数
     */
-    long LoadPlugins(LPCWSTR plugins, bool loadCore = true);
+    long LoadPlugins(const wchar_t* plugins, bool loadCore = true);
 
     //! 卸载所有插件
     void UnloadPlugins();
@@ -47,10 +47,10 @@ protected:
         \param file 相对文件名，为空则返回目录全名
         \return 文件或目录的全名
     */
-    std::wstring MakeDataPath(LPCWSTR folder, LPCWSTR file);
+    std::wstring MakeDataPath(const wchar_t* folder, const wchar_t* file);
 
 private:
-    void MakeRootPath(LPWSTR path, LPCWSTR name);
+    void MakeRootPath(wchar_t* path, const wchar_t* name);
 };
 
 #endif // X3_UNITTEST_BASETEST_H_

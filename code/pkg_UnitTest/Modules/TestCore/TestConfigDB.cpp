@@ -45,7 +45,7 @@ void TestConfigDB::tearDown()
     VERIFY(DeleteFileW(m_dbfile.c_str()));
 }
 
-Cx_Ptr TestConfigDB::GetDatabase(LPCWSTR filename)
+Cx_Ptr TestConfigDB::GetDatabase(const wchar_t* filename)
 {
     Cx_Interface<Ix_ConfigDBFactory> pIFFactory(CLSID_ConfigDBFactory);
     ASSERT(pIFFactory.IsNotNull());

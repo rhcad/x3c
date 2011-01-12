@@ -57,162 +57,162 @@ ULONG Cx_CfgDbSection::GetModifiedCount()
     return 0;
 }
 
-std::wstring Cx_CfgDbSection::GetString(LPCWSTR, LPCWSTR pszDefault)
+std::wstring Cx_CfgDbSection::GetString(const wchar_t*, const wchar_t* pszDefault)
 {
     return pszDefault;
 }
 
-bool Cx_CfgDbSection::SetString(LPCWSTR, LPCWSTR)
+bool Cx_CfgDbSection::SetString(const wchar_t*, const wchar_t*)
 {
     return false;
 }
 
-int Cx_CfgDbSection::GetInt(LPCWSTR, int nDefault)
+int Cx_CfgDbSection::GetInt(const wchar_t*, int nDefault)
 {
     return nDefault;
 }
 
-bool Cx_CfgDbSection::SetInt(LPCWSTR, int)
+bool Cx_CfgDbSection::SetInt(const wchar_t*, int)
 {
     return false;
 }
 
-long Cx_CfgDbSection::GetInt32(LPCWSTR, long nDefault)
+long Cx_CfgDbSection::GetInt32(const wchar_t*, long nDefault)
 {
     return nDefault;
 }
 
-bool Cx_CfgDbSection::SetInt32(LPCWSTR, long)
+bool Cx_CfgDbSection::SetInt32(const wchar_t*, long)
 {
     return false;
 }
 
-ULONG Cx_CfgDbSection::GetUInt32(LPCWSTR, ULONG nDefault)
+ULONG Cx_CfgDbSection::GetUInt32(const wchar_t*, ULONG nDefault)
 {
     return nDefault;
 }
 
-bool Cx_CfgDbSection::SetUInt32(LPCWSTR, ULONG)
+bool Cx_CfgDbSection::SetUInt32(const wchar_t*, ULONG)
 {
     return false;
 }
 
-short Cx_CfgDbSection::GetInt16(LPCWSTR, short nDefault)
+short Cx_CfgDbSection::GetInt16(const wchar_t*, short nDefault)
 {
     return nDefault;
 }
 
-bool Cx_CfgDbSection::SetInt16(LPCWSTR, short)
+bool Cx_CfgDbSection::SetInt16(const wchar_t*, short)
 {
     return false;
 }
 
-WORD Cx_CfgDbSection::GetUInt16(LPCWSTR, WORD nDefault)
+WORD Cx_CfgDbSection::GetUInt16(const wchar_t*, WORD nDefault)
 {
     return nDefault;
 }
 
-bool Cx_CfgDbSection::SetUInt16(LPCWSTR, WORD)
+bool Cx_CfgDbSection::SetUInt16(const wchar_t*, WORD)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::GetBool(LPCWSTR, BOOL bDefault)
+bool Cx_CfgDbSection::GetBool(const wchar_t*, BOOL bDefault)
 {
     return !!bDefault;
 }
 
-bool Cx_CfgDbSection::SetBool(LPCWSTR, BOOL)
+bool Cx_CfgDbSection::SetBool(const wchar_t*, BOOL)
 {
     return false;
 }
 
-double Cx_CfgDbSection::GetDouble(LPCWSTR, double dDefault)
+double Cx_CfgDbSection::GetDouble(const wchar_t*, double dDefault)
 {
     return dDefault;
 }
 
-bool Cx_CfgDbSection::SetDouble(LPCWSTR, double)
+bool Cx_CfgDbSection::SetDouble(const wchar_t*, double)
 {
     return false;
 }
 
-float Cx_CfgDbSection::GetFloat(LPCWSTR, float fDefault)
+float Cx_CfgDbSection::GetFloat(const wchar_t*, float fDefault)
 {
     return fDefault;
 }
 
-bool Cx_CfgDbSection::SetFloat(LPCWSTR, float)
+bool Cx_CfgDbSection::SetFloat(const wchar_t*, float)
 {
     return false;
 }
 
-COLORREF Cx_CfgDbSection::GetRGB(LPCWSTR, COLORREF crDefault)
+COLORREF Cx_CfgDbSection::GetRGB(const wchar_t*, COLORREF crDefault)
 {
     return crDefault;
 }
 
-bool Cx_CfgDbSection::SetRGB(LPCWSTR, COLORREF)
+bool Cx_CfgDbSection::SetRGB(const wchar_t*, COLORREF)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::GetCMYK(LPCWSTR, WORD&, WORD&, WORD&, WORD&)
+bool Cx_CfgDbSection::GetCMYK(const wchar_t*, WORD&, WORD&, WORD&, WORD&)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::SetCMYK(LPCWSTR, WORD, WORD, WORD, WORD)
+bool Cx_CfgDbSection::SetCMYK(const wchar_t*, WORD, WORD, WORD, WORD)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::GetDate(LPCWSTR, int&, int&, int&)
+bool Cx_CfgDbSection::GetDate(const wchar_t*, int&, int&, int&)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::SetDate(LPCWSTR, int, int, int)
+bool Cx_CfgDbSection::SetDate(const wchar_t*, int, int, int)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::GetDateTime(LPCWSTR, int&, int&, int&, int&, int&, int&)
+bool Cx_CfgDbSection::GetDateTime(const wchar_t*, int&, int&, int&, int&, int&, int&)
 {
     return false;
 }
 
-bool Cx_CfgDbSection::SetDateTime(LPCWSTR, int, int, int, int, int, int)
+bool Cx_CfgDbSection::SetDateTime(const wchar_t*, int, int, int, int, int, int)
 {
     return false;
 }
 
-long Cx_CfgDbSection::GetDoubleArray(LPCWSTR, double*, long)
+long Cx_CfgDbSection::GetDoubleArray(const wchar_t*, double*, long)
 {
     return 0;
 }
 
-bool Cx_CfgDbSection::SetDoubleArray(LPCWSTR, const double*, long)
+bool Cx_CfgDbSection::SetDoubleArray(const wchar_t*, const double*, long)
 {
     return false;
 }
 
-long Cx_CfgDbSection::GetIntArray(LPCWSTR, long*, long)
+long Cx_CfgDbSection::GetIntArray(const wchar_t*, long*, long)
 {
     return 0;
 }
 
-bool Cx_CfgDbSection::SetIntArray(LPCWSTR, const long*, long)
+bool Cx_CfgDbSection::SetIntArray(const wchar_t*, const long*, long)
 {
     return false;
 }
 
-long Cx_CfgDbSection::GetBinary(LPCWSTR, LPVOID, long)
+long Cx_CfgDbSection::GetBinary(const wchar_t*, LPVOID, long)
 {
     return 0;
 }
 
-bool Cx_CfgDbSection::SetBinary(LPCWSTR, LPCVOID, long)
+bool Cx_CfgDbSection::SetBinary(const wchar_t*, LPCVOID, long)
 {
     return false;
 }

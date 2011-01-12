@@ -13,19 +13,19 @@
 */
 inline std::wstring RoundStr(double value, int decimal = 4)
 {
-    WCHAR buf[65] = { 0 };
+    wchar_t buf[65] = { 0 };
     
-    WCHAR fmt[] = L"%.2lf";
+    wchar_t fmt[] = L"%.2lf";
     if (decimal < 1) decimal = 1;
     if (decimal > 5) decimal = 5;
-    fmt[2] = (WCHAR)('0' + decimal);
+    fmt[2] = (wchar_t)('0' + decimal);
 #if _MSC_VER <= 1200 // VC6
     swprintf(buf, fmt, value);
 #else
     swprintf_s(buf, 65, fmt, value);    
 #endif
     
-    LPWSTR p = wcschr(buf, '.');
+    wchar_t* p = wcschr(buf, '.');
     if (p != NULL)
     {
         int i = decimal;

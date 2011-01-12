@@ -20,7 +20,7 @@
 #include <Ix_ConfigData.h>
 #include <math.h>
 
-static const LPCWSTR EMPTYDEFSTR = L"~&*^0@!";
+static const const wchar_t* EMPTYDEFSTR = L"~&*^0@!";
 
 Cx_XmlSection::Cx_XmlSection()
     : m_pData(NULL), m_bSubElement(false)
@@ -41,7 +41,7 @@ std::wstring Cx_XmlSection::GetText()
     return CXmlUtil::GetText(m_xmlNode);
 }
 
-bool Cx_XmlSection::SetText(LPCWSTR value, bool cdata)
+bool Cx_XmlSection::SetText(const wchar_t* value, bool cdata)
 {
     bool bRet = true;
 
@@ -108,7 +108,7 @@ bool Cx_XmlSection::IsValid() const
     return m_xmlNode != NULL;
 }
 
-std::wstring Cx_XmlSection::GetString(LPCWSTR name, LPCWSTR defValue)
+std::wstring Cx_XmlSection::GetString(const wchar_t* name, const wchar_t* defValue)
 {
     if (!m_bSubElement)
     {
@@ -117,7 +117,7 @@ std::wstring Cx_XmlSection::GetString(LPCWSTR name, LPCWSTR defValue)
     return CXmlUtil::GetField(m_xmlNode, name, defValue);
 }
 
-bool Cx_XmlSection::SetString(LPCWSTR name, LPCWSTR value)
+bool Cx_XmlSection::SetString(const wchar_t* name, const wchar_t* value)
 {
     bool bRet = true;
 
@@ -139,7 +139,7 @@ bool Cx_XmlSection::SetString(LPCWSTR name, LPCWSTR value)
     return bRet;
 }
 
-int Cx_XmlSection::GetInt(LPCWSTR name, int defValue)
+int Cx_XmlSection::GetInt(const wchar_t* name, int defValue)
 {
     if (!m_bSubElement)
     {
@@ -148,7 +148,7 @@ int Cx_XmlSection::GetInt(LPCWSTR name, int defValue)
     return CXmlUtil::GetFieldInt(m_xmlNode, name, defValue);
 }
 
-bool Cx_XmlSection::SetInt(LPCWSTR name, int value)
+bool Cx_XmlSection::SetInt(const wchar_t* name, int value)
 {
     bool bRet = true;
 
@@ -171,47 +171,47 @@ bool Cx_XmlSection::SetInt(LPCWSTR name, int value)
     return bRet;
 }
 
-long Cx_XmlSection::GetInt32(LPCWSTR name, long defValue)
+long Cx_XmlSection::GetInt32(const wchar_t* name, long defValue)
 {
     return GetInt(name, defValue);
 }
 
-bool Cx_XmlSection::SetInt32(LPCWSTR name, long value)
+bool Cx_XmlSection::SetInt32(const wchar_t* name, long value)
 {
     return SetInt(name, value);
 }
 
-ULONG Cx_XmlSection::GetUInt32(LPCWSTR name, ULONG defValue)
+ULONG Cx_XmlSection::GetUInt32(const wchar_t* name, ULONG defValue)
 {
     return GetInt(name, defValue);
 }
 
-bool Cx_XmlSection::SetUInt32(LPCWSTR name, ULONG value)
+bool Cx_XmlSection::SetUInt32(const wchar_t* name, ULONG value)
 {
     return SetInt(name, value);
 }
 
-short Cx_XmlSection::GetInt16(LPCWSTR name, short defValue)
+short Cx_XmlSection::GetInt16(const wchar_t* name, short defValue)
 {
     return static_cast<short>(GetInt(name, defValue));
 }
 
-bool Cx_XmlSection::SetInt16(LPCWSTR name, short value)
+bool Cx_XmlSection::SetInt16(const wchar_t* name, short value)
 {
     return SetInt(name, value);
 }
 
-WORD Cx_XmlSection::GetUInt16(LPCWSTR name, WORD defValue)
+WORD Cx_XmlSection::GetUInt16(const wchar_t* name, WORD defValue)
 {
     return static_cast<WORD>(GetInt(name, defValue));
 }
 
-bool Cx_XmlSection::SetUInt16(LPCWSTR name, WORD value)
+bool Cx_XmlSection::SetUInt16(const wchar_t* name, WORD value)
 {
     return SetInt(name, value);
 }
 
-bool Cx_XmlSection::GetBool(LPCWSTR name, BOOL defValue)
+bool Cx_XmlSection::GetBool(const wchar_t* name, BOOL defValue)
 {
     if (!m_bSubElement)
     {
@@ -221,7 +221,7 @@ bool Cx_XmlSection::GetBool(LPCWSTR name, BOOL defValue)
     return !!CXmlUtil::GetFieldBool(m_xmlNode, name, defValue);
 }
 
-bool Cx_XmlSection::SetBool(LPCWSTR name, BOOL value)
+bool Cx_XmlSection::SetBool(const wchar_t* name, BOOL value)
 {
     bool bRet = true;
 
@@ -243,7 +243,7 @@ bool Cx_XmlSection::SetBool(LPCWSTR name, BOOL value)
     return bRet;
 }
 
-double Cx_XmlSection::GetDouble(LPCWSTR name, double defValue)
+double Cx_XmlSection::GetDouble(const wchar_t* name, double defValue)
 {
     if (!m_bSubElement)
     {
@@ -252,7 +252,7 @@ double Cx_XmlSection::GetDouble(LPCWSTR name, double defValue)
     return CXmlUtil::GetFieldFloat(m_xmlNode, name, defValue);
 }
 
-bool Cx_XmlSection::SetDouble(LPCWSTR name, double value)
+bool Cx_XmlSection::SetDouble(const wchar_t* name, double value)
 {
     bool bRet = true;
 
@@ -280,17 +280,17 @@ bool Cx_XmlSection::SetDouble(LPCWSTR name, double value)
     return bRet;
 }
 
-float Cx_XmlSection::GetFloat(LPCWSTR name, float defValue)
+float Cx_XmlSection::GetFloat(const wchar_t* name, float defValue)
 {
     return static_cast<float>(GetDouble(name, defValue));
 }
 
-bool Cx_XmlSection::SetFloat(LPCWSTR name, float value)
+bool Cx_XmlSection::SetFloat(const wchar_t* name, float value)
 {
     return SetDouble(name, value);
 }
 
-COLORREF Cx_XmlSection::GetRGB(LPCWSTR name, COLORREF defValue)
+COLORREF Cx_XmlSection::GetRGB(const wchar_t* name, COLORREF defValue)
 {
     BYTE nums[3] = { 0, 0, 0 };
     if (ReadInts(GetString(name).c_str(), nums, 3) == 3)
@@ -298,15 +298,15 @@ COLORREF Cx_XmlSection::GetRGB(LPCWSTR name, COLORREF defValue)
     return defValue;
 }
 
-bool Cx_XmlSection::SetRGB(LPCWSTR name, COLORREF value)
+bool Cx_XmlSection::SetRGB(const wchar_t* name, COLORREF value)
 {
-    WCHAR szBuf[32];
+    wchar_t szBuf[32];
     swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d", 
         GetRValue(value), GetGValue(value), GetBValue(value));
     return SetString(name, szBuf);
 }
 
-bool Cx_XmlSection::GetCMYK(LPCWSTR name, WORD& c, WORD& m, WORD& y, WORD& k)
+bool Cx_XmlSection::GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD& k)
 {
     WORD nums[4] = { 0, 0, 0, 0 };
     bool bRet = (ReadInts(GetString(name).c_str(), nums, 4) == 4);
@@ -320,14 +320,14 @@ bool Cx_XmlSection::GetCMYK(LPCWSTR name, WORD& c, WORD& m, WORD& y, WORD& k)
     return bRet;
 }
 
-bool Cx_XmlSection::SetCMYK(LPCWSTR name, WORD c, WORD m, WORD y, WORD k)
+bool Cx_XmlSection::SetCMYK(const wchar_t* name, WORD c, WORD m, WORD y, WORD k)
 {
-    WCHAR szBuf[40];
+    wchar_t szBuf[40];
     swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d, %d", c, m, y, k);
     return SetString(name, szBuf);
 }
 
-bool Cx_XmlSection::GetDate(LPCWSTR name, int& year, int& month, int& day)
+bool Cx_XmlSection::GetDate(const wchar_t* name, int& year, int& month, int& day)
 {
     int nums[3] = { 0, 0, 0 };
 
@@ -347,14 +347,14 @@ bool Cx_XmlSection::GetDate(LPCWSTR name, int& year, int& month, int& day)
     return bRet;
 }
 
-bool Cx_XmlSection::SetDate(LPCWSTR name, int year, int month, int day)
+bool Cx_XmlSection::SetDate(const wchar_t* name, int year, int month, int day)
 {
-    WCHAR szBuf[40];
+    wchar_t szBuf[40];
     swprintf_s(szBuf, _countof(szBuf), L"%d-%d-%d", year, month, day);
     return SetString(name, szBuf);
 }
 
-bool Cx_XmlSection::GetDateTime(LPCWSTR name, int& year, int& month, int& day, 
+bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int& day, 
     int& hour, int& minute, int& second)
 {
     int nums[6] = { 0, 0, 0, 0, 0, 0 };
@@ -378,21 +378,21 @@ bool Cx_XmlSection::GetDateTime(LPCWSTR name, int& year, int& month, int& day,
     return bRet;
 }
 
-bool Cx_XmlSection::SetDateTime(LPCWSTR name, int year, int month, int day, 
+bool Cx_XmlSection::SetDateTime(const wchar_t* name, int year, int month, int day, 
     int hour, int minute, int second)
 {
-    WCHAR szBuf[60];
+    wchar_t szBuf[60];
     swprintf_s(szBuf, _countof(szBuf), L"%d-%d-%d %d:%d:%d", 
         year, month, day, hour, minute, second);
     return SetString(name, szBuf);
 }
 
-long Cx_XmlSection::GetDoubleArray(LPCWSTR name, double* items, long count)
+long Cx_XmlSection::GetDoubleArray(const wchar_t* name, double* items, long count)
 {
     return ReadDoubleArray(GetString(name).c_str(), items, count);
 }
 
-bool Cx_XmlSection::SetDoubleArray(LPCWSTR name, const double* items, long count)
+bool Cx_XmlSection::SetDoubleArray(const wchar_t* name, const double* items, long count)
 {
     std::wostringstream sbuf;
     for (int i = 0; i < count; i++)
@@ -404,12 +404,12 @@ bool Cx_XmlSection::SetDoubleArray(LPCWSTR name, const double* items, long count
     return SetString(name, sbuf.str().c_str());
 }
 
-long Cx_XmlSection::GetIntArray(LPCWSTR name, long* items, long count)
+long Cx_XmlSection::GetIntArray(const wchar_t* name, long* items, long count)
 {
     return ReadInts(GetString(name).c_str(), items, count);
 }
 
-bool Cx_XmlSection::SetIntArray(LPCWSTR name, const long* items, long count)
+bool Cx_XmlSection::SetIntArray(const wchar_t* name, const long* items, long count)
 {
     std::wostringstream sbuf;
     for (int i = 0; i < count; i++)
@@ -421,16 +421,16 @@ bool Cx_XmlSection::SetIntArray(LPCWSTR name, const long* items, long count)
     return SetString(name, sbuf.str().c_str());
 }
 
-long Cx_XmlSection::GetBinary(LPCWSTR name, LPVOID buf, long size)
+long Cx_XmlSection::GetBinary(const wchar_t* name, LPVOID buf, long size)
 {
     std::wstring wstrText(GetString(name));
     size_t nLen = wstrText.size();
-    LPCWSTR pszText = wstrText.c_str();
+    const wchar_t* pszText = wstrText.c_str();
 
-    WCHAR szNum[3] = L"00";
+    wchar_t szNum[3] = L"00";
     int nRet = 0;
     LPBYTE items = (LPBYTE)buf;
-    LPWSTR endptr;
+    wchar_t* endptr;
 
     for (size_t i = 0; i + 1 < nLen && nRet < size; i += 2)
     {
@@ -442,10 +442,10 @@ long Cx_XmlSection::GetBinary(LPCWSTR name, LPVOID buf, long size)
     return nRet;
 }
 
-bool Cx_XmlSection::SetBinary(LPCWSTR name, LPCVOID buf, long size)
+bool Cx_XmlSection::SetBinary(const wchar_t* name, LPCVOID buf, long size)
 {
     std::wostringstream sbuf;
-    WCHAR szNum[20];
+    wchar_t szNum[20];
     LPBYTE items = (LPBYTE)buf;
 
     for (int i = 0; i < size; i++)

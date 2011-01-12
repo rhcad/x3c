@@ -48,7 +48,7 @@ interface Ix_FileTransaction
         \param recycle true表示放进回收站，false表示直接删除
         \return 是否能删除该目录或文件. 文件全名为空或文件不存在则返回true
     */
-    virtual bool DeletePathFile(LPCWSTR filename, bool recycle = false) = 0;
+    virtual bool DeletePathFile(const wchar_t* filename, bool recycle = false) = 0;
 };
 
 #endif // X3_UTIL_IFILETRANSACTION_H_

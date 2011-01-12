@@ -20,7 +20,6 @@
  */
 #ifndef X3_VIEW_CREATEWND_IMPL_H_
 #define X3_VIEW_CREATEWND_IMPL_H_
-#pragma once
 
 #pragma warning(disable:4097)   // typedef-name used as synonym
 

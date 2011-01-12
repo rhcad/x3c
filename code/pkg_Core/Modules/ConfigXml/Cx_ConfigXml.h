@@ -36,14 +36,14 @@ protected:
     //
     virtual Ix_ConfigData* GetData();
     virtual std::wstring GetFileName() const;
-    virtual void SetFileName(LPCWSTR filename);
+    virtual void SetFileName(const wchar_t* filename);
     virtual std::wstring GetRootName() const;
-    virtual void SetRootName(LPCWSTR rootName = L"root", 
-        LPCWSTR encoding = L"UTF-8", 
-        LPCWSTR nmspace = L"");
-    virtual void SetSchemaLocation(LPCWSTR location);
+    virtual void SetRootName(const wchar_t* rootName = L"root", 
+        const wchar_t* encoding = L"UTF-8", 
+        const wchar_t* nmspace = L"");
+    virtual void SetSchemaLocation(const wchar_t* location);
     virtual bool Reload();
-    virtual bool Save(LPCWSTR filename = L"") const;
+    virtual bool Save(const wchar_t* filename = L"") const;
     virtual bool GetXmlContent(std::wstring& content) const;
     virtual bool SetXmlContent(const std::wstring& content);
     virtual bool GetXmlContent(std::wstring& content, Ix_ConfigSection* node) const;
@@ -58,36 +58,36 @@ protected:
     // From Ix_ConfigData
     //
     virtual ConfigIOSection GetSection(
-        LPCWSTR name, bool autoCreate = true);
+        const wchar_t* name, bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue, 
         bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, LPCWSTR attrValue, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, const wchar_t* attrValue, 
         bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, LPCWSTR attrValue, 
-        LPCWSTR attrName2, LPCWSTR attrValue2, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, const wchar_t* attrValue, 
+        const wchar_t* attrName2, const wchar_t* attrValue2, 
         bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue, 
-        LPCWSTR attrName2, ULONG attrValue2, 
+        Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue, 
+        const wchar_t* attrName2, ULONG attrValue2, 
         bool autoCreate = true);
     virtual long GetSectionCount(
-        Ix_ConfigSection* parent, LPCWSTR name);
+        Ix_ConfigSection* parent, const wchar_t* name);
     virtual ConfigIOSection GetSectionByIndex(
-        Ix_ConfigSection* parent, LPCWSTR name, long index);
+        Ix_ConfigSection* parent, const wchar_t* name, long index);
     virtual ConfigIOSection AddSection(
-        Ix_ConfigSection* parent, LPCWSTR name);
+        Ix_ConfigSection* parent, const wchar_t* name);
     virtual bool RemoveSection(Ix_ConfigSection* sec);
-    virtual long RemoveChildren(Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName = L"", LPCWSTR attrValue = L"");
-    virtual long RemoveChildren(Ix_ConfigSection* parent, LPCWSTR name, 
-        LPCWSTR attrName, ULONG attrValue);
+    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName = L"", const wchar_t* attrValue = L"");
+    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
+        const wchar_t* attrName, ULONG attrValue);
     virtual ConfigIOSection GetParentSection(Ix_ConfigSection* sec);
 
 private:

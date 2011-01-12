@@ -32,7 +32,7 @@ HMODULE Cx_PluginLoader::GetMainModuleHandle()
     return m_instance;
 }
 
-static void ReplaceSlashes(LPWSTR filename)
+static void ReplaceSlashes(wchar_t* filename)
 {
     for (; *filename; ++filename)
     {
@@ -43,10 +43,10 @@ static void ReplaceSlashes(LPWSTR filename)
     }
 }
 
-long Cx_PluginLoader::LoadPlugins(HMODULE instance, LPCWSTR path, 
-                                  LPCWSTR ext, bool recursive)
+long Cx_PluginLoader::LoadPlugins(HMODULE instance, const wchar_t* path, 
+                                  const wchar_t* ext, bool recursive)
 {
-    WCHAR fullpath[MAX_PATH];
+    wchar_t fullpath[MAX_PATH];
 
     m_instance = instance;
     GetModuleFileNameW(instance, fullpath, MAX_PATH);
@@ -56,11 +56,11 @@ long Cx_PluginLoader::LoadPlugins(HMODULE instance, LPCWSTR path,
     return LoadPlugins(fullpath, ext, recursive);
 }
 
-long Cx_PluginLoader::LoadPlugins(LPCWSTR path, LPCWSTR ext, bool recursive)
+long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool recursive)
 {
     WIN32_FIND_DATAW fd;
-    WCHAR rootpath[MAX_PATH];
-    WCHAR filename[MAX_PATH];
+    wchar_t rootpath[MAX_PATH];
+    wchar_t filename[MAX_PATH];
     long count = 0;
     const int extlen = lstrlenW(ext);
     std::vector<std::wstring> subpaths;
@@ -121,10 +121,10 @@ long Cx_PluginLoader::LoadPlugins(LPCWSTR path, LPCWSTR ext, bool recursive)
     return count;
 }
 
-long Cx_PluginLoader::LoadPluginFiles(LPCWSTR path, LPCWSTR files, HMODULE instance)
+long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path, const wchar_t* files, HMODULE instance)
 {
-    WCHAR filename[MAX_PATH];
-    WCHAR apppath[MAX_PATH];
+    wchar_t filename[MAX_PATH];
+    wchar_t apppath[MAX_PATH];
 
     m_instance = instance;
     GetModuleFileNameW(instance, apppath, MAX_PATH);
@@ -135,7 +135,7 @@ long Cx_PluginLoader::LoadPluginFiles(LPCWSTR path, LPCWSTR files, HMODULE insta
     PathAddBackslashW(filename);
     
     const int len0 = lstrlenW(filename);
-    LPWSTR nameend = filename + len0;
+    wchar_t* nameend = filename + len0;
 
     std::vector<std::wstring> filenames;
     int i, j;
@@ -224,7 +224,7 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
     return false;
 }
 
-bool Cx_PluginLoader::LoadPlugin(LPCWSTR filename)
+bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 {
     bool bOwner = false;
     HMODULE hModule = GetModuleHandleW(filename);
@@ -254,7 +254,7 @@ bool Cx_PluginLoader::LoadPlugin(LPCWSTR filename)
     return moduleIndex >= 0;
 }
 
-bool Cx_PluginLoader::UnloadPlugin(LPCWSTR name)
+bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 {
     HMODULE hModule = GetModuleHandleW(name);
 
@@ -316,7 +316,7 @@ long Cx_PluginLoader::UnloadPlugins()
     return nUnLoadPluginNum;
 }
 
-bool Cx_PluginLoader::issep(WCHAR c)
+bool Cx_PluginLoader::issep(wchar_t c)
 {
     return ',' == c || ';' == c || iswspace(c);
 }

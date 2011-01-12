@@ -54,7 +54,9 @@ interface Ix_GuidGenerator
 inline std::wstring CreateGuid(bool withBrackets = false)
 {
     Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+#ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
+#endif
     return pIFGenerator->CreateGuid(withBrackets);
 }
 
@@ -66,7 +68,9 @@ inline std::wstring CreateGuid(bool withBrackets = false)
 inline std::wstring RemoveGuidBrackets(const std::wstring& uid)
 {
     Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+#ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
+#endif
     return pIFGenerator->RemoveGuidBrackets(uid);
 }
 
@@ -78,7 +82,9 @@ inline std::wstring RemoveGuidBrackets(const std::wstring& uid)
 inline ULONG GuidCreateID(long type = 0)
 {
     Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+#ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
+#endif
     return pIFGenerator->CreateID(type);
 }
 
@@ -89,7 +95,9 @@ inline ULONG GuidCreateID(long type = 0)
 inline std::wstring GetCurrentTimeString(bool hasYear = true)
 {
     Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+#ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
+#endif
     return pIFGenerator->GetCurrentTimeString(hasYear);
 }
 

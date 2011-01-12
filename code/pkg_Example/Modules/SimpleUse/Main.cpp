@@ -2,7 +2,7 @@
 
 extern HMODULE g_hPluginDll;    // ¼û XComCreator.h
 
-bool LoadPlugin(LPCWSTR filename);
+bool LoadPlugin(const wchar_t* filename);
 void Test();
 
 int main()
@@ -25,7 +25,7 @@ int main()
     return 0;
 }
 
-bool LoadPlugin(LPCWSTR filename)
+bool LoadPlugin(const wchar_t* filename)
 {
     g_hPluginDll = LoadLibraryW(filename);
 

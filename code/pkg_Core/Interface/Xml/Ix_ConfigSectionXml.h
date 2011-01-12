@@ -21,6 +21,8 @@
 #ifndef X3_XML_ICONFIGSECTIONXML_H_
 #define X3_XML_ICONFIGSECTIONXML_H_
 
+#include "Ix_Object.h"
+
 //! XML数据节点接口
 /*! XML数据节点支持 Ix_ConfigSectionXml 和 Ix_ConfigSection 接口
     \interface Ix_ConfigSectionXml
@@ -48,7 +50,7 @@ interface Ix_ConfigSectionXml
         \param cdata 保存为CDATA值还是普通内容
         \return 是否改变了内容
     */
-    virtual bool SetText(LPCWSTR value, bool cdata = false) = 0;
+    virtual bool SetText(const wchar_t* value, bool cdata = false) = 0;
 
     //! 返回内部的XML元素节点(IXMLDOMElement)
     virtual IUnknown* GetDOMElement(bool addRef = false) = 0;

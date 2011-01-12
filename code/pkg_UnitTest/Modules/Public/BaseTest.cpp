@@ -18,8 +18,8 @@
 #include <PluginManager.h>
 
 static CPluginManager s_loader;
-static WCHAR s_datapath[MAX_PATH] = { 0 };
-static WCHAR s_temppath[MAX_PATH] = { 0 };
+static wchar_t s_datapath[MAX_PATH] = { 0 };
+static wchar_t s_temppath[MAX_PATH] = { 0 };
 
 BaseTest::BaseTest()
 {
@@ -27,7 +27,7 @@ BaseTest::BaseTest()
     MakeRootPath(s_temppath, L"Temp");
 }
 
-long BaseTest::LoadPlugins(LPCWSTR plugins, bool loadCore)
+long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 {
     // Initialize COM
     VERIFY(SUCCEEDED(CoInitialize(NULL)));
@@ -65,9 +65,9 @@ Ix_PluginLoader* BaseTest::GetPluginLoader()
     return s_loader.GetPluginLoader();
 }
 
-void BaseTest::MakeRootPath(LPWSTR path, LPCWSTR name)
+void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
 {
-    WCHAR filename[MAX_PATH];
+    wchar_t filename[MAX_PATH];
 
     if (0 == path[0])
     {
@@ -91,9 +91,9 @@ void BaseTest::MakeRootPath(LPWSTR path, LPCWSTR name)
     }
 }
 
-std::wstring BaseTest::MakeDataPath(LPCWSTR folder, LPCWSTR file)
+std::wstring BaseTest::MakeDataPath(const wchar_t* folder, const wchar_t* file)
 {
-    WCHAR filename[MAX_PATH];
+    wchar_t filename[MAX_PATH];
 
     if (folder && *folder)
     {

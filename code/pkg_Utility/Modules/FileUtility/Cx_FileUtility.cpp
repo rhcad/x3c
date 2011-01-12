@@ -24,17 +24,17 @@
 
 static long s_nFileOpRet = 0;   // SHFileOperationW 返回值
 
-static inline bool IsPathSlash(WCHAR c)
+static inline bool IsPathSlash(wchar_t c)
 {
     return '\\' == c || '/' == c;
 }
 
-static inline bool IsNotNull(LPCWSTR pszText)
+static inline bool IsNotNull(const wchar_t* pszText)
 {
     return pszText != NULL && *pszText != 0;
 }
 
-static void ReplaceSlash(LPWSTR path)
+static void ReplaceSlash(wchar_t* path)
 {
     for (; *path; path++)
     {
@@ -45,13 +45,13 @@ static void ReplaceSlash(LPWSTR path)
     }
 }
 
-bool Cx_FileUtility::IsPathFileExists(LPCWSTR pszFileName, bool bWrite)
+bool Cx_FileUtility::IsPathFileExists(const wchar_t* pszFileName, bool bWrite)
 {
     return IsNotNull(pszFileName)
         && _waccess(pszFileName, bWrite ? 6 : 0) == 0;
 }
 
-bool Cx_FileUtility::IsPath(LPCWSTR pszFileName, bool bCheckExists)
+bool Cx_FileUtility::IsPath(const wchar_t* pszFileName, bool bCheckExists)
 {
     if (IsNotNull(pszFileName))
     {
@@ -75,11 +75,11 @@ Cx_FileUtility::Cx_FileUtility()
 {
 }
 
-bool Cx_FileUtility::CreateDirectory(LPCWSTR pszFileName, bool bIsPath)
+bool Cx_FileUtility::CreateDirectory(const wchar_t* pszFileName, bool bIsPath)
 {
-    WCHAR szPath[MAX_PATH];
+    wchar_t szPath[MAX_PATH];
     int i, nLen;
-    WCHAR cSaveChar;
+    wchar_t cSaveChar;
 
     if (!IsNotNull(pszFileName))
         return false;
@@ -122,7 +122,7 @@ bool Cx_FileUtility::CreateDirectory(LPCWSTR pszFileName, bool bIsPath)
     return true;
 }
 
-bool Cx_FileUtility::VerifyFileCanWrite(LPCWSTR pszFileName)
+bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* pszFileName)
 {
     if (!IsNotNull(pszFileName))
         return false;
@@ -140,7 +140,7 @@ bool Cx_FileUtility::VerifyFileCanWrite(LPCWSTR pszFileName)
     return true;
 }
 
-bool Cx_FileUtility::DeletePathFile(LPCWSTR pszFileName, bool bRecycle)
+bool Cx_FileUtility::DeletePathFile(const wchar_t* pszFileName, bool bRecycle)
 {
     if (!IsNotNull(pszFileName))
         return true;
@@ -152,7 +152,7 @@ bool Cx_FileUtility::DeletePathFile(LPCWSTR pszFileName, bool bRecycle)
         return true;
     }
 
-    WCHAR szFile[MAX_PATH];
+    wchar_t szFile[MAX_PATH];
     ZeroMemory(szFile, sizeof(szFile));
     lstrcpynW(szFile, pszFileName, MAX_PATH);
     ReplaceSlash(szFile);
@@ -186,8 +186,8 @@ bool Cx_FileUtility::DeletePathFile(LPCWSTR pszFileName, bool bRecycle)
     return true;
 }
 
-bool Cx_FileUtility::TwoFileOperation(LPCWSTR pszOldFile, 
-                                      LPCWSTR pszNewFile, UINT wFunc)
+bool Cx_FileUtility::TwoFileOperation(const wchar_t* pszOldFile, 
+                                      const wchar_t* pszNewFile, UINT wFunc)
 {
     if (!IsNotNull(pszOldFile))
         return true;
@@ -203,7 +203,7 @@ bool Cx_FileUtility::TwoFileOperation(LPCWSTR pszOldFile,
     }
     else
     {
-        WCHAR szOld[MAX_PATH], szNew[MAX_PATH];
+        wchar_t szOld[MAX_PATH], szNew[MAX_PATH];
         ZeroMemory(szOld, sizeof(szOld));
         ZeroMemory(szNew, sizeof(szNew));   // pTo必须以两个\0结束
         lstrcpynW(szOld, pszOldFile, MAX_PATH);
@@ -230,7 +230,7 @@ bool Cx_FileUtility::TwoFileOperation(LPCWSTR pszOldFile,
     return bRet;
 }
 
-bool Cx_FileUtility::MovePathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile)
+bool Cx_FileUtility::MovePathFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile)
 {
     if (IsPathFileExists(pszOldFile)
         && !CreateDirectory(pszNewFile, false))
@@ -251,7 +251,7 @@ bool Cx_FileUtility::MovePathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile)
     return true;
 }
 
-bool Cx_FileUtility::RenamePathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile)
+bool Cx_FileUtility::RenamePathFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile)
 {
     if (!TwoFileOperation(pszOldFile, pszNewFile, FO_RENAME))
     {
@@ -267,7 +267,7 @@ bool Cx_FileUtility::RenamePathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile)
     return true;
 }
 
-bool Cx_FileUtility::CopyPathFile(LPCWSTR pszOldFile, LPCWSTR pszNewFile)
+bool Cx_FileUtility::CopyPathFile(const wchar_t* pszOldFile, const wchar_t* pszNewFile)
 {
     if (IsPathFileExists(pszOldFile)
         && !CreateDirectory(pszNewFile, false))
@@ -298,10 +298,10 @@ HWND Cx_FileUtility::GetMsgBoxOwnerWnd()
     return m_hMsgBoxOwnerWnd;
 }
 
-std::wstring Cx_FileUtility::RelToAbs(LPCWSTR pszRel, bool bRelIsFile, 
-                                      LPCWSTR pszBase, bool bBaseIsFile)
+std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile, 
+                                      const wchar_t* pszBase, bool bBaseIsFile)
 {
-    WCHAR szPath[MAX_PATH * 2] = { 0 };
+    wchar_t szPath[MAX_PATH * 2] = { 0 };
     
     if (pszRel != NULL)
     {
@@ -350,11 +350,11 @@ std::wstring Cx_FileUtility::RelToAbs(LPCWSTR pszRel, bool bRelIsFile,
     return szPath;
 }
 
-std::wstring Cx_FileUtility::AbsToRel(LPCWSTR pszAbs, bool bAbsIsFile, 
-                                      LPCWSTR pszBase, bool bBaseIsFile)
+std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile, 
+                                      const wchar_t* pszBase, bool bBaseIsFile)
 {
-    WCHAR szPath[MAX_PATH] = { 0 };
-    WCHAR szBasePath[MAX_PATH] = { 0 };
+    wchar_t szPath[MAX_PATH] = { 0 };
+    wchar_t szBasePath[MAX_PATH] = { 0 };
     
     if (pszAbs != NULL)
     {
@@ -385,10 +385,10 @@ std::wstring Cx_FileUtility::AbsToRel(LPCWSTR pszAbs, bool bAbsIsFile,
     return szPath;
 }
 
-std::wstring Cx_FileUtility::ChangeFileNameSuffix(LPCWSTR pszFileName, 
-                                                  LPCWSTR pszSuffix)
+std::wstring Cx_FileUtility::ChangeFileNameSuffix(const wchar_t* pszFileName, 
+                                                  const wchar_t* pszSuffix)
 {
-    WCHAR szNewFile[MAX_PATH] = { 0 };
+    wchar_t szNewFile[MAX_PATH] = { 0 };
 
     if (pszFileName != NULL && pszSuffix != NULL)
     {
@@ -400,13 +400,13 @@ std::wstring Cx_FileUtility::ChangeFileNameSuffix(LPCWSTR pszFileName,
     return szNewFile;
 }
 
-std::wstring Cx_FileUtility::GetFileTitle(LPCWSTR pszFileName)
+std::wstring Cx_FileUtility::GetFileTitle(const wchar_t* pszFileName)
 {
-    WCHAR szNewFile[MAX_PATH] = { 0 };
+    wchar_t szNewFile[MAX_PATH] = { 0 };
 
     if (pszFileName != NULL)
     {
-        LPWSTR pszName = PathFindFileNameW(pszFileName);
+        wchar_t* pszName = PathFindFileNameW(pszFileName);
         if (pszName != NULL)
         {
             lstrcpynW(szNewFile, pszName, MAX_PATH);
@@ -418,26 +418,26 @@ std::wstring Cx_FileUtility::GetFileTitle(LPCWSTR pszFileName)
     return szNewFile;
 }
 
-std::wstring Cx_FileUtility::GetFileName(LPCWSTR pszFileName)
+std::wstring Cx_FileUtility::GetFileName(const wchar_t* pszFileName)
 {
     if (NULL == pszFileName || 0 == pszFileName[0])
         return L"";
 
-    WCHAR szTemp[MAX_PATH];
+    wchar_t szTemp[MAX_PATH];
     lstrcpynW(szTemp, PathFindFileNameW(pszFileName), MAX_PATH);
     PathRemoveBackslashW(szTemp);
 
     return szTemp;
 }
 
-std::wstring Cx_FileUtility::GetExtension(LPCWSTR pszFileName)
+std::wstring Cx_FileUtility::GetExtension(const wchar_t* pszFileName)
 {
     return pszFileName ? PathFindExtensionW(pszFileName) : L"";
 }
 
-std::wstring Cx_FileUtility::GetPathOfFile(LPCWSTR pszFileName)
+std::wstring Cx_FileUtility::GetPathOfFile(const wchar_t* pszFileName)
 {
-    WCHAR szPath[MAX_PATH] = { 0 };
+    wchar_t szPath[MAX_PATH] = { 0 };
     
     if (pszFileName != NULL)
     {
@@ -456,7 +456,7 @@ std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath,
                                           const std::wstring& wstrFileTitle, 
                                           const std::wstring& wstrExtName)
 {
-    WCHAR szFileName[MAX_PATH * 2] = { 0 };
+    wchar_t szFileName[MAX_PATH * 2] = { 0 };
 
     if (wstrPath.empty() || wstrFileTitle.empty())
         return szFileName;
@@ -489,7 +489,7 @@ std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath,
                                             const std::wstring& wstrExtName, 
                                             bool bReturnRel)
 {
-    WCHAR szFileName[MAX_PATH] = { 0 };
+    wchar_t szFileName[MAX_PATH] = { 0 };
 
     for (int i = 0; i < 9999; i++)
     {
@@ -523,7 +523,7 @@ std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath,
 
 std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
 {
-    WCHAR szTime[20] = { 0 };
+    wchar_t szTime[20] = { 0 };
 
     HANDLE hFile = ::CreateFileW(wstrFileName.c_str(), 
         GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
@@ -568,7 +568,7 @@ ULONG Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
     return nFileSize;
 }
 
-int Cx_FileUtility::CompareFileName(LPCWSTR pszFileName1, LPCWSTR pszFileName2, 
+int Cx_FileUtility::CompareFileName(const wchar_t* pszFileName1, const wchar_t* pszFileName2, 
                                     long* pSamePartCount)
 {
     int nRet = 0;
@@ -585,8 +585,8 @@ int Cx_FileUtility::CompareFileName(LPCWSTR pszFileName1, LPCWSTR pszFileName2,
     }
 
     long nSamePartCount = 0;
-    LPCWSTR pszFile1 = pszFileName1;
-    LPCWSTR pszFile2 = pszFileName2;
+    const wchar_t* pszFile1 = pszFileName1;
+    const wchar_t* pszFile2 = pszFileName2;
 
     if ('.' == pszFile1[0] && IsPathSlash(pszFile1[1]))
         pszFile1 += 2;
@@ -641,7 +641,7 @@ bool Cx_FileUtility::GetFileVersion(
         const std::wstring& filename)
 {
     DWORD handle = 0;
-    WCHAR *block = NULL;
+    wchar_t *block = NULL;
     bool ret = false;
 
     ver1 = 0;
@@ -649,10 +649,10 @@ bool Cx_FileUtility::GetFileVersion(
     ver3 = 0;
     ver4 = 0;
 
-    UINT size = ::GetFileVersionInfoSizeW((LPWSTR)filename.c_str(), &handle);
-    if (size > 0 && NULL != (block = new WCHAR[size]))
+    UINT size = ::GetFileVersionInfoSizeW((wchar_t*)filename.c_str(), &handle);
+    if (size > 0 && NULL != (block = new wchar_t[size]))
     {
-        ::GetFileVersionInfoW((LPWSTR)filename.c_str(), handle, size, block);
+        ::GetFileVersionInfoW((wchar_t*)filename.c_str(), handle, size, block);
 
         VS_FIXEDFILEINFO* pFixedInfo = NULL;
         if (::VerQueryValueW(block, L"\\", (LPVOID*)&pFixedInfo, &size))
@@ -674,19 +674,19 @@ bool Cx_FileUtility::GetFileDescription(
         std::wstring& description, const std::wstring& filename)
 {
     DWORD handle = 0;
-    WCHAR *block = NULL;
+    wchar_t *block = NULL;
     bool ret = false;
 
     description.resize(0);
 
-    UINT size = ::GetFileVersionInfoSizeW((LPWSTR)filename.c_str(), &handle);
-    if (size > 0 && NULL != (block = new WCHAR[size]))
+    UINT size = ::GetFileVersionInfoSizeW((wchar_t*)filename.c_str(), &handle);
+    if (size > 0 && NULL != (block = new wchar_t[size]))
     {
-        ::GetFileVersionInfoW((LPWSTR)filename.c_str(), handle, size, block);
+        ::GetFileVersionInfoW((wchar_t*)filename.c_str(), handle, size, block);
 
         LPWORD lpTranslate = NULL;
-        WCHAR szSubBlock[41] = { 0 };
-        LPWSTR szStr;
+        wchar_t szSubBlock[41] = { 0 };
+        wchar_t* szStr;
 
         if (::VerQueryValueW(block, L"\\VarFileInfo\\Translation",
             (LPVOID*)&lpTranslate, &size))

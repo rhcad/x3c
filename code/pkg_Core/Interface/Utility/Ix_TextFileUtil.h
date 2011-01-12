@@ -118,7 +118,7 @@ interface Ix_TextFileUtil
         \see ReadTextFile
     */
     virtual std::wstring GetLine(const std::wstring& text, 
-        long line, LPCWSTR* nextLine = NULL) = 0;
+        long line, const wchar_t** nextLine = NULL) = 0;
 
     //! 返回是否为空白文字行（由半角空格、全角空格、换行符组成）
     virtual bool IsSpaceLine(const std::wstring& text) = 0;
@@ -131,7 +131,9 @@ interface Ix_TextFileUtil
 inline Cx_Interface<Ix_TextFileUtil> TextFileUtil()
 {
     Cx_Interface<Ix_TextFileUtil> pIFUtility(CLSID_TextUtil);
+#ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
+#endif
     return pIFUtility;
 }
 
