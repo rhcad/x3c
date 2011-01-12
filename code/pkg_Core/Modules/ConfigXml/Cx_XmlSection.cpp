@@ -20,7 +20,7 @@
 #include <Ix_ConfigData.h>
 #include <math.h>
 
-static const const wchar_t* EMPTYDEFSTR = L"~&*^0@!";
+static const LPCWSTR EMPTYDEFSTR = L"~&*^0@!";
 
 Cx_XmlSection::Cx_XmlSection()
     : m_pData(NULL), m_bSubElement(false)

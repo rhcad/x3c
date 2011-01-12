@@ -149,7 +149,8 @@ CXTPDOMElementPtr ConfigXmlImpl::GetParentNode(CXTPDOMElementPtr xmlParent,
                                                     std::wstring& strSection)
 {
     const wchar_t* pStart = strSection.c_str();
-    const wchar_t* pEnd, pEnd2;
+    const wchar_t* pEnd;
+    const wchar_t* pEnd2;
     std::wstring strTemp, strName;
 
     for ( ; pStart != NULL && *pStart != 0; pStart = pEnd)
