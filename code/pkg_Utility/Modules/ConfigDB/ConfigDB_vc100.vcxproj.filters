@@ -42,7 +42,7 @@
     <ClInclude Include="DbFunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Interface\Ix_ConfigDBFactory.h">
+    <ClInclude Include="..\..\Interface\Database\Ix_ConfigDBFactory.h">
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="ClsID_Internal.h">

@@ -18,7 +18,7 @@
 
 #include <Xml/Ix_ConfigTransaction.h>
 #include <Xml/ConfigIOSection.h>
-#include <Ix_ConfigDBFactory.h>
+#include <Database/Ix_ConfigDBFactory.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc;..\..\..\pkg_Core\Interface\Utility;..\..\..\pkg_Core\Interface\Xml"
+				AdditionalIncludeDirectories="..\..\Interface\Database;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc;..\..\..\pkg_Core\Interface\Utility;..\..\..\pkg_Core\Interface\Xml"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_AFXEXT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -121,7 +121,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc;..\..\..\pkg_Core\Interface\Utility;..\..\..\pkg_Core\Interface\Xml"
+				AdditionalIncludeDirectories="..\..\Interface\Database;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc;..\..\..\pkg_Core\Interface\Utility;..\..\..\pkg_Core\Interface\Xml"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_AFXEXT"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -295,7 +295,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Interface\Ix_ConfigDBFactory.h"
+				RelativePath="..\..\Interface\Database\Ix_ConfigDBFactory.h"
 				>
 			</File>
 			<File

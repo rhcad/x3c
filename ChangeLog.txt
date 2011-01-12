@@ -5,11 +5,13 @@ X3 C++ PluginFramework
     * Rename text files(add .txt).
     * Replace tab char to space char in *.h and *.cpp.
     * Replace LPWSTR to wchar*
+    * Move FileUtility/TextUtility/LogWriter/ to pkg_Core, Move Ix_ConfigDBFactory.h to Interface\Database\.
     
     * ConfigDB v1.0.0.2:
     * pkg_Utility\Modules\ConfigDB\Cx_ConfigFactory.cpp: Remove Ix_FileUtility.
         Open access connection readonly if file is readonly.
-    * pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.h: 
+    * pkg_Utility\Interface\Database\Ix_ConfigDBFactory.h:
+    * pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.h:
     * pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.cpp: Add readonly param in OpenConnection()
     
 2011-01-09, Zhang Yun Gui <rhcad@hotmail.com>

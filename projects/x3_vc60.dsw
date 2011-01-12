@@ -51,7 +51,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "FileUtility"=..\code\pkg_Utility\Modules\FileUtility\FileUtility.dsp - Package Owner=<4>
+Project: "FileUtility"=..\code\pkg_Core\Modules\FileUtility\FileUtility.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -75,7 +75,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "LogWriter"=..\code\pkg_Utility\Modules\LogWriter\LogWriter.dsp - Package Owner=<4>
+Project: "LogWriter"=..\code\pkg_Core\Modules\LogWriter\LogWriter.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -159,7 +159,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TextUtility"=..\code\pkg_Utility\Modules\TextUtility\TextUtility.dsp - Package Owner=<4>
+Project: "TextUtility"=..\code\pkg_Core\Modules\TextUtility\TextUtility.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

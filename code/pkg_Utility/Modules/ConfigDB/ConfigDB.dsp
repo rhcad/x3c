@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\..\obj\vc60\Release\ConfigDB"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\Interface" /I "..\..\..\pkg_Core\Interface" /I "..\..\..\pkg_Core\Interface\Module" /I "..\..\..\pkg_Core\Interface\UtilFunc" /I "..\..\..\pkg_Core\Interface\Utility" /I "..\..\..\pkg_Core\Interface\Xml" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXEXT" /D "UNICODE" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\Interface\Database" /I "..\..\..\pkg_Core\Interface" /I "..\..\..\pkg_Core\Interface\Module" /I "..\..\..\pkg_Core\Interface\UtilFunc" /I "..\..\..\pkg_Core\Interface\Utility" /I "..\..\..\pkg_Core\Interface\Xml" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXEXT" /D "UNICODE" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\..\obj\vc60\Debug\ConfigDB"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\Interface" /I "..\..\..\pkg_Core\Interface" /I "..\..\..\pkg_Core\Interface\Module" /I "..\..\..\pkg_Core\Interface\UtilFunc" /I "..\..\..\pkg_Core\Interface\Utility" /I "..\..\..\pkg_Core\Interface\Xml" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXEXT" /D "UNICODE" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\Interface\Database" /I "..\..\..\pkg_Core\Interface" /I "..\..\..\pkg_Core\Interface\Module" /I "..\..\..\pkg_Core\Interface\UtilFunc" /I "..\..\..\pkg_Core\Interface\Utility" /I "..\..\..\pkg_Core\Interface\Xml" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXEXT" /D "UNICODE" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
@@ -82,7 +82,7 @@ SOURCE=.\ClsID_Internal.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\Interface\Ix_ConfigDBFactory.h
+SOURCE=..\..\Interface\Database\Ix_ConfigDBFactory.h
 # End Source File
 # Begin Source File
 
