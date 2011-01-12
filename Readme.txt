@@ -17,3 +17,7 @@ projects: VC++ workspace files.
 code: source code of plugins.
 doc: development documents and doxygen files.
 tools: some useful tools for development.
+
+Authors:
+Zhang Yun Gui <rhcad@hotmail.com>
+Huang Ye <think.hy@gmail.com>
