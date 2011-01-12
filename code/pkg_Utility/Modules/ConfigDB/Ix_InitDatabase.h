@@ -12,8 +12,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Changes:
+// 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
+//
 
-#pragma once
+#ifndef _X3_CONFIGDB_INITDATABASE_INTERFACE_H
+#define _X3_CONFIGDB_INITDATABASE_INTERFACE_H
 
 interface Ix_SQLParser;
 
@@ -22,5 +27,7 @@ interface Ix_InitDatabase
 {
     //! 指定SQL连接串打开数据库
     virtual bool OpenConnection(const std::wstring& wstrConnection, 
-        Ix_SQLParser* pSQLParser) = 0;
+        Ix_SQLParser* pSQLParser, bool readonly = false) = 0;
 };
+
+#endif // _X3_CONFIGDB_INITDATABASE_INTERFACE_H

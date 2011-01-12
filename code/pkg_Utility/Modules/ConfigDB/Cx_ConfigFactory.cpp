@@ -12,11 +12,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Changes:
+// 2010-01-12, Zhang Yun Gui: Remove Ix_FileUtility.
+//      Open access connection readonly if file is readonly.
+//
 
 #include "StdAfx.h"
 #include "Cx_ConfigFactory.h"
 #include "Cx_CfgDatabase.h"
-#include <Ix_FileUtility.h>
 #include "ClsID_Internal.h"
 #include "Ix_InitDatabase.h"
 #include "Cx_SQLParser.h"
@@ -33,17 +37,17 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
                                       const std::wstring& user, 
                                       const std::wstring& password)
 {
-    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    DWORD attr = GetFileAttributesW(filename.c_str());
+    bool readonly = (attr & FILE_ATTRIBUTE_READONLY) != 0;
 
-    if (pIFUtility && !pIFUtility->IsPathFileExists(filename.c_str()))
+    if (attr == (DWORD)-1)
     {
         LOG_ERROR2(LOGHEAD L"IDS_NO_FILE", filename);
         return Cx_Ptr();
     }
-    if (pIFUtility && !pIFUtility->VerifyFileCanWrite(filename.c_str()))
+    if (readonly)
     {
-        LOG_ERROR2(LOGHEAD L"IDS_FILE_READONLY", filename);
-        return Cx_Ptr();
+        LOG_INFO2(LOGHEAD L"IDS_FILE_READONLY", filename);
     }
 
     std::wostringstream conn;
@@ -73,8 +77,9 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
 
     Cx_Interface<Ix_InitDatabase> pIFDB(CLSID_CfgDatabase);
     ASSERT(pIFDB.IsNotNull());
+    Ix_SQLParser* pSQLParser = new SQLParser_Access();
 
-    return pIFDB->OpenConnection(conn.str(), new SQLParser_Access())
+    return pIFDB->OpenConnection(conn.str(), pSQLParser, readonly)
         ? Cx_Ptr(pIFDB) : Cx_Ptr();
 }
 
@@ -102,7 +107,8 @@ Cx_Ptr Cx_ConfigFactory::OpenSQLServerDB(const std::wstring& server,
 
     Cx_Interface<Ix_InitDatabase> pIFDB(CLSID_CfgDatabase);
     ASSERT(pIFDB.IsNotNull());
+    Ix_SQLParser* pSQLParser = new SQLParser_SQLServer();
 
-    return pIFDB->OpenConnection(conn.str(), new SQLParser_SQLServer())
+    return pIFDB->OpenConnection(conn.str(), pSQLParser)
         ? Cx_Ptr(pIFDB) : Cx_Ptr();
 }

@@ -6,6 +6,12 @@ X3 C++ PluginFramework
     * Replace tab char to space char in *.h and *.cpp.
     * Replace LPWSTR to wchar*
     
+    * ConfigDB v1.0.0.2:
+    * pkg_Utility\Modules\ConfigDB\Cx_ConfigFactory.cpp: Remove Ix_FileUtility.
+        Open access connection readonly if file is readonly.
+    * pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.h: 
+    * pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.cpp: Add readonly param in OpenConnection()
+    
 2011-01-09, Zhang Yun Gui <rhcad@hotmail.com>
 
     * ConfigXml v1.0.0.2:

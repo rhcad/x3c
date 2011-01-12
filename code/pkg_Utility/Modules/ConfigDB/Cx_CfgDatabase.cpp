@@ -12,6 +12,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Changes:
+// 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
+//
 
 #include "StdAfx.h"
 #include "Cx_CfgDatabase.h"
@@ -36,7 +40,8 @@ Cx_CfgDatabase::~Cx_CfgDatabase()
 }
 
 bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection, 
-                                    Ix_SQLParser* pSQLParser)
+                                    Ix_SQLParser* pSQLParser, 
+                                    bool readonly)
 {
     bool bRet = false;
     HRESULT hr;
@@ -54,6 +59,10 @@ bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,
             }
         }
 
+        if (readonly)
+        {
+            m_pCon->Mode = adModeRead;
+        }
         m_pCon->ConnectionTimeout = 5;
         m_pCon->ConnectionString = connection.c_str();
 

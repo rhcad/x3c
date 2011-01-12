@@ -12,6 +12,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Changes:
+// 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
+//
 
 /*! \file Cx_CfgDatabase.h
  *  \brief 定义数据库访问的实现类 Cx_CfgDatabase
@@ -77,7 +81,7 @@ protected:
 protected:
     // Ix_InitDatabase
     virtual bool OpenConnection(const std::wstring& connection, 
-        Ix_SQLParser* pSQLParser);
+        Ix_SQLParser* pSQLParser, bool readonly = false);
 
     // From Ix_ConfigTransaction
     virtual void BeginTransaction();
