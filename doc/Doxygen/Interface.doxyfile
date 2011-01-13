@@ -1382,7 +1382,8 @@ PREDEFINED             = _WINDOWS \
                          UNICODE \
                          interface=struct \
                          __declspec(dllimport)= \
-                         _STD_BEGIN=
+                         _STD_BEGIN= \
+                         XDEFINE_CLASSMAP_ENTRY=XDEFINE_CLASSMAP_ENTRY
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 
 # this tag can be used to specify a list of macro names that should be expanded. 

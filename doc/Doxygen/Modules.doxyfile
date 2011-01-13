@@ -626,7 +626,16 @@ RECURSIVE              = YES
 EXCLUDE                = ../../code/pkg_Core/Interface/Log/DebugR.cpp \
                          ../../code/pkg_Core/Interface/UtilFunc/ctrim.h \
                          ../../code/pkg_Core/Modules/ConfigXml/XmlUtil/XTPXMLHelpers.h \
-                         ../../code/pkg_Utility/Modules/LogWriter/log4cplus/
+                         ../../code/pkg_Core/Modules/LogWriter/log4cplus/ \
+                         ../../code/pkg_Core/Modules/ChangeManager/StdAfx.h \
+                         ../../code/pkg_Core/Modules/ConfigXml/StdAfx.h \
+                         ../../code/pkg_Core/Modules/FileUtility/StdAfx.h \
+                         ../../code/pkg_Core/Modules/LogManager/StdAfx.h \
+                         ../../code/pkg_Core/Modules/LogWriter/StdAfx.h \
+                         ../../code/pkg_Core/Modules/PluginManager/StdAfx.h \
+                         ../../code/pkg_Core/Modules/StringTable/StdAfx.h \
+                         ../../code/pkg_Core/Modules/TextUtility/StdAfx.h \
+                         ../../code/pkg_Utility/Modules/ConfigDB/StdAfx.h
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or 
 # directories that are symbolic links (a Unix filesystem feature) are excluded 

@@ -14,18 +14,18 @@
 // limitations under the License.
 
 /*! \file Ix_UIConfig.h
- *  \brief 定义界面配置数据读写接口 Ix_UIConfig
+ *  \brief Define UI config options interface: Ix_UIConfig
  *  \author Zhang Yun Gui, C++ Plugin Framework
  *  \date   2010.11.2
  */
-#ifndef X3_VIEW_IUICONFIG_H_
-#define X3_VIEW_IUICONFIG_H_
+#ifndef X3_APPUI_IUICONFIG_H_
+#define X3_APPUI_IUICONFIG_H_
 
 #include <ConfigIOSection.h>
 
 const XCLSID CLSID_UIConfig("4472ba6d-d833-40b9-899f-edc017ec9166");
 
-//! 界面配置数据读写接口
+//! UI config options interface
 /*!
     \interface Ix_UIConfig
     \ingroup _GROUP_APPUI_
@@ -33,14 +33,14 @@ const XCLSID CLSID_UIConfig("4472ba6d-d833-40b9-899f-edc017ec9166");
 */
 interface Ix_UIConfig
 {
-    //! 返回界面配置数据对象，非空
+    //! Return UI config data object, not null.
     virtual Ix_ConfigData* GetUIConfig() = 0;
 
-    //! 返回指定名称的界面配置节点
+    //! Return a config node object of the specified name.
     virtual CConfigIOSection GetUISection(const wchar_t* name) = 0;
 
-    //! 立即保持改变了的配置数据
+    //! Save UI config data if modified.
     virtual bool Save() = 0;
 };
 
-#endif // X3_VIEW_IUICONFIG_H_
+#endif // X3_APPUI_IUICONFIG_H_

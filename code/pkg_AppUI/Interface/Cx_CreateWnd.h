@@ -14,7 +14,7 @@
 // limitations under the License.
 
 /*! \file Cx_CreateWnd.h
- *  \brief 定义 Ix_CreateWnd 的模板实现类 Cx_CreateWnd
+ *  \brief Define template class (Cx_CreateWnd) to implement Ix_CreateWnd.
  *  \author Zhang Yun Gui, C++ Plugin Framework
  *  \date   2010.10.28
  */
@@ -25,11 +25,11 @@
 
 #include "Ix_CreateWnd.h"
 
-//! 对界面组件类进行注册的宏
+//! The macro to register window class in XBEGIN_DEFINE_MODULE() group.
 /*!
-    \ingroup _GROUP_VIEW_
-    \param clsid 组件类ID
-    \param cls 窗口类名，一般是从CWnd及其派生窗口类派生的
+    \ingroup _GROUP_APPUI_
+    \param clsid window class unique id.
+    \param cls window class deriving from CWnd or other window class.
     \see Cx_CreateWnd, XDEFINE_CLASSMAP_ENTRY
 */
 #if defined(XDEFINE_CLASSMAP_ENTRY) && !defined(XDEFINE_CLASSMAP_ENTRY_Wnd)
@@ -40,11 +40,13 @@
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<Cx_CreateWnd<cls> >::GetRefCountByOthers)), 
 #endif
 
-//! Ix_CreateWnd 的模板实现类
-/*! BASEWND 为窗口类，要实现下面两个函数: \n
-    BOOL CreateWnd(CWnd* pParentWnd, UINT nID); \n
+//! Template class to implement Ix_CreateWnd.
+/*! BASEWND is a window class which need to implement the following functions: 
+    \code
+    BOOL CreateWnd(CWnd* pParentWnd, UINT nID);
     void Refresh();
-    \ingroup _GROUP_VIEW_
+    \endcode
+    \ingroup _GROUP_APPUI_
     \see XDEFINE_CLASSMAP_ENTRY_Wnd
 */
 template <class BASEWND>
@@ -71,7 +73,7 @@ public:
         return m_pWnd->GetSafeHwnd();
     }
 
-    // BASEWND实现函数: BOOL CreateWnd(CWnd* pParentWnd, UINT nID)
+    // BASEWND class must has function: BOOL CreateWnd(CWnd* pParentWnd, UINT nID)
     virtual bool CreateWnd(HWND hwndParent, UINT nID)
     {
 #ifdef _USRDLL
@@ -102,7 +104,7 @@ public:
         return m_pWnd->OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
     }
 
-    // BASEWND实现函数: void Refresh()
+    // BASEWND class may has function: void Refresh()
     virtual void Refresh()
     {
 #ifdef _USRDLL
