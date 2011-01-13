@@ -4,6 +4,9 @@ X3 C++ PluginFramework
 
     * Move Ix_UIConfig.h to pkg_AppUI. Fix doxyfile files.
     
+    * ConfigXml v1.0.0.3: 
+    * pkg_Core\Modules\ConfigXml\Cx_XmlSection.cpp: fix default return value of Cx_XmlSection::Setxxx.
+    
 2011-01-12, Zhang Yun Gui <rhcad@hotmail.com>
 
     * Rename text files(add .txt).

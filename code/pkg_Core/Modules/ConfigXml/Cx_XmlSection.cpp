@@ -43,23 +43,23 @@ std::wstring Cx_XmlSection::GetText()
 
 bool Cx_XmlSection::SetText(const wchar_t* value, bool cdata)
 {
-    bool bRet = true;
+    bool changed = false;
 
     if (0 != wcscmp(value, CXmlUtil::GetText(m_xmlNode, EMPTYDEFSTR).c_str()))
     {
         m_pData->SetModified();
         if (cdata)
         {
-            bRet = CXmlUtil::SetTextCDATA(
+            changed = CXmlUtil::SetTextCDATA(
                 m_pData->m_xmlDoc, m_xmlNode, value);
         }
         else
         {
-            bRet = CXmlUtil::SetText(m_xmlNode, value);
+            changed = CXmlUtil::SetText(m_xmlNode, value);
         }
     }
 
-    return bRet;
+    return changed;
 }
 
 IUnknown* Cx_XmlSection::GetDOMElement(bool addRef)
@@ -119,24 +119,24 @@ std::wstring Cx_XmlSection::GetString(const wchar_t* name, const wchar_t* defVal
 
 bool Cx_XmlSection::SetString(const wchar_t* name, const wchar_t* value)
 {
-    bool bRet = true;
+    bool changed = false;
 
     if (0 != wcscmp(value, GetString(name, EMPTYDEFSTR).c_str()))
     {
         m_pData->SetModified();
         if (!m_bSubElement)
         {
-            bRet = !!CXmlUtil::SetAttribute(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttribute(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
         else
         {
-            bRet = !!CXmlUtil::SetField(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetField(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
     }
 
-    return bRet;
+    return changed;
 }
 
 int Cx_XmlSection::GetInt(const wchar_t* name, int defValue)
@@ -150,7 +150,7 @@ int Cx_XmlSection::GetInt(const wchar_t* name, int defValue)
 
 bool Cx_XmlSection::SetInt(const wchar_t* name, int value)
 {
-    bool bRet = true;
+    bool changed = false;
 
     if (GetString(name, EMPTYDEFSTR).compare(EMPTYDEFSTR) == 0
         || value != (int)GetInt(name))
@@ -158,17 +158,17 @@ bool Cx_XmlSection::SetInt(const wchar_t* name, int value)
         m_pData->SetModified();
         if (!m_bSubElement)
         {
-            bRet = !!CXmlUtil::SetAttributeInt(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttributeInt(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
         else
         {
-            bRet = !!CXmlUtil::SetFieldInt(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetFieldInt(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
     }
 
-    return bRet;
+    return changed;
 }
 
 long Cx_XmlSection::GetInt32(const wchar_t* name, long defValue)
@@ -223,24 +223,24 @@ bool Cx_XmlSection::GetBool(const wchar_t* name, BOOL defValue)
 
 bool Cx_XmlSection::SetBool(const wchar_t* name, BOOL value)
 {
-    bool bRet = true;
+    bool changed = false;
 
     if (value != (int)GetInt(name, 9))
     {
         m_pData->SetModified();
         if (!m_bSubElement)
         {
-            bRet = !!CXmlUtil::SetAttributeBool(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttributeBool(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
         else
         {
-            bRet = !!CXmlUtil::SetFieldBool(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetFieldBool(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
     }
 
-    return bRet;
+    return changed;
 }
 
 double Cx_XmlSection::GetDouble(const wchar_t* name, double defValue)
@@ -254,7 +254,7 @@ double Cx_XmlSection::GetDouble(const wchar_t* name, double defValue)
 
 bool Cx_XmlSection::SetDouble(const wchar_t* name, double value)
 {
-    bool bRet = true;
+    bool changed = false;
 
     if (!m_bSubElement)
     {
@@ -262,7 +262,7 @@ bool Cx_XmlSection::SetDouble(const wchar_t* name, double value)
             m_xmlNode, name, 1.2345e20)))
         {
             m_pData->SetModified();
-            bRet = !!CXmlUtil::SetAttributeFloat(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttributeFloat(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
     }
@@ -272,12 +272,12 @@ bool Cx_XmlSection::SetDouble(const wchar_t* name, double value)
             m_xmlNode, name, 1e20)))
         {
             m_pData->SetModified();
-            bRet = !!CXmlUtil::SetFieldFloat(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetFieldFloat(m_pData->m_xmlDoc, 
                 m_xmlNode, name, value);
         }
     }
 
-    return bRet;
+    return changed;
 }
 
 float Cx_XmlSection::GetFloat(const wchar_t* name, float defValue)
