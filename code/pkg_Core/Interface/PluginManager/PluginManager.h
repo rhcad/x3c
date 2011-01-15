@@ -48,6 +48,11 @@ public:
     }
 
     //! Load plugin manager.
+    /*!
+        \param subdir PluginManagerX3's path, absolute path or relative to instance.
+        \param instance used if subdir is a relative path.
+        \return true if plugin manager is loaded.
+    */
     bool LoadPluginManager(const wchar_t* subdir, HMODULE instance = NULL)
     {
         GetModuleFileNameW(instance, m_filename, MAX_PATH);
@@ -65,6 +70,11 @@ public:
     }
 
     //! Load plugin manager and core plugins.
+    /*!
+        \param subdir plugin path, absolute path or relative to instance.
+        \param instance used if subdir is a relative path.
+        \return true if any plugin is loaded.
+    */
     bool LoadCorePlugins(const wchar_t* subdir, HMODULE instance = NULL)
     {
         if (!LoadPluginManager(subdir, instance))

@@ -1,4 +1,5 @@
-数组的常用函数
+/*! \file vecptr.h
+ *  \brief 定义对象数组函数
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */

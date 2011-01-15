@@ -1,4 +1,4 @@
 <hr size="1"><address>
-X3插件框架（通用C++插件框架）, <a href="http://sourceforge.net/projects/x3c">http://sourceforge.net/projects/x3c</a></address>
+X3 C++ PluginFramework, Zhang Yun Gui, <a href="http://sourceforge.net/projects/x3c">http://sourceforge.net/projects/x3c</a></address>
 </body>
 </html>

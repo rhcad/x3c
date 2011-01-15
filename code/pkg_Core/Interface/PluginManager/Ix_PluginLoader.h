@@ -15,78 +15,78 @@
  */
 interface Ix_PluginLoader
 {
-    //! 加载指定DLL的某个子目录下的所有插件
+    //! Load all plugins in the module's path.
     /*!
-        \param instance 用于指定目录的模块句柄，为NULL则取EXE路径
-        \param path 相对目录名，末尾可以不带斜号，例如“Plugins”
-        \param ext 插件的后缀名，用于匹配搜索，不区分大小写，
-            点号前可以有其他字符，不带问号和星号，例如“.plugin”、“.plugin.dll”、“_core.dll”
-        \param recursive 为true时同时加载所有子目录的插件
-        \return 加载成功的插件个数
-        \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
+        \param instance used as relative base, null as exe module.
+        \param path plugin path, absolute path or relative to instance. eg: 'Plugins'.
+        \param ext suffix of plugin filename, ignorecase, no * or ?, allow chars before dot.
+            eg: '.plugin', '.plugin.dll', '_core.dll'.
+        \param recursive true: include all child folders. false: only one folder.
+        \return count of plugins loaded.
+        \note need to call InitializePlugins() after.
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
     virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
         const wchar_t* ext = L".plugin.dll", bool recursive = true) = 0;
 
-    //! 加载当前EXE的指定目录下的所有插件
+    //! Load all plugins in the application's path.
     /*!
-        \param path 目录名，相对目录或绝对路径，末尾可以不带斜号，例如“Plugins”
-        \param ext 插件的后缀名，用于匹配搜索，不区分大小写，
-            点号前可以有其他字符，不带问号和星号，例如“.plugin”、“.plugin.dll”、“_core.dll”
-        \param recursive 为true时同时加载所有子目录的插件
-        \return 加载成功的插件个数
-        \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
+        \param path plugin path, absolute path or relative to the application. eg: 'Plugins'.
+        \param ext suffix of plugin filename, ignorecase, no * or ?, allow chars before dot.
+            eg: '.plugin', '.plugin.dll', '_core.dll'.
+        \param recursive true: include all child folders. false: only one folder.
+        \return count of plugins loaded.
+        \note need to call InitializePlugins() after.
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
     virtual long LoadPlugins(const wchar_t* path, 
         const wchar_t* ext = L".plugin.dll", bool recursive = true) = 0;
 
-    //! 加载指定模块的同目录下的多个插件
+    //! Load the specified plugins in the specified path.
     /*!
-        \param path 相对目录名或空串，例如“Plugins”，空串表示同目录
-        \param files 由插件的相对文件名组成，用逗号或空白字符分隔，例如“1.dll, 2.dll”
-        \param instance 用于指定目录的模块句柄，一般是主模块，为NULL则取EXE路径
-        \return 加载成功的插件个数
-        \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
+        \param path relative path or empty, such as 'Plugins'.
+        \param files include filename of plugins, separated by spaces or comma, such as '1.dll, 2.dll'.
+        \param instance used as relative base.
+        \return count of plugins loaded.
+        \note need to call InitializePlugins() after.
         \see InitializePlugins, LoadPlugins
     */
     virtual long LoadPluginFiles(const wchar_t* path, const wchar_t* files, HMODULE instance = NULL) = 0;
 
-    //! 初始化所有新加载的插件
-    /*! 调用插件的 InitializePlugin 函数，不会重复初始化已有插件
-        \return 新初始化的插件的个数(成功调用 InitializePlugin 或其插件未实现该函数的)
+    //! Initialize all plugins after loaded.
+    /*! Auto skip the plugins which has initialized.
+        \return count of plugins which has initialized (or no InitializePlugin) this time.
     */
     virtual long InitializePlugins() = 0;
 
-    //! 注册一个插件
-    /*! 仅注册插件的类工厂函数，可用于静态链接的动态库插件或调用插件管理器的主模块
-        \param instance 要注册的插件的模块句柄
-        \return 是否注册成功
-        \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
+    //! Register a plugin (not load dll).
+    /*! It can used to static-link dll or main appliction module.
+        \param instance the module to register.
+        \return if register success.
+        \note need to call InitializePlugins() after.
         \see InitializePlugins
     */
     virtual bool RegisterPlugin(HMODULE instance) = 0;
 
-    //! 加载一个插件
-    /*! 使用LoadLibraryEx进行加载，同时注册插件(RegisterPlugin)
-        \param filename 插件的文件全名，或相对于EXE的相对文件名
-        \return 是否加载成功
-        \note 后续还需要调用 InitializePlugins() 以便执行新加载插件的初始化函数
+    //! Load a plugin.
+    /*! Use LoadLibraryEx() and RegisterPlugin() to load.
+        \param filename absolute file name or relative to the application.
+        \return if load success.
+        \note need to call InitializePlugins() after.
         \see InitializePlugins
     */
     virtual bool LoadPlugin(const wchar_t* filename) = 0;
 
-    //! 卸载指定名称的插件
+    //! Unload a plugin.
     /*!
-        \param name 插件文件名，没有路径，例如“MyData.plugin.dll”
-        \return 是否卸载成功
+        \param name plugin filename, such as 'MyData.plugin.dll'.
+        \return if unload success.
     */
     virtual bool UnloadPlugin(const wchar_t* name) = 0;
 
-    //! 卸载所有插件
-    /*! 不再需要插件时调用，一般在程序退出时调用
-        \return 本次已卸载的插件个数
+    //! Unload all plugins.
+    /*!
+        \return count of plugins unloaded.
     */
     virtual long UnloadPlugins() = 0;
 };
