@@ -1,17 +1,3 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 //
 // Changes:
 // 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
@@ -19,7 +5,7 @@
 
 /*! \file Cx_CfgDatabase.h
  *  \brief 定义数据库访问的实现类 Cx_CfgDatabase
- *  \author Zhang Yun Gui, C++ Plugin Framework
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.9.25
  */
 #ifndef _X3_CONFIGDB_CFGDATABASE_H

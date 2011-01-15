@@ -1,33 +1,18 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*! \file Ix_StringConvert.h
  *  \brief 定义文本转换实用操作的接口 Ix_StringConvert
- *  \author Zhang Yun Gui, C++ Plugin Framework
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.12.28
  */
 #ifndef X3_UTIL_ISTRINGCONVERT_H_
 #define X3_UTIL_ISTRINGCONVERT_H_
 
-#include <ClsID_TextUtil.h>
+#include "ClsID_TextUtil.h"
 
 //! 文本转换实用操作的接口
 /*!
     \interface Ix_StringConvert
     \ingroup _GROUP_UTILITY_
-    \see CLSID_TextUtil, StringConvert(), ConvStr.h
+    \see CLSID_TextUtil, StringConvert(), Ix_TextFileUtil, ConvStr.h
 */
 interface Ix_StringConvert
 {
@@ -114,6 +99,7 @@ interface Ix_StringConvert
 //! 得到文本转换操作对象
 /*!
     \ingroup _GROUP_UTILITY_
+    \see Ix_TextFileUtil
 */
 inline Cx_Interface<Ix_StringConvert> StringConvert()
 {

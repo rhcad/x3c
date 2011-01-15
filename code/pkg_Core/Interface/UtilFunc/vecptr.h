@@ -1,6 +1,5 @@
-/*! \file vecptr.h
- *  \brief 包含STL指针数组的常用函数
- *  \author Zhang Yun Gui, C++ Plugin Framework
+数组的常用函数
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef UTILFUNC_VECPTR_H_

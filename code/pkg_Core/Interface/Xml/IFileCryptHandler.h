@@ -1,6 +1,5 @@
-/*! \file IFileCryptHandler.h
- *  \brief 定义文件内容加解密的接口 IFileCryptHandler
- *  \author Zhang Yun Gui, C++ Plugin Framework
+ief 定义文件内容加解密的接口 IFileCryptHandler
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef X3_IFILECRYPTHANDLER_H_

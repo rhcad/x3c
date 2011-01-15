@@ -4,6 +4,12 @@ X3 C++ PluginFramework
 
     * Remove cppunit 1.12.1 include files.
     * Replace StrCpyNW to lstrcpynW (because for VC6 shell32.dll no StrCpyNW entry point).
+    * Simplify license note in *.h and *.cpp.
+    
+    * pkg_Core\Interface\PluginManager\PluginManager.h: add TextUtility.plugin.dll in LoadCorePlugins().
+    
+    * TextUtility v1.0.0.2:
+    * pkg_Core\Modules\TextUtility\Cx_TextUtil.cpp: IsSpaceChar() support '\r' and '\n'.
 
 2011-01-13, Zhang Yun Gui <rhcad@hotmail.com>
 
