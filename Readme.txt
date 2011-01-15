@@ -10,8 +10,7 @@ License: Apache License V2.0
 Bug reports are welcome.  Please use the SourceForge bug tracking
 system at http://sourceforge.net/projects/x3c/develop.
 
-Email to the current maintainers may be sent to
-<ooyg@users.sourceforge.net>.
+Email to the current maintainers may be sent to <rhcad@hotmail.com>.
 
 projects: VC++ workspace files.
 code: source code of plugins.

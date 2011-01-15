@@ -1,5 +1,9 @@
 X3 C++ PluginFramework
 
+2011-01-15, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * Remove cppunit 1.12.1 include files.
+
 2011-01-13, Zhang Yun Gui <rhcad@hotmail.com>
 
     * Move Ix_UIConfig.h to pkg_AppUI. Fix doxyfile files.
