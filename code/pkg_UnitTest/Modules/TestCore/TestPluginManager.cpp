@@ -161,7 +161,7 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
     long nCount = 0;
     long nExtLen = lstrlenW(ext);
     
-    StrCpyNW(szFileName, path, MAX_PATH);
+    lstrcpynW(szFileName, path, MAX_PATH);
     PathAppendW(szFileName, L"*.*");
     
     HANDLE hFind = ::FindFirstFileW(szFileName, &fd);
@@ -173,7 +173,7 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
         {
             if (fd.cFileName[0] != '.' && recursive)
             {
-                StrCpyNW(szFileName, path, MAX_PATH);
+                lstrcpynW(szFileName, path, MAX_PATH);
                 PathAppendW(szFileName, fd.cFileName);
                 arrSubPath.push_back(szFileName);
             }
@@ -183,7 +183,7 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
             long nFLen = lstrlenW(fd.cFileName);
             if (StrCmpIW(&fd.cFileName[max(0, nFLen - nExtLen)], ext) == 0)
             {
-                StrCpyNW(szFileName, path, MAX_PATH);
+                lstrcpynW(szFileName, path, MAX_PATH);
                 PathAppendW(szFileName, fd.cFileName);
                 if (lstrlen(szFileName) > 0)
                 {

@@ -317,7 +317,7 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
                 GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
             }
 
-            StrCpyNW(StrChrW(szPath, ':') + 1, pszRel, MAX_PATH);
+            lstrcpynW(StrChrW(szPath, ':') + 1, pszRel, MAX_PATH);
         }
         else if (PathIsRelativeW(pszRel))
         {

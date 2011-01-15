@@ -73,11 +73,11 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool 
     }
     else
     {
-        StrCpyNW(rootpath, path, MAX_PATH);
+        lstrcpynW(rootpath, path, MAX_PATH);
     }
 
     ReplaceSlashes(rootpath);
-    StrCpyNW(filename, rootpath, MAX_PATH);
+    lstrcpynW(filename, rootpath, MAX_PATH);
     PathAppendW(filename, L"*.*");
     
     HANDLE hFind = ::FindFirstFileW(filename, &fd);
@@ -89,7 +89,7 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool 
         {
             if (fd.cFileName[0] != '.' && recursive)
             {
-                StrCpyNW(filename, rootpath, MAX_PATH);
+                lstrcpynW(filename, rootpath, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);
                 subpaths.push_back(filename);
             }
@@ -100,7 +100,7 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool 
 
             if (StrCmpIW(&fd.cFileName[max(0, len - extlen)], ext) == 0)
             {
-                StrCpyNW(filename, rootpath, MAX_PATH);
+                lstrcpynW(filename, rootpath, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);
                 if (LoadPlugin(filename))
                 {
@@ -130,7 +130,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path, const wchar_t* files,
     GetModuleFileNameW(instance, apppath, MAX_PATH);
     PathRemoveFileSpecW(apppath);
 
-    StrCpyNW(filename, apppath, MAX_PATH);
+    lstrcpynW(filename, apppath, MAX_PATH);
     PathAppendW(filename, path);
     PathAddBackslashW(filename);
     

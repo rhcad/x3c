@@ -76,7 +76,7 @@ inline long ScanFiles(IScanFilesCallback* back,
     wchar_t filename[MAX_PATH];
     long count = 0;
     
-    StrCpyNW(filename, path, MAX_PATH);
+    lstrcpynW(filename, path, MAX_PATH);
     PathAppendW(filename, L"*.*");
     
     HANDLE hfind = ::FindFirstFileW(filename, &fd);
@@ -95,7 +95,7 @@ inline long ScanFiles(IScanFilesCallback* back,
         {
             if (fd.cFileName[0] != '.')
             {
-                StrCpyNW(filename, path, MAX_PATH);
+                lstrcpynW(filename, path, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);
                 PathAddBackslashW(filename);
 
@@ -109,7 +109,7 @@ inline long ScanFiles(IScanFilesCallback* back,
         }
         else
         {
-            StrCpyNW(filename, path, MAX_PATH);
+            lstrcpynW(filename, path, MAX_PATH);
             PathAppendW(filename, fd.cFileName);
 
             count++;

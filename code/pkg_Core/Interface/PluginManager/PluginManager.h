@@ -126,7 +126,7 @@ public:
 
 private:
     HMODULE     m_dll;
-    wchar_t       m_filename[MAX_PATH];
+    wchar_t     m_filename[MAX_PATH];
 };
 
 #endif // X3_MANAGER_PLUGINMANAGER_H_
