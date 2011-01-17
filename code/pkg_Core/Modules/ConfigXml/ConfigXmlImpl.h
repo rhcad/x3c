@@ -39,8 +39,14 @@ struct ConfigXmlImpl
 
     ~ConfigXmlImpl()
     {
-        m_xmlRoot.Release();
-        m_xmlDoc.Release();
+        if (m_xmlRoot)
+        {
+            m_xmlRoot.Release();
+        }
+        if (m_xmlDoc)
+        {
+            m_xmlDoc.Release();
+        }
         if (m_bInitCom)
         {
             CoUninitialize();

@@ -1,5 +1,9 @@
 X3 C++ PluginFramework
 
+2011-01-17, Zhang Yun Gui <rhcad@hotmail.com>
+
+    * pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h: Free XML objects need checking zero or not.
+    
 2011-01-15, Zhang Yun Gui <rhcad@hotmail.com>
 
     * Remove cppunit 1.12.1 include files.
