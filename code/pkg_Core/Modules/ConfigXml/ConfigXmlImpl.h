@@ -1,5 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
+// Changes:
+// 2011-01-18, Zhang Yun Gui: Delay call CoUninitialize until plugin is unloading.
 
 #ifndef _X3_CONFIGXML_CONFIGXMLIMPL_H
 #define _X3_CONFIGXML_CONFIGXMLIMPL_H
@@ -24,7 +26,7 @@ struct ConfigXmlImpl
     CXTPDOMElementPtr   m_xmlRoot;
     IFileCryptHandler*  m_pCryptHandler;
     Ix_ConfigData*      m_pThis;
-    bool                m_bInitCom;
+    static int          c_nInitCom;
 
     ConfigXmlImpl(Ix_ConfigData* pThis) : m_pThis(pThis)
     {
@@ -34,23 +36,15 @@ struct ConfigXmlImpl
         m_bNeedLoad = true;
         m_strEncoding = L"UTF-8";
         m_pCryptHandler = NULL;
-        m_bInitCom = SUCCEEDED(CoInitializeEx(NULL, COINIT_MULTITHREADED));
+        if (0 == c_nInitCom)
+        {
+            c_nInitCom = SUCCEEDED(CoInitializeEx(NULL, COINIT_MULTITHREADED))
+                ? 1 : -1;
+        }
     }
 
     ~ConfigXmlImpl()
     {
-        if (m_xmlRoot)
-        {
-            m_xmlRoot.Release();
-        }
-        if (m_xmlDoc)
-        {
-            m_xmlDoc.Release();
-        }
-        if (m_bInitCom)
-        {
-            CoUninitialize();
-        }
     }
 
     CXTPDOMElementPtr GetRoot()

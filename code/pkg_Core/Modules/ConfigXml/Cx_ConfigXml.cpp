@@ -1,5 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
+// Changes:
+// 2011-01-18, Zhang Yun Gui: Delay call CoUninitialize until plugin is unloading.
 
 #include "StdAfx.h"
 #include "Cx_ConfigXml.h"
@@ -60,6 +62,17 @@ public:
         return false;
     }
 };
+
+int ConfigXmlImpl::c_nInitCom = 0;
+
+extern "C" __declspec(dllexport) void UninitializePlugin()
+{
+    if (1 == ConfigXmlImpl::c_nInitCom)
+    {
+        CoUninitialize();
+        ConfigXmlImpl::c_nInitCom = 0;
+    }
+}
 
 bool ConfigXmlImpl::Reload()
 {
