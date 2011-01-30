@@ -1,5 +1,5 @@
 /*! \file Ix_LogManager.h
- *  \brief 定义日志管理器的接口 Ix_LogManager
+ *  \brief Define interface of logging output observer manager: Ix_LogManager
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -8,86 +8,84 @@
 
 #include "Ix_Object.h"
 
-//! 日志类型
+//! Logging type.
 enum kLogType
 {
-    kLogType_Debug,     //!< 调试信息
-    kLogType_Info,      //!< 普通信息
-    kLogType_Warning,   //!< 警告信息
-    kLogType_Error,     //!< 错误信息
-    kLogType_Fatal      //!< 严重错误
+    kLogType_Debug,     //!< debug info
+    kLogType_Info,      //!< infomation
+    kLogType_Warning,   //!< warning info.
+    kLogType_Error,     //!< error info.
+    kLogType_Fatal      //!< fatal error info.
 };
 
 interface ILogObserver;
 
 const XCLSID CLSID_LogManager("bbf48a97-9aef-4368-9dc0-2d2937c326ec");
 
-//! 日志管理器接口
-/*! 该接口供 RegisterLogObserver, CAutoLogGroup, LOG_WARNING 等使用。
+//! interface of logging output observer manager.
+/*! Used by RegisterLogObserver, CAutoLogGroup and LOG_WARNING.
     \interface Ix_LogManager
     \ingroup _GROUP_PLUGIN_LOG_
     \see CLSID_LogManager, Ix_StringTable
+    \see RegisterLogObserver, UnRegisterObserver
 */
 interface Ix_LogManager
 {
-    //! 注册日志输出观察者
-    /*!
-        \param observer 要注册的观察者
-        \return 是否注册成功
-        \see RegisterLogObserver, UnRegisterObserver
-    */
+    //! Add a logging output observer.
     virtual bool RegisterObserver(ILogObserver* observer) = 0;
 
-    //! 注销日志输出观察者
-    /*!
-        \param observer 要注销的观察者
-        \see UnRegisterLogObserver, RegisterObserver
-    */
+    //! Remove a logging output observer.
     virtual void UnRegisterObserver(ILogObserver* observer) = 0;
 
-    //! 开始新的一组日志
+    //! Beginning a new logging group.
     /*!
-        \param msg 日志组的文字，如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
-        \param extra 附加的上下文信息
-        \return 是否执行成功
+        \param msg group message text. 
+            if the first char is '@' and leading as 'Module:StrID' format 
+            then the manager will translate into localization text using Ix_StringTable.
+        \param extra additional context info.
+        \return true if successful.
         \see CAutoLogGroup, PopGroup
     */
     virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra) = 0;
 
-    //! 结束一组日志
+    //! Ending a logging group.
     /*!
-        \return 是否执行成功
+        \return true if successful.
         \see CAutoLogGroup, PushGroup
     */
     virtual bool PopGroup() = 0;
 
-    //! 输出日志信息
+    //! Output a logging info.(UNICODE string)
     /*!
-        \param type 日志类型
-        \param msg 信息文字，如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
-        \param extra 附加的可选文字，用于输出附加的上下文信息
-        \param file 源代码文件名, __FILE__
-        \param line 源代码行号, __LINE__
-        \return 是否执行成功
+        \param type logging type.
+        \param msg logging text.
+            if the first char is '@' and leading as 'Module:StrID' format 
+            then the manager will translate into localization text using Ix_StringTable.
+        \param extra additional context info.
+        \param file source file name, __FILE__
+        \param line code line, __LINE__
+        \return true if successful.
         \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
     */
     virtual bool WriteLog(kLogType type, const wchar_t* msg, 
         const wchar_t* extra, LPCSTR file, long line) = 0;
 
-    //! 输出日志信息(ANSI串)
+    //! Output a logging info.(ANSI string)
     /*!
-        \param type 日志类型
-        \param msg 信息文字，如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
-        \param extra 附加的可选文字，用于输出附加的上下文信息
-        \param file 源代码文件名, __FILE__
-        \param line 源代码行号, __LINE__
-        \return 是否执行成功
+        \param type logging type.
+        \param msg logging text.
+            if the first char is '@' and leading as 'Module:StrID' format 
+            then the manager will translate into localization text using Ix_StringTable.
+        \param extra additional context info.
+        \param file source file name, __FILE__
+        \param line code line, __LINE__
+        \return true if successful.
         \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
     */
     virtual bool WriteLog(kLogType type, LPCSTR msg, 
         LPCSTR extra, LPCSTR file, long line) = 0;
 
-    //! 显示断言错误信息，供 XCrtDbgReport() 调用
+    //! Show assert info, used by XCrtDbgReport.
     virtual int CrtDbgReport(LPCSTR msg, LPCSTR file, long line) = 0;
 };
 

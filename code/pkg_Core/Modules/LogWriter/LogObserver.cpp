@@ -15,10 +15,10 @@
 #include <log4cplus/helpers/stringhelper.h>
 
 CLogObserver::CLogObserver()
-    : m_bInited(false), m_nGroupLevel(0)
+    : m_inited(false), m_level(0)
 {
 #if _MSC_VER < 1600
-    // 确保log4cplus能保存中文字符，否则 _Wcrtomb 失败
+    // assure log4cplus can save chinese text, avoid _Wcrtomb failing.
     std::locale::global(std::locale(""));
 #endif
 
@@ -29,12 +29,16 @@ CLogObserver::CLogObserver()
 
 CLogObserver::~CLogObserver()
 {
-    if (m_bInited)
+    if (m_inited)
+    {
         Logger::shutdown();
+    }
     
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
     if (pIFManager.IsNotNull())
+    {
         pIFManager->UnRegisterObserver(this);
+    }
 }
 
 Logger CLogObserver::GetLogger()
@@ -45,60 +49,60 @@ Logger CLogObserver::GetLogger()
 
 void CLogObserver::InitLogFile()
 {
-    if (!m_bInited)
+    if (!m_inited)
     {
-        m_bInited = true;
+        m_inited = true;
 
         MakerInitVars();
 
         Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
-        if (pIFUtility && !pIFUtility->CreateDirectory(m_wstrPath.c_str(), true))
+        if (pIFUtility && !pIFUtility->CreateDirectory(m_path.c_str(), true))
         {
-            m_wstrPath = MakeTempFileName(L"Log", false);
-            pIFUtility->CreateDirectory(m_wstrPath.c_str(), true);
+            m_path = MakeTempFileName(L"Log", false);
+            pIFUtility->CreateDirectory(m_path.c_str(), true);
         }
 
-        wchar_t szPropFile[MAX_PATH] = {0};
-        lstrcpynW(szPropFile, m_wstrPath.c_str(), MAX_PATH);
-        PathAppendW(szPropFile, m_wstrAppName.c_str());
-        StrCatW(szPropFile, L".properties");
+        wchar_t propfile[MAX_PATH] = {0};
+        lstrcpynW(propfile, m_path.c_str(), MAX_PATH);
+        PathAppendW(propfile, m_appname.c_str());
+        StrCatW(propfile, L".properties");
 
-        if (pIFUtility && !pIFUtility->IsPathFileExists(szPropFile))
+        if (pIFUtility && !pIFUtility->IsPathFileExists(propfile))
         {
-            WritePropFile(szPropFile);
+            WritePropFile(propfile);
         }
 
-        PropertyConfigurator::doConfigure(szPropFile);
+        PropertyConfigurator::doConfigure(propfile);
     }
 }
 
 void CLogObserver::MakerInitVars()
 {
-    wchar_t szPath[MAX_PATH] = {0};
+    wchar_t path[MAX_PATH] = {0};
     
-    if (m_wstrPath.empty())
+    if (m_path.empty())
     {
-        m_wstrPath = RelToAbsWithPlugin(L"../log", false);
+        m_path = RelToAbsWithPlugin(L"../log", false);
     }
-    else if (PathIsRelativeW(m_wstrPath.c_str()))
+    else if (PathIsRelativeW(m_path.c_str()))
     {
-        m_wstrPath = FileNameRelToAbs(m_wstrPath.c_str(), false);
+        m_path = FileNameRelToAbs(m_path.c_str(), false);
     }
     
-    lstrcpynW(szPath, m_wstrPath.c_str(), MAX_PATH);
-    PathAddBackslashW(szPath);
-    m_wstrPath = szPath;
+    lstrcpynW(path, m_path.c_str(), MAX_PATH);
+    PathAddBackslashW(path);
+    m_path = path;
     
-    if (m_wstrAppName.empty())
+    if (m_appname.empty())
     {
-        GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
-        wchar_t* pszName = PathFindFileNameW(szPath);
-        PathRemoveExtensionW(pszName);
-        m_wstrAppName = helpers::toLower(pszName);
+        GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+        wchar_t* name = PathFindFileNameW(path);
+        PathRemoveExtensionW(name);
+        m_appname = helpers::toLower(name);
     }
 }
 
-void CLogObserver::WritePropFile(const wchar_t* pszFileName)
+void CLogObserver::WritePropFile(const wchar_t* filename)
 {
     std::wostringstream buf;
 
@@ -106,72 +110,72 @@ void CLogObserver::WritePropFile(const wchar_t* pszFileName)
     buf << L"log4cplus.rootLogger=DEBUG,ROOTAPPENDER" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER=log4cplus::RollingFileAppender" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.File="
-        << m_wstrPath << m_wstrAppName << L".log" << std::endl;
+        << m_path << m_appname << L".log" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxFileSize=1024KB" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxBackupIndex=3" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.layout=log4cplus::TTCCLayout" << std::endl;
 
     Cx_Interface<Ix_TextFileUtil> pIFTextUtil(CLSID_TextUtil);
-    InterfaceSafeCall(pIFTextUtil, SaveTextFile(buf.str(), pszFileName, false));
+    InterfaceSafeCall(pIFTextUtil, SaveTextFile(buf.str(), filename, false));
 }
 
-void CLogObserver::OnPushGroup(long nLevel, 
-                               const std::wstring& wstrMsg, 
-                               const std::wstring& wstrExtra, 
-                               const std::wstring& wstrModule, 
-                               const std::wstring& wstrID)
+void CLogObserver::OnPushGroup(long level, 
+                               const std::wstring& msg, 
+                               const std::wstring& extra, 
+                               const std::wstring& module, 
+                               const std::wstring& idname)
 {
     std::wostringstream buf(L"");
 
-    for (int i = 0; i < m_nGroupLevel; i++)
+    for (int i = 0; i < m_level; i++)
     {
         buf << L"  ";
     }
-    buf << wstrMsg;
-    if (!wstrExtra.empty())
+    buf << msg;
+    if (!extra.empty())
     {
-        buf << L" (" << wstrExtra << L")";
+        buf << L" (" << extra << L")";
     }
-    if (!wstrModule.empty())
+    if (!module.empty())
     {
-        buf << L" @" << wstrModule << L":" << wstrID;
+        buf << L" @" << module << L":" << idname;
     }
 
     LOG4CPLUS_INFO_STR(GetLogger(), buf.str());
-    m_nGroupLevel = nLevel;
+    m_level = level;
 }
 
-void CLogObserver::OnPopGroup(long nLevel)
+void CLogObserver::OnPopGroup(long level)
 {
-    m_nGroupLevel = nLevel - 1;
+    m_level = level - 1;
 }
 
-void CLogObserver::OnWriteLog(int nType, 
-                              const std::wstring& wstrMsg, 
-                              const std::wstring& wstrExtra, 
-                              const std::wstring& wstrModule, 
-                              const std::wstring& wstrID, 
-                              const std::wstring& wstrFile, 
-                              long nLine)
+void CLogObserver::OnWriteLog(int type, 
+                              const std::wstring& msg, 
+                              const std::wstring& extra, 
+                              const std::wstring& module, 
+                              const std::wstring& idname, 
+                              const std::wstring& file, 
+                              long line)
 {
     std::wostringstream buf;
 
-    for (int i = 0; i < m_nGroupLevel; i++)
+    for (int i = 0; i < m_level; i++)
     {
         buf << L"  ";
     }
-    buf << wstrMsg;
-    if (!wstrExtra.empty())
+    buf << msg;
+    if (!extra.empty())
     {
-        buf << L" (" << wstrExtra << L")";
+        buf << L" (" << extra << L")";
     }
-    if (!wstrModule.empty())
+    if (!module.empty())
     {
-        buf << L" @" << wstrModule << L":" << wstrID;
+        buf << L" @" << module << L":" << idname;
     }
-    buf << L" [" << wstrFile << L" L" << nLine << L"]";
+    buf << L" [" << file << L" L" << line << L"]";
 
-    switch (nType)
+    switch (type)
     {
     case kLogType_Debug:
         LOG4CPLUS_DEBUG_STR(GetLogger(), buf.str());

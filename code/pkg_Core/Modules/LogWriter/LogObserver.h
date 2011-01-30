@@ -16,26 +16,26 @@ public:
     virtual ~CLogObserver();
 
 protected:
-    virtual void OnPushGroup(long nLevel, 
-        const std::wstring& wstrMsg, const std::wstring& wstrExtra, 
-        const std::wstring& wstrModule, const std::wstring& wstrID);
-    virtual void OnPopGroup(long nLevel);
-    virtual void OnWriteLog(int nType, 
-        const std::wstring& wstrMsg, const std::wstring& wstrExtra, 
-        const std::wstring& wstrModule, const std::wstring& wstrID, 
-        const std::wstring& wstrFile, long nLine);
+    virtual void OnPushGroup(long level, 
+        const std::wstring& msg, const std::wstring& extra, 
+        const std::wstring& module, const std::wstring& idname);
+    virtual void OnPopGroup(long level);
+    virtual void OnWriteLog(int type, 
+        const std::wstring& msg, const std::wstring& extra, 
+        const std::wstring& module, const std::wstring& idname, 
+        const std::wstring& file, long line);
 
 private:
     Logger GetLogger();
     void InitLogFile();
     void MakerInitVars();
-    void WritePropFile(const wchar_t* pszFileName);
+    void WritePropFile(const wchar_t* filename);
 
 private:
-    std::wstring    m_wstrPath;         // 日志文件目录，末尾有斜杠号
-    std::wstring    m_wstrAppName;      // 应用标识名称
-    bool            m_bInited;          // 是否已初始化了日志文件
-    long            m_nGroupLevel;      // 当前日志组的级别
+    std::wstring    m_path;         // logging path ending with backsplash.
+    std::wstring    m_appname;      // application name for logging.
+    bool            m_inited;       // logging file is setted or not.
+    long            m_level;        // group level of current group.
 };
 
 #endif // _X3_LOGWRITER_LOGOBSERVER_H

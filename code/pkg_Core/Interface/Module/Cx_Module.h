@@ -1,5 +1,5 @@
 /*! \file Cx_Module.h
- *  \brief 定义插件模块实现类 Cx_Module
+ *  \brief Define the implement class of plugin module. (for internal use only)
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -9,8 +9,9 @@
 #include "Ix_Module.h"
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief 插件模块实现类，仅内部使用
- *  \note  每个插件模块中有唯一的本类对象，在 XModuleImpl.h 中定义了该对象
+ *  \brief the implement class of plugin module.
+ *  \note  Each plugin has a object of this class. The object is defined in XModuleImpl.h .
+ *  \internal
  */
 class Cx_Module : public Ix_Module
 {
@@ -18,7 +19,7 @@ public:
     Cx_Module();
     ~Cx_Module();
 
-    //! 初始化本插件，供 _xGetModuleInterface() 调用
+    //! Initialize this plugin. Used by _xGetModuleInterface().
     void Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule);
 
 public:

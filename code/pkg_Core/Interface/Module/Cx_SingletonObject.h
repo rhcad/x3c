@@ -1,5 +1,5 @@
 /*! \file Cx_SingletonObject.h
- *  \brief 定义单实例组件类的模板实现类 Cx_SingletonObject
+ *  \brief Define single instance implement template class: Cx_SingletonObject<cls>
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -13,8 +13,9 @@
 HMODULE xGetModuleHandle();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief 单实例组件类的模板实现类，内部使用
- *  \brief 供宏 XDEFINE_CLASSMAP_ENTRY_Singleton 使用，模板参数 ClsType 为某个接口实现类
+ *  \brief Single instance implement template class used by XDEFINE_CLASSMAP_ENTRY_Singleton.
+ *  \brief The template parameter is a class which implement a interface.
+ *  \internal
  *  \see   Cx_Object \n
  *         XDEFINE_CLASSMAP_ENTRY_Singleton \n
  *         XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton

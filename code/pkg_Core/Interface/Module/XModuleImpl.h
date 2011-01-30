@@ -1,7 +1,7 @@
 /*! \file XModuleImpl.h
- *  \brief 实现插件模块的导出函数和 xCreateObject 等全局函数
- *  \note 在工程中的一个CPP文件中包含本文件，且只能在一个CPP文件中包含本文件。\n
- *        如果不希望使用本文件和 XModuleMacro.h 等文件，可使用 XComCreator.h 文件。
+ *  \brief Implement plugin's export functions and xCreateObject.
+ *  \note Include this file in one and only one CPP file of your plugin project.\n
+ *        If you don't want to use XModuleMacro.h and this file, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -20,13 +20,14 @@ OUTAPI DWORD    _xGetClassEntryTable(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
 OUTAPI HRESULT  _xInternalCreateObject(const char*, Ix_Object**, HMODULE);
 OUTAPI bool     xCanUnloadPlugin();
 
-static Cx_Module    s_xModuleObject;    // 全局唯一的插件模块对象
+//! the only one module object in this project.
+static Cx_Module    s_xModuleObject;
 
-//! 插件模块的导出函数，供插件管理器使用
+//! A export function used by the plugin manager.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
-    \param pFactory 插件管理器对象，为NULL则忽略
-    \param hModule 本插件模块的DLL句柄，为NULL则忽略
-    \return 本插件模块的唯一模块对象
+    \param pFactory the plugin manager object, skip if NULL.
+    \param hModule DLL handle of this plugin, skip if NULL.
+    \return the module object in this plugin.
     \see _xInternalCreateObject, _xGetClassEntryTable, xPluginOnLoad, xPluginOnUnload
 */
 OUTAPI Ix_Module* _xGetModuleInterface(Ix_ObjectFactory* pFactory, HMODULE hModule)
@@ -54,13 +55,13 @@ static long GetClassCount(BYTE minType)
     return nClassCount;
 }
 
-//! 获得本插件模块的组件类信息表
+//! Get class factory registries of the plugin module.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
-    \param[out] pBuildInfo 填充VC++构建信息，为NULL时忽略该参数
-    \param[in,out] pEntrySize 输入和填充 _XCLASSMETA_ENTRY 的大小，为NULL时忽略该参数
-    \param[out] pTable 输入数组地址，填充组件类信息项，为NULL时返回实际元素个数
-    \param[in] nMaxCount 缓冲pTable的元素最多个数
-    \return 实际复制的元素个数，pTable为NULL时为实际元素个数
+    \param[out] pBuildInfo Fill VC++ building info, skip if NULL.
+    \param[in,out] pEntrySize Pass in sizeof _XCLASSMETA_ENTRY and fill actual size, skip if NULL.
+    \param[out] pTable Pass in array address and fill items. Return actual count if pTable is NULL.
+    \param[in] nMaxCount max count of elements in pTable.
+    \return element count of actual copied. Return actual count if pTable is NULL.
     \see _xGetModuleInterface, xPluginOnLoad, xPluginOnUnload
 */
 OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize, 
@@ -100,12 +101,12 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
     return nClassCount;
 }
 
-//! 仅在本工程内创建对象的导出函数
+//! A export function to create object whose class is implement in this project.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
-    \param clsid 组件类UID，必须有效
-    \param ppv 填充创建的对象，必须为有效地址
-    \param fromdll 调用者所在模块的DLL句柄
-    \return S_OK 表示成功，其余失败
+    \param clsid class unique id, must be valid.
+    \param ppv Pass in a valid address and return a new object.
+    \param fromdll DLL handle of the caller's module.
+    \return S_OK or failed.
     \see _xGetModuleInterface, xCreateObject, _xGetModuleInterface
 */
 OUTAPI HRESULT _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fromdll)
@@ -129,14 +130,13 @@ OUTAPI HRESULT _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODUL
     return E_NOINTERFACE;
 }
 
-//! 供本工程使用的对象创建函数
+//! Object factory function used by Cx_Interface or Cx_Ptr.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
-    智能指针类 Cx_Interface 和 Cx_Ptr 会调用本函数，
-    如果不希望使用XModuleImpl.h等文件，可使用 XComCreator.h 文件。
-
-    \param clsid 组件类UID，必须有效
-    \param ppv 填充创建的对象，必须为有效地址
-    \return S_OK 表示成功，其余失败
+    Autoptr classes (Cx_Interface and Cx_Ptr) will call it. \n
+    If you don't want to use this file, then you can use XComCreator.h file.
+    \param clsid class unique id, must be valid.
+    \param ppv Pass in a valid address and return a new object.
+    \return S_OK or failed.
     \see _xInternalCreateObject, Ix_ObjectFactory, xIsCreatorRegister
 */
 HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
@@ -169,7 +169,8 @@ HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
     return hr;
 }
 
-//! 返回当前插件模块的DLL句柄，用于记录其他模块是否使用其内部组件对象
+//! Return DLL handle of the current plugin module.
+//! Using it can check how many objects are used by other modules)
 HMODULE xGetModuleHandle()
 {
     return s_xModuleObject.GetModuleInstance();
@@ -244,7 +245,7 @@ long Cx_Module::GetUnfreeObjectCount()
 }
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief 返回本模块是否可以安全卸载，即没有其他模块正在使用其内部组件对象
+ *  \brief Return true if this module can be safe unloaded (there is no object using by other modules).
  */
 OUTAPI bool xCanUnloadPlugin()
 {

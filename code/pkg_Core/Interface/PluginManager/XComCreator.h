@@ -1,15 +1,17 @@
 /*! \file XComCreator.h
  *  \brief Implement xCreateObject() to use Cx_Interface. XModuleMacro.h and XModuleImpl.h are not needed.
  *
- *  \note 本文件用于那些不需要实现组件类，仅需要使用组件接口的工程，不需要包含
- *        XModuleMacro.h 和 XModuleImpl.h 等文件。\n
- *        这些工程一般是单元测试程序、非插件体系的程序、COM控件、简单EXE工程。\n
+ *  \note This file is used in projects which need not to 
+ *        implement interface and want use interface only, 
+ *        so XModuleMacro.h and XModuleImpl.h are not need.\n
+ *        These projects are usual unit-test applications, COM/Active controls, 
+ *        simple applications or non plugin-system applications. \n
  *
- *    使用方法：一般将本文件包含到StdAfx.cpp中，只在工程的一个CPP中包含，这样通过实现其中的
- *        xCreateObject 函数来创建组件对象。\n
- *        (1) 如果需要使用多个插件，则不定义USE_ONE_PLUGIN，先使用 PluginManager.h 加载这些插件。\n
- *        (2) 如果仅加载一个插件，则可以不使用PluginManager.h，而是采用简化方法：
- *        先定义 USE_ONE_PLUGIN 后再包含本文件，在外部使用 LoadLibrary 为 g_hPluginDll 赋值。
+ *    Usage: Include this file in a cpp file such as StdAfx.cpp, so you can use Cx_Interface.
+ *    (1) Load plugins using PluginManager.h before using those interfaces.\n
+ *    (2) or, if just use only one plugin, you can do as following and not need PluginManager.h :
+ *    define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll.
+ *
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */

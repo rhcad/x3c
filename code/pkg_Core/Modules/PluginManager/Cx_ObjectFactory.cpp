@@ -2,7 +2,7 @@
 // http://sourceforge.net/projects/x3c/
 
 // author: Zhang Yun Gui, Tao Jian Lin
-// v2: 2011.1.5, change class-table to hash_map
+// v2: 2011.1.5, ooyg: change class-table to hash_map
 
 #include "StdAfx.h"
 #include "Cx_ObjectFactory.h"
@@ -46,9 +46,9 @@ long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
     ASSERT(iid && *iid);
 
     long count = 0;
-    CLSMAP::const_iterator it = m_mapEntry.begin();
+    CLSMAP::const_iterator it = m_clsmap.begin();
 
-    for (; it != m_mapEntry.end(); ++it)
+    for (; it != m_clsmap.end(); ++it)
     {
         const _XCLASSMETA_ENTRY& cls = it->second;
         if (lstrcmpiA(iid, cls.iidSpecial) == 0)
@@ -67,7 +67,7 @@ long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
 bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
         long index, const char* iid, Ix_Object** ppv)
 {
-    bool bRet = IsValidIndexOf(m_vecModule, index) && ppv != NULL;
+    bool bRet = IsValidIndexOf(m_modules, index) && ppv != NULL;
     if (!bRet)
     {
         return false;
@@ -75,14 +75,14 @@ bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
 
     *ppv = NULL;
 
-    const VCLSID& clsids = m_vecModule[index].clsids;
-    VCLSID::const_iterator it = clsids.begin();
+    const CLSIDS& clsids = m_modules[index].clsids;
+    CLSIDS::const_iterator it = clsids.begin();
 
     for (; it != clsids.end(); ++it)
     {
-        CLSMAP::const_iterator mit = m_mapEntry.find(it->str());
+        CLSMAP::const_iterator mit = m_clsmap.find(it->str());
 
-        if (mit != m_mapEntry.end()
+        if (mit != m_clsmap.end()
             && lstrcmpiA(iid, mit->second.iidSpecial) == 0)
         {
             *ppv = (mit->second.pfnObjectCreator)(xGetModuleHandle());
@@ -101,14 +101,14 @@ bool Cx_ObjectFactory::HasCreatorReplaced(const XCLSID& clsid)
 
 _XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid)
 {
-    CLSMAP::iterator it = m_mapEntry.find(clsid.str());
-    return (it == m_mapEntry.end()) ? NULL : &it->second;
+    CLSMAP::iterator it = m_clsmap.find(clsid.str());
+    return (it == m_clsmap.end()) ? NULL : &it->second;
 }
 
 int Cx_ObjectFactory::FindModule(HMODULE hModule)
 {
-    int i = GetSize(m_vecModule);
-    while (--i >= 0 && m_vecModule[i].hModule != hModule) ;
+    int i = GetSize(m_modules);
+    while (--i >= 0 && m_modules[i].hdll != hModule) ;
 
     return i;
 }
@@ -118,7 +118,7 @@ Ix_Module* Cx_ObjectFactory::GetModule(HMODULE hModule)
     int index = FindModule(hModule);
     if (index >= 0)
     {
-        return m_vecModule[index].pModule;
+        return m_modules[index].module;
     }
 
     typedef Ix_Module* (*FUNC_MODULE)(Ix_ObjectFactory*, HMODULE);
@@ -143,9 +143,9 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
     Ix_Module* pModule = GetModule(hModule);
     ASSERT(pModule);    // must call RegisterPlugin before
 
-    if (!m_vecModule[index].clsids.empty())
+    if (!m_modules[index].clsids.empty())
     {
-        return GetSize(m_vecModule[index].clsids);
+        return GetSize(m_modules[index].clsids);
     }
 
     typedef DWORD (*FUNC_GET)(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
@@ -205,8 +205,8 @@ bool Cx_ObjectFactory::RegisterClass(int moduleIndex, const _XCLASSMETA_ENTRY& c
         return false;
     }
 
-    m_mapEntry[cls.clsid.str()] = cls;
-    m_vecModule[moduleIndex].clsids.push_back(cls.clsid);
+    m_clsmap[cls.clsid.str()] = cls;
+    m_modules[moduleIndex].clsids.push_back(cls.clsid);
 
     return true;
 }
@@ -216,22 +216,22 @@ void Cx_ObjectFactory::ReleaseModule(HMODULE hModule)
     int index = FindModule(hModule);
     ASSERT(index >= 0);
 
-    const VCLSID& clsids = m_vecModule[index].clsids;
-    VCLSID::const_iterator it = clsids.begin();
+    const CLSIDS& clsids = m_modules[index].clsids;
+    CLSIDS::const_iterator it = clsids.begin();
 
     for (; it != clsids.end(); ++it)
     {
-        CLSMAP::iterator mit = m_mapEntry.find(it->str());
-        if (mit != m_mapEntry.end())
+        CLSMAP::iterator mit = m_clsmap.find(it->str());
+        if (mit != m_clsmap.end())
         {
-            m_mapEntry.erase(mit);
+            m_clsmap.erase(mit);
         }
     }
 
-    if (m_vecModule[index].bOwner)
+    if (m_modules[index].owned)
     {
         FreeLibrary(hModule);
     }
 
-    m_vecModule.erase(m_vecModule.begin() + index);
+    m_modules.erase(m_modules.begin() + index);
 }

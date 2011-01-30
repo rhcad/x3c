@@ -1,5 +1,5 @@
 /*! \file Ix_ChangeManager.h
- *  \brief 定义改变通知管理器的接口 Ix_ChangeManager
+ *  \brief Define interface of change observer manager: Ix_ChangeManager
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -10,7 +10,7 @@
 
 const XCLSID CLSID_ChangeManager("34c6e7c0-fe4a-45a1-b227-3da06e08499f");
 
-//! 改变通知管理器的接口
+//! interface of change observer manager.
 /*!
     \interface Ix_ChangeManager
     \ingroup _GROUP_CHANGE_OBSERVER_
@@ -18,24 +18,24 @@ const XCLSID CLSID_ChangeManager("34c6e7c0-fe4a-45a1-b227-3da06e08499f");
 */
 interface Ix_ChangeManager
 {
-    //! 注册观察者
+    //! Add a change observer.
     /*!
-        \param type 通知的类型, 由具体系统决定
-        \param observer 要添加的观察者
+        \param type observer type interpreted by specific system.
+        \param observer a observer to add.
     */
     virtual void RegisterObserver(const char* type, Ix_ChangeObserver* observer) = 0;
 
-    //! 注销观察者
+    //! Remove a change observer.
     /*!
-        \param type 通知的类型, 由具体系统决定
-        \param observer 要去掉的观察者
+        \param type observer type interpreted by specific system.
+        \param observer a observer to remove.
     */
     virtual void UnRegisterObserver(const char* type, Ix_ChangeObserver* observer) = 0;
 
-    //! 向一组观察者广播改变通知
+    //! Broadcast change event.
     /*!
-        \param type 通知的类型, 由具体系统决定
-        \param data 通知参数，一般为一个局部变量的地址
+        \param type observer type interpreted by specific system.
+        \param data the event data, it is usually a local variable's address.
     */
     virtual void ChangeNotify(const char* type, ChangeNotifyData* data) = 0;
 };

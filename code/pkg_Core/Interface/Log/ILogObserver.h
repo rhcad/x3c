@@ -1,5 +1,5 @@
 /*! \file ILogObserver.h
- *  \brief 定义日志输出观察者的接口 ILogObserver
+ *  \brief Define logging output observer interface: ILogObserver
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -8,42 +8,42 @@
 
 #include "Ix_Object.h"
 
-//! 日志输出观察者的接口
-/*! 使用 RegisterLogObserver(ILogObserver*)注册观察者，
-    使用 UnRegisterLogObserver 注销观察者
+//! logging output observer interface.
+/*! Use RegisterLogObserver(ILogObserver*) to register a observer,
+    and use UnRegisterLogObserver to unregister.
     \interface ILogObserver
     \ingroup _GROUP_PLUGIN_LOG_
     \see RegisterLogObserver, UnRegisterLogObserver, CLogObserverImpl
 */
 interface ILogObserver
 {
-    //! 开始新的一组日志
+    //! Notification of beginning a new logging group.
     /*!
-        \param level 新的一组日志的组号，从1开始
-        \param msg 组信息，已本地化
-        \param extra 附加的上下文信息
-        \param module 模块名
-        \param idname 串ID名称
+        \param level group number of the new group, base 1.
+        \param msg group message text, may be localization text.
+        \param extra additional context info.
+        \param module module name extracting from group message text.
+        \param idname string id name extracting from group message text.
     */
     virtual void OnPushGroup(long level, 
         const std::wstring& msg, const std::wstring& extra, 
         const std::wstring& module, const std::wstring& idname) = 0;
 
-    //! 结束一组日志
+    //! Notification of ending a logging group.
     /*!
-        \param level 要结束的一组日志的组号，和相应的 OnPushGroup 同值
+        \param level group number same as OnPushGroup.
     */
     virtual void OnPopGroup(long level) = 0;
 
-    //! 响应日志信息的输出通知
+    //! Notification of outputting a logging info.
     /*!
-        \param type 日志类型, kLogType 枚举值
-        \param msg 日志内容信息，已本地化
-        \param extra 附加的上下文信息
-        \param module 模块名
-        \param idname 串ID名称
-        \param file 源代码文件名
-        \param line 源代码行号
+        \param type logging type, see kLogType.
+        \param msg logging text, may be localization text.
+        \param extra additional context info.
+        \param module module name extracting from logging text.
+        \param idname string id name extracting from logging text.
+        \param file source file name.
+        \param line code line in source file.
     */
     virtual void OnWriteLog(int type, 
         const std::wstring& msg, const std::wstring& extra, 
@@ -51,7 +51,7 @@ interface ILogObserver
         const std::wstring& file, long line) = 0;
 };
 
-//! 日志输出观察者的默认实现
+//! Default implement of logging output observer.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
 */

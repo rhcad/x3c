@@ -1,5 +1,5 @@
 /*! \file ChangeNotifyData.h
- *  \brief 定义改变通知消息数据基类 ChangeNotifyData 和 ChangeObserver
+ *  \brief Define the base classes of change observer data: ChangeNotifyData, ChangeObserver.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -9,7 +9,7 @@
 #include "XComPtr.h"
 #include "Ix_ChangeManager.h"
 
-//! 改变通知消息数据的基类
+//! The base class of change observer event data.
 /*!
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see ChangeObserver
@@ -17,13 +17,13 @@
 class ChangeNotifyData
 {
 protected:
-    //! 构造函数，由派生数据类传入type(唯一标识)
+    //! Constructor. type is unique observer name passed from derived class.
     ChangeNotifyData(const char* type) : m_type(type)
     {
     }
 
 public:
-    //! 广播改变通知
+    //! Broadcast change event.
     void Notify()
     {
         Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
@@ -33,13 +33,13 @@ public:
         }
     }
 
-    //! 返回改变通知类型
+    //! Return the unique observer name passed from derived class.
     const char* GetChangeType() const
     {
         return m_type;
     }
 
-    //! 析构函数(以便可动态转换为具体类型)
+    //! Destructor for dynamic cast.
     virtual ~ChangeNotifyData()
     {
     }
@@ -49,22 +49,22 @@ private:
     const char*     m_type;
 };
 
-//! 改变通知观察者基类
-/*! 具体一种改变通知观察者类需要实现 DoUpdate() 私有函数
+//! The base class of change observer.
+/*! Derived class need implement DoUpdate().
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see ChangeNotifyData
 */
 class ChangeObserver : public Ix_ChangeObserver
 {
 private:
-    //! 分发改变通知，由具体改变通知观察者类实现
+    //! Process the change event.
     /*!
-        \param data 通知参数，为一个局部变量的地址，可动态转换为具体类型
+        \param data the event data which can be dynamic casted to specified class.
     */
     virtual void DoUpdate(ChangeNotifyData* data) = 0;
 
 protected:
-    //! 构造函数，由派生观察者类传入type(唯一标识)
+    //! Constructor. type is unique observer name passed from derived class.
     ChangeObserver(const char* type, bool register_now = true)
         : m_type(type), m_times(0)
     {
@@ -74,19 +74,19 @@ protected:
         }
     }
 
-    //! 返回改变通知类型
+    //! Return the unique observer name passed from derived class.
     const char* GetChangeType() const
     {
         return m_type;
     }
 
-    //! 返回是否正在执行改变通知的分发过程
+    //! Return if the change event is broadcasting.
     bool IsUpdating() const
     {
         return m_times != 0;
     }
 
-    //! 注册观察者
+    //! Delay register observer (passing false to constructor).
     void RegisterObserver()
     {
         Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
@@ -97,7 +97,7 @@ protected:
     }
 
 public:
-    //! 析构函数
+    //! Destructor for unregister observer.
     virtual ~ChangeObserver()
     {
         Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
@@ -113,13 +113,13 @@ private:
         //ASSERT(data && 0 == strcmp(data->GetChangeType(), GetChangeType()));
         ++m_times;
         DoUpdate(data);
-        --m_times;
+        --m_times;      // assume no exception
     }
 
 private:
     ChangeObserver();
-    const char* m_type;
-    long        m_times;
+    const char*     m_type;
+    long            m_times;
 };
 
 #endif // X3_OBSERVER_CHANGENOTIFYDATA_H_

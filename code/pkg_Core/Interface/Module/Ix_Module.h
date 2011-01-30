@@ -1,5 +1,5 @@
 /*! \file Ix_Module.h
- *  \brief 定义插件模块接口 Ix_Module
+ *  \brief Define the plugin module interface: Ix_Module
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -12,43 +12,43 @@ interface Ix_ObjectFactory;
 
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \interface Ix_Module
- *  \brief 插件模块接口
- *  \note  每个插件模块DLL中包含一个Ix_Module对象, 可用 xGetCurrentModule() 得到该对象
+ *  \brief the plugin module interface.
+ *  \note  Each plugin (DLL) has a Ix_Module object which can get from xGetCurrentModule().
  *  \see xGetCurrentModule, xIsCreatorRegister, Ix_ObjectFactory
  */
 interface Ix_Module
 {
-    //! 在卸载模块前释放所有单实例对象
+    //! Free all single instance objects when this plugin is unloading.
     virtual void ClearModuleItems() = 0;
 
-    //! 返回未释放的对象个数
+    //! Return count of unfree objects.
     virtual long GetUnfreeObjectCount() = 0;
 
-    //! 返回插件管理器对象
+    //! Return the plugin manager object.
     virtual Ix_ObjectFactory* GetObjectFactory() const = 0;
 
-    //! 返回本模块DLL句柄
+    //! Return DLL handle of this plugin.
     virtual HMODULE GetModuleInstance() const = 0;
 
-    //! 返回本模块资源句柄
+    //! Return resource DLL handle of this plugin.
     virtual HMODULE GetModuleResourceHandle() const = 0;
 
-    //! 设置本模块的资源句柄，当需要支持本地化资源时调用
+    //! Set localization resource DLL handle.
     virtual HMODULE SetModuleResourceHandle(HMODULE hResource) = 0;
 };
 
-//! 返回当前工程内的模块对象
+//! Return the module object of the current project (this plugin).
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \return 当前插件模块中唯一的模块对象
+    \return the only one module object in the current project.
 */
 Ix_Module* xGetCurrentModule();
 
-//! 返回指定的组件类ID是否已经注册类工厂函数
+//! Check the class factory of the specified class id has registered or not.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \param clsid 组件类ID
-    \return 该组件类是否已经注册(即是否已加载其插件)
+    \param clsid the specified class id.
+    \return the class factory has registered (plugin loaded namely) or not.
 */
 bool xIsCreatorRegister(const XCLSID& clsid);
 

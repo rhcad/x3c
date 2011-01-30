@@ -165,21 +165,21 @@ long Cx_PluginLoader::InitializePlugins()
 {
     long nSuccessLoadNum = 0;
 
-    for (unsigned int i = 0; i < m_vecModule.size(); i++)
+    for (unsigned int i = 0; i < m_modules.size(); i++)
     {
-        if (m_vecModule[i].bInit)
+        if (m_modules[i].inited)
         {
             continue;
         }
 
         typedef bool (*FUNC_PLUGINLOAD)();
         FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
-            m_vecModule[i].hModule, "InitializePlugin");
+            m_modules[i].hdll, "InitializePlugin");
 
         if (!pfn || (*pfn)())
         {
             nSuccessLoadNum++;
-            m_vecModule[i].bInit = true;
+            m_modules[i].inited = true;
         }
     }
 
@@ -199,11 +199,11 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
     {
         MODULEINFO moduleInfo;
 
-        moduleInfo.hModule = instance;
-        moduleInfo.pModule = pModule;
-        moduleInfo.bOwner = false;
-        moduleInfo.bInit = false;
-        m_vecModule.push_back(moduleInfo);
+        moduleInfo.hdll = instance;
+        moduleInfo.module = pModule;
+        moduleInfo.owned = false;
+        moduleInfo.inited = false;
+        m_modules.push_back(moduleInfo);
 
         RegisterClassEntryTable(instance);
 
@@ -233,7 +233,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
     {
         moduleIndex = FindModule(hModule);
         ASSERT(moduleIndex >= 0);
-        m_vecModule[moduleIndex].bOwner = bOwner;
+        m_modules[moduleIndex].owned = bOwner;
     }
     else if (bOwner)
     {
@@ -278,28 +278,28 @@ long Cx_PluginLoader::UnloadPlugins()
     int i = 0;
     int nUnLoadPluginNum = 0;
 
-    for (i = m_vecModule.size() - 1; i >= 0; i--)
+    for (i = m_modules.size() - 1; i >= 0; i--)
     {
         typedef void (*FUNC_UNLOAD)();
         FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
-            m_vecModule[i].hModule, "UninitializePlugin");
+            m_modules[i].hdll, "UninitializePlugin");
         if (pfnUnload)
         {
             pfnUnload();
         }
     }
 
-    for (i = m_vecModule.size() - 1; i >= 0; i--)
+    for (i = m_modules.size() - 1; i >= 0; i--)
     {
-        if (ClearModuleItems(m_vecModule[i].hModule))
+        if (ClearModuleItems(m_modules[i].hdll))
         {
             nUnLoadPluginNum++;
         }
     }
 
-    for (i = m_vecModule.size() - 1; i >= 0; i--)
+    for (i = m_modules.size() - 1; i >= 0; i--)
     {
-        ReleaseModule(m_vecModule[i].hModule);
+        ReleaseModule(m_modules[i].hdll);
     }
 
     return nUnLoadPluginNum;

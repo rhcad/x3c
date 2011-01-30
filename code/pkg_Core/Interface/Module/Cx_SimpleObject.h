@@ -1,16 +1,16 @@
 /*! \file Cx_SimpleObject.h
- *  \brief 定义可直接实例化的简单模板类 Cx_SimpleObject
+ *  \brief Define a implement template class (Cx_SimpleObject) that can instantiate directly.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
- */
+ */ // 
 #ifndef X3_PLUGINIMPL_SIMPLEOBJECT_H_
 #define X3_PLUGINIMPL_SIMPLEOBJECT_H_
 
 #include "Cx_Object.h"
 #include "XComPtr.h"
 
-//! 可直接实例化的简单模板类
-/*! 使用示例: \code
+//! A implement template class that can instantiate directly.
+/*! Example: \code
     Cx_Ptr MyFunc()
     {
         Cx_Ptr objRet;
@@ -21,8 +21,8 @@
         return objRet;
     }
     \endcode
-    最好在 XBEGIN_DEFINE_MODULE 组件类列表中把该实现类登记上，
-    这样就可以外部模块是否引用其对象，例如： \code
+    The implement class must be registered in XBEGIN_DEFINE_MODULE group. eg:
+    \code
     XBEGIN_DEFINE_MODULE()
         XDEFINE_CLASSMAP_ENTRY(XCLSID(), Cx_MyInternal)
     XEND_DEFINE_MODULE()
@@ -33,7 +33,7 @@ template <class ClsType>
 class Cx_SimpleObject : public Cx_Object<ClsType>
 {
 public:
-    //! 创建一个对象，并由Cx_Ptr接管
+    //! Create a object owned by Cx_Ptr.
     static Cx_SimpleObject<ClsType>* Create(Cx_Ptr& objOwner)
     {
         Cx_SimpleObject<ClsType>* p = new Cx_SimpleObject<ClsType>();
@@ -41,7 +41,7 @@ public:
         return p;
     }
     
-    //! 创建一个对象，并由Cx_Interface接管
+    //! Create a object owned by Cx_Interface.
     template <class IF_Type>
     static Cx_SimpleObject<ClsType>* Create(Cx_Interface<IF_Type>& pIFOwner)
     {

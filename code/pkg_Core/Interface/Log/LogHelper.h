@@ -1,5 +1,5 @@
 /*! \file LogHelper.h
- *  \brief 定义日志输出的 LOG_WARNING 等宏和 CAutoLogGroup
+ *  \brief Define logging macros such as LOG_WARNING and CAutoLogGroup.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -30,110 +30,113 @@
 // CAutoLogGroup(msg)
 
 
-//! 输出调试信息
+//! Output a debug info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param msg 要输出的信息，为任意类型数值或Unicode字符串(不能是ANSI串)，
-        如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
+    \param msg logging text, can be UNICODE string or other type number (not ANSI string).
+        if the first char is '@' and leading as 'Module:StrID' format, 
+        then the manager will translate into localization text.
 */
 #define LOG_DEBUG(msg)  \
     LOG_EVENT_(msg, kLogType_Debug, __FILE__, __LINE__)
 
 
-//! 输出调试信息和附加信息
+//! Output a debug info with additional context info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param name Unicode字符串，以@开头接上“Module:StrID”格式
-    \param extra 附加的上下文信息，为任意类型数值或Unicode字符串(不能是ANSI串)
+    \param name UNICODE string, the first char is '@' and leading as 'Module:StrID' format.
+    \param extra additional context info, can be UNICODE string or other type number (not ANSI string).
 */
 #define LOG_DEBUG2(name, extra)     \
     LOG_EVENT_2(name, extra, kLogType_Debug, __FILE__, __LINE__)
 
 
-//! 输出普通信息
+//! Output a normal info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param msg 要输出的信息，为任意类型数值或Unicode字符串(不能是ANSI串)，
-        如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
+    \param msg logging text, can be UNICODE string or other type number (not ANSI string).
+        if the first char is '@' and leading as 'Module:StrID' format, 
+        then the manager will translate into localization text.
 */
 #define LOG_INFO(msg)   \
     LOG_EVENT_(msg, kLogType_Info, __FILE__, __LINE__)
 
 
-//! 输出普通信息和附加信息
+//! Output a normal info with additional context info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param name Unicode字符串，以@开头接上“Module:StrID”格式
-    \param extra 附加的上下文信息，为任意类型数值或Unicode字符串(不能是ANSI串)
+    \param name UNICODE string, the first char is '@' and leading as 'Module:StrID' format.
+    \param extra additional context info, can be UNICODE string or other type number (not ANSI string).
 */
 #define LOG_INFO2(name, extra)  \
     LOG_EVENT_2(name, extra, kLogType_Info, __FILE__, __LINE__)
 
 
-//! 输出警告信息
+//! Output a warnning info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param msg 要输出的信息，为任意类型数值或Unicode字符串(不能是ANSI串)，
-        如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
+    \param msg logging text, can be UNICODE string or other type number (not ANSI string).
+        if the first char is '@' and leading as 'Module:StrID' format, 
+        then the manager will translate into localization text.
 */
 #define LOG_WARNING(msg)        \
     LOG_EVENT_(msg, kLogType_Warning, __FILE__, __LINE__)
 
 
-//! 输出警告信息和附加信息
+//! Output a warnning info with additional context info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param name Unicode字符串，以@开头接上“Module:StrID”格式
-    \param extra 附加的上下文信息，为任意类型数值或Unicode字符串(不能是ANSI串)
+    \param name UNICODE string, the first char is '@' and leading as 'Module:StrID' format.
+    \param extra additional context info, can be UNICODE string or other type number (not ANSI string).
 */
 #define LOG_WARNING2(name, extra)   \
     LOG_EVENT_2(name, extra, kLogType_Warning, __FILE__, __LINE__)
 
 
-//! 输出错误信息
+//! Output a error info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param msg 要输出的信息，为任意类型数值或Unicode字符串(不能是ANSI串)，
-        如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
+    \param msg logging text, can be UNICODE string or other type number (not ANSI string).
+        if the first char is '@' and leading as 'Module:StrID' format, 
+        then the manager will translate into localization text.
 */
 #define LOG_ERROR(msg)  \
     LOG_EVENT_(msg, kLogType_Error, __FILE__, __LINE__)
 
 
-//! 输出错误信息和附加信息
+//! Output a error info with additional context info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param name Unicode字符串，以@开头接上“Module:StrID”格式
-    \param extra 附加的上下文信息，为任意类型数值或Unicode字符串(不能是ANSI串)
+    \param name UNICODE string, the first char is '@' and leading as 'Module:StrID' format.
+    \param extra additional context info, can be UNICODE string or other type number (not ANSI string).
 */
 #define LOG_ERROR2(name, extra)     \
     LOG_EVENT_2(name, extra, kLogType_Error, __FILE__, __LINE__)
 
 
-//! 输出严重错误信息
+//! Output a fatal error info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param msg 要输出的信息，为任意类型数值或Unicode字符串(不能是ANSI串)，
-        如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
+    \param msg logging text, can be UNICODE string or other type number (not ANSI string).
+        if the first char is '@' and leading as 'Module:StrID' format, 
+        then the manager will translate into localization text.
 */
 #define LOG_FATAL(msg)      \
     LOG_EVENT_(msg, kLogType_Fatal, __FILE__, __LINE__)
 
 
-//! 输出严重错误信息和附加信息
+//! Output a fatal error info with additional context info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param name Unicode字符串，以@开头接上“Module:StrID”格式
-    \param extra 附加的上下文信息，为任意类型数值或Unicode字符串(不能是ANSI串)
+    \param name UNICODE string, the first char is '@' and leading as 'Module:StrID' format.
+    \param extra additional context info, can be UNICODE string or other type number (not ANSI string).
 */
 #define LOG_FATAL2(name, extra)     \
     LOG_EVENT_2(name, extra, kLogType_Fatal, __FILE__, __LINE__)
 
-//! 注册日志输出观察者
+//! Register a logging output observer.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param observer 要注册的观察者
-    \return 是否注册成功
     \see UnRegisterLogObserver
 */
 inline bool RegisterLogObserver(ILogObserver* observer)
@@ -146,7 +149,7 @@ inline bool RegisterLogObserver(ILogObserver* observer)
     return false;
 }
 
-//! 注销日志输出观察者
+//! Unregister a logging output observer.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
     \see RegisterLogObserver
@@ -160,17 +163,26 @@ inline void UnRegisterLogObserver(ILogObserver* observer)
     }
 }
 
-//! 自动开始一组日志的辅助类，用于在函数中定义局部变量
-/*!
+//! Helper class for logging group, auto begin and end group.
+/*! Use this class to define variable in local function, eg: 
+    \code
+    void MyFunc()
+    {
+        CAutoLogGroup group(L"@MyPlugin:GROUP_MYNAME");
+        ...
+    }
+    \endcode
     \ingroup _GROUP_PLUGIN_LOG_
 */
 class CAutoLogGroup
 {
 public:
-    //! 构造函数，自动开始新的一组日志
+    //! Constructor, auto begin a new logging group.
     /*!
-        \param msg 日志组的文字，如果是以@开头接上“Module:StrID”格式则自动换为本地化文字
-        \param extra 附加的上下文信息
+        \param msg group message text. 
+            if the first char is '@' and leading as 'Module:StrID' format 
+            then the manager will translate into localization text using Ix_StringTable.
+        \param extra additional context info.
     */
     CAutoLogGroup(const wchar_t* msg, const wchar_t* extra = NULL)
     {
@@ -180,7 +192,7 @@ public:
             pIFManager->PushGroup(msg, extra);
         }
     }
-    //! 析构函数，自动结束一组日志
+    //! Destructor, auto end the logging group.
     ~CAutoLogGroup()
     {
         Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
@@ -213,14 +225,14 @@ public:
         pIFManager->WriteLog(type, name, buf.str().c_str(), file, line);    \
     }} while (0)
 
-//! 输出ANSI串的日志信息
+//! Output a ANSI string with additional context info.
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
-    \param name ANSI字符串，以@开头接上“Module:StrID”格式
-    \param extra 附加的上下文信息，为任意类型数值或ANSI字符串
-    \param type 日志类型，见 kLogType
-    \param file 源代码文件名, 一般取为 __FILE__
-    \param line 源代码行号, 一般取为 __LINE__
+    \param name ANSI string, the first char is '@' and leading as 'Module:StrID' format.
+    \param extra additional context info, can be ANSI string or other type number.
+    \param type logging type, see kLogType.
+    \param file source file name, __FILE__
+    \param line code line, __LINE__
 */
 #define LOG_EVENT_ANSI(name, extra, type, file, line)   \
     do {                                                        \

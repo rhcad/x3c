@@ -1,5 +1,5 @@
 /*! \file Ix_ChangeObserver.h
- *  \brief 定义改变通知观察者的接口 Ix_ChangeObserver
+ *  \brief Define change observer interface: Ix_ChangeObserver
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -8,16 +8,16 @@
 
 class ChangeNotifyData;
 
-//! 改变通知观察者的接口
+//! Change observer interface
 /*!
     \interface Ix_ChangeObserver
     \ingroup _GROUP_CHANGE_OBSERVER_
 */
 interface Ix_ChangeObserver
 {
-    //! 改变的通知
+    //! Notification of a event.
     /*!
-        \param data 通知参数，一般为一个局部变量的地址
+        \param data the event data, it is usually a local variable's address.
     */
     virtual void Update(ChangeNotifyData* data) = 0;
 };

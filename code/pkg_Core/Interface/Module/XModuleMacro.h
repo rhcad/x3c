@@ -1,7 +1,7 @@
-/*! \file XModuleMacro.h
- *  \brief 定义组件类注册的 XBEGIN_DEFINE_MODULE 等宏
- *  \note XModuleImpl.h 和本文件可以不需要同时包含在一个CPP文件中。\n
- *        如果不希望使用本文件和 XModuleImpl.h 等文件，可使用 XComCreator.h 文件。
+/*! \file   XModuleMacro.h
+ *  \brief  Define macros of class factory registry, such as XBEGIN_DEFINE_MODULE.
+ *  \note   This file and XModuleImpl.h may be included in different CPP files.\n
+ *      if you don't want to use this file and XModuleImpl.h, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -21,7 +21,7 @@
 #include "Cx_Object.h"
 #include "Cx_SingletonObject.h"
 
-//! 开始组件类注册的宏
+//! Begin group of class factory registry.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE
@@ -30,11 +30,11 @@
 #define XBEGIN_DEFINE_MODULE()  \
     const _XCLASSMETA_ENTRY _XCLASSMETA_ENTRY::s_classes[] = {
 
-//! 对普通组件类进行注册的宏
+//! Register a regular class.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \param clsid 组件类ID，必须是LPCSTR或CHAR数组的常量
-    \param cls 组件类名
+    \param clsid class unique id, XCLSID constant.
+    \param cls implement class
 */
 #define XDEFINE_CLASSMAP_ENTRY(clsid, cls)      \
     _XCLASSMETA_ENTRY(1, "Cx_Object<" #cls ">", clsid, "",  \
@@ -42,11 +42,11 @@
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<cls>::GetObjectCount),  \
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<cls>::GetRefCountByOthers)), 
 
-//! 对单实例组件类进行注册的宏
+//! Register a single instance class.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \param clsid 组件类ID，必须是LPCSTR或CHAR数组的常量
-    \param cls 组件类名
+    \param clsid class unique id, XCLSID constant.
+    \param cls implement class
 */
 #define XDEFINE_CLASSMAP_ENTRY_Singleton(clsid, cls)    \
     _XCLASSMETA_ENTRY(MIN_SINGLETON_TYPE,   \
@@ -55,11 +55,11 @@
         reinterpret_cast<PFNXGetObjectCount>(&Cx_SingletonObject<cls>::GetObjectCount), \
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)), 
 
-//! 对支持特定通用接口的单实例组件类进行注册的宏
+//! Register a single instance class that support the specific interface.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \param iid 特定通用接口的接口ID名称，必须是LPCSTR或CHAR数组的常量
-    \param cls 组件类名
+    \param iid the specific interface id name. char array constant.
+    \param cls implement class
 */
 #define XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton(iid, cls)     \
     _XCLASSMETA_ENTRY(MIN_SINGLETON_TYPE + 1,   \
@@ -68,7 +68,7 @@
         reinterpret_cast<PFNXGetObjectCount>(&Cx_SingletonObject<cls>::GetObjectCount), \
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)), 
 
-//! 结束组件类注册的宏
+//! End group of class factory registry.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE_WIN32DLL, XEND_DEFINE_MODULE_MFCEXTDLL
@@ -79,8 +79,8 @@
 
 #pragma warning(disable:4710)   // inline function not expanded
 
-//! 结束组件类注册的宏，并实现Win32DLL(USRDLL)默认的入口函数
-/*! 要使用本宏的话，需要同时包含本文件和 XModuleImpl.h 文件
+//! End group of class factory registry and implement entry function of Win32DLL(USRDLL).
+/*! Using this macro need include this file and XModuleImpl.h file.
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE_MFCEXTDLL, XEND_DEFINE_MODULE_MFCDLL
 */
@@ -100,8 +100,8 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
     return TRUE;    \
 }
 
-//! 结束组件类注册的宏，并实现MFC扩展DLL默认的DLL入口函数
-/*! 要使用本宏的话，需要同时包含本文件和 XModuleImpl.h 文件
+//! End group of class factory registry and implement entry function of MFC Extension DLL.
+/*! Using this macro need include this file and XModuleImpl.h file.
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE_WIN32DLL, XEND_DEFINE_MODULE_MFCDLL
 */
@@ -127,10 +127,11 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)    \
     return 1;   \
 }
 
-//! 结束组件类注册的宏，并实现MFC常规DLL默认的DLL程序基类 CPluginApp
-/*! 要使用本宏的话，需要同时包含本文件和 XModuleImpl.h 文件
-    \note 在MFC常规DLL的任何导出函数和可供外部调用的函数中，必须在使用MFC的语句前
-        先调用 AFX_MANAGE_STATE(AfxGetStaticModuleState());
+//! End group of class factory registry and implement entry function of MFC regular DLL.
+/*! This macro implements CPluginApp class.\n
+    Using this macro need include this file and XModuleImpl.h file.
+    \note Call the following statemant before call any MFC function: \n
+            AFX_MANAGE_STATE(AfxGetStaticModuleState());
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE_WIN32DLL, XEND_DEFINE_MODULE_MFCEXTDLL
 */

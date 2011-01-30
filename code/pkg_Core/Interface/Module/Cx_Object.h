@@ -1,5 +1,5 @@
 /*! \file Cx_Object.h
- *  \brief 定义普通组件类的模板实现类 Cx_Object
+ *  \brief Define the regular implement template class: Cx_Object<cls>
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -12,9 +12,10 @@
 HMODULE xGetModuleHandle();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief 普通组件类的模板实现类，内部使用
- *  \note  供宏 XDEFINE_CLASSMAP_ENTRY 使用，模板参数 ClsType 为某个接口实现类
+ *  \brief The regular implement template class used by XDEFINE_CLASSMAP_ENTRY.
+ *  \note  The template parameter is a class which implement a interface.
  *  \see   Cx_SingletonObject, XDEFINE_CLASSMAP_ENTRY
+ *  \internal
  */
 template <class ClsType>
 class Cx_Object

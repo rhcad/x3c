@@ -2,7 +2,7 @@
 // http://sourceforge.net/projects/x3c/
 
 // author: Zhang Yun Gui, Tao Jian Lin
-// v2: 2011.1.5, change class-table to hash_map
+// v2: 2011.1.5, ooyg: change class-table to hash_map
 
 #ifndef _X3_CORE_OBJECTFACTORY_H
 #define _X3_CORE_OBJECTFACTORY_H
@@ -33,18 +33,20 @@ public:
     virtual bool HasCreatorReplaced(const XCLSID& clsid);
 
 protected:
-    typedef std::vector<XCLSID>         VCLSID;
+    typedef std::vector<XCLSID>         CLSIDS;
     typedef hash_map<std::string, _XCLASSMETA_ENTRY>    CLSMAP;
-    struct MODULEINFO                   //!< 插件模块登记项
+    
+    struct MODULEINFO                   //!< plugin module info
     {
-        HMODULE             hModule;    //!< 插件DLL句柄
-        Ix_Module*          pModule;    //!< 插件模块对象
-        VCLSID              clsids;     //!< 注册了类工厂的所有类ID
-        bool                bOwner;     //!< 是否由本类加载了该DLL
-        bool                bInit;      //!< 是否已由 InitializePlugins 调用
+        HMODULE             hdll;       //!< DLL handle of the plugin
+        Ix_Module*          module;     //!< plugin module object
+        CLSIDS              clsids;     //!< all classes of the plugin
+        bool                owned;      //!< the DLL is loaded by this class or not
+        bool                inited;     //!< InitializePlugins() has been called or not
     };
-    std::vector<MODULEINFO> m_vecModule;    //!< 所有插件模块
-    CLSMAP                  m_mapEntry;     //!< 类ID到登记项的映射表
+    
+    std::vector<MODULEINFO> m_modules;  //!< all plugin modules
+    CLSMAP                  m_clsmap;   //!< map from clsid to class factory
 
 protected:
     int FindModule(HMODULE hModule);

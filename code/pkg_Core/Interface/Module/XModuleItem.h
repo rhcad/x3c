@@ -1,5 +1,5 @@
 /*! \file XModuleItem.h
- *  \brief 定义单实例对象基类，内部文件
+ *  \brief Define the base class of single instance classes. (for internal use only)
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -7,7 +7,8 @@
 #define X3_PLUGINIMPL_MODULEITEM_H_
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief 本模块内单实例对象基类，仅内部使用
+ *  \brief the base class of single instance classes.
+ *  \internal
  */
 class CModuleItem
 {
@@ -19,19 +20,18 @@ protected:
     {
     }
 
-    //! 添加自身到单实例对象链表
+    //! Add self to the single instance stack.
     void AddModuleItem()
     {
-        m_index = InterlockedDecrement(&Index());   // 其他线程可同时添加
+        m_index = InterlockedDecrement(&Index());   // support concurrent insert.
         if (m_index >= 0)
         {
-            // Items[index] 只会被一个线程操作
-            Items()[m_index] = this;
+            Items()[m_index] = this;                // only one thread can do it.
         }
     }
 
 public:
-    //! 在本模块卸载时，释放(delete)所有单实例对象
+    //! Free all single instance objects when this plugin is unloading.
     static void ClearModuleItems()
     {
         if (Items())
@@ -51,7 +51,7 @@ public:
         }
     }
 
-    //! 初始化单实例对象堆栈( _xGetModuleInterface 会调用本函数)
+    //! Init the single instance stack. _xGetModuleInterface will call it.
     static void InitModuleItems(long nCount)
     {
         if (NULL == Items() && nCount > 0)
@@ -63,7 +63,7 @@ public:
     }
 
 private:
-    long    m_index;    //!< 在单实例对象堆栈中的顺序，越早越大
+    long    m_index;    // index in the single instance stack.
 
     static long& MaxCount()
     {
