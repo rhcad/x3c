@@ -35,6 +35,8 @@ public:
 private:
     bool issep(wchar_t c);
     bool ClearModuleItems(HMODULE hModule);
+    void ReplaceSlashes(wchar_t* filename);
+    void MakeFullPath(wchar_t* fullpath, HMODULE instance, const wchar_t* path);
 
 private:
     HMODULE m_instance;

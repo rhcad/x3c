@@ -3,6 +3,7 @@
 
 // author: Zhang Yun Gui, Tao Jian Lin
 // v2: 2011.1.5, ooyg: change class-table to hash_map
+// v3: 2011.2.4, ooyg: Don't remove element in ReleaseModule().
 
 #include "StdAfx.h"
 #include "Cx_ObjectFactory.h"
@@ -17,17 +18,20 @@ Cx_ObjectFactory::~Cx_ObjectFactory()
 
 bool Cx_ObjectFactory::IsCreatorRegister(const XCLSID& clsid)
 {
-    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid);
+    int moduleIndex = -1;
+    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid, moduleIndex);
     return pEntry && pEntry->pfnObjectCreator;
 }
 
-HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid, Ix_Object** ppv, 
+HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid, 
+                                       Ix_Object** ppv, 
                                        HMODULE fromdll)
 {
     ASSERT(clsid.valid() && ppv != NULL);
     *ppv = NULL;
 
-    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid);
+    int moduleIndex = -1;
+    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid, moduleIndex);
 
     if (pEntry && pEntry->pfnObjectCreator)
     {
@@ -50,8 +54,9 @@ long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
 
     for (; it != m_clsmap.end(); ++it)
     {
-        const _XCLASSMETA_ENTRY& cls = it->second;
-        if (lstrcmpiA(iid, cls.iidSpecial) == 0)
+        const _XCLASSMETA_ENTRY& cls = it->second.first;
+        if (lstrcmpiA(iid, cls.iidSpecial) == 0
+            && cls.pfnObjectCreator)
         {
             Ix_Object* pIF = NULL;
             pIF = (cls.pfnObjectCreator)(xGetModuleHandle());
@@ -83,9 +88,10 @@ bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
         CLSMAP::const_iterator mit = m_clsmap.find(it->str());
 
         if (mit != m_clsmap.end()
-            && lstrcmpiA(iid, mit->second.iidSpecial) == 0)
+            && lstrcmpiA(iid, mit->second.first.iidSpecial) == 0
+            && mit->second.first.pfnObjectCreator)
         {
-            *ppv = (mit->second.pfnObjectCreator)(xGetModuleHandle());
+            *ppv = (mit->second.first.pfnObjectCreator)(xGetModuleHandle());
             return true;
         }
     }
@@ -99,10 +105,12 @@ bool Cx_ObjectFactory::HasCreatorReplaced(const XCLSID& clsid)
     return false;
 }
 
-_XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid)
+_XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid, 
+                                               int& moduleIndex)
 {
     CLSMAP::iterator it = m_clsmap.find(clsid.str());
-    return (it == m_clsmap.end()) ? NULL : &it->second;
+    moduleIndex = (it == m_clsmap.end()) ? -1 : it->second.second;
+    return (it == m_clsmap.end()) ? NULL : &(it->second.first);
 }
 
 int Cx_ObjectFactory::FindModule(HMODULE hModule)
@@ -122,7 +130,8 @@ Ix_Module* Cx_ObjectFactory::GetModule(HMODULE hModule)
     }
 
     typedef Ix_Module* (*FUNC_MODULE)(Ix_ObjectFactory*, HMODULE);
-    FUNC_MODULE pfn = (FUNC_MODULE)GetProcAddress(hModule, "_xGetModuleInterface");
+    FUNC_MODULE pfn = (FUNC_MODULE)GetProcAddress(
+        hModule, "_xGetModuleInterface");
 
     if (pfn != NULL)
     {
@@ -137,15 +146,15 @@ Ix_Module* Cx_ObjectFactory::GetModule(HMODULE hModule)
 
 long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
 {
-    int index = FindModule(hModule);
-    ASSERT(index >= 0); // must call RegisterPlugin before
+    int moduleIndex = FindModule(hModule);
+    ASSERT(moduleIndex >= 0);   // must call RegisterPlugin before
 
     Ix_Module* pModule = GetModule(hModule);
-    ASSERT(pModule);    // must call RegisterPlugin before
+    ASSERT(pModule);            // must call RegisterPlugin before
 
-    if (!m_modules[index].clsids.empty())
+    if (!m_modules[moduleIndex].clsids.empty())
     {
-        return GetSize(m_modules[index].clsids);
+        return GetSize(m_modules[moduleIndex].clsids);
     }
 
     typedef DWORD (*FUNC_GET)(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
@@ -157,25 +166,25 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
     }
 
     DWORD buildInfo = 0;
-    int nClassCount = (*pfn)(&buildInfo, NULL, NULL, 0);
+    int classCount = (*pfn)(&buildInfo, NULL, NULL, 0);
 
-    if (nClassCount <= 0)
+    if (classCount <= 0)
     {
         return 0;
     }
 
-    std::vector<_XCLASSMETA_ENTRY> table(nClassCount);
+    std::vector<_XCLASSMETA_ENTRY> table(classCount);
     DWORD size = sizeof(_XCLASSMETA_ENTRY);
 
-    nClassCount = (*pfn)(NULL, &size, &table[0], nClassCount);
+    classCount = (*pfn)(NULL, &size, &table[0], classCount);
 
-    for (int i = 0; i < nClassCount; i++)
+    for (int i = 0; i < classCount; i++)
     {
         _XCLASSMETA_ENTRY& cls = table[i];
 
         if (cls.clsid.valid())
         {
-            RegisterClass(index, cls);
+            RegisterClass(moduleIndex, cls);
         }
         if (cls.iidSpecial && *cls.iidSpecial)
         {
@@ -183,29 +192,33 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
 
             sprintf_s(tmpclsid, 40, "iid%lx:%d", hModule, i);
             cls.clsid = XCLSID(tmpclsid);
-            RegisterClass(index, cls);
+            RegisterClass(moduleIndex, cls);
         }
     }
 
-    return nClassCount;
+    return classCount;
 }
 
-bool Cx_ObjectFactory::RegisterClass(int moduleIndex, const _XCLASSMETA_ENTRY& cls)
+bool Cx_ObjectFactory::RegisterClass(int moduleIndex, 
+                                     const _XCLASSMETA_ENTRY& cls)
 {
-    ASSERT(moduleIndex >= 0 && cls.clsid.valid() && cls.pfnObjectCreator);
-    _XCLASSMETA_ENTRY* pOldCls = FindEntry(cls.clsid);
+    ASSERT(moduleIndex >= 0 && cls.clsid.valid());
+
+    int oldIndex = -1;
+    _XCLASSMETA_ENTRY* pOldCls = FindEntry(cls.clsid, oldIndex);
 
     if (pOldCls)
     {
-        char msg[256] = { 0, 0 };
+        char msg[256] = { 0 };
         sprintf_s(msg, 256, 
-            "The classid '%s' is already registered by '%s', then '%s' register fail.", 
+            "The classid '%s' is already registered by '%s', "
+            "then '%s' register fail.", 
             cls.clsid.str(), pOldCls->className, cls.className);
         ASSERT_MESSAGE(false, msg);
         return false;
     }
 
-    m_clsmap[cls.clsid.str()] = cls;
+    m_clsmap[cls.clsid.str()] = MAPITEM(cls, moduleIndex);
     m_modules[moduleIndex].clsids.push_back(cls.clsid);
 
     return true;
@@ -216,10 +229,10 @@ void Cx_ObjectFactory::ReleaseModule(HMODULE hModule)
     int index = FindModule(hModule);
     ASSERT(index >= 0);
 
-    const CLSIDS& clsids = m_modules[index].clsids;
-    CLSIDS::const_iterator it = clsids.begin();
+    MODULEINFO& item = m_modules[index];
+    CLSIDS::const_iterator it = item.clsids.begin();
 
-    for (; it != clsids.end(); ++it)
+    for (; it != item.clsids.end(); ++it)
     {
         CLSMAP::iterator mit = m_clsmap.find(it->str());
         if (mit != m_clsmap.end())
@@ -228,10 +241,13 @@ void Cx_ObjectFactory::ReleaseModule(HMODULE hModule)
         }
     }
 
-    if (m_modules[index].owned)
+    if (item.owned)
     {
         FreeLibrary(hModule);
     }
 
-    m_modules.erase(m_modules.begin() + index);
+    // don't remove: m_modules.erase(m_modules.begin() + index);
+    item.hdll = NULL;
+    item.module = NULL;
+    item.clsids.clear();
 }

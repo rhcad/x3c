@@ -46,4 +46,7 @@
 		<string id="IDS_CLIP_NOTEXT" value="剪贴板上没有文本内容"/>
 		<string id="IDS_COCREATEGUID_FAIL" value="创建GUID失败"/>
 	</module>
+	<module name="PluginManager">
+		<string id="IDS_INITPLUGIN_FAIL" value="初始化插件失败"/>
+	</module>
 </root>

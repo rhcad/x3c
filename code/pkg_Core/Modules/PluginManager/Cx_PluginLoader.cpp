@@ -3,6 +3,9 @@
 
 // author: Zhang Yun Gui, Tao Jian Lin
 // v1: 2010.12
+// v2: 2011.2.4, ooyg: Support absolute path in LoadPlugins(). 
+//          Unload plugin if fail to call InitializePlugins().
+//          Reuse element position in RegisterPlugin().
 
 #include "stdafx.h"
 #include "Cx_PluginLoader.h"
@@ -21,7 +24,7 @@ HMODULE Cx_PluginLoader::GetMainModuleHandle()
     return m_instance;
 }
 
-static void ReplaceSlashes(wchar_t* filename)
+void Cx_PluginLoader::ReplaceSlashes(wchar_t* filename)
 {
     for (; *filename; ++filename)
     {
@@ -32,20 +35,39 @@ static void ReplaceSlashes(wchar_t* filename)
     }
 }
 
-long Cx_PluginLoader::LoadPlugins(HMODULE instance, const wchar_t* path, 
-                                  const wchar_t* ext, bool recursive)
+void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, 
+                                   HMODULE instance, 
+                                   const wchar_t* path)
+{
+    if (PathIsRelativeW(path) || 0 == path[0])
+    {
+        GetModuleFileNameW(instance, fullpath, MAX_PATH);
+        PathRemoveFileSpecW(fullpath);
+        PathAppendW(fullpath, path);
+    }
+    else
+    {
+        lstrcpynW(fullpath, path, MAX_PATH);
+    }
+    ReplaceSlashes(fullpath);
+}
+
+long Cx_PluginLoader::LoadPlugins(HMODULE instance, 
+                                  const wchar_t* path, 
+                                  const wchar_t* ext, 
+                                  bool recursive)
 {
     wchar_t fullpath[MAX_PATH];
 
+    MakeFullPath(fullpath, instance, path);
     m_instance = instance;
-    GetModuleFileNameW(instance, fullpath, MAX_PATH);
-    PathRemoveFileSpecW(fullpath);
-    PathAppendW(fullpath, path);
 
     return LoadPlugins(fullpath, ext, recursive);
 }
 
-long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool recursive)
+long Cx_PluginLoader::LoadPlugins(const wchar_t* path, 
+                                  const wchar_t* ext, 
+                                  bool recursive)
 {
     WIN32_FIND_DATAW fd;
     wchar_t rootpath[MAX_PATH];
@@ -54,18 +76,8 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool 
     const int extlen = lstrlenW(ext);
     std::vector<std::wstring> subpaths;
 
-    if (PathIsRelativeW(path) || 0 == path[0])
-    {
-        GetModuleFileNameW(NULL, rootpath, MAX_PATH);
-        PathRemoveFileSpecW(rootpath);
-        PathAppendW(rootpath, path);
-    }
-    else
-    {
-        lstrcpynW(rootpath, path, MAX_PATH);
-    }
+    MakeFullPath(rootpath, NULL, path);
 
-    ReplaceSlashes(rootpath);
     lstrcpynW(filename, rootpath, MAX_PATH);
     PathAppendW(filename, L"*.*");
     
@@ -110,7 +122,14 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, bool 
     return count;
 }
 
-long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path, const wchar_t* files, HMODULE instance)
+bool Cx_PluginLoader::issep(wchar_t c)
+{
+    return ',' == c || ';' == c || iswspace(c);
+}
+
+long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path, 
+                                      const wchar_t* files, 
+                                      HMODULE instance)
 {
     wchar_t filename[MAX_PATH];
     wchar_t apppath[MAX_PATH];
@@ -165,9 +184,9 @@ long Cx_PluginLoader::InitializePlugins()
 {
     long nSuccessLoadNum = 0;
 
-    for (unsigned int i = 0; i < m_modules.size(); i++)
+    for (long i = 0; i < GetSize(m_modules); i++)
     {
-        if (m_modules[i].inited)
+        if (m_modules[i].inited || !m_modules[i].hdll)
         {
             continue;
         }
@@ -176,7 +195,14 @@ long Cx_PluginLoader::InitializePlugins()
         FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
             m_modules[i].hdll, "InitializePlugin");
 
-        if (!pfn || (*pfn)())
+        if (pfn && !(*pfn)())
+        {
+            GetModuleFileNameW(m_modules[i].hdll, m_modules[i].filename, MAX_PATH);
+            LOG_WARNING2(LOGHEAD L"IDS_INITPLUGIN_FAIL", m_modules[i].filename);
+            VERIFY(UnloadPlugin(m_modules[i].filename));
+            i--;
+        }
+        else
         {
             nSuccessLoadNum++;
             m_modules[i].inited = true;
@@ -203,7 +229,21 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
         moduleInfo.module = pModule;
         moduleInfo.owned = false;
         moduleInfo.inited = false;
-        m_modules.push_back(moduleInfo);
+        GetModuleFileNameW(moduleInfo.hdll, moduleInfo.filename, MAX_PATH);
+
+        std::vector<MODULEINFO>::iterator it = m_modules.begin();
+        for (; it != m_modules.end(); ++it)
+        {
+            if (StrCmpIW(it->filename, moduleInfo.filename) == 0)
+            {
+                *it = moduleInfo;
+                break;
+            }
+        }
+        if (it == m_modules.end())
+        {
+            m_modules.push_back(moduleInfo);
+        }
 
         RegisterClassEntryTable(instance);
 
@@ -253,7 +293,8 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
     }
 
     typedef bool (*FUNC_CANUNLOAD)();
-    FUNC_CANUNLOAD pfnCan = (FUNC_CANUNLOAD)GetProcAddress(hModule, "xCanUnloadPlugin");
+    FUNC_CANUNLOAD pfnCan = (FUNC_CANUNLOAD)GetProcAddress(
+        hModule, "xCanUnloadPlugin");
 
     if (pfnCan && !pfnCan())
     {
@@ -261,7 +302,9 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
     }
 
     typedef void (*FUNC_UNLOAD)();
-    FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(hModule, "UninitializePlugin");
+    FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
+        hModule, "UninitializePlugin");
+
     if (pfnUnload)
     {
         pfnUnload();
@@ -275,10 +318,10 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 
 long Cx_PluginLoader::UnloadPlugins()
 {
-    int i = 0;
-    int nUnLoadPluginNum = 0;
+    long i = 0;
+    long nUnLoadPluginNum = 0;
 
-    for (i = m_modules.size() - 1; i >= 0; i--)
+    for (i = GetSize(m_modules) - 1; i >= 0; i--)
     {
         typedef void (*FUNC_UNLOAD)();
         FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
@@ -289,7 +332,7 @@ long Cx_PluginLoader::UnloadPlugins()
         }
     }
 
-    for (i = m_modules.size() - 1; i >= 0; i--)
+    for (i = GetSize(m_modules) - 1; i >= 0; i--)
     {
         if (ClearModuleItems(m_modules[i].hdll))
         {
@@ -297,7 +340,7 @@ long Cx_PluginLoader::UnloadPlugins()
         }
     }
 
-    for (i = m_modules.size() - 1; i >= 0; i--)
+    for (i = GetSize(m_modules) - 1; i >= 0; i--)
     {
         ReleaseModule(m_modules[i].hdll);
     }
@@ -305,15 +348,8 @@ long Cx_PluginLoader::UnloadPlugins()
     return nUnLoadPluginNum;
 }
 
-bool Cx_PluginLoader::issep(wchar_t c)
-{
-    return ',' == c || ';' == c || iswspace(c);
-}
-
 bool Cx_PluginLoader::ClearModuleItems(HMODULE hModule)
 {
-    ASSERT(hModule);
-
     Ix_Module* pModule = GetModule(hModule);
 
     if (pModule)

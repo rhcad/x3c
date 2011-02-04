@@ -1,5 +1,12 @@
 X3 C++ PluginFramework
 
+2011-02-04, Zhang Yun Gui
+
+    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Support absolute path in LoadPlugins().
+    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Unload plugin if fail to call InitializePlugins().
+    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h: Add filename in MODULEINFO. Add module index in class map.
+    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp: Don't remove element in ReleaseModule().
+    
 2011-01-18, Zhang Yun Gui <rhcad@hotmail.com>
 
     * pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h:
