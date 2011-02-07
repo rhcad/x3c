@@ -7,6 +7,7 @@
 //          Unload plugin if fail to call InitializePlugins().
 //          Reuse element position in RegisterPlugin().
 // v3: 2011.2.7, ooyg: Implement the delay-loaded feature.
+// v4: 2011.2.8, ooyg: Call SaveClsids() only if clsids have changed.
 
 #include "stdafx.h"
 #include "Cx_PluginLoader.h"
@@ -463,7 +464,7 @@ bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
         if (StrCmpIW(fnend, it->c_str()) == 0)
         {
             return LoadPluginCache(filename)
-                || LoadPlugin(filename) && BuildPluginCache(filename);
+                || LoadPlugin(filename) && (BuildPluginCache(filename) || 1);
         }
     }
 
@@ -503,7 +504,11 @@ bool Cx_PluginLoader::BuildPluginCache(const wchar_t* filename)
     int moduleIndex = GetPluginIndex(filename);
     ASSERT(moduleIndex >= 0);
 
-    return SaveClsids(m_modules[moduleIndex].clsids, filename);
+    CLSIDS oldids;
+    LoadClsids(oldids, filename);
+
+    return oldids != m_modules[moduleIndex].clsids
+        && SaveClsids(m_modules[moduleIndex].clsids, filename);
 }
 
 bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
@@ -607,22 +612,20 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
             L"plugin", L"filename", filename));
+
         seclist = seclist.GetSection(L"clsids");
+        seclist.RemoveChildren(L"clsid");
 
-        if (seclist.GetSectionCount(L"clsid") == 0)
+        for (CLSIDS::const_iterator it = clsids.begin(); 
+            it != clsids.end(); ++it)
         {
-            seclist.RemoveChildren(L"clsid");
-            for (CLSIDS::const_iterator it = clsids.begin(); 
-                it != clsids.end(); ++it)
-            {
-                CConfigIOSection sec(seclist.GetSection(
-                    L"clsid", L"id", std::a2w(it->str()).c_str()));
+            CConfigIOSection sec(seclist.GetSection(
+                L"clsid", L"id", std::a2w(it->str()).c_str()));
 
-                _XCLASSMETA_ENTRY* pEntry = FindEntry(*it);
-                if (pEntry && pEntry->pfnObjectCreator)
-                {
-                    sec->SetString(L"class", std::a2w(pEntry->className).c_str());
-                }
+            _XCLASSMETA_ENTRY* pEntry = FindEntry(*it);
+            if (pEntry && pEntry->pfnObjectCreator)
+            {
+                sec->SetString(L"class", std::a2w(pEntry->className).c_str());
             }
         }
     }

@@ -1,6 +1,6 @@
 X3 C++ PluginFramework
 
-2011-02-04, Zhang Yun Gui
+2011-02-07, Zhang Yun Gui
 
     * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp:
     * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Implement the delay-loaded feature.
