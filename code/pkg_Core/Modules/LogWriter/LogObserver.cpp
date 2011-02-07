@@ -1,5 +1,6 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
+// v2: 2011.2.7, ooyg: Using Ix_AppWorkPath to get logging path.
 
 #include "stdafx.h"
 #include "LogObserver.h"
@@ -8,6 +9,7 @@
 #include <Ix_FileUtility.h>
 #include <Ix_TextFileUtil.h>
 #include <Ix_LogManager.h>
+#include <PluginManager/Ix_AppWorkPath.h>
 
 #pragma warning(disable:4127)       // conditional expression is constant
 #include <log4cplus/configurator.h>
@@ -82,11 +84,7 @@ void CLogObserver::MakerInitVars()
     
     if (m_path.empty())
     {
-        m_path = RelToAbsWithPlugin(L"../log", false);
-    }
-    else if (PathIsRelativeW(m_path.c_str()))
-    {
-        m_path = FileNameRelToAbs(m_path.c_str(), false);
+        m_path = GetAppWorkPath() + L"log";
     }
     
     lstrcpynW(path, m_path.c_str(), MAX_PATH);

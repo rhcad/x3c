@@ -4,6 +4,7 @@
 // author: Zhang Yun Gui, Tao Jian Lin
 // v2: 2011.1.5, ooyg: change class-table to hash_map
 // v3: 2011.2.4, ooyg: Don't remove element in ReleaseModule().
+// v4: 2011.2.7, ooyg: Implement the delay-loaded feature.
 
 #include "StdAfx.h"
 #include "Cx_ObjectFactory.h"
@@ -18,9 +19,7 @@ Cx_ObjectFactory::~Cx_ObjectFactory()
 
 bool Cx_ObjectFactory::IsCreatorRegister(const XCLSID& clsid)
 {
-    int moduleIndex = -1;
-    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid, moduleIndex);
-    return pEntry && pEntry->pfnObjectCreator;
+    return FindEntry(clsid) != NULL;
 }
 
 HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid, 
@@ -31,7 +30,20 @@ HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid,
     *ppv = NULL;
 
     int moduleIndex = -1;
-    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid, moduleIndex);
+    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid, &moduleIndex);
+
+    if (pEntry && !pEntry->pfnObjectCreator && moduleIndex >= 0)
+    {
+        if (!LoadDelayPlugin(m_modules[moduleIndex].filename))
+        {
+            CLSMAP::iterator it = m_clsmap.find(clsid.str());
+            if (it != m_clsmap.end())
+            {
+                it->second.second = -1; // next time: moduleIndex = -1
+            }
+        }
+        pEntry = FindEntry(clsid, &moduleIndex);
+    }
 
     if (pEntry && pEntry->pfnObjectCreator)
     {
@@ -106,10 +118,13 @@ bool Cx_ObjectFactory::HasCreatorReplaced(const XCLSID& clsid)
 }
 
 _XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid, 
-                                               int& moduleIndex)
+                                               int* moduleIndex)
 {
     CLSMAP::iterator it = m_clsmap.find(clsid.str());
-    moduleIndex = (it == m_clsmap.end()) ? -1 : it->second.second;
+    if (moduleIndex)
+    {
+        *moduleIndex = (it == m_clsmap.end()) ? -1 : it->second.second;
+    }
     return (it == m_clsmap.end()) ? NULL : &(it->second.first);
 }
 
@@ -203,11 +218,9 @@ bool Cx_ObjectFactory::RegisterClass(int moduleIndex,
                                      const _XCLASSMETA_ENTRY& cls)
 {
     ASSERT(moduleIndex >= 0 && cls.clsid.valid());
+    _XCLASSMETA_ENTRY* pOldCls = FindEntry(cls.clsid);
 
-    int oldIndex = -1;
-    _XCLASSMETA_ENTRY* pOldCls = FindEntry(cls.clsid, oldIndex);
-
-    if (pOldCls)
+    if (pOldCls && pOldCls->pfnObjectCreator)
     {
         char msg[256] = { 0 };
         sprintf_s(msg, 256, 

@@ -4,6 +4,7 @@
 // author: Zhang Yun Gui, Tao Jian Lin
 // v2: 2011.1.5, ooyg: Change class-table to hash_map
 // v3: 2011.2.4, ooyg: Add filename in MODULEINFO. Add module index in class map.
+// v4: 2011.2.7, ooyg: Implement the delay-loaded feature.
 
 #ifndef _X3_CORE_OBJECTFACTORY_H
 #define _X3_CORE_OBJECTFACTORY_H
@@ -56,10 +57,11 @@ protected:
     Ix_Module* GetModule(HMODULE hModule);
     long RegisterClassEntryTable(HMODULE hModule);
     void ReleaseModule(HMODULE hModule);
+    _XCLASSMETA_ENTRY* FindEntry(const XCLSID& clsid, int* moduleIndex = NULL);
 
 private:
-    _XCLASSMETA_ENTRY* FindEntry(const XCLSID& clsid, int& moduleIndex);
     bool RegisterClass(int moduleIndex, const _XCLASSMETA_ENTRY& cls);
+    virtual bool LoadDelayPlugin(const wchar_t* filename) = 0;
 };
 
 #endif // _X3_CORE_OBJECTFACTORY_H

@@ -253,6 +253,10 @@
 			Name="Interface"
 			>
 			<File
+				RelativePath="..\..\Interface\PluginManager\Ix_AppWorkPath.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Interface\PluginManager\Ix_PluginLoader.h"
 				>
 			</File>

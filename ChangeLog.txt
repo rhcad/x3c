@@ -2,6 +2,16 @@ X3 C++ PluginFramework
 
 2011-02-04, Zhang Yun Gui
 
+    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp:
+    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Implement the delay-loaded feature.
+    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h:
+    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp: Implement the delay-loaded feature.
+    
+    * pkg_Core\Modules\PluginManager\Module.cpp: Add Ix_AppWorkPath.
+    * pkg_Core\Modules\LogWriter\LogObserver.cpp: Using Ix_AppWorkPath to get logging path.
+    
+2011-02-04, Zhang Yun Gui
+
     * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Support absolute path in LoadPlugins().
     * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Unload plugin if fail to call InitializePlugins().
     * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h: Add filename in MODULEINFO. Add module index in class map.
