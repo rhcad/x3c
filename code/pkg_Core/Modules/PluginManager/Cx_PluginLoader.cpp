@@ -407,28 +407,28 @@ void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
                                     const wchar_t* iniFile)
 {
     DWORD size = 1024;
-	DWORD retsize = size;
-	wchar_t* buf = NULL;
+    DWORD retsize = size;
+    wchar_t* buf = NULL;
 
     m_delayFiles.clear();
 
-	while (true)
-	{
-		buf = new wchar_t[size];
-		wmemset(buf, 0, size);
+    while (true)
+    {
+        buf = new wchar_t[size];
+        wmemset(buf, 0, size);
 
-		retsize = GetPrivateProfileSectionW(sectionName, buf, size, iniFile);
-		if (retsize <= size - sizeof(wchar_t))
+        retsize = GetPrivateProfileSectionW(sectionName, buf, size, iniFile);
+        if (retsize <= size - sizeof(wchar_t))
         {
             break;
         }
-		else
-		{
-			delete[] buf;
+        else
+        {
+            delete[] buf;
             buf = NULL;
-			size += 512;
-		}
-	}
+            size += 512;
+        }
+    }
 
     for (wchar_t* pw = buf;  *pw != 0;  pw += wcslen(pw) + 1)
     {
@@ -437,9 +437,9 @@ void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
         std::wstring filename(pw);
         unsigned pos = filename.find(L'=');
 
-		if (pos != std::wstring::npos)
-		{
-			filename = filename.substr(0, pos);
+        if (pos != std::wstring::npos)
+        {
+            filename = filename.substr(0, pos);
             m_delayFiles.push_back(filename);
         }
     }
@@ -556,6 +556,27 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
     return true;
 }
 
+static const wchar_t* TrimFileName(const wchar_t* filename)
+{
+    const wchar_t* name = PathFindFileNameW(filename);
+    int folder = 0;
+
+    while (name > filename)
+    {
+        name--;
+        if ('\\' == *name || '/' == *name)
+        {
+            if (++folder > 2)
+            {
+                name++;
+                break;
+            }
+        }
+    }
+
+    return name;
+}
+
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/ConfigIOSection.h>
 #include <ConvStr.h>
@@ -583,7 +604,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
-            L"plugin", L"filename", filename, false));
+            L"plugin", L"filename", TrimFileName(filename), false));
         seclist = seclist.GetSection(L"clsids", false);
 
         for (int i = 0; i < 999; i++)
@@ -611,7 +632,7 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
-            L"plugin", L"filename", filename));
+            L"plugin", L"filename", TrimFileName(filename)));
 
         seclist = seclist.GetSection(L"clsids");
         seclist.RemoveChildren(L"clsid");
