@@ -1,6 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 // v1: 2011.2.7, ooyg: Add Ix_AppWorkPath.
+// v2: 2011.2.8, ooyg: Add Ix_PluginDelayLoad.
 
 #include "stdafx.h"
 #include "Cx_PluginLoader.h"
@@ -23,7 +24,8 @@ public:
 public:
     HRESULT CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll)
     {
-        if (CLSID_AppWorkPath == clsid)
+        if (CLSID_AppWorkPath == clsid
+            || CLSID_PluginDelayLoad == clsid)
         {
             *ppv = this;
             return S_OK;

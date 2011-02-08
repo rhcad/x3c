@@ -4,16 +4,19 @@
 // author: Zhang Yun Gui, Tao Jian Lin
 // v1: 2010.12
 // v3: 2011.2.7, ooyg: Implement the delay-loaded feature.
+// v4: 2011.2.8, ooyg: Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
 
 #ifndef _X3_CORE_PLUGINLOADER_H
 #define _X3_CORE_PLUGINLOADER_H
 
 #include "Cx_ObjectFactory.h"
 #include "Ix_PluginLoader.h"
+#include "Ix_PluginDelayLoad.h"
 
 class Cx_PluginLoader
     : public Cx_ObjectFactory
     , public Ix_PluginLoader
+    , public Ix_PluginDelayLoad
 {
 public:
     Cx_PluginLoader();
@@ -21,6 +24,8 @@ public:
 
     HMODULE GetMainModuleHandle();
 
+    // From Ix_PluginLoader
+    //
     virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
         const wchar_t* ext = L".plugin.dll", bool recursive = true);
     virtual long LoadPlugins(const wchar_t* path, 
@@ -33,6 +38,11 @@ public:
     virtual bool UnloadPlugin(const wchar_t* name);
     virtual long UnloadPlugins();
 
+    // From Ix_PluginDelayLoad
+    //
+    virtual void AddObserverPlugin(HMODULE hdll, const char* obtype);
+    virtual void FireFirstEvent(const char* obtype);
+
 private:
     bool issep(wchar_t c);
     bool ClearModuleItems(HMODULE hModule);
@@ -44,6 +54,7 @@ private:
     virtual bool LoadDelayPlugin(const wchar_t* filename);
     void VerifyLoadFileNames();
     void LoadFileNames(const wchar_t* sectionName, const wchar_t* iniFile);
+    bool IsDelayPlugin(const wchar_t* filename);
     bool LoadPluginOrDelay(const wchar_t* filename);
     bool BuildPluginCache(const wchar_t* filename);
     bool LoadPluginCache(const wchar_t* filename);

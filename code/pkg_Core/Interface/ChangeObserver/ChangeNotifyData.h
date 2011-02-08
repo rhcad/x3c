@@ -1,7 +1,9 @@
 /*! \file ChangeNotifyData.h
  *  \brief Define the base classes of change observer data: ChangeNotifyData, ChangeObserver.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \version
+ *      2010.10.22: First release.
+ *      2011.02.08: Add parameter 'fromdll' in RegisterObserver.
  */
 #ifndef X3_OBSERVER_CHANGENOTIFYDATA_H_
 #define X3_OBSERVER_CHANGENOTIFYDATA_H_
@@ -92,7 +94,7 @@ protected:
         Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
         if (pIFManager.IsNotNull())
         {
-            pIFManager->RegisterObserver(GetChangeType(), this);
+            pIFManager->RegisterObserver(GetChangeType(), this, xGetModuleHandle());
         }
     }
 

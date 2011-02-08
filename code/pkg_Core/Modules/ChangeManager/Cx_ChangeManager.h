@@ -2,7 +2,8 @@
 // http://sourceforge.net/projects/x3c/
 
 // author: Zhang Yun Gui
-// v2: 2011.1.5, change to hash_multimap
+// v2, 2011.1.5: Change to hash_multimap
+// v3, 2011.2.8: Support delay-load feature for observer plugins.
 
 #ifndef _X3_CORE_CHANGEMANAGER_H
 #define _X3_CORE_CHANGEMANAGER_H
@@ -23,7 +24,8 @@ protected:
     virtual ~Cx_ChangeManager();
 
 protected:
-    virtual void RegisterObserver(const char* type, Ix_ChangeObserver* observer);
+    virtual void RegisterObserver(const char* type, 
+        Ix_ChangeObserver* observer, HMODULE fromdll = NULL);
     virtual void UnRegisterObserver(const char* type, Ix_ChangeObserver* observer);
     virtual void ChangeNotify(const char* type, ChangeNotifyData* data);
 
@@ -32,6 +34,9 @@ private:
     typedef std::pair<std::string, Ix_ChangeObserver*> ObserverPair;
     typedef ObserverMap::iterator MAP_IT;
     ObserverMap     m_observers;
+
+    std::vector<std::pair<HMODULE, std::string> >   m_callers;
+    std::vector<std::string>                        m_notified;
 };
 
 #endif // _X3_CORE_CHANGEMANAGER_H

@@ -2,10 +2,12 @@
 // http://sourceforge.net/projects/x3c/
 
 // author: Zhang Yun Gui
-// v2: 2011.1.5, change to hash_multimap
+// v2, 2011.1.5: Change to hash_multimap
+// v3, 2011.2.8: Support delay-load feature for observer plugins.
 
 #include "StdAfx.h"
 #include "Cx_ChangeManager.h"
+#include "../PluginManager/Ix_PluginDelayLoad.h"
 
 Cx_ChangeManager::Cx_ChangeManager()
 {
@@ -15,9 +17,23 @@ Cx_ChangeManager::~Cx_ChangeManager()
 {
 }
 
-void Cx_ChangeManager::RegisterObserver(const char* type, Ix_ChangeObserver* observer)
+void Cx_ChangeManager::RegisterObserver(const char* type, 
+                                        Ix_ChangeObserver* observer, 
+                                        HMODULE fromdll)
 {
     ASSERT(observer && type);
+
+    std::pair<HMODULE, std::string> key(fromdll, type);
+    if (fromdll && find_value(m_callers, key) < 0)
+    {
+        m_callers.push_back(key);
+
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(CLSID_PluginDelayLoad);
+        if (pIFLoader)
+        {
+            pIFLoader->AddObserverPlugin(fromdll, type);
+        }
+    }
 
     std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
 
@@ -50,6 +66,17 @@ void Cx_ChangeManager::UnRegisterObserver(const char* type, Ix_ChangeObserver* o
 void Cx_ChangeManager::ChangeNotify(const char* type, ChangeNotifyData* data)
 {
     ASSERT(data != NULL);
+
+    if (find_value(m_notified, std::string(type)) < 0)
+    {
+        m_notified.push_back(type);
+
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(CLSID_PluginDelayLoad);
+        if (pIFLoader)
+        {
+            pIFLoader->FireFirstEvent(type);
+        }
+    }
 
     std::pair<MAP_IT, MAP_IT> range (m_observers.equal_range(type));
 

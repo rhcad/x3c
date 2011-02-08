@@ -1,13 +1,19 @@
 X3 C++ PluginFramework
 
+2011-02-08, Zhang Yun Gui
+
+    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.h: 
+    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: 
+        Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
+        
+    * pkg_Core\Interface\ChangeObserver\ChangeNotifyData.h:
+    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.h:
+    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.cpp:
+        Support delay-load feature for observer plugins.
+    
 2011-02-07, Zhang Yun Gui
 
-    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp:
-    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Implement the delay-loaded feature.
-    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h:
-    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp: Implement the delay-loaded feature.
-    
-    * pkg_Core\Modules\PluginManager\Module.cpp: Add Ix_AppWorkPath.
+    * pkg_Core\Modules\PluginManager: Implement the delay-loaded feature. Add Ix_AppWorkPath.
     * pkg_Core\Modules\LogWriter\LogObserver.cpp: Using Ix_AppWorkPath to get logging path.
     
 2011-02-04, Zhang Yun Gui
@@ -25,7 +31,7 @@ X3 C++ PluginFramework
 2011-01-15, Zhang Yun Gui <rhcad@hotmail.com>
 
     * Remove cppunit 1.12.1 include files.
-    * Replace StrCpyNW to lstrcpynW (because for VC6 shell32.dll no StrCpyNW entry point).
+    * Replace StrCpyNW to lstrcpynW (because for VC6 shell32.dll no StrCpyNW entry point in Win7).
     * Simplify license note in *.h and *.cpp.
     
     * pkg_Core\Interface\PluginManager\PluginManager.h: add TextUtility.plugin.dll in LoadCorePlugins().

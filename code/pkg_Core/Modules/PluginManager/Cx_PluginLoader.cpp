@@ -8,6 +8,8 @@
 //          Reuse element position in RegisterPlugin().
 // v3: 2011.2.7, ooyg: Implement the delay-loaded feature.
 // v4: 2011.2.8, ooyg: Call SaveClsids() only if clsids have changed.
+//          Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
+//
 
 #include "stdafx.h"
 #include "Cx_PluginLoader.h"
@@ -227,7 +229,17 @@ long Cx_PluginLoader::InitializePlugins()
 int Cx_PluginLoader::GetPluginIndex(const wchar_t* filename)
 {
     int i = GetSize(m_modules);
-    while (--i >= 0 && StrCmpIW(filename, m_modules[i].filename) != 0) ;
+    int len = lstrlenW(filename);
+
+    while (--i >= 0)
+    {
+        int leni = lstrlenW(m_modules[i].filename);
+        if (StrCmpIW(filename, &filename[max(0, leni - len)]) == 0)
+        {
+            break;
+        }
+    }
+
     return i;
 }
 
@@ -301,16 +313,17 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 
 bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 {
-    HMODULE hModule = GetModuleHandleW(name);
+    int moduleIndex = GetPluginIndex(name);
+    HMODULE hdll = moduleIndex < 0 ? NULL : m_modules[moduleIndex].hdll;
 
-    if (!hModule || FindModule(hModule) < 0)
+    if (NULL == hdll)
     {
         return false;
     }
 
     typedef bool (*FUNC_CANUNLOAD)();
     FUNC_CANUNLOAD pfnCan = (FUNC_CANUNLOAD)GetProcAddress(
-        hModule, "xCanUnloadPlugin");
+        hdll, "xCanUnloadPlugin");
 
     if (pfnCan && !pfnCan())
     {
@@ -319,15 +332,15 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 
     typedef void (*FUNC_UNLOAD)();
     FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
-        hModule, "UninitializePlugin");
+        hdll, "UninitializePlugin");
 
     if (pfnUnload)
     {
         pfnUnload();
     }
 
-    VERIFY(ClearModuleItems(hModule));
-    ReleaseModule(hModule);
+    VERIFY(ClearModuleItems(hdll));
+    ReleaseModule(hdll);
 
     return true;
 }
@@ -448,6 +461,23 @@ void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
     buf = NULL;
 }
 
+bool Cx_PluginLoader::IsDelayPlugin(const wchar_t* filename)
+{
+    int len = lstrlenW(filename);
+    std::vector<std::wstring>::const_iterator it = m_delayFiles.begin();
+
+    for (; it != m_delayFiles.end(); ++it)
+    {
+        const wchar_t* fnend = &filename[max(0, len - GetSize(*it))];
+        if (StrCmpIW(fnend, it->c_str()) == 0)
+        {
+            break;
+        }
+    }
+
+    return it != m_delayFiles.end();
+}
+
 bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
 {
     if (FindModule(GetModuleHandleW(filename)) >= 0)
@@ -455,17 +485,10 @@ bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
         return false;
     }
 
-    int len = lstrlenW(filename);
-    std::vector<std::wstring>::iterator it = m_delayFiles.begin();
-
-    for (; it != m_delayFiles.end(); ++it)
+    if (IsDelayPlugin(filename))
     {
-        const wchar_t* fnend = &filename[max(0, len - GetSize(*it))];
-        if (StrCmpIW(fnend, it->c_str()) == 0)
-        {
-            return LoadPluginCache(filename)
-                || LoadPlugin(filename) && (BuildPluginCache(filename) || 1);
-        }
+        return LoadPluginCache(filename)
+            || LoadPlugin(filename) && (BuildPluginCache(filename) || 1);
     }
 
     return LoadPlugin(filename);
@@ -604,7 +627,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
-            L"plugin", L"filename", TrimFileName(filename), false));
+            L"plugins/plugin", L"filename", TrimFileName(filename), false));
         seclist = seclist.GetSection(L"clsids", false);
 
         for (int i = 0; i < 999; i++)
@@ -632,7 +655,7 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
-            L"plugin", L"filename", TrimFileName(filename)));
+            L"plugins/plugin", L"filename", TrimFileName(filename)));
 
         seclist = seclist.GetSection(L"clsids");
         seclist.RemoveChildren(L"clsid");
@@ -658,4 +681,50 @@ bool Cx_PluginLoader::SaveClsids()
 {
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
     return pIFFile && pIFFile->Save();
+}
+
+void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
+{
+    wchar_t filename[MAX_PATH] = { 0 };
+
+    GetModuleFileNameW(hdll, filename, MAX_PATH);
+    if (IsDelayPlugin(filename))
+    {
+        Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
+        if (pIFFile)
+        {
+            CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+                L"observers/observer", L"type", std::a2w(obtype).c_str()));
+            seclist.GetSection(L"plugin", L"filename", TrimFileName(filename));
+        }
+    }
+}
+
+void Cx_PluginLoader::FireFirstEvent(const char* obtype)
+{
+    Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
+
+    if (pIFFile)
+    {
+        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+            L"observers/observer", L"type", std::a2w(obtype).c_str(), false));
+
+        for (int i = 0; i < 999; i++)
+        {
+            CConfigIOSection sec(seclist.GetSectionByIndex(L"plugin", i));
+            std::wstring shortflname(sec->GetString(L"filename"));
+
+            if (shortflname.empty())
+            {
+                break;
+            }
+
+            int moduleIndex = GetPluginIndex(shortflname.c_str());
+
+            if (moduleIndex >= 0 && !m_modules[moduleIndex].hdll)
+            {
+                LoadDelayPlugin(m_modules[moduleIndex].filename);
+            }
+        }
+    }
 }
