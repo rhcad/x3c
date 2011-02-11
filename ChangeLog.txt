@@ -1,51 +1,50 @@
 X3 C++ PluginFramework
 
-2011-02-08, Zhang Yun Gui
+------v1.0.5------
 
-    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.h: 
-    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: 
-        Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
-        
-    * pkg_Core\Interface\ChangeObserver\ChangeNotifyData.h:
-    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.h:
-    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.cpp:
-        Support delay-load feature for observer plugins.
-    
-2011-02-07, Zhang Yun Gui
+2011-02-08
 
-    * pkg_Core\Modules\PluginManager: Implement the delay-loaded feature. Add Ix_AppWorkPath.
-    * pkg_Core\Modules\LogWriter\LogObserver.cpp: Using Ix_AppWorkPath to get logging path.
+    * PluginManager: Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
+    * ChangeObserver: Support delay-load feature for observer plugins.
     
-2011-02-04, Zhang Yun Gui
+2011-02-07
 
-    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Support absolute path in LoadPlugins().
-    * pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp: Unload plugin if fail to call InitializePlugins().
-    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h: Add filename in MODULEINFO. Add module index in class map.
-    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp: Don't remove element in ReleaseModule().
+    * PluginManager: Implement the delay-loaded feature. Add Ix_AppWorkPath.
+    * LogWriter: Using Ix_AppWorkPath to get logging path.
     
-2011-01-18, Zhang Yun Gui <rhcad@hotmail.com>
+2011-02-04
 
-    * pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h:
-    * pkg_Core\Modules\ConfigXml\Cx_ConfigXml.cpp: Delay call CoUninitialize until plugin is unloading.
+    * PluginManager: Support absolute path in LoadPlugins().
+        Unload plugin if fail to call InitializePlugins().
+        Add filename in MODULEINFO. Add module index in class map.
+        Don't remove element in ReleaseModule().
     
-2011-01-15, Zhang Yun Gui <rhcad@hotmail.com>
+------v1.0.4------
+
+2011-01-18
+
+    * ConfigXml: Delay call CoUninitialize until plugin is unloading.
+    
+2011-01-15
 
     * Remove cppunit 1.12.1 include files.
     * Replace StrCpyNW to lstrcpynW (because for VC6 shell32.dll no StrCpyNW entry point in Win7).
     * Simplify license note in *.h and *.cpp.
     
-    * pkg_Core\Interface\PluginManager\PluginManager.h: add TextUtility.plugin.dll in LoadCorePlugins().
+    * PluginManager\PluginManager.h: add TextUtility.plugin.dll in LoadCorePlugins().
     
     * TextUtility v1.0.0.2:
-    * pkg_Core\Modules\TextUtility\Cx_TextUtil.cpp: IsSpaceChar() support '\r' and '\n'.
+    * TextUtility\Cx_TextUtil.cpp: IsSpaceChar() support '\r' and '\n'.
 
-2011-01-13, Zhang Yun Gui <rhcad@hotmail.com>
+2011-01-13
 
     * Move Ix_UIConfig.h to pkg_AppUI. Fix doxyfile files.
     
     * ConfigXml v1.0.0.3: 
-    * pkg_Core\Modules\ConfigXml\Cx_XmlSection.cpp: fix default return value of Cx_XmlSection::Setxxx.
-    
+    * ConfigXml\Cx_XmlSection.cpp: fix default return value of Cx_XmlSection::Setxxx.
+
+------v1.0.3------
+
 2011-01-12, Zhang Yun Gui <rhcad@hotmail.com>
 
     * Rename text files(add .txt).
@@ -63,10 +62,12 @@ X3 C++ PluginFramework
 2011-01-09, Zhang Yun Gui <rhcad@hotmail.com>
 
     * ConfigXml v1.0.0.2:
-    * pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h: 
+    * ConfigXml\ConfigXmlImpl.h: 
         automatic call CoInitializeEx to avoid caller forget it.
-    * pkg_Core\Modules\ConfigXml\XmlUtil\XmlUtil.cpp: support MSXML6 and MSXML4.
+    * ConfigXml\XmlUtil\XmlUtil.cpp: support MSXML6 and MSXML4.
     * add InitXMLDLL.h for applications to Ensure MSXML correctly initialized.
+
+------v1.0.2------
 
 2011-01-06, Zhang Yun Gui <rhcad@hotmail.com>
 
@@ -81,11 +82,11 @@ X3 C++ PluginFramework
 2011-01-05, Zhang Yun Gui <rhcad@hotmail.com>
 
     * ChangeManager v1.0.0.2:
-    * pkg_Core\Modules\ChangeManager\Cx_ChangeManager.h and cpp:
+    * ChangeManager\Cx_ChangeManager.h and cpp:
     change std::multimap to std::hash_multimap, remove my hash function.
 
     * PluginManager v1.0.0.2:
-    * pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h and cpp:
+    * PluginManager\Cx_ObjectFactory.h and cpp:
         change class-table from std::map to std::hash_map. add 'Tao Jian Lin' to author list.
 
     * doc\Doxygen\Interface.doxyfile: change include files to relative paths.
