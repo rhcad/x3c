@@ -1,5 +1,5 @@
 //! \file SafeCall.h
-//! \brief 定义普通指针和智能指针的安全调用的宏和函数
+//! \brief Define functions to call pointer safely.
 
 #ifndef __APPCORE_SAFECALL_H
 #define __APPCORE_SAFECALL_H
@@ -20,10 +20,10 @@
 #undef SafeDelete
 #undef SafeDeleteArray
 
-//! 删除指针对象
+//! Delete pointer object.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param p 指针对象，采用 new 申请的
+    \param p pointer object created using 'new'.
 */
 template<class T>
 void SafeDelete(T*& p)
@@ -34,10 +34,10 @@ void SafeDelete(T*& p)
     *(&p) = NULL;
 }
 
-//! 删除指针数组对象
+//! Delete pointer array object.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param p 指针数组对象，采用 new[] 申请的
+    \param p pointer array object created using 'new []'.
 */
 template<class T>
 void SafeDeleteArray(T*& p)
@@ -47,10 +47,10 @@ void SafeDeleteArray(T*& p)
     p = NULL;
 }
 
-//! 删除容器内的所有指针元素
+//! Delete all elements in a container.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param container STL数组变量，例如" vector<int*> arr; "
+    \param container STL container variable (vector, list, map). eg: " vector<int*> arr; "
 */
 template<class CONTAINER>
 void DeletePtrInContainer(CONTAINER& container)

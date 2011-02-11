@@ -1,5 +1,5 @@
 /*! \file ScanFiles.h
- *  \brief 定义扫描目录文件的函数 ScanFiles 及回调类 CScanFilesCallback
+ *  \brief Define directory scanning function (ScanFiles) and callback class CScanFilesCallback.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -8,27 +8,27 @@
 
 #include <shlwapi.h>
 
-//! 扫描目录文件时的回调接口
+//! Callback interface for directory scanning.
 interface IScanFilesCallback
 {
-    //! 扫描到一个子目录的通知
+    //! Notify when a subfolder is found.
     /*!
-        \param[in] path 扫描到的子目录的文件全名，末尾有反斜号
-        \param[in,out] recursive 是否扫描该子目录下的文件，默认为 ScanFiles() 传入的值
-        \param[in,out] cancel 如果要停止所有扫描则设置为 true
+        \param[in] path absolute path ending with slash char.
+        \param[in,out] recursive True if need to include all child folders. The default value is passed by ScanFiles.
+        \param[in,out] cancel If you want to stop scanning then set it as true.
     */
     virtual void OnCheckPath(const wchar_t* path, bool& recursive, bool& cancel) = 0;
 
-    //! 扫描到一个文件的通知
+    //! Notify when a file is found.
     /*!
-        \param[in] filename 扫描到的文件的文件全名
-        \param[in] ext 如果有后缀名则以点号开头，否则为空串
-        \param[in,out] cancel 如果要停止所有扫描则设置为 true
+        \param[in] filename absolute file name.
+        \param[in] ext The postfix of the file beginning with dot, or empty string if the file has not postfix.
+        \param[in,out] cancel If you want to stop scanning then set it as true.
     */
     virtual void OnCheckFile(const wchar_t* filename, const wchar_t* ext, bool& cancel) = 0;
 };
 
-//! 扫描目录文件时的回调接口的默认实现类
+//! The default implement class of IScanFilesCallback.
 /*!
     \ingroup _GROUP_UTILFUNC
     \see ScanFiles
@@ -45,13 +45,13 @@ public:
         { filename; ext; cancel; }
 };
 
-//! 扫描目录下的所有文件
+//! Scans all files in a directory.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param back 传入回调接口的实现对象的地址
-    \param path 目录的文件全名，非空，末尾的反斜号可有可无
-    \param recursive 是否扫描子目录下的文件
-    \return 扫描过的文件总数
+    \param back Object address of scanning callback.
+    \param path Absolute path to scan. It must be not empty and the end slash char is unnecessary.
+    \param recursive True if need to include all child folders. False if only one folder.
+    \return count of files found.
     \see CScanFilesCallback
 */
 inline long ScanFiles(IScanFilesCallback* back, 
@@ -109,7 +109,7 @@ inline long ScanFiles(IScanFilesCallback* back,
     return count;
 }
 
-//! 扫描特定后缀名文件的回调类
+//! Callback class for scanning files of the specified postfix.
 /*!
     \ingroup _GROUP_UTILFUNC
     \see ScanFiles
@@ -117,10 +117,10 @@ inline long ScanFiles(IScanFilesCallback* back,
 class CScanFilesByExtension : public CScanFilesCallback
 {
 public:
-    //! 构造函数
+    //! Constructor.
     /*!
-        \param files 用于存放找到的文件全名
-        \param ext 特定的后缀名，以点号开头
+        \param files Filling with filenames found.
+        \param ext The specified postfix beginning with dot.
     */
     CScanFilesByExtension(std::vector<std::wstring>* files, const std::wstring& ext)
         : m_files(files), m_ext(ext)
@@ -138,8 +138,8 @@ protected:
     }
 
 protected:
-    std::vector<std::wstring>*  m_files;    //!< 存放找到的文件全名
-    std::wstring                m_ext;      //!< 特定的后缀名，以点号开头
+    std::vector<std::wstring>*  m_files;    //!< Filling with filenames found.
+    std::wstring                m_ext;      //!< The specified postfix beginning with dot.
 };
 
 #endif // UTILFUNC_SCANFILES_H_

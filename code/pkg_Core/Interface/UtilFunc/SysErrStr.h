@@ -1,14 +1,14 @@
 //! \file SysErrStr.h
-//! \brief 定义得到系统错误的描述内容的函数 GetSystemErrorString
+//! \brief Define a function to obtains error message strings: GetSystemErrorString.
 
 #ifndef UTILFUNC_SYSERRSTR_H_
 #define UTILFUNC_SYSERRSTR_H_
 
-//! 得到系统错误的描述内容
+//! Obtains error message strings for a error code.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param errorcode 错误码，例如 GetLastError() 返回值或 HRESULT 值
-    \return 错误信息描述内容
+    \param errorcode the error code returned by GetLastError or HRESULT value.
+    \return error message strings.
 */
 inline std::wstring GetSystemErrorString(unsigned long errorcode)
 {

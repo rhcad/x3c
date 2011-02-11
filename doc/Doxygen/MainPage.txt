@@ -3,9 +3,9 @@
     \defgroup _GROUP_PLUGIN_CORE2_ The others of core component.
     \defgroup _GROUP_PLUGIN_LOG_ Logging output.
     \defgroup _GROUP_CHANGE_OBSERVER_ Event observer.
-    \defgroup _GROUP_PLUGIN_XML_ XML interfaces.
     \defgroup _GROUP_UTILFUNC Some frequently-used functions.
     \defgroup _GROUP_UTILITY_ Some frequently-used utilities.
+    \defgroup _GROUP_PLUGIN_XML_ XML interfaces.
     \defgroup _GROUP_APPUI_ Application's UI.
 */
 
@@ -34,14 +34,14 @@
     
     - \ref _GROUP_CHANGE_OBSERVER_ "Event observer." \n
         Change observer classes for event-driven programming.\n\n
-
-    - \ref _GROUP_PLUGIN_XML_ "XML interfaces." \n
-        The interfaces for data I/O and data object management.\n
-        There is a plugin implemented using MSXML DOM Parser.\n\n
         
     - \ref _GROUP_UTILFUNC "Frequently-used functions." \n
         Some frequently-used functions for developing plugins.\n\n
         
     - \ref _GROUP_UTILITY_ "Frequently-used utilities." \n
         Some frequently-used utility interfaces for developing plugins.\n\n
+        
+    - \ref _GROUP_PLUGIN_XML_ "XML interfaces." \n
+        The interfaces for data I/O and data object management.\n
+        There is a plugin implemented using MSXML DOM Parser.\n\n
 */

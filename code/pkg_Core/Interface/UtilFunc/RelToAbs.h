@@ -1,5 +1,5 @@
 /*! \file RelToAbs.h
- *  \brief 定义相对文件名转换到绝对文件名的函数 RelToAbsWithPlugin, FileNameRelToAbs
+ *  \brief Define functions converting relative path to absolute path: RelToAbsWithPlugin, FileNameRelToAbs
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -10,7 +10,7 @@
 #include <shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
 
-//! 得到主程序的模块句柄，通常为EXE，是主动加载插件的模块
+//! Return the module handle of main application which load plugins initiative.
 inline HMODULE GetMainModuleHandle()
 {
     HMODULE hModule = GetModuleHandleW(L"PluginManagerX3.dll");
@@ -19,12 +19,12 @@ inline HMODULE GetMainModuleHandle()
     return fn ? (*fn)() : NULL;
 }
 
-//! 相对文件名转换到绝对文件名，相对于当前插件文件
+//! Converte relative path to absolute path basing on the current plugin file.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param relname 要转换的相对路径
-    \param isfile 相对路径是文件名还是路径名
-    \return 转换后的绝对路径，如果isfile为false则绝对路径末尾有斜号
+    \param relname Relative path or file name to be converted.
+    \param isfile 'relname' is a file name or path.
+    \return Absolute path converted. If isfile is false then the result will end with slash char.
     \see FileNameRelToAbs
 */
 inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = true)
@@ -44,12 +44,12 @@ inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = tru
     return path;
 }
 
-//! 相对文件名转换到绝对文件名
-/*! 相对于主模块文件（通常为EXE，是主动加载插件的模块）
+//! Converte relative path to absolute path basing on the main application.
+/*!
     \ingroup _GROUP_UTILFUNC
-    \param relname 要转换的相对路径
-    \param isfile 相对路径是文件名还是路径名
-    \return 转换后的绝对路径，如果isfile为false则绝对路径末尾有斜号
+    \param relname Relative path or file name to be converted.
+    \param isfile 'relname' is a file name or path.
+    \return Absolute path converted. If isfile is false then the result will end with slash char.
     \see GetMainModuleHandle
 */
 inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
@@ -69,12 +69,13 @@ inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
     return path;
 }
 
-//! 构造临时文件全名
-/*! 相对于主模块文件（通常为EXE，是主动加载插件的模块）
+//! Generate a absolute path in windows temporary path.
+/*! The result path is a subfolder of the windows temporary path (using GetTempPath).\n
+    The subfolder name is file name of the main application which load plugins initiative.
     \ingroup _GROUP_UTILFUNC
-    \param relname 要转换的相对路径，可以包含子目录名，例如“Log.txt”
-    \param isfile 相对路径是文件名还是路径名
-    \return 转换后的绝对路径，如果isfile为false则绝对路径末尾有斜号
+    \param relname Relative path or file name to be converted such as 'Log.txt' and 'myapp/output'.
+    \param isfile 'relname' is a file name or path.
+    \return Absolute path converted. If isfile is false then the result will end with slash char.
     \see GetMainModuleHandle
 */
 inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile = true)
@@ -102,23 +103,23 @@ inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile =
     return path;
 }
 
-//! 确保路径末尾有反斜号
+//! Ensure a path ending with slash char.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param[in,out] wstrPath 路径文件全名
-    \return 和wstrPath相同
+    \param[in,out] path absolute path name.
+    \return same as 'path'.
 */
-inline std::wstring EnsurePathHasSlash(std::wstring& wstrPath)
+inline std::wstring EnsurePathHasSlash(std::wstring& path)
 {
-    if (!wstrPath.empty())
+    if (!path.empty())
     {
-        wchar_t c = wstrPath[wstrPath.size() - 1];
+        wchar_t c = path[path.size() - 1];
         if (c != '\\' && c != '/')
         {
-            wstrPath += '\\';
+            path += '\\';
         }
     }
-    return wstrPath;
+    return path;
 }
 
 #endif // UTILFUNC_RELTOABS_H_

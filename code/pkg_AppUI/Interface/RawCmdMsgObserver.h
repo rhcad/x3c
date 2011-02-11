@@ -1,5 +1,5 @@
 /*! \file RawCmdMsgObserver.h
- *  \brief 定义命令消息观察者类 RawCmdMsgObserver
+ *  \brief Define window's command message observer: RawCmdMsgObserver
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.29
  */
@@ -8,17 +8,17 @@
 
 #include <ChangeNotifyData.h>
 
-//! 命令消息数据
+//! Window's command message observer data.
 /*!
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see RawCmdMsgObserver
 */
 struct RawCmdMsgEventData : public ChangeNotifyData
 {
-    //! 广播执行命令消息的构造函数
+    //! Constructor for dispatching command execute message.
     /*!
-        \param _id 菜单项资源ID
-        \param _sender 消息发送者的类型信息，由具体应用决定其含义
+        \param _id resource id of the menu item.
+        \param _sender additional infomation interpreted by message sender.
     */
     RawCmdMsgEventData(UINT _id, int _sender = 0)
         : ChangeNotifyData("RawCmdMsgEvent")
@@ -27,13 +27,13 @@ struct RawCmdMsgEventData : public ChangeNotifyData
     {
     }
 
-    //! 广播命令更新消息的构造函数
+    //! Constructor for dispatching the update of command UI message.
     /*!
-        \param[in] _id 菜单项资源ID
-        \param[in,out] _enabled 由响应者设置命令是否可用
-        \param[in,out] _checked 由响应者设置命令是否打勾
-        \param[in,out] _text 由响应者设置命令的显示文本
-        \param[in] _sender 消息发送者的类型信息，由具体应用决定其含义
+        \param[in] _id resource id of the menu item.
+        \param[in,out] _enabled enables or disables.
+        \param[in,out] _checked checks or unchecks.
+        \param[in,out] _text sets display text.
+        \param[in] _sender additional infomation interpreted by message sender.
     */
     RawCmdMsgEventData(UINT _id, bool& _enabled, bool& _checked, 
         std::wstring& _text, int _sender = 0)
@@ -51,7 +51,7 @@ struct RawCmdMsgEventData : public ChangeNotifyData
     std::wstring*   text;
 };
 
-//! 命令消息观察者基类
+//! Window's command message observer base class.
 /*!
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see RawCmdMsgEventData
@@ -59,17 +59,17 @@ struct RawCmdMsgEventData : public ChangeNotifyData
 class RawCmdMsgObserver : public ChangeObserver
 {
 protected:
-    //! 构造函数
+    //! Constructor
     RawCmdMsgObserver() : ChangeObserver("RawCmdMsgEvent")
     {
     }
 
 protected:
-    //! 响应命令执行消息
+    //! Handle the command execute message.
     /*!
-        \param id 菜单项资源ID
-        \param sender 消息发送者的类型信息，由具体应用决定其含义
-        \return 是否响应了本通知
+        \param id resource id of the menu item.
+        \param sender additional infomation interpreted by message sender.
+        \return The message is handled by the derived class or not.
     */
     virtual bool OnRawCommand(UINT id, int sender)
     {
@@ -77,14 +77,14 @@ protected:
         return false;
     }
 
-    //! 响应命令更新消息
+    //! Handle the update of command UI message.
     /*!
-        \param[in] id 菜单项资源ID
-        \param[in,out] enabled 由响应者设置命令是否可用
-        \param[in,out] checked 由响应者设置命令是否打勾
-        \param[in,out] text 由响应者设置命令的显示文本
-        \param[in] sender 消息发送者的类型信息，由具体应用决定其含义
-        \return 是否响应了本通知
+        \param[in] id resource id of the menu item.
+        \param[in,out] enabled enables or disables.
+        \param[in,out] checked checks or unchecks.
+        \param[in,out] text sets display text.
+        \param[in] sender additional infomation interpreted by message sender.
+        \return The message is handled by the derived class or not.
     */
     virtual bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked, 
         std::wstring& text, int sender)

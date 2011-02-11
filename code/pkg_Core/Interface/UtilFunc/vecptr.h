@@ -1,5 +1,5 @@
 /*! \file vecptr.h
- *  \brief 定义对象数组函数
+ *  \brief Define functions of pointer container.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -9,12 +9,12 @@
 #include "vecfunc.h"
 #include <XComPtr.h>
 
-//! 得到对象数组中指定序号的对象
+//! Returns a object of the specified index in a array container.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param arr STL数组变量，例如" vector<ObjPtr> arr; "
-    \param index 元素序号
-    \return 数组中的元素对象，或空对象表示越界
+    \param arr STL vector variable. eg: " vector<ObjPtr> arr; "
+    \param index The specified index of element.
+    \return a object in a array container or null object if out of range.
 */
 template<class _Ta> inline
 Cx_Ptr GetPtrIndexOf(const _Ta& arr, long index)
@@ -22,7 +22,7 @@ Cx_Ptr GetPtrIndexOf(const _Ta& arr, long index)
     return IsValidIndexOf(arr, index) ? Cx_Ptr(arr[index]) : Cx_Ptr();
 }
 
-//! Cx_Ptr数组的查找算法函数
+//! Matching function for STL container whose element type is Cx_Ptr.
 template<class IF_Type>
 struct FindByPtr : std::binary_function<Cx_Ptr, Cx_Ptr, bool>
 {
@@ -41,7 +41,7 @@ struct FindByPtr : std::binary_function<Cx_Ptr, Cx_Ptr, bool>
     }
 };
 
-//! 数值对的数组的查找算法函数，数值对的第二项为Cx_Ptr
+//! Matching function for STL container whose element type is std::pair and the second item of pair is Cx_Ptr.
 template<class IF_Type, class Pair_Type>
 struct FindPairByPtr : std::binary_function<Pair_Type, Pair_Type, bool>
 {
@@ -63,12 +63,12 @@ struct FindPairByPtr : std::binary_function<Pair_Type, Pair_Type, bool>
     }
 };
 
-//! 根据元素值删除数组元素
+//! Removes an element that match a element value in a container.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param arr STL数组变量，元素类型为Cx_Ptr，例如 vector<Cx_Ptr>
-    \param p 要删除的元素值
-    \return 是否已删除
+    \param arr STL container variable (vector, list, map) whose element type is Cx_Ptr. eg:  vector<Cx_Ptr>
+    \param p The element value for matching. It's type is same as the element type of 'arr'.
+    \return The element is removed or not.
 */
 template<class IF_Type, class _Ta> inline
 bool erase_value(_Ta& arr, Cx_Ptr& p)
@@ -76,12 +76,12 @@ bool erase_value(_Ta& arr, Cx_Ptr& p)
     return erase_if(arr, std::bind2nd(FindByPtr<IF_Type>(), p));
 }
 
-//! 根据元素值删除数组元素
+//! Removes an element that match a element value in a container.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param arr STL数组变量，元素类型为Pair_Type，例如 vector<Pair_Type>
-    \param p 要删除的数值对，第二项为Cx_Ptr
-    \return 是否已删除
+    \param arr STL container variable (vector, list, map) whose element type is Pair_Type. eg:  vector<Pair_Type>
+    \param p The element value for matching. It's type is Pair_Type whose second item is Cx_Ptr.
+    \return The element is removed or not.
 */
 template<class IF_Type, class _Ta, class Pair_Type> inline
 bool erase_pair(_Ta& arr, Pair_Type& p)
@@ -89,12 +89,12 @@ bool erase_pair(_Ta& arr, Pair_Type& p)
     return erase_if(arr, std::bind2nd(FindPairByPtr<IF_Type, Pair_Type>(), p));
 }
 
-//! 根据元素值查找数组元素的位置
+//! Finds the position index of an element that match a element value in a container.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param arr STL数组变量，元素类型为Cx_Ptr，例如 vector<Cx_Ptr>
-    \param p 元素值
-    \return 元素位置，-1表示没找到
+    \param arr STL vector variable whose element type is Cx_Ptr. eg:  vector<Cx_Ptr>
+    \param p The element value for matching. It's type is same as the element type of 'arr'.
+    \return the position index of an element, or -1 if not found.
 */
 template<class IF_Type, class _Ta> inline
 long find_value(const _Ta& arr, const Cx_Ptr& p)
@@ -102,12 +102,12 @@ long find_value(const _Ta& arr, const Cx_Ptr& p)
     return find_if(arr, std::bind2nd(FindByPtr<IF_Type>(), p));
 }
 
-//! 根据元素值查找数组元素的位置
+//! Finds the position index of an element that match a element value in a container.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param arr STL数组变量，元素类型为Pair_Type，例如 vector<Pair_Type>
-    \param p 元素值，数值对，第二项为Cx_Ptr
-    \return 元素位置，-1表示没找到
+    \param arr STL vector variable whose element type is Pair_Type. eg:  vector<Pair_Type>
+    \param p The element value for matching. It's type is Pair_Type whose second item is Cx_Ptr.
+    \return the position index of an element, or -1 if not found.
 */
 template<class IF_Type, class _Ta, class Pair_Type> inline
 long find_pair(_Ta& arr, Pair_Type& p)

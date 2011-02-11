@@ -1,5 +1,5 @@
 /*! \file CmdMsgObserverSimple.h
- *  \brief 定义命令消息观察者类 RawCmdMsgObserver
+ *  \brief Define window's command message observer: RawCmdMsgObserver
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.29
  */
@@ -10,9 +10,17 @@
 
 struct MENU_MSG_MAP;
 
-//! 命令消息观察者基类
-/*! 在派生类定义中加上 DECLARE_MENU_MSG_MAP() \n
-    在实现文件中指定响应函数，说明见 MenuMsgMapFunctions 
+//! Window's command message observer.
+/*! Add DECLARE_MENU_MSG_MAP() in the derived class (*.h).\n
+    Add the command handler functions in implement files (*.cpp) as following:
+    \code
+    BEGIN_MENU_MSG_MAP(class)
+        ON_MENU_COMMAND(id, memberFxn)
+        ON_MENU_COMMAND_RANGE(idMin, idMax, memberFxn)
+        ON_MENU_UPDATE_CMDUI(id, memberFxn)
+        ON_MENU_UPDATE_CMDUI_RANGE(idMin, idMax, memberFxn)
+    END_MENU_MSG_MAP()
+    \endcode
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see MenuMsgMapFunctions
 */
@@ -38,9 +46,9 @@ private:
 
 typedef void (CmdMsgObserverSimple::*PFN_MSG)(void);
 
-//! 菜单命令响应函数的类型
-/*! 在CmdMsgObserverSimple的派生类定义中加上 DECLARE_MENU_MSG_MAP() \n
-    在实现文件中指定响应函数，如下所示：
+//! Command handler function typedefs.
+/*! Add DECLARE_MENU_MSG_MAP() in the derived class of CmdMsgObserverSimple (*.h).\n
+    Add the command handler functions in implement files (*.cpp) as following:
     \code
     BEGIN_MENU_MSG_MAP(class)
         ON_MENU_COMMAND(id, memberFxn)
@@ -55,22 +63,22 @@ union MenuMsgMapFunctions
 {
     PFN_MSG pfn;
 
-    //! 普通命令响应函数，对应于 ON_MENU_COMMAND
+    //! Regular command handler function, correspond to ON_MENU_COMMAND.
     void (CmdMsgObserverSimple::*pfn_COMMAND)();
 
-    //! 连续ID范围的命令响应函数，对应于 ON_MENU_COMMAND_RANGE
+    //! Command handler function of contiguous range of command IDs, correspond to ON_MENU_COMMAND_RANGE.
     void (CmdMsgObserverSimple::*pfn_COMMAND_RANGE)(UINT id);
 
-    //! 普通命令的菜单更新函数，对应于 ON_MENU_UPDATE_CMDUI
+    //! Regular update message handler function, correspond to ON_MENU_UPDATE_CMDUI.
     void (CmdMsgObserverSimple::*pfn_UPDATE_CMDUI)(
         bool& enabled, bool& checked, std::wstring& text);
 
-    //! 连续ID范围的菜单更新函数，对应于 ON_MENU_UPDATE_CMDUI_RANGE
+    //! Update message handler function of contiguous range of command IDs, correspond to ON_MENU_UPDATE_CMDUI_RANGE.
     void (CmdMsgObserverSimple::*pfn_UPDATE_CMDUI_RANGE)(
         UINT id, bool& enabled, bool& checked, std::wstring& text);
 };
 
-//! 命令响应函数的类型
+//! Command handler function types.
 enum MenuMsgType
 {
     kMenuMsgNull,
@@ -80,7 +88,7 @@ enum MenuMsgType
     kMenuMsgUpdateUIRange,
 };
 
-//! 命令响应函数入口项
+//! Entry item of command handler functions.
 struct MENU_MSG_MAP
 {
     UINT        id;
@@ -89,8 +97,8 @@ struct MENU_MSG_MAP
     PFN_MSG     pfn;
 };
 
-//! 在H文件中定义命令响应函数入口项的数组
-/*!
+//! Define command handler function entries in H file.
+/*! It's used in the derived class of CmdMsgObserverSimple (*.h).
     \see MenuMsgMapFunctions, BEGIN_MENU_MSG_MAP
 */
 #define DECLARE_MENU_MSG_MAP()  \
@@ -98,8 +106,7 @@ private:    \
     const MENU_MSG_MAP* GetMsgMapEntry() const; \
     static const MENU_MSG_MAP messageMap[];
 
-//! 在CPP中实现命令响应函数入口项的数组
-/*!
+//! Implement command handler function entries in implement files (*.cpp).
     \see MenuMsgMapFunctions, END_MENU_MSG_MAP, DECLARE_MENU_MSG_MAP
 */
 #define BEGIN_MENU_MSG_MAP(theClass)    \
@@ -107,14 +114,14 @@ private:    \
         { return messageMap; }  \
     const MENU_MSG_MAP theClass::messageMap[] = {
 
-//! 登记一个单一命令的响应函数
+//! This macro maps a command message to a member function.
 /*!
     \see BEGIN_MENU_MSG_MAP, MenuMsgMapFunctions
 */
 #define ON_MENU_COMMAND(id, memberFxn)  \
         { id, id, kMenuMsgCommand, (PFN_MSG)&memberFxn },
 
-//! 登记一个范围命令的响应函数
+//! Use this macro to map a contiguous range of command IDs to a single message handler function.
 /*!
     \see BEGIN_MENU_MSG_MAP, MenuMsgMapFunctions
 */
@@ -122,7 +129,7 @@ private:    \
         { idMin, idMax, kMenuMsgCommandRange, \
         (PFN_MSG)(void (CmdMsgObserverSimple::*)(UINT))&memberFxn },
 
-//! 登记一个单一命令的更新函数
+//! This macro indicates which function will handle a user-interface update command message.
 /*!
     \see BEGIN_MENU_MSG_MAP, MenuMsgMapFunctions
 */
@@ -130,7 +137,7 @@ private:    \
         { id, id, kMenuMsgUpdateUI, \
         (PFN_MSG)(void (CmdMsgObserverSimple::*)(bool&,bool&,std::wstring&))&memberFxn },
 
-//! 登记一个范围命令的更新函数
+//! Maps a contiguous range of command IDs to a single update message handler function.
 /*!
     \see BEGIN_MENU_MSG_MAP, MenuMsgMapFunctions
 */
@@ -138,7 +145,7 @@ private:    \
         { idMin, idMax, kMenuMsgUpdateUIRange, \
         (PFN_MSG)(void (CmdMsgObserverSimple::*)(UINT,bool&,bool&,std::wstring&))&memberFxn },
 
-//! BEGIN_MENU_MSG_MAP对应的结束项
+//! End item correspond to BEGIN_MENU_MSG_MAP.
 /*!
     \see BEGIN_MENU_MSG_MAP, MenuMsgMapFunctions
 */
