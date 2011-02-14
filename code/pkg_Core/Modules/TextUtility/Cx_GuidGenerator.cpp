@@ -51,12 +51,12 @@ std::wstring Cx_GuidGenerator::RemoveGuidBrackets(const std::wstring& uid)
     size_t index = 0;
     size_t len = uid.size();
 
-    if (len > 2 && '{' == uid[0])
+    if (len > 2 && L'{' == uid[0])
     {
         index++;
         len--;
     }
-    if (len > 2 && '}' == uid[uid.size() - 1])
+    if (len > 2 && L'}' == uid[uid.size() - 1])
     {
         len--;
     }

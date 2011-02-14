@@ -38,10 +38,10 @@ std::wstring Cx_StringTable::GetValue(const std::wstring& module,
 bool Cx_StringTable::GetValue(std::wstring& value, const std::wstring& name, 
     std::wstring& module, std::wstring& id)
 {
-    if (name.size() > 1 && '@' == name[0] &&
-        StrChrW(name.c_str(), ':') != NULL)
+    if (name.size() > 1 && L'@' == name[0] &&
+        StrChrW(name.c_str(), L':') != NULL)
     {
-        const wchar_t* p = StrChrW(name.c_str(), ':');
+        const wchar_t* p = StrChrW(name.c_str(), L':');
 
         module = std::wstring(name.c_str() + 1, (size_t)(p - name.c_str() - 1));
         id = p + 1;
@@ -57,13 +57,13 @@ static void ReplaceLf(std::wstring& text)
     for (int i = static_cast<int>(text.size()) - 1; i > 0; --i)
     {
         wchar_t c = text[i];
-        if ('\\' == text[i - 1] && ('n' == c || 'r' == c || 't' == c))
+        if (L'\\' == text[i - 1] && (L'n' == c || L'r' == c || L't' == c))
         {
             switch (c)
             {
-                case 'n': text[i - 1] = '\n'; break;
-                case 'r': text[i - 1] = '\r'; break;
-                case 't': text[i - 1] = '\t'; break;
+                case L'n': text[i - 1] = L'\n'; break;
+                case L'r': text[i - 1] = L'\r'; break;
+                case L't': text[i - 1] = L'\t'; break;
             }
             text.erase(i, 1);
         }

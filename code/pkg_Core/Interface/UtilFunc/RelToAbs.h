@@ -114,9 +114,9 @@ inline std::wstring EnsurePathHasSlash(std::wstring& path)
     if (!path.empty())
     {
         wchar_t c = path[path.size() - 1];
-        if (c != '\\' && c != '/')
+        if (c != L'\\' && c != L'/')
         {
-            path += '\\';
+            path += L'\\';
         }
     }
     return path;

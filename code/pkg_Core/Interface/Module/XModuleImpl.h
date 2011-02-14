@@ -57,7 +57,7 @@ static long GetClassCount(BYTE minType)
 
 //! Get class factory registries of the plugin module.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
-    \param[out] pBuildInfo Fill VC++ building info, skip if NULL.
+    \param[out] pBuildInfo Fill C++ building info, skip if NULL.
     \param[in,out] pEntrySize Pass in sizeof _XCLASSMETA_ENTRY and fill actual size, skip if NULL.
     \param[out] pTable Pass in array address and fill items. Return actual count if pTable is NULL.
     \param[in] nMaxCount max count of elements in pTable.

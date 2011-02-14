@@ -132,7 +132,7 @@ long Cx_CfgRecord::SubmitRecord()
             _ltow_s(m_nKeyNewID, szNum, _countof(szNum), 10);
             wstrValue = szNum;
         }
-        else if ('@' == wstrValue[0])
+        else if (L'@' == wstrValue[0])
         {
             wstrValue = GetSQLFunc(wstrValue.c_str() + 1, m_pDB->GetSQLParser());
         }
@@ -228,7 +228,7 @@ bool Cx_CfgRecord::SetString(const wchar_t* pszEntry, const wchar_t* pszValue)
 {
     std::wstring wstrValue;
 
-    if (pszValue[0] != '@')
+    if (pszValue[0] != L'@')
     {
         wstrValue += L"'";
         wstrValue += pszValue;

@@ -78,7 +78,7 @@ inline long ScanFiles(IScanFilesCallback* back,
 
         if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
         {
-            if (fd.cFileName[0] != '.')
+            if (fd.cFileName[0] != L'.')
             {
                 lstrcpynW(filename, path, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);

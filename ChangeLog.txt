@@ -10,6 +10,8 @@ X3 C++ PluginFramework
     * PluginManager 1.0.0.5:
     * PluginManager\Cx_PluginLoader.cpp: Ignore folders in GetPluginIndex. Rewrite LoadPlugin().
     
+    * Add L before the wide character like L'.'
+    
 ------v1.0.5------
 
 2011-02-08

@@ -35,9 +35,9 @@ void Cx_PluginLoader::ReplaceSlashes(wchar_t* filename)
 {
     for (; *filename; ++filename)
     {
-        if ('/' == *filename)
+        if (L'/' == *filename)
         {
-            *filename = '\\';
+            *filename = L'\\';
         }
     }
 }
@@ -113,7 +113,7 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
     {
         if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
         {
-            if (fd.cFileName[0] != '.' && recursive)
+            if (fd.cFileName[0] != L'.' && recursive)
             {
                 lstrcpynW(filename, path, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);
@@ -144,7 +144,7 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
 
 bool Cx_PluginLoader::issep(wchar_t c)
 {
-    return ',' == c || ';' == c || iswspace(c);
+    return L',' == c || L';' == c || iswspace(c);
 }
 
 long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path, 

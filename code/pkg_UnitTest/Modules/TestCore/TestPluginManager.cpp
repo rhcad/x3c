@@ -159,7 +159,7 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
     {
         if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
         {
-            if (fd.cFileName[0] != '.' && recursive)
+            if (fd.cFileName[0] != L'.' && recursive)
             {
                 lstrcpynW(szFileName, path, MAX_PATH);
                 PathAppendW(szFileName, fd.cFileName);

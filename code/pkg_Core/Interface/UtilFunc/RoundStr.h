@@ -18,20 +18,20 @@ inline std::wstring RoundStr(double value, int decimal = 4)
     wchar_t fmt[] = L"%.2lf";
     if (decimal < 1) decimal = 1;
     if (decimal > 5) decimal = 5;
-    fmt[2] = (wchar_t)('0' + decimal);
+    fmt[2] = (wchar_t)(L'0' + decimal);
 #if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
     swprintf(buf, fmt, value);
 #else
     swprintf_s(buf, 65, fmt, value);    
 #endif
     
-    wchar_t* p = wcschr(buf, '.');
+    wchar_t* p = wcschr(buf, L'.');
     if (p != NULL)
     {
         int i = decimal;
-        for (; i > 0 && p[i] == '0'; i--)
+        for (; i > 0 && p[i] == L'0'; i--)
             p[i] = 0;
-        if (p[i] == '.')
+        if (p[i] == L'.')
             p[i] = 0;
     }
     

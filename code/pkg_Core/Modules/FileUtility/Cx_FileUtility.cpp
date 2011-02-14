@@ -14,7 +14,7 @@ static long s_nFileOpRet = 0;   // SHFileOperationW ·µ»ØÖµ
 
 static inline bool IsPathSlash(wchar_t c)
 {
-    return '\\' == c || '/' == c;
+    return L'\\' == c || L'/' == c;
 }
 
 static inline bool IsNotNull(const wchar_t* pszText)
@@ -26,9 +26,9 @@ static void ReplaceSlash(wchar_t* path)
 {
     for (; *path; path++)
     {
-        if ('/' == *path)
+        if (L'/' == *path)
         {
-            *path = '\\';
+            *path = L'\\';
         }
     }
 }
@@ -86,7 +86,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* pszFileName, bool bIsPath)
 
     for (i = 2; i < nLen; i++)
     {
-        if (IsPathSlash(szPath[i]) && szPath[i-1] != ':')
+        if (IsPathSlash(szPath[i]) && szPath[i-1] != L':')
         {
             cSaveChar = szPath[i];
             szPath[i] = 0;
@@ -294,7 +294,7 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
     if (pszRel != NULL)
     {
         if (IsPathSlash(pszRel[0]) && !IsPathSlash(pszRel[1])   // "\xxx"
-            && (!IsNotNull(pszBase) || StrChrW(pszBase, ':') != NULL))
+            && (!IsNotNull(pszBase) || StrChrW(pszBase, L':') != NULL))
         {
             if (IsNotNull(pszBase))
             {
@@ -305,7 +305,7 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
                 GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
             }
 
-            lstrcpynW(StrChrW(szPath, ':') + 1, pszRel, MAX_PATH);
+            lstrcpynW(StrChrW(szPath, L':') + 1, pszRel, MAX_PATH);
         }
         else if (PathIsRelativeW(pszRel))
         {
@@ -360,7 +360,7 @@ std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
             if (IsPathSlash(szPath[0]))     //  \xxx  ->  .\xxx
             {
                 StrCpyW(szBasePath, szPath);
-                szPath[0] = '.';
+                szPath[0] = L'.';
                 StrCpyW(szPath + 1, szBasePath);
             }
         }
@@ -380,7 +380,7 @@ std::wstring Cx_FileUtility::ChangeFileNameSuffix(const wchar_t* pszFileName,
 
     if (pszFileName != NULL && pszSuffix != NULL)
     {
-        ASSERT(wcschr(pszSuffix, '.') != NULL);
+        ASSERT(wcschr(pszSuffix, L'.') != NULL);
         lstrcpynW(szNewFile, pszFileName, MAX_PATH);
         PathRenameExtensionW(szNewFile, pszSuffix);
     }
@@ -455,7 +455,7 @@ std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath,
     {
         PathAppendW(szFileName, GetFileName(wstrFileTitle.c_str()).c_str());
     }
-    else if (StrChrW(wstrExtName.c_str(), '.') == NULL)
+    else if (StrChrW(wstrExtName.c_str(), L'.') == NULL)
     {
         PathAppendW(szFileName, GetFileTitle(wstrFileTitle.c_str()).c_str());
         lstrcatW(szFileName, L".");
@@ -491,7 +491,7 @@ std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath,
         }
         if (!wstrExtName.empty())
         {
-            if (wcschr(wstrExtName.c_str(), '.') == NULL)
+            if (wcschr(wstrExtName.c_str(), L'.') == NULL)
                 wcscat_s(szFileName, _countof(szFileName), L".");
             wcscat_s(szFileName, _countof(szFileName), wstrExtName.c_str());
         }
@@ -576,9 +576,9 @@ int Cx_FileUtility::CompareFileName(const wchar_t* pszFileName1, const wchar_t* 
     const wchar_t* pszFile1 = pszFileName1;
     const wchar_t* pszFile2 = pszFileName2;
 
-    if ('.' == pszFile1[0] && IsPathSlash(pszFile1[1]))
+    if (L'.' == pszFile1[0] && IsPathSlash(pszFile1[1]))
         pszFile1 += 2;
-    if ('.' == pszFile2[0] && IsPathSlash(pszFile2[1]))
+    if (L'.' == pszFile2[0] && IsPathSlash(pszFile2[1]))
         pszFile2 += 2;
 
     while (0 == nRet && (*pszFile1 != 0 || *pszFile2 != 0))

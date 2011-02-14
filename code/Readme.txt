@@ -4,7 +4,7 @@ pkg_Example: example projects.
 pkg_UnitTest: unittest projects, using cppunit 1.12.1.
 pkg_Utility: other frequently-used utility plugins.
 
-..\projects: VC++ workspace files.
+..\projects: C++ workspace files (MSVC, MinGW GCC, ...).
 
 
 Bug reports are welcome.  Please use the SourceForge bug tracking

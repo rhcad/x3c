@@ -147,7 +147,7 @@ bool Cx_LogManager::CheckMsgParam(std::wstring& wstrMsg,
     wstrMsg = pszMsg ? pszMsg : L"";
     wstrExtra = pszExtra ? pszExtra : L"";
 
-    if (!wstrMsg.empty() && '@' == wstrMsg[0])  // @Module:IDS_XXX
+    if (!wstrMsg.empty() && L'@' == wstrMsg[0])  // @Module:IDS_XXX
     {
         Cx_Interface<Ix_StringTable> pIFTable(CLSID_StringTable);
         ret = pIFTable && pIFTable->GetValue(wstrMsg, pszMsg, wstrModule, wstrID);

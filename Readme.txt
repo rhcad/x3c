@@ -1,7 +1,7 @@
 X3 C++ PluginFramework
 http://sourceforge.net/projects/x3c/
 
-A plugin-framework using VC++ and STL, not using MFC/ATL/COM. 
+A plugin-framework using C++ (MSVC, MinGW GCC) and STL, not using MFC/ATL/COM. 
 It has many frequently-used and lightweight plugins. 
 We can use it to develop more plugins and windows applications easily. 
 
@@ -12,7 +12,7 @@ system at http://sourceforge.net/projects/x3c/develop.
 
 Email to the current maintainers may be sent to <rhcad@hotmail.com>.
 
-projects: VC++ workspace files.
+projects: C++ workspace files (MSVC, MinGW GCC, ...).
 code: source code of plugins.
 doc: development documents and doxygen files.
 tools: some useful tools for development.

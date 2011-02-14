@@ -65,9 +65,9 @@ std::wstring DbFunc::GetLevel1Name(const wchar_t* name)
     wchar_t buf[41];
 
     lstrcpynW(buf, name ? name : L"", _countof(buf));
-    cutstr(StrChrW(buf, '\\'));
-    cutstr(StrChrW(buf, '/'));
-    cutstr(StrChrW(buf, ' '));
+    cutstr(StrChrW(buf, L'\\'));
+    cutstr(StrChrW(buf, L'/'));
+    cutstr(StrChrW(buf, L' '));
 
     std::wstring wstr(buf);
     trim::ctrim(wstr);
@@ -77,7 +77,7 @@ std::wstring DbFunc::GetLevel1Name(const wchar_t* name)
 
 bool DbFunc::IsDBName(const wchar_t* name)
 {
-    return name && *name && StrChrW(name, ' ') == NULL;
+    return name && *name && StrChrW(name, L' ') == NULL;
 }
 
 bool DbFunc::IsSelectSQL(const wchar_t* name)
@@ -238,7 +238,7 @@ BOOL DbFunc::GetBool(const _variant_t &v, BOOL bDefault)
         {
             if (NULL != v.bstrVal)
             {
-                bRet = ('y' == v.bstrVal[0]);
+                bRet = (L'y' == v.bstrVal[0]);
             }
         }
         else

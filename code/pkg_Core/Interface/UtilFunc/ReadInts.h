@@ -14,7 +14,7 @@
 */
 inline bool IsIntChar(wchar_t c, bool signchar = false)
 {
-    return iswdigit(c) || signchar && ('+' == c || '-' == c);
+    return iswdigit(c) || signchar && (L'+' == c || L'-' == c);
 }
 
 //! splitting integer numbers from a string.
@@ -61,8 +61,8 @@ long ReadInts(const wchar_t* str, IntType* arr, long size, bool signchar = false
 //! Check if a character is element of floating point number.
 inline bool IsDblChar(wchar_t c)
 {
-    return iswdigit(c) || '+' == c || '-' == c
-        || '.' == c || 'E' == c || 'e' == c;
+    return iswdigit(c) || L'+' == c || L'-' == c
+        || L'.' == c || L'E' == c || L'e' == c;
 }
 
 //! splitting floating point numbers from a string.

@@ -286,7 +286,7 @@ long Cx_TextUtil::GetLineCount(const std::wstring& text)
     {
         pszStart = pszEnd + 1;
         if (*pszStart != *pszEnd
-            && ('\n' == *pszStart || '\r' == *pszStart))
+            && (L'\n' == *pszStart || L'\r' == *pszStart))
         {
             pszStart++;
         }
@@ -315,7 +315,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
     {
         pszStart = pszEnd + 1;
         if (*pszStart != *pszEnd
-            && ('\n' == *pszStart || '\r' == *pszStart))
+            && (L'\n' == *pszStart || L'\r' == *pszStart))
         {
             pszStart++;
         }
@@ -332,7 +332,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
         else
         {
             const wchar_t* p = pszEnd + 1;
-            if (*p != *pszEnd && ('\n' == *p || '\r' == *p))
+            if (*p != *pszEnd && (L'\n' == *p || L'\r' == *p))
             {
                 p++;
             }
@@ -346,8 +346,8 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
 static inline bool IsSpaceChar(wchar_t cChar, const wchar_t* targets = NULL)
 {
     return targets ? (StrChrW(targets, cChar) != NULL)
-        : (0x0020 == cChar || 0x3000 == cChar || '\t' == cChar
-        || '\n' == cChar || '\r' == cChar);
+        : (0x0020 == cChar || 0x3000 == cChar || L'\t' == cChar
+        || L'\n' == cChar || L'\r' == cChar);
 }
 
 bool Cx_TextUtil::IsSpaceLine(const std::wstring& text)
@@ -462,7 +462,7 @@ bool Cx_TextUtil::ReplaceChar(std::wstring& text,
 bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
 {
     bool changed = false;
-    std::wstring dest('\0', text.size() + 1);
+    std::wstring dest(L'\0', text.size() + 1);
 
     if (!text.empty() && punct)
     {
@@ -488,17 +488,17 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
         {
             if (psrc[i] >= 0xA3B0 && psrc[i] <= 0xA3B9)     // £°..£¹
             {
-                pdest[i] = wchar_t('0' + psrc[i] - 0xA3B0);
+                pdest[i] = wchar_t(L'0' + psrc[i] - 0xA3B0);
                 n++;
             }
             else if (psrc[i] >= 0xA3C1 && psrc[i] <= 0xA3DA)    // £Á..£Ú
             {
-                pdest[i] = wchar_t('A' + psrc[i] - 0xA3C1);
+                pdest[i] = wchar_t(L'A' + psrc[i] - 0xA3C1);
                 n++;
             }
             else if (psrc[i] >= 0xA3E1 && psrc[i] <= 0xA3FA)    // £á..£ú
             {
-                pdest[i] = wchar_t('a' + psrc[i] - 0xA3E1);
+                pdest[i] = wchar_t(L'a' + psrc[i] - 0xA3E1);
                 n++;
             }
             else

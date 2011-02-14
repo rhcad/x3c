@@ -156,8 +156,8 @@ XMLDOMElementPtr ConfigXmlImpl::GetParentNode(XMLDOMElementPtr xmlParent,
 
     for ( ; pStart != NULL && *pStart != 0; pStart = pEnd)
     {
-        pEnd = wcschr(pStart, '\\');
-        pEnd2 = wcschr(pStart, '/');
+        pEnd = wcschr(pStart, L'\\');
+        pEnd2 = wcschr(pStart, L'/');
         if (NULL == pEnd)
             pEnd = pEnd2;
         else if (pEnd2 != NULL)
