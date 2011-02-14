@@ -95,7 +95,7 @@ public:
 #ifdef _USRDLL
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
-#if _MSC_VER > 1300
+#if defined(_MSC_VER) && _MSC_VER > 1300
         __if_exists(BASEWND::Refresh)
 #endif
         {

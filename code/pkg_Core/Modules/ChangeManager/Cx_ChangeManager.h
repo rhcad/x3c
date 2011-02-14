@@ -10,10 +10,22 @@
 
 #include <Ix_ChangeManager.h>
 
-#if _MSC_VER > 1200 // not VC6
+#if defined(_MSC_VER) && _MSC_VER > 1200    // not VC6
     #include <hash_map>
     using stdext::hash_multimap;
-#else
+#elif defined(__GNUC__)                     // gcc
+    #include <hash_map>
+    using __gnu_cxx::hash_multimap;
+    namespace __gnu_cxx {
+        template<> struct hash<std::string>
+        {
+            size_t operator()(const std::string& s) const
+            {
+                return hash<char*>()(s.c_str());
+            }
+        };
+    } // of namespace __gnu_cxx
+#else                                       // VC6 or others
     #define hash_multimap std::multimap
 #endif
 

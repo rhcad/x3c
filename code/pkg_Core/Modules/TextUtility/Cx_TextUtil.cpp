@@ -191,7 +191,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
 {
     bool bRet = false;
 
-    ::SetFileAttributes(filename.c_str(), FILE_ATTRIBUTE_NORMAL);
+    ::SetFileAttributesW(filename.c_str(), FILE_ATTRIBUTE_NORMAL);
     HANDLE hFile = ::CreateFileW(filename.c_str(), 
         GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
 
@@ -234,7 +234,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
 {
     bool bRet = false;
 
-    ::SetFileAttributes(filename.c_str(), FILE_ATTRIBUTE_NORMAL);
+    ::SetFileAttributesW(filename.c_str(), FILE_ATTRIBUTE_NORMAL);
     HANDLE hFile = ::CreateFileW(filename.c_str(), 
         GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
 

@@ -1,7 +1,11 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
+// Changes:
+// 2011.2.14, ooyg: Support MFC dialog application and console application.
+//
 
 #include "stdafx.h"
+#ifdef _AFXDLL
 #include <cppunit/ui/mfc/TestRunner.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 
@@ -26,3 +30,38 @@ public:
 };
 
 CUnitTestsApp theApp;
+
+#else   // Console application
+
+int _tmain(int argc, _TCHAR** argv)
+{
+    // Get the top level suite from the registry
+    CppUnit::Test* suite = CppUnit::TestFactoryRegistry::getRegistry().makeTest();
+
+    // Adds the test to the list of test to run
+    CppUnit::TextUi::TestRunner runner;
+    runner.addTest(suite);
+
+    if ((argc > 1) && (_tcscmp(argv[1], _T("-x")) == 0))
+    {
+        char filename[MAX_PATH];
+
+        GetModuleFileNameA(NULL, filename, MAX_PATH);
+        lstrcpyA(filename, PathFindFileNameA(filename));
+        lstrcpyA(strrchr(filename, '.'), ".cppunit-result.xml");
+
+        // Specify XML output and inform the test runner of this format
+        std::ofstream outputFile(filename);
+        runner.setOutputter(new CppUnit::XmlOutputter(&runner.result(), outputFile));
+    }
+    else
+    {
+        // Change the default outputter to a compiler error format outputter
+        runner.setOutputter(new CppUnit::CompilerOutputter(&runner.result(), CppUnit::stdCOut()));
+    }
+
+    // Run the test and return error code 1 if the one of test failed
+	return runner.run() ? 0 : 1;
+}
+
+#endif  // _AFXDLL

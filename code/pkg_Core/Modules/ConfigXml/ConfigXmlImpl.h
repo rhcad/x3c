@@ -6,8 +6,6 @@
 #ifndef _X3_CONFIGXML_CONFIGXMLIMPL_H
 #define _X3_CONFIGXML_CONFIGXMLIMPL_H
 
-#include <comdef.h>
-
 interface IFileCryptHandler;
 interface Ix_ConfigData;
 
@@ -22,8 +20,8 @@ struct ConfigXmlImpl
     std::wstring        m_strSchemaLocation;
     bool                m_bModified;
     bool                m_bNeedLoad;
-    CXTPDOMDocumentPtr  m_xmlDoc;
-    CXTPDOMElementPtr   m_xmlRoot;
+    XMLDOMDocumentPtr   m_xmlDoc;
+    XMLDOMElementPtr    m_xmlRoot;
     IFileCryptHandler*  m_pCryptHandler;
     Ix_ConfigData*      m_pThis;
     static int          c_nInitCom;
@@ -47,7 +45,7 @@ struct ConfigXmlImpl
     {
     }
 
-    CXTPDOMElementPtr GetRoot()
+    XMLDOMElementPtr GetRoot()
     {
         if (NULL == m_xmlRoot)
             Reload();
@@ -63,8 +61,8 @@ struct ConfigXmlImpl
 
     bool Reload();
     void NewDoc();
-    CXTPDOMElementPtr GetParentNode(Ix_ConfigSection* pParent, std::wstring& strSection);
-    CXTPDOMElementPtr GetParentNode(CXTPDOMElementPtr xmlParent, std::wstring& strSection);
+    XMLDOMElementPtr GetParentNode(Ix_ConfigSection* pParent, std::wstring& strSection);
+    XMLDOMElementPtr GetParentNode(XMLDOMElementPtr xmlParent, std::wstring& strSection);
 };
 
 #endif // _X3_CONFIGXML_CONFIGXMLIMPL_H

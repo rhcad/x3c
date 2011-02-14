@@ -56,7 +56,7 @@ public:
     {
         if (NULL == Items() && nCount > 0)
         {
-            MaxCount() = max(nCount, MaxCount());
+            MaxCount() = (nCount > MaxCount()) ? nCount : MaxCount();
             Index() = MaxCount();
             Items() = new CModuleItem*[MaxCount()];
         }

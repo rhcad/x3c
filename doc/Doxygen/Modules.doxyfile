@@ -625,7 +625,7 @@ RECURSIVE              = YES
 
 EXCLUDE                = ../../code/pkg_Core/Interface/Log/DebugR.cpp \
                          ../../code/pkg_Core/Interface/UtilFunc/ctrim.h \
-                         ../../code/pkg_Core/Modules/ConfigXml/XmlUtil/XTPXMLHelpers.h \
+                         ../../code/pkg_Core/Modules/ConfigXml/XmlUtil/XMLHelpers.h \
                          ../../code/pkg_Core/Modules/LogWriter/log4cplus/ \
                          ../../code/pkg_Core/Modules/ChangeManager/StdAfx.h \
                          ../../code/pkg_Core/Modules/ConfigXml/StdAfx.h \

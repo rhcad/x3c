@@ -55,7 +55,7 @@ void SafeDeleteArray(T*& p)
 template<class CONTAINER>
 void DeletePtrInContainer(CONTAINER& container)
 {
-    CONTAINER::iterator it = container.begin();
+    typename CONTAINER::iterator it = container.begin();
     for(; it != container.end(); ++it)
         SafeDelete(*it);
     container.resize(0);

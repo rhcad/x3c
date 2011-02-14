@@ -5,11 +5,12 @@
 #include "Cx_GuidGenerator.h"
 #include <time.h>
 #include <SysErrStr.h>
+#include <objbase.h>
 
 #pragma comment(lib,"Rpcrt4.lib")
 
-#if _MSC_VER < 1400 // not VC8
-typedef wchar_t* RPC_WSTR;
+#if !defined(_MSC_VER) || _MSC_VER < 1400 // not VC8
+typedef unsigned short* RPC_WSTR;
 #endif // _MSC_VER
 
 std::wstring Cx_GuidGenerator::CreateGuid(bool withBrackets)
@@ -90,7 +91,7 @@ std::wstring Cx_GuidGenerator::GetCurrentTimeString(bool hasYear)
 {
     wchar_t szTime[30] = { 0, 0, 0, 0, 0, 0 };
     
-#if _MSC_VER < 1400 // not VC8
+#if !defined(_MSC_VER) || _MSC_VER < 1400 // not VC8
     time_t tim = ::time(NULL);
     struct tm* ptm = localtime(&tim);
     

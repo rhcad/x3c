@@ -168,12 +168,12 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
         }
         else
         {
-            long nFLen = lstrlenW(fd.cFileName);
-            if (StrCmpIW(&fd.cFileName[max(0, nFLen - nExtLen)], ext) == 0)
+            long len = lstrlenW(fd.cFileName) - nExtLen;
+            if (StrCmpIW(&fd.cFileName[len > 0 ? len : 0], ext) == 0)
             {
                 lstrcpynW(szFileName, path, MAX_PATH);
                 PathAppendW(szFileName, fd.cFileName);
-                if (lstrlen(szFileName) > 0)
+                if (lstrlenW(szFileName) > 0)
                 {
                     nCount++;
                 }

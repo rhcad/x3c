@@ -84,8 +84,8 @@ inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile =
     wchar_t exename[MAX_PATH] = { 0 };
     
     GetModuleFileNameW(GetMainModuleHandle(), exename, MAX_PATH);
-    PathStripPath(exename);
-    PathRemoveExtension(exename);
+    PathStripPathW(exename);
+    PathRemoveExtensionW(exename);
 
     GetTempPathW(MAX_PATH - 1, path);
     PathAppendW(path, exename);

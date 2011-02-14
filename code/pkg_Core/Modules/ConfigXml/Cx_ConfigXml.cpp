@@ -22,7 +22,7 @@ public:
     {
     }
 
-    virtual bool Decrypt(CXTPDOMDocumentPtr& doc, const wchar_t* filename)
+    virtual bool Decrypt(XMLDOMDocumentPtr& doc, const wchar_t* filename)
     {
         if (NULL == m_pCryptHandler)
             return false;
@@ -49,7 +49,7 @@ public:
         lstrcpynW(szTmpFile, filename, _countof(szTmpFile));
         szTmpFile[_countof(szTmpFile) - 5] = 0;
         lstrcatW(szTmpFile, L".tmp");
-        
+
         int nRet = _wrename(filename, szTmpFile);
         if (NO_ERROR == nRet)
         {
@@ -131,10 +131,10 @@ void ConfigXmlImpl::NewDoc()
     }
 }
 
-CXTPDOMElementPtr ConfigXmlImpl::GetParentNode(Ix_ConfigSection* parent, 
-                                                    std::wstring& strSection)
+XMLDOMElementPtr ConfigXmlImpl::GetParentNode(Ix_ConfigSection* parent, 
+                                              std::wstring& strSection)
 {
-    CXTPDOMElementPtr xmlParent = GetRoot();
+    XMLDOMElementPtr xmlParent = GetRoot();
     if (parent != NULL)
     {
         Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(parent);
@@ -146,8 +146,8 @@ CXTPDOMElementPtr ConfigXmlImpl::GetParentNode(Ix_ConfigSection* parent,
     return GetParentNode(xmlParent, strSection);
 }
 
-CXTPDOMElementPtr ConfigXmlImpl::GetParentNode(CXTPDOMElementPtr xmlParent, 
-                                                    std::wstring& strSection)
+XMLDOMElementPtr ConfigXmlImpl::GetParentNode(XMLDOMElementPtr xmlParent, 
+                                              std::wstring& strSection)
 {
     const wchar_t* pStart = strSection.c_str();
     const wchar_t* pEnd;
@@ -175,8 +175,9 @@ CXTPDOMElementPtr ConfigXmlImpl::GetParentNode(CXTPDOMElementPtr xmlParent,
         {
             if (!strName.empty())
             {
-                CXTPDOMElementPtr xmlNode = xmlParent;
-                CXmlUtil::GetChildOrAdd(xmlParent, m_xmlDoc, xmlNode, strName.c_str());
+                XMLDOMElementPtr xmlNode = xmlParent;
+                CXmlUtil::GetChildOrAdd(xmlParent, m_xmlDoc, 
+                    xmlNode, strName.c_str());
             }
             strName = strTemp;
         }
@@ -220,7 +221,7 @@ std::wstring Cx_ConfigXml::GetRootName() const
     if (NULL == m_pImpl->m_xmlDoc)
     {
         CXmlFileCrypt crypt(m_pImpl->m_pCryptHandler);
-        CXTPDOMDocumentPtr xmlDoc;
+        XMLDOMDocumentPtr xmlDoc;
 
         if (CXmlUtil::LoadXMLFile(xmlDoc, 
             m_pImpl->m_strFileName.c_str(), &crypt))
@@ -232,7 +233,9 @@ std::wstring Cx_ConfigXml::GetRootName() const
     return strRootName;
 }
 
-void Cx_ConfigXml::SetRootName(const wchar_t* rootName, const wchar_t* encoding, const wchar_t* nmspace)
+void Cx_ConfigXml::SetRootName(const wchar_t* rootName, 
+                               const wchar_t* encoding, 
+                               const wchar_t* nmspace)
 {
     m_pImpl->m_strRootName = rootName;
     m_pImpl->m_strEncoding = encoding;
@@ -299,7 +302,8 @@ bool Cx_ConfigXml::SetXmlContent(const std::wstring& content)
     return bRet;
 }
 
-bool Cx_ConfigXml::GetXmlContent(std::wstring& content, Ix_ConfigSection* node) const
+bool Cx_ConfigXml::GetXmlContent(std::wstring& content, 
+                                 Ix_ConfigSection* node) const
 {
     content.resize(0);
 
@@ -310,7 +314,7 @@ bool Cx_ConfigXml::GetXmlContent(std::wstring& content, Ix_ConfigSection* node) 
 
         content = CXmlUtil::GetNodeXMLString(p->m_xmlNode);
     }
-    
+
     return !content.empty();
 }
 
@@ -361,7 +365,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     bool bRet = false;
     std::wstring strFileName(filename && filename[0] ? filename
         : m_pImpl->m_strFileName.c_str());
-    
+
     if (strFileName.empty())
     {
         LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", L"--");
@@ -372,7 +376,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     CXmlFileCrypt crypt(m_pImpl->m_pCryptHandler);
     bRet = CXmlUtil::SaveXMLFile(m_pImpl->m_xmlDoc, 
         strFileName.c_str(), &crypt);
-    
+
     if (bRet)
     {
         if (StrCmpIW(strFileName.c_str(), m_pImpl->m_strFileName.c_str()) == 0)
@@ -382,7 +386,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     {
         LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", strFileName);
     }
-    
+
     return bRet;
 }
 
@@ -412,19 +416,24 @@ Cx_Section Cx_ConfigXml::GetSection(const wchar_t* name, bool autoCreate)
     return pIFRet;
 }
 
-Cx_Section Cx_ConfigXml::GetSection(
-    Ix_ConfigSection* parent, const wchar_t* name, 
-    const wchar_t* attrName, ULONG attrValue, bool autoCreate)
+Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent, 
+                                    const wchar_t* name, 
+                                    const wchar_t* attrName, 
+                                    ULONG attrValue, 
+                                    bool autoCreate)
 {
     wchar_t buf[35];
     _ultow_s(attrValue, buf, 35, 10);
     return GetSection(parent, name, attrName, buf, autoCreate);
 }
 
-Cx_Section Cx_ConfigXml::GetSection(
-    Ix_ConfigSection* parent, const wchar_t* name, 
-    const wchar_t* attrName, ULONG attrValue, 
-    const wchar_t* attrName2, ULONG attrValue2, bool autoCreate)
+Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent, 
+                                    const wchar_t* name, 
+                                    const wchar_t* attrName, 
+                                    ULONG attrValue, 
+                                    const wchar_t* attrName2, 
+                                    ULONG attrValue2, 
+                                    bool autoCreate)
 {
     wchar_t buf1[35], buf2[35];
     _ultow_s(attrValue, buf1, 35, 10);
@@ -432,22 +441,27 @@ Cx_Section Cx_ConfigXml::GetSection(
     return GetSection(parent, name, attrName, buf1, attrName2, buf2, autoCreate);
 }
 
-Cx_Section Cx_ConfigXml::GetSection(
-    Ix_ConfigSection* parent, const wchar_t* name, 
-    const wchar_t* attrName, const wchar_t* attrValue, bool autoCreate)
+Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent, 
+                                    const wchar_t* name, 
+                                    const wchar_t* attrName, 
+                                    const wchar_t* attrValue, 
+                                    bool autoCreate)
 {
     return GetSection(parent, name, 
         attrName, attrValue, L"", L"", autoCreate);
 }
 
-Cx_Section Cx_ConfigXml::GetSection(
-    Ix_ConfigSection* parent, const wchar_t* name, 
-    const wchar_t* attrName, const wchar_t* attrValue, 
-    const wchar_t* attrName2, const wchar_t* attrValue2, bool autoCreate)
+Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent, 
+                                    const wchar_t* name, 
+                                    const wchar_t* attrName, 
+                                    const wchar_t* attrValue, 
+                                    const wchar_t* attrName2, 
+                                    const wchar_t* attrValue2, 
+                                    bool autoCreate)
 {
     std::wstring strName (name);
-    CXTPDOMElementPtr xmlParent = m_pImpl->GetParentNode(parent, strName);
-    CXTPDOMElementPtr xmlNode;
+    XMLDOMElementPtr xmlParent = m_pImpl->GetParentNode(parent, strName);
+    XMLDOMElementPtr xmlNode;
 
     if (CXmlUtil::FindElementByAttr(xmlNode, xmlParent, 
         strName.c_str(), attrName, attrValue, 
@@ -475,10 +489,11 @@ Cx_Section Cx_ConfigXml::GetSection(
     return pIFRet;
 }
 
-long Cx_ConfigXml::GetSectionCount(Ix_ConfigSection* parent, const wchar_t* name)
+long Cx_ConfigXml::GetSectionCount(Ix_ConfigSection* parent, 
+                                   const wchar_t* name)
 {
     std::wstring strName (name);
-    CXTPDOMElementPtr xmlParent = m_pImpl->GetParentNode(parent, strName);
+    XMLDOMElementPtr xmlParent = m_pImpl->GetParentNode(parent, strName);
     return CXmlUtil::GetChildCount(xmlParent, strName.c_str());
 }
 
@@ -491,7 +506,8 @@ Cx_Section Cx_ConfigXml::GetSectionByIndex(
 
     pIFCfg->m_pData = m_pImpl;
     pIFCfg->m_xmlParent = m_pImpl->GetParentNode(parent, strName);
-    CXmlUtil::GetChild(pIFCfg->m_xmlNode, pIFCfg->m_xmlParent, strName.c_str(), index);
+    CXmlUtil::GetChild(pIFCfg->m_xmlNode, pIFCfg->m_xmlParent, 
+        strName.c_str(), index);
 
     return pIFRet;
 }
@@ -506,7 +522,7 @@ Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
     pIFCfg->m_xmlNode = m_pImpl->GetParentNode(sec, strName);
     if (pIFCfg->m_xmlNode)
     {
-        XTPXML::IXMLDOMNodePtr pNode = NULL;
+        XMLDOMNodePtr pNode = NULL;
         pIFCfg->m_xmlNode->get_parentNode(&pNode);
         pIFCfg->m_xmlParent = pNode;
     }
@@ -515,11 +531,12 @@ Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
     {
         pIFCfg->m_xmlNode = NULL;
     }
-    
+
     return pIFRet;
 }
 
-Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent, const wchar_t* name)
+Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent, 
+                                    const wchar_t* name)
 {
     std::wstring strName (name);
     Cx_Interface<Ix_ConfigSection> pIFRet;
@@ -557,7 +574,9 @@ bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)
 }
 
 long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent, 
-    const wchar_t* name, const wchar_t* attrName, ULONG attrValue)
+                                  const wchar_t* name, 
+                                  const wchar_t* attrName, 
+                                  ULONG attrValue)
 {
     wchar_t buf[35];
     _ultow_s(attrValue, buf, 35, 10);
@@ -565,7 +584,9 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
 }
 
 long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent, 
-    const wchar_t* name, const wchar_t* attrName, const wchar_t* attrValue)
+                                  const wchar_t* name, 
+                                  const wchar_t* attrName, 
+                                  const wchar_t* attrValue)
 {
     long count = 0;
 

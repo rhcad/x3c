@@ -22,8 +22,8 @@ protected:
 
 public:
     ConfigXmlImpl*      m_pData;
-    CXTPDOMElementPtr   m_xmlParent;
-    CXTPDOMElementPtr   m_xmlNode;
+    XMLDOMElementPtr    m_xmlParent;
+    XMLDOMElementPtr    m_xmlNode;
     bool                m_bSubElement;
 
 protected:

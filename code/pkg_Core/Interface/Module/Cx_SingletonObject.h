@@ -8,7 +8,7 @@
 
 #include "Ix_Object.h"
 #include "XModuleItem.h"
-#include <typeinfo.h>
+#include <typeinfo>
 
 HMODULE xGetModuleHandle();
 

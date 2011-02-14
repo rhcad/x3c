@@ -22,9 +22,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeObserverExample", "..\code\pkg_Example\Modules\ChangeObserverExample\ChangeObserverExample_vc80.vcproj", "{392088E1-0ABC-4222-9014-578BEC6ACF6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Core", "pkg_Core", "{B7C4A024-AE85-4AD5-B160-CC63E66D9686}"
-	ProjectSection(SolutionItems) = preProject
-		..\code\pkg_Core\Readme.txt = ..\code\pkg_Core\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeManager", "..\code\pkg_Core\Modules\ChangeManager\ChangeManager_vc80.vcproj", "{CA68A7E4-8D73-4F50-9A8F-7697F8020D90}"
 EndProject

@@ -206,7 +206,7 @@ struct KAutoNewArr2d : KAutoNewArr<T2>
     {
         for (size_t i = 0; i < count1; i++)
         {
-            at(i).Realloc(count2);
+            KAutoNewArr<T2>::at(i).Realloc(count2);
         }
     }
 };

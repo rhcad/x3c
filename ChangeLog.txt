@@ -1,5 +1,13 @@
 X3 C++ PluginFramework
 
+2011-02-14
+
+    * Compile and fix projects using MinGW and GCC 4.5.1.
+    * Add Code::Blocks 10.05 projects (converted from x3_vc60).
+    * Support MFC dialog application and console application in cppunit test applications.
+    * Rename MSXML DOM namespace in ConfigXml plugin.
+
+    
 ------v1.0.5------
 
 2011-02-08

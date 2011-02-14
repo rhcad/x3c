@@ -8,7 +8,7 @@
 
 int XCrtDbgReport(const char* file, long line, const char* msg);
 
-#if _MSC_VER <= 1200 // VC6
+#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
 #define __debugbreak DebugBreak
 #endif
 

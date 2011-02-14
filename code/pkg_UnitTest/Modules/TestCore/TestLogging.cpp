@@ -56,7 +56,7 @@ void TestLogging::testMultiTypes()
 {
     LOG_WARNING2(L"Name", L"Name");
     LOG_WARNING2(L"Name", "Name");
-    LOG_WARNING2(L"Name", CString(L"Name"));
+    //LOG_WARNING2(L"Name", CString(L"Name"));
     LOG_WARNING2(L"Name", std::wstring(L"Name"));
     //LOG_WARNING2(L"Name", std::string("Name"));
     LOG_WARNING2(L"Name", 10);

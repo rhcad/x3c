@@ -1,10 +1,6 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#if _MSC_VER >= 1600 // VC2010
-#include <SDKDDKVer.h>      // Defines the highest available Windows platform.
-#endif
-
 #define VC_EXTRALEAN        // Exclude rarely-used stuff from Windows headers
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS  // some CString constructors will be explicit
 #define _AFX_ALL_WARNINGS   // turns off MFC's warning messages often safely ignored

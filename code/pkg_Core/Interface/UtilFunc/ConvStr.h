@@ -6,7 +6,7 @@
 #ifndef UTILFUNC_CONVSTR_H_
 #define UTILFUNC_CONVSTR_H_
 
-_STD_BEGIN
+namespace std {
 
 //! Convert from UNICODE string to ANSI string, std::w2a.
 /*!
@@ -88,5 +88,5 @@ inline std::string w2t(const std::wstring& s) { return w2a(s); }
 inline std::wstring t2w(LPCTSTR s) { return a2w(s); }
 #endif
 
-_STD_END
+}
 #endif // UTILFUNC_CONVSTR_H_

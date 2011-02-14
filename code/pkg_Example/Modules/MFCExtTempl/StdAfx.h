@@ -1,11 +1,6 @@
 #pragma once
 
 #define VC_EXTRALEAN        // Exclude rarely-used stuff from Windows headers
-
-#if _MSC_VER >= 1600        // VC2010
-#include <SDKDDKVer.h>      // Defines the highest available Windows platform.
-#endif
-
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
 
 #include <afxwin.h>         // MFC core and standard components

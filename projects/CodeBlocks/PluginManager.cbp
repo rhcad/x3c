@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="PluginManager" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Win32 Release">
+				<Option output="..\..\code\bin\gcc\Release\Plugins\PluginManagerX3" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\obj\gcc\Release\PluginManager" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DWIN32" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\code\pkg_Core\Modules\PluginManager" />
+					<Add directory="..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="..\..\code\pkg_Core\Interface\PluginManager" />
+				</Compiler>
+				<Linker>
+					<Add option="--implib ..\..\obj\gcc\Release\Lib/PluginManager.lib" />
+					<Add library='&quot;..\..\obj\gcc\Release\Lib/PluginManager' />
+				</Linker>
+			</Target>
+			<Target title="Win32 Debug">
+				<Option output="..\..\code\bin\gcc\Debug\Plugins\PluginManagerX3" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\obj\gcc\Debug\PluginManager" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DWIN32" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\code\pkg_Core\Modules\PluginManager" />
+					<Add directory="..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="..\..\code\pkg_Core\Interface\PluginManager" />
+				</Compiler>
+				<Linker>
+					<Add option="--implib ..\..\obj\gcc\Debug\Lib/PluginManager.lib" />
+					<Add library='&quot;..\..\obj\gcc\Debug\Lib/PluginManager' />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="..\..\code\pkg_Core\Interface\PluginManager\Ix_PluginLoader.h" />
+		<Unit filename="..\..\code\pkg_Core\Interface\PluginManager\PluginManager.h" />
+		<Unit filename="..\..\code\pkg_Core\Interface\PluginManager\XComCreator.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\StdAfx.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\StdAfx.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\PluginManager.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Version.rc2" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

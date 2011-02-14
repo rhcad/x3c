@@ -3,7 +3,7 @@
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <signal.h>
 
 #pragma comment(lib, "shlwapi.lib")
@@ -34,7 +34,7 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
 #if defined(_WINUSER_) && !defined(NOUSER)
         char buf[512];
 
-#if _MSC_VER <= 1200 // VC6
+#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
         sprintf(buf, 
 #else
         sprintf_s(buf, 512, 

@@ -10,7 +10,7 @@
 #pragma warning(disable:4018)   // signed/unsigned mismatch
 #pragma warning(disable:4702)   // unreachable code
 #include <algorithm>
-#include <xstring>
+#include <string>
 #include <vector>
 #include <deque>
 #include <list>
@@ -36,7 +36,7 @@ inline std::wstring towstr(const CString& str)
 template<class _Ta, class _Pr> inline
 bool erase_if(_Ta& arr, _Pr _P)
 {
-    _Ta::iterator it = std::find_if(arr.begin(), arr.end(), _P);
+    typename _Ta::iterator it = std::find_if(arr.begin(), arr.end(), _P);
     bool b = (it != arr.end());
 
     if (b)
@@ -70,7 +70,7 @@ bool erase_value(_Ta& arr, _Tp& p)
 template<class _Ta, class _Pr> inline
 long find_if(const _Ta& arr, _Pr _P)
 {
-    _Ta::const_iterator it = std::find_if(arr.begin(), arr.end(), _P);
+    typename _Ta::const_iterator it = std::find_if(arr.begin(), arr.end(), _P);
     return (it != arr.end()) ? (long)(it - arr.begin()) : -1;
 }
 
@@ -112,7 +112,7 @@ bool IsValidIndexOf(const _Ta& arr, long index)
     return index >= 0 && index < static_cast<long>(arr.size());
 }
 
-#if _MSC_VER <= 1200 // VC6
+#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
 #include "func_s.h"
 #endif
 

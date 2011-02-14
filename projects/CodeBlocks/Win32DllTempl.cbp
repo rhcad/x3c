@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Win32DllTempl" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Win32 Release">
+				<Option output="..\..\code\bin\gcc\Release\Plugins\Win32DllTempl.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\obj\gcc\Release\Win32DllTempl" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DWIN32" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\code\pkg_Example\Modules\Win32DllTempl" />
+					<Add directory="..\..\code\pkg_Example\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
+				</Compiler>
+				<Linker>
+					<Add option="--implib ..\..\obj\gcc\Release\Lib/Win32DllTempl.lib" />
+					<Add library='&quot;..\..\obj\gcc\Release\Lib/Win32DllTempl' />
+				</Linker>
+			</Target>
+			<Target title="Win32 Debug">
+				<Option output="..\..\code\bin\gcc\Debug\Plugins\Win32DllTempl.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\obj\gcc\Debug\Win32DllTempl" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DWIN32" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\code\pkg_Example\Modules\Win32DllTempl" />
+					<Add directory="..\..\code\pkg_Example\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
+				</Compiler>
+				<Linker>
+					<Add option="--implib ..\..\obj\gcc\Debug\Lib/Win32DllTempl.lib" />
+					<Add library='&quot;..\..\obj\gcc\Debug\Lib/Win32DllTempl' />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="..\..\code\pkg_Example\Interface\ClsID_Example.h" />
+		<Unit filename="..\..\code\pkg_Example\Interface\Ix_Example.h" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.h" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\StdAfx.h" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Plugin.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\StdAfx.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Version.rc2" />
+		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

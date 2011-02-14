@@ -38,7 +38,7 @@ namespace trim
     {
         bool operator()(const T& v, const S& c) const
         {
-            for (S::const_iterator it = c.begin(); it != c.end(); ++it)
+            for (typename S::const_iterator it = c.begin(); it != c.end(); ++it)
             {
                 if (v == *it)
                     return true;
@@ -103,10 +103,11 @@ namespace trim
 
     template <class S> void remove(S& c, const S& match)
     {
+        typedef typename S::value_type value_type;
         for (;;)
         {
-            S::iterator it = std::find_if(c.begin(), c.end(), 
-                std::bind2nd(values<S::value_type, S>(), match));
+            typename S::iterator it = std::find_if(c.begin(), c.end(),
+                std::bind2nd(values<value_type, S>(), match));
             if (it == c.end())
                 break;
             c.erase(it);
@@ -116,12 +117,13 @@ namespace trim
     template <class S, class C> long replace(S& s, const S& match, const C& newchar)
     {
         long count = 0;
-        S::iterator it = s.begin();
+        typedef typename S::value_type value_type;
+        typename S::iterator it = s.begin();
 
         for (; it != s.end(); ++it)
         {
-            it = std::find_if(it, s.end(), 
-                std::bind2nd(values<S::value_type, S>(), match));
+            it = std::find_if(it, s.end(),
+                std::bind2nd(values<value_type, S>(), match));
             if (it != s.end())
             {
                 *it = newchar;
@@ -135,12 +137,13 @@ namespace trim
     template <class S> long replace_each(S& s, const S& match, const S& chars)
     {
         long count = 0;
-        S::iterator it = s.begin();
+        typedef typename S::value_type value_type;
+        typename S::iterator it = s.begin();
 
         for (; it != s.end(); ++it)
         {
-            it = std::find_if(it, s.end(), 
-                std::bind2nd(values<S::value_type, S>(), match));
+            it = std::find_if(it, s.end(),
+                std::bind2nd(values<value_type, S>(), match));
             if (it != s.end())
             {
                 size_t n = match.find(*it);

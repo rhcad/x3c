@@ -19,7 +19,7 @@
 CLogObserver::CLogObserver()
     : m_inited(false), m_level(0)
 {
-#if _MSC_VER < 1600
+#if !defined(_MSC_VER) || _MSC_VER < 1600
     // assure log4cplus can save chinese text, avoid _Wcrtomb failing.
     std::locale::global(std::locale(""));
 #endif

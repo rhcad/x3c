@@ -129,7 +129,7 @@ void TestConfigDB::testSQLWithLike()
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
     CConfigIOSection secRecordset(pIFDb->GetSection(
         L"SELECT id, title, author, country, times, subject, style "
-        L"FROM article WHERE author like '%ку%' "));
+        L"FROM article WHERE author like '%text%' "));
 
     long nRecordCount = secRecordset.GetSectionCount(L"");
     ASSERT(nRecordCount > 0);

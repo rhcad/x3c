@@ -7,7 +7,7 @@
 #define X3_PLUGINIMPL_OBJECT_H_
 
 #include "Ix_Object.h"
-#include <typeinfo.h>
+#include <typeinfo>
 
 HMODULE xGetModuleHandle();
 

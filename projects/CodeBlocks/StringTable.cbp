@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="StringTable" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Win32 Release">
+				<Option output="..\..\code\bin\gcc\Release\Plugins\StringTable.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\obj\gcc\Release\StringTable" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DWIN32" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\code\pkg_Core\Modules\StringTable" />
+					<Add directory="..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="..\..\code\pkg_Core\Interface\Xml" />
+				</Compiler>
+				<Linker>
+					<Add option="--implib ..\..\obj\gcc\Release\Lib/StringTable.lib" />
+					<Add library='&quot;..\..\obj\gcc\Release\Lib/StringTable' />
+				</Linker>
+			</Target>
+			<Target title="Win32 Debug">
+				<Option output="..\..\code\bin\gcc\Debug\Plugins\StringTable.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\obj\gcc\Debug\StringTable" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DWIN32" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\code\pkg_Core\Modules\StringTable" />
+					<Add directory="..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="..\..\code\pkg_Core\Interface\Xml" />
+				</Compiler>
+				<Linker>
+					<Add option="--implib ..\..\obj\gcc\Debug\Lib/StringTable.lib" />
+					<Add library='&quot;..\..\obj\gcc\Debug\Lib/StringTable' />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="..\..\code\pkg_Core\Interface\Xml\Ix_StringTable.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\StdAfx.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\StdAfx.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\StringTable.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Version.rc2" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

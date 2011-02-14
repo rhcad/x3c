@@ -69,7 +69,13 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
 {
     if (pBuildInfo)
     {
-        *pBuildInfo = _MSC_VER << 2;
+        *pBuildInfo = 0;
+#ifdef _MSC_VER
+        *pBuildInfo |= (4 | (_MSC_VER << 8));
+#endif
+#ifdef __GNUC__
+        *pBuildInfo |= (8 | (__GNUC__ << 8));
+#endif
 #ifdef _DEBUG
         *pBuildInfo |= 1;
 #endif
@@ -79,7 +85,7 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
 
     if (pEntrySize)
     {
-        nEntrySize = min(nEntrySize, *pEntrySize);
+        nEntrySize = nEntrySize < *pEntrySize ? nEntrySize : *pEntrySize;
         nEntrySize = nEntrySize ? nEntrySize : sizeof(_XCLASSMETA_ENTRY);
         *pEntrySize = nEntrySize;
     }
@@ -91,7 +97,7 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
         return nClassCount;
     }
 
-    nClassCount = min(nClassCount, nMaxCount);
+    nClassCount = nClassCount < nMaxCount ? nClassCount : nMaxCount;
     for (DWORD i = 0; i < nClassCount; i++)
     {
         memcpy((LPBYTE)pTable + i * nEntrySize, 

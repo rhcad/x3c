@@ -19,7 +19,7 @@ inline std::wstring RoundStr(double value, int decimal = 4)
     if (decimal < 1) decimal = 1;
     if (decimal > 5) decimal = 5;
     fmt[2] = (wchar_t)('0' + decimal);
-#if _MSC_VER <= 1200 // VC6
+#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
     swprintf(buf, fmt, value);
 #else
     swprintf_s(buf, 65, fmt, value);    

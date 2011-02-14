@@ -16,7 +16,7 @@ HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv);
 // It is implemented in XModuleImpl.h or XComCreator.h
 HMODULE xGetModuleHandle();
 
-#ifndef _CPPRTTI
+#if defined(_MSC_VER) && !defined(_CPPRTTI)
 #error must enable RTTI (compiled with /GR)
 #endif
 
@@ -36,20 +36,9 @@ public:
     {
     }
 
-    Cx_Interface(const Cx_Ptr& src) : m_pInterface(NULL), m_pObj(NULL)
-    {
-        if (src.P())
-        {
-            m_pInterface = dynamic_cast<IF_Type*>(src.P());
-            if (m_pInterface)
-            {
-                m_pObj = src.P();
-                m_pObj->AddRef(xGetModuleHandle());
-            }
-        }
-    }
+    Cx_Interface(const Cx_Ptr& src);
 
-#if _MSC_VER > 1200 // not VC60
+#if defined(_MSC_VER) && _MSC_VER > 1200 // not VC60
 
     Cx_Interface(const thisClass& src)
         : m_pInterface(src.m_pInterface), m_pObj(src.m_pObj)
@@ -166,23 +155,8 @@ public:
 
         return *this;
     }
-    
-    thisClass& operator=(const Cx_Ptr& src)
-    {
-        Unload();
 
-        if (src.P())
-        {
-            m_pInterface = dynamic_cast<IF_Type*>(src.P());
-            if (m_pInterface)
-            {
-                m_pObj = src.P();
-                m_pObj->AddRef(xGetModuleHandle());
-            }
-        }
-
-        return *this;
-    }
+    thisClass& operator=(const Cx_Ptr& src);
 
     thisClass& operator=(const int nul)
     {
@@ -538,5 +512,39 @@ private:
 private:
     Ix_Object*  m_pInterface;
 };
+
+// Inlines for Cx_Interface
+//
+template <class IF_Type> inline
+Cx_Interface<IF_Type>::Cx_Interface(const Cx_Ptr& src) : m_pInterface(NULL), m_pObj(NULL)
+{
+    if (src.P())
+    {
+        m_pInterface = dynamic_cast<IF_Type*>(src.P());
+        if (m_pInterface)
+        {
+            m_pObj = src.P();
+            m_pObj->AddRef(xGetModuleHandle());
+        }
+    }
+}
+
+template <class IF_Type> inline
+Cx_Interface<IF_Type>& Cx_Interface<IF_Type>::operator=(const Cx_Ptr& src)
+{
+    Unload();
+
+    if (src.P())
+    {
+        m_pInterface = dynamic_cast<IF_Type*>(src.P());
+        if (m_pInterface)
+        {
+            m_pObj = src.P();
+            m_pObj->AddRef(xGetModuleHandle());
+        }
+    }
+
+    return *this;
+}
 
 #endif // X3_CORE_XCOMPTR_H_

@@ -6,6 +6,7 @@
 #pragma once
 
 #include <ChangeNotifyData.h>
+#include <typeinfo>
 
 //! 作为例子的职责链观察者类
 /*! 本例子用于让多个派生类都能处理同一个调用
