@@ -6,9 +6,10 @@
 // v2: 2011.2.4, ooyg: Support absolute path in LoadPlugins(). 
 //          Unload plugin if fail to call InitializePlugins().
 //          Reuse element position in RegisterPlugin().
-// v3: 2011.2.7, ooyg: Implement the delay-loaded feature.
-// v4: 2011.2.8, ooyg: Call SaveClsids() only if clsids have changed.
+// v3: 2011.02.07, ooyg: Implement the delay-loaded feature.
+// v4: 2011.02.08, ooyg: Call SaveClsids() only if clsids have changed.
 //          Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
+// v5: 2011.02.14, ooyg: Ignore folders in GetPluginIndex. Rewrite LoadPlugin().
 //
 
 #include "stdafx.h"
@@ -228,13 +229,13 @@ long Cx_PluginLoader::InitializePlugins()
 
 int Cx_PluginLoader::GetPluginIndex(const wchar_t* filename)
 {
+    const wchar_t* title = PathFindFileNameW(filename);
     int i = GetSize(m_modules);
-    int len = lstrlenW(filename);
 
     while (--i >= 0)
     {
-        int leni = lstrlenW(m_modules[i].filename);
-        if (StrCmpIW(filename, &filename[max(0, leni - len)]) == 0)
+        // ignore folders
+        if (StrCmpIW(title, PathFindFileNameW(m_modules[i].filename)) == 0)
         {
             break;
         }
@@ -282,33 +283,40 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
 
 bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 {
-    bool bOwner = false;
-    HMODULE hModule = GetModuleHandleW(filename);
+    int existIndex = GetPluginIndex(filename);
 
-    if (!hModule)
+    if (existIndex >= 0 && m_modules[existIndex].hdll)
     {
-        hModule = LoadLibraryExW(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-        if (!hModule)
+        if (StrCmpIW(filename, m_modules[existIndex].filename) != 0)
         {
-            return false;
+            LOG_DEBUG2(L"The plugin is already loaded.", 
+                filename << L", " << (m_modules[existIndex].filename));
         }
-        bOwner = true;
-        DisableThreadLibraryCalls(hModule);
+        return false;
     }
 
-    int moduleIndex = FindModule(hModule);
-    if (moduleIndex < 0 && RegisterPlugin(hModule))
+    HMODULE hdll = LoadLibraryExW(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+
+    if (hdll)
     {
-        moduleIndex = FindModule(hModule);
-        ASSERT(moduleIndex >= 0);
-        m_modules[moduleIndex].owned = bOwner;
-    }
-    else if (bOwner)
-    {
-        FreeLibrary(hModule);
+        if (RegisterPlugin(hdll))
+        {
+            int moduleIndex = FindModule(hdll);
+
+            ASSERT(moduleIndex >= 0);
+            ASSERT(existIndex < 0 || existIndex == moduleIndex);
+
+            m_modules[moduleIndex].owned = true;
+            DisableThreadLibraryCalls(hdll);
+        }
+        else
+        {
+            FreeLibrary(hdll);
+            hdll = NULL;
+        }
     }
 
-    return moduleIndex >= 0;
+    return hdll != NULL;
 }
 
 bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
@@ -579,27 +587,6 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
     return true;
 }
 
-static const wchar_t* TrimFileName(const wchar_t* filename)
-{
-    const wchar_t* name = PathFindFileNameW(filename);
-    int folder = 0;
-
-    while (name > filename)
-    {
-        name--;
-        if ('\\' == *name || '/' == *name)
-        {
-            if (++folder > 2)
-            {
-                name++;
-                break;
-            }
-        }
-    }
-
-    return name;
-}
-
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/ConfigIOSection.h>
 #include <ConvStr.h>
@@ -627,7 +614,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
-            L"plugins/plugin", L"filename", TrimFileName(filename), false));
+            L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
         seclist = seclist.GetSection(L"clsids", false);
 
         for (int i = 0; i < 999; i++)
@@ -655,7 +642,7 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
-            L"plugins/plugin", L"filename", TrimFileName(filename)));
+            L"plugins/plugin", L"filename", PathFindFileNameW(filename)));
 
         seclist = seclist.GetSection(L"clsids");
         seclist.RemoveChildren(L"clsid");
@@ -695,7 +682,7 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
         {
             CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
                 L"observers/observer", L"type", std::a2w(obtype).c_str()));
-            seclist.GetSection(L"plugin", L"filename", TrimFileName(filename));
+            seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
         }
     }
 }

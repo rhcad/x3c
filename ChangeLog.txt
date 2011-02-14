@@ -6,7 +6,9 @@ X3 C++ PluginFramework
     * Add Code::Blocks 10.05 projects (converted from x3_vc60).
     * Support MFC dialog application and console application in cppunit test applications.
     * Rename MSXML DOM namespace in ConfigXml plugin.
-
+    
+    * PluginManager 1.0.0.5:
+    * PluginManager\Cx_PluginLoader.cpp: Ignore folders in GetPluginIndex. Rewrite LoadPlugin().
     
 ------v1.0.5------
 

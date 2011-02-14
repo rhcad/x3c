@@ -4,7 +4,7 @@
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,4
+ FILEVERSION 1,0,0,5
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -22,7 +22,7 @@ BEGIN
 			VALUE "Comments", "Author: Zhang Yun Gui, Tao Jian Lin"
 			VALUE "FileDescription", "Plugin Manager DLL\0"
             VALUE "FileDescription", "Plugin Manager DLL\0"
-            VALUE "FileVersion", "1.0.0.4\0"
+            VALUE "FileVersion", "1.0.0.5\0"
             VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
             VALUE "OriginalFilename", "PluginManagerX3.dll\0"
             VALUE "ProductName", "X3 C++ PluginFramework\0"
