@@ -37,8 +37,8 @@ RSC=rc.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\code\bin\vc60\Release\UnitTests"
-# PROP Intermediate_Dir "..\..\obj\vc60\Release\TestCore"
+# PROP Output_Dir "..\..\code\bin\gcc\Release\UnitTests"
+# PROP Intermediate_Dir "..\..\obj\gcc\Release\TestCore"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
@@ -50,7 +50,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
-# ADD LINK32 cppunit_dll.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /pdb:"..\..\obj\vc60\Release\Symbols/TestCore.pdb" /machine:I386 /libpath:"..\..\code\bin\vc60\Release\UnitTests"
+# ADD LINK32 cppunit_dll.lib shlwapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /pdb:"..\..\obj\gcc\Release\Symbols/TestCore.pdb" /machine:I386 /libpath:"..\..\code\bin\gcc\Release\UnitTests"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ELSEIF  "$(CFG)" == "TestCore - Win32 Debug"
@@ -62,8 +62,8 @@ LINK32=link.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\code\bin\vc60\Debug\UnitTests"
-# PROP Intermediate_Dir "..\..\obj\vc60\Debug\TestCore"
+# PROP Output_Dir "..\..\code\bin\gcc\Debug\UnitTests"
+# PROP Intermediate_Dir "..\..\obj\gcc\Debug\TestCore"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
@@ -75,7 +75,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 cppunitd_dll.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /pdb:"..\..\obj\vc60\Debug\Symbols/TestCore.pdb" /debug /machine:I386 /pdbtype:sept /libpath:"..\..\code\bin\vc60\Debug\UnitTests"
+# ADD LINK32 cppunitd_dll.lib shlwapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /pdb:"..\..\obj\gcc\Debug\Symbols/TestCore.pdb" /debug /machine:I386 /pdbtype:sept /libpath:"..\..\code\bin\gcc\Debug\UnitTests"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 

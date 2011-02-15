@@ -30,10 +30,6 @@
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 					<Add directory="..\..\code\pkg_Core\Interface\ChangeObserver" />
 				</Compiler>
-				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Release\Lib/ChangeObserverExample.lib" />
-					<Add library='&quot;..\..\obj\gcc\Release\Lib/ChangeObserverExample' />
-				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
 				<Option output="..\..\code\bin\gcc\Debug\Plugins\ChangeObserverExample.plugin" prefix_auto="1" extension_auto="1" />
@@ -59,27 +55,23 @@
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 					<Add directory="..\..\code\pkg_Core\Interface\ChangeObserver" />
 				</Compiler>
-				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Debug\Lib/ChangeObserverExample.lib" />
-					<Add library='&quot;..\..\obj\gcc\Debug\Lib/ChangeObserverExample' />
-				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="..\..\code\pkg_Example\Interface\Ix_ChangeObserverTest.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserver.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserverB.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.cpp" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\DocEventObserver.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\DocObserverTest.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Interface\Ix_ChangeObserverTest.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\NodeSelectionObserver.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Plugin.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.h" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\DocObserverTest.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Responsibility.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\ResponsibilityB.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\StdAfx.h" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Plugin.cpp" />
+		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\StdAfx.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

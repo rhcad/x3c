@@ -33,8 +33,8 @@ RSC=rc.exe
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\code\bin\vc60\Release\Plugins"
-# PROP Intermediate_Dir "..\..\obj\vc60\Release\FileUtility"
+# PROP Output_Dir "..\..\code\bin\gcc\Release\Plugins"
+# PROP Intermediate_Dir "..\..\obj\gcc\Release\FileUtility"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\code\pkg_Core\Modules\FileUtility" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\Module" /I "..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\code\pkg_Core\Interface\Utility" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /c
@@ -45,15 +45,15 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\obj\vc60\Release\Symbols/FileUtility.pdb" /machine:I386 /out:"..\..\code\bin\vc60\Release\Plugins/FileUtility.plugin.dll" /implib:"..\..\obj\vc60\Release\Lib/FileUtility.lib"
+# ADD LINK32 shlwapi.lib version.lib /nologo /dll /pdb:"..\..\obj\gcc\Release\Symbols/FileUtility.pdb" /machine:I386 /out:"..\..\code\bin\gcc\Release\Plugins/FileUtility.plugin.dll"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ELSEIF  "$(CFG)" == "FileUtility - Win32 Debug"
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\code\bin\vc60\Debug\Plugins"
-# PROP Intermediate_Dir "..\..\obj\vc60\Debug\FileUtility"
+# PROP Output_Dir "..\..\code\bin\gcc\Debug\Plugins"
+# PROP Intermediate_Dir "..\..\obj\gcc\Debug\FileUtility"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\code\pkg_Core\Modules\FileUtility" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\Module" /I "..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\code\pkg_Core\Interface\Utility" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\obj\vc60\Debug\Symbols/FileUtility.pdb" /debug /machine:I386 /out:"..\..\code\bin\vc60\Debug\Plugins/FileUtility.plugin.dll" /implib:"..\..\obj\vc60\Debug\Lib/FileUtility.lib" /pdbtype:sept
+# ADD LINK32 shlwapi.lib version.lib /nologo /dll /pdb:"..\..\obj\gcc\Debug\Symbols/FileUtility.pdb" /debug /machine:I386 /out:"..\..\code\bin\gcc\Debug\Plugins/FileUtility.plugin.dll" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 

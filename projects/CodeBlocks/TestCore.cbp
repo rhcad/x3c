@@ -12,14 +12,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
-					<Add option="-Wall" />
 					<Add option="-W" />
 					<Add option="-fexceptions" />
+					<Add option="-O2" />
 					<Add option="-DWIN32" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
+					<Add option="-D_AFXDLL" />
+					<Add option="-Wall" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_UNICODE" />
 					<Add option="-DUNICODE" />
@@ -54,14 +55,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-g" />
 					<Add option="-W" />
 					<Add option="-fexceptions" />
+					<Add option="-g" />
 					<Add option="-DWIN32" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
+					<Add option="-D_AFXDLL" />
+					<Add option="-Wall" />
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_UNICODE" />
 					<Add option="-DUNICODE" />
@@ -91,23 +93,23 @@
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.cpp" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigDB.cpp" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.cpp" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.cpp" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.cpp" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.cpp" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.h" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigDB.h" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.h" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.h" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.h" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.h" />
 		<Unit filename="..\..\code\pkg_UnitTest\Modules\Public\BaseTest.cpp" />
 		<Unit filename="..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp" />
 		<Unit filename="..\..\code\pkg_UnitTest\Modules\Public\stdafx.cpp" />
 		<Unit filename="..\..\code\pkg_UnitTest\Modules\Public\stdafx.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.cpp" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigDB.cpp" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigDB.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.cpp" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.cpp" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.cpp" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.h" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.cpp" />
-		<Unit filename="..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.h" />
+		<Unit filename="..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -33,8 +33,8 @@ RSC=rc.exe
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\code\bin\vc60\Release\Plugins"
-# PROP Intermediate_Dir "..\..\obj\vc60\Release\Win32DllTempl"
+# PROP Output_Dir "..\..\code\bin\gcc\Release\Plugins"
+# PROP Intermediate_Dir "..\..\obj\gcc\Release\Win32DllTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\code\pkg_Example\Modules\Win32DllTempl" /I "..\..\code\pkg_Example\Interface" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\Module" /I "..\..\code\pkg_Core\Interface\UtilFunc" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /c
@@ -45,15 +45,15 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\obj\vc60\Release\Symbols/Win32DllTempl.pdb" /machine:I386 /out:"..\..\code\bin\vc60\Release\Plugins/Win32DllTempl.plugin.dll" /implib:"..\..\obj\vc60\Release\Lib/Win32DllTempl.lib"
+# ADD LINK32 shlwapi.lib /nologo /dll /pdb:"..\..\obj\gcc\Release\Symbols/Win32DllTempl.pdb" /machine:I386 /out:"..\..\code\bin\gcc\Release\Plugins/Win32DllTempl.plugin.dll"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ELSEIF  "$(CFG)" == "Win32DllTempl - Win32 Debug"
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\code\bin\vc60\Debug\Plugins"
-# PROP Intermediate_Dir "..\..\obj\vc60\Debug\Win32DllTempl"
+# PROP Output_Dir "..\..\code\bin\gcc\Debug\Plugins"
+# PROP Intermediate_Dir "..\..\obj\gcc\Debug\Win32DllTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\code\pkg_Example\Modules\Win32DllTempl" /I "..\..\code\pkg_Example\Interface" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\Module" /I "..\..\code\pkg_Core\Interface\UtilFunc" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\obj\vc60\Debug\Symbols/Win32DllTempl.pdb" /debug /machine:I386 /out:"..\..\code\bin\vc60\Debug\Plugins/Win32DllTempl.plugin.dll" /implib:"..\..\obj\vc60\Debug\Lib/Win32DllTempl.lib" /pdbtype:sept
+# ADD LINK32 shlwapi.lib /nologo /dll /pdb:"..\..\obj\gcc\Debug\Symbols/Win32DllTempl.pdb" /debug /machine:I386 /out:"..\..\code\bin\gcc\Debug\Plugins/Win32DllTempl.plugin.dll" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 

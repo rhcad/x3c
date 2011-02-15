@@ -33,8 +33,8 @@ RSC=rc.exe
 
 # PROP Use_MFC 2
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\code\bin\vc60\Release\Plugins"
-# PROP Intermediate_Dir "..\..\obj\vc60\Release\ConfigDB"
+# PROP Output_Dir "..\..\code\bin\gcc\Release\Plugins"
+# PROP Intermediate_Dir "..\..\obj\gcc\Release\ConfigDB"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\code\pkg_Utility\Modules\ConfigDB" /I "..\..\code\pkg_Utility\Interface\Database" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\Module" /I "..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\code\pkg_Core\Interface\Utility" /I "..\..\code\pkg_Core\Interface\Xml" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXEXT" /D "UNICODE" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
@@ -45,15 +45,15 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\obj\vc60\Release\Symbols/ConfigDB.pdb" /machine:I386 /out:"..\..\code\bin\vc60\Release\Plugins/ConfigDB.plugin.dll" /implib:"..\..\obj\vc60\Release\Lib/ConfigDB.lib"
+# ADD LINK32 shlwapi.lib /nologo /dll /pdb:"..\..\obj\gcc\Release\Symbols/ConfigDB.pdb" /machine:I386 /out:"..\..\code\bin\gcc\Release\Plugins/ConfigDB.plugin.dll"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ELSEIF  "$(CFG)" == "ConfigDB - Win32 Debug"
 
 # PROP Use_MFC 2
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\code\bin\vc60\Debug\Plugins"
-# PROP Intermediate_Dir "..\..\obj\vc60\Debug\ConfigDB"
+# PROP Output_Dir "..\..\code\bin\gcc\Debug\Plugins"
+# PROP Intermediate_Dir "..\..\obj\gcc\Debug\ConfigDB"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\code\pkg_Utility\Modules\ConfigDB" /I "..\..\code\pkg_Utility\Interface\Database" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\Module" /I "..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\code\pkg_Core\Interface\Utility" /I "..\..\code\pkg_Core\Interface\Xml" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXEXT" /D "UNICODE" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\obj\vc60\Debug\Symbols/ConfigDB.pdb" /debug /machine:I386 /out:"..\..\code\bin\vc60\Debug\Plugins/ConfigDB.plugin.dll" /implib:"..\..\obj\vc60\Debug\Lib/ConfigDB.lib" /pdbtype:sept
+# ADD LINK32 shlwapi.lib /nologo /dll /pdb:"..\..\obj\gcc\Debug\Symbols/ConfigDB.pdb" /debug /machine:I386 /out:"..\..\code\bin\gcc\Debug\Plugins/ConfigDB.plugin.dll" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 

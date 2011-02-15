@@ -30,8 +30,7 @@
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Release\Lib/Win32DllTempl.lib" />
-					<Add library='&quot;..\..\obj\gcc\Release\Lib/Win32DllTempl' />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
@@ -58,8 +57,7 @@
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Debug\Lib/Win32DllTempl.lib" />
-					<Add library='&quot;..\..\obj\gcc\Debug\Lib/Win32DllTempl' />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 		</Build>

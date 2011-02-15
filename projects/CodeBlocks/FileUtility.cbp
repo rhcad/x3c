@@ -30,8 +30,8 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Utility" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Release\Lib/FileUtility.lib" />
-					<Add library='&quot;..\..\obj\gcc\Release\Lib/FileUtility' />
+					<Add library="shlwapi" />
+					<Add library="version" />
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
@@ -58,8 +58,8 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Utility" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Debug\Lib/FileUtility.lib" />
-					<Add library='&quot;..\..\obj\gcc\Debug\Lib/FileUtility' />
+					<Add library="shlwapi" />
+					<Add library="version" />
 				</Linker>
 			</Target>
 		</Build>

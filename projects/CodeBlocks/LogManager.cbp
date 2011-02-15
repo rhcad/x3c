@@ -30,9 +30,8 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Log" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Release\Lib/LogManager.lib" />
 					<Add library="user32" />
-					<Add library='&quot;..\..\obj\gcc\Release\Lib/LogManager' />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
@@ -59,9 +58,8 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Log" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Debug\Lib/LogManager.lib" />
 					<Add library="user32" />
-					<Add library='&quot;..\..\obj\gcc\Debug\Lib/LogManager' />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 		</Build>

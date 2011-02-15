@@ -34,10 +34,9 @@
 					<Add directory="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Release\Lib/LogWriter.lib" />
 					<Add library="advapi32" />
 					<Add library="wsock32" />
-					<Add library='&quot;..\..\obj\gcc\Release\Lib/LogWriter' />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
@@ -68,10 +67,9 @@
 					<Add directory="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" />
 				</Compiler>
 				<Linker>
-					<Add option="--implib ..\..\obj\gcc\Debug\Lib/LogWriter.lib" />
 					<Add library="advapi32" />
 					<Add library="wsock32" />
-					<Add library='&quot;..\..\obj\gcc\Debug\Lib/LogWriter' />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 		</Build>
