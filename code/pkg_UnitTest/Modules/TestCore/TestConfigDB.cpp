@@ -14,7 +14,9 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef _MSC_VER
 CPPUNIT_TEST_SUITE_REGISTRATION( TestConfigDB );
+#endif
 
 TestConfigDB::TestConfigDB()
 {

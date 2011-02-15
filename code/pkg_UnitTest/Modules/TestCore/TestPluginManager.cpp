@@ -18,7 +18,7 @@ TestPluginManager::~TestPluginManager(void)
 
 void TestPluginManager::setUp()
 {
-    VERIFY(LoadPlugins(L"PluginManager.dll", false) == 0);
+    VERIFY(LoadPlugins(L"PluginManagerX3.dll", false) == 0);
 }
 
 void TestPluginManager::tearDown()
@@ -72,7 +72,7 @@ void TestPluginManager::testCreateObject()
 
     VERIFY(pLoader);
     VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin.dll"));
-    
+
     Ix_Object* ixObject=NULL;
     VERIFY(S_OK==pFactory->CreateObject(CLSID_LogManager, &ixObject,NULL));
     ixObject->Release(NULL);
@@ -132,7 +132,7 @@ Ix_PluginLoader* TestPluginManager::GetManagerLoader(void)
 Ix_ObjectFactory* TestPluginManager::GetManagerObjectFactory(void)
 {
     typedef Ix_ObjectFactory* (*FUNC_GETREGISTERBANK)();
-    FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(GetModuleHandleW(L"PluginManager.dll"), "xGetRegisterBank");
+    FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(GetModuleHandleW(L"PluginManagerX3.dll"), "xGetRegisterBank");
     VERIFY(pfn != NULL);
 
     Ix_ObjectFactory* pFactory = (*pfn)();
@@ -140,7 +140,7 @@ Ix_ObjectFactory* TestPluginManager::GetManagerObjectFactory(void)
 }
 
 
-long TestPluginManager::GetPluginsNum(const wchar_t* path, 
+long TestPluginManager::GetPluginsNum(const wchar_t* path,
         const wchar_t* ext, bool recursive)
 {
     WIN32_FIND_DATAW fd;
@@ -148,10 +148,10 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
     std::vector<std::wstring> arrSubPath;
     long nCount = 0;
     long nExtLen = lstrlenW(ext);
-    
+
     lstrcpynW(szFileName, path, MAX_PATH);
     PathAppendW(szFileName, L"*.*");
-    
+
     HANDLE hFind = ::FindFirstFileW(szFileName, &fd);
     BOOL bContinue = (hFind != INVALID_HANDLE_VALUE);
 
@@ -182,12 +182,12 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
         bContinue = ::FindNextFileW(hFind, &fd);
     }
     ::FindClose(hFind);
-    
+
     std::vector<std::wstring>::iterator it = arrSubPath.begin();
     for (; it != arrSubPath.end(); ++it)
     {
         nCount += GetPluginsNum(it->c_str(), ext, recursive);
     }
-    
+
     return nCount;
 }
