@@ -33,7 +33,7 @@ CUnitTestsApp theApp;
 
 #else   // Console application
 
-int _tmain(int argc, _TCHAR** argv)
+int main(int argc, char** argv)
 {
     // Get the top level suite from the registry
     CppUnit::Test* suite = CppUnit::TestFactoryRegistry::getRegistry().makeTest();
@@ -42,7 +42,7 @@ int _tmain(int argc, _TCHAR** argv)
     CppUnit::TextUi::TestRunner runner;
     runner.addTest(suite);
 
-    if ((argc > 1) && (_tcscmp(argv[1], _T("-x")) == 0))
+    if ((argc > 1) && (strcmp(argv[1], "-x") == 0))
     {
         char filename[MAX_PATH];
 

@@ -12,14 +12,14 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wall" />
 					<Add option="-W" />
 					<Add option="-fexceptions" />
-					<Add option="-O2" />
 					<Add option="-DWIN32" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
-					<Add option="-Wall" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Example\Modules\SimpleApp" />
@@ -40,6 +40,7 @@
 					<Add library="uuid" />
 					<Add library="odbc32" />
 					<Add library="odbccp32" />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
@@ -48,14 +49,14 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
 					<Add option="-W" />
 					<Add option="-fexceptions" />
-					<Add option="-g" />
 					<Add option="-DWIN32" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
-					<Add option="-Wall" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Example\Modules\SimpleApp" />
@@ -76,6 +77,7 @@
 					<Add library="uuid" />
 					<Add library="odbc32" />
 					<Add library="odbccp32" />
+					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 		</Build>

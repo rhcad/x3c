@@ -44,6 +44,7 @@
 					<Add library="odbc32" />
 					<Add library="odbccp32" />
 					<Add library="cppunit_dll" />
+					<Add library="shlwapi" />
 					<Add directory="..\..\code\bin\gcc\Release\UnitTests" />
 				</Linker>
 			</Target>
@@ -85,6 +86,7 @@
 					<Add library="odbc32" />
 					<Add library="odbccp32" />
 					<Add library="cppunitd_dll" />
+					<Add library="shlwapi" />
 					<Add directory="..\..\code\bin\gcc\Debug\UnitTests" />
 				</Linker>
 			</Target>
