@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Win32 Release">
-				<Option output="F:\x3c\code\bin\gcc\Release\UnitTests\SimpleApp" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\code\bin\gcc\Release\UnitTests\SimpleApp" prefix_auto="1" extension_auto="1" />
 				<Option object_output="..\..\obj\gcc\Release\SimpleApp" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -44,7 +44,7 @@
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
-				<Option output="F:\x3c\code\bin\gcc\Debug\UnitTests\SimpleApp" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\code\bin\gcc\Debug\UnitTests\SimpleApp" prefix_auto="1" extension_auto="1" />
 				<Option object_output="..\..\obj\gcc\Debug\SimpleApp" />
 				<Option type="1" />
 				<Option compiler="gcc" />
