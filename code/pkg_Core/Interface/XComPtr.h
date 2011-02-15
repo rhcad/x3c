@@ -158,22 +158,22 @@ public:
 
     thisClass& operator=(const Cx_Ptr& src);
 
-    thisClass& operator=(const int nul)
+    thisClass& operator=(const int)
     {
-        nul;//ASSERT(0 == nul);
+        //ASSERT(0 == nul);
         Unload();
         return *this;
     }
 
-    bool operator==(const int nul) const
+    bool operator==(const int) const
     {
-        nul;//ASSERT(0 == nul);
+        //ASSERT(0 == nul);
         return m_pInterface == NULL;
     }
 
-    bool operator!=(const int nul) const
+    bool operator!=(const int) const
     {
-        nul;//ASSERT(0 == nul);
+        //ASSERT(0 == nul);
         return m_pInterface != NULL;
     }
     
@@ -399,22 +399,22 @@ public:
         return *this;
     }
 
-    Cx_Ptr& operator=(const int nul)
+    Cx_Ptr& operator=(const int)
     {
-        nul;//ASSERT(0 == nul);
+        //ASSERT(0 == nul);
         Unload();
         return *this;
     }
 
-    bool operator==(const int nul) const
+    bool operator==(const int) const
     {
-        nul;//ASSERT(0 == nul);
+        //ASSERT(0 == nul);
         return m_pInterface == NULL;
     }
 
-    bool operator!=(const int nul) const
+    bool operator!=(const int) const
     {
-        nul;//ASSERT(0 == nul);
+        //ASSERT(0 == nul);
         return m_pInterface != NULL;
     }
     

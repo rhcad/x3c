@@ -136,7 +136,7 @@ interface Ix_FileUtility3
     /*! 将一个绝对路径转换为相对于给定参考路径的相对路径
         \param absFile 要转换的绝对路径
         \param absIsFile 绝对路径是文件名还是路径名
-        \param baseFile 参考路径，即相对哪个路径来转换，为/*! 空则取EXE路径
+        \param baseFile 参考路径，即相对哪个路径来转换，为空则取EXE路径
         \param baseIsFile 参考路径是文件名还是路径名
         \return 转换后的相对路径，如果relIsFile为false则绝对路径末尾有斜号，
             如果失败则和原来路径相同

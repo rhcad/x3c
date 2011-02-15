@@ -15,26 +15,24 @@
 
 #if defined(_STDIO_H_) || defined(_INC_STDIO)   // stdio.h
 
-inline int sprintf_s(char *buffer, size_t sizeOfBuffer, const char *format, ...)
+inline int sprintf_s(char *buffer, size_t, const char *format, ...)
 {
-    sizeOfBuffer;
     va_list arglist;
     va_start(arglist, format);
     return vsprintf(buffer, format, arglist);
 }
 
-inline int swprintf_s(wchar_t *buffer, size_t sizeOfBuffer, const wchar_t *format, ...)
+inline int swprintf_s(wchar_t *buffer, size_t, const wchar_t *format, ...)
 {
-    sizeOfBuffer;
     va_list arglist;
     va_start(arglist, format);
     return vswprintf(buffer, format, arglist);
 }
 
-inline int vsprintf_s(char *buffer, size_t sizeOfBuffer, const char *format, va_list arglist)
-    { sizeOfBuffer; return vsprintf(buffer, format, arglist); }
-inline int vswprintf_s(wchar_t *buffer, size_t sizeOfBuffer, const wchar_t *format, va_list arglist)
-    { sizeOfBuffer; return vswprintf(buffer, format, arglist); }
+inline int vsprintf_s(char *buffer, size_t, const char *format, va_list arglist)
+    { return vsprintf(buffer, format, arglist); }
+inline int vswprintf_s(wchar_t *buffer, size_t, const wchar_t *format, va_list arglist)
+    { return vswprintf(buffer, format, arglist); }
 
 #endif // _INC_STDIO
 

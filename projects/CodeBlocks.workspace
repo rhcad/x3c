@@ -5,7 +5,7 @@
 		<Project filename="CodeBlocks/ChangeObserverExample.cbp" />
 		<Project filename="CodeBlocks/ConfigXml.cbp" />
 		<Project filename="CodeBlocks/FileUtility.cbp" />
-		<Project filename="CodeBlocks/LogManager.cbp" active="1" />
+		<Project filename="CodeBlocks/LogManager.cbp" />
 		<Project filename="CodeBlocks/LogWriter.cbp" />
 		<Project filename="CodeBlocks/PluginManager.cbp" />
 		<Project filename="CodeBlocks/SimpleApp.cbp" />
@@ -13,6 +13,6 @@
 		<Project filename="CodeBlocks/StringTable.cbp" />
 		<Project filename="CodeBlocks/TextUtility.cbp" />
 		<Project filename="CodeBlocks/Win32DllTempl.cbp" />
-		<Project filename="CodeBlocks/TestCore.cbp" />
+		<Project filename="CodeBlocks/TestCore.cbp" active="1" />
 	</Workspace>
 </CodeBlocks_workspace_file>
