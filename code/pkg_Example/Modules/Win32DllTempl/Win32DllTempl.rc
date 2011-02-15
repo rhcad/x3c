@@ -1,7 +1,7 @@
 // Win32DllTempl.rc - resource script.
 //
 
-#include <afxres.h>
+#include <winresrc.h>
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
