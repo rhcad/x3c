@@ -13,5 +13,5 @@ extern "C" __declspec(dllexport) bool InitializePlugin()
 // Optional function to free this plugin when unloaded by the plugin manager.
 extern "C" __declspec(dllexport) void UninitializePlugin()
 {
-    delete s_observer;
+    SafeDelete(s_observer);
 }

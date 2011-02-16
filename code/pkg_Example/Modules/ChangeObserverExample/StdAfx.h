@@ -4,6 +4,7 @@
 #include <windows.h>        // Windows master include file
 #include <shlwapi.h>        // Windows light-weight utility APIs
 
+#include <SafeCall.h>       // Call pointer safely
 #include <vecfunc.h>        // STL master include file and functions
 #include <Log/DebugR.h>     // ASSERT, VERIFY and ASSERT_MESSAGE
 #include <Log/LogHelper.h>  // LOG_WARNING ...
