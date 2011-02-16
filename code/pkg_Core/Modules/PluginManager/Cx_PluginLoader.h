@@ -65,6 +65,7 @@ private:
 private:
     HMODULE                     m_instance;
     wchar_t                     m_inifile[MAX_PATH];
+    wchar_t                     m_clsfile[MAX_PATH];
     std::vector<std::wstring>   m_delayFiles;
     Cx_Ptr                      m_cache;
 };

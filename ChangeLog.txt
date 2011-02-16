@@ -1,5 +1,13 @@
 X3 C++ PluginFramework
 
+2011-02-16
+
+    * Fix PluginManager: 
+		Avoid plugin loading when a plugin is unloading.
+		Counting even a plugin is not loaded in InitializePlugins.
+		Not call ReleaseModule if a plugin is not loaded in UnloadPlugins.
+		Force load ConfigXml plugin if the class file is about to loaded.
+    
 2011-02-14
 
     * Compile and fix projects using MinGW and GCC 4.5.1.

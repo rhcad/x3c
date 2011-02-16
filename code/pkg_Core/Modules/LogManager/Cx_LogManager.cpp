@@ -71,7 +71,7 @@ bool Cx_LogManager::WriteLog(kLogType nType, const wchar_t* pszMsg,
 
 #ifdef _DEBUG
     const wchar_t* names[] = { L"> LogInfo: ", 
-        L"> LogWarning: ", L"> LogError: ", L"> LogError: " };
+        L"> LogWarning: ", L"> LogError: ", L"> FatalError: " };
     if (nType >= kLogType_Info && nType <= kLogType_Fatal)
     {
         OutputDebugStringW(names[nType - kLogType_Info]);

@@ -2,14 +2,16 @@
 // http://sourceforge.net/projects/x3c/
 
 // author: Zhang Yun Gui, Tao Jian Lin
-// v2: 2011.1.5, ooyg: change class-table to hash_map
-// v3: 2011.2.4, ooyg: Don't remove element in ReleaseModule().
-// v4: 2011.2.7, ooyg: Implement the delay-loaded feature.
+// v2: 2011.01.05, ooyg: change class-table to hash_map
+// v3: 2011.02.04, ooyg: Don't remove element in ReleaseModule().
+// v4: 2011.02.07, ooyg: Implement the delay-loaded feature.
+// v5: 2011.02.16, ooyg: Avoid plugin loading when a plugin is unloading.
 
 #include "StdAfx.h"
 #include "Cx_ObjectFactory.h"
 
 Cx_ObjectFactory::Cx_ObjectFactory()
+    : m_unloading(0)
 {
 }
 
@@ -34,7 +36,8 @@ HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid,
 
     if (pEntry && !pEntry->pfnObjectCreator && moduleIndex >= 0)
     {
-        if (!LoadDelayPlugin(m_modules[moduleIndex].filename))
+        if (!LoadDelayPlugin(m_modules[moduleIndex].filename)
+            && 0 == m_unloading)
         {
             CLSMAP::iterator it = m_clsmap.find(clsid.str());
             if (it != m_clsmap.end())
@@ -130,8 +133,16 @@ _XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid,
 
 int Cx_ObjectFactory::FindModule(HMODULE hModule)
 {
+    if (!hModule)
+    {
+        return -1;
+    }
+
     int i = GetSize(m_modules);
-    while (--i >= 0 && m_modules[i].hdll != hModule) ;
+
+    while (--i >= 0 && m_modules[i].hdll != hModule)
+    {
+    }
 
     return i;
 }

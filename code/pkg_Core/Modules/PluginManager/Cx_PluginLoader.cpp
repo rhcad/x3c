@@ -10,16 +10,21 @@
 // v4: 2011.02.08, ooyg: Call SaveClsids() only if clsids have changed.
 //          Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
 // v5: 2011.02.14, ooyg: Ignore folders in GetPluginIndex. Rewrite LoadPlugin().
-//
+// v6: 2011.02.16, ooyg: Avoid plugin loading when a plugin is unloading.
+//          Counting even a plugin is not loaded in InitializePlugins.
+//          Not call ReleaseModule if a plugin is not loaded in UnloadPlugins.
+//          Force load ConfigXml plugin if the class file is about to loaded.
 
 #include "stdafx.h"
 #include "Cx_PluginLoader.h"
 #include <Ix_AppWorkPath.h>
+#include <LockCount.h>
 
 Cx_PluginLoader::Cx_PluginLoader()
     : m_instance(NULL)
 {
     m_inifile[0] = 0;
+    m_clsfile[0] = 0;
 }
 
 Cx_PluginLoader::~Cx_PluginLoader()
@@ -201,8 +206,14 @@ long Cx_PluginLoader::InitializePlugins()
 
     for (long i = 0; i < GetSize(m_modules); i++)
     {
-        if (m_modules[i].inited || !m_modules[i].hdll)
+        if (m_modules[i].inited)
         {
+            continue;
+        }
+        if (!m_modules[i].hdll)
+        {
+            nSuccessLoadNum++;
+            m_modules[i].inited = true;
             continue;
         }
 
@@ -223,6 +234,8 @@ long Cx_PluginLoader::InitializePlugins()
             m_modules[i].inited = true;
         }
     }
+
+    SaveClsids();
 
     return nSuccessLoadNum;
 }
@@ -321,6 +334,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 
 bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 {
+    CLockCount locker(&m_unloading);
     int moduleIndex = GetPluginIndex(name);
     HMODULE hdll = moduleIndex < 0 ? NULL : m_modules[moduleIndex].hdll;
 
@@ -355,6 +369,7 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 
 long Cx_PluginLoader::UnloadPlugins()
 {
+    CLockCount locker(&m_unloading);
     SaveClsids();
     m_cache.Release();
 
@@ -382,7 +397,10 @@ long Cx_PluginLoader::UnloadPlugins()
 
     for (i = GetSize(m_modules) - 1; i >= 0; i--)
     {
-        ReleaseModule(m_modules[i].hdll);
+        if (m_modules[i].hdll)
+        {
+            ReleaseModule(m_modules[i].hdll);
+        }
     }
 
     return nUnLoadPluginNum;
@@ -488,7 +506,8 @@ bool Cx_PluginLoader::IsDelayPlugin(const wchar_t* filename)
 
 bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
 {
-    if (FindModule(GetModuleHandleW(filename)) >= 0)
+    if (m_unloading != 0
+        || FindModule(GetModuleHandleW(filename)) >= 0)
     {
         return false;
     }
@@ -589,23 +608,27 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/ConfigIOSection.h>
+#include <Xml/Ix_ConfigTransaction.h>
 #include <ConvStr.h>
 
 bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
 {
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
 
-    if (pIFFile.IsNull())
+    if (pIFFile.IsNull() && 0 == m_clsfile[0])
     {
-        wchar_t xmlfile[MAX_PATH];
+        lstrcpyW(m_clsfile, filename);
+        PathRemoveFileSpecW(m_clsfile);
+        PathAppendW(m_clsfile, L"ConfigXml.plugin.dll");
+        LoadPlugin(m_clsfile);
 
-        lstrcpyW(xmlfile, m_inifile);
-        PathRenameExtensionW(xmlfile, L".clsbuf");
+        lstrcpyW(m_clsfile, m_inifile);
+        PathRenameExtensionW(m_clsfile, L".clsbuf");
 
         if (pIFFile.Create(CLSID_ConfigXmlFile))
         {
             m_cache = pIFFile;
-            pIFFile->SetFileName(xmlfile);
+            pIFFile->SetFileName(m_clsfile);
         }
     }
 
@@ -666,8 +689,8 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
 
 bool Cx_PluginLoader::SaveClsids()
 {
-    Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
-    return pIFFile && pIFFile->Save();
+    CConfigTransaction autosave(m_cache);
+    return autosave.Submit();
 }
 
 void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
