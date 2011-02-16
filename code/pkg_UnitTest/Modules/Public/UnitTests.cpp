@@ -5,7 +5,8 @@
 //
 
 #include "stdafx.h"
-#ifdef _AFXDLL
+
+#if defined(_AFXDLL) && !defined(_CONSOLE)
 #include <cppunit/ui/mfc/TestRunner.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 

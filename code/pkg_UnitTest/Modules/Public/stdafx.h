@@ -7,7 +7,7 @@
 #ifndef _UNITTEST_PUBLIC_STDAFX_H
 #define _UNITTEST_PUBLIC_STDAFX_H
 
-#ifdef _AFXDLL              // MFC dialog application
+#if defined(_AFXDLL) && !defined(_CONSOLE)              // MFC dialog application
 
 #define VC_EXTRALEAN        // Exclude rarely-used stuff from Windows headers
 #include <afxwin.h>         // MFC core and standard components
