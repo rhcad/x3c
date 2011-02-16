@@ -655,7 +655,16 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
         }
     }
 
-    return !clsids.empty();
+    bool has = !clsids.empty();
+    if (!has)
+    {
+        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+            L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
+        seclist = seclist.GetSection(L"observers", false);
+        has = (seclist.GetSectionCount(L"observer") > 0);
+    }
+
+    return has;
 }
 
 bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
@@ -706,6 +715,10 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
             CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
                 L"observers/observer", L"type", std::a2w(obtype).c_str()));
             seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
+
+            seclist = pIFFile->GetData()->GetSection(NULL, 
+                L"plugins/plugin", L"filename", PathFindFileNameW(filename));
+            seclist.GetSection(L"observers/observer", L"type", std::a2w(obtype).c_str());
         }
     }
 }

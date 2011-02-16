@@ -19,3 +19,18 @@ private:
 private:
     int*    m_data;
 };
+
+class CDocObserverTestOnRun
+    : private DocEventObserver
+{
+public:
+    CDocObserverTestOnRun()
+    {
+    }
+
+private:
+    virtual void OnDocEventAfterOpen()
+    {
+        LOG_INFO(L"CDocObserverTestOnRun::OnDocEventAfterOpen");
+    }
+};
