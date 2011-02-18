@@ -6,6 +6,7 @@
 #pragma once
 
 #include <ChangeNotifyData.h>
+#include <typeinfo>
 
 //! 作为例子的节点选择改变观察者类
 /*! 本例子用于让派生类都响应节点变化，并可避免连锁循环变化

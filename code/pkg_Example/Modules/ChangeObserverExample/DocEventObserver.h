@@ -6,6 +6,7 @@
 #pragma once
 
 #include <ChangeNotifyData.h>
+#include <typeinfo>
 
 //! 文档事件类型
 enum kDocEventType

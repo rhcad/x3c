@@ -3,7 +3,6 @@
 	<Workspace title="Workspace">
 		<Project filename="CodeBlocks/ChangeManager.cbp" />
 		<Project filename="CodeBlocks/ChangeObserverExample.cbp" />
-		<Project filename="CodeBlocks/ConfigXml.cbp" />
 		<Project filename="CodeBlocks/FileUtility.cbp" />
 		<Project filename="CodeBlocks/LogManager.cbp" />
 		<Project filename="CodeBlocks/LogWriter.cbp" />
