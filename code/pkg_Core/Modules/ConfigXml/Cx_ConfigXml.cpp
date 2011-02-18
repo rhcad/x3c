@@ -2,6 +2,7 @@
 // http://sourceforge.net/projects/x3c/
 // Changes:
 // 2011-01-18, Zhang Yun Gui: Delay call CoUninitialize until plugin is unloading.
+// 2011-02-18, Zhang Yun Gui: Not call CoUninitialize if another plugin (eg. StringTable) is using this plugin.
 
 #include "StdAfx.h"
 #include "Cx_ConfigXml.h"
@@ -64,10 +65,11 @@ public:
 };
 
 int ConfigXmlImpl::c_nInitCom = 0;
+extern "C" __declspec(dllexport) bool xCanUnloadPlugin();
 
 extern "C" __declspec(dllexport) void UninitializePlugin()
 {
-    if (1 == ConfigXmlImpl::c_nInitCom)
+    if (1 == ConfigXmlImpl::c_nInitCom && xCanUnloadPlugin())
     {
         CoUninitialize();
         ConfigXmlImpl::c_nInitCom = 0;

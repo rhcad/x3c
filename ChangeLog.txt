@@ -6,6 +6,7 @@ X3 C++ PluginFramework
 
     * Add delay-load comments.
     * Fix Cx_PluginLoader::LoadPluginOrDelay.
+    * Not call CoUninitialize if another plugin (eg. StringTable) is using ConfigXml plugin.
 
 2011-02-16
 
