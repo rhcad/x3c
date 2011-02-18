@@ -50,7 +50,7 @@ void Cx_PluginLoader::ReplaceSlashes(wchar_t* filename)
 void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, HMODULE instance, 
                                    const wchar_t* path)
 {
-    if (PathIsRelativeW(path) || 0 == path[0])
+    if (!path || 0 == path[0] || PathIsRelativeW(path))
     {
         GetModuleFileNameW(instance, fullpath, MAX_PATH);
         PathRemoveFileSpecW(fullpath);
@@ -202,7 +202,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
 
 long Cx_PluginLoader::InitializePlugins()
 {
-    long nSuccessLoadNum = 0;
+    long count = 0;
 
     for (long i = 0; i < GetSize(m_modules); i++)
     {
@@ -210,15 +210,15 @@ long Cx_PluginLoader::InitializePlugins()
         {
             continue;
         }
-        if (!m_modules[i].hdll)
+        if (!m_modules[i].hdll) // delay-load
         {
-            nSuccessLoadNum++;
+            count++;
             m_modules[i].inited = true;
             continue;
         }
 
-        typedef bool (*FUNC_PLUGINLOAD)();
-        FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
+        typedef bool (*FUNC_INIT)();
+        FUNC_INIT pfn = (FUNC_INIT)GetProcAddress(
             m_modules[i].hdll, "InitializePlugin");
 
         if (pfn && !(*pfn)())
@@ -230,14 +230,14 @@ long Cx_PluginLoader::InitializePlugins()
         }
         else
         {
-            nSuccessLoadNum++;
+            count++;
             m_modules[i].inited = true;
         }
     }
 
     SaveClsids();
 
-    return nSuccessLoadNum;
+    return count;
 }
 
 int Cx_PluginLoader::GetPluginIndex(const wchar_t* filename)
@@ -328,6 +328,11 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
             hdll = NULL;
         }
     }
+    else
+    {
+        DWORD err = GetLastError();
+        LOG_WARNING2(L"Fail to load plugin.", filename << L", " << err);
+    }
 
     return hdll != NULL;
 }
@@ -374,7 +379,7 @@ long Cx_PluginLoader::UnloadPlugins()
     m_cache.Release();
 
     long i = 0;
-    long nUnLoadPluginNum = 0;
+    long count = 0;
 
     for (i = GetSize(m_modules) - 1; i >= 0; i--)
     {
@@ -389,10 +394,7 @@ long Cx_PluginLoader::UnloadPlugins()
 
     for (i = GetSize(m_modules) - 1; i >= 0; i--)
     {
-        if (ClearModuleItems(m_modules[i].hdll))
-        {
-            nUnLoadPluginNum++;
-        }
+        ClearModuleItems(m_modules[i].hdll);
     }
 
     for (i = GetSize(m_modules) - 1; i >= 0; i--)
@@ -400,10 +402,11 @@ long Cx_PluginLoader::UnloadPlugins()
         if (m_modules[i].hdll)
         {
             ReleaseModule(m_modules[i].hdll);
+            count++;
         }
     }
 
-    return nUnLoadPluginNum;
+    return count;
 }
 
 bool Cx_PluginLoader::ClearModuleItems(HMODULE hModule)
@@ -419,12 +422,24 @@ bool Cx_PluginLoader::ClearModuleItems(HMODULE hModule)
     return false;
 }
 
-// The configure file of the delay-loaded feature:
+// The configure file of the delay-load feature:
 //     <ExePath>\Config\<ExeName>.ini
-// Example content:
+// The encode of ini file is recommend Unicode.
+//
+// The class cache file will be saved as <ExePath>\Config\<ExeName>.clsbuf
+// You can change the configure path using Ix_AppWorkPath.
+//
+// Example content of the configure file:
 //     [Plugins]
-//     MyPlugin.plugin.dll==
 //     Plugin2.plugin.dll==
+//     MyExample.plugin.dll==
+//     \Example.plugin.dll==
+//     /HasSlashCanExactCompare.plugin.dll==
+//
+// If you want delay-load all plugins, you can add '.plugin.dll' or '.dll' as following:
+//     [Plugins]
+//     .plugin.dll==
+//
 
 void Cx_PluginLoader::VerifyLoadFileNames()
 {
@@ -506,8 +521,7 @@ bool Cx_PluginLoader::IsDelayPlugin(const wchar_t* filename)
 
 bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
 {
-    if (m_unloading != 0
-        || FindModule(GetModuleHandleW(filename)) >= 0)
+    if (m_unloading != 0 || GetPluginIndex(filename) >= 0)
     {
         return false;
     }
