@@ -109,7 +109,9 @@ namespace trim
             typename S::iterator it = std::find_if(c.begin(), c.end(),
                 std::bind2nd(values<value_type, S>(), match));
             if (it == c.end())
+            {
                 break;
+            }
             c.erase(it);
         }
     }
@@ -134,8 +136,26 @@ namespace trim
         return count;
     }
 
+    template <class S> long replace(S& s, const S& match, const S& newtext)
+    {
+        long count = 0;
+        size_t index = s.find(match);
+
+        while (index != s.npos)
+        {
+            count++;
+            s.replace(index, match.size(), newtext);
+            index = s.find(match, index + newtext.size());
+        }
+
+        return count;
+    }
+
     template <class S> long replace_each(S& s, const S& match, const S& chars)
     {
+#ifdef ASSERT
+        ASSERT(match.size() > 0 && match.size() == chars.size());
+#endif
         long count = 0;
         typedef typename S::value_type value_type;
         typename S::iterator it = s.begin();

@@ -1,6 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
-// v2: 2011.2.7, ooyg: Using Ix_AppWorkPath to get logging path.
+// v2: 2011.02.07, ooyg: Using Ix_AppWorkPath to get logging path.
+// v3: 2011.02.21, ooyg: Replace "\n" to "\\n " in LogWriter plugin.
 
 #include "stdafx.h"
 #include "LogObserver.h"
@@ -10,6 +11,7 @@
 #include <Ix_TextFileUtil.h>
 #include <Ix_LogManager.h>
 #include <PluginManager/Ix_AppWorkPath.h>
+#include <ctrim.h>
 
 #pragma warning(disable:4127)       // conditional expression is constant
 #include <log4cplus/configurator.h>
@@ -162,15 +164,34 @@ void CLogObserver::OnWriteLog(int type,
     {
         buf << L"  ";
     }
-    buf << msg;
-    if (!extra.empty())
+
+    if (!module.empty())
+    {
+        buf << L"@" << module << L":" << idname << L", ";
+    }
+
+    if (msg.find(L"\n") != std::wstring::npos)
+    {
+        std::wstring text(msg);
+        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n "));
+        buf << text;
+    }
+    else
+    {
+        buf << msg;
+    }
+
+    if (extra.find(L"\n") != std::wstring::npos)
+    {
+        std::wstring text(extra);
+        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n "));
+        buf << L" (" << text << L")";
+    }
+    else if (!extra.empty())
     {
         buf << L" (" << extra << L")";
     }
-    if (!module.empty())
-    {
-        buf << L" @" << module << L":" << idname;
-    }
+
     buf << L" [" << file << L" L" << line << L"]";
 
     switch (type)
