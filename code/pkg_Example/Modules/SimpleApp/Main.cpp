@@ -3,13 +3,17 @@
 
 void Test();
 
+#if defined(_MSC_VER) && defined(UNICODE)
+#define main wmain
+#endif
+
 int main()
 {
     CPluginManager loader;
 
     if (loader.LoadPluginManager(L"../Plugins"))
     {
-        loader.GetPluginLoader()->LoadPluginFiles(L"../Plugins", 
+        loader.GetPluginLoader()->LoadPluginFiles(L"../Plugins",
             L"Win32DllTempl.plugin.dll");
         loader.GetPluginLoader()->InitializePlugins();
 

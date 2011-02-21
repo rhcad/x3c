@@ -8,9 +8,9 @@ class Cx_Example2
 {
 protected:
     Cx_Example2();
-    ~Cx_Example2();
+    virtual ~Cx_Example2();
 
-protected:
+private:
     // From Ix_Example
     virtual void Foo();
 
