@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-02-24
+
+    * Set modified flag only if actually changed in Cx_XmlSection::SetXXX().
+    * Check NULL string in Cx_ConfigXml::GetSection().
+
 2011-02-21
 
     * Replace "\n" to "\\n " in LogWriter plugin. Add replace function in ctrim.h

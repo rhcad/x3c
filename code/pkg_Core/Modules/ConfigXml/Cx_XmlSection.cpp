@@ -1,5 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
+// Changes:
+// 2011-02-24: Set modified flag only if actually changed in Cx_XmlSection::SetXXX().
 
 #include "StdAfx.h"
 #include "Cx_XmlSection.h"
@@ -32,10 +34,10 @@ std::wstring Cx_XmlSection::GetText()
 bool Cx_XmlSection::SetText(const wchar_t* value, bool cdata)
 {
     bool changed = false;
+    std::wstring oldvalue(CXmlUtil::GetText(m_xmlNode, EMPTYDEFSTR));
 
-    if (0 != wcscmp(value, CXmlUtil::GetText(m_xmlNode, EMPTYDEFSTR).c_str()))
+    if (0 != wcscmp(value, oldvalue.c_str()))
     {
-        m_pData->SetModified();
         if (cdata)
         {
             changed = CXmlUtil::SetTextCDATA(
@@ -44,6 +46,10 @@ bool Cx_XmlSection::SetText(const wchar_t* value, bool cdata)
         else
         {
             changed = CXmlUtil::SetText(m_xmlNode, value);
+        }
+        if (changed)
+        {
+            m_pData->SetModified();
         }
     }
 
@@ -108,19 +114,23 @@ std::wstring Cx_XmlSection::GetString(const wchar_t* name, const wchar_t* defVal
 bool Cx_XmlSection::SetString(const wchar_t* name, const wchar_t* value)
 {
     bool changed = false;
+    std::wstring oldvalue(GetString(name, EMPTYDEFSTR));
 
-    if (0 != wcscmp(value, GetString(name, EMPTYDEFSTR).c_str()))
+    if (0 != wcscmp(value, oldvalue.c_str()))
     {
-        m_pData->SetModified();
         if (!m_bSubElement)
         {
-            changed = !!CXmlUtil::SetAttribute(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttribute(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
         }
         else
         {
-            changed = !!CXmlUtil::SetField(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetField(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
+        }
+        if (changed)
+        {
+            m_pData->SetModified();
         }
     }
 
@@ -139,20 +149,24 @@ int Cx_XmlSection::GetInt(const wchar_t* name, int defValue)
 bool Cx_XmlSection::SetInt(const wchar_t* name, int value)
 {
     bool changed = false;
+    std::wstring oldvalue(GetString(name, EMPTYDEFSTR));
 
-    if (GetString(name, EMPTYDEFSTR).compare(EMPTYDEFSTR) == 0
+    if (oldvalue.compare(EMPTYDEFSTR) == 0
         || value != (int)GetInt(name))
     {
-        m_pData->SetModified();
         if (!m_bSubElement)
         {
-            changed = !!CXmlUtil::SetAttributeInt(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttributeInt(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
         }
         else
         {
-            changed = !!CXmlUtil::SetFieldInt(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetFieldInt(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
+        }
+        if (changed)
+        {
+            m_pData->SetModified();
         }
     }
 
@@ -215,16 +229,19 @@ bool Cx_XmlSection::SetBool(const wchar_t* name, BOOL value)
 
     if (value != (int)GetInt(name, 9))
     {
-        m_pData->SetModified();
         if (!m_bSubElement)
         {
-            changed = !!CXmlUtil::SetAttributeBool(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttributeBool(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
         }
         else
         {
-            changed = !!CXmlUtil::SetFieldBool(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetFieldBool(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
+        }
+        if (changed)
+        {
+            m_pData->SetModified();
         }
     }
 
@@ -249,8 +266,7 @@ bool Cx_XmlSection::SetDouble(const wchar_t* name, double value)
         if (1e-5 < fabs(value - CXmlUtil::GetAttributeFloat(
             m_xmlNode, name, 1.2345e20)))
         {
-            m_pData->SetModified();
-            changed = !!CXmlUtil::SetAttributeFloat(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetAttributeFloat(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
         }
     }
@@ -259,10 +275,13 @@ bool Cx_XmlSection::SetDouble(const wchar_t* name, double value)
         if (1e-5 < fabs(value - CXmlUtil::GetFieldFloat(
             m_xmlNode, name, 1e20)))
         {
-            m_pData->SetModified();
-            changed = !!CXmlUtil::SetFieldFloat(m_pData->m_xmlDoc, 
+            changed = !!CXmlUtil::SetFieldFloat(m_pData->m_xmlDoc,
                 m_xmlNode, name, value);
         }
+    }
+    if (changed)
+    {
+        m_pData->SetModified();
     }
 
     return changed;
@@ -289,7 +308,7 @@ COLORREF Cx_XmlSection::GetRGB(const wchar_t* name, COLORREF defValue)
 bool Cx_XmlSection::SetRGB(const wchar_t* name, COLORREF value)
 {
     wchar_t szBuf[32];
-    swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d", 
+    swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d",
         GetRValue(value), GetGValue(value), GetBValue(value));
     return SetString(name, szBuf);
 }
@@ -342,7 +361,7 @@ bool Cx_XmlSection::SetDate(const wchar_t* name, int year, int month, int day)
     return SetString(name, szBuf);
 }
 
-bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int& day, 
+bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int& day,
     int& hour, int& minute, int& second)
 {
     int nums[6] = { 0, 0, 0, 0, 0, 0 };
@@ -366,11 +385,11 @@ bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int&
     return bRet;
 }
 
-bool Cx_XmlSection::SetDateTime(const wchar_t* name, int year, int month, int day, 
+bool Cx_XmlSection::SetDateTime(const wchar_t* name, int year, int month, int day,
     int hour, int minute, int second)
 {
     wchar_t szBuf[60];
-    swprintf_s(szBuf, _countof(szBuf), L"%d-%d-%d %d:%d:%d", 
+    swprintf_s(szBuf, _countof(szBuf), L"%d-%d-%d %d:%d:%d",
         year, month, day, hour, minute, second);
     return SetString(name, szBuf);
 }
