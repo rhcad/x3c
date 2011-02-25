@@ -2,6 +2,7 @@
 // http://sourceforge.net/projects/x3c/
 // v2: 2011.02.07, ooyg: Using Ix_AppWorkPath to get logging path.
 // v3: 2011.02.21, ooyg: Replace "\n" to "\\n " in LogWriter plugin.
+// v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
 
 #include "stdafx.h"
 #include "LogObserver.h"
@@ -19,7 +20,7 @@
 #include <log4cplus/helpers/stringhelper.h>
 
 CLogObserver::CLogObserver()
-    : m_inited(false), m_level(0)
+    : m_inited(false), m_level(0), m_haserr(false)
 {
 #if !defined(_MSC_VER) || _MSC_VER < 1600
     // assure log4cplus can save chinese text, avoid _Wcrtomb failing.
@@ -28,21 +29,53 @@ CLogObserver::CLogObserver()
 
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
     if (pIFManager.IsNotNull())
+    {
         pIFManager->RegisterObserver(this);
+    }
 }
 
 CLogObserver::~CLogObserver()
 {
-    if (m_inited)
-    {
-        Logger::shutdown();
-    }
-    
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
         pIFManager->UnRegisterObserver(this);
     }
+
+    if (m_inited)
+    {
+        Logger::shutdown();
+
+        if (m_haserr)
+        {
+            Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+            wchar_t path[MAX_PATH] = { 0 };
+            wchar_t hostname[33] = { 0 };
+            unsigned long namesize = 33;
+
+            if (pIFUtility && GetServerPath(path)
+#ifdef GetComputerName
+                && GetComputerNameW(hostname, &namesize)
+#endif
+                )
+            {
+                PathAppendW(path, hostname);
+                PathAddBackslashW(path);
+                pIFUtility->CopyPathFile(m_path.c_str(), path);
+            }
+        }
+    }
+}
+
+bool CLogObserver::GetServerPath(wchar_t* path)
+{
+    wchar_t inifile[MAX_PATH];
+
+    lstrcpynW(inifile, m_path.c_str(), MAX_PATH);
+    PathAppendW(inifile, L"LogWriter.ini");
+
+    return GetPrivateProfileStringW(L"Server", L"Path", L"", 
+        path, MAX_PATH, inifile) > 1;
 }
 
 Logger CLogObserver::GetLogger()
@@ -204,12 +237,15 @@ void CLogObserver::OnWriteLog(int type,
         break;
     case kLogType_Warning:
         LOG4CPLUS_WARN_STR(GetLogger(), buf.str());
+        m_haserr = true;
         break;
     case kLogType_Error:
         LOG4CPLUS_ERROR_STR(GetLogger(), buf.str());
+        m_haserr = true;
         break;
     case kLogType_Fatal:
         LOG4CPLUS_FATAL_STR(GetLogger(), buf.str());
+        m_haserr = true;
         break;
     }
 }
