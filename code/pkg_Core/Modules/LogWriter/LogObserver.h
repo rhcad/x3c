@@ -31,6 +31,7 @@ private:
     void MakerInitVars();
     void WritePropFile(const wchar_t* filename);
     bool GetServerPath(wchar_t* path);
+    bool CopyLogFilesToServer();
 
 private:
     std::wstring    m_path;         // logging path ending with backsplash.

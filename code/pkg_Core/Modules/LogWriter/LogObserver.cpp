@@ -48,23 +48,31 @@ CLogObserver::~CLogObserver()
 
         if (m_haserr)
         {
-            Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
-            wchar_t path[MAX_PATH] = { 0 };
-            wchar_t hostname[33] = { 0 };
-            unsigned long namesize = 33;
-
-            if (pIFUtility && GetServerPath(path)
-#ifdef GetComputerName
-                && GetComputerNameW(hostname, &namesize)
-#endif
-                )
-            {
-                PathAppendW(path, hostname);
-                PathAddBackslashW(path);
-                pIFUtility->CopyPathFile(m_path.c_str(), path);
-            }
+            CopyLogFilesToServer();
         }
     }
+}
+
+bool CLogObserver::CopyLogFilesToServer()
+{
+    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    wchar_t path[MAX_PATH] = { 0 };
+    wchar_t hostname[33] = { 0 };
+    unsigned long namesize = 33;
+    bool ret = false;
+
+    if (pIFUtility && GetServerPath(path)
+#ifdef GetComputerName
+        && GetComputerNameW(hostname, &namesize)
+#endif
+        )
+    {
+        PathAppendW(path, hostname);
+        PathAddBackslashW(path);
+        ret = pIFUtility->CopyPathFile(m_path.c_str(), path);
+    }
+
+    return ret;
 }
 
 bool CLogObserver::GetServerPath(wchar_t* path)
@@ -237,16 +245,19 @@ void CLogObserver::OnWriteLog(int type,
         break;
     case kLogType_Warning:
         LOG4CPLUS_WARN_STR(GetLogger(), buf.str());
-        m_haserr = true;
         break;
     case kLogType_Error:
         LOG4CPLUS_ERROR_STR(GetLogger(), buf.str());
-        m_haserr = true;
         break;
     case kLogType_Fatal:
         LOG4CPLUS_FATAL_STR(GetLogger(), buf.str());
-        m_haserr = true;
         break;
+    }
+
+    if (type > kLogType_Info)
+    {
+        m_haserr = true;
+        CopyLogFilesToServer();
     }
 }
 
