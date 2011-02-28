@@ -39,6 +39,7 @@ private:
     bool            m_inited;       // logging file is setted or not.
     long            m_level;        // group level of current group.
     bool            m_haserr;       // see OnWriteLog
+    long            m_copyflags;    // flags for CopyLogFilesToServer
 };
 
 #endif // _X3_LOGWRITER_LOGOBSERVER_H

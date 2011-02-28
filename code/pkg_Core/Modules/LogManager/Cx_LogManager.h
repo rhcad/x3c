@@ -16,24 +16,25 @@ protected:
 protected:
     virtual bool RegisterObserver(ILogObserver* observer);
     virtual void UnRegisterObserver(ILogObserver* observer);
-    virtual bool PushGroup(const wchar_t* pszMsg, const wchar_t* pszExtra);
+    virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra);
     virtual bool PopGroup();
-    virtual bool WriteLog(kLogType nType, const wchar_t* pszMsg, 
-        const wchar_t* pszExtra, LPCSTR pszFile, long nLine);
-    virtual bool WriteLog(kLogType nType, LPCSTR pszMsg, 
-        LPCSTR pszExtra, LPCSTR pszFile, long nLine);
-    virtual int CrtDbgReport(LPCSTR szMsg, LPCSTR szFile, long nLine);
+    virtual bool WriteLog(kLogType type, const wchar_t* msg, 
+        const wchar_t* extra, LPCSTR file, long line);
+    virtual bool WriteLog(kLogType type, LPCSTR msg, 
+        LPCSTR extra, LPCSTR file, long line);
+    virtual int CrtDbgReport(LPCSTR msg, LPCSTR file, long line);
 
 private:
-    LPCSTR TrimFileName(LPCSTR pszFile);
-    bool CheckMsgParam(std::wstring& wstrMsg, std::wstring& wstrExtra, 
-        std::wstring& wstrModule, std::wstring& wstrID, 
-        const wchar_t* pszMsg, const wchar_t* pszExtra);
+    LPCSTR TrimFileName(LPCSTR file);
+    bool CheckMsgParam(std::wstring& msg2, std::wstring& extra2, 
+        std::wstring& module, std::wstring& idname, 
+        const wchar_t* msg, const wchar_t* extra);
 
 private:
     typedef std::vector<ILogObserver*>::iterator ObserverIt;
-    std::vector<ILogObserver*>      m_arrObserver;
-    long                            m_nGroupLevel;
+    std::vector<ILogObserver*>      m_observers;
+    long                            m_groupLevel;
+    long                            m_loglock;
 };
 
 #endif // _X3_CORE_LOGMANAGER_H

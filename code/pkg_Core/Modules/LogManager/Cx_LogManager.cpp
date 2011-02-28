@@ -1,14 +1,17 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
+// Changes:
+// 2011-02-28: Avoid reenter in WriteLog.
 
 #include "StdAfx.h"
 #include "Cx_LogManager.h"
 #include <ILogObserver.h>
 #include <ConvStr.h>
 #include <Xml/Ix_StringTable.h>
+#include <LockCount.h>
 
 Cx_LogManager::Cx_LogManager()
-    : m_nGroupLevel(0)
+    : m_groupLevel(0), m_loglock(0)
 {
 }
 
@@ -18,9 +21,9 @@ Cx_LogManager::~Cx_LogManager()
 
 bool Cx_LogManager::RegisterObserver(ILogObserver* observer)
 {
-    if (observer != NULL && find_value(m_arrObserver, observer) < 0)
+    if (observer != NULL && find_value(m_observers, observer) < 0)
     {
-        m_arrObserver.push_back(observer);
+        m_observers.push_back(observer);
         return true;
     }
     return false;
@@ -28,18 +31,18 @@ bool Cx_LogManager::RegisterObserver(ILogObserver* observer)
 
 void Cx_LogManager::UnRegisterObserver(ILogObserver* observer)
 {
-    erase_value(m_arrObserver, observer);
+    erase_value(m_observers, observer);
 }
 
-bool Cx_LogManager::PushGroup(const wchar_t* pszMsg, const wchar_t* pszExtra)
+bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra)
 {
-    std::wstring wstrMsg, wstrExtra, wstrModule, wstrID;
-    CheckMsgParam(wstrMsg, wstrExtra, wstrModule, wstrID, pszMsg, pszExtra);
+    std::wstring msg2, extra2, module, idname;
+    CheckMsgParam(msg2, extra2, module, idname, msg, extra);
 
-    InterlockedIncrement(&m_nGroupLevel);
-    for (ObserverIt it = m_arrObserver.begin(); it != m_arrObserver.end(); ++it)
+    InterlockedIncrement(&m_groupLevel);
+    for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        (*it)->OnPushGroup(m_nGroupLevel, wstrMsg, wstrExtra, wstrModule, wstrID);
+        (*it)->OnPushGroup(m_groupLevel, msg2, extra2, module, idname);
     }
 
     return true;
@@ -47,39 +50,45 @@ bool Cx_LogManager::PushGroup(const wchar_t* pszMsg, const wchar_t* pszExtra)
 
 bool Cx_LogManager::PopGroup()
 {
-    for (ObserverIt it = m_arrObserver.begin(); it != m_arrObserver.end(); ++it)
+    for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        (*it)->OnPopGroup(m_nGroupLevel);
+        (*it)->OnPopGroup(m_groupLevel);
     }
-    InterlockedDecrement(&m_nGroupLevel);
+    InterlockedDecrement(&m_groupLevel);
 
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType nType, const wchar_t* pszMsg, 
-    const wchar_t* pszExtra, LPCSTR pszFile, long nLine)
+bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg, 
+    const wchar_t* extra, LPCSTR file, long line)
 {
-    std::wstring wstrFile(std::a2w(TrimFileName(pszFile)));
-    std::wstring wstrMsg, wstrExtra, wstrModule, wstrID;
-    CheckMsgParam(wstrMsg, wstrExtra, wstrModule, wstrID, pszMsg, pszExtra);
-
-    for (ObserverIt it = m_arrObserver.begin(); it != m_arrObserver.end(); ++it)
+    CLockCount locker(&m_loglock);
+    if (m_loglock > 0)
     {
-        (*it)->OnWriteLog(nType, wstrMsg, wstrExtra, 
-            wstrModule, wstrID, wstrFile, nLine);
+        return false;
+    }
+
+    std::wstring wstrFile(std::a2w(TrimFileName(file)));
+    std::wstring msg2, extra2, module, idname;
+    CheckMsgParam(msg2, extra2, module, idname, msg, extra);
+
+    for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
+    {
+        (*it)->OnWriteLog(type, msg2, extra2, 
+            module, idname, wstrFile, line);
     }
 
 #ifdef _DEBUG
     const wchar_t* names[] = { L"> LogInfo: ", 
         L"> LogWarning: ", L"> LogError: ", L"> FatalError: " };
-    if (nType >= kLogType_Info && nType <= kLogType_Fatal)
+    if (type >= kLogType_Info && type <= kLogType_Fatal)
     {
-        OutputDebugStringW(names[nType - kLogType_Info]);
-        OutputDebugStringW(pszMsg);
-        if (!wstrExtra.empty())
+        OutputDebugStringW(names[type - kLogType_Info]);
+        OutputDebugStringW(msg);
+        if (!extra2.empty())
         {
             OutputDebugStringW(L", ");
-            OutputDebugStringW(pszExtra);
+            OutputDebugStringW(extra);
         }
         OutputDebugStringW(L"\n");
     }
@@ -88,17 +97,17 @@ bool Cx_LogManager::WriteLog(kLogType nType, const wchar_t* pszMsg,
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType nType, LPCSTR pszMsg, 
-    LPCSTR pszExtra, LPCSTR pszFile, long nLine)
+bool Cx_LogManager::WriteLog(kLogType type, LPCSTR msg, 
+    LPCSTR extra, LPCSTR file, long line)
 {
-    return WriteLog(nType, std::a2w(pszMsg).c_str(), 
-        std::a2w(pszExtra).c_str(), pszFile, nLine);
+    return WriteLog(type, std::a2w(msg).c_str(), 
+        std::a2w(extra).c_str(), file, line);
 }
 
-int Cx_LogManager::CrtDbgReport(LPCSTR szMsg, LPCSTR szFile, long nLine)
+int Cx_LogManager::CrtDbgReport(LPCSTR msg, LPCSTR file, long line)
 {
     WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED", 
-        std::a2w(szMsg).c_str(), szFile, nLine);
+        std::a2w(msg).c_str(), file, line);
 
     wchar_t buf[512];
 
@@ -108,21 +117,21 @@ int Cx_LogManager::CrtDbgReport(LPCSTR szMsg, LPCSTR szFile, long nLine)
         L"\nFile: %s"
         L"\nLine: %d"
         L"\n\n(Press Retry to debug the application)",
-        std::a2w(szMsg).c_str(), 
-        std::a2w(TrimFileName(szFile)).c_str(), nLine);
+        std::a2w(msg).c_str(), 
+        std::a2w(TrimFileName(file)).c_str(), line);
 
     return MessageBoxW(NULL, buf, L"Debug Assertion Failed", 
         MB_TASKMODAL|MB_ICONHAND|MB_ABORTRETRYIGNORE|MB_SETFOREGROUND);
 }
 
-LPCSTR Cx_LogManager::TrimFileName(LPCSTR pszFile)
+LPCSTR Cx_LogManager::TrimFileName(LPCSTR file)
 {
-    ASSERT(pszFile && *pszFile);
+    ASSERT(file && *file);
 
-    LPCSTR pszName = PathFindFileNameA(pszFile);
+    LPCSTR pszName = PathFindFileNameA(file);
     int folder = 0;
 
-    while (pszName > pszFile)
+    while (pszName > file)
     {
         pszName--;
         if ('\\' == *pszName || '/' == *pszName)
@@ -138,23 +147,23 @@ LPCSTR Cx_LogManager::TrimFileName(LPCSTR pszFile)
     return pszName;
 }
 
-bool Cx_LogManager::CheckMsgParam(std::wstring& wstrMsg, 
-    std::wstring& wstrExtra, std::wstring& wstrModule, std::wstring& wstrID, 
-    const wchar_t* pszMsg, const wchar_t* pszExtra)
+bool Cx_LogManager::CheckMsgParam(std::wstring& msg2, 
+    std::wstring& extra2, std::wstring& module, std::wstring& idname, 
+    const wchar_t* msg, const wchar_t* extra)
 {
     bool ret = false;
 
-    wstrMsg = pszMsg ? pszMsg : L"";
-    wstrExtra = pszExtra ? pszExtra : L"";
+    msg2 = msg ? msg : L"";
+    extra2 = extra ? extra : L"";
 
-    if (!wstrMsg.empty() && L'@' == wstrMsg[0])  // @Module:IDS_XXX
+    if (!msg2.empty() && L'@' == msg2[0])  // @Module:IDS_XXX
     {
         Cx_Interface<Ix_StringTable> pIFTable(CLSID_StringTable);
-        ret = pIFTable && pIFTable->GetValue(wstrMsg, pszMsg, wstrModule, wstrID);
+        ret = pIFTable && pIFTable->GetValue(msg2, msg2, module, idname);
 
-        if (wstrMsg.empty())
+        if (msg2.empty())
         {
-            wstrMsg = wstrID;
+            msg2 = idname;
         }
     }
 

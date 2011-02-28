@@ -3,6 +3,7 @@
 // v2: 2011.02.07, ooyg: Using Ix_AppWorkPath to get logging path.
 // v3: 2011.02.21, ooyg: Replace "\n" to "\\n " in LogWriter plugin.
 // v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
+// v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
 
 #include "stdafx.h"
 #include "LogObserver.h"
@@ -20,7 +21,7 @@
 #include <log4cplus/helpers/stringhelper.h>
 
 CLogObserver::CLogObserver()
-    : m_inited(false), m_level(0), m_haserr(false)
+    : m_inited(false), m_level(0), m_haserr(false), m_copyflags(-1)
 {
 #if !defined(_MSC_VER) || _MSC_VER < 1600
     // assure log4cplus can save chinese text, avoid _Wcrtomb failing.
@@ -69,7 +70,11 @@ bool CLogObserver::CopyLogFilesToServer()
     {
         PathAppendW(path, hostname);
         PathAddBackslashW(path);
+
+        HWND oldwnd = pIFUtility->GetMsgBoxOwnerWnd();
+        pIFUtility->SetMsgBoxOwnerWnd(NULL);
         ret = pIFUtility->CopyPathFile(m_path.c_str(), path);
+        pIFUtility->SetMsgBoxOwnerWnd(oldwnd);
     }
 
     return ret;
@@ -81,6 +86,12 @@ bool CLogObserver::GetServerPath(wchar_t* path)
 
     lstrcpynW(inifile, m_path.c_str(), MAX_PATH);
     PathAppendW(inifile, L"LogWriter.ini");
+
+    if (-1 == m_copyflags)
+    {
+        m_copyflags = GetPrivateProfileIntW(L"Server", L"CopyFlags", 
+            0xFFFF, inifile);
+    }
 
     return GetPrivateProfileStringW(L"Server", L"Path", L"", 
         path, MAX_PATH, inifile) > 1;
@@ -257,7 +268,10 @@ void CLogObserver::OnWriteLog(int type,
     if (type > kLogType_Info)
     {
         m_haserr = true;
-        CopyLogFilesToServer();
+        if (m_copyflags & 0x01)
+        {
+            CopyLogFilesToServer();
+        }
     }
 }
 
