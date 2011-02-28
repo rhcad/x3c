@@ -15,16 +15,15 @@ Interface: directory for storing interface files(*.h)
 	  	 ; VC++ project name
 	  	 project=Test
 
-	2. Run the script makePlugin_v0.3.pl or makePlugin_v0.3.exe. The exe file could be run independently without Perl runtime Environment. The new plugin will be generated in the current directory,the head files of interface will generated in the directory of Interface.
+    2. Run the script makePlugin_v0.3.pl or makePlugin_v0.3.exe. The exe file could be run independently without Perl runtime Environment. The new plugin will be generated in the current directory,the head files of interface will generated in the directory of Interface.
 
-	3. Copy the new plugin directory and interface files to your module directory, you 'll be happy to use it. Thanks to CPAN.
+    3. Copy the new plugin directory and interface files to your module directory, you 'll be happy to use it. Thanks to CPAN.
 
 
 **Things related to Perl
-
-	Perl Win32 Runtime Enviroment(Active Perl): http://www.activestate.com/activeperl 
-	Perl2EXE convertor(ActiveState PDK): http://www.activestate.com/perl-dev-kit	
-    Dependent packages(All packages come from CPAN): File::Copy,Data::GUID,Config::IniFiles  
+     Perl Win32 Runtime Enviroment(Active Perl): http://www.activestate.com/activeperl 
+     Perl2EXE convertor(ActiveState PDK): http://www.activestate.com/perl-dev-kit	
+     Dependent packages(All packages come from CPAN): File::Copy,Data::GUID,Config::IniFiles  
 
 
 
