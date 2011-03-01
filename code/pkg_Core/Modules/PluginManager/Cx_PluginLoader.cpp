@@ -328,10 +328,9 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
             hdll = NULL;
         }
     }
-    else
+    else if (PathFileExistsW(filename))
     {
-        DWORD err = GetLastError();
-        LOG_WARNING2(L"Fail to load plugin.", filename << L", " << err);
+        LOG_WARNING2(L"Fail to load plugin.", filename);
     }
 
     return hdll != NULL;

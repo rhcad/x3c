@@ -63,7 +63,7 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
     const wchar_t* extra, LPCSTR file, long line)
 {
     CLockCount locker(&m_loglock);
-    if (m_loglock > 0)
+    if (m_loglock > 1)
     {
         return false;
     }

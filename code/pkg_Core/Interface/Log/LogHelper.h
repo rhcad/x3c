@@ -210,9 +210,9 @@ public:
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);   \
     if (pIFManager.IsNotNull())                                 \
     {                                                           \
-        std::wostringstream buf;                                \
-        buf << msg;                                         \
-        pIFManager->WriteLog(type, buf.str().c_str(), L"", file, line); \
+        std::wostringstream _buf;                                \
+        _buf << msg;                                         \
+        pIFManager->WriteLog(type, _buf.str().c_str(), L"", file, line); \
     }} while (0)
 
 #define LOG_EVENT_2(name, extra, type, file, line)  \
@@ -220,9 +220,9 @@ public:
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);   \
     if (pIFManager.IsNotNull())                                 \
     {                                                           \
-        std::wostringstream buf;                                \
-        buf << extra;                                       \
-        pIFManager->WriteLog(type, name, buf.str().c_str(), file, line);    \
+        std::wostringstream _buf;                                \
+        _buf << extra;                                       \
+        pIFManager->WriteLog(type, name, _buf.str().c_str(), file, line);    \
     }} while (0)
 
 //! Output a ANSI string with additional context info.
@@ -239,9 +239,9 @@ public:
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);   \
     if (pIFManager.IsNotNull())                                 \
     {                                                           \
-        std::ostringstream buf;                             \
-        buf << extra;                                       \
-        pIFManager->WriteLog(type, name, buf.str().c_str(), file, line);    \
+        std::ostringstream _buf;                             \
+        _buf << extra;                                       \
+        pIFManager->WriteLog(type, name, _buf.str().c_str(), file, line);    \
     }} while (0)
 
 #endif // X3_LOG_LOGHELPER_H_
