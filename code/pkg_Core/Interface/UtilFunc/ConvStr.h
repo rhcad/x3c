@@ -6,6 +6,8 @@
 #ifndef UTILFUNC_CONVSTR_H_
 #define UTILFUNC_CONVSTR_H_
 
+#include <string>
+
 namespace std {
 
 //! Convert from UNICODE string to ANSI string, std::w2a.

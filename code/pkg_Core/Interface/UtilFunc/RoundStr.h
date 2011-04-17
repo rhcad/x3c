@@ -4,6 +4,8 @@
 #ifndef UTILFUNC_ROUNDSTR_H_
 #define UTILFUNC_ROUNDSTR_H_
 
+#include <string>
+
 //! 得到四舍五入的字符串（去掉小数点后末尾的'0'）
 /*! 
     \ingroup _GROUP_UTILFUNC

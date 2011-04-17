@@ -7,6 +7,7 @@
 #define UTILFUNC_RELTOABS_H_
 
 #include "XComPtr.h"
+#include <string>
 #include <shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
 

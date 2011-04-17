@@ -4,6 +4,8 @@
 #ifndef UTILFUNC_SYSERRSTR_H_
 #define UTILFUNC_SYSERRSTR_H_
 
+#include <string>
+
 //! Obtains error message strings for a error code.
 /*!
     \ingroup _GROUP_UTILFUNC

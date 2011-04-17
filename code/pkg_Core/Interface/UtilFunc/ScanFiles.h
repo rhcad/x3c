@@ -7,6 +7,7 @@
 #define UTILFUNC_SCANFILES_H_
 
 #include <shlwapi.h>
+#include <string>
 
 //! Callback interface for directory scanning.
 interface IScanFilesCallback

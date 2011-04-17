@@ -217,11 +217,6 @@ void CLogObserver::OnWriteLog(int type,
         buf << L"  ";
     }
 
-    if (!module.empty())
-    {
-        buf << L"@" << module << L":" << idname << L", ";
-    }
-
     if (msg.find(L"\n") != std::wstring::npos)
     {
         std::wstring text(msg);
@@ -244,6 +239,10 @@ void CLogObserver::OnWriteLog(int type,
         buf << L" (" << extra << L")";
     }
 
+    if (!module.empty())
+    {
+        buf << L" @" << module << L":" << idname;
+    }
     buf << L" [" << file << L" L" << line << L"]";
 
     switch (type)
