@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 // v2: 2011.02.07, ooyg: Using Ix_AppWorkPath to get logging path.
-// v3: 2011.02.21, ooyg: Replace "\n" to "\\n " in LogWriter plugin.
+// v3: 2011.02.21, ooyg: Replace "\n" to "\\n" in LogWriter plugin.
 // v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
 // v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
 
@@ -183,11 +183,29 @@ void CLogObserver::OnPushGroup(long level,
     {
         buf << L"  ";
     }
-    buf << msg;
-    if (!extra.empty())
+
+    if (msg.find(L"\n") != std::wstring::npos)
+    {
+        std::wstring text(msg);
+        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n"));
+        buf << text;
+    }
+    else
+    {
+        buf << msg;
+    }
+
+    if (extra.find(L"\n") != std::wstring::npos)
+    {
+        std::wstring text(extra);
+        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n"));
+        buf << L" (" << text << L")";
+    }
+    else if (!extra.empty())
     {
         buf << L" (" << extra << L")";
     }
+
     if (!module.empty())
     {
         buf << L" @" << module << L":" << idname;
@@ -220,7 +238,7 @@ void CLogObserver::OnWriteLog(int type,
     if (msg.find(L"\n") != std::wstring::npos)
     {
         std::wstring text(msg);
-        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n "));
+        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n"));
         buf << text;
     }
     else
@@ -231,7 +249,7 @@ void CLogObserver::OnWriteLog(int type,
     if (extra.find(L"\n") != std::wstring::npos)
     {
         std::wstring text(extra);
-        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n "));
+        trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n"));
         buf << L" (" << text << L")";
     }
     else if (!extra.empty())
