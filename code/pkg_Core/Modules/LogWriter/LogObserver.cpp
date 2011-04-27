@@ -47,7 +47,7 @@ CLogObserver::~CLogObserver()
     {
         Logger::shutdown();
 
-        if (m_haserr)
+        //if (m_haserr)
         {
             CopyLogFilesToServer();
         }
