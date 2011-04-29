@@ -294,13 +294,15 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
         return false;
     }
 
+    bool ispath = IsPathSlash(oldfile[lstrlenW(oldfile) - 1]);
+
     InterlockedExchange(&s_nFileOpRet, 0);
-    if (!CreateDirectory(newfile, false))
+    if (!CreateDirectory(newfile, ispath))
     {
         return false;
     }
 
-    if (GetFileSize(oldfile) > 1024L * 1024 * 10)   // >10MB
+    if (ispath || GetFileSize(oldfile) > 1024L * 1024 * 10)
     {
         if (!TwoFileOperation(oldfile, newfile, FO_COPY))
         {
