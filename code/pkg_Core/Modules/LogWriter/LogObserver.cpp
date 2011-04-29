@@ -249,6 +249,7 @@ void CLogObserver::OnWriteLog(int type,
     if (extra.find(L"\n") != std::wstring::npos)
     {
         std::wstring text(extra);
+        trim::ctrim(text);
         trim::replace(text, std::wstring(L"\n"), std::wstring(L"\\n"));
         buf << L" (" << text << L")";
     }

@@ -284,22 +284,48 @@ bool Cx_FileUtility::RenamePathFile(const wchar_t* oldfile, const wchar_t* newfi
 
 bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile)
 {
-    if (IsPathFileExists(oldfile)
-        && !CreateDirectory(newfile, false))
+    if (!IsNotNull(oldfile))
+    {
+        return true;
+    }
+    if (!IsPathFileExists(oldfile))
+    {
+        LOG_INFO2(LOGHEAD L"IDS_FILE_NOTEXIST", oldfile);
+        return false;
+    }
+
+    InterlockedExchange(&s_nFileOpRet, 0);
+    if (!CreateDirectory(newfile, false))
     {
         return false;
     }
-    if (!TwoFileOperation(oldfile, newfile, FO_COPY))
+
+    if (GetFileSize(oldfile) > 1024L * 1024 * 10)   // >10MB
     {
-        if (s_nFileOpRet != 0)
+        if (!TwoFileOperation(oldfile, newfile, FO_COPY))
         {
-            std::wostringstream buf;
-            buf << oldfile << L"->" << newfile << L", ";
-            buf << GetSystemErrorString(s_nFileOpRet);
-            LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
+            if (s_nFileOpRet != 0)
+            {
+                std::wostringstream buf;
+                buf << oldfile << L"->" << newfile << L", ";
+                buf << GetSystemErrorString(s_nFileOpRet);
+                LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
+            }
+            return false;
         }
+    }
+    else if (!::CopyFileW(oldfile, newfile, FALSE))
+    {
+        DWORD err = GetLastError();
+        std::wostringstream buf;
+
+        buf << oldfile << L"->" << newfile << L", ";
+        buf << GetSystemErrorString(err);
+        LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
+
         return false;
     }
+
     return true;
 }
 
