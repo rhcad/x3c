@@ -195,6 +195,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TestFileUtil.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TestLoadPlugin.cpp"
 				>
 			</File>
@@ -222,6 +226,10 @@
 			</File>
 			<File
 				RelativePath=".\TestConfigDB.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestFileUtil.h"
 				>
 			</File>
 			<File

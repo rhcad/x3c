@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * FileUtility: Using CopyFileW for coping small file on Win7 instead of calling SHFileOperationW.
     * LogWriter: Call CopyLogFilesToServer() when quiting.
+    * Add a test case for Ix_FileUtility.
 
 ------v1.0.8------
 
