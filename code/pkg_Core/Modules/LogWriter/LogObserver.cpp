@@ -4,7 +4,6 @@
 // v3: 2011.02.21, ooyg: Replace "\n" to "\\n" in LogWriter plugin.
 // v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
 // v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
-// v5: 2011.05.01, ooyg: Not call CopyLogFilesToServer() when error occurred by default.
 
 #include "stdafx.h"
 #include "LogObserver.h"
@@ -22,7 +21,7 @@
 #include <log4cplus/helpers/stringhelper.h>
 
 CLogObserver::CLogObserver()
-    : m_inited(false), m_level(0), m_haserr(false), m_copyflags(0)
+    : m_inited(false), m_level(0), m_haserr(0), m_copyflags(0)
 {
 #if !defined(_MSC_VER) || _MSC_VER < 1600
     // assure log4cplus can save chinese text, avoid _Wcrtomb failing.
@@ -91,7 +90,7 @@ bool CLogObserver::GetServerPath(wchar_t* path)
     if (0 == m_copyflags)
     {
         m_copyflags = GetPrivateProfileIntW(L"Server", L"CopyFlags", 
-            0, inifile) | 0x10000000;
+            -1, inifile) | 0x10000000;
     }
 
     return GetPrivateProfileStringW(L"Server", L"Path", L"", 
@@ -219,6 +218,15 @@ void CLogObserver::OnPushGroup(long level,
 void CLogObserver::OnPopGroup(long level)
 {
     m_level = level - 1;
+
+    if (m_haserr & 1)
+    {
+        m_haserr &= ~1;
+        if (m_copyflags & 1)
+        {
+            CopyLogFilesToServer();
+        }
+    }
 }
 
 void CLogObserver::OnWriteLog(int type, 
@@ -286,11 +294,7 @@ void CLogObserver::OnWriteLog(int type,
 
     if (type > kLogType_Info)
     {
-        m_haserr = true;
-        if (m_copyflags & 0x01)
-        {
-            CopyLogFilesToServer();
-        }
+        m_haserr |= 3;
     }
 }
 

@@ -38,7 +38,7 @@ private:
     std::wstring    m_appname;      // application name for logging.
     bool            m_inited;       // logging file is setted or not.
     long            m_level;        // group level of current group.
-    bool            m_haserr;       // see OnWriteLog
+    int             m_haserr;       // see OnWriteLog
     long            m_copyflags;    // flags for CopyLogFilesToServer
 };
 
