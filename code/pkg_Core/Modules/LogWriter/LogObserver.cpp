@@ -4,6 +4,7 @@
 // v3: 2011.02.21, ooyg: Replace "\n" to "\\n" in LogWriter plugin.
 // v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
 // v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
+// v5: 2011.05.01, ooyg: Not call CopyLogFilesToServer() when error occurred by default.
 
 #include "stdafx.h"
 #include "LogObserver.h"
@@ -21,7 +22,7 @@
 #include <log4cplus/helpers/stringhelper.h>
 
 CLogObserver::CLogObserver()
-    : m_inited(false), m_level(0), m_haserr(false), m_copyflags(-1)
+    : m_inited(false), m_level(0), m_haserr(false), m_copyflags(0)
 {
 #if !defined(_MSC_VER) || _MSC_VER < 1600
     // assure log4cplus can save chinese text, avoid _Wcrtomb failing.
@@ -47,7 +48,7 @@ CLogObserver::~CLogObserver()
     {
         Logger::shutdown();
 
-        //if (m_haserr)
+        if (m_haserr)
         {
             CopyLogFilesToServer();
         }
@@ -87,10 +88,10 @@ bool CLogObserver::GetServerPath(wchar_t* path)
     lstrcpynW(inifile, m_path.c_str(), MAX_PATH);
     PathAppendW(inifile, L"LogWriter.ini");
 
-    if (-1 == m_copyflags)
+    if (0 == m_copyflags)
     {
         m_copyflags = GetPrivateProfileIntW(L"Server", L"CopyFlags", 
-            0xFFFF, inifile);
+            0, inifile) | 0x10000000;
     }
 
     return GetPrivateProfileStringW(L"Server", L"Path", L"", 

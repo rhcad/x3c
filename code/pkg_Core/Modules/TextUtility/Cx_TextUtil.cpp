@@ -31,8 +31,9 @@ DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
     }
     else
     {
+        DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL", 
-            filename << L", " << GetSystemErrorString(GetLastError()));
+            GetSystemErrorString(err) << L", " << filename);
     }
 
     return dwBytesRead;
@@ -131,8 +132,9 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
 
     if (INVALID_HANDLE_VALUE == hFile)
     {
+        DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL", 
-            filename << L", " << GetSystemErrorString(GetLastError()));
+            GetSystemErrorString(err) << L", " << filename);
     }
     else
     {
@@ -197,8 +199,9 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
 
     if (INVALID_HANDLE_VALUE == hFile)
     {
+        DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL", 
-            filename << L", " << GetSystemErrorString(GetLastError()));
+            GetSystemErrorString(err) << L", " << filename);
     }
     else
     {
@@ -240,8 +243,9 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
 
     if (INVALID_HANDLE_VALUE == hFile)
     {
+        DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL", 
-            filename << L", " << GetSystemErrorString(GetLastError()));
+            GetSystemErrorString(err) << L", " << filename);
     }
     else
     {

@@ -181,7 +181,7 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
     if (s_nFileOpRet != 0)
     {
         std::wostringstream buf;
-        buf << filename << L", " << GetSystemErrorString(s_nFileOpRet);
+        buf << GetSystemErrorString(s_nFileOpRet) << L", " << filename;
 
         if (IsPath(filename, true))
         {
@@ -257,8 +257,8 @@ bool Cx_FileUtility::MovePathFile(const wchar_t* oldfile, const wchar_t* newfile
         if (s_nFileOpRet != 0)
         {
             std::wostringstream buf;
-            buf << oldfile << L"->" << newfile << L", ";
             buf << GetSystemErrorString(s_nFileOpRet);
+            buf << L", " << oldfile << L"->" << newfile;
             LOG_ERROR2(LOGHEAD L"IDS_MOVEFILE_FAIL", buf.str());
         }
         return false;
@@ -273,8 +273,8 @@ bool Cx_FileUtility::RenamePathFile(const wchar_t* oldfile, const wchar_t* newfi
         if (s_nFileOpRet != 0)
         {
             std::wostringstream buf;
-            buf << oldfile << L"->" << newfile << L", ";
             buf << GetSystemErrorString(s_nFileOpRet);
+            buf << L", " << oldfile << L"->" << newfile;
             LOG_ERROR2(LOGHEAD L"IDS_RENFILE_FAIL", buf.str());
         }
         return false;
@@ -309,8 +309,8 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
             if (s_nFileOpRet != 0)
             {
                 std::wostringstream buf;
-                buf << oldfile << L"->" << newfile << L", ";
                 buf << GetSystemErrorString(s_nFileOpRet);
+                buf << L", " << oldfile << L"->" << newfile;
                 LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
             }
             return false;
@@ -321,8 +321,8 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
         DWORD err = GetLastError();
         std::wostringstream buf;
 
-        buf << oldfile << L"->" << newfile << L", ";
         buf << GetSystemErrorString(err);
+        buf << L", " << oldfile << L"->" << newfile;
         LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
 
         return false;
