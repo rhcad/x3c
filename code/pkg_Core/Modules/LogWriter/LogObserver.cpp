@@ -163,7 +163,7 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     buf << L"log4cplus.appender.ROOTAPPENDER=log4cplus::RollingFileAppender" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.File="
         << m_path << m_appname << L".log" << std::endl;
-    buf << L"log4cplus.appender.ROOTAPPENDER.MaxFileSize=1024KB" << std::endl;
+    buf << L"log4cplus.appender.ROOTAPPENDER.MaxFileSize=2048KB" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxBackupIndex=3" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.layout=log4cplus::TTCCLayout" << std::endl;
 
@@ -219,12 +219,15 @@ void CLogObserver::OnPopGroup(long level)
 {
     m_level = level - 1;
 
-    if (m_haserr & 1)
+    if (m_haserr & 0x01)
     {
-        m_haserr &= ~1;
-        if (m_copyflags & 1)
+        m_haserr &= ~0x01;
+        if (m_copyflags & 0x01)
         {
-            CopyLogFilesToServer();
+            if (!CopyLogFilesToServer())
+            {
+                m_copyflags &= ~0x01;
+            }
         }
     }
 }
@@ -292,10 +295,7 @@ void CLogObserver::OnWriteLog(int type,
         break;
     }
 
-    if (type > kLogType_Info)
-    {
-        m_haserr |= 3;
-    }
+    m_haserr |= (type > kLogType_Info) ? 0x03 : 0x04;
 }
 
 #pragma warning(default:4127)
