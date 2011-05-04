@@ -234,7 +234,7 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
         op.wFunc = wFunc;
         op.pFrom = szOld;
         op.pTo = szNew;
-        op.fFlags = FOF_NOCONFIRMATION;
+        op.fFlags = FOF_NOCONFIRMATION | FOF_NOCOPYSECURITYATTRIBS;
         if (NULL == m_hMsgBoxOwnerWnd)
         {
             op.fFlags |= FOF_NOERRORUI | FOF_SILENT;
