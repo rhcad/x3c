@@ -42,7 +42,8 @@ Cx_Ptr TestConfigDB::GetDatabase(const wchar_t* filename)
 
     std::wstring srcfile(MakeDataPath(L"Access", filename));
     m_dbfile = MakeDataPath(NULL, filename);
-    ::CopyFileW(srcfile.c_str(), m_dbfile.c_str(), TRUE);
+    CopyFileExW(srcfile.c_str(), m_dbfile.c_str(), 
+        NULL, NULL, NULL, COPY_FILE_FAIL_IF_EXISTS);
 
     Cx_Ptr obj(pIFFactory->OpenAccessDB(m_dbfile));
     CPPUNIT_ASSERT_MESSAGE("Can not open database file.", obj.IsNotNull());

@@ -1,6 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
+#define _WIN32_WINNT    0x0400
 #define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
 #include <windows.h>        // Windows master include file
 #include <shlwapi.h>        // Windows light-weight utility APIs

@@ -7,6 +7,7 @@
 #include "Cx_FileUtility.h"
 #include <io.h>
 #include <shellapi.h>
+#include <tchar.h>
 #include <SysErrStr.h>
 #include <RelToAbs.h>
 
@@ -217,6 +218,8 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     else
     {
         wchar_t szOld[MAX_PATH], szNew[MAX_PATH];
+        SHFILEOPSTRUCTW op;
+
         ZeroMemory(szOld, sizeof(szOld));
         ZeroMemory(szNew, sizeof(szNew));   // pTo必须以两个\0结束
         lstrcpynW(szOld, oldfile, MAX_PATH);
@@ -226,7 +229,6 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
         ReplaceSlash(szNew);
         PathRemoveBackslashW(szNew);
 
-        SHFILEOPSTRUCTW op;
         ZeroMemory(&op, sizeof(op));
         op.hwnd = m_hMsgBoxOwnerWnd;
         op.wFunc = wFunc;
@@ -302,29 +304,15 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
         return false;
     }
 
-    if (ispath || GetFileSize(oldfile) > 1024L * 1024 * 10)
+    if (!TwoFileOperation(oldfile, newfile, FO_COPY))
     {
-        if (!TwoFileOperation(oldfile, newfile, FO_COPY))
+        if (s_nFileOpRet != 0)
         {
-            if (s_nFileOpRet != 0)
-            {
-                std::wostringstream buf;
-                buf << GetSystemErrorString(s_nFileOpRet);
-                buf << L", " << oldfile << L"->" << newfile;
-                LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
-            }
-            return false;
+            std::wostringstream buf;
+            buf << GetSystemErrorString(s_nFileOpRet);
+            buf << L", " << oldfile << L"->" << newfile;
+            LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
         }
-    }
-    else if (!::CopyFileW(oldfile, newfile, FALSE))
-    {
-        DWORD err = GetLastError();
-        std::wostringstream buf;
-
-        buf << GetSystemErrorString(err);
-        buf << L", " << oldfile << L"->" << newfile;
-        LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
-
         return false;
     }
 
