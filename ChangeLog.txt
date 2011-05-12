@@ -1,5 +1,9 @@
 X3 C++ PluginFramework
 
+2011-05-12
+
+    * ConfigXml: Output error info when saving file.
+
 2011-04-29
 
     * FileUtility: Using CopyFileW for coping small file on Win7 instead of calling SHFileOperationW.

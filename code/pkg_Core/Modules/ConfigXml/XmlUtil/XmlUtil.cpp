@@ -39,7 +39,7 @@ class LocalHResult
 public:
     HRESULT m_hr;
 
-    LocalHResult() : m_hr(S_OK)
+    LocalHResult(HRESULT hr = S_OK) : m_hr(hr)
     {
     }
     ~LocalHResult()
@@ -198,7 +198,7 @@ bool CXmlUtil::SaveXMLFile(const XMLDOMDocumentPtr& doc,
                            const wchar_t* pszFileName, 
                            IXmlFileCrypt* pCryptHandler)
 {
-    LocalHResult hr;
+    LocalHResult hr = E_INVALIDARG;
     if (!IsNotEmpty(pszFileName))
         return false;
 
@@ -216,7 +216,9 @@ bool CXmlUtil::SaveXMLFile(const XMLDOMDocumentPtr& doc,
     }
     
     if (vt.bstrVal != NULL)
+    {
         ::SysFreeString(vt.bstrVal);
+    }
 
     if (SUCCEEDED(hr) && pCryptHandler)
     {

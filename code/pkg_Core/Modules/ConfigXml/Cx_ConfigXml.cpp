@@ -4,6 +4,7 @@
 // 2011-01-18: Delay call CoUninitialize until plugin is unloading.
 // 2011-02-18: Not call CoUninitialize if another plugin (eg. StringTable) is using this plugin.
 // 2011-02-24: Check NULL string in Cx_ConfigXml::GetSection().
+// 2011-05-12: Output error info when saving file.
 
 #include "StdAfx.h"
 #include "Cx_ConfigXml.h"
@@ -11,6 +12,7 @@
 #include "ConfigXmlImpl.h"
 #include <Cx_SimpleObject.h>
 #include <IFileCryptHandler.h>
+#include <SysErrStr.h>
 #include <math.h>
 
 #define Cx_Section Cx_Interface<Ix_ConfigSection>
@@ -350,9 +352,15 @@ bool Cx_ConfigXml::EndTransaction()
             m_pImpl->m_strFileName.c_str(), &crypt);
 
         if (bRet)
+        {
             LOG_DEBUG2(LOGHEAD L"IDS_SAVEXML_OK", m_pImpl->m_strFileName);
+        }
         else
-            LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", m_pImpl->m_strFileName);
+        {
+            LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", 
+                GetSystemErrorString(CXmlUtil::GetLastErrorResult())
+                << L", " << m_pImpl->m_strFileName);
+        }
     }
 
     return bRet;
@@ -387,7 +395,9 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     }
     else
     {
-        LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", strFileName);
+        LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", 
+            GetSystemErrorString(CXmlUtil::GetLastErrorResult())
+            << L", " << strFileName);
     }
 
     return bRet;
