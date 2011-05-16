@@ -116,7 +116,7 @@ namespace trim
         }
     }
 
-    template <class S, class C> long replace(S& s, const S& match, const C& newchar)
+    template <class S, class C> long replace_char(S& s, const S& match, const C& newchar)
     {
         long count = 0;
         typedef typename S::value_type value_type;
