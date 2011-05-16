@@ -115,7 +115,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
         {
             buf << GetSystemErrorString(dwError) << L", ";
         }
-        buf << szPath;
+        buf << filename;
         LOG_ERROR2(LOGHEAD L"IDS_CREATEDIR_FAIL", buf.str());
         return false;
     }
@@ -211,8 +211,8 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     
     if (!IsPathFileExists(oldfile))
     {
-        LOG_INFO2(LOGHEAD L"IDS_FILE_NOTEXIST", oldfile);
-        InterlockedExchange(&s_nFileOpRet, 0);
+        InterlockedExchange(&s_nFileOpRet, GetLastError());
+        LOG_INFO2(LOGHEAD L"IDS_FILE_NOTEXIST", oldfile << L", " << s_nFileOpRet);
         return false;
     }
     else
