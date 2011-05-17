@@ -4,7 +4,6 @@
 #ifndef X3_UNITTEST_BASETEST_H_
 #define X3_UNITTEST_BASETEST_H_
 
-const LPCWSTR PLUGINS_DIR = L"../Plugins";
 interface Ix_PluginLoader;
 
 //! ≤‚ ‘”√¿˝ª˘¿‡

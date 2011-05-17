@@ -48,7 +48,7 @@ interface Ix_FileUtility1
         \return 文件大小，字节，失败时为0，大于4G时为0xFFFFFFFF
         \see FileSizeToString
     */
-    virtual ULONG GetFileSize(const std::wstring& filename) = 0;
+    virtual DWORD GetFileSize(const std::wstring& filename) = 0;
 };
 
 //! 文件和目录的实用操作的接口(文件改动操作)
@@ -129,7 +129,7 @@ interface Ix_FileUtility3
         \param baseIsFile 参考路径是文件名还是路径名
         \return 转换后的绝对路径，如果relIsFile为false则绝对路径末尾有斜号
     */
-    virtual std::wstring RelToAbs(const wchar_t* relFile, bool relIsFile, 
+    virtual std::wstring RelToAbs(const wchar_t* relFile, bool relIsFile,
         const wchar_t* baseFile = NULL, bool baseIsFile = true) = 0;
 
     //! 绝对路径转换为相对路径
@@ -141,7 +141,7 @@ interface Ix_FileUtility3
         \return 转换后的相对路径，如果relIsFile为false则绝对路径末尾有斜号，
             如果失败则和原来路径相同
     */
-    virtual std::wstring AbsToRel(const wchar_t* absFile, bool absIsFile, 
+    virtual std::wstring AbsToRel(const wchar_t* absFile, bool absIsFile,
         const wchar_t* baseFile = NULL, bool baseIsFile = true) = 0;
 
     //! 改变文件全名的后缀名
@@ -160,7 +160,7 @@ interface Ix_FileUtility3
         \param ext 文件扩展名，忽略路径和文件名标题，可以没有点号
         \return 新的文件全名
     */
-    virtual std::wstring MakeFileName(const std::wstring& path, 
+    virtual std::wstring MakeFileName(const std::wstring& path,
         const std::wstring& title, const std::wstring& ext) = 0;
 
     //! 计算新的相对文件名
@@ -172,8 +172,8 @@ interface Ix_FileUtility3
         \param returnRel 是否返回相对文件名，false表示返回新的绝对文件全名
         \return 新的相对文件名，例如“t12.xml”
     */
-    virtual std::wstring CreateFileName(const std::wstring& path, 
-        const std::wstring& prefix, const std::wstring& ext, 
+    virtual std::wstring CreateFileName(const std::wstring& path,
+        const std::wstring& prefix, const std::wstring& ext,
         bool returnRel = true) = 0;
 };
 
@@ -209,7 +209,7 @@ interface Ix_FileUtility4
             其中文件全名的各部分是指中间文件夹名及文件标题名
         \return 0表示文件名相同，1或-1表示文件名不同
     */
-    virtual int CompareFileName(const wchar_t* filename1, const wchar_t* filename2, 
+    virtual int CompareFileName(const wchar_t* filename1, const wchar_t* filename2,
         long* samePartCount = NULL) = 0;
 };
 

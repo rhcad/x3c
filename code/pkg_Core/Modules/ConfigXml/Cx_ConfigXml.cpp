@@ -49,18 +49,18 @@ public:
         if (NULL == m_pCryptHandler)
             return false;
 
-        wchar_t szTmpFile[256] = { 0 };
-        lstrcpynW(szTmpFile, filename, _countof(szTmpFile));
-        szTmpFile[_countof(szTmpFile) - 5] = 0;
-        lstrcatW(szTmpFile, L".tmp");
+        wchar_t tmpfile[256] = { 0 };
+        wcsncpy_s(tmpfile, _countof(tmpfile), filename, _countof(tmpfile));
+        tmpfile[_countof(tmpfile) - 5] = 0;
+        lstrcatW(tmpfile, L".tmp");
 
-        int nRet = _wrename(filename, szTmpFile);
+        int nRet = _wrename(filename, tmpfile);
         if (NO_ERROR == nRet)
         {
-            if (SUCCEEDED(m_pCryptHandler->CryptFile(szTmpFile, filename)))
+            if (SUCCEEDED(m_pCryptHandler->CryptFile(tmpfile, filename)))
                 return true;
 
-            _wrename(szTmpFile, filename);
+            _wrename(tmpfile, filename);
         }
 
         return false;
@@ -295,9 +295,9 @@ bool Cx_ConfigXml::SetXmlContent(const std::wstring& content)
     }
     else
     {
-        wchar_t szBuf[81];
-        lstrcpynW(szBuf, content.c_str(), _countof(szBuf));
-        LOG_WARNING2(LOGHEAD L"IDS_LOADXMLSTR_FAIL", szBuf);
+        wchar_t buf[81];
+        wcsncpy_s(buf, _countof(buf), content.c_str(), _countof(buf));
+        LOG_WARNING2(LOGHEAD L"IDS_LOADXMLSTR_FAIL", buf);
     }
 
     if (!bRet)
@@ -390,7 +390,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
 
     if (bRet)
     {
-        if (StrCmpIW(strFileName.c_str(), m_pImpl->m_strFileName.c_str()) == 0)
+        if (_wcsicmp(strFileName.c_str(), m_pImpl->m_strFileName.c_str()) == 0)
             m_pImpl->m_bModified = false;
     }
     else

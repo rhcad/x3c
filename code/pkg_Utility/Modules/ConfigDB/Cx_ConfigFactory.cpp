@@ -40,7 +40,7 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
 
     std::wostringstream conn;
 
-    if (StrCmpIW(PathFindExtensionW(filename.c_str()), L".accdb") == 0)
+    if (_wcsicmp(wcsrchr(filename.c_str(), '.'), L".accdb") == 0)
     {
         conn << L"Provider=Microsoft.ACE.OLEDB.12.0;" ;
     }

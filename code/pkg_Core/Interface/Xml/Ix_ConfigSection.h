@@ -109,7 +109,7 @@ interface Ix_ConfigSection
         \param defValue 默认值，当其内容为空串或没有时取为该值
         \return 该配置项的值，内容为非零整数值或“true”时返回true，其余为false
     */
-    virtual bool GetBool(const wchar_t* name, BOOL defValue) = 0;
+    virtual bool GetBool(const wchar_t* name, int defValue) = 0;
 
     //! 设置值类型为布尔的配置项
     /*!
@@ -117,7 +117,7 @@ interface Ix_ConfigSection
         \param value 新的值
         \return 是否改变了内容
     */
-    virtual bool SetBool(const wchar_t* name, BOOL value) = 0;
+    virtual bool SetBool(const wchar_t* name, int value) = 0;
 
     //! 得到值类型为浮点数的配置项
     /*!
@@ -147,21 +147,21 @@ interface Ix_ConfigSection
     */
     virtual bool SetFloat(const wchar_t* name, float value) = 0;
 
-    //! 得到值类型为RGB颜色的配置项
+    //! 得到值类型为RGB颜色(COLORREF)的配置项
     /*!
         \param name 配置属性名称
         \param defValue 默认值，当其内容没有包含三个整数时取为该值
         \return 该配置项的值，使用了 RGB(r,g,b) 宏
     */
-    virtual COLORREF GetRGB(const wchar_t* name, COLORREF defValue) = 0;
+    virtual DWORD GetRGB(const wchar_t* name, DWORD defValue) = 0;
 
-    //! 设置值类型为RGB颜色值的配置项
+    //! 设置值类型为RGB颜色值(COLORREF)的配置项
     /*!
         \param name 配置属性名称
         \param value 新的值，仅取低6位的三个颜色分量
         \return 是否改变了内容
     */
-    virtual bool SetRGB(const wchar_t* name, COLORREF value) = 0;
+    virtual bool SetRGB(const wchar_t* name, DWORD value) = 0;
 
     //! 得到值类型为CMYK颜色值的配置项
     /*!
@@ -216,7 +216,7 @@ interface Ix_ConfigSection
         \param[out] second 读取成功时填充秒(0-60)，失败时不改变其值
         \return 是否读取成功
     */
-    virtual bool GetDateTime(const wchar_t* name, int& year, int& month, int& day, 
+    virtual bool GetDateTime(const wchar_t* name, int& year, int& month, int& day,
         int& hour, int& minute, int& second) = 0;
 
     //! 设置值类型为日期时间值的配置项
@@ -230,7 +230,7 @@ interface Ix_ConfigSection
         \param second 秒(0-60)
         \return 是否改变了内容
     */
-    virtual bool SetDateTime(const wchar_t* name, int year, int month, int day, 
+    virtual bool SetDateTime(const wchar_t* name, int year, int month, int day,
         int hour, int minute, int second) = 0;
 
     //! 得到值类型为浮点数数组的配置项
@@ -250,7 +250,7 @@ interface Ix_ConfigSection
         \return 是否设置成功
     */
     virtual bool SetDoubleArray(const wchar_t* name, const double* items, long count) = 0;
-    
+
     //! 得到值类型为整数数组的配置项
     /*!
         \param[in] name 配置属性名称
@@ -268,7 +268,7 @@ interface Ix_ConfigSection
         \return 是否设置成功
     */
     virtual bool SetIntArray(const wchar_t* name, const long* items, long count) = 0;
-    
+
     //! 得到值类型为二进制缓冲的配置项
     /*!
         \param[in] name 配置属性名称
@@ -276,7 +276,7 @@ interface Ix_ConfigSection
         \param[in] size 缓冲的最大长度
         \return 读取到的缓冲字节长度，不超过 size
     */
-    virtual long GetBinary(const wchar_t* name, LPVOID buf, long size) = 0;
+    virtual long GetBinary(const wchar_t* name, void* buf, long size) = 0;
 
     //! 设置值类型为二进制缓冲的配置项
     /*!
@@ -285,7 +285,7 @@ interface Ix_ConfigSection
         \param size 缓冲的字节长度
         \return 是否设置成功
     */
-    virtual bool SetBinary(const wchar_t* name, LPCVOID buf, long size) = 0;
+    virtual bool SetBinary(const wchar_t* name, const void* buf, long size) = 0;
 };
 
 #endif // X3_XML_ICONFIGSECTION_H_

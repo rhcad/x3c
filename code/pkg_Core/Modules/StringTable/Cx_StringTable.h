@@ -36,7 +36,7 @@ private:
         IT_ITEM it = m_groups.begin();
         for (; it != m_groups.end(); ++it)
         {
-            if (StrCmpIW(it->module.c_str(), module.c_str()) == 0)
+            if (_wcsicmp(it->module.c_str(), module.c_str()) == 0)
             {
                 break;
             }

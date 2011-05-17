@@ -7,19 +7,19 @@
 CFG=SimpleApp - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE 
+!MESSAGE
 !MESSAGE NMAKE /f "SimpleApp.mak".
-!MESSAGE 
+!MESSAGE
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE 
+!MESSAGE
 !MESSAGE NMAKE /f "SimpleApp.mak" CFG="SimpleApp - Win32 Debug"
-!MESSAGE 
+!MESSAGE
 !MESSAGE Possible choices for configuration are:
-!MESSAGE 
+!MESSAGE
 !MESSAGE "SimpleApp - Win32 Release" (based on "Win32 (x86) Console Application")
 !MESSAGE "SimpleApp - Win32 Debug" (based on "Win32 (x86) Console Application")
-!MESSAGE 
+!MESSAGE
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -42,7 +42,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\code\pkg_Example\Modules\SimpleApp" /I "..\..\code\pkg_Example\Interface" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\PluginManager" /D "NDEBUG" /D "WIN32" /D "_CONSOLE" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\code\pkg_Example\Modules\SimpleApp" /I "..\..\code\pkg_Example\Interface" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\PluginManager" /I "..\..\code\pkg_Core\Interface\UtilFunc" /D "NDEBUG" /D "WIN32" /D "_CONSOLE" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /c
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
 # ADD RSC /l 0x804 /d "NDEBUG"
 BSC32=bscmake.exe
@@ -67,7 +67,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\code\pkg_Example\Modules\SimpleApp" /I "..\..\code\pkg_Example\Interface" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\PluginManager" /D "_DEBUG" /D "WIN32" /D "_CONSOLE" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\code\pkg_Example\Modules\SimpleApp" /I "..\..\code\pkg_Example\Interface" /I "..\..\code\pkg_Core\Interface" /I "..\..\code\pkg_Core\Interface\PluginManager" /I "..\..\code\pkg_Core\Interface\UtilFunc" /D "_DEBUG" /D "WIN32" /D "_CONSOLE" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
 # ADD RSC /l 0x804 /d "_DEBUG"
 BSC32=bscmake.exe
@@ -78,7 +78,7 @@ LINK32=link.exe
 # ADD LINK32 shlwapi.lib /nologo /subsystem:console /pdb:"..\..\obj\gcc\Debug\Symbols/SimpleApp.pdb" /debug /machine:I386 /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
-!ENDIF 
+!ENDIF
 
 # Begin Target
 

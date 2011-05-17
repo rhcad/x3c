@@ -8,8 +8,6 @@
 
 #include "XComPtr.h"
 #include <string>
-#include <shlwapi.h>
-#pragma comment(lib, "shlwapi.lib")
 
 //! Return the module handle of main application which load plugins initiative.
 inline HMODULE GetMainModuleHandle()
@@ -31,17 +29,17 @@ inline HMODULE GetMainModuleHandle()
 inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = true)
 {
     wchar_t path[MAX_PATH] = { 0 };
-    
+
     GetModuleFileNameW(xGetModuleHandle(), path, MAX_PATH);
     PathRemoveFileSpecW(path);
     PathAppendW(path, relname);
-    
+
     PathRemoveBackslashW(path);
     if (!isfile)
     {
         PathAddBackslashW(path);
     }
-    
+
     return path;
 }
 
@@ -56,17 +54,17 @@ inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = tru
 inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
 {
     wchar_t path[MAX_PATH] = { 0 };
-    
+
     GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
     PathRemoveFileSpecW(path);
     PathAppendW(path, relname);
-    
+
     PathRemoveBackslashW(path);
     if (!isfile)
     {
         PathAddBackslashW(path);
     }
-    
+
     return path;
 }
 
@@ -83,7 +81,7 @@ inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile =
 {
     wchar_t path[MAX_PATH] = { 0 };
     wchar_t exename[MAX_PATH] = { 0 };
-    
+
     GetModuleFileNameW(GetMainModuleHandle(), exename, MAX_PATH);
     PathStripPathW(exename);
     PathRemoveExtensionW(exename);
@@ -94,13 +92,13 @@ inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile =
     {
         PathAppendW(path, relname);
     }
-    
+
     PathRemoveBackslashW(path);
     if ( !(isfile && relname && *relname) )
     {
         PathAddBackslashW(path);
     }
-    
+
     return path;
 }
 

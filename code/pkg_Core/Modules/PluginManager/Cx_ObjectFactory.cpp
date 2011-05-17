@@ -24,9 +24,9 @@ bool Cx_ObjectFactory::IsCreatorRegister(const XCLSID& clsid)
     return FindEntry(clsid) != NULL;
 }
 
-HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid, 
-                                       Ix_Object** ppv, 
-                                       HMODULE fromdll)
+int Cx_ObjectFactory::CreateObject(const XCLSID& clsid,
+                                   Ix_Object** ppv,
+                                   HMODULE fromdll)
 {
     ASSERT(clsid.valid() && ppv != NULL);
     *ppv = NULL;
@@ -52,11 +52,11 @@ HRESULT Cx_ObjectFactory::CreateObject(const XCLSID& clsid,
     {
         *ppv = pEntry->pfnObjectCreator(fromdll);
         ASSERT(*ppv);
-        return S_OK;
+        return 0;
     }
     else
     {
-        return E_NOTIMPL;
+        return 3;
     }
 }
 
@@ -70,7 +70,7 @@ long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
     for (; it != m_clsmap.end(); ++it)
     {
         const _XCLASSMETA_ENTRY& cls = it->second.first;
-        if (lstrcmpiA(iid, cls.iidSpecial) == 0
+        if (_stricmp(iid, cls.iidSpecial) == 0
             && cls.pfnObjectCreator)
         {
             Ix_Object* pIF = NULL;
@@ -103,7 +103,7 @@ bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
         CLSMAP::const_iterator mit = m_clsmap.find(it->str());
 
         if (mit != m_clsmap.end()
-            && lstrcmpiA(iid, mit->second.first.iidSpecial) == 0
+            && _stricmp(iid, mit->second.first.iidSpecial) == 0
             && mit->second.first.pfnObjectCreator)
         {
             *ppv = (mit->second.first.pfnObjectCreator)(xGetModuleHandle());
@@ -120,7 +120,7 @@ bool Cx_ObjectFactory::HasCreatorReplaced(const XCLSID& clsid)
     return false;
 }
 
-_XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid, 
+_XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid,
                                                int* moduleIndex)
 {
     CLSMAP::iterator it = m_clsmap.find(clsid.str());
@@ -225,7 +225,7 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
     return classCount;
 }
 
-bool Cx_ObjectFactory::RegisterClass(int moduleIndex, 
+bool Cx_ObjectFactory::RegisterClass(int moduleIndex,
                                      const _XCLASSMETA_ENTRY& cls)
 {
     ASSERT(moduleIndex >= 0 && cls.clsid.valid());
@@ -234,9 +234,9 @@ bool Cx_ObjectFactory::RegisterClass(int moduleIndex,
     if (pOldCls && pOldCls->pfnObjectCreator)
     {
         char msg[256] = { 0 };
-        sprintf_s(msg, 256, 
+        sprintf_s(msg, 256,
             "The classid '%s' is already registered by '%s', "
-            "then '%s' register fail.", 
+            "then '%s' register fail.",
             cls.clsid.str(), pOldCls->className, cls.className);
         ASSERT_MESSAGE(false, msg);
         return false;

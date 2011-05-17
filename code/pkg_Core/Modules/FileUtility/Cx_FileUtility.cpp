@@ -6,12 +6,14 @@
 #include "stdafx.h"
 #include "Cx_FileUtility.h"
 #include <io.h>
-#include <shellapi.h>
 #include <tchar.h>
 #include <SysErrStr.h>
 #include <RelToAbs.h>
 
+#ifdef _MSC_VER
+#include <shellapi.h>
 #pragma comment(lib,"shell32.lib")
+#endif
 
 static long s_nFileOpRet = 0;   // SHFileOperationW 返回值
 
@@ -51,11 +53,11 @@ bool Cx_FileUtility::IsPath(const wchar_t* filename, bool bCheckExists)
             DWORD dwAttr = ::GetFileAttributesW(filename);
             if (dwAttr != (DWORD)-1)
             {
-                return !!(dwAttr & FILE_ATTRIBUTE_DIRECTORY);
+                return !!(dwAttr & 0x00000010); // FILE_ATTRIBUTE_DIRECTORY
             }
         }
 
-        return IsPathSlash(filename[lstrlenW(filename) - 1]);
+        return IsPathSlash(filename[wcslen(filename) - 1]);
     }
 
     return false;
@@ -68,7 +70,7 @@ Cx_FileUtility::Cx_FileUtility()
 
 bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
 {
-    wchar_t szPath[MAX_PATH];
+    wchar_t path[MAX_PATH];
     int i, nLen;
     wchar_t cSaveChar;
 
@@ -77,38 +79,38 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
         return false;
     }
 
-    lstrcpynW(szPath, filename, MAX_PATH);
-    ReplaceSlash(szPath);
+    wcsncpy_s(path, MAX_PATH, filename, MAX_PATH);
+    ReplaceSlash(path);
     if (bIsPath)
     {
-        PathRemoveBackslashW(szPath);
+        PathRemoveBackslashW(path);
     }
     else
     {
-        PathRemoveFileSpecW(szPath);
+        PathRemoveFileSpecW(path);
     }
-    PathAddBackslashW(szPath);
-    nLen = lstrlenW(szPath);
+    PathAddBackslashW(path);
+    nLen = wcslen(path);
 
-    if (_waccess(szPath, 0) == 0)
+    if (_waccess(path, 0) == 0)
     {
         return true;
     }
 
     for (i = 2; i < nLen; i++)
     {
-        if (IsPathSlash(szPath[i]) && szPath[i-1] != L':')
+        if (IsPathSlash(path[i]) && path[i-1] != L':')
         {
-            cSaveChar = szPath[i];
-            szPath[i] = 0;
-            ::CreateDirectoryW(szPath, NULL);
-            ::SetFileAttributesW(szPath, FILE_ATTRIBUTE_NORMAL);
-            szPath[i] = cSaveChar;
+            cSaveChar = path[i];
+            path[i] = 0;
+            ::CreateDirectoryW(path, NULL);
+            ::SetFileAttributesW(path, 0x00000080);  // FILE_ATTRIBUTE_NORMAL
+            path[i] = cSaveChar;
         }
     }
 
     DWORD dwError = GetLastError();
-    if (_waccess(szPath, 0) != 0)
+    if (_waccess(path, 0) != 0)
     {
         std::wostringstream buf;
         if (dwError != 0)
@@ -119,7 +121,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
         LOG_ERROR2(LOGHEAD L"IDS_CREATEDIR_FAIL", buf.str());
         return false;
     }
-    
+
     return true;
 }
 
@@ -135,7 +137,7 @@ bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* filename)
     }
 
     if (IsPathFileExists(filename)
-        && !SetFileAttributesW(filename, FILE_ATTRIBUTE_NORMAL))
+        && !SetFileAttributesW(filename, 0x00000080))   // FILE_ATTRIBUTE_NORMAL
     {
         LOG_ERROR2(LOGHEAD L"IDS_FILE_CANNOT_WRITE", filename);
         return false;
@@ -157,13 +159,14 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
     }
 
     wchar_t szFile[MAX_PATH];
-    ZeroMemory(szFile, sizeof(szFile));
-    lstrcpynW(szFile, filename, MAX_PATH);
+    memset(szFile, 0, sizeof(szFile));
+    wcsncpy_s(szFile, MAX_PATH, filename, MAX_PATH);
     ReplaceSlash(szFile);
     PathRemoveBackslashW(szFile);
 
+#ifdef _MSC_VER
     SHFILEOPSTRUCTW op;
-    ZeroMemory(&op, sizeof(op));
+    memset(&op, 0, sizeof(op));
     op.hwnd = m_hMsgBoxOwnerWnd;
     op.wFunc = FO_DELETE;
     op.pFrom = szFile;
@@ -195,12 +198,13 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
 
         return false;
     }
+#endif
 
     return true;
 }
 
-bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile, 
-                                      const wchar_t* newfile, UINT wFunc)
+bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
+                                      const wchar_t* newfile, int wFunc)
 {
     if (!IsNotNull(oldfile))
     {
@@ -208,7 +212,7 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     }
     ASSERT(!PathIsRelativeW(oldfile));
     bool bRet = true;
-    
+
     if (!IsPathFileExists(oldfile))
     {
         InterlockedExchange(&s_nFileOpRet, GetLastError());
@@ -217,19 +221,20 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     }
     else
     {
+#ifdef _MSC_VER
         wchar_t szOld[MAX_PATH], szNew[MAX_PATH];
         SHFILEOPSTRUCTW op;
 
-        ZeroMemory(szOld, sizeof(szOld));
-        ZeroMemory(szNew, sizeof(szNew));   // pTo必须以两个\0结束
-        lstrcpynW(szOld, oldfile, MAX_PATH);
+        memset(szOld, 0, sizeof(szOld));
+        memset(szNew, 0, sizeof(szNew));   // pTo必须以两个\0结束
+        wcsncpy_s(szOld, MAX_PATH, oldfile, MAX_PATH);
         ReplaceSlash(szOld);
         PathRemoveBackslashW(szOld);
-        lstrcpynW(szNew, newfile, MAX_PATH);
+        wcsncpy_s(szNew, MAX_PATH, newfile, MAX_PATH);
         ReplaceSlash(szNew);
         PathRemoveBackslashW(szNew);
 
-        ZeroMemory(&op, sizeof(op));
+        memset(&op, 0, sizeof(op));
         op.hwnd = m_hMsgBoxOwnerWnd;
         op.wFunc = wFunc;
         op.pFrom = szOld;
@@ -242,8 +247,9 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
 
         InterlockedExchange(&s_nFileOpRet, SHFileOperationW(&op));
         bRet = (0 == s_nFileOpRet);
+#endif
     }
-    
+
     return bRet;
 }
 
@@ -254,7 +260,7 @@ bool Cx_FileUtility::MovePathFile(const wchar_t* oldfile, const wchar_t* newfile
     {
         return false;
     }
-    if (!TwoFileOperation(oldfile, newfile, FO_MOVE))
+    if (!TwoFileOperation(oldfile, newfile, 0x0001))   // FO_MOVE
     {
         if (s_nFileOpRet != 0)
         {
@@ -270,7 +276,7 @@ bool Cx_FileUtility::MovePathFile(const wchar_t* oldfile, const wchar_t* newfile
 
 bool Cx_FileUtility::RenamePathFile(const wchar_t* oldfile, const wchar_t* newfile)
 {
-    if (!TwoFileOperation(oldfile, newfile, FO_RENAME))
+    if (!TwoFileOperation(oldfile, newfile, 0x0004))  // FO_RENAME
     {
         if (s_nFileOpRet != 0)
         {
@@ -296,7 +302,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
         return false;
     }
 
-    bool ispath = IsPathSlash(oldfile[lstrlenW(oldfile) - 1]);
+    bool ispath = IsPathSlash(oldfile[wcslen(oldfile) - 1]);
 
     InterlockedExchange(&s_nFileOpRet, 0);
     if (!CreateDirectory(newfile, ispath))
@@ -304,7 +310,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
         return false;
     }
 
-    if (!TwoFileOperation(oldfile, newfile, FO_COPY))
+    if (!TwoFileOperation(oldfile, newfile, 0x0002))  // FO_COPY
     {
         if (s_nFileOpRet != 0)
         {
@@ -329,32 +335,32 @@ HWND Cx_FileUtility::GetMsgBoxOwnerWnd()
     return m_hMsgBoxOwnerWnd;
 }
 
-std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile, 
+std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
                                       const wchar_t* pszBase, bool bBaseIsFile)
 {
     wchar_t szPath[MAX_PATH * 2] = { 0 };
-    
+
     if (pszRel != NULL)
     {
         if (IsPathSlash(pszRel[0]) && !IsPathSlash(pszRel[1])   // "\xxx"
-            && (!IsNotNull(pszBase) || StrChrW(pszBase, L':') != NULL))
+            && (!IsNotNull(pszBase) || wcschr(pszBase, L':') != NULL))
         {
             if (IsNotNull(pszBase))
             {
-                lstrcpynW(szPath, pszBase, MAX_PATH);
+                wcsncpy_s(szPath, MAX_PATH, pszBase, MAX_PATH);
             }
             else
             {
                 GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
             }
 
-            lstrcpynW(StrChrW(szPath, L':') + 1, pszRel, MAX_PATH);
+            wcsncpy_s(wcschr(szPath, L':') + 1, MAX_PATH, pszRel, MAX_PATH);
         }
         else if (PathIsRelativeW(pszRel))
         {
             if (IsNotNull(pszBase))
             {
-                lstrcpynW(szPath, pszBase, MAX_PATH);
+                wcsncpy_s(szPath, MAX_PATH, pszBase, MAX_PATH);
                 if (bBaseIsFile)
                 {
                     ReplaceSlash(szPath);
@@ -370,9 +376,9 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
         }
         else
         {
-            lstrcpynW(szPath, pszRel, MAX_PATH);
+            wcsncpy_s(szPath, MAX_PATH, pszRel, MAX_PATH);
         }
-        
+
         PathRemoveBackslashW(szPath);
         if (!bRelIsFile)
         {
@@ -383,12 +389,12 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
     return szPath;
 }
 
-std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile, 
+std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
                                       const wchar_t* pszBase, bool bBaseIsFile)
 {
     wchar_t szPath[MAX_PATH] = { 0 };
     wchar_t szBasePath[MAX_PATH] = { 0 };
-    
+
     if (pszAbs != NULL)
     {
         if (!IsNotNull(pszBase))
@@ -397,9 +403,10 @@ std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
             pszBase = szBasePath;
             bBaseIsFile = true;
         }
-        if (IsNotNull(pszBase) && PathRelativePathToW(szPath, pszBase, 
-            bBaseIsFile ? FILE_ATTRIBUTE_NORMAL : FILE_ATTRIBUTE_DIRECTORY, 
-            pszAbs, 
+#ifdef _MSC_VER
+        if (IsNotNull(pszBase) && PathRelativePathToW(szPath, pszBase,
+            bBaseIsFile ? FILE_ATTRIBUTE_NORMAL : FILE_ATTRIBUTE_DIRECTORY,
+            pszAbs,
             bAbsIsFile ? FILE_ATTRIBUTE_NORMAL : FILE_ATTRIBUTE_DIRECTORY))
         {
             if (IsPathSlash(szPath[0]))     //  \xxx  ->  .\xxx
@@ -410,15 +417,16 @@ std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
             }
         }
         else
+#endif
         {
-            lstrcpynW(szPath, pszAbs, MAX_PATH);
+            wcsncpy_s(szPath, MAX_PATH, pszAbs, MAX_PATH);
         }
     }
 
     return szPath;
 }
 
-std::wstring Cx_FileUtility::ChangeFileNameSuffix(const wchar_t* filename, 
+std::wstring Cx_FileUtility::ChangeFileNameSuffix(const wchar_t* filename,
                                                   const wchar_t* pszSuffix)
 {
     wchar_t szNewFile[MAX_PATH] = { 0 };
@@ -426,7 +434,7 @@ std::wstring Cx_FileUtility::ChangeFileNameSuffix(const wchar_t* filename,
     if (filename != NULL && pszSuffix != NULL)
     {
         ASSERT(wcschr(pszSuffix, L'.') != NULL);
-        lstrcpynW(szNewFile, filename, MAX_PATH);
+        wcsncpy_s(szNewFile, MAX_PATH, filename, MAX_PATH);
         PathRenameExtensionW(szNewFile, pszSuffix);
     }
 
@@ -442,7 +450,7 @@ std::wstring Cx_FileUtility::GetFileTitle(const wchar_t* filename)
         wchar_t* pszName = PathFindFileNameW(filename);
         if (pszName != NULL)
         {
-            lstrcpynW(szNewFile, pszName, MAX_PATH);
+            wcsncpy_s(szNewFile, MAX_PATH, pszName, MAX_PATH);
             ReplaceSlash(szNewFile);
             PathRemoveExtensionW(szNewFile);
         }
@@ -457,7 +465,7 @@ std::wstring Cx_FileUtility::GetFileName(const wchar_t* filename)
         return L"";
 
     wchar_t szTemp[MAX_PATH];
-    lstrcpynW(szTemp, PathFindFileNameW(filename), MAX_PATH);
+    wcsncpy_s(szTemp, MAX_PATH, PathFindFileNameW(filename), MAX_PATH);
     PathRemoveBackslashW(szTemp);
 
     return szTemp;
@@ -465,16 +473,16 @@ std::wstring Cx_FileUtility::GetFileName(const wchar_t* filename)
 
 std::wstring Cx_FileUtility::GetExtension(const wchar_t* filename)
 {
-    return filename ? PathFindExtensionW(filename) : L"";
+    return filename ? wcsrchr(filename, '.') : L"";
 }
 
 std::wstring Cx_FileUtility::GetPathOfFile(const wchar_t* filename)
 {
     wchar_t szPath[MAX_PATH] = { 0 };
-    
+
     if (filename != NULL)
     {
-        lstrcpynW(szPath, filename, MAX_PATH);
+        wcsncpy_s(szPath, MAX_PATH, filename, MAX_PATH);
         ReplaceSlash(szPath);
         PathRemoveBackslashW(szPath);
         PathRemoveFileSpecW(szPath);
@@ -483,12 +491,12 @@ std::wstring Cx_FileUtility::GetPathOfFile(const wchar_t* filename)
             PathAddBackslashW(szPath);
         }
     }
-    
+
     return szPath;
 }
 
-std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath, 
-                                          const std::wstring& wstrFileTitle, 
+std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath,
+                                          const std::wstring& wstrFileTitle,
                                           const std::wstring& wstrExtName)
 {
     wchar_t szFileName[MAX_PATH * 2] = { 0 };
@@ -497,22 +505,22 @@ std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath,
     {
         return szFileName;
     }
-    lstrcpynW(szFileName, wstrPath.c_str(), MAX_PATH);
+    wcsncpy_s(szFileName, MAX_PATH, wstrPath.c_str(), MAX_PATH);
 
     if (wstrExtName.empty())
     {
         PathAppendW(szFileName, GetFileName(wstrFileTitle.c_str()).c_str());
     }
-    else if (StrChrW(wstrExtName.c_str(), L'.') == NULL)
+    else if (wcsrchr(wstrExtName.c_str(), L'.') == NULL)
     {
         PathAppendW(szFileName, GetFileTitle(wstrFileTitle.c_str()).c_str());
-        lstrcatW(szFileName, L".");
-        lstrcatW(szFileName, wstrExtName.c_str());
+        wcscat_s(szFileName, MAX_PATH, L".");
+        wcscat_s(szFileName, MAX_PATH, wstrExtName.c_str());
     }
     else
     {
         PathAppendW(szFileName, GetFileTitle(wstrFileTitle.c_str()).c_str());
-        lstrcatW(szFileName, PathFindExtensionW(wstrExtName.c_str()));
+        wcscat_s(szFileName, MAX_PATH, wcsrchr(wstrExtName.c_str(), '.'));
     }
 
     szFileName[MAX_PATH - 1] = 0;
@@ -520,9 +528,9 @@ std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath,
     return szFileName;
 }
 
-std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath, 
-                                            const std::wstring& wstrPrefix, 
-                                            const std::wstring& wstrExtName, 
+std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath,
+                                            const std::wstring& wstrPrefix,
+                                            const std::wstring& wstrExtName,
                                             bool bReturnRel)
 {
     wchar_t szFileName[MAX_PATH] = { 0 };
@@ -565,7 +573,7 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
 {
     wchar_t szTime[20] = { 0 };
 
-    HANDLE hFile = ::CreateFileW(wstrFileName.c_str(), 
+    HANDLE hFile = ::CreateFileW(wstrFileName.c_str(),
         GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
     if (hFile != INVALID_HANDLE_VALUE)
@@ -577,9 +585,9 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
         {
             FileTimeToSystemTime(&ftWrite, &stUTC);
             SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
-            
+
             swprintf_s(szTime, _countof(szTime), L"%04d-%02d-%02d %02d:%02d:%02d",
-                stLocal.wYear, stLocal.wMonth, stLocal.wDay, 
+                stLocal.wYear, stLocal.wMonth, stLocal.wDay,
                 stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
         }
 
@@ -589,10 +597,10 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
     return szTime;
 }
 
-ULONG Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
+DWORD Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
 {
-    ULONG nFileSize = 0;
-    HANDLE hFile = ::CreateFileW(wstrFileName.c_str(), 
+    DWORD nFileSize = 0;
+    HANDLE hFile = ::CreateFileW(wstrFileName.c_str(),
         GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
     if (hFile != INVALID_HANDLE_VALUE)
@@ -600,7 +608,7 @@ ULONG Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
         DWORD dwFileSizeHigh = 0;
         nFileSize = ::GetFileSize(hFile, &dwFileSizeHigh);
         if (dwFileSizeHigh > 0)
-            nFileSize = (ULONG)-1;
+            nFileSize = (DWORD)-1;
 
         ::CloseHandle(hFile);
     }
@@ -608,7 +616,7 @@ ULONG Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
     return nFileSize;
 }
 
-int Cx_FileUtility::CompareFileName(const wchar_t* filename1, const wchar_t* filename2, 
+int Cx_FileUtility::CompareFileName(const wchar_t* filename1, const wchar_t* filename2,
                                     long* pSamePartCount)
 {
     int nRet = 0;
@@ -677,7 +685,7 @@ bool Cx_FileUtility::GetFileVersion(
 }
 
 bool Cx_FileUtility::GetFileVersion(
-        WORD& ver1, WORD& ver2, WORD& ver3, WORD& ver4, 
+        WORD& ver1, WORD& ver2, WORD& ver3, WORD& ver4,
         const std::wstring& filename)
 {
     DWORD handle = 0;
@@ -733,7 +741,7 @@ bool Cx_FileUtility::GetFileDescription(
         {
             ret = true;
 
-            swprintf_s(szSubBlock, _countof(szSubBlock), 
+            swprintf_s(szSubBlock, _countof(szSubBlock),
                 L"\\StringFileInfo\\%04x%04x\\FileDescription",
                 lpTranslate[0], lpTranslate[1]);
             if (::VerQueryValueW(block, szSubBlock, (LPVOID*)&szStr, &size))

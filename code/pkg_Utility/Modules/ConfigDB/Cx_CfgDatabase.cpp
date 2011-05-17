@@ -84,7 +84,7 @@ void Cx_CfgDatabase::CloseConnection()
 
 #define EXECUTESQL(sql) ExecuteSQL(sql, __FILE__, __LINE__)
 
-_RecordsetPtr Cx_CfgDatabase::ExecuteSQL(LPCTSTR sql, LPCSTR file, long line)
+_RecordsetPtr Cx_CfgDatabase::ExecuteSQL(LPCTSTR sql, const char* file, long line)
 {
     _RecordsetPtr pRs = NULL;
     _variant_t vRecords;

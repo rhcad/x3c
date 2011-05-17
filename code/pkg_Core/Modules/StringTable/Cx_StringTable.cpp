@@ -39,9 +39,9 @@ bool Cx_StringTable::GetValue(std::wstring& value, const std::wstring& name,
     std::wstring& module, std::wstring& id)
 {
     if (name.size() > 1 && L'@' == name[0] &&
-        StrChrW(name.c_str(), L':') != NULL)
+        wcschr(name.c_str(), L':') != NULL)
     {
-        const wchar_t* p = StrChrW(name.c_str(), L':');
+        const wchar_t* p = wcschr(name.c_str(), L':');
 
         module = std::wstring(name.c_str() + 1, (size_t)(p - name.c_str() - 1));
         id = p + 1;

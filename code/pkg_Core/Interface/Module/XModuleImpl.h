@@ -17,7 +17,7 @@
 
 OUTAPI Ix_Module*   _xGetModuleInterface(Ix_ObjectFactory*, HMODULE);
 OUTAPI DWORD    _xGetClassEntryTable(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
-OUTAPI HRESULT  _xInternalCreateObject(const char*, Ix_Object**, HMODULE);
+OUTAPI int      _xInternalCreateObject(const char*, Ix_Object**, HMODULE);
 OUTAPI bool     xCanUnloadPlugin();
 
 //! the only one module object in this project.
@@ -64,7 +64,7 @@ static long GetClassCount(BYTE minType)
     \return element count of actual copied. Return actual count if pTable is NULL.
     \see _xGetModuleInterface, xPluginOnLoad, xPluginOnUnload
 */
-OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize, 
+OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
                                   _XCLASSMETA_ENTRY* pTable, DWORD nMaxCount)
 {
     if (pBuildInfo)
@@ -100,7 +100,7 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
     nClassCount = nClassCount < nMaxCount ? nClassCount : nMaxCount;
     for (DWORD i = 0; i < nClassCount; i++)
     {
-        memcpy((LPBYTE)pTable + i * nEntrySize, 
+        memcpy((BYTE*)pTable + i * nEntrySize,
             _XCLASSMETA_ENTRY::s_classes + i, nEntrySize);
     }
 
@@ -112,13 +112,13 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
     \param clsid class unique id, must be valid.
     \param ppv Pass in a valid address and return a new object.
     \param fromdll DLL handle of the caller's module.
-    \return S_OK or failed.
+    \return 0 or failed.
     \see _xGetModuleInterface, xCreateObject, _xGetModuleInterface
 */
-OUTAPI HRESULT _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fromdll)
+OUTAPI int _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fromdll)
 {
     if (NULL == ppv)
-        return E_POINTER;
+        return 1;
     *ppv = NULL;
 
     XCLSID clsid2(clsid);
@@ -129,11 +129,11 @@ OUTAPI HRESULT _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODUL
         if (clsid2 == pCls->clsid)
         {
             *ppv = (*pCls->pfnObjectCreator)(fromdll);
-            return S_OK;
+            return 0;
         }
     }
 
-    return E_NOINTERFACE;
+    return 2;
 }
 
 //! Object factory function used by Cx_Interface or Cx_Ptr.
@@ -142,23 +142,23 @@ OUTAPI HRESULT _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODUL
     If you don't want to use this file, then you can use XComCreator.h file.
     \param clsid class unique id, must be valid.
     \param ppv Pass in a valid address and return a new object.
-    \return S_OK or failed.
+    \return 0 or failed.
     \see _xInternalCreateObject, Ix_ObjectFactory, xIsCreatorRegister
 */
-HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
-        return E_POINTER;
+        return 1;
     *ppv = NULL;
 
-    HRESULT hr;
+    int hr = 0;
     bool bRetry = true;
     Ix_ObjectFactory* pFactory = s_xModuleObject.GetObjectFactory();
 
     if (pFactory && pFactory->HasCreatorReplaced(clsid))
     {
         hr = pFactory->CreateObject(clsid, ppv, xGetModuleHandle());
-        if (S_OK == hr)
+        if (0 == hr)
         {
             return hr;
         }
@@ -167,7 +167,7 @@ HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
     hr = _xInternalCreateObject(clsid.str(), ppv, xGetModuleHandle());
 
-    if (FAILED(hr) && pFactory && bRetry)
+    if (hr != 0 && pFactory && bRetry)
     {
         hr = pFactory->CreateObject(clsid, ppv, xGetModuleHandle());
     }
@@ -238,12 +238,14 @@ long Cx_Module::GetUnfreeObjectCount()
         {
             nTotal += n;
 
+#ifdef OutputDebugString
             OutputDebugStringA("> Unfree: ");
             OutputDebugStringA(pCls->className);
 #ifdef TRACE1
             TRACE1(", %d", n);
 #endif
             OutputDebugStringA("!\n");
+#endif // OutputDebugString
         }
     }
 

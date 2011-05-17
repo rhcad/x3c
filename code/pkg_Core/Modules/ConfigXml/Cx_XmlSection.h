@@ -57,14 +57,14 @@ protected:
     virtual bool SetInt16(const wchar_t* name, short value);
     virtual WORD GetUInt16(const wchar_t* name, WORD defValue = 0);
     virtual bool SetUInt16(const wchar_t* name, WORD value);
-    virtual bool GetBool(const wchar_t* name, BOOL defValue);
-    virtual bool SetBool(const wchar_t* name, BOOL value);
+    virtual bool GetBool(const wchar_t* name, int defValue);
+    virtual bool SetBool(const wchar_t* name, int value);
     virtual double GetDouble(const wchar_t* name, double defValue = 0);
     virtual bool SetDouble(const wchar_t* name, double value);
     virtual float GetFloat(const wchar_t* name, float defValue = 0);
     virtual bool SetFloat(const wchar_t* name, float value);
-    virtual COLORREF GetRGB(const wchar_t* name, COLORREF defValue);
-    virtual bool SetRGB(const wchar_t* name, COLORREF value);
+    virtual DWORD GetRGB(const wchar_t* name, DWORD defValue);
+    virtual bool SetRGB(const wchar_t* name, DWORD value);
     virtual bool GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD& k);
     virtual bool SetCMYK(const wchar_t* name, WORD c, WORD m, WORD y, WORD k);
     virtual bool GetDate(const wchar_t* name, int& year, int& month, int& day);
@@ -77,8 +77,8 @@ protected:
     virtual bool SetDoubleArray(const wchar_t* name, const double* items, long count);
     virtual long GetIntArray(const wchar_t* name, long* items, long count);
     virtual bool SetIntArray(const wchar_t* name, const long* items, long count);
-    virtual long GetBinary(const wchar_t* name, LPVOID buf, long size);
-    virtual bool SetBinary(const wchar_t* name, LPCVOID buf, long size);
+    virtual long GetBinary(const wchar_t* name, void* buf, long size);
+    virtual bool SetBinary(const wchar_t* name, const void* buf, long size);
 };
 
 #endif // _X3_CONFIGXML_XMLSECTION_H

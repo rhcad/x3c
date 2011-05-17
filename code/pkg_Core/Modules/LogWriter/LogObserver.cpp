@@ -84,7 +84,7 @@ bool CLogObserver::GetServerPath(wchar_t* path)
 {
     wchar_t inifile[MAX_PATH];
 
-    lstrcpynW(inifile, m_path.c_str(), MAX_PATH);
+    wcsncpy_s(inifile, MAX_PATH, m_path.c_str(), MAX_PATH);
     PathAppendW(inifile, L"LogWriter.ini");
 
     if (0 == m_copyflags)
@@ -119,7 +119,7 @@ void CLogObserver::InitLogFile()
         }
 
         wchar_t propfile[MAX_PATH] = {0};
-        lstrcpynW(propfile, m_path.c_str(), MAX_PATH);
+        wcsncpy_s(propfile, MAX_PATH, m_path.c_str(), MAX_PATH);
         PathAppendW(propfile, m_appname.c_str());
         StrCatW(propfile, L".properties");
 
@@ -141,7 +141,7 @@ void CLogObserver::MakerInitVars()
         m_path = GetAppWorkPath() + L"log";
     }
     
-    lstrcpynW(path, m_path.c_str(), MAX_PATH);
+    wcsncpy_s(path, MAX_PATH, m_path.c_str(), MAX_PATH);
     PathAddBackslashW(path);
     m_path = path;
     

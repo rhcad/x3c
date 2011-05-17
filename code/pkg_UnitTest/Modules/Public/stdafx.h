@@ -7,18 +7,14 @@
 #ifndef _UNITTEST_PUBLIC_STDAFX_H
 #define _UNITTEST_PUBLIC_STDAFX_H
 
-#if defined(_AFXDLL) && !defined(_CONSOLE)              // MFC dialog application
+#ifdef _CONSOLE                 // Console application
+#undef _AFXDLL
+#endif
 
-#define _WIN32_WINNT 0x0400
-#define VC_EXTRALEAN        // Exclude rarely-used stuff from Windows headers
-#include <afxwin.h>         // MFC core and standard components
-#include <afxext.h>         // MFC extensions
-#include <afxdisp.h>        // MFC Automation classes
+#include <UtilFunc/X3Portability.h>
 
-#else                       // Console application
+#ifdef _CONSOLE                 // Console application
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <tchar.h>
 
 #pragma warning(disable:4710)   // function not inlined
@@ -47,7 +43,6 @@
 #define ASSERT CPPUNIT_ASSERT
 #define VERIFY CPPUNIT_ASSERT
 
-#include <shlwapi.h>        // Windows light-weight utility APIs
 #include <XComPtr.h>
 
 #endif // _UNITTEST_PUBLIC_STDAFX_H

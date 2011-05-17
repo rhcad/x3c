@@ -27,33 +27,33 @@ public:
     virtual bool CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile);
     virtual void SetMsgBoxOwnerWnd(HWND hWnd);
     virtual HWND GetMsgBoxOwnerWnd();
-    virtual std::wstring RelToAbs(const wchar_t* pszRel, bool bRelIsFile, 
+    virtual std::wstring RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
         const wchar_t* pszBase = NULL, bool bBaseIsFile = true);
-    virtual std::wstring AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile, 
+    virtual std::wstring AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
         const wchar_t* pszBase = NULL, bool bBaseIsFile = true);
     virtual std::wstring ChangeFileNameSuffix(const wchar_t* filename, const wchar_t* pszSuffix);
     virtual std::wstring GetFileTitle(const wchar_t* filename);
     virtual std::wstring GetFileName(const wchar_t* filename);
     virtual std::wstring GetExtension(const wchar_t* filename);
     virtual std::wstring GetPathOfFile(const wchar_t* filename);
-    virtual std::wstring MakeFileName(const std::wstring& wstrPath, 
+    virtual std::wstring MakeFileName(const std::wstring& wstrPath,
         const std::wstring& wstrFileTitle, const std::wstring& wstrExtName);
-    virtual std::wstring CreateFileName(const std::wstring& wstrPath, 
-        const std::wstring& wstrPrefix, const std::wstring& wstrExtName, 
+    virtual std::wstring CreateFileName(const std::wstring& wstrPath,
+        const std::wstring& wstrPrefix, const std::wstring& wstrExtName,
         bool bReturnRel = true);
     virtual std::wstring GetModifyTime(const std::wstring& wstrFileName);
-    virtual ULONG GetFileSize(const std::wstring& wstrFileName);
-    virtual int CompareFileName(const wchar_t* filename1, const wchar_t* filename2, 
+    virtual DWORD GetFileSize(const std::wstring& wstrFileName);
+    virtual int CompareFileName(const wchar_t* filename1, const wchar_t* filename2,
         long* pSamePartCount = NULL);
 
     // From Ix_FileVersion
     virtual bool GetFileVersion(std::wstring& version, const std::wstring& filename);
-    virtual bool GetFileVersion(WORD& ver1, WORD& ver2, 
+    virtual bool GetFileVersion(WORD& ver1, WORD& ver2,
         WORD& ver3, WORD& ver4, const std::wstring& filename);
     virtual bool GetFileDescription(std::wstring& description, const std::wstring& filename);
 
 private:
-    bool TwoFileOperation(const wchar_t* oldfile, const wchar_t* newfile, UINT wFunc);
+    bool TwoFileOperation(const wchar_t* oldfile, const wchar_t* newfile, int wFunc);
 
 private:
     HWND    m_hMsgBoxOwnerWnd;

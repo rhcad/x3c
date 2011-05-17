@@ -16,14 +16,14 @@ bool Cx_ClipboardUtil::CopyText(HWND wndOwner, const std::wstring& text)
         HGLOBAL hMem = ::GlobalAlloc(GMEM_MOVEABLE, sizeof(wchar_t) * (text.size() + 1));
         if (hMem != NULL)
         {
-            wchar_t* lpStr = (wchar_t*)::GlobalLock(hMem);
-            if (NULL == lpStr)
+            wchar_t* str = (wchar_t*)::GlobalLock(hMem);
+            if (NULL == str)
             {
                 ::GlobalFree(hMem);
             }
             else
             {
-                lstrcpyW(lpStr, text.c_str());
+                wcscpy_s(str, text.size() + 1, text.c_str());
                 ::GlobalUnlock(hMem);
 
                 ::EmptyClipboard();
@@ -91,7 +91,7 @@ bool Cx_ClipboardUtil::PasteText(HWND wndOwner, std::wstring& text, bool clear)
             HGLOBAL hMem = ::GetClipboardData(CF_UNICODETEXT);
             if (hMem != NULL)
             {
-                LPCSTR lpStr = (LPCSTR)::GlobalLock(hMem);
+                const char* lpStr = (const char*)::GlobalLock(hMem);
                 if (lpStr != NULL)
                 {
                     text = std::a2w(lpStr);

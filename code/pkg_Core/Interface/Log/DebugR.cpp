@@ -3,7 +3,6 @@
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
-//#include "stdafx.h"
 #include <signal.h>
 
 #pragma comment(lib, "shlwapi.lib")
@@ -29,7 +28,7 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
 #endif
     if (0 == code)
     {
-        code = IDRETRY;
+        code = 4;   // IDRETRY
 
 #if defined(_WINUSER_) && !defined(NOUSER)
         char buf[512];
@@ -51,14 +50,14 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
 #endif // _WINUSER_
     }  // if
 
-    if (IDABORT == code)    // abort the program
+    if (3 == code)    // IDABORT: abort the program
     {
         raise(SIGABRT);
         _exit(3);
     }
     
     // Retry: return 1 to call the debugger
-    if (IDRETRY == code)
+    if (4 == code)  // IDRETRY
     {
 #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
         if (::IsDebuggerPresent())

@@ -213,7 +213,7 @@ bool Cx_XmlSection::SetUInt16(const wchar_t* name, WORD value)
     return SetInt(name, value);
 }
 
-bool Cx_XmlSection::GetBool(const wchar_t* name, BOOL defValue)
+bool Cx_XmlSection::GetBool(const wchar_t* name, int defValue)
 {
     if (!m_bSubElement)
     {
@@ -223,7 +223,7 @@ bool Cx_XmlSection::GetBool(const wchar_t* name, BOOL defValue)
     return !!CXmlUtil::GetFieldBool(m_xmlNode, name, defValue);
 }
 
-bool Cx_XmlSection::SetBool(const wchar_t* name, BOOL value)
+bool Cx_XmlSection::SetBool(const wchar_t* name, int value)
 {
     bool changed = false;
 
@@ -297,7 +297,7 @@ bool Cx_XmlSection::SetFloat(const wchar_t* name, float value)
     return SetDouble(name, value);
 }
 
-COLORREF Cx_XmlSection::GetRGB(const wchar_t* name, COLORREF defValue)
+DWORD Cx_XmlSection::GetRGB(const wchar_t* name, DWORD defValue)
 {
     BYTE nums[3] = { 0, 0, 0 };
     if (ReadInts(GetString(name).c_str(), nums, 3) == 3)
@@ -305,7 +305,7 @@ COLORREF Cx_XmlSection::GetRGB(const wchar_t* name, COLORREF defValue)
     return defValue;
 }
 
-bool Cx_XmlSection::SetRGB(const wchar_t* name, COLORREF value)
+bool Cx_XmlSection::SetRGB(const wchar_t* name, DWORD value)
 {
     wchar_t szBuf[32];
     swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d",
@@ -428,7 +428,7 @@ bool Cx_XmlSection::SetIntArray(const wchar_t* name, const long* items, long cou
     return SetString(name, sbuf.str().c_str());
 }
 
-long Cx_XmlSection::GetBinary(const wchar_t* name, LPVOID buf, long size)
+long Cx_XmlSection::GetBinary(const wchar_t* name, void* buf, long size)
 {
     std::wstring wstrText(GetString(name));
     size_t nLen = wstrText.size();
@@ -449,7 +449,7 @@ long Cx_XmlSection::GetBinary(const wchar_t* name, LPVOID buf, long size)
     return nRet;
 }
 
-bool Cx_XmlSection::SetBinary(const wchar_t* name, LPCVOID buf, long size)
+bool Cx_XmlSection::SetBinary(const wchar_t* name, const void* buf, long size)
 {
     std::wostringstream sbuf;
     wchar_t szNum[20];

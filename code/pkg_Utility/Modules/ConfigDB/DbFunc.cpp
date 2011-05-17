@@ -5,7 +5,7 @@
 #include "DbFunc.h"
 #include <ReadInts.h>
 
-void DbFunc::PrintComError(_com_error &e, LPCSTR file, long lLine, const wchar_t* pszSQL)
+void DbFunc::PrintComError(_com_error &e, const char* file, long lLine, const wchar_t* pszSQL)
 {
     HRESULT hr = e.Error();
     bool bSQLError = ((hr & 0xFFFFFF00) == 0x80040E00 || 0x80004005 == hr);
@@ -35,7 +35,7 @@ void DbFunc::PrintComError(_com_error &e, LPCSTR file, long lLine, const wchar_t
     }
 }
 
-void DbFunc::PrintInfo(const wchar_t* pszMsg, LPCSTR file, long lLine, bool bError)
+void DbFunc::PrintInfo(const wchar_t* pszMsg, const char* file, long lLine, bool bError)
 {
     if (bError)
     {
@@ -47,7 +47,7 @@ void DbFunc::PrintInfo(const wchar_t* pszMsg, LPCSTR file, long lLine, bool bErr
     }
 }
 
-void DbFunc::PrintError(CException* e, LPCSTR file, long lLine)
+void DbFunc::PrintError(CException* e, const char* file, long lLine)
 {
     TCHAR szErrorMessage[512];
     e->GetErrorMessage(szErrorMessage, _countof(szErrorMessage));
@@ -64,10 +64,10 @@ std::wstring DbFunc::GetLevel1Name(const wchar_t* name)
 {
     wchar_t buf[41];
 
-    lstrcpynW(buf, name ? name : L"", _countof(buf));
-    cutstr(StrChrW(buf, L'\\'));
-    cutstr(StrChrW(buf, L'/'));
-    cutstr(StrChrW(buf, L' '));
+    wcsncpy_s(buf, _countof(buf), name ? name : L"", _countof(buf));
+    cutstr(wcschr(buf, L'\\'));
+    cutstr(wcschr(buf, L'/'));
+    cutstr(wcschr(buf, L' '));
 
     std::wstring wstr(buf);
     trim::ctrim(wstr);
@@ -77,7 +77,7 @@ std::wstring DbFunc::GetLevel1Name(const wchar_t* name)
 
 bool DbFunc::IsDBName(const wchar_t* name)
 {
-    return name && *name && StrChrW(name, L' ') == NULL;
+    return name && *name && wcschr(name, L' ') == NULL;
 }
 
 bool DbFunc::IsSelectSQL(const wchar_t* name)

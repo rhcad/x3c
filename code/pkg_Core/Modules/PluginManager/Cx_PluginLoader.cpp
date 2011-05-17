@@ -3,7 +3,7 @@
 
 // author: Zhang Yun Gui, Tao Jian Lin
 // v1: 2010.12
-// v2: 2011.2.4, ooyg: Support absolute path in LoadPlugins(). 
+// v2: 2011.2.4, ooyg: Support absolute path in LoadPlugins().
 //          Unload plugin if fail to call InitializePlugins().
 //          Reuse element position in RegisterPlugin().
 // v3: 2011.02.07, ooyg: Implement the delay-loaded feature.
@@ -47,7 +47,7 @@ void Cx_PluginLoader::ReplaceSlashes(wchar_t* filename)
     }
 }
 
-void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, HMODULE instance, 
+void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, HMODULE instance,
                                    const wchar_t* path)
 {
     if (!path || 0 == path[0] || PathIsRelativeW(path))
@@ -58,13 +58,13 @@ void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, HMODULE instance,
     }
     else
     {
-        lstrcpynW(fullpath, path, MAX_PATH);
+        wcsncpy_s(fullpath, MAX_PATH, path, MAX_PATH);
     }
     ReplaceSlashes(fullpath);
     PathAddBackslashW(fullpath);
 }
 
-long Cx_PluginLoader::LoadPlugins(HMODULE instance, const wchar_t* path, 
+long Cx_PluginLoader::LoadPlugins(HMODULE instance, const wchar_t* path,
                                   const wchar_t* ext, bool recursive)
 {
     wchar_t fullpath[MAX_PATH];
@@ -75,7 +75,7 @@ long Cx_PluginLoader::LoadPlugins(HMODULE instance, const wchar_t* path,
     return LoadPlugins(fullpath, ext, recursive);
 }
 
-long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext, 
+long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
                                   bool recursive)
 {
     wchar_t fullpath[MAX_PATH];
@@ -99,18 +99,19 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
     return count;
 }
 
-void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames, 
-                                  const wchar_t* path, const wchar_t* ext, 
+void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
+                                  const wchar_t* path, const wchar_t* ext,
                                   bool recursive)
 {
+#ifdef _MSC_VER
     WIN32_FIND_DATAW fd;
     wchar_t filename[MAX_PATH];
-    const int extlen = lstrlenW(ext);
+    const int extlen = wcslen(ext);
     std::vector<std::wstring> subpaths;
 
-    lstrcpynW(filename, path, MAX_PATH);
+    wcsncpy_s(filename, MAX_PATH, path, MAX_PATH);
     PathAppendW(filename, L"*.*");
-    
+
     HANDLE hFind = ::FindFirstFileW(filename, &fd);
     BOOL bContinue = (hFind != INVALID_HANDLE_VALUE);
 
@@ -120,18 +121,18 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
         {
             if (fd.cFileName[0] != L'.' && recursive)
             {
-                lstrcpynW(filename, path, MAX_PATH);
+                wcsncpy_s(filename, MAX_PATH, path, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);
                 subpaths.push_back(filename);
             }
         }
         else
         {
-            int len = lstrlenW(fd.cFileName);
+            int len = wcslen(fd.cFileName);
 
-            if (StrCmpIW(&fd.cFileName[max(0, len - extlen)], ext) == 0)
+            if (_wcsicmp(&fd.cFileName[0 > len - extlen ? 0 : len - extlen], ext) == 0)
             {
-                lstrcpynW(filename, path, MAX_PATH);
+                wcsncpy_s(filename, MAX_PATH, path, MAX_PATH);
                 PathAppendW(filename, fd.cFileName);
                 filenames.push_back(filename);
             }
@@ -139,12 +140,13 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
         bContinue = ::FindNextFileW(hFind, &fd);
     }
     ::FindClose(hFind);
-    
+
     std::vector<std::wstring>::const_iterator it = subpaths.begin();
     for (; it != subpaths.end(); ++it)
     {
         FindPlugins(filenames, it->c_str(), ext, recursive);
     }
+#endif // _MSC_VER
 }
 
 bool Cx_PluginLoader::issep(wchar_t c)
@@ -152,8 +154,8 @@ bool Cx_PluginLoader::issep(wchar_t c)
     return L',' == c || L';' == c || iswspace(c);
 }
 
-long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path, 
-                                      const wchar_t* files, 
+long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
+                                      const wchar_t* files,
                                       HMODULE instance)
 {
     wchar_t filename[MAX_PATH];
@@ -161,8 +163,8 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
     m_instance = instance;
     MakeFullPath(filename, instance, path);
     VerifyLoadFileNames();
-    
-    const int len0 = lstrlenW(filename);
+
+    const int len0 = wcslen(filename);
     wchar_t* nameend = filename + len0;
 
     std::vector<std::wstring> filenames;
@@ -179,7 +181,8 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
         }
         if (j > i)
         {
-            lstrcpynW(nameend, files + i, min(MAX_PATH - len0, 1 + j - i));
+            wcsncpy_s(nameend, MAX_PATH - len0, files + i,
+                MAX_PATH - len0 < 1 + j - i ? MAX_PATH - len0 : 1 + j - i);
             ReplaceSlashes(filename);
             filenames.push_back(filename);
         }
@@ -248,7 +251,7 @@ int Cx_PluginLoader::GetPluginIndex(const wchar_t* filename)
     while (--i >= 0)
     {
         // ignore folders
-        if (StrCmpIW(title, PathFindFileNameW(m_modules[i].filename)) == 0)
+        if (_wcsicmp(title, PathFindFileNameW(m_modules[i].filename)) == 0)
         {
             break;
         }
@@ -300,15 +303,15 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 
     if (existIndex >= 0 && m_modules[existIndex].hdll)
     {
-        if (StrCmpIW(filename, m_modules[existIndex].filename) != 0)
+        if (_wcsicmp(filename, m_modules[existIndex].filename) != 0)
         {
-            LOG_DEBUG2(L"The plugin is already loaded.", 
+            LOG_DEBUG2(L"The plugin is already loaded.",
                 filename << L", " << (m_modules[existIndex].filename));
         }
         return false;
     }
 
-    HMODULE hdll = LoadLibraryExW(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+    HMODULE hdll = LoadLibraryExW(filename, NULL, 8); // LOAD_WITH_ALTERED_SEARCH_PATH
 
     if (hdll)
     {
@@ -320,7 +323,9 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
             ASSERT(existIndex < 0 || existIndex == moduleIndex);
 
             m_modules[moduleIndex].owned = true;
+#ifdef _MSC_VER
             DisableThreadLibraryCalls(hdll);
+#endif
         }
         else
         {
@@ -448,7 +453,7 @@ void Cx_PluginLoader::VerifyLoadFileNames()
         PathRenameExtensionW(m_inifile, L".ini");
         std::wstring name(PathFindFileNameW(m_inifile));
 
-        lstrcpynW(m_inifile, GetAppWorkPath().c_str(), MAX_PATH);
+        wcsncpy_s(m_inifile, MAX_PATH, GetAppWorkPath().c_str(), MAX_PATH);
         PathAppendW(m_inifile, L"Config");
         PathAppendW(m_inifile, name.c_str());
 
@@ -456,7 +461,7 @@ void Cx_PluginLoader::VerifyLoadFileNames()
     }
 }
 
-void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName, 
+void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
                                     const wchar_t* iniFile)
 {
     DWORD size = 1024;
@@ -464,7 +469,7 @@ void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
     wchar_t* buf = NULL;
 
     m_delayFiles.clear();
-
+#ifdef _MSC_VER
     while (true)
     {
         buf = new wchar_t[size];
@@ -499,17 +504,19 @@ void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
 
     delete[] buf;
     buf = NULL;
+#endif
 }
 
 bool Cx_PluginLoader::IsDelayPlugin(const wchar_t* filename)
 {
-    int len = lstrlenW(filename);
+    int len = wcslen(filename);
     std::vector<std::wstring>::const_iterator it = m_delayFiles.begin();
 
     for (; it != m_delayFiles.end(); ++it)
     {
-        const wchar_t* fnend = &filename[max(0, len - GetSize(*it))];
-        if (StrCmpIW(fnend, it->c_str()) == 0)
+        int len2 = len - GetSize(*it);
+        const wchar_t* fnend = &filename[0 > len2 ? 0 : len2];
+        if (_wcsicmp(fnend, it->c_str()) == 0)
         {
             break;
         }
@@ -586,7 +593,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
         moduleInfo.module = NULL;
         moduleInfo.owned = false;
         moduleInfo.inited = false;
-        lstrcpynW(moduleInfo.filename, filename, MAX_PATH);
+        wcsncpy_s(moduleInfo.filename, MAX_PATH, filename, MAX_PATH);
 
         moduleIndex = GetSize(m_modules);
         m_modules.push_back(moduleInfo);
@@ -605,7 +612,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
         return false;
     }
 
-    ZeroMemory(&cls, sizeof(cls));
+    memset(&cls, 0, sizeof(cls));
     for (CLSIDS::const_iterator it = clsids.begin(); it != clsids.end(); ++it)
     {
         cls.clsid = *it;
@@ -630,12 +637,12 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
 
     if (pIFFile.IsNull() && 0 == m_clsfile[0])
     {
-        lstrcpyW(m_clsfile, filename);
+        wcscpy_s(m_clsfile, MAX_PATH, filename);
         PathRemoveFileSpecW(m_clsfile);
         PathAppendW(m_clsfile, L"ConfigXml.plugin.dll");
         LoadPlugin(m_clsfile);
 
-        lstrcpyW(m_clsfile, m_inifile);
+        wcscpy_s(m_clsfile, MAX_PATH, m_inifile);
         PathRenameExtensionW(m_clsfile, L".clsbuf");
 
         if (pIFFile.Create(CLSID_ConfigXmlFile))
@@ -649,7 +656,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
 
     if (pIFFile)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
         seclist = seclist.GetSection(L"clsids", false);
 
@@ -671,7 +678,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     bool has = !clsids.empty();
     if (!has)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
         seclist = seclist.GetSection(L"observers", false);
         has = (seclist.GetSectionCount(L"observer") > 0);
@@ -686,13 +693,13 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
 
     if (pIFFile)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"plugins/plugin", L"filename", PathFindFileNameW(filename)));
 
         seclist = seclist.GetSection(L"clsids");
         seclist.RemoveChildren(L"clsid");
 
-        for (CLSIDS::const_iterator it = clsids.begin(); 
+        for (CLSIDS::const_iterator it = clsids.begin();
             it != clsids.end(); ++it)
         {
             CConfigIOSection sec(seclist.GetSection(
@@ -725,11 +732,11 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
         Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
         if (pIFFile)
         {
-            CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+            CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
                 L"observers/observer", L"type", std::a2w(obtype).c_str()));
             seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
 
-            seclist = pIFFile->GetData()->GetSection(NULL, 
+            seclist = pIFFile->GetData()->GetSection(NULL,
                 L"plugins/plugin", L"filename", PathFindFileNameW(filename));
             seclist.GetSection(L"observers/observer", L"type", std::a2w(obtype).c_str());
         }
@@ -742,7 +749,7 @@ void Cx_PluginLoader::FireFirstEvent(const char* obtype)
 
     if (pIFFile)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL, 
+        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"observers/observer", L"type", std::a2w(obtype).c_str(), false));
 
         for (int i = 0; i < 999; i++)

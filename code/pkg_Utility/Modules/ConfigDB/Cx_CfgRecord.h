@@ -61,8 +61,8 @@ protected:
     virtual bool SetDouble(const wchar_t* pszEntry, double dValue);
     virtual float GetFloat(const wchar_t* pszEntry, float fDefault = 0);
     virtual bool SetFloat(const wchar_t* pszEntry, float fValue);
-    virtual COLORREF GetRGB(const wchar_t* pszEntry, COLORREF crDefault);
-    virtual bool SetRGB(const wchar_t* pszEntry, COLORREF crValue);
+    virtual DWORD GetRGB(const wchar_t* pszEntry, DWORD crDefault);
+    virtual bool SetRGB(const wchar_t* pszEntry, DWORD crValue);
     virtual bool GetCMYK(const wchar_t* pszEntry, WORD& c, WORD& m, WORD& y, WORD& k);
     virtual bool SetCMYK(const wchar_t* pszEntry, WORD c, WORD m, WORD y, WORD k);
     virtual bool GetDate(const wchar_t* pszEntry, int& year, int& month, int& day);

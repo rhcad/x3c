@@ -6,12 +6,6 @@
 #ifndef X3_CORE_IOBJECT_H_
 #define X3_CORE_IOBJECT_H_
 
-//! \cond IGNORED
-#ifndef interface
-#include <objbase.h>
-#endif
-//! \endcond
-
 /*! \interface Ix_Object
  *  \ingroup _GROUP_PLUGIN_CORE2_
  *  \brief The basic interface that all X3 class can support it.
@@ -41,44 +35,44 @@ public:
 
     XCLSID(const char* clsid)
     {
-        lstrcpynA(m_clsid, clsid ? clsid : "", 40);
+        strncpy_s(m_clsid, 40, clsid ? clsid : "", 40);
     }
 
     XCLSID(const XCLSID& src)
     {
-        lstrcpyA(m_clsid, src.m_clsid);
+        strncpy_s(m_clsid, 40, src.m_clsid, 40);
     }
 
     XCLSID& operator=(const char* clsid)
     {
-        lstrcpynA(m_clsid, clsid ? clsid : "", 40);
+        strncpy_s(m_clsid, 40, clsid ? clsid : "", 40);
         return *this;
     }
 
     XCLSID& operator=(const XCLSID& src)
     {
-        lstrcpyA(m_clsid, src.m_clsid);
+        strncpy_s(m_clsid, 40, src.m_clsid, 40);
         return *this;
     }
 
     bool operator==(const XCLSID& src) const
     {
-        return lstrcmpA(m_clsid, src.m_clsid) == 0;
+        return strcmp(m_clsid, src.m_clsid) == 0;
     }
 
     bool operator!=(const XCLSID& src) const
     {
-        return lstrcmpA(m_clsid, src.m_clsid) != 0;
+        return strcmp(m_clsid, src.m_clsid) != 0;
     }
 
     bool operator>(const XCLSID& src) const
     {
-        return lstrcmpA(m_clsid, src.m_clsid) > 0;
+        return strcmp(m_clsid, src.m_clsid) > 0;
     }
 
     bool operator<(const XCLSID& src) const
     {
-        return lstrcmpA(m_clsid, src.m_clsid) < 0;
+        return strcmp(m_clsid, src.m_clsid) < 0;
     }
 
     const char* str() const

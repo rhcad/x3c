@@ -33,7 +33,7 @@ public:
 
 public:
     //! 执行SQL语句，返回记录集
-    _RecordsetPtr ExecuteSQL(LPCTSTR sql, LPCSTR file, long line);
+    _RecordsetPtr ExecuteSQL(LPCTSTR sql, const char* file, long line);
 
     //! 返回受上一语句影响的行数
     long GetRecordsAffected();

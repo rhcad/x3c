@@ -30,10 +30,6 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Utility" />
 				</Compiler>
 				<Linker>
-					<Add library="user32" />
-					<Add library="ole32" />
-					<Add library="rpcrt4" />
-					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 			<Target title="Win32 Debug">
@@ -60,10 +56,6 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Utility" />
 				</Compiler>
 				<Linker>
-					<Add library="user32" />
-					<Add library="ole32" />
-					<Add library="rpcrt4" />
-					<Add library="shlwapi" />
 				</Linker>
 			</Target>
 		</Build>

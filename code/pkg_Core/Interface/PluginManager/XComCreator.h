@@ -1,10 +1,10 @@
 /*! \file XComCreator.h
  *  \brief Implement xCreateObject() to use Cx_Interface. XModuleMacro.h and XModuleImpl.h are not needed.
  *
- *  \note This file is used in projects which need not to 
- *        implement interface and want use interface only, 
+ *  \note This file is used in projects which need not to
+ *        implement interface and want use interface only,
  *        so XModuleMacro.h and XModuleImpl.h are not need.\n
- *        These projects are usual unit-test applications, COM/Active controls, 
+ *        These projects are usual unit-test applications, COM/Active controls,
  *        simple applications or non plugin-system applications. \n
  *
  *    Usage: Include this file in a cpp file such as StdAfx.cpp, so you can use Cx_Interface.
@@ -20,10 +20,10 @@
 
 #include "Ix_ObjectFactory.h"
 
-HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
-        return E_POINTER;
+        return 1;
     *ppv = NULL;
 
     typedef Ix_ObjectFactory* (*FUNC_GET)();
@@ -32,7 +32,7 @@ HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
     Ix_ObjectFactory* pFactory = pfn ? (*pfn)() : NULL;
     if (NULL == pFactory)
-        return E_FAIL;  // plugins must are already loaded using PluginManager.h
+        return 1;  // plugins must are already loaded using PluginManager.h
 
     return pFactory->CreateObject(clsid, ppv, NULL);
 }
@@ -44,17 +44,17 @@ HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
 HMODULE     g_hPluginDll = NULL;
 
-HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
-        return E_POINTER;
+        return 1;
     *ppv = NULL;
 
-    typedef HRESULT (*FUNC_CREATE)(const char*, Ix_Object**, HMODULE);
+    typedef int (*FUNC_CREATE)(const char*, Ix_Object**, HMODULE);
     FUNC_CREATE pfn = (FUNC_CREATE)GetProcAddress(
         g_hPluginDll, "_xInternalCreateObject");
 
-    return pfn ? (*pfn)(clsid.str(), ppv, NULL) : E_FAIL;
+    return pfn ? (*pfn)(clsid.str(), ppv, NULL) : 1;
 }
 
 #endif // USE_ONE_PLUGIN

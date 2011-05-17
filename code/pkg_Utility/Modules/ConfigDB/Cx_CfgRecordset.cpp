@@ -218,13 +218,13 @@ bool Cx_CfgRecordset::SetFloat(const wchar_t*, float)
     return false;
 }
 
-COLORREF Cx_CfgRecordset::GetRGB(const wchar_t*, COLORREF)
+DWORD Cx_CfgRecordset::GetRGB(const wchar_t*, DWORD)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return 0;
 }
 
-bool Cx_CfgRecordset::SetRGB(const wchar_t*, COLORREF)
+bool Cx_CfgRecordset::SetRGB(const wchar_t*, DWORD)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return false;

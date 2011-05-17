@@ -42,7 +42,7 @@ public:
 
 public:
     virtual bool IsCreatorRegister(const XCLSID& clsid);
-    virtual HRESULT CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll);
+    virtual int CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll);
     virtual long CreateSpecialInterfaceObjects(const char* iid);
     virtual bool QuerySpecialInterfaceObject(long index, const char* iid, Ix_Object** ppv);
     virtual bool HasCreatorReplaced(const XCLSID& clsid);

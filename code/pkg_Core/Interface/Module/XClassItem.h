@@ -9,13 +9,13 @@
 #include "Ix_Object.h"
 
 //! class factory function.
-typedef Ix_Object* (STDMETHODCALLTYPE *PFNXObjectCreator)(HMODULE);
+typedef Ix_Object* (__stdcall *PFNXObjectCreator)(HMODULE);
 
 //! object count of a class.
-typedef long (STDMETHODCALLTYPE *PFNXGetObjectCount)();
+typedef long (__stdcall *PFNXGetObjectCount)();
 
 //! object (used by other modules) count of a class.
-typedef long (STDMETHODCALLTYPE *PFNXRefCountByOthers)();
+typedef long (__stdcall *PFNXRefCountByOthers)();
 
 #define MIN_SINGLETON_TYPE  10
 

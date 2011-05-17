@@ -20,13 +20,13 @@ public:
     class Data : public ChangeNotifyData
     {
     public:
-        Data(ULONG _objid, NodeSelectionObserver* _sender)
+        Data(long _objid, NodeSelectionObserver* _sender)
             : ChangeNotifyData(typeid(NodeSelectionObserver).name())
             , objid(_objid), sender(_sender)
         {
         }
 
-        ULONG   objid;
+        long    objid;
         void*   sender;
     };
 
@@ -36,7 +36,7 @@ protected:
     }
 
     //! 让派生类响应节点选择改变通知
-    virtual void OnNodeSelection(ULONG objid, void* sender)
+    virtual void OnNodeSelection(long objid, void* sender)
     {
         objid; sender;
     }

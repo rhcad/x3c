@@ -13,7 +13,7 @@
 #define min(a,b) ((a)<(b)?(a):(b))
 #endif
 
-#if defined(_STDIO_H_) || defined(_INC_STDIO)   // stdio.h
+#if defined(_STDIO_DEFINED)     // stdio.h
 
 inline int sprintf_s(char *buffer, size_t, const char *format, ...)
 {
@@ -37,14 +37,14 @@ inline int vswprintf_s(wchar_t *buffer, size_t, const wchar_t *format, va_list a
 #endif // _INC_STDIO
 
 inline int strcpy_s(char *str, size_t size, const char *src)
-    { return lstrcpynA(str, src, size) != NULL; }
+    { return strncpy(str, src, size) != NULL; }
 inline int wcscpy_s(wchar_t *str, size_t size, const wchar_t *src)
-    { return lstrcpynW(str, src, size) != NULL; }
+    { return wcsncpy(str, src, size) != NULL; }
 
 inline int strncpy_s(char *str, size_t size, const char *src, size_t len)
-    { return lstrcpynA(str, src, min(size, len)) != NULL; }
+    { return strncpy(str, src, min(size, len)) != NULL; }
 inline int wcsncpy_s(wchar_t *str, size_t size, const wchar_t *src, size_t len)
-    { return lstrcpynW(str, src, min(size, len)) != NULL; }
+    { return wcsncpy(str, src, min(size, len)) != NULL; }
 
 inline int strcat_s(char *str, size_t, const char *src)
     { return strcat(str, src) != NULL; }
@@ -55,6 +55,8 @@ inline wchar_t * _wcslwr_s(wchar_t *str)
     { return _wcslwr(str); }
 inline wchar_t * _wcsupr_s(wchar_t *str)
     { return _wcsupr(str); }
+
+#if defined(_INC_STDLIB) || defined(_STDLIB_H_)
 
 inline int _splitpath_s(
     const char * path, char * drive, size_t,
@@ -94,6 +96,8 @@ inline int _itow_s(int value, wchar_t *str, size_t, int radix)
     { _itow(value, str, radix); return errno; }
 inline int _ultow_s(unsigned long value, wchar_t *str, size_t, int radix)
     { _ultow(value, str, radix); return errno; }
+
+#endif // _INC_STDLIB
 
 #ifdef _INC_TIME        // time.h
 inline void localtime_s(struct tm *tmOut, const time_t *timer)

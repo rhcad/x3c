@@ -10,7 +10,7 @@
 
 // Create an object with the class id.
 // It is implemented in XModuleImpl.h or XComCreator.h
-HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv);
+int xCreateObject(const XCLSID& clsid, Ix_Object** ppv);
 
 // Return the current module handle for making a distinction between plugins.
 // It is implemented in XModuleImpl.h or XComCreator.h
@@ -94,7 +94,7 @@ public:
     
     explicit Cx_Interface(const XCLSID& clsid) : m_pInterface(NULL), m_pObj(NULL)
     {
-        if (S_OK == xCreateObject(clsid, &m_pObj))
+        if (0 == xCreateObject(clsid, &m_pObj))
         {
             m_pInterface = dynamic_cast<IF_Type*>(m_pObj);
             if (NULL == m_pInterface)
@@ -266,7 +266,7 @@ public:
     {
         Unload();
         
-        if (S_OK == xCreateObject(clsid, &m_pObj))
+        if (0 == xCreateObject(clsid, &m_pObj))
         {
             m_pInterface = dynamic_cast<IF_Type*>(m_pObj);
             if (NULL == m_pInterface)
@@ -480,7 +480,7 @@ public:
     bool Create(const XCLSID& clsid)
     {
         Unload();
-        return S_OK == xCreateObject(clsid, &m_pInterface);
+        return 0 == xCreateObject(clsid, &m_pInterface);
     }
     
 private:

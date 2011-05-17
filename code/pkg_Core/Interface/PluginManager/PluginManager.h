@@ -9,9 +9,6 @@
 #include "Ix_ObjectFactory.h"
 #include "Ix_PluginLoader.h"
 
-#include <shlwapi.h>
-#pragma comment(lib, "shlwapi.lib")
-
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \brief Plugin manager wrapper class
  *  \see   Ix_ObjectFactory, Ix_PluginLoader
@@ -21,7 +18,7 @@ class CPluginManager
 public:
     CPluginManager() : m_dll(NULL)
     {
-        lstrcpyW(m_filename, L"PluginManagerX3.dll");
+        wcscpy_s(m_filename, MAX_PATH, L"PluginManagerX3.dll");
     }
 
     ~CPluginManager()
@@ -85,7 +82,7 @@ public:
         Ix_PluginLoader* pLoader = GetPluginLoader();
         if (pLoader)
         {
-            long n = pLoader->LoadPluginFiles(subdir, 
+            long n = pLoader->LoadPluginFiles(subdir,
                 L"LogManager.plugin.dll, "
                 L"LogWriter.plugin.dll, "
                 L"ConfigXml.plugin.dll, "

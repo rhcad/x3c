@@ -74,7 +74,7 @@ void TestPluginManager::testCreateObject()
     VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin.dll"));
 
     Ix_Object* ixObject=NULL;
-    VERIFY(S_OK==pFactory->CreateObject(CLSID_LogManager, &ixObject,NULL));
+    VERIFY(0==pFactory->CreateObject(CLSID_LogManager, &ixObject,NULL));
     ixObject->Release(NULL);
 
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin.dll"));
@@ -147,9 +147,9 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
     wchar_t szFileName[MAX_PATH];
     std::vector<std::wstring> arrSubPath;
     long nCount = 0;
-    long nExtLen = lstrlenW(ext);
+    long nExtLen = wcslen(ext);
 
-    lstrcpynW(szFileName, path, MAX_PATH);
+    wcsncpy_s(szFileName, MAX_PATH, path, MAX_PATH);
     PathAppendW(szFileName, L"*.*");
 
     HANDLE hFind = ::FindFirstFileW(szFileName, &fd);
@@ -161,19 +161,19 @@ long TestPluginManager::GetPluginsNum(const wchar_t* path,
         {
             if (fd.cFileName[0] != L'.' && recursive)
             {
-                lstrcpynW(szFileName, path, MAX_PATH);
+                wcsncpy_s(szFileName, MAX_PATH, path, MAX_PATH);
                 PathAppendW(szFileName, fd.cFileName);
                 arrSubPath.push_back(szFileName);
             }
         }
         else
         {
-            long len = lstrlenW(fd.cFileName) - nExtLen;
-            if (StrCmpIW(&fd.cFileName[len > 0 ? len : 0], ext) == 0)
+            long len = wcslen(fd.cFileName) - nExtLen;
+            if (_wcsicmp(&fd.cFileName[len > 0 ? len : 0], ext) == 0)
             {
-                lstrcpynW(szFileName, path, MAX_PATH);
+                wcsncpy_s(szFileName, MAX_PATH, path, MAX_PATH);
                 PathAppendW(szFileName, fd.cFileName);
-                if (lstrlenW(szFileName) > 0)
+                if (wcslen(szFileName) > 0)
                 {
                     nCount++;
                 }

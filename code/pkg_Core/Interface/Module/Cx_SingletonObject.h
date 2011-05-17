@@ -64,7 +64,7 @@ protected:
     }
 
 public:
-    static Ix_Object* STDMETHODCALLTYPE CreateObject(HMODULE fromdll)
+    static Ix_Object* __stdcall CreateObject(HMODULE fromdll)
     {
         if (NULL == Instance())
         {
@@ -89,12 +89,12 @@ public:
         return Instance();
     }
 
-    static long STDMETHODCALLTYPE GetObjectCount()
+    static long __stdcall GetObjectCount()
     {
         return (Instance() && Instance()->m_lRefCount > 0) ? 1 : 0;
     }
 
-    static long STDMETHODCALLTYPE GetRefCountByOthers()
+    static long __stdcall GetRefCountByOthers()
     {
         return RefCountByOthers();
     }

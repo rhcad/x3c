@@ -34,7 +34,7 @@ inline std::wstring GetSystemErrorString(unsigned long errorcode)
         }
 #endif
 
-#ifdef _stprintf_s
+#ifdef _STDIO_DEFINED
         swprintf_s(buf, _countof(buf), L"[0x%x]", errorcode);
 #endif
         retstr = buf + retstr;

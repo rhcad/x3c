@@ -113,7 +113,7 @@ bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, UI
         {
             codepage = CP_UTF8;
         }
-        content = std::a2w((LPCSTR)buf, codepage);
+        content = std::a2w((const char*)buf, codepage);
     }
 
     return bRet;
@@ -123,7 +123,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
                                const std::wstring& filename, 
                                ULONG nLenLimitMB, UINT codepage)
 {
-    ZeroMemory(head, sizeof(BYTE) * 5);
+    memset(head, 0, sizeof(BYTE) * 5);
     content.resize(0);
     
     bool bRet = false;
@@ -349,7 +349,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
 
 static inline bool IsSpaceChar(wchar_t cChar, const wchar_t* targets = NULL)
 {
-    return targets ? (StrChrW(targets, cChar) != NULL)
+    return targets ? (wcschr(targets, cChar) != NULL)
         : (0x0020 == cChar || 0x3000 == cChar || L'\t' == cChar
         || L'\n' == cChar || L'\r' == cChar);
 }

@@ -61,19 +61,19 @@ protected:
     }
 
 public:
-    static Ix_Object* STDMETHODCALLTYPE CreateObject(HMODULE fromdll)
+    static Ix_Object* __stdcall CreateObject(HMODULE fromdll)
     {
         Cx_Object<ClsType>* p = new Cx_Object<ClsType>(false);
         p->AddRef(fromdll);
         return p;
     }
 
-    static long STDMETHODCALLTYPE GetObjectCount()
+    static long __stdcall GetObjectCount()
     {
         return ObjectCount();
     }
 
-    static long STDMETHODCALLTYPE GetRefCountByOthers()
+    static long __stdcall GetRefCountByOthers()
     {
         return RefCountByOthers();
     }

@@ -84,6 +84,7 @@
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE_MFCEXTDLL, XEND_DEFINE_MODULE_MFCDLL
 */
+#ifdef _MSC_VER
 #define XEND_DEFINE_MODULE_WIN32DLL() \
         _XCLASSMETA_ENTRY() \
     };  \
@@ -99,6 +100,11 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
     }   \
     return TRUE;    \
 }
+#else
+#define XEND_DEFINE_MODULE_WIN32DLL() \
+        _XCLASSMETA_ENTRY() \
+    };
+#endif // XEND_DEFINE_MODULE_WIN32DLL
 
 //! End group of class factory registry and implement entry function of MFC Extension DLL.
 /*! Using this macro need include this file and XModuleImpl.h file.

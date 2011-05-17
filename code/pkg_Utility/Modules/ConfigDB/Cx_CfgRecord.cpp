@@ -69,13 +69,13 @@ ULONG Cx_CfgRecord::GetModifiedCount()
 
 static std::wstring GetSQLFunc(const wchar_t* pszFunc, Ix_SQLParser* pParser)
 {
-    if (StrCmpIW(pszFunc, L"CURDATE()") == 0)
+    if (_wcsicmp(pszFunc, L"CURDATE()") == 0)
         return pParser->GetFunc_CURDATE();
 
-    if (StrCmpIW(pszFunc, L"CURTIME()") == 0)
+    if (_wcsicmp(pszFunc, L"CURTIME()") == 0)
         return pParser->GetFunc_CURTIME();
 
-    if (StrCmpIW(pszFunc, L"NOW()") == 0)
+    if (_wcsicmp(pszFunc, L"NOW()") == 0)
         return pParser->GetFunc_NOW();
 
     return pszFunc;
@@ -186,7 +186,7 @@ bool Cx_CfgRecord::HasFieldValue(const std::wstring& wstrField) const
     std::vector<FieldValue>::const_iterator it = m_arrValue.begin();
     for (; it != m_arrValue.end(); ++it)
     {
-        if (StrCmpIW(it->first.c_str(), wstrField.c_str()) == 0)
+        if (_wcsicmp(it->first.c_str(), wstrField.c_str()) == 0)
         {
             return true;
         }
@@ -244,7 +244,7 @@ bool Cx_CfgRecord::SetString(const wchar_t* pszEntry, const wchar_t* pszValue)
 
 int Cx_CfgRecord::GetInt(const wchar_t* pszEntry, int nDefault)
 {
-    if (StrCmpIW(m_wstrKeyField.c_str(), pszEntry) == 0)
+    if (_wcsicmp(m_wstrKeyField.c_str(), pszEntry) == 0)
     {
         ASSERT(NULL == m_pRs);
         return m_nKeyNewID;
@@ -373,12 +373,12 @@ bool Cx_CfgRecord::SetFloat(const wchar_t* pszEntry, float fValue)
     return AddFieldValue(pszEntry, RoundStr(fValue, 5).c_str());
 }
 
-COLORREF Cx_CfgRecord::GetRGB(const wchar_t* pszEntry, COLORREF crDefault)
+DWORD Cx_CfgRecord::GetRGB(const wchar_t* pszEntry, DWORD crDefault)
 {
     return GetUInt32(pszEntry, crDefault);
 }
 
-bool Cx_CfgRecord::SetRGB(const wchar_t* pszEntry, COLORREF crValue)
+bool Cx_CfgRecord::SetRGB(const wchar_t* pszEntry, DWORD crValue)
 {
     return SetUInt32(pszEntry, crValue);
 }

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\PluginManager"
+				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\PluginManager;..\..\..\pkg_Core\Interface\UtilFunc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -115,7 +115,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\PluginManager"
+				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\PluginManager;..\..\..\pkg_Core\Interface\UtilFunc"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"

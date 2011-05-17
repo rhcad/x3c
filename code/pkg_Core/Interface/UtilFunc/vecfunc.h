@@ -112,8 +112,4 @@ bool IsValidIndexOf(const _Ta& arr, long index)
     return index >= 0 && index < static_cast<long>(arr.size());
 }
 
-#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
-#include "func_s.h"
-#endif
-
 #endif // __STL_VECTOR_FUNCTIONS_H

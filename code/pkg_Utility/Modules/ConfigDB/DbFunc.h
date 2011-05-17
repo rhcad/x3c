@@ -11,13 +11,13 @@ class DbFunc
 {
 public:
     //! 显示COM错误信息
-    static void PrintComError(_com_error &e, LPCSTR file, long lLine, const wchar_t* pszSQL = NULL);
+    static void PrintComError(_com_error &e, const char* file, long lLine, const wchar_t* pszSQL = NULL);
 
     //! 显示错误信息
-    static void PrintError(CException* e, LPCSTR file, long lLine);
+    static void PrintError(CException* e, const char* file, long lLine);
 
     //! 显示信息文字
-    static void PrintInfo(const wchar_t* pszMsg, LPCSTR file, long lLine, bool bError = false);
+    static void PrintInfo(const wchar_t* pszMsg, const char* file, long lLine, bool bError = false);
 
     //! 返回斜号分隔的第一部分子串
     static std::wstring GetLevel1Name(const wchar_t* name);

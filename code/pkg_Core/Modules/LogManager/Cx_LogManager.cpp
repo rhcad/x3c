@@ -60,7 +60,7 @@ bool Cx_LogManager::PopGroup()
 }
 
 bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg, 
-    const wchar_t* extra, LPCSTR file, long line)
+    const wchar_t* extra, const char* file, long line)
 {
     CLockCount locker(&m_loglock);
     if (m_loglock > 1)
@@ -97,18 +97,21 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType type, LPCSTR msg, 
-    LPCSTR extra, LPCSTR file, long line)
+bool Cx_LogManager::WriteLog(kLogType type, const char* msg, 
+    const char* extra, const char* file, long line)
 {
     return WriteLog(type, std::a2w(msg).c_str(), 
         std::a2w(extra).c_str(), file, line);
 }
 
-int Cx_LogManager::CrtDbgReport(LPCSTR msg, LPCSTR file, long line)
+int Cx_LogManager::CrtDbgReport(const char* msg, const char* file, long line)
 {
     WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED", 
         std::a2w(msg).c_str(), file, line);
 
+#ifndef _MSC_VER
+    return 3;
+#else
     wchar_t buf[512];
 
     swprintf_s(buf, 512, 
@@ -122,13 +125,14 @@ int Cx_LogManager::CrtDbgReport(LPCSTR msg, LPCSTR file, long line)
 
     return MessageBoxW(NULL, buf, L"Debug Assertion Failed", 
         MB_TASKMODAL|MB_ICONHAND|MB_ABORTRETRYIGNORE|MB_SETFOREGROUND);
+#endif
 }
 
-LPCSTR Cx_LogManager::TrimFileName(LPCSTR file)
+const char* Cx_LogManager::TrimFileName(const char* file)
 {
     ASSERT(file && *file);
 
-    LPCSTR pszName = PathFindFileNameA(file);
+    const char* pszName = PathFindFileNameA(file);
     int folder = 0;
 
     while (pszName > file)

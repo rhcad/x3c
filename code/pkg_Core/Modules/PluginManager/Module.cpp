@@ -22,13 +22,13 @@ public:
     std::wstring    m_path;
 
 public:
-    HRESULT CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll)
+    int CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll)
     {
         if (CLSID_AppWorkPath == clsid
             || CLSID_PluginDelayLoad == clsid)
         {
             *ppv = this;
-            return S_OK;
+            return 0;
         }
         return Cx_PluginLoader::CreateObject(clsid, ppv, fromdll);
     }
@@ -68,13 +68,13 @@ HMODULE xGetModuleHandle()
     return s_loader.m_hModule;
 }
 
-HRESULT xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
     return s_loader.CreateObject(clsid, ppv, xGetModuleHandle());
 }
 
-#ifdef _USRDLL
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved)
+#if defined(_USRDLL) && defined(_MSC_VER)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
 {
     lpReserved;
     if (DLL_PROCESS_ATTACH == dwReason)

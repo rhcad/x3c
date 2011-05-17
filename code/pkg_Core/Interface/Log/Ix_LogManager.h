@@ -68,7 +68,7 @@ interface Ix_LogManager
         \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
     */
     virtual bool WriteLog(kLogType type, const wchar_t* msg, 
-        const wchar_t* extra, LPCSTR file, long line) = 0;
+        const wchar_t* extra, const char* file, long line) = 0;
 
     //! Output a logging info.(ANSI string)
     /*!
@@ -82,11 +82,11 @@ interface Ix_LogManager
         \return true if successful.
         \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
     */
-    virtual bool WriteLog(kLogType type, LPCSTR msg, 
-        LPCSTR extra, LPCSTR file, long line) = 0;
+    virtual bool WriteLog(kLogType type, const char* msg, 
+        const char* extra, const char* file, long line) = 0;
 
     //! Show assert info, used by XCrtDbgReport.
-    virtual int CrtDbgReport(LPCSTR msg, LPCSTR file, long line) = 0;
+    virtual int CrtDbgReport(const char* msg, const char* file, long line) = 0;
 };
 
 #endif // X3_LOG_ILOGMANAGER_H_

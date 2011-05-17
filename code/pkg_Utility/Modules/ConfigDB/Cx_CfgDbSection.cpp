@@ -135,12 +135,12 @@ bool Cx_CfgDbSection::SetFloat(const wchar_t*, float)
     return false;
 }
 
-COLORREF Cx_CfgDbSection::GetRGB(const wchar_t*, COLORREF crDefault)
+DWORD Cx_CfgDbSection::GetRGB(const wchar_t*, DWORD crDefault)
 {
     return crDefault;
 }
 
-bool Cx_CfgDbSection::SetRGB(const wchar_t*, COLORREF)
+bool Cx_CfgDbSection::SetRGB(const wchar_t*, DWORD)
 {
     return false;
 }

@@ -6,7 +6,6 @@
 #ifndef UTILFUNC_SCANFILES_H_
 #define UTILFUNC_SCANFILES_H_
 
-#include <shlwapi.h>
 #include <string>
 
 //! Callback interface for directory scanning.
@@ -55,16 +54,17 @@ public:
     \return count of files found.
     \see CScanFilesCallback
 */
-inline long ScanFiles(IScanFilesCallback* back, 
+inline long ScanFiles(IScanFilesCallback* back,
                       const wchar_t* path, bool recursive)
 {
+    long count = 0;
+#ifdef _MSC_VER
     WIN32_FIND_DATAW fd;
     wchar_t filename[MAX_PATH];
-    long count = 0;
-    
+
     lstrcpynW(filename, path, MAX_PATH);
     PathAppendW(filename, L"*.*");
-    
+
     HANDLE hfind = ::FindFirstFileW(filename, &fd);
     BOOL loop = (hfind != INVALID_HANDLE_VALUE);
     bool cancel = false;
@@ -99,14 +99,15 @@ inline long ScanFiles(IScanFilesCallback* back,
             PathAppendW(filename, fd.cFileName);
 
             count++;
-            back->OnCheckFile(filename, 
+            back->OnCheckFile(filename,
                 PathFindExtensionW(filename), cancel);
         }
-        
+
         loop = ::FindNextFileW(hfind, &fd);
     }
     ::FindClose(hfind);
-    
+#endif
+
     return count;
 }
 
@@ -132,7 +133,7 @@ protected:
     virtual void OnCheckFile(const wchar_t* filename, const wchar_t* ext, bool& cancel)
     {
         cancel;
-        if (StrCmpIW(m_ext.c_str(), ext) == 0)
+        if (_wcsicmp(m_ext.c_str(), ext) == 0)
         {
             m_files->push_back(filename);
         }

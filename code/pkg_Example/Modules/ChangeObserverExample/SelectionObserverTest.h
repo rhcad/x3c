@@ -10,7 +10,7 @@ public:
     }
 
 private:
-    virtual void OnNodeSelection(ULONG objid, void* sender)
+    virtual void OnNodeSelection(long objid, void* sender)
     {
         objid; sender;
     }
@@ -27,14 +27,14 @@ public:
     {
         if (!NodeSelectionObserver::IsUpdating())
         {
-            ULONG objid = 1234;
+            long objid = 1234;
             RefreshView(objid);
             NodeSelectionObserver::Data(objid, this).Notify();
         }
     }
 
 private:
-    virtual void OnNodeSelection(ULONG objid, void* sender)
+    virtual void OnNodeSelection(long objid, void* sender)
     {
         if (this != sender)
         {
@@ -43,7 +43,7 @@ private:
         }
     }
 
-    void RefreshView(ULONG objid)
+    void RefreshView(long objid)
     {
         objid;
     }

@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-05-17
+
+    * Implement portability for linux.
+    * tags/x3c-1.0.8-beforelinux: Ready to implement portability.
+
 2011-05-12
 
     * ConfigXml: Output error info when saving file.
@@ -88,7 +93,7 @@ X3 C++ PluginFramework
 2011-01-15
 
     * Remove cppunit 1.12.1 include files.
-    * Replace StrCpyNW to lstrcpynW (because for VC6 shell32.dll no StrCpyNW entry point in Win7).
+    * Replace StrCpyNW to wcsncpy_s (because for VC6 shell32.dll no StrCpyNW entry point in Win7).
     * Simplify license note in *.h and *.cpp.
 
     * PluginManager\PluginManager.h: add TextUtility.plugin.dll in LoadCorePlugins().

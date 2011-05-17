@@ -55,7 +55,7 @@ private:
     {
         Data* mydata = dynamic_cast<Data*>(data);
         ASSERT(mydata);
-        
+
         switch (mydata->event)
         {
         case kDocEvent_BeforeOpen:
@@ -71,7 +71,7 @@ private:
             break;
 
         default:
-            ASSERT(FALSE);
+            ASSERT(0);
         }
     }
 };

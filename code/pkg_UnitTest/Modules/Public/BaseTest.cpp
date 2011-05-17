@@ -21,11 +21,11 @@ long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
     VERIFY(SUCCEEDED(CoInitialize(NULL)));
 
     // Load plugins
-    VERIFY(s_loader.LoadPluginManager(PLUGINS_DIR));
+    VERIFY(s_loader.LoadPluginManager(L"../Plugins"));
 
     if (loadCore)
     {
-        VERIFY(s_loader.LoadCorePlugins(PLUGINS_DIR));
+        VERIFY(s_loader.LoadCorePlugins(L"../Plugins"));
     }
 
     long count = 1;
@@ -35,7 +35,7 @@ long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
         Ix_PluginLoader* pPluginLoader = s_loader.GetPluginLoader();
         ASSERT(pPluginLoader != NULL);
 
-        count = pPluginLoader->LoadPluginFiles(PLUGINS_DIR, plugins);
+        count = pPluginLoader->LoadPluginFiles(L"../Plugins", plugins);
         pPluginLoader->InitializePlugins();
     }
 
@@ -63,7 +63,7 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         PathRemoveFileSpecW(filename);
         PathAppendW(filename, L"UnitTests.ini");
 
-        lstrcpynW(path, filename, MAX_PATH);
+        wcsncpy_s(path, MAX_PATH, filename, MAX_PATH);
         PathRemoveFileSpecW(path);      // bin\vc80\debug\tests
         PathRemoveFileSpecW(path);      // bin\vc80\debug
         PathRemoveFileSpecW(path);      // bin\vc80
@@ -85,12 +85,12 @@ std::wstring BaseTest::MakeDataPath(const wchar_t* folder, const wchar_t* file)
 
     if (folder && *folder)
     {
-        lstrcpynW(filename, s_datapath, MAX_PATH);
+        wcsncpy_s(filename, MAX_PATH, s_datapath, MAX_PATH);
         PathAppendW(filename, folder);
     }
     else
     {
-        lstrcpynW(filename, s_temppath, MAX_PATH);
+        wcsncpy_s(filename, MAX_PATH, s_temppath, MAX_PATH);
         ::CreateDirectoryW(s_temppath, NULL);
     }
 

@@ -8,6 +8,17 @@
 
 #include <string>
 
+#ifndef _MSC_VER
+
+int WideCharToMultiByte(int codepage, DWORD flags,
+                        const wchar_t* wstr, int wchars,
+                        char* astr, int achars,
+                        const char* defaultChar, void*);
+int MultiByteToWideChar(int codepage, DWORD flags,
+                        const char* astr, int achars,
+                        wchar_t* wstr, int wchars);
+#endif // _MSC_VER
+
 namespace std {
 
 //! Convert from UNICODE string to ANSI string, std::w2a.
@@ -17,7 +28,7 @@ namespace std {
     \param codepage Code page of the target ANSI string. For example CP_UTF8 is UTF-8 code.
     \return The target ANSI string.
 */
-inline std::string w2a(const wchar_t* s, UINT codepage = CP_ACP)
+inline std::string w2a(const wchar_t* s, int codepage = 0)
 {
     std::string str;
     int wlen = (NULL == s) ? 0 : (int)wcslen(s);
@@ -26,7 +37,7 @@ inline std::string w2a(const wchar_t* s, UINT codepage = CP_ACP)
     {
         long len = WideCharToMultiByte(codepage, 0, s, wlen, NULL, 0, NULL, NULL);
         str.resize(len);
-        WideCharToMultiByte(codepage, 0, s, wlen, 
+        WideCharToMultiByte(codepage, 0, s, wlen,
             const_cast<char*>(str.data()), len, NULL, NULL);
     }
 
@@ -40,7 +51,7 @@ inline std::string w2a(const wchar_t* s, UINT codepage = CP_ACP)
     \param codepage Code page of the target ANSI string. For example CP_UTF8 is UTF-8 code.
     \return The target ANSI string.
 */
-inline std::string w2a(const std::wstring& s, UINT codepage = CP_ACP)
+inline std::string w2a(const std::wstring& s, int codepage = 0)
 {
     return w2a(s.c_str(), codepage);
 }
@@ -52,7 +63,7 @@ inline std::string w2a(const std::wstring& s, UINT codepage = CP_ACP)
     \param codepage Code page of the source ANSI string. For example CP_UTF8 is UTF-8 code.
     \return UNICODE string
 */
-inline std::wstring a2w(LPCSTR s, UINT codepage = CP_ACP)
+inline std::wstring a2w(const char* s, int codepage = 0)
 {
     std::wstring wstr;
     int len = (NULL == s) ? 0 : (int)strlen(s);
@@ -61,7 +72,7 @@ inline std::wstring a2w(LPCSTR s, UINT codepage = CP_ACP)
     {
         int wlen = MultiByteToWideChar(codepage, 0, s, len, NULL, 0);
         wstr.resize(wlen);
-        MultiByteToWideChar(codepage, 0, s, len, 
+        MultiByteToWideChar(codepage, 0, s, len,
             const_cast<wchar_t*>(wstr.data()), wlen);
     }
 
@@ -75,7 +86,7 @@ inline std::wstring a2w(LPCSTR s, UINT codepage = CP_ACP)
     \param codepage Code page of the source ANSI string. For example CP_UTF8 is UTF-8 code.
     \return UNICODE string
 */
-inline std::wstring a2w(const std::string& s, UINT codepage = CP_ACP)
+inline std::wstring a2w(const std::string& s, int codepage = 0)
 {
     return a2w(s.c_str(), codepage);
 }
@@ -83,11 +94,11 @@ inline std::wstring a2w(const std::string& s, UINT codepage = CP_ACP)
 #ifdef _UNICODE
 inline std::wstring w2t(const wchar_t* s) { return s; }
 inline std::wstring w2t(const std::wstring& s) { return s; }
-inline std::wstring t2w(LPCTSTR s) { return s; }
+inline std::wstring t2w(const wchar_t* s) { return s; }
 #else
 inline std::string w2t(const wchar_t* s) { return w2a(s); }
 inline std::string w2t(const std::wstring& s) { return w2a(s); }
-inline std::wstring t2w(LPCTSTR s) { return a2w(s); }
+inline std::wstring t2w(const char* s) { return a2w(s); }
 #endif
 
 }

@@ -19,7 +19,7 @@ interface Ix_ObjectFactory
     virtual bool IsCreatorRegister(const XCLSID& clsid) = 0;
 
     //! Create an object with the class id.
-    virtual HRESULT CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll) = 0;
+    virtual int CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll) = 0;
 
     //! Create singleton objects that support the specified interface in all plugins.
     /*!

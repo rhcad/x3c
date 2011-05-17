@@ -71,7 +71,7 @@ private:
     {
         Data* mydata = dynamic_cast<Data*>(data);
         ASSERT(mydata);
-        
+
         switch (mydata->type)
         {
         case 1:
@@ -83,7 +83,7 @@ private:
             break;
 
         default:
-            ASSERT(FALSE);
+            ASSERT(0);
         }
     }
 };
