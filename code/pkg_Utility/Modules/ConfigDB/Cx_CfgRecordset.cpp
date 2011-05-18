@@ -290,7 +290,7 @@ bool Cx_CfgRecordset::SetIntArray(const wchar_t*, const long*, long)
     return false;
 }
 
-long Cx_CfgRecordset::GetBinary(const wchar_t*, LPVOID, long)
+long Cx_CfgRecordset::GetBinary(const wchar_t*, void*, long)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Recordset::GetXXX/SetXXX]");
     return 0;

@@ -195,7 +195,7 @@ bool Cx_CfgDbSection::SetIntArray(const wchar_t*, const long*, long)
     return false;
 }
 
-long Cx_CfgDbSection::GetBinary(const wchar_t*, LPVOID, long)
+long Cx_CfgDbSection::GetBinary(const wchar_t*, void*, long)
 {
     return 0;
 }

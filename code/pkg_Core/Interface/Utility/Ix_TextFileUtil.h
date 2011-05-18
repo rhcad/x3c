@@ -28,7 +28,7 @@ interface Ix_TextFileUtil
     */
     virtual bool ReadTextFile(std::wstring& content, 
         const std::wstring& filename, 
-        ULONG limitMB = 16, UINT codepage = CP_ACP) = 0;
+        ULONG limitMB = 16, int codepage = 0) = 0;
 
     //! 将一个宽字符串内容保存到文件中
     /*!
@@ -42,7 +42,7 @@ interface Ix_TextFileUtil
     */
     virtual bool SaveTextFile(const std::wstring& content, 
         const std::wstring& filename, 
-        bool utf16 = true, UINT codepage = CP_ACP) = 0;
+        bool utf16 = true, int codepage = 0) = 0;
 
     //! 将一个ANSI字符串内容保存到文件中
     /*!
@@ -55,7 +55,7 @@ interface Ix_TextFileUtil
     */
     virtual bool SaveTextFile(const std::string& content, 
         const std::wstring& filename, 
-        bool utf16 = true, UINT codepage = CP_ACP) = 0;
+        bool utf16 = true, int codepage = 0) = 0;
 
     //! 检查一个文件是否为UNICODE文件
     /*! 检查文件前面几个字符是否为FFFE，即 UTF-16 (little-endian)
@@ -80,7 +80,7 @@ interface Ix_TextFileUtil
             例如 CP_UTF8 表示UTF-8格式编码，默认为CP_ACP
         \return 是否执行成功
     */
-    virtual bool UnicodeToAnsi(const std::wstring& filename, UINT codepage = CP_ACP) = 0;
+    virtual bool UnicodeToAnsi(const std::wstring& filename, int codepage = 0) = 0;
 
     //! 如果是ANSI编码文件则转换为UTF16文件
     /*!
@@ -89,7 +89,7 @@ interface Ix_TextFileUtil
             例如 CP_UTF8 表示UTF-8格式编码，默认为CP_ACP
         \return 是否执行成功
     */
-    virtual bool AnsiToUnicode(const std::wstring& filename, UINT codepage = CP_ACP) = 0;
+    virtual bool AnsiToUnicode(const std::wstring& filename, int codepage = 0) = 0;
 
     //! 得到文本内容的行数
     virtual long GetLineCount(const std::wstring& text) = 0;

@@ -75,7 +75,7 @@ protected:
     virtual bool SetDoubleArray(const wchar_t* pszEntry, const double* pItems, long count);
     virtual long GetIntArray(const wchar_t* pszEntry, long* pItems, long count);
     virtual bool SetIntArray(const wchar_t* pszEntry, const long* pItems, long count);
-    virtual long GetBinary(const wchar_t* pszEntry, LPVOID pBuf, long nSize);
+    virtual long GetBinary(const wchar_t* pszEntry, void* pBuf, long nSize);
     virtual bool SetBinary(const wchar_t* pszEntry, LPCVOID pBuf, long nSize);
 };
 

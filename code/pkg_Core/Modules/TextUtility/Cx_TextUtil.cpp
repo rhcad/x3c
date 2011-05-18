@@ -11,6 +11,16 @@
 #include <SysErrStr.h>
 #include <ctrim.h>
 
+#ifndef GENERIC_READ
+#define GENERIC_READ        0x80000000L
+#define GENERIC_WRITE       0x40000000L
+#define FILE_SHARE_READ     0x00000001
+#define FILE_SHARE_WRITE    0x00000002
+#define CREATE_ALWAYS       2
+#define OPEN_EXISTING       3
+#define INVALID_HANDLE_VALUE ((HANDLE)-1)
+#endif
+
 // First bytes      Encoding assumed:
 // EF BB BF         UTF-8
 // FE FF            UTF-16 (big-endian)
@@ -21,18 +31,18 @@
 DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
 {
     DWORD dwBytesRead = 0;
-    HANDLE hFile = ::CreateFileW(filename.c_str(), 
+    HANDLE hFile = ::CreateFileW(filename.c_str(),
         GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
     if (hFile != INVALID_HANDLE_VALUE)
     {
         ::ReadFile(hFile, head, 5, &dwBytesRead, NULL);
-        ::CloseHandle(hFile);
+        CloseFile(hFile);
     }
     else
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL", 
+        LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
 
@@ -65,7 +75,7 @@ bool Cx_TextUtil::IsUTF8File(const std::wstring& filename, bool& bUTF8)
     return bRet;
 }
 
-bool Cx_TextUtil::UnicodeToAnsi(const std::wstring& filename, UINT codepage)
+bool Cx_TextUtil::UnicodeToAnsi(const std::wstring& filename, int codepage)
 {
     BYTE head[5] = { 0, 0, 0, 0, 0 };
     DWORD dwBytesRead = GetHeadBytes(filename, head);
@@ -81,12 +91,12 @@ bool Cx_TextUtil::UnicodeToAnsi(const std::wstring& filename, UINT codepage)
     return bRet;
 }
 
-bool Cx_TextUtil::AnsiToUnicode(const std::wstring& filename, UINT codepage)
+bool Cx_TextUtil::AnsiToUnicode(const std::wstring& filename, int codepage)
 {
     bool bRet = false;
     BYTE head[5];
     std::wstring content;
-    
+
     if (ReadTextFile(head, content, filename, 16, codepage))
     {
         bRet = (0xFF == head[0] && 0xFE == head[1])
@@ -96,14 +106,14 @@ bool Cx_TextUtil::AnsiToUnicode(const std::wstring& filename, UINT codepage)
     return bRet;
 }
 
-bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, UINT codepage)
+bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, int codepage)
 {
     bool bRet = true;
 
     if (0xFF == buf[0] && 0xFE == buf[1])   // UTF-16 (little-endian)
     {
         content.resize((size - 2) / 2);
-        memcpy((LPVOID)content.c_str(), buf + 2, content.size() * sizeof(wchar_t));
+        memcpy((void*)content.c_str(), buf + 2, content.size() * sizeof(wchar_t));
     }
     else            // ANSI/ASCII
     {
@@ -111,7 +121,7 @@ bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, UI
 
         if (size > 3 && (0xEF == buf[0] && 0xBB == buf[1] && 0xBF == buf[2]))
         {
-            codepage = CP_UTF8;
+            codepage = 65001;//CP_UTF8
         }
         content = std::a2w((const char*)buf, codepage);
     }
@@ -119,49 +129,49 @@ bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, UI
     return bRet;
 }
 
-bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content, 
-                               const std::wstring& filename, 
-                               ULONG nLenLimitMB, UINT codepage)
+bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
+                               const std::wstring& filename,
+                               ULONG nLenLimitMB, int codepage)
 {
     memset(head, 0, sizeof(BYTE) * 5);
     content.resize(0);
-    
+
     bool bRet = false;
-    HANDLE hFile = ::CreateFileW(filename.c_str(), 
+    HANDLE hFile = ::CreateFileW(filename.c_str(),
         GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
     if (INVALID_HANDLE_VALUE == hFile)
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL", 
+        LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
     {
         DWORD dwLength = ::GetFileSize(hFile, NULL);
-        HGLOBAL hBuffer = NULL;
+        HANDLE hBuffer = NULL;
 
-        if (dwLength != INVALID_FILE_SIZE)
+        if ((long)dwLength > 0)
         {
             if (dwLength > nLenLimitMB * 1024L * 1024L)
             {
-                LOG_WARNING2(LOGHEAD L"IDS_HUGE_FILE", 
+                LOG_WARNING2(LOGHEAD L"IDS_HUGE_FILE",
                     (dwLength / (1024.0*1024.0)) << L"MB, " << filename);
                 dwLength = nLenLimitMB * 1024L * 1024L;
             }
-            hBuffer = GlobalAlloc(GHND, dwLength + 8);
+            hBuffer = GlobalAlloc(0x0042, dwLength + 8);    // GHND
         }
-        
+
         if (hBuffer != NULL)
         {
-            LPBYTE pBuffer = (LPBYTE)GlobalLock(hBuffer);
+            BYTE* pBuffer = (BYTE*)GlobalLock(hBuffer);
             if (pBuffer != NULL)
             {
                 DWORD dwBytesRead = 0;
                 ::ReadFile(hFile, pBuffer, dwLength, &dwBytesRead, NULL);
                 if (dwBytesRead > 0)
                 {
-                    CopyMemory(head, pBuffer, sizeof(BYTE) * min(5, dwBytesRead));
+                    CopyMemory(head, pBuffer, sizeof(BYTE) * (5 < dwBytesRead ? 5 : dwBytesRead));
                     bRet = GetFileContent(content, pBuffer, dwBytesRead, codepage);
                     if (!bRet)
                     {
@@ -172,35 +182,35 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
             }
             GlobalFree(hBuffer);
         }
-        
-        ::CloseHandle(hFile);
+
+        CloseFile(hFile);
     }
 
     return bRet;
 }
 
-bool Cx_TextUtil::ReadTextFile(std::wstring& content, 
-                               const std::wstring& filename, 
-                               ULONG nLenLimitMB, UINT codepage)
+bool Cx_TextUtil::ReadTextFile(std::wstring& content,
+                               const std::wstring& filename,
+                               ULONG nLenLimitMB, int codepage)
 {
     BYTE head[5];
     return ReadTextFile(head, content, filename, nLenLimitMB, codepage);
 }
 
-bool Cx_TextUtil::SaveTextFile(const std::wstring& content, 
-                               const std::wstring& filename, 
-                               bool utf16, UINT codepage)
+bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
+                               const std::wstring& filename,
+                               bool utf16, int codepage)
 {
     bool bRet = false;
 
-    ::SetFileAttributesW(filename.c_str(), FILE_ATTRIBUTE_NORMAL);
-    HANDLE hFile = ::CreateFileW(filename.c_str(), 
+    ::SetFileAttributesW(filename.c_str(), 0x00000080);   // FILE_ATTRIBUTE_NORMAL
+    HANDLE hFile = ::CreateFileW(filename.c_str(),
         GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
 
     if (INVALID_HANDLE_VALUE == hFile)
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL", 
+        LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -211,7 +221,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
         {
             BYTE head[] = { 0xFF, 0xFE };
             ::WriteFile(hFile, head, 2, &dwBytes, NULL);
-            
+
             dwLen = (DWORD)(content.size() * sizeof(wchar_t));
             ::WriteFile(hFile, content.c_str(), dwLen, &dwBytes, NULL);
             bRet = (dwBytes == dwLen);
@@ -225,26 +235,26 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
             bRet = (dwBytes == dwLen);
         }
 
-        ::CloseHandle(hFile);
+        CloseFile(hFile);
     }
 
     return bRet;
 }
 
-bool Cx_TextUtil::SaveTextFile(const std::string& content, 
-                               const std::wstring& filename, 
-                               bool utf16, UINT codepage)
+bool Cx_TextUtil::SaveTextFile(const std::string& content,
+                               const std::wstring& filename,
+                               bool utf16, int codepage)
 {
     bool bRet = false;
 
-    ::SetFileAttributesW(filename.c_str(), FILE_ATTRIBUTE_NORMAL);
-    HANDLE hFile = ::CreateFileW(filename.c_str(), 
+    ::SetFileAttributesW(filename.c_str(), 0x00000080); // FILE_ATTRIBUTE_NORMAL
+    HANDLE hFile = ::CreateFileW(filename.c_str(),
         GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
 
     if (INVALID_HANDLE_VALUE == hFile)
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL", 
+        LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -269,7 +279,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
             bRet = (dwBytes == dwLen);
         }
 
-        ::CloseHandle(hFile);
+        CloseFile(hFile);
     }
 
     return bRet;
@@ -286,7 +296,7 @@ long Cx_TextUtil::GetLineCount(const std::wstring& text)
     const wchar_t* pszStart = text.c_str();
     const wchar_t* pszEnd;
 
-    for (; (pszEnd = StrStrW(pszStart, L"\n\r")) != NULL; nCount++)
+    for (; (pszEnd = wcsstr(pszStart, L"\n\r")) != NULL; nCount++)
     {
         pszStart = pszEnd + 1;
         if (*pszStart != *pszEnd
@@ -299,7 +309,7 @@ long Cx_TextUtil::GetLineCount(const std::wstring& text)
     return nCount;
 }
 
-std::wstring Cx_TextUtil::GetLine(const std::wstring& text, 
+std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
                                   long line, const wchar_t** nextline)
 {
     if (line < 0)
@@ -313,7 +323,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
 
     long nCount = 0;
     const wchar_t* pszStart = text.c_str();
-    const wchar_t* pszEnd = pszStart + StrCSpnW(pszStart, L"\n\r");
+    const wchar_t* pszEnd = pszStart + wcscspn(pszStart, L"\n\r");
 
     while (line > nCount && *pszEnd != 0)
     {
@@ -323,7 +333,7 @@ std::wstring Cx_TextUtil::GetLine(const std::wstring& text,
         {
             pszStart++;
         }
-        pszEnd = pszStart + StrCSpnW(pszStart, L"\n\r");
+        pszEnd = pszStart + wcscspn(pszStart, L"\n\r");
         nCount++;
     }
 
@@ -439,8 +449,8 @@ bool Cx_TextUtil::RemoveInvalidChars(std::wstring& text, const wchar_t* targets)
     return nCount > 0;
 }
 
-bool Cx_TextUtil::ReplaceAll(std::wstring& text, 
-                             const std::wstring& match, 
+bool Cx_TextUtil::ReplaceAll(std::wstring& text,
+                             const std::wstring& match,
                              const std::wstring& newtext)
 {
     long count = 0;
@@ -456,8 +466,8 @@ bool Cx_TextUtil::ReplaceAll(std::wstring& text,
     return count > 0;
 }
 
-bool Cx_TextUtil::ReplaceChar(std::wstring& text, 
-                              const std::wstring& match, 
+bool Cx_TextUtil::ReplaceChar(std::wstring& text,
+                              const std::wstring& match,
                               const std::wstring& chars)
 {
     return trim::replace_each(text, match, chars) > 0;
@@ -471,9 +481,9 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
     if (!text.empty() && punct)
     {
         int ret = LCMapStringW(
-            MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED), 
-            LCMAP_HALFWIDTH, 
-            text.c_str(), text.size(), 
+            MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED),
+            LCMAP_HALFWIDTH,
+            text.c_str(), text.size(),
             &dest[0], dest.size() + 1);
 
         if (ret > 0 && dest != text)
@@ -522,12 +532,12 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
     return changed;
 }
 
-std::string Cx_TextUtil::ToAnsi(const std::wstring& text, UINT codepage)
+std::string Cx_TextUtil::ToAnsi(const std::wstring& text, int codepage)
 {
     return std::w2a(text, codepage);
 }
 
-std::wstring Cx_TextUtil::ToUnicode(const std::string& text, UINT codepage)
+std::wstring Cx_TextUtil::ToUnicode(const std::string& text, int codepage)
 {
     return std::a2w(text, codepage);
 }

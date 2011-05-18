@@ -436,7 +436,7 @@ long Cx_XmlSection::GetBinary(const wchar_t* name, void* buf, long size)
 
     wchar_t szNum[3] = L"00";
     int nRet = 0;
-    LPBYTE items = (LPBYTE)buf;
+    BYTE* items = (BYTE*)buf;
     wchar_t* endptr;
 
     for (size_t i = 0; i + 1 < nLen && nRet < size; i += 2)
@@ -453,7 +453,7 @@ bool Cx_XmlSection::SetBinary(const wchar_t* name, const void* buf, long size)
 {
     std::wostringstream sbuf;
     wchar_t szNum[20];
-    LPBYTE items = (LPBYTE)buf;
+    BYTE* items = (BYTE*)buf;
 
     for (int i = 0; i < size; i++)
     {

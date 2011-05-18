@@ -20,17 +20,17 @@ private:
     //
     virtual bool ReadTextFile(std::wstring& content, 
         const std::wstring& filename, 
-        ULONG limitMB = 16, UINT codepage = CP_ACP);
+        ULONG limitMB = 16, int codepage = 0);
     virtual bool SaveTextFile(const std::wstring& content, 
         const std::wstring& filename, 
-        bool utf16 = true, UINT codepage = CP_ACP);
+        bool utf16 = true, int codepage = 0);
     virtual bool SaveTextFile(const std::string& content, 
         const std::wstring& filename, 
-        bool utf16 = true, UINT codepage = CP_ACP);
+        bool utf16 = true, int codepage = 0);
     virtual bool IsUTF16File(const std::wstring& filename, bool& utf16);
     virtual bool IsUTF8File(const std::wstring& filename, bool& utf8);
-    virtual bool UnicodeToAnsi(const std::wstring& filename, UINT codepage = CP_ACP);
-    virtual bool AnsiToUnicode(const std::wstring& filename, UINT codepage = CP_ACP);
+    virtual bool UnicodeToAnsi(const std::wstring& filename, int codepage = 0);
+    virtual bool AnsiToUnicode(const std::wstring& filename, int codepage = 0);
     virtual long GetLineCount(const std::wstring& text);
     virtual std::wstring GetLine(const std::wstring& text, 
         long line, const wchar_t** nextLine = NULL);
@@ -49,15 +49,15 @@ private:
         const std::wstring& match, 
         const std::wstring& chars);
     virtual bool ToDBC(std::wstring& text, bool punct = false);
-    virtual std::string ToAnsi(const std::wstring& text, UINT codepage = CP_ACP);
-    virtual std::wstring ToUnicode(const std::string& text, UINT codepage = CP_ACP);
+    virtual std::string ToAnsi(const std::wstring& text, int codepage = 0);
+    virtual std::wstring ToUnicode(const std::string& text, int codepage = 0);
 
 private:
     DWORD GetHeadBytes(const std::wstring& wstrFileName, BYTE buf[5]);
-    bool GetFileContent(std::wstring& content, BYTE* buf, long size, UINT codepage);
+    bool GetFileContent(std::wstring& content, BYTE* buf, long size, int codepage);
     bool ReadTextFile(BYTE head[5], std::wstring& content, 
         const std::wstring& wstrFileName, 
-        ULONG nLenLimitMB, UINT codepage);
+        ULONG nLenLimitMB, int codepage);
 };
 
 #endif // _X3_UTILITY_TEXTUTIL_H

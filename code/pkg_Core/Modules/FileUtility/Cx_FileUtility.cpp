@@ -38,6 +38,17 @@ static void ReplaceSlash(wchar_t* path)
     }
 }
 
+#ifndef GENERIC_READ
+#define GENERIC_READ        0x80000000L
+#define GENERIC_WRITE       0x40000000L
+#define FILE_SHARE_READ     0x00000001
+#define FILE_SHARE_WRITE    0x00000002
+#define CREATE_ALWAYS       2
+#define OPEN_EXISTING       3
+#define INVALID_HANDLE_VALUE ((HANDLE)-1)
+#endif
+
+
 bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
 {
     return IsNotNull(filename)
@@ -578,6 +589,7 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
 
     if (hFile != INVALID_HANDLE_VALUE)
     {
+#ifdef _MSC_VER
         FILETIME ftCreate, ftAccess, ftWrite;
         SYSTEMTIME stUTC, stLocal;
 
@@ -590,8 +602,9 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
                 stLocal.wYear, stLocal.wMonth, stLocal.wDay,
                 stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
         }
+#endif
 
-        ::CloseHandle(hFile);
+        CloseFile(hFile);
     }
 
     return szTime;
@@ -610,7 +623,7 @@ DWORD Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
         if (dwFileSizeHigh > 0)
             nFileSize = (DWORD)-1;
 
-        ::CloseHandle(hFile);
+        CloseFile(hFile);
     }
 
     return nFileSize;
@@ -650,10 +663,10 @@ int Cx_FileUtility::CompareFileName(const wchar_t* filename1, const wchar_t* fil
 
     while (0 == nRet && (*pszFile1 != 0 || *pszFile2 != 0))
     {
-        int nPos1 = StrCSpnW(pszFile1, L"\\/");
-        int nPos2 = StrCSpnW(pszFile2, L"\\/");
+        int nPos1 = wcscspn(pszFile1, L"\\/");
+        int nPos2 = wcscspn(pszFile2, L"\\/");
 
-        nRet = StrCmpNIW(pszFile1, pszFile2, max(nPos1, nPos2));
+        nRet = _wcsnicmp(pszFile1, pszFile2, nPos1 > nPos2 ? nPos1 : nPos2);
         if (0 == nRet && nPos1 > 0)
         {
             nSamePartCount++;
@@ -697,13 +710,14 @@ bool Cx_FileUtility::GetFileVersion(
     ver3 = 0;
     ver4 = 0;
 
+#ifdef _MSC_VER
     UINT size = ::GetFileVersionInfoSizeW((wchar_t*)filename.c_str(), &handle);
     if (size > 0 && NULL != (block = new wchar_t[size]))
     {
         ::GetFileVersionInfoW((wchar_t*)filename.c_str(), handle, size, block);
 
         VS_FIXEDFILEINFO* pFixedInfo = NULL;
-        if (::VerQueryValueW(block, L"\\", (LPVOID*)&pFixedInfo, &size))
+        if (::VerQueryValueW(block, L"\\", (void**)&pFixedInfo, &size))
         {
             ret = true;
             ver1 = HIWORD(pFixedInfo->dwFileVersionMS);
@@ -714,6 +728,7 @@ bool Cx_FileUtility::GetFileVersion(
 
         delete[] block;
     }
+#endif
 
     return ret;
 }
@@ -727,6 +742,7 @@ bool Cx_FileUtility::GetFileDescription(
 
     description.resize(0);
 
+#ifdef _MSC_VER
     UINT size = ::GetFileVersionInfoSizeW((wchar_t*)filename.c_str(), &handle);
     if (size > 0 && NULL != (block = new wchar_t[size]))
     {
@@ -737,14 +753,14 @@ bool Cx_FileUtility::GetFileDescription(
         wchar_t* szStr;
 
         if (::VerQueryValueW(block, L"\\VarFileInfo\\Translation",
-            (LPVOID*)&lpTranslate, &size))
+            (void**)&lpTranslate, &size))
         {
             ret = true;
 
             swprintf_s(szSubBlock, _countof(szSubBlock),
                 L"\\StringFileInfo\\%04x%04x\\FileDescription",
                 lpTranslate[0], lpTranslate[1]);
-            if (::VerQueryValueW(block, szSubBlock, (LPVOID*)&szStr, &size))
+            if (::VerQueryValueW(block, szSubBlock, (void**)&szStr, &size))
             {
                 description = szStr;
             }
@@ -752,6 +768,7 @@ bool Cx_FileUtility::GetFileDescription(
 
         delete[] block;
     }
+#endif
 
     return ret;
 }

@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#undef _WIN32
+
 #ifndef interface
 #define interface struct
 #endif
@@ -19,8 +21,16 @@ typedef DWORD ULONG;
 inline void DebugBreak() {}
 inline long InterlockedIncrement(long* p) { return ++(*p); }
 inline long InterlockedDecrement(long* p) { return --(*p); }
-inline long InterlockedExchange(long* p, long v) { return *p = v; }
-inline void* InterlockedCompareExchange(void** p, void* newv, void* oldv) { *(long*)p = (long)newv; return oldv; }
+inline long InterlockedExchange(long* p, long v)
+    { long old = *p; *p = v; return old; }
+inline void* InterlockedCompareExchange(void** p, void* newv, void* cmp)
+{
+    void* old = *p;
+    if (cmp == *p)
+        *(long*)p = (long)newv;
+    return old;
+}
+
 
 inline bool FreeLibrary(HMODULE hdll)
 {
@@ -37,15 +47,20 @@ inline HMODULE LoadLibraryExW(const wchar_t* filename, void*, DWORD)
     return LoadLibraryW(filename);
 }
 
+inline HMODULE GetModuleHandleW(const wchar_t* filename)
+{
+    return NULL;
+}
+
 inline void* GetProcAddress(HMODULE hdll, const char* name)
 {
     return NULL;
 }
 
-inline HMODULE GetModuleHandleW(const wchar_t* filename)
+inline void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
 {
-    return NULL;
 }
+
 
 inline HANDLE CreateFileW(const wchar_t* filename, DWORD access, 
                           DWORD shareMode, void*, DWORD disposition, 
@@ -54,9 +69,19 @@ inline HANDLE CreateFileW(const wchar_t* filename, DWORD access,
     return NULL;
 }
 
-inline char* PathFindFileNameA(const char* path)
+inline bool CloseFile(HANDLE file)
 {
-    return NULL;
+    return false;
+}
+
+inline bool ReadFile(HANDLE file, void* buf, DWORD size, DWORD* readed, void*)
+{
+    return false;
+}
+
+inline bool WriteFile(HANDLE file, const void* buf, DWORD size, DWORD* written, void*)
+{
+    return false;
 }
 
 inline bool PathFileExistsW(const wchar_t* path)
@@ -64,9 +89,20 @@ inline bool PathFileExistsW(const wchar_t* path)
     return false;
 }
 
-inline bool PathIsRelativeW(const wchar_t* path)
+inline bool CreateDirectoryW(const wchar_t* path, void*)
 {
     return false;
+}
+
+inline DWORD GetFileSize(HANDLE file, DWORD* high)
+{
+    return 0;
+}
+
+
+inline char* PathFindFileNameA(const char* path)
+{
+    return NULL;
 }
 
 inline wchar_t* PathFindFileNameW(const wchar_t* path)
@@ -74,8 +110,9 @@ inline wchar_t* PathFindFileNameW(const wchar_t* path)
     return NULL;
 }
 
-inline void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
+inline bool PathIsRelativeW(const wchar_t* path)
 {
+    return false;
 }
 
 inline void PathStripPathW(wchar_t* path)
@@ -119,11 +156,6 @@ inline DWORD GetFileAttributesW(const wchar_t* filename)
 inline bool SetFileAttributesW(const wchar_t* filename, DWORD attr)
 {
     return 0;
-}
-
-inline bool CreateDirectoryW(const wchar_t* path, void*)
-{
-    return false;
 }
 
 inline DWORD GetLastError()

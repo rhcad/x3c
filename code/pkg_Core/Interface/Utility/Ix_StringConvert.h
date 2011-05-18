@@ -85,7 +85,7 @@ interface Ix_StringConvert
             例如 CP_UTF8 表示UTF-8格式编码，默认为CP_ACP
         \return ANSI编码串
     */
-    virtual std::string ToAnsi(const std::wstring& text, UINT codepage = CP_ACP) = 0;
+    virtual std::string ToAnsi(const std::wstring& text, int codepage = 0) = 0;
 
     //! ANSI串转换为UNICODE串
     /*!
@@ -93,7 +93,7 @@ interface Ix_StringConvert
         \param codepage text为哪种编码，例如 CP_UTF8 表示UTF-8格式编码，默认为CP_ACP
         \return UNICODE串，即UTF16编码
     */
-    virtual std::wstring ToUnicode(const std::string& text, UINT codepage = CP_ACP) = 0;
+    virtual std::wstring ToUnicode(const std::string& text, int codepage = 0) = 0;
 };
 
 //! 得到文本转换操作对象

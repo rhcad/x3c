@@ -74,7 +74,7 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 }
 
 #if defined(_USRDLL) && defined(_MSC_VER)
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, void* lpReserved)
 {
     lpReserved;
     if (DLL_PROCESS_ATTACH == dwReason)

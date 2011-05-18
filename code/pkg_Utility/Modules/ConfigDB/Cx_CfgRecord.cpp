@@ -504,7 +504,7 @@ bool Cx_CfgRecord::SetIntArray(const wchar_t* pszEntry, const long* pItems, long
     return false;
 }
 
-long Cx_CfgRecord::GetBinary(const wchar_t* pszEntry, LPVOID pBuf, long nSize)
+long Cx_CfgRecord::GetBinary(const wchar_t* pszEntry, void* pBuf, long nSize)
 {
     pszEntry;pBuf;nSize;
     ASSERT_MESSAGE(0, "TODO: GetBinary ªπŒ¥ µœ÷");
