@@ -10,6 +10,7 @@
 #include <ConvStr.h>
 #include <SysErrStr.h>
 #include <ctrim.h>
+#include <AutoNew.h>
 
 #ifndef GENERIC_READ
 #define GENERIC_READ        0x80000000L
@@ -149,7 +150,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
     else
     {
         DWORD dwLength = ::GetFileSize(hFile, NULL);
-        HANDLE hBuffer = NULL;
+        KAutoNewArr<BYTE> buf;
 
         if ((long)dwLength > 0)
         {
@@ -159,28 +160,23 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
                     (dwLength / (1024.0*1024.0)) << L"MB, " << filename);
                 dwLength = nLenLimitMB * 1024L * 1024L;
             }
-            hBuffer = GlobalAlloc(0x0042, dwLength + 8);    // GHND
+            buf.Realloc(dwLength + 8);
+            memset(buf.ptr, 0, buf.count);
         }
 
-        if (hBuffer != NULL)
+        if (buf)
         {
-            BYTE* pBuffer = (BYTE*)GlobalLock(hBuffer);
-            if (pBuffer != NULL)
+            DWORD dwBytesRead = 0;
+            ::ReadFile(hFile, buf.ptr, dwLength, &dwBytesRead, NULL);
+            if (dwBytesRead > 0)
             {
-                DWORD dwBytesRead = 0;
-                ::ReadFile(hFile, pBuffer, dwLength, &dwBytesRead, NULL);
-                if (dwBytesRead > 0)
+                memcpy(head, buf.ptr, 5 < dwBytesRead ? 5 : dwBytesRead);
+                bRet = GetFileContent(content, buf.ptr, dwBytesRead, codepage);
+                if (!bRet)
                 {
-                    CopyMemory(head, pBuffer, sizeof(BYTE) * (5 < dwBytesRead ? 5 : dwBytesRead));
-                    bRet = GetFileContent(content, pBuffer, dwBytesRead, codepage);
-                    if (!bRet)
-                    {
-                        LOG_WARNING2(LOGHEAD L"IDS_NOT_ANSIFILE", filename);
-                    }
+                    LOG_WARNING2(LOGHEAD L"IDS_NOT_ANSIFILE", filename);
                 }
-                GlobalUnlock(hBuffer);
             }
-            GlobalFree(hBuffer);
         }
 
         CloseFile(hFile);
@@ -476,6 +472,7 @@ bool Cx_TextUtil::ReplaceChar(std::wstring& text,
 bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
 {
     bool changed = false;
+#ifdef _MSC_VER
     std::wstring dest(L'\0', text.size() + 1);
 
     if (!text.empty() && punct)
@@ -528,6 +525,7 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
             changed = true;
         }
     }
+#endif
 
     return changed;
 }

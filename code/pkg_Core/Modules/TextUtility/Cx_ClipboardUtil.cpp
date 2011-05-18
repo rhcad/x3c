@@ -3,6 +3,7 @@
 
 #include "StdAfx.h"
 #include "Cx_ClipboardUtil.h"
+#ifdef _MSC_VER
 #include <ConvStr.h>
 #include <SysErrStr.h>
 
@@ -116,3 +117,5 @@ bool Cx_ClipboardUtil::CanPasteText()
     return ::IsClipboardFormatAvailable(CF_UNICODETEXT)
         || ::IsClipboardFormatAvailable(CF_TEXT);
 }
+
+#endif // _MSC_VER

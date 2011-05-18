@@ -39,28 +39,22 @@ void TestPluginManager::testLoadUnloadPlugin()
 
 void TestPluginManager::testLoadUnloadPlugins()
 {
-    long lPluginsNum = GetPluginsNum(L"../Plugins");
-
     Ix_PluginLoader* pLoader = GetManagerLoader();
     VERIFY(pLoader);
-    VERIFY(pLoader->LoadPlugins(L"../Plugins") == lPluginsNum);
-
-    VERIFY(pLoader->UnloadPlugins() == lPluginsNum);
+    VERIFY(pLoader->LoadPlugins(L"../Plugins") > 0);
+    VERIFY(pLoader->UnloadPlugins() > 0);
 }
 
 void TestPluginManager::testLoadPluginFiles()
 {
-
 }
 
 void TestPluginManager::testInitializePlugins()
 {
-
 }
 
 void TestPluginManager::testRegisterPlugin()
 {
-
 }
 
 void TestPluginManager::testCreateObject()
@@ -137,57 +131,4 @@ Ix_ObjectFactory* TestPluginManager::GetManagerObjectFactory(void)
 
     Ix_ObjectFactory* pFactory = (*pfn)();
     return pFactory;
-}
-
-
-long TestPluginManager::GetPluginsNum(const wchar_t* path,
-        const wchar_t* ext, bool recursive)
-{
-    WIN32_FIND_DATAW fd;
-    wchar_t szFileName[MAX_PATH];
-    std::vector<std::wstring> arrSubPath;
-    long nCount = 0;
-    long nExtLen = wcslen(ext);
-
-    wcsncpy_s(szFileName, MAX_PATH, path, MAX_PATH);
-    PathAppendW(szFileName, L"*.*");
-
-    HANDLE hFind = ::FindFirstFileW(szFileName, &fd);
-    BOOL bContinue = (hFind != INVALID_HANDLE_VALUE);
-
-    while (bContinue)
-    {
-        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-        {
-            if (fd.cFileName[0] != L'.' && recursive)
-            {
-                wcsncpy_s(szFileName, MAX_PATH, path, MAX_PATH);
-                PathAppendW(szFileName, fd.cFileName);
-                arrSubPath.push_back(szFileName);
-            }
-        }
-        else
-        {
-            long len = wcslen(fd.cFileName) - nExtLen;
-            if (_wcsicmp(&fd.cFileName[len > 0 ? len : 0], ext) == 0)
-            {
-                wcsncpy_s(szFileName, MAX_PATH, path, MAX_PATH);
-                PathAppendW(szFileName, fd.cFileName);
-                if (wcslen(szFileName) > 0)
-                {
-                    nCount++;
-                }
-            }
-        }
-        bContinue = ::FindNextFileW(hFind, &fd);
-    }
-    ::FindClose(hFind);
-
-    std::vector<std::wstring>::iterator it = arrSubPath.begin();
-    for (; it != arrSubPath.end(); ++it)
-    {
-        nCount += GetPluginsNum(it->c_str(), ext, recursive);
-    }
-
-    return nCount;
 }

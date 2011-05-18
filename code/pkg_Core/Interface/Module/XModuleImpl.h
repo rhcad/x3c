@@ -3,7 +3,7 @@
  *  \note Include this file in one and only one CPP file of your plugin project.\n
  *        If you don't want to use XModuleMacro.h and this file, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.05.18
  */
 #ifndef X3_PLUGINIMPL_MODULEIMPL_H_
 #define X3_PLUGINIMPL_MODULEIMPL_H_
@@ -12,6 +12,10 @@
 #include "XModuleItem.h"
 #include "Cx_Module.h"
 #include "Ix_ObjectFactory.h"
+
+#ifndef _MSC_VER
+#include "../Portability/portimpl.h"
+#endif
 
 #define OUTAPI  extern "C" __declspec(dllexport)
 

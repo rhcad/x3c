@@ -48,8 +48,8 @@ int main(int argc, char** argv)
         char filename[MAX_PATH];
 
         GetModuleFileNameA(NULL, filename, MAX_PATH);
-        lstrcpyA(filename, PathFindFileNameA(filename));
-        lstrcpyA(strrchr(filename, '.'), ".cppunit-result.xml");
+        strcpy_s(filename, MAX_PATH, PathFindFileNameA(filename));
+        strcpy_s(strrchr(filename, '.'), MAX_PATH, ".cppunit-result.xml");
 
         // Specify XML output and inform the test runner of this format
         std::ofstream outputFile(filename);

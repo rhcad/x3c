@@ -56,16 +56,15 @@ CLogObserver::~CLogObserver()
 
 bool CLogObserver::CopyLogFilesToServer()
 {
+	bool ret = false;
+#ifdef _MSC_VER
     Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
     wchar_t path[MAX_PATH] = { 0 };
     wchar_t hostname[33] = { 0 };
     unsigned long namesize = 33;
-    bool ret = false;
 
     if (pIFUtility && GetServerPath(path)
-#ifdef GetComputerName
         && GetComputerNameW(hostname, &namesize)
-#endif
         )
     {
         PathAppendW(path, hostname);
@@ -76,12 +75,13 @@ bool CLogObserver::CopyLogFilesToServer()
         ret = pIFUtility->CopyPathFile(m_path.c_str(), path);
         pIFUtility->SetMsgBoxOwnerWnd(oldwnd);
     }
-
+#endif
     return ret;
 }
 
 bool CLogObserver::GetServerPath(wchar_t* path)
 {
+#ifdef _MSC_VER
     wchar_t inifile[MAX_PATH];
 
     wcsncpy_s(inifile, MAX_PATH, m_path.c_str(), MAX_PATH);
@@ -89,12 +89,15 @@ bool CLogObserver::GetServerPath(wchar_t* path)
 
     if (0 == m_copyflags)
     {
-        m_copyflags = GetPrivateProfileIntW(L"Server", L"CopyFlags", 
+        m_copyflags = GetPrivateProfileIntW(L"Server", L"CopyFlags",
             -1, inifile) | 0x10000000;
     }
 
-    return GetPrivateProfileStringW(L"Server", L"Path", L"", 
+    return GetPrivateProfileStringW(L"Server", L"Path", L"",
         path, MAX_PATH, inifile) > 1;
+#else
+    return false;
+#endif
 }
 
 Logger CLogObserver::GetLogger()
@@ -121,7 +124,7 @@ void CLogObserver::InitLogFile()
         wchar_t propfile[MAX_PATH] = {0};
         wcsncpy_s(propfile, MAX_PATH, m_path.c_str(), MAX_PATH);
         PathAppendW(propfile, m_appname.c_str());
-        StrCatW(propfile, L".properties");
+        wcscat_s(propfile, _countof(propfile), L".properties");
 
         if (pIFUtility && !pIFUtility->IsPathFileExists(propfile))
         {
@@ -135,16 +138,16 @@ void CLogObserver::InitLogFile()
 void CLogObserver::MakerInitVars()
 {
     wchar_t path[MAX_PATH] = {0};
-    
+
     if (m_path.empty())
     {
         m_path = GetAppWorkPath() + L"log";
     }
-    
+
     wcsncpy_s(path, MAX_PATH, m_path.c_str(), MAX_PATH);
     PathAddBackslashW(path);
     m_path = path;
-    
+
     if (m_appname.empty())
     {
         GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
@@ -171,10 +174,10 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     InterfaceSafeCall(pIFTextUtil, SaveTextFile(buf.str(), filename, false));
 }
 
-void CLogObserver::OnPushGroup(long level, 
-                               const std::wstring& msg, 
-                               const std::wstring& extra, 
-                               const std::wstring& module, 
+void CLogObserver::OnPushGroup(long level,
+                               const std::wstring& msg,
+                               const std::wstring& extra,
+                               const std::wstring& module,
                                const std::wstring& idname)
 {
     std::wostringstream buf(L"");
@@ -232,12 +235,12 @@ void CLogObserver::OnPopGroup(long level)
     }
 }
 
-void CLogObserver::OnWriteLog(int type, 
-                              const std::wstring& msg, 
-                              const std::wstring& extra, 
-                              const std::wstring& module, 
-                              const std::wstring& idname, 
-                              const std::wstring& file, 
+void CLogObserver::OnWriteLog(int type,
+                              const std::wstring& msg,
+                              const std::wstring& extra,
+                              const std::wstring& module,
+                              const std::wstring& idname,
+                              const std::wstring& file,
                               long line)
 {
     std::wostringstream buf;

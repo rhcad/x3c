@@ -345,7 +345,7 @@ bool Cx_ConfigXml::EndTransaction()
         && !m_pImpl->m_strFileName.empty())
     {
         m_pImpl->m_bModified = false;
-        SetFileAttributesW(m_pImpl->m_strFileName.c_str(), FILE_ATTRIBUTE_NORMAL);
+        SetFileAttributesW(m_pImpl->m_strFileName.c_str(), 0x00000080);  // FILE_ATTRIBUTE_NORMAL
 
         CXmlFileCrypt crypt(m_pImpl->m_pCryptHandler);
         bRet = CXmlUtil::SaveXMLFile(m_pImpl->m_xmlDoc,
@@ -383,7 +383,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
         return false;
     }
 
-    SetFileAttributesW(strFileName.c_str(), FILE_ATTRIBUTE_NORMAL);
+    SetFileAttributesW(strFileName.c_str(), 0x00000080);  // FILE_ATTRIBUTE_NORMAL
     CXmlFileCrypt crypt(m_pImpl->m_pCryptHandler);
     bRet = CXmlUtil::SaveXMLFile(m_pImpl->m_xmlDoc,
         strFileName.c_str(), &crypt);

@@ -13,8 +13,12 @@
  *    define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll.
  *
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.05.18
  */
+
+#ifndef _MSC_VER
+#include "../Portability/portimpl.h"
+#endif
 
 #ifndef USE_ONE_PLUGIN
 

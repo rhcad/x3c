@@ -18,7 +18,9 @@ BaseTest::BaseTest()
 long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 {
     // Initialize COM
+#ifdef _MSC_VER
     VERIFY(SUCCEEDED(CoInitialize(NULL)));
+#endif
 
     // Load plugins
     VERIFY(s_loader.LoadPluginManager(L"../Plugins"));
@@ -45,7 +47,9 @@ long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 void BaseTest::UnloadPlugins()
 {
     s_loader.Unload();      // Unload plugins
+#ifdef _MSC_VER
     CoUninitialize();       // Free COM resource
+#endif
 }
 
 Ix_PluginLoader* BaseTest::GetPluginLoader()
@@ -70,12 +74,14 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         PathRemoveFileSpecW(path);      // bin
         PathAppendW(path, name);        // bin\name
 
-        GetPrivateProfileStringW(L"Path", name, path, 
+#ifdef _MSC_VER
+        GetPrivateProfileStringW(L"Path", name, path,
             path, MAX_PATH, filename);
+        WritePrivateProfileStringW(L"Path", name, path, filename);
+#endif
         PathAddBackslashW(path);
 
-        SetFileAttributesW(filename, FILE_ATTRIBUTE_NORMAL);
-        WritePrivateProfileStringW(L"Path", name, path, filename);
+        SetFileAttributesW(filename, 0x00000080);  // FILE_ATTRIBUTE_NORMAL
     }
 }
 

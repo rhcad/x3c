@@ -7,6 +7,7 @@
 #include <Xml/Ix_ConfigTransaction.h>
 #include <Xml/ConfigIOSection.h>
 #include <Database/Ix_ConfigDBFactory.h>
+#include <Utility/Ix_FileUtility.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -24,14 +25,14 @@ TestConfigDB::TestConfigDB()
 
 void TestConfigDB::setUp()
 {
-    VERIFY(LoadPlugins(L"LogManager.plugin.dll, ConfigDB.plugin.dll", false) > 0);
+    VERIFY(LoadPlugins(L"LogManager.plugin.dll, ConfigDB.plugin.dll, FileUtility.plugin.dll", false) > 0);
 }
 
 void TestConfigDB::tearDown()
 {
     UnloadPlugins();
 
-    VERIFY(SetFileAttributesW(m_dbfile.c_str(), FILE_ATTRIBUTE_NORMAL));
+    VERIFY(SetFileAttributesW(m_dbfile.c_str(), 0x00000080));  // FILE_ATTRIBUTE_NORMAL
     VERIFY(DeleteFileW(m_dbfile.c_str()));
 }
 
@@ -42,8 +43,12 @@ Cx_Ptr TestConfigDB::GetDatabase(const wchar_t* filename)
 
     std::wstring srcfile(MakeDataPath(L"Access", filename));
     m_dbfile = MakeDataPath(NULL, filename);
-    CopyFileExW(srcfile.c_str(), m_dbfile.c_str(), 
-        NULL, NULL, NULL, COPY_FILE_FAIL_IF_EXISTS);
+
+    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    if (pIFUtility && !pIFUtility->IsPathFileExists(m_dbfile.c_str()))
+    {
+        pIFUtility->CopyPathFile(srcfile.c_str(), m_dbfile.c_str());
+    }
 
     Cx_Ptr obj(pIFFactory->OpenAccessDB(m_dbfile));
     CPPUNIT_ASSERT_MESSAGE("Can not open database file.", obj.IsNotNull());

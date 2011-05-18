@@ -8,6 +8,10 @@
 #include <Ix_AppWorkPath.h>
 #include <RelToAbs.h>
 
+#ifndef _MSC_VER
+#include "../Portability/portimpl.h"
+#endif
+
 class Cx_PluginLoaderOut
     : public Cx_PluginLoader
     , public Ix_Object

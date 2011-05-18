@@ -70,7 +70,10 @@ struct KAutoNewArr
 
     bool Realloc(size_t _count)
     {
-        ptr = new T[_count];
+        T* newp = new T[_count];
+        memcpy(newp, ptr, sizeof(T) * (count < _count ? count : _count));
+        delete[] ptr;
+        ptr = newp;
         count = _count;
         return true;
     }
