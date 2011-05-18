@@ -1,3 +1,6 @@
+//! \file X3Portability.h
+//! \brief Implement portability for linux and windows.
+
 #ifndef X3C_PORTABILITY_H
 #define X3C_PORTABILITY_H
 

@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * Implement portability for linux.
     * tags/x3c-1.0.8-beforelinux: Ready to implement portability.
+    * Move VC++ project files to 'projects\msvc'.
 
 2011-05-12
 

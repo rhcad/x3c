@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="ChangeManager.cbp" />
+		<Project filename="ChangeObserverExample.cbp" />
+		<Project filename="FileUtility.cbp" />
+		<Project filename="LogManager.cbp" />
+		<Project filename="LogWriter.cbp" />
+		<Project filename="PluginManager.cbp" />
+		<Project filename="SimpleApp.cbp" />
+		<Project filename="SimpleUse.cbp" />
+		<Project filename="StringTable.cbp" />
+		<Project filename="TextUtility.cbp" />
+		<Project filename="Win32DllTempl.cbp" />
+		<Project filename="TestCore.cbp" active="1" />
+	</Workspace>
+</CodeBlocks_workspace_file>
