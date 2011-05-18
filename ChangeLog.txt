@@ -1,10 +1,11 @@
 X3 C++ PluginFramework
 
-2011-05-17
+2011-05-18
 
-    * Implement portability for linux.
+    * Implement portability for Linux.
     * tags/x3c-1.0.8-beforelinux: Ready to implement portability.
     * Move VC++ project files to 'projects\msvc'.
+    * Change CodeBlocks projects to Linux. Add portimpl.h and linuximpl.h
 
 2011-05-12
 
