@@ -15,8 +15,6 @@
 
 #ifdef _CONSOLE                 // Console application
 
-#include <tchar.h>
-
 #ifdef _MSC_VER
 #pragma warning(disable:4710)   // function not inlined
 #pragma warning(disable:4786)   // identifier was truncated

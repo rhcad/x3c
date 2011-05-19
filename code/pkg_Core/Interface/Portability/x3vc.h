@@ -22,6 +22,9 @@
 #include <shlwapi.h>        // Windows light-weight utility APIs
 #pragma comment(lib, "shlwapi.lib")
 
+#define STDCALL     __stdcall
+#define DECLEXPORT  __declspec(dllexport)
+
 #if _MSC_VER <= 1200        // VC6
 #ifndef interface
 #include <objbase.h>

@@ -5,11 +5,20 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <wchar.h>
 
 #undef _WIN32
 
 #ifndef interface
 #define interface struct
+#endif
+
+#define EXTERN_C
+#define STDCALL
+#define DECLEXPORT
+
+#ifndef MAX_PATH
+#define MAX_PATH 256
 #endif
 
 typedef void* HMODULE;
@@ -75,5 +84,10 @@ int WideCharToMultiByte(int codepage, DWORD flags,
 int MultiByteToWideChar(int codepage, DWORD flags,
                         const char* astr, int achars,
                         wchar_t* wstr, int wchars);
+
+inline int _stricmp(const char* s1, const char* s2)
+    { return strncasecmp(s1, s2, strlen(s1)); }
+inline int _wcsicmp(const wchar_t* s1, const wchar_t* s2)
+    { return wcsncasecmp(s1, s2, wcslen(s1)); }
 
 #endif // X3GCC_PORTABILITY_H

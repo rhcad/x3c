@@ -26,8 +26,9 @@
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
-struct KAutoNew
+class KAutoNew
 {
+public:
     T*  ptr;
 
     KAutoNew() : ptr(NULL) {}
@@ -42,6 +43,10 @@ struct KAutoNew
     bool operator!() const { return ptr == NULL; }
 
     T* operator->() const { return ptr; }
+
+private:
+    KAutoNew(const KAutoNew&);
+    void operator=(const KAutoNew&);
 };
 
 //! 自动释放数组的辅助类，对采用 new[] 申请内存的代码进行改善
@@ -49,8 +54,9 @@ struct KAutoNew
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
-struct KAutoNewArr
+class KAutoNewArr
 {
+public:
     T*      ptr;
     size_t  count;
 
@@ -113,6 +119,9 @@ struct KAutoNewArr
 
     operator bool() const { return ptr != NULL; }
     bool operator!() const { return ptr == NULL; }
+
+private:
+    KAutoNewArr(const KAutoNewArr&);
 };
 
 //! 自动释放数组的辅助类，采用 malloc 申请数组
@@ -123,8 +132,9 @@ struct KAutoNewArr
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
-struct KAutoMalloc
+class KAutoMalloc
 {
+public:
     T*      ptr;
     size_t  count;
 
@@ -192,6 +202,9 @@ struct KAutoMalloc
 
     operator bool() const { return ptr != NULL; }
     bool operator!() const { return ptr == NULL; }
+
+private:
+    KAutoMalloc(const KAutoMalloc&);
 };
 
 //! 自动释放二维数组的辅助类
@@ -202,8 +215,9 @@ struct KAutoMalloc
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T, typename T2 = KAutoMalloc<T> >
-struct KAutoNewArr2d : KAutoNewArr<T2>
+class KAutoNewArr2d : KAutoNewArr<T2>
 {
+public:
     KAutoNewArr2d(size_t count1, size_t count2)
         : KAutoNewArr<T2>(count1)
     {
@@ -212,6 +226,11 @@ struct KAutoNewArr2d : KAutoNewArr<T2>
             KAutoNewArr<T2>::at(i).Realloc(count2);
         }
     }
+
+private:
+    KAutoNewArr2d();
+    KAutoNewArr2d(const KAutoNewArr2d&);
+    void operator=(const KAutoNewArr2d&);
 };
 
 #endif // __AUTOFREE_NEW_H

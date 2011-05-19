@@ -48,6 +48,9 @@ public:
 
 private:
     ChangeNotifyData();
+    ChangeNotifyData(const ChangeNotifyData&);
+    void operator=(const ChangeNotifyData&);
+
     const char*     m_type;
 };
 
@@ -120,6 +123,9 @@ private:
 
 private:
     ChangeObserver();
+    ChangeObserver(const ChangeObserver&);
+    void operator=(const ChangeObserver&);
+
     const char*     m_type;
     long            m_times;
 };

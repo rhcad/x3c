@@ -38,7 +38,7 @@ public:
 
     Cx_Interface(const Cx_Ptr& src);
 
-#if defined(_MSC_VER) && _MSC_VER > 1200 // not VC60
+#if defined(_MSC_VER) && _MSC_VER > 1200 || defined(__GNUC__) // not VC60
 
     Cx_Interface(const thisClass& src)
         : m_pInterface(src.m_pInterface), m_pObj(src.m_pObj)
@@ -60,7 +60,7 @@ public:
     }
 
 #endif // _MSC_VER
-    
+
     template <class IF_Type2>
     explicit Cx_Interface(IF_Type2* pInterface) : m_pInterface(NULL), m_pObj(NULL)
     {
@@ -91,7 +91,7 @@ public:
             }
         }
     }
-    
+
     explicit Cx_Interface(const XCLSID& clsid) : m_pInterface(NULL), m_pObj(NULL)
     {
         if (0 == xCreateObject(clsid, &m_pObj))
@@ -104,18 +104,18 @@ public:
             }
         }
     }
-    
+
     ~Cx_Interface()
     {
         Unload();
     }
-    
-    
+
+
     inline IF_Type* P() const
     {
         return m_pInterface;
     }
-    
+
     inline IF_Type* operator->() const
     {
         return m_pInterface;
@@ -176,22 +176,22 @@ public:
         //ASSERT(0 == nul);
         return m_pInterface != NULL;
     }
-    
+
     bool operator==(const IF_Type* pInterface) const
     {
         return m_pInterface == pInterface;
     }
-    
+
     bool operator!=(const IF_Type* pInterface) const
     {
         return m_pInterface != pInterface;
     }
-    
+
     bool operator==(const thisClass& src) const
     {
         return m_pInterface == src.m_pInterface;
     }
-    
+
     bool operator!=(const thisClass& src) const
     {
         return m_pInterface != src.m_pInterface;
@@ -206,23 +206,23 @@ public:
     {
         return NULL == m_pInterface;
     }
-    
+
     inline bool IsNull() const
     {
         return NULL == m_pInterface;
     }
-    
+
     inline bool IsNotNull() const
     {
         return m_pInterface != NULL;
     }
-    
-    
+
+
     void Release()
     {
         Unload();
     }
-    
+
     IF_Type* DetachInterface()
     {
         IF_Type* pIF = m_pInterface;
@@ -230,7 +230,7 @@ public:
         m_pObj = NULL;
         return pIF;
     }
-    
+
     bool AttachInterface(IF_Type* pIF)
     {
         Unload();
@@ -238,7 +238,7 @@ public:
         m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
         return (m_pObj != NULL || NULL == m_pInterface);
     }
-    
+
     bool AttachInterface(Ix_Object* pIF)
     {
         Unload();
@@ -261,11 +261,11 @@ public:
 
         return true;
     }
-    
+
     bool Create(const XCLSID& clsid)
     {
         Unload();
-        
+
         if (0 == xCreateObject(clsid, &m_pObj))
         {
             m_pInterface = dynamic_cast<IF_Type*>(m_pObj);
@@ -275,10 +275,10 @@ public:
                 m_pObj = NULL;
             }
         }
-        
+
         return m_pInterface != NULL;
     }
-    
+
 private:
     void Unload()
     {
@@ -289,7 +289,7 @@ private:
             m_pInterface = NULL;
         }
     }
-    
+
     void Load(IF_Type* pIF)
     {
         Ix_Object* pObj = dynamic_cast<Ix_Object*>(pIF);
@@ -307,7 +307,7 @@ private:
             m_pInterface = pIF;
         }
     }
-    
+
 private:
     IF_Type*    m_pInterface;
     Ix_Object*  m_pObj;
@@ -332,7 +332,7 @@ public:
             m_pInterface->AddRef(xGetModuleHandle());
         }
     }
-    
+
     template <class IF_Type>
     explicit Cx_Ptr(IF_Type* pInterface) : m_pInterface(NULL)
     {
@@ -352,23 +352,23 @@ public:
             m_pInterface->AddRef(xGetModuleHandle());
         }
     }
-    
+
     explicit Cx_Ptr(const XCLSID& clsid) : m_pInterface(NULL)
     {
         xCreateObject(clsid, &m_pInterface);
     }
-    
+
     ~Cx_Ptr()
     {
         Unload();
     }
-    
-    
+
+
     Ix_Object* P() const
     {
         return m_pInterface;
     }
-    
+
     template <class IF_Type>
     Cx_Ptr& operator=(IF_Type* pInterface)
     {
@@ -388,7 +388,7 @@ public:
     {
         return operator=(pIF.P());
     }
-    
+
     Cx_Ptr& operator=(const Cx_Ptr& src)
     {
         if (this != &src)
@@ -417,22 +417,22 @@ public:
         //ASSERT(0 == nul);
         return m_pInterface != NULL;
     }
-    
+
     bool operator==(const Ix_Object* pInterface) const
     {
         return m_pInterface == pInterface;
     }
-    
+
     bool operator!=(const Ix_Object* pInterface) const
     {
         return m_pInterface != pInterface;
     }
-    
+
     bool operator==(const Cx_Ptr& src) const
     {
         return m_pInterface == src.m_pInterface;
     }
-    
+
     bool operator!=(const Cx_Ptr& src) const
     {
         return m_pInterface != src.m_pInterface;
@@ -447,42 +447,42 @@ public:
     {
         return NULL == m_pInterface;
     }
-    
+
     inline bool IsNull() const
     {
         return NULL == m_pInterface;
     }
-    
+
     inline bool IsNotNull() const
     {
         return m_pInterface != NULL;
     }
-    
-    
+
+
     void Release()
     {
         Unload();
     }
-    
+
     Ix_Object* DetachInterface()
     {
         Ix_Object* pIF = m_pInterface;
         m_pInterface = NULL;
         return pIF;
     }
-    
+
     void AttachInterface(Ix_Object* pIF)
     {
         Unload();
         m_pInterface = pIF;
     }
-    
+
     bool Create(const XCLSID& clsid)
     {
         Unload();
         return 0 == xCreateObject(clsid, &m_pInterface);
     }
-    
+
 private:
     void Unload()
     {
@@ -492,7 +492,7 @@ private:
             m_pInterface = NULL;
         }
     }
-    
+
     void Load(Ix_Object* pIF)
     {
         if (m_pInterface != pIF)
@@ -508,7 +508,7 @@ private:
             m_pInterface = pIF;
         }
     }
-    
+
 private:
     Ix_Object*  m_pInterface;
 };

@@ -6,6 +6,11 @@
 
 #if !defined(_MSC_VER) || _MSC_VER < 1400 // not VC8
 
+#ifdef __GNUC__
+#include <wchar.h>
+#include <wctype.h>
+#endif
+
 #ifndef max
 #define max(a,b) ((a)>(b)?(a):(b))
 #endif
@@ -22,17 +27,26 @@ inline int sprintf_s(char *buffer, size_t, const char *format, ...)
     return vsprintf(buffer, format, arglist);
 }
 
-inline int swprintf_s(wchar_t *buffer, size_t, const wchar_t *format, ...)
+inline int swprintf_s(wchar_t *buffer, size_t size, const wchar_t *format, ...)
 {
     va_list arglist;
     va_start(arglist, format);
-    return vswprintf(buffer, format, arglist);
+#ifdef __GNUC__
+    return vswprintf(buffer, size, format, arglist);
+#else
+    size; return vswprintf(buffer, format, arglist);
+#endif
 }
 
 inline int vsprintf_s(char *buffer, size_t, const char *format, va_list arglist)
     { return vsprintf(buffer, format, arglist); }
-inline int vswprintf_s(wchar_t *buffer, size_t, const wchar_t *format, va_list arglist)
-    { return vswprintf(buffer, format, arglist); }
+
+inline int vswprintf_s(wchar_t *buffer, size_t size, const wchar_t *format, va_list arglist)
+#ifdef __GNUC__
+    { return vswprintf(buffer, size, format, arglist); }
+#else
+    { size; return vswprintf(buffer, format, arglist); }
+#endif
 
 #endif // _INC_STDIO
 
@@ -52,9 +66,9 @@ inline int wcscat_s(wchar_t *str, size_t, const wchar_t *src)
     { return wcscat(str, src) != NULL; }
 
 inline wchar_t * _wcslwr_s(wchar_t *str)
-    { return _wcslwr(str); }
+    { for (wchar_t* p = str; *p; p++) towlower(*p); return str; }
 inline wchar_t * _wcsupr_s(wchar_t *str)
-    { return _wcsupr(str); }
+    { for (wchar_t* p = str; *p; p++) towupper(*p); return str; }
 
 #if defined(_INC_STDLIB) || defined(_STDLIB_H_)
 
