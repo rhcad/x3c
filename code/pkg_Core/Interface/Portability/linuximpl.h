@@ -1,3 +1,5 @@
+// Included by portimpl.h to implement functions on Linux.
+
 #ifndef X3LINUX_PORTABILITY_IMPL_H
 #define X3LINUX_PORTABILITY_IMPL_H
 #ifdef __linux__
@@ -12,7 +14,7 @@ HMODULE LoadLibraryW(const wchar_t* filename)
     return NULL;
 }
 
-HMODULE LoadLibraryExW(const wchar_t* filename, void*, DWORD)
+HMODULE LoadLibraryExW(const wchar_t* filename)
 {
     return LoadLibraryW(filename);
 }
@@ -36,11 +38,14 @@ void GetModuleFileNameA(HMODULE hdll, char* filename, int size)
 }
 
 
-HANDLE CreateFileW(const wchar_t* filename, DWORD access, 
-                          DWORD shareMode, void*, DWORD disposition, 
-                          DWORD attributes, void*)
+bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename)
 {
-    return NULL;
+    return false;
+}
+
+bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename)
+{
+    return false;
 }
 
 bool CloseFile(HANDLE file)
@@ -78,63 +83,18 @@ DWORD GetFileSize(HANDLE file, DWORD* high)
     return 0;
 }
 
-
-char* PathFindFileNameA(const char* path)
-{
-    return NULL;
-}
-
-wchar_t* PathFindFileNameW(const wchar_t* path)
-{
-    return NULL;
-}
-
-bool PathIsRelativeW(const wchar_t* path)
-{
-    return false;
-}
-
-void PathStripPathW(wchar_t* path)
-{
-}
-
-void PathRemoveFileSpecW(wchar_t* path)
-{
-}
-
-void PathRemoveExtensionW(wchar_t* path)
-{
-}
-
-void PathRemoveBackslashW(wchar_t* path)
-{
-}
-
-void PathAppendW(wchar_t* path, const wchar_t* more)
-{
-}
-
-wchar_t* PathAddBackslashW(wchar_t* path)
-{
-    return NULL;
-}
-
-void PathRenameExtensionW(wchar_t* path, const wchar_t* more)
-{
-}
-
 void GetTempPathW(DWORD len, wchar_t* buf)
 {
 }
 
-DWORD GetFileAttributesW(const wchar_t* filename)
+bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder)
 {
-    return 0;
+    return false;
 }
 
-bool SetFileAttributesW(const wchar_t* filename, DWORD attr)
+bool SetFileAttributesNormal(const wchar_t* filename)
 {
-    return 0;
+    return false;
 }
 
 DWORD GetLastError()

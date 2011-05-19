@@ -32,7 +32,7 @@ void TestConfigDB::tearDown()
 {
     UnloadPlugins();
 
-    VERIFY(SetFileAttributesW(m_dbfile.c_str(), 0x00000080));  // FILE_ATTRIBUTE_NORMAL
+    VERIFY(SetFileAttributesNormal(m_dbfile.c_str()));
     VERIFY(DeleteFileW(m_dbfile.c_str()));
 }
 

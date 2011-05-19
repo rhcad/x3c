@@ -289,6 +289,30 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Portability"
+			>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\linuximpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portgcc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portimpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\X3Portability.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3vc.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

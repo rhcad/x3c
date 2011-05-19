@@ -81,7 +81,7 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
 #endif
         PathAddBackslashW(path);
 
-        SetFileAttributesW(filename, 0x00000080);  // FILE_ATTRIBUTE_NORMAL
+        SetFileAttributesNormal(filename);
     }
 }
 

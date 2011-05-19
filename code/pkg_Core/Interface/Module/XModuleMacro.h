@@ -40,7 +40,7 @@
     _XCLASSMETA_ENTRY(1, "Cx_Object<" #cls ">", clsid, "",  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_Object<cls>::CreateObject), \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<cls>::GetObjectCount),  \
-        reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<cls>::GetRefCountByOthers)), 
+        reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<cls>::GetRefCountByOthers)),
 
 //! Register a single instance class.
 /*!
@@ -53,7 +53,7 @@
         "Cx_SingletonObject<" #cls ">", clsid, "",  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_SingletonObject<cls>::CreateObject),    \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_SingletonObject<cls>::GetObjectCount), \
-        reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)), 
+        reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)),
 
 //! Register a single instance class that support the specific interface.
 /*!
@@ -66,7 +66,7 @@
         "Cx_SingletonObject<" #cls ">", XCLSID(), iid,  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_SingletonObject<cls>::CreateObject),    \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_SingletonObject<cls>::GetObjectCount), \
-        reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)), 
+        reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)),
 
 //! End group of class factory registry.
 /*!
@@ -77,7 +77,9 @@
         _XCLASSMETA_ENTRY() \
     };
 
+#ifdef _MSC_VER
 #pragma warning(disable:4710)   // inline function not expanded
+#endif
 
 //! End group of class factory registry and implement entry function of Win32DLL(USRDLL).
 /*! Using this macro need include this file and XModuleImpl.h file.

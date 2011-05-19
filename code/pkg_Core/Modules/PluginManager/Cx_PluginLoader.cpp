@@ -311,7 +311,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
         return false;
     }
 
-    HMODULE hdll = LoadLibraryExW(filename, NULL, 8); // LOAD_WITH_ALTERED_SEARCH_PATH
+    HMODULE hdll = LoadLibraryExW(filename);
 
     if (hdll)
     {

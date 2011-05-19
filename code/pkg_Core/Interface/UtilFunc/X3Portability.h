@@ -1,5 +1,5 @@
 //! \file X3Portability.h
-//! \brief Implement portability for linux and windows.
+//! \brief Included by stdafx.h to declare portability functions.
 
 #ifndef X3C_PORTABILITY_H
 #define X3C_PORTABILITY_H

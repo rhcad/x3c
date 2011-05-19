@@ -12,16 +12,6 @@
 #include <ctrim.h>
 #include <AutoNew.h>
 
-#ifndef GENERIC_READ
-#define GENERIC_READ        0x80000000L
-#define GENERIC_WRITE       0x40000000L
-#define FILE_SHARE_READ     0x00000001
-#define FILE_SHARE_WRITE    0x00000002
-#define CREATE_ALWAYS       2
-#define OPEN_EXISTING       3
-#define INVALID_HANDLE_VALUE ((HANDLE)-1)
-#endif
-
 // First bytes      Encoding assumed:
 // EF BB BF         UTF-8
 // FE FF            UTF-16 (big-endian)
@@ -32,10 +22,9 @@
 DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
 {
     DWORD dwBytesRead = 0;
-    HANDLE hFile = ::CreateFileW(filename.c_str(),
-        GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    HANDLE hFile = NULL;
 
-    if (hFile != INVALID_HANDLE_VALUE)
+    if (OpenFileForRead(hFile, filename.c_str()))
     {
         ::ReadFile(hFile, head, 5, &dwBytesRead, NULL);
         CloseFile(hFile);
@@ -138,10 +127,9 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
     content.resize(0);
 
     bool bRet = false;
-    HANDLE hFile = ::CreateFileW(filename.c_str(),
-        GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    HANDLE hFile = NULL;
 
-    if (INVALID_HANDLE_VALUE == hFile)
+    if (!OpenFileForRead(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL",
@@ -198,12 +186,11 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
                                bool utf16, int codepage)
 {
     bool bRet = false;
+    HANDLE hFile = NULL;
 
-    ::SetFileAttributesW(filename.c_str(), 0x00000080);   // FILE_ATTRIBUTE_NORMAL
-    HANDLE hFile = ::CreateFileW(filename.c_str(),
-        GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
+    ::SetFileAttributesNormal(filename.c_str());
 
-    if (INVALID_HANDLE_VALUE == hFile)
+    if (!OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL",
@@ -242,12 +229,11 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
                                bool utf16, int codepage)
 {
     bool bRet = false;
+    HANDLE hFile = NULL;
 
-    ::SetFileAttributesW(filename.c_str(), 0x00000080); // FILE_ATTRIBUTE_NORMAL
-    HANDLE hFile = ::CreateFileW(filename.c_str(),
-        GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
+    ::SetFileAttributesNormal(filename.c_str());
 
-    if (INVALID_HANDLE_VALUE == hFile)
+    if (!OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
         LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL",

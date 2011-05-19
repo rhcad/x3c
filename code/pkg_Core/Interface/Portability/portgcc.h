@@ -1,3 +1,5 @@
+// Included by X3Portability.h to declare functions for GCC compiler.
+
 #ifndef X3GCC_PORTABILITY_H
 #define X3GCC_PORTABILITY_H
 
@@ -34,15 +36,14 @@ inline void* InterlockedCompareExchange(void** p, void* newv, void* cmp)
 
 bool FreeLibrary(HMODULE hdll);
 HMODULE LoadLibraryW(const wchar_t* filename);
-HMODULE LoadLibraryExW(const wchar_t* filename, void*, DWORD);
+HMODULE LoadLibraryExW(const wchar_t* filename);
 HMODULE GetModuleHandleW(const wchar_t* filename);
 void* GetProcAddress(HMODULE hdll, const char* name);
 void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size);
 void GetModuleFileNameA(HMODULE hdll, char* filename, int size);
 
-HANDLE CreateFileW(const wchar_t* filename, DWORD access, 
-                   DWORD shareMode, void*, DWORD disposition, 
-                   DWORD attributes, void*);
+bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename);
+bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename);
 bool CloseFile(HANDLE file);
 bool ReadFile(HANDLE file, void* buf, DWORD size, DWORD* readed, void*);
 bool WriteFile(HANDLE file, const void* buf, DWORD size, DWORD* written, void*);
@@ -63,8 +64,8 @@ wchar_t* PathAddBackslashW(wchar_t* path);
 void PathRenameExtensionW(wchar_t* path, const wchar_t* more);
 
 void GetTempPathW(DWORD len, wchar_t* buf);
-DWORD GetFileAttributesW(const wchar_t* filename);
-bool SetFileAttributesW(const wchar_t* filename, DWORD attr);
+bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
+bool SetFileAttributesNormal(const wchar_t* filename);
 DWORD GetLastError();
 
 int WideCharToMultiByte(int codepage, DWORD flags,

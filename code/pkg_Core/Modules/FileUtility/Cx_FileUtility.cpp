@@ -38,17 +38,6 @@ static void ReplaceSlash(wchar_t* path)
     }
 }
 
-#ifndef GENERIC_READ
-#define GENERIC_READ        0x80000000L
-#define GENERIC_WRITE       0x40000000L
-#define FILE_SHARE_READ     0x00000001
-#define FILE_SHARE_WRITE    0x00000002
-#define CREATE_ALWAYS       2
-#define OPEN_EXISTING       3
-#define INVALID_HANDLE_VALUE ((HANDLE)-1)
-#endif
-
-
 bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
 {
     return IsNotNull(filename)
@@ -61,10 +50,10 @@ bool Cx_FileUtility::IsPath(const wchar_t* filename, bool bCheckExists)
     {
         if (bCheckExists)
         {
-            DWORD dwAttr = ::GetFileAttributesW(filename);
-            if (dwAttr != (DWORD)-1)
+            bool folder = false;
+            if (CheckFileAttributes(filename, NULL, &folder))
             {
-                return !!(dwAttr & 0x00000010); // FILE_ATTRIBUTE_DIRECTORY
+                return folder;
             }
         }
 
@@ -115,7 +104,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
             cSaveChar = path[i];
             path[i] = 0;
             ::CreateDirectoryW(path, NULL);
-            ::SetFileAttributesW(path, 0x00000080);  // FILE_ATTRIBUTE_NORMAL
+            ::SetFileAttributesNormal(path);
             path[i] = cSaveChar;
         }
     }
@@ -148,7 +137,7 @@ bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* filename)
     }
 
     if (IsPathFileExists(filename)
-        && !SetFileAttributesW(filename, 0x00000080))   // FILE_ATTRIBUTE_NORMAL
+        && !SetFileAttributesNormal(filename))
     {
         LOG_ERROR2(LOGHEAD L"IDS_FILE_CANNOT_WRITE", filename);
         return false;
@@ -583,11 +572,9 @@ std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath,
 std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
 {
     wchar_t szTime[20] = { 0 };
+    HANDLE hFile = NULL;
 
-    HANDLE hFile = ::CreateFileW(wstrFileName.c_str(),
-        GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
-
-    if (hFile != INVALID_HANDLE_VALUE)
+    if (OpenFileForRead(hFile, wstrFileName.c_str()))
     {
 #ifdef _MSC_VER
         FILETIME ftCreate, ftAccess, ftWrite;
@@ -613,10 +600,9 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
 DWORD Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
 {
     DWORD nFileSize = 0;
-    HANDLE hFile = ::CreateFileW(wstrFileName.c_str(),
-        GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    HANDLE hFile = NULL;
 
-    if (hFile != INVALID_HANDLE_VALUE)
+    if (OpenFileForRead(hFile, wstrFileName.c_str()))
     {
         DWORD dwFileSizeHigh = 0;
         nFileSize = ::GetFileSize(hFile, &dwFileSizeHigh);
@@ -684,7 +670,9 @@ int Cx_FileUtility::CompareFileName(const wchar_t* filename1, const wchar_t* fil
     return nRet;
 }
 
+#ifdef _MSC_VER
 #pragma comment(lib, "version.lib")
+#endif
 
 bool Cx_FileUtility::GetFileVersion(
         std::wstring& version, const std::wstring& filename)

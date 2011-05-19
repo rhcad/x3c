@@ -9,9 +9,7 @@
 #include "XComPtr.h"
 #include "Ix_LogManager.h"
 
-#pragma warning (push, 1)
 #include <sstream>      // std::wostringstream
-#pragma warning (pop)
 
 // LOG_DEBUG(msg)
 // LOG_DEBUG2(name, extra)
@@ -203,7 +201,9 @@ public:
     }
 };
 
+#ifdef _MSC_VER
 #pragma warning(disable:4127)   // conditional expression is constant
+#endif
 
 #define LOG_EVENT_(msg, type, file, line)                   \
     do {                                                        \

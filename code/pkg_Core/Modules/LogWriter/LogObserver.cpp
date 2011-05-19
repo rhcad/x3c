@@ -15,7 +15,9 @@
 #include <PluginManager/Ix_AppWorkPath.h>
 #include <ctrim.h>
 
+#ifdef _MSC_VER
 #pragma warning(disable:4127)       // conditional expression is constant
+#endif
 #include <log4cplus/configurator.h>
 #include <log4cplus/helpers/loglog.h>
 #include <log4cplus/helpers/stringhelper.h>
@@ -301,4 +303,6 @@ void CLogObserver::OnWriteLog(int type,
     m_haserr |= (type > kLogType_Info) ? 0x03 : 0x04;
 }
 
+#ifdef _MSC_VER
 #pragma warning(default:4127)
+#endif

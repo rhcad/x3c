@@ -1,3 +1,6 @@
+// Implement portability functions.
+// This file has included by XModuleImpl.h and XComCreator.h
+
 #ifndef X3_PORTABILITY_IMPL_H
 #define X3_PORTABILITY_IMPL_H
 
@@ -8,5 +11,7 @@
 #include "../Portability/macimpl.h"
 #endif
 #endif // __GNUC__
+
+#include "../Portability/pathstr.h"
 
 #endif // X3_PORTABILITY_IMPL_H

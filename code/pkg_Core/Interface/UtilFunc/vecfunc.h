@@ -4,11 +4,13 @@
 #ifndef __STL_VECTOR_FUNCTIONS_H
 #define __STL_VECTOR_FUNCTIONS_H
 
+#ifdef _MSC_VER
 #pragma warning(disable:4710)   // inline function not expanded
 #pragma warning(disable:4786)   // identifier was truncated
 #pragma warning (push, 3)
 #pragma warning(disable:4018)   // signed/unsigned mismatch
 #pragma warning(disable:4702)   // unreachable code
+#endif
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -16,7 +18,9 @@
 #include <list>
 #include <map>
 #include <sstream>
+#ifdef _MSC_VER
 #pragma warning (pop)
+#endif
 
 #ifdef __AFX_H__
 //! Converts safely from CString variable to std::wstring, avoid null address problem.

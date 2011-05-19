@@ -17,26 +17,33 @@
 
 #include <tchar.h>
 
+#ifdef _MSC_VER
 #pragma warning(disable:4710)   // function not inlined
 #pragma warning(disable:4786)   // identifier was truncated
-
 #pragma warning(push, 1)
-#include <iostream>
 #pragma warning(disable:4511 4512)
+#endif
+#include <iostream>
 #include <cppunit/config/SourcePrefix.h>
 #include <cppunit/XmlOutputter.h>
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 #endif // _AFXDLL
 
+#ifdef _MSC_VER
 #pragma warning(disable:4097)   // typedef-name used as synonym for TestFixture class
 #pragma warning (push, 3)
+#endif
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
+#ifdef _MSC_VER
 #pragma warning (pop)
+#endif
 
 #undef ASSERT
 #undef VERIFY

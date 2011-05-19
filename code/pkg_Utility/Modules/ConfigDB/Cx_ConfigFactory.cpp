@@ -25,10 +25,10 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
                                       const std::wstring& user, 
                                       const std::wstring& password)
 {
-    DWORD attr = GetFileAttributesW(filename.c_str());
-    bool readonly = (attr & FILE_ATTRIBUTE_READONLY) != 0;
+    bool readonly = false;
+    bool exist = CheckFileAttributes(filename.c_str(), &readonly, NULL);
 
-    if (attr == (DWORD)-1)
+    if (!exist)
     {
         LOG_ERROR2(LOGHEAD L"IDS_NO_FILE", filename);
         return Cx_Ptr();
