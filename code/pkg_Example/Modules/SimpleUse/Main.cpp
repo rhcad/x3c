@@ -14,14 +14,14 @@ void Test();
 
 int main()
 {
-    if (LoadPlugin( L"../Plugins/Win32DllTempl.plugin.dll") )
+    if (LoadPlugin( L"../Plugins/Win32DllTempl.plugin" PLNEXT) )
     {
         Test();
 
         FreeLibrary(g_hPluginDll);
         g_hPluginDll = NULL;
     }
-    if (LoadPlugin( L"../Plugins/MFCExtTempl.plugin.dll") )
+    if (LoadPlugin( L"../Plugins/MFCExtTempl.plugin" PLNEXT) )
     {
         Test();
 

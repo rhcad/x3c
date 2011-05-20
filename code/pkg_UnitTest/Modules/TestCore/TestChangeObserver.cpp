@@ -14,7 +14,8 @@ TestChangeObserver::TestChangeObserver()
 void TestChangeObserver::setUp()
 {
     VERIFY(2 == LoadPlugins(
-        L"ChangeManager.plugin.dll, ChangeObserverExample.plugin.dll", false));
+        L"ChangeManager.plugin" PLNEXT
+        L",ChangeObserverExample.plugin" PLNEXT, false));
 }
 
 void TestChangeObserver::tearDown()

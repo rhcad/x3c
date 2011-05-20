@@ -27,7 +27,7 @@ interface Ix_PluginLoader
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
     virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
-        const wchar_t* ext = L".plugin.dll", bool recursive = true) = 0;
+        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true) = 0;
 
     //! Load all plugins in the application's path.
     /*!
@@ -40,7 +40,7 @@ interface Ix_PluginLoader
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
     virtual long LoadPlugins(const wchar_t* path, 
-        const wchar_t* ext = L".plugin.dll", bool recursive = true) = 0;
+        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true) = 0;
 
     //! Load the specified plugins in the specified path.
     /*!

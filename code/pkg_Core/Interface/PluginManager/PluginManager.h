@@ -18,7 +18,7 @@ class CPluginManager
 public:
     CPluginManager() : m_dll(NULL)
     {
-        wcscpy_s(m_filename, MAX_PATH, L"PluginManagerX3.dll");
+        wcscpy_s(m_filename, MAX_PATH, L"PluginManagerX3" PLNEXT);
     }
 
     ~CPluginManager()
@@ -55,7 +55,7 @@ public:
         GetModuleFileNameW(instance, m_filename, MAX_PATH);
         PathRemoveFileSpecW(m_filename);
         PathAppendW(m_filename, subdir);
-        PathAppendW(m_filename, L"PluginManagerX3.dll");
+        PathAppendW(m_filename, L"PluginManagerX3" PLNEXT);
 
         if (GetModuleHandleW(m_filename) || m_dll)
         {
@@ -83,14 +83,14 @@ public:
         if (pLoader)
         {
             long n = pLoader->LoadPluginFiles(subdir,
-                L"LogManager.plugin.dll, "
-                L"LogWriter.plugin.dll, "
-                L"ConfigXml.plugin.dll, "
-                L"StringTable.plugin.dll, "
-                L"ChangeManager.plugin.dll, "
-                L"FileUtility.plugin.dll, "
-                L"TextUtility.plugin.dll, "
-                L"PluginManagerEx.plugin.dll", instance);
+                L"LogManager.plugin" PLNEXT
+                L",LogWriter.plugin" PLNEXT
+                L",ConfigXml.plugin" PLNEXT
+                L",StringTable.plugin" PLNEXT
+                L",ChangeManager.plugin" PLNEXT
+                L",FileUtility.plugin" PLNEXT
+                L",TextUtility.plugin" PLNEXT
+                L",PluginManagerEx.plugin" PLNEXT, instance);
 
             if (pLoader->InitializePlugins() > 0 && n > 0)
             {

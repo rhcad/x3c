@@ -32,7 +32,7 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
     typedef Ix_ObjectFactory* (*FUNC_GET)();
     FUNC_GET pfn = (FUNC_GET)GetProcAddress(
-        GetModuleHandleW(L"PluginManagerX3.dll"), "xGetRegisterBank");
+        GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
 
     Ix_ObjectFactory* pFactory = pfn ? (*pfn)() : NULL;
     if (NULL == pFactory)

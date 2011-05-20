@@ -639,7 +639,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     {
         wcscpy_s(m_clsfile, MAX_PATH, filename);
         PathRemoveFileSpecW(m_clsfile);
-        PathAppendW(m_clsfile, L"ConfigXml.plugin.dll");
+        PathAppendW(m_clsfile, L"ConfigXml.plugin" PLNEXT);
         LoadPlugin(m_clsfile);
 
         wcscpy_s(m_clsfile, MAX_PATH, m_inifile);

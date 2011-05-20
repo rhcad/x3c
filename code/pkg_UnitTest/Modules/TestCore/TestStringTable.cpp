@@ -13,7 +13,9 @@ TestStringTable::TestStringTable()
 
 void TestStringTable::setUp()
 {
-    VERIFY(LoadPlugins(L"StringTable.plugin.dll, ConfigXml.plugin.dll LogManager.plugin.dll", false) >= 2);
+    VERIFY(LoadPlugins(L"StringTable.plugin" PLNEXT
+        L",ConfigXml.plugin" PLNEXT
+        L",LogManager.plugin" PLNEXT, false) >= 2);
 }
 
 void TestStringTable::tearDown()

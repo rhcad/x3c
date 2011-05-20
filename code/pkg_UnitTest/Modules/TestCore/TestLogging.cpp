@@ -13,8 +13,10 @@ TestLogging::TestLogging()
 
 void TestLogging::setUp()
 {
-    VERIFY(LoadPlugins(L"LogManager.plugin.dll, LogWriter.plugin.dll, "
-        L"FileUtility.plugin.dll, TextUtility.plugin.dll", false) > 0);
+    VERIFY(LoadPlugins(L"LogManager.plugin" PLNEXT
+        L",LogWriter.plugin" PLNEXT
+        L",FileUtility.plugin" PLNEXT
+        L",TextUtility.plugin" PLNEXT, false) > 0);
 }
 
 void TestLogging::tearDown()

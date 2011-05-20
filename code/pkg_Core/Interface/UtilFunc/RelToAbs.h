@@ -12,7 +12,7 @@
 //! Return the module handle of main application which load plugins initiative.
 inline HMODULE GetMainModuleHandle()
 {
-    HMODULE hModule = GetModuleHandleW(L"PluginManagerX3.dll");
+    HMODULE hModule = GetModuleHandleW(L"PluginManagerX3" PLNEXT);
     typedef HMODULE (*FUNC_GET)();
     FUNC_GET fn = (FUNC_GET)GetProcAddress(hModule, "xGetMainModuleHandle");
     return fn ? (*fn)() : NULL;

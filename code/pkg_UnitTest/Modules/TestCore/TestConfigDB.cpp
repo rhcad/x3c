@@ -23,7 +23,9 @@ TestConfigDB::TestConfigDB()
 
 void TestConfigDB::setUp()
 {
-    VERIFY(LoadPlugins(L"LogManager.plugin.dll, ConfigDB.plugin.dll, FileUtility.plugin.dll", false) > 0);
+    VERIFY(LoadPlugins(L"LogManager.plugin" PLNEXT
+        L",ConfigDB.plugin" PLNEXT
+        L",FileUtility.plugin" PLNEXT, false) > 0);
 }
 
 void TestConfigDB::tearDown()

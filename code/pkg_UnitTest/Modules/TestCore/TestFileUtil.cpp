@@ -13,7 +13,7 @@ TestFileUtil::TestFileUtil()
 
 void TestFileUtil::setUp()
 {
-    VERIFY(LoadPlugins(L"FileUtility.plugin.dll", false) >= 1);
+    VERIFY(LoadPlugins(L"FileUtility.plugin" PLNEXT, false) >= 1);
 }
 
 void TestFileUtil::tearDown()

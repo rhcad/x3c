@@ -27,9 +27,9 @@ public:
     // From Ix_PluginLoader
     //
     virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
-        const wchar_t* ext = L".plugin.dll", bool recursive = true);
+        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true);
     virtual long LoadPlugins(const wchar_t* path, 
-        const wchar_t* ext = L".plugin.dll", bool recursive = true);
+        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true);
     virtual long LoadPluginFiles(const wchar_t* path, 
         const wchar_t* files, HMODULE instance = NULL);
     virtual long InitializePlugins();
