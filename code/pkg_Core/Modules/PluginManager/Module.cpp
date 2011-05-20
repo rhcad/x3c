@@ -78,7 +78,7 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
     return s_loader.CreateObject(clsid, ppv, xGetModuleHandle());
 }
 
-#if defined(_USRDLL) && defined(_WIN32)
+#if defined(_USRDLL) && defined(APIENTRY)
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, void* lpReserved)
 {
     lpReserved;

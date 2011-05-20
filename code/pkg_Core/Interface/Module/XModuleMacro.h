@@ -86,7 +86,7 @@
     \ingroup _GROUP_PLUGIN_CORE_
     \see XEND_DEFINE_MODULE_MFCEXTDLL, XEND_DEFINE_MODULE_MFCDLL
 */
-#ifdef _WIN32
+#if defined(_USRDLL) && defined(APIENTRY)
 #define XEND_DEFINE_MODULE_WIN32DLL() \
         _XCLASSMETA_ENTRY() \
     };  \
