@@ -63,11 +63,9 @@
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\DocObserverTest.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Responsibility.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\ResponsibilityB.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.cpp" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Module.cpp" />
 		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\Plugin.cpp" />
-		<Unit filename="..\..\code\pkg_Example\Modules\ChangeObserverExample\StdAfx.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

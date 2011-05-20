@@ -46,7 +46,6 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="4"
 			/>
@@ -121,7 +120,6 @@
 				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\Module;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_Core\Interface\Utility;..\..\..\code\pkg_Core\Interface\Log;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;INSIDE_LOG4CPLUS;LOG4CPLUS_STATIC"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -192,26 +190,6 @@
 			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Plugin.cpp"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\stdafx.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
 			</File>
 			<Filter
 				Name="log4cplus"
@@ -1039,10 +1017,6 @@
 			>
 			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\LogObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\stdafx.h"
 				>
 			</File>
 		</Filter>

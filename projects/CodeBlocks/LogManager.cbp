@@ -61,10 +61,8 @@
 		<Unit filename="..\..\code\pkg_Core\Interface\Log\LogHelper.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\ClsID_LogManager.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\Cx_LogManager.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\Cx_LogManager.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogManager\LogManager.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

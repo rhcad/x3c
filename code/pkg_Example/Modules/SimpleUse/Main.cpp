@@ -1,4 +1,7 @@
-#include "stdafx.h"
+#include <PluginInc.h>
+
+#define USE_ONE_PLUGIN
+#include <XComCreator.h>
 
 extern HMODULE g_hPluginDll;    // ¼û XComCreator.h
 

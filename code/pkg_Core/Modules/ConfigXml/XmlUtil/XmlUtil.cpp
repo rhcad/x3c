@@ -6,7 +6,7 @@
 //    2011-01-10, Zhang Yun Gui: support MSXML6 and MSXML4
 //
 
-#include "stdafx.h"
+#include <PluginInc.h>
 #include "XmlUtil.h"
 
 #if !defined(_MSC_VER) || _MSC_VER < 1400 // not VC8

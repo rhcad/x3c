@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "stdafx.h"
+#include <UnitTestInc.h>
 #include "TestFileUtil.h"
 #include <Utility/Ix_FileUtility.h>
 

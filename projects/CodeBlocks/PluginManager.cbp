@@ -60,11 +60,9 @@
 		<Unit filename="..\..\code\pkg_Core\Interface\PluginManager\XComCreator.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\PluginManager\PluginManager.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

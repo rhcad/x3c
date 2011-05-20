@@ -1,7 +1,8 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "StdAfx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_ClipboardUtil.h"
 #ifdef _MSC_VER
 #include <ConvStr.h>
@@ -35,14 +36,14 @@ bool Cx_ClipboardUtil::CopyText(HWND wndOwner, const std::wstring& text)
                 else
                 {
                     err = GetLastError();
-                    LOG_WARNING2(LOGHEAD L"IDS_SETCLIP_FAIL", GetSystemErrorString(err));
+                    LOG_WARNING2(L"@TextUtility:IDS_SETCLIP_FAIL", GetSystemErrorString(err));
                 }
             }
         }
         else
         {
             err = GetLastError();
-            LOG_WARNING2(LOGHEAD L"IDS_ALLOCMEM_FAIL", GetSystemErrorString(err));
+            LOG_WARNING2(L"@TextUtility:IDS_ALLOCMEM_FAIL", GetSystemErrorString(err));
         }
 
         ::CloseClipboard();
@@ -50,7 +51,7 @@ bool Cx_ClipboardUtil::CopyText(HWND wndOwner, const std::wstring& text)
     else
     {
         err = GetLastError();
-        LOG_WARNING2(LOGHEAD L"IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
+        LOG_WARNING2(L"@TextUtility:IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
     }
 
     return bRet;
@@ -63,14 +64,14 @@ bool Cx_ClipboardUtil::PasteText(HWND wndOwner, std::wstring& text, bool clear)
     if (!::IsClipboardFormatAvailable(CF_UNICODETEXT)
         && !::IsClipboardFormatAvailable(CF_TEXT))
     {
-        LOG_INFO(LOGHEAD L"IDS_CLIP_NOTEXT");
+        LOG_INFO(L"@TextUtility:IDS_CLIP_NOTEXT");
         return false;
     }
 
     if (!::OpenClipboard(wndOwner))
     {
         DWORD err = GetLastError();
-        LOG_WARNING2(LOGHEAD L"IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
+        LOG_WARNING2(L"@TextUtility:IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
     }
     else
     {

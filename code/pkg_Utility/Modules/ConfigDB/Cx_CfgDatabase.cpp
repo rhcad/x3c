@@ -5,7 +5,7 @@
 // 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
 //
 
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_CfgDatabase.h"
 #include <Cx_SimpleObject.h>
 #include "Cx_CfgRecordset.h"
@@ -27,8 +27,8 @@ Cx_CfgDatabase::~Cx_CfgDatabase()
     SafeCall(m_pSQLParser, Release());
 }
 
-bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection, 
-                                    Ix_SQLParser* pSQLParser, 
+bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,
+                                    Ix_SQLParser* pSQLParser,
                                     bool readonly)
 {
     bool bRet = false;
@@ -42,7 +42,7 @@ bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,
         {
             if (FAILED(hr = m_pCon.CreateInstance(__uuidof(Connection))))
             {
-                LOG_ERROR(LOGHEAD L"IDS_CREATEINSTANCE_FAIL");
+                LOG_ERROR(L"@ConfigDB:IDS_CREATEINSTANCE_FAIL");
                 _com_util::CheckError(hr);
             }
         }
@@ -56,7 +56,7 @@ bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,
 
         if (FAILED(hr = m_pCon->raw_Open(NULL, NULL, NULL, adConnectUnspecified)))
         {
-            LOG_ERROR(LOGHEAD L"IDS_CONNECT_FAIL");
+            LOG_ERROR(L"@ConfigDB:IDS_CONNECT_FAIL");
             _com_issue_errorex(hr, m_pCon, __uuidof(m_pCon));
         }
 
@@ -116,7 +116,7 @@ Ix_SQLParser* Cx_CfgDatabase::GetSQLParser()
     return m_pSQLParser;
 }
 
-bool Cx_CfgDatabase::GetRecordNewID(ULONG& newid, const std::wstring& table, 
+bool Cx_CfgDatabase::GetRecordNewID(ULONG& newid, const std::wstring& table,
                                     const std::wstring& field)
 {
     CString sql;
@@ -139,9 +139,9 @@ bool Cx_CfgDatabase::GetRecordNewID(ULONG& newid, const std::wstring& table,
 
 bool Cx_CfgDatabase::GetRecordCount(long& count, const std::wstring& sqlSelect)
 {
-    ASSERT_MESSAGE(StrStrIW(sqlSelect.c_str(), L"SELECT ") == sqlSelect.c_str(), 
+    ASSERT_MESSAGE(StrStrIW(sqlSelect.c_str(), L"SELECT ") == sqlSelect.c_str(),
         "The SQL command must contains 'SELECT' keyword.");
-    ASSERT_MESSAGE(StrStrIW(sqlSelect.c_str(), L"FROM ") != NULL, 
+    ASSERT_MESSAGE(StrStrIW(sqlSelect.c_str(), L"FROM ") != NULL,
         "The SQL command must contains 'FROM' keyword.");
 
     std::wstring wstrSQL(L"SELECT count(*) ");
@@ -173,7 +173,7 @@ static std::wstring EnsureSQLHasSelect(const std::wstring& sql)
         return sqlSelect;
     }
 
-    ASSERT_MESSAGE(StrStrIW(sql.c_str(), L"SELECT ") == sql.c_str(), 
+    ASSERT_MESSAGE(StrStrIW(sql.c_str(), L"SELECT ") == sql.c_str(),
         "The SQL command must contains 'SELECT' keyword.");
 
     return sql;
@@ -194,24 +194,24 @@ Cx_Section Cx_CfgDatabase::GetSection(const wchar_t* sqlSelect, bool)
     return OpenRecordset(sqlSelect);
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect, 
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
                                       const wchar_t* field, ULONG condValue, bool)
 {
     return GetSection(pParent, sqlSelect, field, condValue, L"", 0L);
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* pszNodeName, 
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* pszNodeName,
                                       const wchar_t* field, const wchar_t* pszAttrValue, bool)
 {
     return GetSection(pParent, pszNodeName, field, pszAttrValue, L"", L"");
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect, 
-                                      const wchar_t* field, const wchar_t* condValue, 
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
+                                      const wchar_t* field, const wchar_t* condValue,
                                       const wchar_t* field2Name, const wchar_t* condValue2, bool)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::GetSection(pParent, ...): pParent must be NULL");
-    
+
     std::wostringstream sql;
 
     sql << EnsureSQLHasSelect(sqlSelect);
@@ -237,12 +237,12 @@ Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* 
     return OpenRecordset(sql.str());
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect, 
-                                      const wchar_t* field, ULONG condValue, 
+Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
+                                      const wchar_t* field, ULONG condValue,
                                       const wchar_t* field2Name, ULONG condValue2, bool)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::GetSection(pParent, ...): pParent must be NULL");
-    
+
     std::wostringstream sql;
 
     sql << EnsureSQLHasSelect(sqlSelect);
@@ -333,7 +333,7 @@ Cx_Section Cx_CfgDatabase::GetParentSection(Ix_ConfigSection*)
     return Cx_Section();
 }
 
-long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table, 
+long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table,
                                     const wchar_t* field, const wchar_t* condValue)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::RemoveChildren(pParent, ...): pParent must be NULL");
@@ -355,7 +355,7 @@ long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* ta
     return 0;
 }
 
-long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table, 
+long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table,
                                     const wchar_t* field, ULONG condValue)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::RemoveChildren(pParent, ...): pParent must be NULL");

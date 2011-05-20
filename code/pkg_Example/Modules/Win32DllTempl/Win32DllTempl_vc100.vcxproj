@@ -88,7 +88,7 @@
     <ClInclude Include="..\..\Interface\ClsID_Example.h" />
     <ClInclude Include="..\..\Interface\Ix_Example.h" />
     <ClInclude Include="Cx_Example.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include=<PluginInc.h> />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cx_Example.cpp" />

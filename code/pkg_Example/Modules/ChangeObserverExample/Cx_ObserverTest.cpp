@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_ObserverTest.h"
 #include <AutoNew.h>
 #include "Responsibility.h"

@@ -6,7 +6,7 @@
 //      Open access connection readonly if file is readonly.
 //
 
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_ConfigFactory.h"
 #include "Cx_CfgDatabase.h"
 #include "ClsID_Internal.h"
@@ -30,12 +30,12 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
 
     if (!exist)
     {
-        LOG_ERROR2(LOGHEAD L"IDS_NO_FILE", filename);
+        LOG_ERROR2(L"@ConfigDB:IDS_NO_FILE", filename);
         return Cx_Ptr();
     }
     if (readonly)
     {
-        LOG_INFO2(LOGHEAD L"IDS_FILE_READONLY", filename);
+        LOG_INFO2(L"@ConfigDB:IDS_FILE_READONLY", filename);
     }
 
     std::wostringstream conn;

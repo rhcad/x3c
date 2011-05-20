@@ -1,7 +1,8 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "stdafx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_FileTransaction.h"
 #include "FileTransaction.h"
 
@@ -50,7 +51,7 @@ bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycl
 
     if (CFileTransactions::Instance().IsRollbacking())
     {
-        LOG_ERROR2(LOGHEAD L"IDS_DELETEFILE_ROLLBACK", pszFileName);
+        LOG_ERROR2(L"@FileUtility:IDS_DELETEFILE_ROLLBACK", pszFileName);
         return false;
     }
 
@@ -61,7 +62,7 @@ bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycl
 
     for (int i = 1; i < 1000; i++)
     {
-        swprintf_s(szTmpFile, MAX_PATH, L"%s~%s.~%d", 
+        swprintf_s(szTmpFile, MAX_PATH, L"%s~%s.~%d",
             wstrPath.c_str(), wstrName.c_str(), i);
         if (!pIFUtility->IsPathFileExists(szTmpFile))
             break;
@@ -71,12 +72,12 @@ bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycl
     if (bRet)
     {
         CFileTransactions::Instance().AddStep(
-            new CTransDeleteFile(szTmpFile, bRecycle), 
+            new CTransDeleteFile(szTmpFile, bRecycle),
             new CTransRenameFile(szTmpFile, pszFileName));
     }
     else
     {
-        LOG_ERROR2(LOGHEAD L"IDS_DELFILE_FAIL", pszFileName);
+        LOG_ERROR2(L"@FileUtility:IDS_DELFILE_FAIL", pszFileName);
         CFileTransactions::Instance().EndTransaction(false);
     }
 

@@ -5,7 +5,7 @@
 // v2, 2011.1.5: Change to hash_multimap
 // v3, 2011.2.8: Support delay-load feature for observer plugins.
 
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_ChangeManager.h"
 #include "../PluginManager/Ix_PluginDelayLoad.h"
 

@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "stdafx.h"
+#include <UnitTestInc.h>
 #include "BaseTest.h"
 #include <PluginManager.h>
 
@@ -75,13 +75,12 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         PathAppendW(path, name);        // bin\name
 
 #ifdef _MSC_VER
+        SetFileAttributesNormal(filename);
         GetPrivateProfileStringW(L"Path", name, path,
             path, MAX_PATH, filename);
         WritePrivateProfileStringW(L"Path", name, path, filename);
 #endif
         PathAddBackslashW(path);
-
-        SetFileAttributesNormal(filename);
     }
 }
 

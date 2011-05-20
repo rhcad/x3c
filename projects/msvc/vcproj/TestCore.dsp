@@ -41,8 +41,8 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\TestCore"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\PluginManager" /I "..\..\..\code\pkg_Utility\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /Yu"stdafx.h" /FD /c
+# ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\PluginManager" /I "..\..\..\code\pkg_Utility\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /FD /c
 # ADD BASE RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
 # ADD RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
 BSC32=bscmake.exe
@@ -66,8 +66,8 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\TestCore"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\PluginManager" /I "..\..\..\code\pkg_Utility\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
+# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\PluginManager" /I "..\..\..\code\pkg_Utility\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /FD /GZ /c
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
 # ADD RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
 BSC32=bscmake.exe
@@ -150,15 +150,6 @@ SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.cpp
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\stdafx.cpp
-# ADD CPP /Yc"stdafx.h"
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\stdafx.h
 # End Source File
 # Begin Source File
 

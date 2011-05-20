@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <PluginInc.h>
 
 // Optional function to initialize this plugin when loaded by the plugin manager.
 OUTAPI bool InitializePlugin()

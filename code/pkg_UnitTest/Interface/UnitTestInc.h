@@ -4,8 +4,8 @@
 // 2011.2.14, ooyg: Support MFC dialog application and console application.
 //
 
-#ifndef _UNITTEST_PUBLIC_STDAFX_H
-#define _UNITTEST_PUBLIC_STDAFX_H
+#ifndef _UNITTEST_PUBLIC_INC_H
+#define _UNITTEST_PUBLIC_INC_H
 
 #ifdef _CONSOLE                 // Console application
 #undef _AFXDLL
@@ -50,4 +50,4 @@
 
 #include <XComPtr.h>
 
-#endif // _UNITTEST_PUBLIC_STDAFX_H
+#endif // _UNITTEST_PUBLIC_INC_H

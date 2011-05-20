@@ -5,7 +5,7 @@
 // v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
 // v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
 
-#include "stdafx.h"
+#include <PluginInc.h>
 #include "LogObserver.h"
 
 #include <RelToAbs.h>

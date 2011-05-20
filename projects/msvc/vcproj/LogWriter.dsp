@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\LogWriter"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_Core\Interface\Utility" /I "..\..\..\code\pkg_Core\Interface\Log" /I "..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /D "LOG4CPLUS_STATIC" /D "INSIDE_LOG4CPLUS" /D LONG_PTR=long /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_Core\Interface\Utility" /I "..\..\..\code\pkg_Core\Interface\Log" /I "..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /D "LOG4CPLUS_STATIC" /D "INSIDE_LOG4CPLUS" /D LONG_PTR=long /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\LogWriter"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_Core\Interface\Utility" /I "..\..\..\code\pkg_Core\Interface\Log" /I "..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /D "LOG4CPLUS_STATIC" /D "INSIDE_LOG4CPLUS" /D LONG_PTR=long /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_Core\Interface\Utility" /I "..\..\..\code\pkg_Core\Interface\Log" /I "..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /D "LOG4CPLUS_STATIC" /D "INSIDE_LOG4CPLUS" /D LONG_PTR=long /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -84,10 +84,7 @@ LINK32=link.exe
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\LogObserver.h
 # End Source File
-# Begin Source File
 
-SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\StdAfx.h
-# End Source File
 # End Group
 # Begin Group "Source Files"
 
@@ -99,223 +96,223 @@ SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\StdAfx.h
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appenderattachableimpl.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\configurator.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\consoleappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\factory.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\fileappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\filter.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\global-init.cxx"
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\hierarchy.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\hierarchylocker.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\layout.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\logger.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loggerimpl.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loggingevent.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loglevel.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loglog.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\logloguser.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\ndc.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\nteventlogappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\nullappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\objectregistry.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\patternlayout.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\pointer.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\property.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\rootlogger.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\sleep.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socket-win32.cxx"
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socket.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socketappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socketbuffer.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\stringhelper.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\syncprims.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\syslogappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\threads.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\timehelper.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\win32consoleappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\win32debugappender.cxx
 # ADD CPP /W2
-# SUBTRACT CPP /YX /Yc /Yu
+# SUBTRACT CPP /YX /Yu
 # End Source File
 # End Group
 # Begin Source File
@@ -330,11 +327,7 @@ SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\Module.cpp
 
 SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\Plugin.cpp
 # End Source File
-# Begin Source File
 
-SOURCE=..\..\..\code\pkg_Core\Modules\LogWriter\StdAfx.cpp
-# ADD CPP /Yc"stdafx.h"
-# End Source File
 # End Group
 # Begin Group "Resource Files"
 

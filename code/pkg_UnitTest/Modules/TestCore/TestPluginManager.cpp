@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "StdAfx.h"
+#include "UnitTestInc.h"
 #include "TestPluginManager.h"
 
 #include "Log/Ix_LogManager.h"

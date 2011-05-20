@@ -58,11 +58,9 @@
 		<Unit filename="..\..\code\pkg_Example\Interface\ClsID_Example.h" />
 		<Unit filename="..\..\code\pkg_Example\Interface\Ix_Example.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.h" />
-		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.cpp" />
 		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Module.cpp" />
 		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Plugin.cpp" />
-		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Version.rc2" />
 		<Unit filename="..\..\code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl.rc">
 			<Option compilerVar="WINDRES" />

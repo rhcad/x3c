@@ -1,13 +1,11 @@
-//
-// Changes:
-// 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
-//
-
 /*! \file Cx_CfgDatabase.h
  *  \brief 定义数据库访问的实现类 Cx_CfgDatabase
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.9.25
  */
+// Changes:
+// 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
+
 #ifndef _X3_CONFIGDB_CFGDATABASE_H
 #define _X3_CONFIGDB_CFGDATABASE_H
 
@@ -15,6 +13,7 @@
 #include <Ix_ConfigTransaction.h>
 #include "Ix_InitDatabase.h"
 #include "Ix_SQLParser.h"
+#include "msado15.tlh"
 
 class Cx_CfgRecordset;
 

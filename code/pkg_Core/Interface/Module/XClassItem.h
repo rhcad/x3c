@@ -9,13 +9,13 @@
 #include "Ix_Object.h"
 
 //! class factory function.
-typedef Ix_Object* (__stdcall *PFNXObjectCreator)(HMODULE);
+typedef Ix_Object* (STDCALL *PFNXObjectCreator)(HMODULE);
 
 //! object count of a class.
-typedef long (__stdcall *PFNXGetObjectCount)();
+typedef long (STDCALL *PFNXGetObjectCount)();
 
 //! object (used by other modules) count of a class.
-typedef long (__stdcall *PFNXRefCountByOthers)();
+typedef long (STDCALL *PFNXRefCountByOthers)();
 
 #define MIN_SINGLETON_TYPE  10
 
@@ -37,12 +37,12 @@ struct _XCLASSMETA_ENTRY
     PFNXRefCountByOthers    pfnRefCountByOthers;    //!< count of objects used by other modules
 
     //! Used by XDEFINE_CLASSMAP_ENTRY, XDEFINE_CLASSMAP_ENTRY_Singleton
-    _XCLASSMETA_ENTRY(BYTE      _type, 
-        const char*             _className, 
-        const XCLSID&           _clsid, 
-        const char*             _iidSpecial, 
-        PFNXObjectCreator       _pfnObjectCreator, 
-        PFNXGetObjectCount      _pfnGetObjectCount = NULL, 
+    _XCLASSMETA_ENTRY(BYTE      _type,
+        const char*             _className,
+        const XCLSID&           _clsid,
+        const char*             _iidSpecial,
+        PFNXObjectCreator       _pfnObjectCreator,
+        PFNXGetObjectCount      _pfnGetObjectCount = NULL,
         PFNXRefCountByOthers    _pfnRefCountByOthers = NULL)
 
         : type(_type), className(_className)
@@ -60,7 +60,7 @@ struct _XCLASSMETA_ENTRY
         , pfnRefCountByOthers(NULL)
     {
     }
-    
+
     //! class factory registries. filled by XBEGIN_DEFINE_MODULE.
     static const _XCLASSMETA_ENTRY s_classes[];
 };

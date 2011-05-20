@@ -63,12 +63,10 @@
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Cx_GuidGenerator.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Cx_GuidGenerator.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\TextUtility\TextUtility.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

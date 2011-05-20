@@ -16,6 +16,9 @@
 #ifndef _MSC_VER
 #include "../Portability/portimpl.h"
 #endif
+#ifdef X3_LOG_DEBUGR_H_
+#include "../Log/DebugR.cpp"
+#endif
 
 OUTAPI Ix_Module*   _xGetModuleInterface(Ix_ObjectFactory*, HMODULE);
 OUTAPI DWORD    _xGetClassEntryTable(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);

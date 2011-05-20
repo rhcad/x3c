@@ -45,7 +45,6 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="4"
 			/>
@@ -122,7 +121,6 @@
 				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\Module;..\..\..\code\pkg_Core\Interface\UtilFunc"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -196,26 +194,6 @@
 				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Plugin.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\stdafx.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -224,10 +202,6 @@
 			>
 			<File
 				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_Example.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\stdafx.h"
 				>
 			</File>
 		</Filter>

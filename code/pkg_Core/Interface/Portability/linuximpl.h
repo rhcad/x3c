@@ -117,6 +117,33 @@ int MultiByteToWideChar(int codepage, DWORD flags,
 {
     return 0;
 }
-                        
+
+long InterlockedIncrement(long* p)
+{
+    return ++(*p);
+}
+
+long InterlockedDecrement(long* p)
+{
+    return --(*p);
+}
+
+long InterlockedExchange(long* p, long v)
+{
+    long old = *p;
+    *p = v;
+    return old;
+}
+
+void* InterlockedCompareExchange(void** p, void* newv, void* cmp)
+{
+    void* old = *p;
+    if (cmp == *p)
+    {
+        *(long*)p = (long)newv;
+    }
+    return old;
+}
+
 #endif // __linux__
 #endif // X3LINUX_PORTABILITY_IMPL_H

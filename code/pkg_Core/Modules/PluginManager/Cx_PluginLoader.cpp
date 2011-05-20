@@ -15,7 +15,7 @@
 //          Not call ReleaseModule if a plugin is not loaded in UnloadPlugins.
 //          Force load ConfigXml plugin if the class file is about to loaded.
 
-#include "stdafx.h"
+#include <PluginInc.h>
 #include "Cx_PluginLoader.h"
 #include <Ix_AppWorkPath.h>
 #include <LockCount.h>
@@ -227,7 +227,7 @@ long Cx_PluginLoader::InitializePlugins()
         if (pfn && !(*pfn)())
         {
             GetModuleFileNameW(m_modules[i].hdll, m_modules[i].filename, MAX_PATH);
-            LOG_WARNING2(LOGHEAD L"IDS_INITPLUGIN_FAIL", m_modules[i].filename);
+            LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", m_modules[i].filename);
             VERIFY(UnloadPlugin(m_modules[i].filename));
             i--;
         }
@@ -555,7 +555,7 @@ bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
 
         if (pfn && !(*pfn)())
         {
-            LOG_WARNING2(LOGHEAD L"IDS_INITPLUGIN_FAIL", filename);
+            LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", filename);
             VERIFY(UnloadPlugin(filename));
         }
         else

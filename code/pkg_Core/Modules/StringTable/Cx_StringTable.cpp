@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_StringTable.h"
 #include <ScanFiles.h>
 #include <Ix_ConfigXml.h>
@@ -29,7 +29,7 @@ std::wstring Cx_StringTable::GetValue(const std::wstring& module,
     }
     if (value.empty())
     {
-        LOG_WARNING2(LOGHEAD L"IDS_NO_STRVALUE", module + L":" + id);
+        LOG_WARNING2(L"@StringTable:IDS_NO_STRVALUE", module + L":" + id);
     }
 
     return value;
@@ -114,7 +114,7 @@ long Cx_StringTable::LoadFiles(const std::wstring& path)
     
     if (0 == count)
     {
-        LOG_INFO2(LOGHEAD L"IDS_NO_STRFILE", path);
+        LOG_INFO2(L"@StringTable:IDS_NO_STRFILE", path);
     }
 
     return count;
@@ -129,7 +129,7 @@ long Cx_StringTable::RegisterFile(const std::wstring& filename)
     }
 
     pIFFile->SetFileName(filename.c_str());
-    LOG_DEBUG2(LOGHEAD L"IDS_LOAD_STRFILE", PathFindFileNameW(filename.c_str()));
+    LOG_DEBUG2(L"@StringTable:IDS_LOAD_STRFILE", PathFindFileNameW(filename.c_str()));
 
     long count = 0;
     for (int i = 0; i < 99; i++)
@@ -151,7 +151,7 @@ long Cx_StringTable::RegisterFile(const std::wstring& filename)
         }
         else
         {
-            LOG_WARNING2(LOGHEAD L"IDS_IGNORE_STRGROUP", item.module);
+            LOG_WARNING2(L"@StringTable:IDS_IGNORE_STRGROUP", item.module);
         }
     }
 

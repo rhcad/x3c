@@ -5,7 +5,8 @@
 // 2011-01-15, Zhang Yun Gui: IsSpaceChar() support '\r' and '\n'.
 //
 
-#include "stdafx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_TextUtil.h"
 #include <ConvStr.h>
 #include <SysErrStr.h>
@@ -32,7 +33,7 @@ DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
     else
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL",
+        LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
 
@@ -132,7 +133,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
     if (!OpenFileForRead(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_OPEN_FAIL",
+        LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -144,7 +145,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
         {
             if (dwLength > nLenLimitMB * 1024L * 1024L)
             {
-                LOG_WARNING2(LOGHEAD L"IDS_HUGE_FILE",
+                LOG_WARNING2(L"@TextUtility:IDS_HUGE_FILE",
                     (dwLength / (1024.0*1024.0)) << L"MB, " << filename);
                 dwLength = nLenLimitMB * 1024L * 1024L;
             }
@@ -162,7 +163,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
                 bRet = GetFileContent(content, buf.ptr, dwBytesRead, codepage);
                 if (!bRet)
                 {
-                    LOG_WARNING2(LOGHEAD L"IDS_NOT_ANSIFILE", filename);
+                    LOG_WARNING2(L"@TextUtility:IDS_NOT_ANSIFILE", filename);
                 }
             }
         }
@@ -193,7 +194,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
     if (!OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL",
+        LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -236,7 +237,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
     if (!OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(LOGHEAD L"IDS_WRITE_FAIL",
+        LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -458,9 +459,9 @@ bool Cx_TextUtil::ReplaceChar(std::wstring& text,
 bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
 {
     bool changed = false;
-#ifdef _MSC_VER
     std::wstring dest(L'\0', text.size() + 1);
 
+#ifdef _MSC_VER
     if (!text.empty() && punct)
     {
         int ret = LCMapStringW(
@@ -474,8 +475,9 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
             text = dest;
             changed = true;
         }
-    }
-    else if (!text.empty())
+    } else
+#endif
+    if (!text.empty())
     {
         const wchar_t* psrc = text.c_str();
         wchar_t* pdest = &dest[0];
@@ -511,7 +513,6 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
             changed = true;
         }
     }
-#endif
 
     return changed;
 }

@@ -46,7 +46,6 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="4"
 			/>
@@ -120,7 +119,6 @@
 				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -219,10 +217,6 @@
 			>
 			<File
 				RelativePath=".\Cx_Example.h"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.h"
 				>
 			</File>
 		</Filter>

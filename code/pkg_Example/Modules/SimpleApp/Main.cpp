@@ -1,5 +1,6 @@
-#include "stdafx.h"
+#include <PluginInc.h>
 #include <PluginManager.h>
+#include <XComCreator.h>
 
 void Test();
 

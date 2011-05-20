@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "DbFunc.h"
 #include <ReadInts.h>
 
@@ -27,11 +27,11 @@ void DbFunc::PrintComError(_com_error &e, const char* file, long lLine, const wc
 
     if (bSQLError)
     {
-        LOG_EVENT_2(LOGHEAD L"IDS_SQL_ERROR", towstr(strError), kLogType_Error, file, lLine);
+        LOG_EVENT_2(L"@ConfigDB:IDS_SQL_ERROR", towstr(strError), kLogType_Error, file, lLine);
     }
     else
     {
-        LOG_EVENT_2(LOGHEAD L"IDS_DB_ERROR", towstr(strError), kLogType_Error, file, lLine);
+        LOG_EVENT_2(L"@ConfigDB:IDS_DB_ERROR", towstr(strError), kLogType_Error, file, lLine);
     }
 }
 
@@ -39,11 +39,11 @@ void DbFunc::PrintInfo(const wchar_t* pszMsg, const char* file, long lLine, bool
 {
     if (bError)
     {
-        LOG_EVENT_2(LOGHEAD L"IDS_DB_ERROR", pszMsg, kLogType_Error, file, lLine);
+        LOG_EVENT_2(L"@ConfigDB:IDS_DB_ERROR", pszMsg, kLogType_Error, file, lLine);
     }
     else
     {
-        LOG_EVENT_2(LOGHEAD L"IDS_DB_INFO", pszMsg, kLogType_Info, file, lLine);
+        LOG_EVENT_2(L"@ConfigDB:IDS_DB_INFO", pszMsg, kLogType_Info, file, lLine);
     }
 }
 
@@ -51,7 +51,7 @@ void DbFunc::PrintError(CException* e, const char* file, long lLine)
 {
     TCHAR szErrorMessage[512];
     e->GetErrorMessage(szErrorMessage, _countof(szErrorMessage));
-    LOG_EVENT_2(LOGHEAD L"IDS_DB_ERROR", szErrorMessage, kLogType_Error, file, lLine);
+    LOG_EVENT_2(L"@ConfigDB:IDS_DB_ERROR", szErrorMessage, kLogType_Error, file, lLine);
 }
 
 static inline void cutstr(wchar_t* pch)

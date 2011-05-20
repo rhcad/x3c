@@ -3,14 +3,14 @@
 // Changes:
 // 2011-02-28: Add FOF_SILENT flag for SHFileOperationW.
 
-#include "stdafx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_FileUtility.h"
-#include <io.h>
-#include <tchar.h>
 #include <SysErrStr.h>
 #include <RelToAbs.h>
 
 #ifdef _MSC_VER
+#include <io.h>
 #include <shellapi.h>
 #pragma comment(lib,"shell32.lib")
 #endif
@@ -40,8 +40,13 @@ static void ReplaceSlash(wchar_t* path)
 
 bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
 {
-    return IsNotNull(filename)
-        && _waccess(filename, bWrite ? 6 : 0) == 0;
+    if (!IsNotNull(filename))
+        return false;
+#ifdef _MSC_VER
+    return _waccess(filename, bWrite ? 6 : 0) == 0;
+#else
+    return CheckFileAttributes(filename, NULL, NULL);
+#endif
 }
 
 bool Cx_FileUtility::IsPath(const wchar_t* filename, bool bCheckExists)
@@ -92,7 +97,11 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
     PathAddBackslashW(path);
     nLen = wcslen(path);
 
+#ifdef _MSC_VER
     if (_waccess(path, 0) == 0)
+#else
+    if (CheckFileAttributes(path, NULL, NULL))
+#endif
     {
         return true;
     }
@@ -110,7 +119,11 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
     }
 
     DWORD dwError = GetLastError();
+#ifdef _MSC_VER
     if (_waccess(path, 0) != 0)
+#else
+    if (!CheckFileAttributes(path, NULL, NULL))
+#endif
     {
         std::wostringstream buf;
         if (dwError != 0)
@@ -118,7 +131,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
             buf << GetSystemErrorString(dwError) << L", ";
         }
         buf << filename;
-        LOG_ERROR2(LOGHEAD L"IDS_CREATEDIR_FAIL", buf.str());
+        LOG_ERROR2(L"@FileUtility:IDS_CREATEDIR_FAIL", buf.str());
         return false;
     }
 
@@ -139,7 +152,7 @@ bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* filename)
     if (IsPathFileExists(filename)
         && !SetFileAttributesNormal(filename))
     {
-        LOG_ERROR2(LOGHEAD L"IDS_FILE_CANNOT_WRITE", filename);
+        LOG_ERROR2(L"@FileUtility:IDS_FILE_CANNOT_WRITE", filename);
         return false;
     }
 
@@ -189,11 +202,11 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
 
         if (IsPath(filename, true))
         {
-            LOG_WARNING2(LOGHEAD L"IDS_DELFOLDER_FAIL", buf.str());
+            LOG_WARNING2(L"@FileUtility:IDS_DELFOLDER_FAIL", buf.str());
         }
         else
         {
-            LOG_ERROR2(LOGHEAD L"IDS_DELFILE_FAIL", buf.str());
+            LOG_ERROR2(L"@FileUtility:IDS_DELFILE_FAIL", buf.str());
         }
 
         return false;
@@ -216,7 +229,7 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     if (!IsPathFileExists(oldfile))
     {
         InterlockedExchange(&s_nFileOpRet, GetLastError());
-        LOG_INFO2(LOGHEAD L"IDS_FILE_NOTEXIST", oldfile << L", " << s_nFileOpRet);
+        LOG_INFO2(L"@FileUtility:IDS_FILE_NOTEXIST", oldfile << L", " << s_nFileOpRet);
         return false;
     }
     else
@@ -267,7 +280,7 @@ bool Cx_FileUtility::MovePathFile(const wchar_t* oldfile, const wchar_t* newfile
             std::wostringstream buf;
             buf << GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
-            LOG_ERROR2(LOGHEAD L"IDS_MOVEFILE_FAIL", buf.str());
+            LOG_ERROR2(L"@FileUtility:IDS_MOVEFILE_FAIL", buf.str());
         }
         return false;
     }
@@ -283,7 +296,7 @@ bool Cx_FileUtility::RenamePathFile(const wchar_t* oldfile, const wchar_t* newfi
             std::wostringstream buf;
             buf << GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
-            LOG_ERROR2(LOGHEAD L"IDS_RENFILE_FAIL", buf.str());
+            LOG_ERROR2(L"@FileUtility:IDS_RENFILE_FAIL", buf.str());
         }
         return false;
     }
@@ -298,7 +311,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
     }
     if (!IsPathFileExists(oldfile))
     {
-        LOG_INFO2(LOGHEAD L"IDS_FILE_NOTEXIST", oldfile);
+        LOG_INFO2(L"@FileUtility:IDS_FILE_NOTEXIST", oldfile);
         return false;
     }
 
@@ -317,7 +330,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
             std::wostringstream buf;
             buf << GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
-            LOG_ERROR2(LOGHEAD L"IDS_COPYFILE_FAIL", buf.str());
+            LOG_ERROR2(L"@FileUtility:IDS_COPYFILE_FAIL", buf.str());
         }
         return false;
     }

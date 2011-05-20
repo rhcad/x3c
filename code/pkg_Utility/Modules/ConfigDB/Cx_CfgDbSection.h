@@ -6,6 +6,7 @@
 
 #include <Ix_ConfigSection.h>
 #include <Ix_ConfigTransaction.h>
+#include "msado15.tlh"
 
 class Cx_CfgDatabase;
 

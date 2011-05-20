@@ -6,7 +6,8 @@
 // 2011-02-24: Check NULL string in Cx_ConfigXml::GetSection().
 // 2011-05-12: Output error info when saving file.
 
-#include "StdAfx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_ConfigXml.h"
 #include "Cx_XmlSection.h"
 #include "ConfigXmlImpl.h"
@@ -100,13 +101,13 @@ bool ConfigXmlImpl::Reload()
         else
         {
             m_xmlDoc = NULL;
-            LOG_WARNING2(LOGHEAD L"IDS_LOADXML_ROOT_MISMATCH", m_strFileName);
+            LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_ROOT_MISMATCH", m_strFileName);
         }
     }
     else
     {
         if (PathFileExistsW(m_strFileName.c_str()))
-            LOG_WARNING2(LOGHEAD L"IDS_LOADXML_FAIL", m_strFileName);
+            LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_FAIL", m_strFileName);
     }
 
     if (NULL == m_xmlDoc || NULL == m_xmlRoot)
@@ -285,19 +286,19 @@ bool Cx_ConfigXml::SetXmlContent(const std::wstring& content)
         if (!bRet)
         {
             m_pImpl->m_xmlDoc = NULL;
-            LOG_WARNING2(LOGHEAD L"IDS_LOADXML_ROOT_MISMATCH",
+            LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_ROOT_MISMATCH",
                 CXmlUtil::GetRootName(m_pImpl->m_xmlDoc));
         }
     }
     else if (content.empty())
     {
-        LOG_WARNING(LOGHEAD L"IDS_LOADXML_EMPTY");
+        LOG_WARNING(L"@ConfigXml:IDS_LOADXML_EMPTY");
     }
     else
     {
         wchar_t buf[81];
         wcsncpy_s(buf, _countof(buf), content.c_str(), _countof(buf));
-        LOG_WARNING2(LOGHEAD L"IDS_LOADXMLSTR_FAIL", buf);
+        LOG_WARNING2(L"@ConfigXml:IDS_LOADXMLSTR_FAIL", buf);
     }
 
     if (!bRet)
@@ -353,11 +354,11 @@ bool Cx_ConfigXml::EndTransaction()
 
         if (bRet)
         {
-            LOG_DEBUG2(LOGHEAD L"IDS_SAVEXML_OK", m_pImpl->m_strFileName);
+            LOG_DEBUG2(L"@ConfigXml:IDS_SAVEXML_OK", m_pImpl->m_strFileName);
         }
         else
         {
-            LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", 
+            LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", 
                 GetSystemErrorString(CXmlUtil::GetLastErrorResult())
                 << L", " << m_pImpl->m_strFileName);
         }
@@ -379,7 +380,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
 
     if (strFileName.empty())
     {
-        LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", L"--");
+        LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", L"--");
         return false;
     }
 
@@ -395,7 +396,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     }
     else
     {
-        LOG_WARNING2(LOGHEAD L"IDS_SAVEXML_FAIL", 
+        LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", 
             GetSystemErrorString(CXmlUtil::GetLastErrorResult())
             << L", " << strFileName);
     }

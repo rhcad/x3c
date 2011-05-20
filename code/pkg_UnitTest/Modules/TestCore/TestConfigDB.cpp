@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "stdafx.h"
+#include <UnitTestInc.h>
 #include "TestConfigDB.h"
 
 #include <Xml/Ix_ConfigTransaction.h>
@@ -15,9 +15,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#ifdef _MSC_VER
 CPPUNIT_TEST_SUITE_REGISTRATION( TestConfigDB );
-#endif
 
 TestConfigDB::TestConfigDB()
 {

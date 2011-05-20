@@ -32,7 +32,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include=<PluginInc.h>>
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cx_Example2.h">

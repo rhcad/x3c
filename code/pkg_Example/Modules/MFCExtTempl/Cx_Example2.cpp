@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_Example2.h"
 
 Cx_Example2::Cx_Example2()

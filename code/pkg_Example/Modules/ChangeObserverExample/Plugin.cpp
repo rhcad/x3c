@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <PluginInc.h>
 #include "DocObserverTest.h"
 
 static CDocObserverTestOnRun* s_observer = NULL;

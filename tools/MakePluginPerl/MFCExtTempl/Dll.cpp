@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <PluginInc.h>
 #include <afxdllx.h>
 
 #ifdef _DEBUG

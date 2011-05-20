@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\Win32DllTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\Win32DllTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -92,10 +92,7 @@ SOURCE=..\..\..\code\pkg_Example\Interface\Ix_Example.h
 
 SOURCE=..\..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.h
 # End Source File
-# Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\Win32DllTempl\StdAfx.h
-# End Source File
 # End Group
 # Begin Group "Source Files"
 
@@ -112,11 +109,7 @@ SOURCE=..\..\..\code\pkg_Example\Modules\Win32DllTempl\Module.cpp
 
 SOURCE=..\..\..\code\pkg_Example\Modules\Win32DllTempl\Plugin.cpp
 # End Source File
-# Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\Win32DllTempl\StdAfx.cpp
-# ADD CPP /Yc"stdafx.h"
-# End Source File
 # End Group
 # Begin Group "Resource Files"
 

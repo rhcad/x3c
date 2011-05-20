@@ -58,8 +58,6 @@
 			</Target>
 		</Build>
 		<Unit filename="..\..\code\pkg_Example\Modules\SimpleUse\Main.cpp" />
-		<Unit filename="..\..\code\pkg_Example\Modules\SimpleUse\StdAfx.cpp" />
-		<Unit filename="..\..\code\pkg_Example\Modules\SimpleUse\StdAfx.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -7,7 +7,7 @@
 // v4: 2011.02.07, ooyg: Implement the delay-loaded feature.
 // v5: 2011.02.16, ooyg: Avoid plugin loading when a plugin is unloading.
 
-#include "StdAfx.h"
+#include <PluginInc.h>
 #include "Cx_ObjectFactory.h"
 
 Cx_ObjectFactory::Cx_ObjectFactory()

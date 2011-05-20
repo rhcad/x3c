@@ -64,7 +64,6 @@
 			</Target>
 		</Build>
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogObserver.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appender.cxx" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appenderattachableimpl.cxx" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\configurator.cxx" />
@@ -105,7 +104,6 @@
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogObserver.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Module.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Plugin.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogWriter.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

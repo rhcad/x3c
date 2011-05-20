@@ -55,10 +55,8 @@
 		<Unit filename="..\..\code\pkg_Core\Interface\ChangeObserver\Ix_ChangeManager.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\ChangeObserver\Ix_ChangeObserver.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ChangeManager\Cx_ChangeManager.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ChangeManager\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ChangeManager\Cx_ChangeManager.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ChangeManager\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ChangeManager\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ChangeManager\ChangeManager.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

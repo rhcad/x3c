@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <PluginInc.h>
 
 // 有该函数时，在插件加载时由插件管理器调用，可做关键初始化操作
 OUTAPI bool InitializePlugin()

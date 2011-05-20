@@ -1,7 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "stdafx.h"
+#include <UnitTestInc.h>
 #include "TestLogging.h"
 #include <Log/LogHelper.h>
 
@@ -133,8 +133,8 @@ public:
     }
 
 private:
-    virtual void OnPushGroup(long nLevel, 
-        const std::wstring& wstrMsg, const std::wstring& wstrExtra, 
+    virtual void OnPushGroup(long nLevel,
+        const std::wstring& wstrMsg, const std::wstring& wstrExtra,
         const std::wstring& wstrModule, const std::wstring& wstrID)
     {
         nLevel; wstrMsg; wstrExtra; wstrModule; wstrID;
@@ -147,9 +147,9 @@ private:
         m_count++;
     }
 
-    virtual void OnWriteLog(int nType, 
-        const std::wstring& wstrMsg, const std::wstring& wstrExtra, 
-        const std::wstring& wstrModule, const std::wstring& wstrID, 
+    virtual void OnWriteLog(int nType,
+        const std::wstring& wstrMsg, const std::wstring& wstrExtra,
+        const std::wstring& wstrModule, const std::wstring& wstrID,
         const std::wstring& wstrFile, long nLine)
     {
         nType; wstrMsg; wstrExtra; wstrModule; wstrID; wstrFile; nLine;

@@ -28,19 +28,10 @@ typedef unsigned short WORD;
 typedef unsigned long DWORD;
 typedef DWORD ULONG;
 
-inline void DebugBreak() {}
-inline long InterlockedIncrement(long* p) { return ++(*p); }
-inline long InterlockedDecrement(long* p) { return --(*p); }
-inline long InterlockedExchange(long* p, long v)
-    { long old = *p; *p = v; return old; }
-inline void* InterlockedCompareExchange(void** p, void* newv, void* cmp)
-{
-    void* old = *p;
-    if (cmp == *p)
-        *(long*)p = (long)newv;
-    return old;
-}
-
+long InterlockedIncrement(long* p);
+long InterlockedDecrement(long* p);
+long InterlockedExchange(long* p, long v);
+void* InterlockedCompareExchange(void** p, void* newv, void* cmp);
 
 bool FreeLibrary(HMODULE hdll);
 HMODULE LoadLibraryW(const wchar_t* filename);
@@ -88,5 +79,7 @@ inline int _stricmp(const char* s1, const char* s2)
     { return strncasecmp(s1, s2, strlen(s1)); }
 inline int _wcsicmp(const wchar_t* s1, const wchar_t* s2)
     { return wcsncasecmp(s1, s2, wcslen(s1)); }
+inline int _wcsnicmp(const wchar_t* s1, const wchar_t* s2, int count)
+    { return wcsncasecmp(s1, s2, count); }
 
 #endif // X3GCC_PORTABILITY_H

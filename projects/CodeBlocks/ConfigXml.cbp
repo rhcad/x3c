@@ -61,11 +61,9 @@
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_ConfigXml.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_XmlSection.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_ConfigXml.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_XmlSection.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\ConfigXml.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

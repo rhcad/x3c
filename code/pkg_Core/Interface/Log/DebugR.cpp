@@ -14,6 +14,8 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
     {
         pIFManager->CrtDbgReport(msg, file, line);
     }
+#else
+    file;line;msg;
 #endif
     return 0;
 }

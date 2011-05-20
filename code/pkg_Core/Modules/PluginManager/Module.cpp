@@ -3,10 +3,11 @@
 // v1: 2011.2.7, ooyg: Add Ix_AppWorkPath.
 // v2: 2011.2.8, ooyg: Add Ix_PluginDelayLoad.
 
-#include "stdafx.h"
+#include <PluginInc.h>
 #include "Cx_PluginLoader.h"
 #include <Ix_AppWorkPath.h>
 #include <RelToAbs.h>
+#include <Log/DebugR.cpp>
 
 #ifndef _MSC_VER
 #include "../Portability/portimpl.h"
@@ -77,7 +78,7 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
     return s_loader.CreateObject(clsid, ppv, xGetModuleHandle());
 }
 
-#if defined(_USRDLL) && defined(_MSC_VER)
+#if defined(_USRDLL) && defined(_WIN32)
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, void* lpReserved)
 {
     lpReserved;

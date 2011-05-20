@@ -1,7 +1,8 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "StdAfx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_TempFolder.h"
 #include <Ix_FileUtility.h>
 #include <Ix_FileTransaction.h>

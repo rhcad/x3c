@@ -1,7 +1,8 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include "stdafx.h"
+#define _NEED_STDIO
+#include <PluginInc.h>
 #include "Cx_GuidGenerator.h"
 
 #ifdef _MSC_VER
@@ -42,7 +43,7 @@ std::wstring Cx_GuidGenerator::CreateGuid(bool withBrackets)
     }
     else
     {
-        LOG_WARNING2(LOGHEAD L"IDS_COCREATEGUID_FAIL", GetSystemErrorString(hr));
+        LOG_WARNING2(L"@TextUtility:IDS_COCREATEGUID_FAIL", GetSystemErrorString(hr));
     }
 
     return wstrGuid;

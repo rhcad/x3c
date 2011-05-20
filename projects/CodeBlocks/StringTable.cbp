@@ -57,10 +57,8 @@
 		</Build>
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\Ix_StringTable.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\StringTable\StringTable.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

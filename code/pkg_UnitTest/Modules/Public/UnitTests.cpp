@@ -4,7 +4,8 @@
 // 2011.2.14, ooyg: Support MFC dialog application and console application.
 //
 
-#include "stdafx.h"
+#include <UnitTestInc.h>
+#include <XComCreator.h>
 
 #if defined(_AFXDLL) && !defined(_CONSOLE)
 #include <cppunit/ui/mfc/TestRunner.h>

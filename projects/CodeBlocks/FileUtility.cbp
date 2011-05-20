@@ -63,13 +63,11 @@
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\FileTransaction.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\StdAfx.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileTransaction.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Module.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Plugin.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\StdAfx.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\FileUtility.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
