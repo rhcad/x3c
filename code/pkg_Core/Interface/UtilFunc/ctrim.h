@@ -1,14 +1,18 @@
 #ifndef UTILFUNC_CTRIM_H_
 #define UTILFUNC_CTRIM_H_
 
+#ifdef _MSC_VER
 #pragma warning (push, 2)
+#endif
 #include <iterator>
 #include <functional>
 #include <algorithm>
 #ifndef __GNUC__
 #include <locale>
 #endif
+#ifdef _MSC_VER
 #pragma warning (pop)
+#endif
 
 namespace trim
 {

@@ -17,7 +17,7 @@ class Cx_Module : public Ix_Module
 {
 public:
     Cx_Module();
-    ~Cx_Module();
+    virtual ~Cx_Module();
 
     //! Initialize this plugin. Used by _xGetModuleInterface().
     void Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule);
@@ -31,6 +31,9 @@ public:
     HMODULE SetModuleResourceHandle(HMODULE hResource);
 
 private:
+    Cx_Module(const Cx_Module&);
+    void operator=(const Cx_Module&);
+
     Ix_ObjectFactory*   m_pFactory;
     HMODULE         m_hModule;
     HMODULE         m_hResource;
