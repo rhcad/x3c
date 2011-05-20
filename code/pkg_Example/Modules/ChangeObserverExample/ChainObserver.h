@@ -25,6 +25,7 @@ public:
         }
 
         int*    sum;
+        NOCOPY_CONSTRUCTOR(Data);
     };
 
 protected:
@@ -45,6 +46,7 @@ private:
         ASSERT(mydata && mydata->sum);
         OnChain(*(mydata->sum));
     }
+    NOCOPY_CONSTRUCTOR(ChainObserver);
 };
 
 #endif // EXAMPLE_CHAIN_OBSERVER_H_

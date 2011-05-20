@@ -57,12 +57,12 @@ private:
 
 static Cx_PluginLoaderOut s_loader;
 
-extern "C" __declspec(dllexport) Ix_ObjectFactory* xGetRegisterBank()
+OUTAPI Ix_ObjectFactory* xGetRegisterBank()
 {
     return &s_loader;
 }
 
-extern "C" __declspec(dllexport) HMODULE xGetMainModuleHandle()
+OUTAPI HMODULE xGetMainModuleHandle()
 {
     return s_loader.GetMainModuleHandle();
 }

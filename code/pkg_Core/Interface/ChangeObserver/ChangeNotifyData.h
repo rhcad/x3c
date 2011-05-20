@@ -11,6 +11,11 @@
 #include "XComPtr.h"
 #include "Ix_ChangeManager.h"
 
+#define NOCOPY_CONSTRUCTOR(cls) \
+private:                \
+    cls(const cls&);    \
+    void operator=(const cls&)
+
 //! The base class of change observer event data.
 /*!
     \ingroup _GROUP_CHANGE_OBSERVER_
@@ -48,8 +53,7 @@ public:
 
 private:
     ChangeNotifyData();
-    ChangeNotifyData(const ChangeNotifyData&);
-    void operator=(const ChangeNotifyData&);
+    NOCOPY_CONSTRUCTOR(ChangeNotifyData);
 
     const char*     m_type;
 };
@@ -123,8 +127,7 @@ private:
 
 private:
     ChangeObserver();
-    ChangeObserver(const ChangeObserver&);
-    void operator=(const ChangeObserver&);
+    NOCOPY_CONSTRUCTOR(ChangeObserver);
 
     const char*     m_type;
     long            m_times;

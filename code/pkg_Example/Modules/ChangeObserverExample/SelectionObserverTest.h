@@ -4,6 +4,7 @@
 
 class CNodeSelectionTestOnlyReceive : private NodeSelectionObserver
 {
+    NOCOPY_CONSTRUCTOR(CNodeSelectionTestOnlyReceive);
 public:
     CNodeSelectionTestOnlyReceive()
     {
@@ -18,6 +19,7 @@ private:
 
 class CNodeSelectionTestSendReceive : private NodeSelectionObserver
 {
+    NOCOPY_CONSTRUCTOR(CNodeSelectionTestSendReceive);
 public:
     CNodeSelectionTestSendReceive()
     {

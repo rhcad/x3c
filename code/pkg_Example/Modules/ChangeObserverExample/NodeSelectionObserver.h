@@ -15,10 +15,12 @@
 */
 class NodeSelectionObserver : public ChangeObserver
 {
+    NOCOPY_CONSTRUCTOR(NodeSelectionObserver);
 public:
     //! NodeSelectionObserver 观察者的通知数据类
     class Data : public ChangeNotifyData
     {
+        NOCOPY_CONSTRUCTOR(Data);
     public:
         Data(long _objid, NodeSelectionObserver* _sender)
             : ChangeNotifyData(typeid(NodeSelectionObserver).name())

@@ -5,6 +5,7 @@
 class CDocObserverTest
     : private DocEventObserver
 {
+    NOCOPY_CONSTRUCTOR(CDocObserverTest);
 public:
     CDocObserverTest(int* data) : m_data(data)
     {
@@ -23,6 +24,7 @@ private:
 class CDocObserverTestOnRun
     : private DocEventObserver
 {
+    NOCOPY_CONSTRUCTOR(CDocObserverTestOnRun);
 public:
     CDocObserverTestOnRun()
     {

@@ -6,9 +6,9 @@
 
 #if defined (__GNUC__)    // GCC
 #if defined (__linux__)
-#include "../Portability/linuximpl.h"
+#include "linuximpl.h"
 #elif defined (__MACOS__)
-#include "../Portability/macimpl.h"
+#include "macimpl.h"
 #endif
 #endif // __GNUC__
 

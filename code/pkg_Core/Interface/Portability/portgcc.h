@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <wchar.h>
 
-#undef _WIN32
-
 #ifndef interface
 #define interface struct
 #endif
@@ -16,6 +14,7 @@
 #define EXTERN_C
 #define STDCALL
 #define DECLEXPORT
+#define OUTAPI      EXTERN_C DECLEXPORT
 
 #ifndef MAX_PATH
 #define MAX_PATH 256

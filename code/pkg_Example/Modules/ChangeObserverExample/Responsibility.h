@@ -5,6 +5,7 @@
 class CResponsibility1
     : private ChainObserver
 {
+    NOCOPY_CONSTRUCTOR(CResponsibility1);
 public:
     CResponsibility1()
     {
@@ -20,6 +21,7 @@ private:
 class CResponsibility2
     : private ChainObserver
 {
+    NOCOPY_CONSTRUCTOR(CResponsibility2);
 public:
     CResponsibility2()
     {

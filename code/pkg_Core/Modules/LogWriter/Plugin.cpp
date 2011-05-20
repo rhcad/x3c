@@ -6,7 +6,7 @@
 
 static CLogObserver* s_pObserver = NULL;
 
-extern "C" __declspec(dllexport) bool InitializePlugin()
+OUTAPI bool InitializePlugin()
 {
     ASSERT(!s_pObserver);
     s_pObserver = new CLogObserver;
@@ -14,7 +14,7 @@ extern "C" __declspec(dllexport) bool InitializePlugin()
     return true;
 }
 
-extern "C" __declspec(dllexport) void UninitializePlugin()
+OUTAPI void UninitializePlugin()
 {
     SafeDelete(s_pObserver);
 }

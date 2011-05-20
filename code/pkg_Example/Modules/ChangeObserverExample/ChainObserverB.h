@@ -15,10 +15,12 @@
 */
 class ChainObserverB : public ChangeObserver
 {
+    NOCOPY_CONSTRUCTOR(ChainObserverB);
 public:
     //! ChainObserverB 观察者的通知数据类
     class Data : public ChangeNotifyData
     {
+        NOCOPY_CONSTRUCTOR(Data);
     public:
         //! 第一种职责链通知
         static bool DoWork1(int value)

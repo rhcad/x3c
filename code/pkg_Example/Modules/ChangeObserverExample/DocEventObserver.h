@@ -23,10 +23,12 @@ enum kDocEventType
 */
 class DocEventObserver : public ChangeObserver
 {
+    NOCOPY_CONSTRUCTOR(DocEventObserver);
 public:
     //! DocEventObserver 观察者的通知数据类
     class Data : public ChangeNotifyData
     {
+        NOCOPY_CONSTRUCTOR(Data);
     public:
         Data(kDocEventType _event)
             : ChangeNotifyData(typeid(DocEventObserver).name()), event(_event)

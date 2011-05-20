@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Cx_TempFolder.h"
 
-extern "C" __declspec(dllexport) void UninitializePlugin()
+OUTAPI void UninitializePlugin()
 {
     Cx_TempFolder::DeleteFolders();
 }

@@ -68,9 +68,9 @@ public:
 };
 
 int ConfigXmlImpl::c_nInitCom = 0;
-extern "C" __declspec(dllexport) bool xCanUnloadPlugin();
+OUTAPI bool xCanUnloadPlugin();
 
-extern "C" __declspec(dllexport) void UninitializePlugin()
+OUTAPI void UninitializePlugin()
 {
     if (1 == ConfigXmlImpl::c_nInitCom && xCanUnloadPlugin())
     {

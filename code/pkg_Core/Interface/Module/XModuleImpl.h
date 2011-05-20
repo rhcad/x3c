@@ -17,8 +17,6 @@
 #include "../Portability/portimpl.h"
 #endif
 
-#define OUTAPI  EXTERN_C DECLEXPORT
-
 OUTAPI Ix_Module*   _xGetModuleInterface(Ix_ObjectFactory*, HMODULE);
 OUTAPI DWORD    _xGetClassEntryTable(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
 OUTAPI int      _xInternalCreateObject(const char*, Ix_Object**, HMODULE);
