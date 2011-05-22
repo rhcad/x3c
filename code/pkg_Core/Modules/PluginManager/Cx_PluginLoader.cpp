@@ -103,7 +103,7 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
                                   const wchar_t* path, const wchar_t* ext,
                                   bool recursive)
 {
-#ifdef _MSC_VER
+#ifdef _WIN32
     WIN32_FIND_DATAW fd;
     wchar_t filename[MAX_PATH];
     const int extlen = wcslen(ext);
@@ -146,7 +146,7 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
     {
         FindPlugins(filenames, it->c_str(), ext, recursive);
     }
-#endif // _MSC_VER
+#endif // _WIN32
 }
 
 bool Cx_PluginLoader::issep(wchar_t c)
@@ -323,7 +323,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
             ASSERT(existIndex < 0 || existIndex == moduleIndex);
 
             m_modules[moduleIndex].owned = true;
-#ifdef _MSC_VER
+#ifdef _WIN32
             DisableThreadLibraryCalls(hdll);
 #endif
         }
@@ -469,7 +469,7 @@ void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
     wchar_t* buf = NULL;
 
     m_delayFiles.clear();
-#ifdef _MSC_VER
+#ifdef _WIN32
     while (true)
     {
         buf = new wchar_t[size];

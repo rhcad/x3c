@@ -461,7 +461,7 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
     bool changed = false;
     std::wstring dest(L'\0', text.size() + 1);
 
-#ifdef _MSC_VER
+#ifdef _WIN32
     if (!text.empty() && punct)
     {
         int ret = LCMapStringW(

@@ -18,7 +18,6 @@
 					<Add option="-fexceptions" />
 					<Add option="-O2" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Example\Modules\ChangeObserverExample" />
@@ -41,7 +40,6 @@
 					<Add option="-fexceptions" />
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Example\Modules\ChangeObserverExample" />

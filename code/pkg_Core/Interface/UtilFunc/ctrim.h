@@ -1,7 +1,7 @@
 #ifndef UTILFUNC_CTRIM_H_
 #define UTILFUNC_CTRIM_H_
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER     // hide warnings
 #pragma warning (push, 2)
 #endif
 #include <iterator>
@@ -10,7 +10,7 @@
 #ifndef __GNUC__
 #include <locale>
 #endif
-#ifdef _MSC_VER
+#ifdef _MSC_VER         // hide warnings
 #pragma warning (pop)
 #endif
 

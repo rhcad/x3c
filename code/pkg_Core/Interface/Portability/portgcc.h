@@ -7,10 +7,6 @@
 #include <stdlib.h>
 #include <wchar.h>
 
-#ifndef interface
-#define interface struct
-#endif
-
 #define EXTERN_C
 #define STDCALL
 #define DECLEXPORT

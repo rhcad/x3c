@@ -32,7 +32,7 @@
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
     \param msg logging text, can be UNICODE string or other type number (not ANSI string).
-        if the first char is '@' and leading as 'Module:StrID' format, 
+        if the first char is '@' and leading as 'Module:StrID' format,
         then the manager will translate into localization text.
 */
 #define LOG_DEBUG(msg)  \
@@ -53,7 +53,7 @@
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
     \param msg logging text, can be UNICODE string or other type number (not ANSI string).
-        if the first char is '@' and leading as 'Module:StrID' format, 
+        if the first char is '@' and leading as 'Module:StrID' format,
         then the manager will translate into localization text.
 */
 #define LOG_INFO(msg)   \
@@ -74,7 +74,7 @@
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
     \param msg logging text, can be UNICODE string or other type number (not ANSI string).
-        if the first char is '@' and leading as 'Module:StrID' format, 
+        if the first char is '@' and leading as 'Module:StrID' format,
         then the manager will translate into localization text.
 */
 #define LOG_WARNING(msg)        \
@@ -95,7 +95,7 @@
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
     \param msg logging text, can be UNICODE string or other type number (not ANSI string).
-        if the first char is '@' and leading as 'Module:StrID' format, 
+        if the first char is '@' and leading as 'Module:StrID' format,
         then the manager will translate into localization text.
 */
 #define LOG_ERROR(msg)  \
@@ -116,7 +116,7 @@
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
     \param msg logging text, can be UNICODE string or other type number (not ANSI string).
-        if the first char is '@' and leading as 'Module:StrID' format, 
+        if the first char is '@' and leading as 'Module:StrID' format,
         then the manager will translate into localization text.
 */
 #define LOG_FATAL(msg)      \
@@ -162,7 +162,7 @@ inline void UnRegisterLogObserver(ILogObserver* observer)
 }
 
 //! Helper class for logging group, auto begin and end group.
-/*! Use this class to define variable in local function, eg: 
+/*! Use this class to define variable in local function, eg:
     \code
     void MyFunc()
     {
@@ -177,8 +177,8 @@ class CAutoLogGroup
 public:
     //! Constructor, auto begin a new logging group.
     /*!
-        \param msg group message text. 
-            if the first char is '@' and leading as 'Module:StrID' format 
+        \param msg group message text.
+            if the first char is '@' and leading as 'Module:StrID' format
             then the manager will translate into localization text using Ix_StringTable.
         \param extra additional context info.
     */
@@ -201,7 +201,7 @@ public:
     }
 };
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER                 // hide warnings
 #pragma warning(disable:4127)   // conditional expression is constant
 #endif
 

@@ -7,7 +7,12 @@
 
 #include "Cx_ConfigXml.h"
 #include "Cx_XmlSection.h"
+
+#ifdef _MSC_VER
 #include "XmlUtil/XmlUtil.cpp"
+#else
+#include "OpenXml/XmlUtil.cpp"
+#endif
 
 XBEGIN_DEFINE_MODULE()
     XDEFINE_CLASSMAP_ENTRY(CLSID_ConfigXmlFile, Cx_ConfigXml)

@@ -4,7 +4,7 @@
  *  \date   2010.10.19
  */
 
-#ifndef _MSC_VER
+#ifndef _WIN32
 
 int XCrtDbgReport(const char* file, long line, const char* msg)
 {
@@ -20,7 +20,7 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
     return 0;
 }
 
-#else // _MSC_VER
+#else // _WIN32
 
 #pragma comment(lib, "shlwapi.lib")
 #if defined(_WINUSER_) && !defined(NOUSER)
@@ -51,7 +51,7 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
 #if defined(_WINUSER_) && !defined(NOUSER)
         char buf[512];
 
-#if _MSC_VER <= 1200 // VC6
+#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
         sprintf(buf,
 #else
         sprintf_s(buf, 512,

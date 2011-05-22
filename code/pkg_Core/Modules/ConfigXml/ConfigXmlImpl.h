@@ -24,7 +24,6 @@ struct ConfigXmlImpl
     XMLDOMElementPtr    m_xmlRoot;
     IFileCryptHandler*  m_pCryptHandler;
     Ix_ConfigData*      m_pThis;
-    static int          c_nInitCom;
 
     ConfigXmlImpl(Ix_ConfigData* pThis) : m_pThis(pThis)
     {
@@ -34,11 +33,6 @@ struct ConfigXmlImpl
         m_bNeedLoad = true;
         m_strEncoding = L"UTF-8";
         m_pCryptHandler = NULL;
-        if (0 == c_nInitCom)
-        {
-            c_nInitCom = SUCCEEDED(CoInitializeEx(NULL, COINIT_MULTITHREADED))
-                ? 1 : -1;
-        }
     }
 
     ~ConfigXmlImpl()

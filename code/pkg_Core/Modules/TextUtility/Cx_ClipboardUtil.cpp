@@ -4,7 +4,7 @@
 #define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_ClipboardUtil.h"
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <ConvStr.h>
 #include <SysErrStr.h>
 
@@ -119,4 +119,4 @@ bool Cx_ClipboardUtil::CanPasteText()
         || ::IsClipboardFormatAvailable(CF_TEXT);
 }
 
-#endif // _MSC_VER
+#endif // _WIN32

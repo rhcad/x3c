@@ -49,7 +49,8 @@ long ReadInts(const wchar_t* str, IntType* arr, long size, bool signchar = false
         }
         if (j > i)
         {
-            lstrcpynW(buf, str + i, min(_countof(buf), 1 + j - i));
+            int mincnt = _countof(buf) < 1 + j - i ? _countof(buf) : 1 + j - i;
+            wcsncpy_s(buf, _countof(buf), str + i, mincnt);
             arr[count++] = static_cast<IntType>(_wtoi(buf));
         }
         i = j;
@@ -96,7 +97,7 @@ inline long ReadDoubleArray(const wchar_t* str, double* arr, long size)
         }
         if (j > i)
         {
-            lstrcpynW(buf, str + i, min(32, 1 + j - i));
+            wcsncpy_s(buf, _countof(buf), str + i, 32 < 1 + j - i ? 32 : 1 + j - i);
             arr[count++] = wcstod(buf, &endptr);
         }
         i = j;

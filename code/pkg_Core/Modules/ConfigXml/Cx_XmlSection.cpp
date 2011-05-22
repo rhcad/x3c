@@ -3,14 +3,16 @@
 // Changes:
 // 2011-02-24: Set modified flag only if actually changed in Cx_XmlSection::SetXXX().
 
+#define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_XmlSection.h"
 #include "ConfigXmlImpl.h"
 #include <ReadInts.h>
 #include <Ix_ConfigData.h>
 #include <math.h>
+#include <RoundStr.h>
 
-static const LPCWSTR EMPTYDEFSTR = L"~&*^0@!";
+static const wchar_t* EMPTYDEFSTR = L"~&*^0@!";
 
 Cx_XmlSection::Cx_XmlSection()
     : m_pData(NULL), m_bSubElement(false)
@@ -56,6 +58,7 @@ bool Cx_XmlSection::SetText(const wchar_t* value, bool cdata)
     return changed;
 }
 
+#ifdef _OLE2_H_
 IUnknown* Cx_XmlSection::GetDOMElement(bool addRef)
 {
     if (m_xmlNode != NULL && addRef)
@@ -69,6 +72,7 @@ IUnknown* Cx_XmlSection::GetDOMDocument(bool addRef)
         m_pData->m_xmlDoc->AddRef();
     return m_pData->m_xmlDoc;
 }
+#endif
 
 void Cx_XmlSection::BeginTransaction()
 {
@@ -301,16 +305,16 @@ DWORD Cx_XmlSection::GetRGB(const wchar_t* name, DWORD defValue)
 {
     BYTE nums[3] = { 0, 0, 0 };
     if (ReadInts(GetString(name).c_str(), nums, 3) == 3)
-        defValue = RGB(nums[0], nums[1], nums[2]);
+        defValue = nums[0] | nums[1] << 8 | nums[2] << 16;
     return defValue;
 }
 
 bool Cx_XmlSection::SetRGB(const wchar_t* name, DWORD value)
 {
-    wchar_t szBuf[32];
-    swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d",
-        GetRValue(value), GetGValue(value), GetBValue(value));
-    return SetString(name, szBuf);
+    wchar_t buf[32] = { 0 };
+    swprintf_s(buf, _countof(buf), L"%d, %d, %d",
+        value & 0xFF, (value >> 8) & 0xFF, (value >> 16) & 0xFF);
+    return SetString(name, buf);
 }
 
 bool Cx_XmlSection::GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD& k)
@@ -329,9 +333,9 @@ bool Cx_XmlSection::GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD
 
 bool Cx_XmlSection::SetCMYK(const wchar_t* name, WORD c, WORD m, WORD y, WORD k)
 {
-    wchar_t szBuf[40];
-    swprintf_s(szBuf, _countof(szBuf), L"%d, %d, %d, %d", c, m, y, k);
-    return SetString(name, szBuf);
+    wchar_t buf[40];
+    swprintf_s(buf, _countof(buf), L"%d, %d, %d, %d", c, m, y, k);
+    return SetString(name, buf);
 }
 
 bool Cx_XmlSection::GetDate(const wchar_t* name, int& year, int& month, int& day)
@@ -356,9 +360,9 @@ bool Cx_XmlSection::GetDate(const wchar_t* name, int& year, int& month, int& day
 
 bool Cx_XmlSection::SetDate(const wchar_t* name, int year, int month, int day)
 {
-    wchar_t szBuf[40];
-    swprintf_s(szBuf, _countof(szBuf), L"%d-%d-%d", year, month, day);
-    return SetString(name, szBuf);
+    wchar_t buf[40];
+    swprintf_s(buf, _countof(buf), L"%d-%d-%d", year, month, day);
+    return SetString(name, buf);
 }
 
 bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int& day,
@@ -388,10 +392,10 @@ bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int&
 bool Cx_XmlSection::SetDateTime(const wchar_t* name, int year, int month, int day,
     int hour, int minute, int second)
 {
-    wchar_t szBuf[60];
-    swprintf_s(szBuf, _countof(szBuf), L"%d-%d-%d %d:%d:%d",
+    wchar_t buf[60];
+    swprintf_s(buf, _countof(buf), L"%d-%d-%d %d:%d:%d",
         year, month, day, hour, minute, second);
-    return SetString(name, szBuf);
+    return SetString(name, buf);
 }
 
 long Cx_XmlSection::GetDoubleArray(const wchar_t* name, double* items, long count)
@@ -406,7 +410,7 @@ bool Cx_XmlSection::SetDoubleArray(const wchar_t* name, const double* items, lon
     {
         if (i > 0)
             sbuf << L", ";
-        sbuf << CXmlUtil::RoundStr(items[i]);
+        sbuf << RoundStr(items[i]);
     }
     return SetString(name, sbuf.str().c_str());
 }
@@ -423,7 +427,7 @@ bool Cx_XmlSection::SetIntArray(const wchar_t* name, const long* items, long cou
     {
         if (i > 0)
             sbuf << L", ";
-        sbuf << CXmlUtil::RoundStr(items[i], 0);
+        sbuf << RoundStr(items[i], 0);
     }
     return SetString(name, sbuf.str().c_str());
 }

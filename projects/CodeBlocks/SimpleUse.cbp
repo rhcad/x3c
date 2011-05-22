@@ -15,7 +15,6 @@
 					<Add option="-W" />
 					<Add option="-fexceptions" />
 					<Add option="-O2" />
-					<Add option="-D__linux__" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
@@ -28,8 +27,6 @@
 					<Add directory="..\..\code\pkg_Core\Interface\PluginManager" />
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 				</Compiler>
-				<Linker>
-				</Linker>
 			</Target>
 			<Target title="Debug">
 				<Option output="..\..\code\bin\gcc\Debug\UnitTests\SimpleUse" prefix_auto="1" extension_auto="1" />
@@ -40,7 +37,6 @@
 					<Add option="-W" />
 					<Add option="-fexceptions" />
 					<Add option="-g" />
-					<Add option="-D__linux__" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
@@ -53,10 +49,11 @@
 					<Add directory="..\..\code\pkg_Core\Interface\PluginManager" />
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 				</Compiler>
-				<Linker>
-				</Linker>
 			</Target>
 		</Build>
+		<Linker>
+			<Add library="shlwapi" />
+		</Linker>
 		<Unit filename="..\..\code\pkg_Example\Modules\SimpleUse\Main.cpp" />
 		<Extensions>
 			<code_completion />

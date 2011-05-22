@@ -14,11 +14,10 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-O2" />
 					<Add option="-Wall" />
 					<Add option="-fexceptions" />
-					<Add option="-O2" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Core\Modules\FileUtility" />
@@ -27,8 +26,6 @@
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 					<Add directory="..\..\code\pkg_Core\Interface\Utility" />
 				</Compiler>
-				<Linker>
-				</Linker>
 			</Target>
 			<Target title="Debug">
 				<Option output="..\..\code\bin\gcc\Debug\Plugins\FileUtility.plugin.dll" prefix_auto="1" extension_auto="1" />
@@ -39,10 +36,9 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-Wall" />
-					<Add option="-fexceptions" />
 					<Add option="-g" />
+					<Add option="-fexceptions" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Core\Modules\FileUtility" />
@@ -51,26 +47,27 @@
 					<Add directory="..\..\code\pkg_Core\Interface\UtilFunc" />
 					<Add directory="..\..\code\pkg_Core\Interface\Utility" />
 				</Compiler>
-				<Linker>
-				</Linker>
 			</Target>
 		</Build>
+		<Linker>
+			<Add library="shlwapi" />
+		</Linker>
+		<Unit filename="..\..\code\pkg_Core\Interface\UtilFunc\RelToAbs.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Utility\Ix_FileTransaction.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Utility\Ix_FileUtility.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Utility\Ix_TempFolder.h" />
-		<Unit filename="..\..\code\pkg_Core\Interface\UtilFunc\RelToAbs.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileTransaction.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileTransaction.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.h" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\FileTransaction.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileTransaction.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Plugin.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\FileUtility.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Plugin.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\FileUtility\Version.rc2" />
 		<Extensions>
 			<code_completion />

@@ -9,7 +9,7 @@
 #include <SysErrStr.h>
 #include <RelToAbs.h>
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <io.h>
 #include <shellapi.h>
 #pragma comment(lib,"shell32.lib")
@@ -42,7 +42,7 @@ bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
 {
     if (!IsNotNull(filename))
         return false;
-#ifdef _MSC_VER
+#ifdef _WIN32
     return _waccess(filename, bWrite ? 6 : 0) == 0;
 #else
     return CheckFileAttributes(filename, NULL, NULL);
@@ -97,7 +97,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
     PathAddBackslashW(path);
     nLen = wcslen(path);
 
-#ifdef _MSC_VER
+#ifdef _WIN32
     if (_waccess(path, 0) == 0)
 #else
     if (CheckFileAttributes(path, NULL, NULL))
@@ -119,7 +119,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
     }
 
     DWORD dwError = GetLastError();
-#ifdef _MSC_VER
+#ifdef _WIN32
     if (_waccess(path, 0) != 0)
 #else
     if (!CheckFileAttributes(path, NULL, NULL))
@@ -177,7 +177,7 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
     ReplaceSlash(szFile);
     PathRemoveBackslashW(szFile);
 
-#ifdef _MSC_VER
+#ifdef _WIN32
     SHFILEOPSTRUCTW op;
     memset(&op, 0, sizeof(op));
     op.hwnd = m_hMsgBoxOwnerWnd;
@@ -234,7 +234,7 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     }
     else
     {
-#ifdef _MSC_VER
+#ifdef _WIN32
         wchar_t szOld[MAX_PATH], szNew[MAX_PATH];
         SHFILEOPSTRUCTW op;
 
@@ -416,7 +416,7 @@ std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
             pszBase = szBasePath;
             bBaseIsFile = true;
         }
-#ifdef _MSC_VER
+#ifdef _WIN32
         if (IsNotNull(pszBase) && PathRelativePathToW(szPath, pszBase,
             bBaseIsFile ? FILE_ATTRIBUTE_NORMAL : FILE_ATTRIBUTE_DIRECTORY,
             pszAbs,
@@ -589,7 +589,7 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
 
     if (OpenFileForRead(hFile, wstrFileName.c_str()))
     {
-#ifdef _MSC_VER
+#ifdef _WIN32
         FILETIME ftCreate, ftAccess, ftWrite;
         SYSTEMTIME stUTC, stLocal;
 

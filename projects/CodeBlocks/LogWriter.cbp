@@ -18,7 +18,6 @@
 					<Add option="-fexceptions" />
 					<Add option="-O2" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add option="-DLOG4CPLUS_STATIC" />
@@ -31,8 +30,6 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Log" />
 					<Add directory="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" />
 				</Compiler>
-				<Linker>
-				</Linker>
 			</Target>
 			<Target title="Debug">
 				<Option output="..\..\code\bin\gcc\Debug\Plugins\LogWriter.plugin.dll" prefix_auto="1" extension_auto="1" />
@@ -46,7 +43,6 @@
 					<Add option="-fexceptions" />
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add option="-DLOG4CPLUS_STATIC" />
@@ -59,11 +55,20 @@
 					<Add directory="..\..\code\pkg_Core\Interface\Log" />
 					<Add directory="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include" />
 				</Compiler>
-				<Linker>
-				</Linker>
 			</Target>
 		</Build>
+		<Linker>
+			<Add library="shlwapi" />
+			<Add library="wsock32" />
+		</Linker>
+		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogObserver.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogObserver.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogWriter.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Module.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Plugin.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Version.rc2" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appender.cxx" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appenderattachableimpl.cxx" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\configurator.cxx" />
@@ -101,13 +106,6 @@
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\timehelper.cxx" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\win32consoleappender.cxx" />
 		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\win32debugappender.cxx" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogObserver.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Module.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Plugin.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\LogWriter.rc">
-			<Option compilerVar="WINDRES" />
-		</Unit>
-		<Unit filename="..\..\code\pkg_Core\Modules\LogWriter\Version.rc2" />
 		<Extensions>
 			<code_completion />
 			<debugger />

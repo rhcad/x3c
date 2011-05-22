@@ -9,7 +9,7 @@
 #include <RelToAbs.h>
 #include <Log/DebugR.cpp>
 
-#ifndef _MSC_VER
+#ifndef _WIN32
 #include "../Portability/portimpl.h"
 #endif
 

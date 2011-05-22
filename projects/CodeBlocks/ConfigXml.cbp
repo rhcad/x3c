@@ -18,7 +18,6 @@
 					<Add option="-fexceptions" />
 					<Add option="-O2" />
 					<Add option="-DNDEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Core\Modules\ConfigXml" />
@@ -40,7 +39,6 @@
 					<Add option="-fexceptions" />
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
-					<Add option="-D__linux__" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Core\Modules\ConfigXml" />
@@ -51,6 +49,9 @@
 				</Compiler>
 			</Target>
 		</Build>
+		<Linker>
+			<Add library="shlwapi" />
+		</Linker>
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\ConfigIOSection.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\IFileCryptHandler.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\Ix_ConfigData.h" />
@@ -58,15 +59,15 @@
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\Ix_ConfigSectionXml.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\Ix_ConfigTransaction.h" />
 		<Unit filename="..\..\code\pkg_Core\Interface\Xml\Ix_ConfigXml.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_ConfigXml.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_XmlSection.h" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_ConfigXml.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_XmlSection.cpp" />
-		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Module.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\ConfigXml.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\ConfigXmlImpl.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_ConfigXml.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_ConfigXml.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_XmlSection.cpp" />
+		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Cx_XmlSection.h" />
+		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Module.cpp" />
 		<Unit filename="..\..\code\pkg_Core\Modules\ConfigXml\Version.rc2" />
 		<Extensions>
 			<code_completion />

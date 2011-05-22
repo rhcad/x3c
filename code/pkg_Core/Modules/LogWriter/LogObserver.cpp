@@ -15,7 +15,7 @@
 #include <PluginManager/Ix_AppWorkPath.h>
 #include <ctrim.h>
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER                     // hide warnings
 #pragma warning(disable:4127)       // conditional expression is constant
 #endif
 #include <log4cplus/configurator.h>
@@ -59,7 +59,7 @@ CLogObserver::~CLogObserver()
 bool CLogObserver::CopyLogFilesToServer()
 {
 	bool ret = false;
-#ifdef _MSC_VER
+#ifdef _WIN32
     Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
     wchar_t path[MAX_PATH] = { 0 };
     wchar_t hostname[33] = { 0 };
@@ -83,7 +83,7 @@ bool CLogObserver::CopyLogFilesToServer()
 
 bool CLogObserver::GetServerPath(wchar_t* path)
 {
-#ifdef _MSC_VER
+#ifdef _WIN32
     wchar_t inifile[MAX_PATH];
 
     wcsncpy_s(inifile, MAX_PATH, m_path.c_str(), MAX_PATH);
@@ -303,6 +303,6 @@ void CLogObserver::OnWriteLog(int type,
     m_haserr |= (type > kLogType_Info) ? 0x03 : 0x04;
 }
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER     // hide warnings
 #pragma warning(default:4127)
 #endif

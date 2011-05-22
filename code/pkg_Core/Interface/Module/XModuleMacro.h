@@ -77,7 +77,7 @@
         _XCLASSMETA_ENTRY() \
     };
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER                 // hide warnings
 #pragma warning(disable:4710)   // inline function not expanded
 #endif
 

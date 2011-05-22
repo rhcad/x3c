@@ -15,7 +15,7 @@
 
     X3 C++ PluginFramework is a plugin-framework using C++ and STL, not using MFC/ATL/COM. \n
     It has many frequently-used and lightweight plugins (raw dll). \n
-    We can use it to develop more plugins and windows applications easily.
+    We can use it to develop more plugins and applications easily on Windows and Linux.
     
     This framework is licensed under the Apache Public License 2.0.\n
     Bug reports and suggestions are welcome.

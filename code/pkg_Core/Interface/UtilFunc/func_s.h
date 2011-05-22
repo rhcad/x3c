@@ -4,11 +4,15 @@
 #ifndef FUNCTIONS_COMPATIBLE_VC60_H
 #define FUNCTIONS_COMPATIBLE_VC60_H
 
-#if !defined(_MSC_VER) || _MSC_VER < 1400 // not VC8
+#if !defined(_MSC_VER) || _MSC_VER < 1400   // not VC8
 
 #ifdef __GNUC__
 #include <wchar.h>
 #include <wctype.h>
+#endif
+
+#ifndef interface
+#define interface struct
 #endif
 
 #ifndef max

@@ -37,11 +37,13 @@ interface Ix_ConfigSectionXml
     */
     virtual bool SetText(const wchar_t* value, bool cdata = false) = 0;
 
+#ifdef _OLE2_H_
     //! 返回内部的XML元素节点(IXMLDOMElement)
     virtual IUnknown* GetDOMElement(bool addRef = false) = 0;
 
     //! 返回内部的XML文档对象(IXMLDOMDocument)
     virtual IUnknown* GetDOMDocument(bool addRef = false) = 0;
+#endif // _OLE2_H_
 };
 
 #endif // X3_XML_ICONFIGSECTIONXML_H_

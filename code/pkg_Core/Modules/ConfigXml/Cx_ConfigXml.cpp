@@ -53,12 +53,12 @@ public:
         wchar_t tmpfile[256] = { 0 };
         wcsncpy_s(tmpfile, _countof(tmpfile), filename, _countof(tmpfile));
         tmpfile[_countof(tmpfile) - 5] = 0;
-        lstrcatW(tmpfile, L".tmp");
+        wcscat_s(tmpfile, _countof(tmpfile), L".tmp");
 
         int nRet = _wrename(filename, tmpfile);
-        if (NO_ERROR == nRet)
+        if (0 == nRet)
         {
-            if (SUCCEEDED(m_pCryptHandler->CryptFile(tmpfile, filename)))
+            if (0 == m_pCryptHandler->CryptFile(tmpfile, filename))
                 return true;
 
             _wrename(tmpfile, filename);
@@ -67,18 +67,6 @@ public:
         return false;
     }
 };
-
-int ConfigXmlImpl::c_nInitCom = 0;
-OUTAPI bool xCanUnloadPlugin();
-
-OUTAPI void UninitializePlugin()
-{
-    if (1 == ConfigXmlImpl::c_nInitCom && xCanUnloadPlugin())
-    {
-        CoUninitialize();
-        ConfigXmlImpl::c_nInitCom = 0;
-    }
-}
 
 bool ConfigXmlImpl::Reload()
 {
@@ -141,7 +129,7 @@ XMLDOMElementPtr ConfigXmlImpl::GetParentNode(Ix_ConfigSection* parent,
                                               std::wstring& strSection)
 {
     XMLDOMElementPtr xmlParent = GetRoot();
-    if (parent != NULL)
+    if (parent)
     {
         Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(parent);
         ASSERT_MESSAGE(p != NULL, "type mismatch: Ix_ConfigSection");
@@ -164,10 +152,8 @@ XMLDOMElementPtr ConfigXmlImpl::GetParentNode(XMLDOMElementPtr xmlParent,
     {
         pEnd = wcschr(pStart, L'\\');
         pEnd2 = wcschr(pStart, L'/');
-        if (NULL == pEnd)
+        if (!pEnd || pEnd2 && pEnd2 < pEnd)
             pEnd = pEnd2;
-        else if (pEnd2 != NULL)
-            pEnd = min(pEnd, pEnd2);
 
         if (NULL == pEnd)
             strTemp = pStart;
@@ -358,7 +344,7 @@ bool Cx_ConfigXml::EndTransaction()
         }
         else
         {
-            LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", 
+            LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
                 GetSystemErrorString(CXmlUtil::GetLastErrorResult())
                 << L", " << m_pImpl->m_strFileName);
         }
@@ -396,7 +382,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     }
     else
     {
-        LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", 
+        LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
             GetSystemErrorString(CXmlUtil::GetLastErrorResult())
             << L", " << strFileName);
     }
@@ -536,11 +522,9 @@ Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
     pIFCfg->m_xmlNode = m_pImpl->GetParentNode(sec, strName);
     if (pIFCfg->m_xmlNode)
     {
-        XMLDOMNodePtr pNode = NULL;
-        pIFCfg->m_xmlNode->get_parentNode(&pNode);
-        pIFCfg->m_xmlParent = pNode;
+        pIFCfg->m_xmlParent = CXmlUtil::GetParentNode(pIFCfg->m_xmlNode);
     }
-    if (NULL == pIFCfg->m_xmlParent
+    if (pIFCfg->m_xmlParent == NULL
         || pIFCfg->m_xmlParent == pIFCfg->m_xmlNode)
     {
         pIFCfg->m_xmlNode = NULL;
@@ -604,7 +588,7 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
 {
     long count = 0;
 
-    if (parent != NULL && name != NULL)
+    if (parent && name)
     {
         Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(parent);
         ASSERT_MESSAGE(p != NULL, "type mismatch: Ix_ConfigSection");

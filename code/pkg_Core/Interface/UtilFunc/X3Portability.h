@@ -4,15 +4,11 @@
 #ifndef X3C_PORTABILITY_H
 #define X3C_PORTABILITY_H
 
-#if defined (_MSC_VER)      // VC++
-
+#if defined(_WIN32)
 #include "../Portability/x3vc.h"
-
-#elif defined (__GNUC__)    // GCC
-
+#else
 #include "../Portability/portgcc.h"
-
-#endif // _MSC_VER
+#endif // _WIN32
 
 #ifdef _NEED_STDIO
 #include <stdio.h>
@@ -21,6 +17,8 @@
 #define _STDIO_DEFINED
 #endif
 #endif
+#if !defined(_MSC_VER) || _MSC_VER < 1400   // not VC8
 #include "func_s.h"
+#endif
 
 #endif // X3C_PORTABILITY_H

@@ -683,15 +683,8 @@ public:
         const XMLDOMElementPtr& ele, 
         const wchar_t* pszComment);
 
-    //! 得到四舍五入的字符串（去掉小数点后末尾的'0'）
-    /*! 
-        \param[in] value 要转换的浮点数
-        \param[in] decimal 保留小数点后第几位数，超出部分四舍五入
-        \return 转换后的字符串
-    */
-    static std::wstring RoundStr(
-        double value, 
-        int decimal = 4);
+    //! 返回上一级节点
+    static XMLDOMNodePtr GetParentNode(XMLDOMNodePtr node);
 };
 
 #endif // __XMLUTIL_NONMFC_INCLUDED_

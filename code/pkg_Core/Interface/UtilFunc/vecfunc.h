@@ -4,7 +4,7 @@
 #ifndef __STL_VECTOR_FUNCTIONS_H
 #define __STL_VECTOR_FUNCTIONS_H
 
-#ifdef _MSC_VER
+#ifdef _MSC_VER                 // hide warnings
 #pragma warning(disable:4710)   // inline function not expanded
 #pragma warning(disable:4786)   // identifier was truncated
 #pragma warning (push, 3)
@@ -18,7 +18,7 @@
 #include <list>
 #include <map>
 #include <sstream>
-#ifdef _MSC_VER
+#ifdef _MSC_VER                 // hide warnings
 #pragma warning (pop)
 #endif
 

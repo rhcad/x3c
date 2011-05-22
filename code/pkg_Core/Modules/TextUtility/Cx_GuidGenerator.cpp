@@ -5,7 +5,7 @@
 #include <PluginInc.h>
 #include "Cx_GuidGenerator.h"
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <time.h>
 #include <SysErrStr.h>
 #include <objbase.h>

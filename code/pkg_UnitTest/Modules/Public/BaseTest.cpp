@@ -18,7 +18,7 @@ BaseTest::BaseTest()
 long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 {
     // Initialize COM
-#ifdef _MSC_VER
+#ifdef _WIN32
     VERIFY(SUCCEEDED(CoInitialize(NULL)));
 #endif
 
@@ -47,7 +47,7 @@ long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 void BaseTest::UnloadPlugins()
 {
     s_loader.Unload();      // Unload plugins
-#ifdef _MSC_VER
+#ifdef _WIN32
     CoUninitialize();       // Free COM resource
 #endif
 }
@@ -74,7 +74,7 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         PathRemoveFileSpecW(path);      // bin
         PathAppendW(path, name);        // bin\name
 
-#ifdef _MSC_VER
+#ifdef _WIN32
         SetFileAttributesNormal(filename);
         GetPrivateProfileStringW(L"Path", name, path,
             path, MAX_PATH, filename);

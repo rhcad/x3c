@@ -60,7 +60,7 @@ bool Cx_LogManager::PopGroup()
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg, 
+bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
     const wchar_t* extra, const char* file, long line)
 {
     CLockCount locker(&m_loglock);
@@ -75,12 +75,12 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
 
     for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        (*it)->OnWriteLog(type, msg2, extra2, 
+        (*it)->OnWriteLog(type, msg2, extra2,
             module, idname, wstrFile, line);
     }
 
 #ifdef _DEBUG
-    const wchar_t* names[] = { L"> LogInfo: ", 
+    const wchar_t* names[] = { L"> LogInfo: ",
         L"> LogWarning: ", L"> LogError: ", L"> FatalError: " };
     if (type >= kLogType_Info && type <= kLogType_Fatal)
     {
@@ -98,33 +98,33 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType type, const char* msg, 
+bool Cx_LogManager::WriteLog(kLogType type, const char* msg,
     const char* extra, const char* file, long line)
 {
-    return WriteLog(type, std::a2w(msg).c_str(), 
+    return WriteLog(type, std::a2w(msg).c_str(),
         std::a2w(extra).c_str(), file, line);
 }
 
 int Cx_LogManager::CrtDbgReport(const char* msg, const char* file, long line)
 {
-    WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED", 
+    WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED",
         std::a2w(msg).c_str(), file, line);
 
-#ifndef _MSC_VER
+#ifndef _WIN32
     return 3;
 #else
     wchar_t buf[512];
 
-    swprintf_s(buf, 512, 
+    swprintf_s(buf, 512,
         L"Debug Assertion Failed!\n"
         L"\nExpression: %s"
         L"\nFile: %s"
         L"\nLine: %d"
         L"\n\n(Press Retry to debug the application)",
-        std::a2w(msg).c_str(), 
+        std::a2w(msg).c_str(),
         std::a2w(TrimFileName(file)).c_str(), line);
 
-    return MessageBoxW(NULL, buf, L"Debug Assertion Failed", 
+    return MessageBoxW(NULL, buf, L"Debug Assertion Failed",
         MB_TASKMODAL|MB_ICONHAND|MB_ABORTRETRYIGNORE|MB_SETFOREGROUND);
 #endif
 }
@@ -152,8 +152,8 @@ const char* Cx_LogManager::TrimFileName(const char* file)
     return pszName;
 }
 
-bool Cx_LogManager::CheckMsgParam(std::wstring& msg2, 
-    std::wstring& extra2, std::wstring& module, std::wstring& idname, 
+bool Cx_LogManager::CheckMsgParam(std::wstring& msg2,
+    std::wstring& extra2, std::wstring& module, std::wstring& idname,
     const wchar_t* msg, const wchar_t* extra)
 {
     bool ret = false;

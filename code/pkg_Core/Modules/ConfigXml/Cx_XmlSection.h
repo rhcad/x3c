@@ -7,7 +7,12 @@
 #include <Ix_ConfigSection.h>
 #include <Ix_ConfigSectionXml.h>
 #include <Ix_ConfigTransaction.h>
+
+#ifdef _MSC_VER
 #include "XmlUtil/XmlUtil.h"
+#else
+#include "OpenXml/XmlUtil.h"
+#endif
 
 struct ConfigXmlImpl;
 
@@ -32,8 +37,10 @@ protected:
     virtual void UseSubElement(bool element);
     virtual std::wstring GetText();
     virtual bool SetText(const wchar_t* value, bool cdata = false);
+#ifdef _OLE2_H_
     virtual IUnknown* GetDOMElement(bool addRef = false);
     virtual IUnknown* GetDOMDocument(bool addRef = false);
+#endif
 
     // From Ix_ConfigTransaction
     //
@@ -69,9 +76,9 @@ protected:
     virtual bool SetCMYK(const wchar_t* name, WORD c, WORD m, WORD y, WORD k);
     virtual bool GetDate(const wchar_t* name, int& year, int& month, int& day);
     virtual bool SetDate(const wchar_t* name, int year, int month, int day);
-    virtual bool GetDateTime(const wchar_t* name, int& year, int& month, int& day, 
+    virtual bool GetDateTime(const wchar_t* name, int& year, int& month, int& day,
         int& hour, int& minute, int& second);
-    virtual bool SetDateTime(const wchar_t* name, int year, int month, int day, 
+    virtual bool SetDateTime(const wchar_t* name, int year, int month, int day,
         int hour, int minute, int second);
     virtual long GetDoubleArray(const wchar_t* name, double* items, long count);
     virtual bool SetDoubleArray(const wchar_t* name, const double* items, long count);

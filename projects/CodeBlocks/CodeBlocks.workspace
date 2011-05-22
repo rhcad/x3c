@@ -13,5 +13,6 @@
 		<Project filename="TextUtility.cbp" />
 		<Project filename="Win32DllTempl.cbp" />
 		<Project filename="TestCore.cbp" active="1" />
+		<Project filename="ConfigXml.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
