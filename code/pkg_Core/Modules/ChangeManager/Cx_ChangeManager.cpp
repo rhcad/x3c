@@ -67,9 +67,9 @@ void Cx_ChangeManager::ChangeNotify(const char* type, ChangeNotifyData* data)
 {
     ASSERT(data != NULL);
 
-    if (find_value(m_notified, std::string(type)) < 0)
+    if (find_value(m_types, std::string(type)) < 0)
     {
-        m_notified.push_back(type);
+        m_types.push_back(type);
 
         Cx_Interface<Ix_PluginDelayLoad> pIFLoader(CLSID_PluginDelayLoad);
         if (pIFLoader)

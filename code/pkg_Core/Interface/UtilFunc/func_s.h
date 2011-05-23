@@ -35,7 +35,7 @@ inline int swprintf_s(wchar_t *buffer, size_t size, const wchar_t *format, ...)
 {
     va_list arglist;
     va_start(arglist, format);
-#if defined(__GNUC__) && !defined(__MINGW_H)
+#if !defined(_WIN32)
     return vswprintf(buffer, size, format, arglist);
 #else
     size; return vswprintf(buffer, format, arglist);
@@ -46,7 +46,7 @@ inline int vsprintf_s(char *buffer, size_t, const char *format, va_list arglist)
     { return vsprintf(buffer, format, arglist); }
 
 inline int vswprintf_s(wchar_t *buffer, size_t size, const wchar_t *format, va_list arglist)
-#if defined(__GNUC__) && !defined(__MINGW_H)
+#if !defined(_WIN32)
     { return vswprintf(buffer, size, format, arglist); }
 #else
     { size; return vswprintf(buffer, format, arglist); }

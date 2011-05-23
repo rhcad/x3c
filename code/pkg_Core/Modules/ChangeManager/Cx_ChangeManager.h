@@ -48,7 +48,7 @@ private:
     ObserverMap     m_observers;
 
     std::vector<std::pair<HMODULE, std::string> >   m_callers;
-    std::vector<std::string>                        m_notified;
+    std::vector<std::string>                        m_types;
 };
 
 #endif // _X3_CORE_CHANGEMANAGER_H

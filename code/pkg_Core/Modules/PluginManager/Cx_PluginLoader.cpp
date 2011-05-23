@@ -19,6 +19,7 @@
 #include "Cx_PluginLoader.h"
 #include <Ix_AppWorkPath.h>
 #include <LockCount.h>
+#include <ScanFiles.h>
 
 Cx_PluginLoader::Cx_PluginLoader()
     : m_instance(NULL)
@@ -99,54 +100,36 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
     return count;
 }
 
+class CScanPluginsByExt : public CScanFilesCallback
+{
+public:
+    CScanPluginsByExt(std::vector<std::wstring>* files, const wchar_t* ext)
+        : m_files(files), m_ext(ext), m_extlen(wcslen(ext))
+    {
+    }
+
+private:
+    virtual void OnCheckFile(const wchar_t* filename, const wchar_t*, bool&)
+    {
+        int len = wcslen(filename);
+        if (len >= m_extlen && _wcsicmp(&filename[len - m_extlen], m_ext) == 0)
+        {
+            m_files->push_back(filename);
+        }
+    }
+
+protected:
+    std::vector<std::wstring>*  m_files;
+    const wchar_t*              m_ext;
+    const int                   m_extlen;
+};
+
 void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
                                   const wchar_t* path, const wchar_t* ext,
                                   bool recursive)
 {
-#ifdef _WIN32
-    WIN32_FIND_DATAW fd;
-    wchar_t filename[MAX_PATH];
-    const int extlen = wcslen(ext);
-    std::vector<std::wstring> subpaths;
-
-    wcsncpy_s(filename, MAX_PATH, path, MAX_PATH);
-    PathAppendW(filename, L"*.*");
-
-    HANDLE hFind = ::FindFirstFileW(filename, &fd);
-    BOOL bContinue = (hFind != INVALID_HANDLE_VALUE);
-
-    while (bContinue)
-    {
-        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-        {
-            if (fd.cFileName[0] != L'.' && recursive)
-            {
-                wcsncpy_s(filename, MAX_PATH, path, MAX_PATH);
-                PathAppendW(filename, fd.cFileName);
-                subpaths.push_back(filename);
-            }
-        }
-        else
-        {
-            int len = wcslen(fd.cFileName);
-
-            if (_wcsicmp(&fd.cFileName[0 > len - extlen ? 0 : len - extlen], ext) == 0)
-            {
-                wcsncpy_s(filename, MAX_PATH, path, MAX_PATH);
-                PathAppendW(filename, fd.cFileName);
-                filenames.push_back(filename);
-            }
-        }
-        bContinue = ::FindNextFileW(hFind, &fd);
-    }
-    ::FindClose(hFind);
-
-    std::vector<std::wstring>::const_iterator it = subpaths.begin();
-    for (; it != subpaths.end(); ++it)
-    {
-        FindPlugins(filenames, it->c_str(), ext, recursive);
-    }
-#endif // _WIN32
+    CScanPluginsByExt scanner(&filenames, ext);
+    ScanFiles(&scanner, path, recursive);
 }
 
 bool Cx_PluginLoader::issep(wchar_t c)

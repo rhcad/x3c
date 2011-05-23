@@ -275,6 +275,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\pathstr.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\PluginInc.h"
 				>
 			</File>

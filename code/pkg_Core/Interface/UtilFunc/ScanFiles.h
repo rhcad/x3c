@@ -58,7 +58,7 @@ inline long ScanFiles(IScanFilesCallback* back,
                       const wchar_t* path, bool recursive)
 {
     long count = 0;
-#ifdef _MSC_VER
+#ifdef _WIN32
     WIN32_FIND_DATAW fd;
     wchar_t filename[MAX_PATH];
 
