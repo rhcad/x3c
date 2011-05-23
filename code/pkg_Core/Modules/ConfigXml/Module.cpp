@@ -1,6 +1,7 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
+#define _NEED_STDIO
 #include <PluginInc.h>
 #include <XModuleMacro.h>
 #include <XModuleImpl.h>
@@ -8,7 +9,7 @@
 #include "Cx_ConfigXml.h"
 #include "Cx_XmlSection.h"
 
-#ifdef _MSC_VER
+#ifdef _XMLDOM_HELPERS_H
 #include "XmlUtil/XmlUtil.cpp"
 #else
 #include "OpenXml/XmlUtil.cpp"

@@ -89,9 +89,9 @@ void PathAppendW(wchar_t* path, const wchar_t* more)
 
     if (len > 0 && !IsPathSlash(path[len - 1]))
     {
-        strcat_s(path, MAX_PATH, L"/");
+        wcscat_s(path, MAX_PATH, L"/");
     }
-    strcat_s(path, MAX_PATH, IsPathSlash(*more) ? more + 1 : more);
+    wcscat_s(path, MAX_PATH, IsPathSlash(*more) ? more + 1 : more);
 }
 
 wchar_t* PathAddBackslashW(wchar_t* path)
@@ -100,7 +100,7 @@ wchar_t* PathAddBackslashW(wchar_t* path)
 
     if (len > 0 && !IsPathSlash(path[len - 1]))
     {
-        strcat_s(path, MAX_PATH, L"/");
+        wcscat_s(path, MAX_PATH, L"/");
     }
 
     return path;

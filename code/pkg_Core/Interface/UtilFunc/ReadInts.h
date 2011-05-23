@@ -51,7 +51,7 @@ long ReadInts(const wchar_t* str, IntType* arr, long size, bool signchar = false
         {
             int mincnt = _countof(buf) < 1 + j - i ? _countof(buf) : 1 + j - i;
             wcsncpy_s(buf, _countof(buf), str + i, mincnt);
-            arr[count++] = static_cast<IntType>(_wtoi(buf));
+            arr[count++] = static_cast<IntType>(wcstol(buf, NULL, 10));
         }
         i = j;
     }

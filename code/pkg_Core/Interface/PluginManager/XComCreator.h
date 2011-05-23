@@ -19,6 +19,9 @@
 #ifndef _MSC_VER
 #include "../Portability/portimpl.h"
 #endif
+#ifdef X3_LOG_DEBUGR_H_
+#include "../Log/DebugR.cpp"
+#endif
 
 #ifndef USE_ONE_PLUGIN
 

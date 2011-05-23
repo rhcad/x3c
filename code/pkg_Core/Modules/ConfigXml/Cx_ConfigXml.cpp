@@ -13,10 +13,17 @@
 #include "ConfigXmlImpl.h"
 #include <Cx_SimpleObject.h>
 #include <IFileCryptHandler.h>
-#include <SysErrStr.h>
 #include <math.h>
 
 #define Cx_Section Cx_Interface<Ix_ConfigSection>
+
+#ifndef WIN32
+#include <ConvStr.h>
+static inline int _wrename (const wchar_t *oldfile, const wchar_t *newfile)
+{
+    return rename(std::w2a(oldfile).c_str(), std::w2a(newfile).c_str());
+}
+#endif
 
 class CXmlFileCrypt : public IXmlFileCrypt
 {
@@ -345,7 +352,7 @@ bool Cx_ConfigXml::EndTransaction()
         else
         {
             LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
-                GetSystemErrorString(CXmlUtil::GetLastErrorResult())
+                CXmlUtil::GetLastErrorResult()
                 << L", " << m_pImpl->m_strFileName);
         }
     }
@@ -383,8 +390,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     else
     {
         LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
-            GetSystemErrorString(CXmlUtil::GetLastErrorResult())
-            << L", " << strFileName);
+            CXmlUtil::GetLastErrorResult() << L", " << strFileName);
     }
 
     return bRet;
@@ -422,7 +428,7 @@ Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
                                     ULONG attrValue,
                                     bool autoCreate)
 {
-    wchar_t buf[35];
+    wchar_t buf[35] = { 0 };
     _ultow_s(attrValue, buf, 35, 10);
     return GetSection(parent, name, attrName, buf, autoCreate);
 }
@@ -435,7 +441,8 @@ Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
                                     ULONG attrValue2,
                                     bool autoCreate)
 {
-    wchar_t buf1[35], buf2[35];
+    wchar_t buf1[35] = { 0 };
+    wchar_t buf2[35] = { 0 };
     _ultow_s(attrValue, buf1, 35, 10);
     _ultow_s(attrValue2, buf2, 35, 10);
     return GetSection(parent, name, attrName, buf1, attrName2, buf2, autoCreate);
@@ -522,7 +529,7 @@ Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
     pIFCfg->m_xmlNode = m_pImpl->GetParentNode(sec, strName);
     if (pIFCfg->m_xmlNode)
     {
-        pIFCfg->m_xmlParent = CXmlUtil::GetParentNode(pIFCfg->m_xmlNode);
+        CXmlUtil::GetParentNode(pIFCfg->m_xmlParent, pIFCfg->m_xmlNode);
     }
     if (pIFCfg->m_xmlParent == NULL
         || pIFCfg->m_xmlParent == pIFCfg->m_xmlNode)
@@ -576,7 +583,7 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
                                   const wchar_t* attrName,
                                   ULONG attrValue)
 {
-    wchar_t buf[35];
+    wchar_t buf[35] = { 0 };
     _ultow_s(attrValue, buf, 35, 10);
     return RemoveChildren(parent, name, attrName, buf);
 }

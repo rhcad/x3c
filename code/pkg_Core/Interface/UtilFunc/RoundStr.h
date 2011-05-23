@@ -7,7 +7,7 @@
 #include <string>
 
 //! 得到四舍五入的字符串（去掉小数点后末尾的'0'）
-/*! 
+/*!
     \ingroup _GROUP_UTILFUNC
     \param value 要转换的浮点数
     \param decimal 保留小数点后第几位数，超出部分四舍五入
@@ -16,17 +16,13 @@
 inline std::wstring RoundStr(double value, int decimal = 4)
 {
     wchar_t buf[65] = { 0 };
-    
+
     wchar_t fmt[] = L"%.2lf";
     if (decimal < 1) decimal = 1;
     if (decimal > 5) decimal = 5;
     fmt[2] = (wchar_t)(L'0' + decimal);
-#if !defined(_MSC_VER) || _MSC_VER <= 1200 // VC6
-    swprintf(buf, fmt, value);
-#else
-    swprintf_s(buf, 65, fmt, value);    
-#endif
-    
+    swprintf_s(buf, 65, fmt, value);
+
     wchar_t* p = wcschr(buf, L'.');
     if (p != NULL)
     {
@@ -36,7 +32,7 @@ inline std::wstring RoundStr(double value, int decimal = 4)
         if (p[i] == L'.')
             p[i] = 0;
     }
-    
+
     return buf;
 }
 

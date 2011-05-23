@@ -34,9 +34,8 @@ inline std::wstring GetSystemErrorString(unsigned long errorcode)
         }
 #endif
 
-#ifdef _STDIO_DEFINED
+        // define _NEED_STDIO before include PluginInc.h for vc6 or gcc.
         swprintf_s(buf, _countof(buf), L"[0x%x]", errorcode);
-#endif
         retstr = buf + retstr;
     }
 

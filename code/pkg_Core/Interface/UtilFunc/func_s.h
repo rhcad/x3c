@@ -74,6 +74,34 @@ inline wchar_t * _wcslwr_s(wchar_t *str)
 inline wchar_t * _wcsupr_s(wchar_t *str)
     { for (wchar_t* p = str; *p; p++) towupper(*p); return str; }
 
+#if defined(_WIN32)
+
+inline int _ltoa_s(long value, char *str, size_t, int radix)
+    { _ltoa(value, str, radix); return errno; }
+inline int _ltow_s(long value, wchar_t *str, size_t, int radix)
+    { _ltow(value, str, radix); return errno; }
+inline int _itoa_s(int value, char *str, size_t, int radix)
+    { _itoa(value, str, radix); return errno; }
+inline int _itow_s(int value, wchar_t *str, size_t, int radix)
+    { _itow(value, str, radix); return errno; }
+inline int _ultow_s(unsigned long value, wchar_t *str, size_t, int radix)
+    { _ultow(value, str, radix); return errno; }
+
+#elif defined(_STDIO_DEFINED)
+
+inline int _ltoa_s(long value, char *str, size_t size, int radix)
+    { sprintf_s(str, size, 16 == radix ? "%lx" : "%ld", value); return 0; }
+inline int _ltow_s(long value, wchar_t *str, size_t size, int radix)
+    { swprintf_s(str, size, 16 == radix ? L"%lx" : L"%ld", value); return 0; }
+inline int _itoa_s(int value, char *str, size_t size, int radix)
+    { return _ltoa_s(value, str, size, radix); }
+inline int _itow_s(int value, wchar_t *str, size_t size, int radix)
+    { return _ltow_s(value, str, size, radix); }
+inline int _ultow_s(unsigned long value, wchar_t *str, size_t size, int radix)
+    { swprintf_s(str, size, 16 == radix ? L"%ulx" : L"%uld", value); return 0; }
+
+#endif
+
 #if defined(_INC_STDLIB) || defined(_STDLIB_H_)
 
 inline int _splitpath_s(
@@ -103,17 +131,6 @@ inline int _makepath_s(char *path, size_t,
 inline int _wmakepath_s(wchar_t *path, size_t,
     const wchar_t *drive, const wchar_t *dir, const wchar_t *fname, const wchar_t *ext)
     { _wmakepath(path, drive, dir, fname, ext); return errno; }
-
-inline int _ltoa_s(long value, char *str, size_t, int radix)
-    { _ltoa(value, str, radix); return errno; }
-inline int _ltow_s(long value, wchar_t *str, size_t, int radix)
-    { _ltow(value, str, radix); return errno; }
-inline int _itoa_s(int value, char *str, size_t, int radix)
-    { _itoa(value, str, radix); return errno; }
-inline int _itow_s(int value, wchar_t *str, size_t, int radix)
-    { _itow(value, str, radix); return errno; }
-inline int _ultow_s(unsigned long value, wchar_t *str, size_t, int radix)
-    { _ultow(value, str, radix); return errno; }
 
 #endif // _INC_STDLIB
 

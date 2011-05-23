@@ -59,6 +59,8 @@ bool Cx_XmlSection::SetText(const wchar_t* value, bool cdata)
 }
 
 #ifdef _OLE2_H_
+#ifdef _XMLDOM_HELPERS_H
+
 IUnknown* Cx_XmlSection::GetDOMElement(bool addRef)
 {
     if (m_xmlNode != NULL && addRef)
@@ -72,7 +74,18 @@ IUnknown* Cx_XmlSection::GetDOMDocument(bool addRef)
         m_pData->m_xmlDoc->AddRef();
     return m_pData->m_xmlDoc;
 }
+
+#else
+IUnknown* Cx_XmlSection::GetDOMElement(bool)
+{
+    return NULL;
+}
+IUnknown* Cx_XmlSection::GetDOMDocument(bool)
+{
+    return NULL;
+}
 #endif
+#endif // _OLE2_H_
 
 void Cx_XmlSection::BeginTransaction()
 {
