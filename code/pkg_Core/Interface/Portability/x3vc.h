@@ -20,7 +20,9 @@
 #endif // _AFXDLL
 
 #include <shlwapi.h>        // Windows light-weight utility APIs
+#ifdef _MSC_VER
 #pragma comment(lib, "shlwapi.lib")
+#endif
 
 #define STDCALL     __stdcall
 #define DECLEXPORT  __declspec(dllexport)

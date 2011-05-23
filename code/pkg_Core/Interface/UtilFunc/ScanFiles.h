@@ -43,6 +43,10 @@ public:
         { path; recursive; cancel; }
     virtual void OnCheckFile(const wchar_t* filename, const wchar_t* ext, bool& cancel)
         { filename; ext; cancel; }
+
+private:
+    CScanFilesCallback(const CScanFilesCallback&);
+    void operator=(const CScanFilesCallback&);
 };
 
 //! Scans all files in a directory.
@@ -142,6 +146,11 @@ protected:
 protected:
     std::vector<std::wstring>*  m_files;    //!< Filling with filenames found.
     std::wstring                m_ext;      //!< The specified postfix beginning with dot.
+
+private:
+    CScanFilesByExtension();
+    CScanFilesByExtension(const CScanFilesByExtension&);
+    void operator=(const CScanFilesByExtension&);
 };
 
 #endif // UTILFUNC_SCANFILES_H_

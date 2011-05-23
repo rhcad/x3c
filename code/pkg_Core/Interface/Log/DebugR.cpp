@@ -22,11 +22,15 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
 
 #else // _WIN32
 
+#ifdef _MSC_VER
 #pragma comment(lib, "shlwapi.lib")
+#endif
 #if defined(_WINUSER_) && !defined(NOUSER)
     #include <stdlib.h>
     #include <stdio.h>
+    #ifdef _MSC_VER
     #pragma comment(lib, "user32.lib")
+    #endif
 #endif
 #include <signal.h>
 
@@ -36,12 +40,11 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
     int code = 0;
 
 #ifdef LOG_EVENT_ANSI
+    Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
+    if (pIFManager)
     {
-        Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
-        if (pIFManager)
-        {
-            code = pIFManager->CrtDbgReport(msg, file, line);
-        }
+        code = pIFManager->CrtDbgReport(msg, file, line);
+        pIFManager.Release();
     }
 #endif
     if (0 == code)

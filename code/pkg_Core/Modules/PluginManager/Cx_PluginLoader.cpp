@@ -118,7 +118,11 @@ private:
         }
     }
 
-protected:
+private:
+    CScanPluginsByExt();
+    CScanPluginsByExt(const CScanPluginsByExt&);
+    void operator=(const CScanPluginsByExt&);
+
     std::vector<std::wstring>*  m_files;
     const wchar_t*              m_ext;
     const int                   m_extlen;
