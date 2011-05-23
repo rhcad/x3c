@@ -4,6 +4,10 @@
 #define X3LINUX_PORTABILITY_IMPL_H
 #ifdef __linux__
 
+#include <ConvStr.h>
+
+#define W2A(wstr)   std::w2a(wstr).c_str()
+
 bool FreeLibrary(HMODULE hdll)
 {
     return true;
