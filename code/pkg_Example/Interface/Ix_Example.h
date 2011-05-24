@@ -4,10 +4,10 @@
 
 interface Ix_Example
 {
-    virtual void Foo() = 0;
+    virtual void Foo(long& value) = 0;
 };
 
 interface Ix_Example2
 {
-    virtual void Foo2() = 0;
+    virtual void Foo2(long& value) = 0;
 };

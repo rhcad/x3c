@@ -79,7 +79,7 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
             module, idname, wstrFile, line);
     }
 
-#ifdef _DEBUG
+#if defined(_DEBUG) && defined(OutputDebugString)
     const wchar_t* names[] = { L"> LogInfo: ",
         L"> LogWarning: ", L"> LogError: ", L"> FatalError: " };
     if (type >= kLogType_Info && type <= kLogType_Fatal)

@@ -63,7 +63,7 @@ public:
         }
 
         m_dll = LoadLibraryW(m_filename);
-        return m_dll != NULL;
+        return m_dll && GetObjectFactory();
     }
 
     //! Load plugin manager and core plugins.

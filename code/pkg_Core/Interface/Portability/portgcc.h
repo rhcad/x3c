@@ -71,13 +71,11 @@ int MultiByteToWideChar(int codepage, DWORD flags,
                         const char* astr, int achars,
                         wchar_t* wstr, int wchars);
 
-#ifndef __MINGW_H
 inline int _stricmp(const char* s1, const char* s2)
     { return strncasecmp(s1, s2, strlen(s1)); }
 inline int _wcsicmp(const wchar_t* s1, const wchar_t* s2)
     { return wcsncasecmp(s1, s2, wcslen(s1)); }
 inline int _wcsnicmp(const wchar_t* s1, const wchar_t* s2, int count)
     { return wcsncasecmp(s1, s2, count); }
-#endif
 
 #endif // X3GCC_PORTABILITY_H

@@ -6,11 +6,11 @@
 
 #if !defined (_WIN32)
     #if defined (__linux__)
-        #include "linuximpl.h"
+        #include "Portability/linuximpl.h"
     #elif defined (MACOS) || defined (_MAC)
-        #include "macimpl.h"
+        #include "Portability/macimpl.h"
     #endif
-    #include "pathstr.h"
+    #include "Portability/pathstr.h"
 #endif // _WIN32
 
 #endif // X3_PORTABILITY_IMPL_H

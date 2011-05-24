@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LogWriter" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="../../../code/bin/unix/Release/Plugins/LogWriter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/unix/Release/LogWriter" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add option="-DLOG4CPLUS_STATIC" />
+					<Add option="-DINSIDE_LOG4CPLUS" />
+					<Add directory="../../../code/pkg_Core/Modules/LogWriter" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/Utility" />
+					<Add directory="../../../code/pkg_Core/Interface/Log" />
+					<Add directory="../../../code/pkg_Core/Modules/LogWriter/log4cplus/include" />
+				</Compiler>
+			</Target>
+			<Target title="Debug">
+				<Option output="../../../code/bin/unix/Debug/Plugins/LogWriter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/unix/Debug/LogWriter" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Weffc++" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-fexceptions" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add option="-DLOG4CPLUS_STATIC" />
+					<Add option="-DINSIDE_LOG4CPLUS" />
+					<Add directory="../../../code/pkg_Core/Modules/LogWriter" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/Utility" />
+					<Add directory="../../../code/pkg_Core/Interface/Log" />
+					<Add directory="../../../code/pkg_Core/Modules/LogWriter/log4cplus/include" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/LogObserver.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/LogObserver.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/LogWriter.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/Module.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/Plugin.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/Version.rc2" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/appender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/appenderattachableimpl.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/configurator.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/consoleappender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/factory.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/fileappender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/filter.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/global-init.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/hierarchy.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/hierarchylocker.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/layout.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/logger.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/loggerimpl.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/loggingevent.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/loglevel.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/loglog.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/logloguser.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/ndc.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/nteventlogappender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/nullappender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/objectregistry.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/patternlayout.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/pointer.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/property.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/rootlogger.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/sleep.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socket.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socketappender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socketbuffer.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/stringhelper.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/syncprims.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/syslogappender.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/threads.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/timehelper.cxx" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

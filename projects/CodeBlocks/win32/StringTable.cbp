@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="StringTable" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="..\..\..\code\bin\gcc\Release\Plugins\StringTable.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\..\obj\gcc\Release\StringTable" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-fexceptions" />
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\..\code\pkg_Core\Modules\StringTable" />
+					<Add directory="..\..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="..\..\..\code\pkg_Core\Interface\Xml" />
+				</Compiler>
+			</Target>
+			<Target title="Debug">
+				<Option output="..\..\..\code\bin\gcc\Debug\Plugins\StringTable.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="..\..\..\obj\gcc\Debug\StringTable" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Weffc++" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-fexceptions" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DUNICODE" />
+					<Add option="-D_UNICODE" />
+					<Add directory="..\..\..\code\pkg_Core\Modules\StringTable" />
+					<Add directory="..\..\..\code\pkg_Core\Interface" />
+					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
+					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="..\..\..\code\pkg_Core\Interface\Xml" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Linker>
+			<Add library="shlwapi" />
+		</Linker>
+		<Unit filename="..\..\..\code\pkg_Core\Interface\Xml\Ix_StringTable.h" />
+		<Unit filename="..\..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.cpp" />
+		<Unit filename="..\..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.h" />
+		<Unit filename="..\..\..\code\pkg_Core\Modules\StringTable\Module.cpp" />
+		<Unit filename="..\..\..\code\pkg_Core\Modules\StringTable\StringTable.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="..\..\..\code\pkg_Core\Modules\StringTable\Version.rc2" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

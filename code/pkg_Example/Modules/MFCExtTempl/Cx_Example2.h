@@ -12,8 +12,8 @@ protected:
 
 private:
     // From Ix_Example
-    virtual void Foo();
+    virtual void Foo(long& value);
 
     // From Ix_Example2
-    virtual void Foo2();
+    virtual void Foo2(long& value);
 };
