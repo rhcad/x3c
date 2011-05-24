@@ -118,6 +118,9 @@ public:
     }
 
 private:
+    CPluginManager(const CPluginManager&);
+    void operator=(const CPluginManager&);
+
     HMODULE     m_dll;
     wchar_t     m_filename[MAX_PATH];
 };

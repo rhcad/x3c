@@ -86,6 +86,10 @@ protected:
     virtual bool SetIntArray(const wchar_t* name, const long* items, long count);
     virtual long GetBinary(const wchar_t* name, void* buf, long size);
     virtual bool SetBinary(const wchar_t* name, const void* buf, long size);
+
+private:
+    Cx_XmlSection(const Cx_XmlSection&);
+    void operator=(const Cx_XmlSection&);
 };
 
 #endif // _X3_CONFIGXML_XMLSECTION_H

@@ -8,9 +8,8 @@
 
 static long s_nLevel = 0;
 
-Cx_FileTransaction::Cx_FileTransaction()
+Cx_FileTransaction::Cx_FileTransaction() : m_lLevel(InterlockedIncrement(&s_nLevel))
 {
-    m_lLevel = InterlockedIncrement(&s_nLevel);
     if (1 == m_lLevel)
     {
         CFileTransactions::Instance().Reset();

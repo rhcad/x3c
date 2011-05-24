@@ -69,7 +69,7 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
         return false;
     }
 
-    std::wstring wstrFile(std::a2w(TrimFileName(file)));
+    std::wstring wstrFile(x3::a2w(TrimFileName(file)));
     std::wstring msg2, extra2, module, idname;
     CheckMsgParam(msg2, extra2, module, idname, msg, extra);
 
@@ -101,14 +101,14 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
 bool Cx_LogManager::WriteLog(kLogType type, const char* msg,
     const char* extra, const char* file, long line)
 {
-    return WriteLog(type, std::a2w(msg).c_str(),
-        std::a2w(extra).c_str(), file, line);
+    return WriteLog(type, x3::a2w(msg).c_str(),
+        x3::a2w(extra).c_str(), file, line);
 }
 
 int Cx_LogManager::CrtDbgReport(const char* msg, const char* file, long line)
 {
     WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED",
-        std::a2w(msg).c_str(), file, line);
+        x3::a2w(msg).c_str(), file, line);
 
 #ifndef _WIN32
     return 3;
@@ -121,8 +121,8 @@ int Cx_LogManager::CrtDbgReport(const char* msg, const char* file, long line)
         L"\nFile: %s"
         L"\nLine: %d"
         L"\n\n(Press Retry to debug the application)",
-        std::a2w(msg).c_str(),
-        std::a2w(TrimFileName(file)).c_str(), line);
+        x3::a2w(msg).c_str(),
+        x3::a2w(TrimFileName(file)).c_str(), line);
 
     return MessageBoxW(NULL, buf, L"Debug Assertion Failed",
         MB_TASKMODAL|MB_ICONHAND|MB_ABORTRETRYIGNORE|MB_SETFOREGROUND);

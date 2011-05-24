@@ -68,7 +68,6 @@ void TestLogging::testMultiTypes()
     LOG_WARNING2(L"Name", 10.2f);
     LOG_WARNING2(L"Name", true);
     LOG_WARNING2(L"Name", this);
-    LOG_WARNING2(L"Name", NULL);
     LOG_EVENT_ANSI("@Test:Name", 10, kLogType_Info, __FILE__, __LINE__);
 }
 
@@ -85,7 +84,6 @@ void TestLogging::testIdFormat()
     LOG_INFO(L"");
     LOG_INFO(L" ");
     LOG_INFO(L"Test");
-    LOG_INFO(NULL);
 }
 
 void TestLogging::testGroup()

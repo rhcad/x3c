@@ -114,7 +114,7 @@ bool Cx_TextUtil::GetFileContent(std::wstring& content, BYTE* buf, long size, in
         {
             codepage = 65001;//CP_UTF8
         }
-        content = std::a2w((const char*)buf, codepage);
+        content = x3::a2w((const char*)buf, codepage);
     }
 
     return bRet;
@@ -212,7 +212,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
         }
         else
         {
-            std::string strAnsi (std::w2a(content, codepage));
+            std::string strAnsi (x3::w2a(content, codepage));
 
             dwLen = GetSize(strAnsi);
             ::WriteFile(hFile, strAnsi.c_str(), dwLen, &dwBytes, NULL);
@@ -246,7 +246,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
 
         if (utf16)
         {
-            std::wstring wstrUnicode (std::a2w(content, codepage));
+            std::wstring wstrUnicode (x3::a2w(content, codepage));
 
             BYTE head[] = { 0xFF, 0xFE };
             ::WriteFile(hFile, head, 2, &dwBytes, NULL);
@@ -413,13 +413,19 @@ bool Cx_TextUtil::RemoveInvalidChars(std::wstring& text, const wchar_t* targets)
     {
         wchar_t ch = text[i];
 
-        if (targets && IsSpaceChar(ch, targets)
-            || !targets && ((ch >= 0x0001 && ch <= 0x0008)
-            || (ch >= 0x000b && ch <= 0x000c)
-            || (ch >= 0x000e && ch <= 0x001f)
-            || (ch == 0xDBC0)) )
+        if (targets && IsSpaceChar(ch, targets))
         {
             arrIndex.push_back(i);
+        }
+        else if (!targets)
+        {
+            if ( (ch >= 0x0001 && ch <= 0x0008)
+                || (ch >= 0x000b && ch <= 0x000c)
+                || (ch >= 0x000e && ch <= 0x001f)
+                || (ch == 0xDBC0) )
+            {
+                arrIndex.push_back(i);
+            }
         }
     }
 
@@ -519,10 +525,10 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
 
 std::string Cx_TextUtil::ToAnsi(const std::wstring& text, int codepage)
 {
-    return std::w2a(text, codepage);
+    return x3::w2a(text, codepage);
 }
 
 std::wstring Cx_TextUtil::ToUnicode(const std::string& text, int codepage)
 {
-    return std::a2w(text, codepage);
+    return x3::a2w(text, codepage);
 }

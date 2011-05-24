@@ -2,7 +2,7 @@
  *  \brief Define a implement template class (Cx_SimpleObject) that can instantiate directly.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
- */ // 
+ */ //
 #ifndef X3_PLUGINIMPL_SIMPLEOBJECT_H_
 #define X3_PLUGINIMPL_SIMPLEOBJECT_H_
 
@@ -40,7 +40,7 @@ public:
         objOwner.AttachInterface(p);
         return p;
     }
-    
+
     //! Create a object owned by Cx_Interface.
     template <class IF_Type>
     static Cx_SimpleObject<ClsType>* Create(Cx_Interface<IF_Type>& pIFOwner)
@@ -52,6 +52,7 @@ public:
 private:
     Cx_SimpleObject() {}
     Cx_SimpleObject(const Cx_SimpleObject&);
+    void operator=(const Cx_SimpleObject&);
 };
 
 #endif // X3_PLUGINIMPL_SIMPLEOBJECT_H_

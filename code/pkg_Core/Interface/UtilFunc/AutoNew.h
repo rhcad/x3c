@@ -60,8 +60,8 @@ public:
     T*      ptr;
     size_t  count;
 
-    KAutoNewArr() : count(0), ptr(NULL) {}
-    KAutoNewArr(size_t _count) : count(_count), ptr(new T[_count]) {}
+    KAutoNewArr() : ptr(NULL), count(0) {}
+    KAutoNewArr(size_t _count) : ptr(new T[_count]), count(_count) {}
     ~KAutoNewArr() { delete[] ptr; }
 
     void Free()
@@ -138,7 +138,7 @@ public:
     T*      ptr;
     size_t  count;
 
-    KAutoMalloc() : count(0), ptr(NULL) {}
+    KAutoMalloc() : ptr(NULL), count(0) {}
     ~KAutoMalloc() { if (ptr) free(ptr); }
 
     KAutoMalloc(size_t _count)

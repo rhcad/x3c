@@ -79,6 +79,9 @@ public:
     }
 
 private:
+    Cx_Object(const Cx_Object&);
+    void operator=(const Cx_Object&);
+
     long        m_lRefCount;
 
     static long& ObjectCount()

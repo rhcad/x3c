@@ -51,7 +51,7 @@ protected:
     typedef std::vector<XCLSID>         CLSIDS;
     typedef std::pair<_XCLASSMETA_ENTRY, long>  MAPITEM;    //!< entry+moduleIndex
     typedef hash_map<std::string, MAPITEM>    CLSMAP;       //!< clsid+item
-    
+
     struct MODULEINFO                   //!< plugin module info
     {
         HMODULE             hdll;       //!< DLL handle of the plugin
@@ -60,8 +60,10 @@ protected:
         bool                owned;      //!< the DLL is loaded by this class or not
         bool                inited;     //!< InitializePlugins() has been called or not
         wchar_t             filename[MAX_PATH];   //!< plugin filename
+
+        MODULEINFO() : hdll(NULL), module(NULL), owned(false), inited(false) {}
     };
-    
+
     std::vector<MODULEINFO> m_modules;  //!< all plugin modules
     CLSMAP                  m_clsmap;   //!< map from clsid to class factory
     long                    m_unloading;    //!< positive if a a plugin is unloading
@@ -74,6 +76,9 @@ protected:
     _XCLASSMETA_ENTRY* FindEntry(const XCLSID& clsid, int* moduleIndex = NULL);
 
 private:
+    Cx_ObjectFactory(const Cx_ObjectFactory&);
+    void operator=(const Cx_ObjectFactory&);
+
     bool RegisterClass(int moduleIndex, const _XCLASSMETA_ENTRY& cls);
     virtual bool LoadDelayPlugin(const wchar_t* filename) = 0;
 };

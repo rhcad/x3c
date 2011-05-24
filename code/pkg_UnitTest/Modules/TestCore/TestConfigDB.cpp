@@ -12,7 +12,6 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
 #endif
 
 CPPUNIT_TEST_SUITE_REGISTRATION( TestConfigDB );
@@ -128,7 +127,7 @@ void TestConfigDB::testSQLWithOrderBy()
         ULONG nID = secRec->GetUInt32(L"id");
         std::wstring wstrName = secRec->GetString(L"title");
 
-        ASSERT(0 == iRec && nID == 1 || 1 == iRec && nID == 4);
+        ASSERT((0 == iRec && nID == 1) || (1 == iRec && nID == 4));
     }
 }
 

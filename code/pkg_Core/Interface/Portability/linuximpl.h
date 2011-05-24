@@ -6,7 +6,7 @@
 
 #include <ConvStr.h>
 
-#define W2A(wstr)   std::w2a(wstr).c_str()
+#define W2A(wstr)   x3::w2a(wstr).c_str()
 
 bool FreeLibrary(HMODULE hdll)
 {

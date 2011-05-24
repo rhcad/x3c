@@ -39,6 +39,9 @@ public:
     }
 
 private:
+    Cx_PluginLoaderOut(const Cx_PluginLoaderOut&);
+    void operator=(const Cx_PluginLoaderOut&);
+
     std::wstring GetWorkPath()
     {
         return m_path.empty() ? FileNameRelToAbs(L"", false) : m_path;

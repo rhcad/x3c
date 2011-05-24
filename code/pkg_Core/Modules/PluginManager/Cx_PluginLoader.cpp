@@ -522,7 +522,7 @@ bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
     if (IsDelayPlugin(filename))
     {
         return LoadPluginCache(filename)
-            || LoadPlugin(filename) && (BuildPluginCache(filename) || 1);
+            || (LoadPlugin(filename) && (BuildPluginCache(filename) || 1));
     }
 
     return LoadPlugin(filename);
@@ -654,7 +654,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
             {
                 break;
             }
-            XCLSID clsid(std::w2a(sec->GetString(L"id")).c_str());
+            XCLSID clsid(x3::w2a(sec->GetString(L"id")).c_str());
             if (clsid.valid() && find_value(clsids, clsid) < 0)
             {
                 clsids.push_back(clsid);
@@ -690,12 +690,12 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
             it != clsids.end(); ++it)
         {
             CConfigIOSection sec(seclist.GetSection(
-                L"clsid", L"id", std::a2w(it->str()).c_str()));
+                L"clsid", L"id", x3::a2w(it->str()).c_str()));
 
             _XCLASSMETA_ENTRY* pEntry = FindEntry(*it);
             if (pEntry && pEntry->pfnObjectCreator)
             {
-                sec->SetString(L"class", std::a2w(pEntry->className).c_str());
+                sec->SetString(L"class", x3::a2w(pEntry->className).c_str());
             }
         }
     }
@@ -720,12 +720,12 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
         if (pIFFile)
         {
             CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
-                L"observers/observer", L"type", std::a2w(obtype).c_str()));
+                L"observers/observer", L"type", x3::a2w(obtype).c_str()));
             seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
 
             seclist = pIFFile->GetData()->GetSection(NULL,
                 L"plugins/plugin", L"filename", PathFindFileNameW(filename));
-            seclist.GetSection(L"observers/observer", L"type", std::a2w(obtype).c_str());
+            seclist.GetSection(L"observers/observer", L"type", x3::a2w(obtype).c_str());
         }
     }
 }
@@ -737,7 +737,7 @@ void Cx_PluginLoader::FireFirstEvent(const char* obtype)
     if (pIFFile)
     {
         CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
-            L"observers/observer", L"type", std::a2w(obtype).c_str(), false));
+            L"observers/observer", L"type", x3::a2w(obtype).c_str(), false));
 
         for (int i = 0; i < 999; i++)
         {

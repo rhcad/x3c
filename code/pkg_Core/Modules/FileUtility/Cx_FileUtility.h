@@ -53,6 +53,9 @@ public:
     virtual bool GetFileDescription(std::wstring& description, const std::wstring& filename);
 
 private:
+    Cx_FileUtility(const Cx_FileUtility&);
+    void operator=(const Cx_FileUtility&);
+
     bool TwoFileOperation(const wchar_t* oldfile, const wchar_t* newfile, int wFunc);
 
 private:

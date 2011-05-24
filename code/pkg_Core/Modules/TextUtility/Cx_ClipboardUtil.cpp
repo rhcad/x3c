@@ -96,7 +96,7 @@ bool Cx_ClipboardUtil::PasteText(HWND wndOwner, std::wstring& text, bool clear)
                 const char* lpStr = (const char*)::GlobalLock(hMem);
                 if (lpStr != NULL)
                 {
-                    text = std::a2w(lpStr);
+                    text = x3::a2w(lpStr);
                     ::GlobalUnlock(hMem);
                 }
             }

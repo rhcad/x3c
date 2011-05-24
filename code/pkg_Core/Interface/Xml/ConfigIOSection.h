@@ -38,13 +38,17 @@ public:
     }
 
     //! 赋值操作符函数
-    void operator=(const Cx_Interface<Ix_ConfigSection>& src)
+    CConfigIOSection& operator=(const Cx_Interface<Ix_ConfigSection>& src)
     {
-        Cx_Interface<Ix_ConfigSection>::operator=(src);
+        if (&src != this)
+        {
+            Cx_Interface<Ix_ConfigSection>::operator=(src);
+        }
+        return *this;
     }
 
     //! 析构函数
-    ~CConfigIOSection()
+    virtual ~CConfigIOSection()
     {
         Release();
     }
@@ -70,7 +74,7 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name, 
+    CConfigIOSection GetSection(const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -85,8 +89,8 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name, 
-        const wchar_t* attrName, const wchar_t* attrValue, 
+    CConfigIOSection GetSection(const wchar_t* name,
+        const wchar_t* attrName, const wchar_t* attrValue,
         bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -103,16 +107,16 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name, 
-        const wchar_t* attrName, const wchar_t* attrValue, 
-        const wchar_t* attrName2, const wchar_t* attrValue2, 
+    CConfigIOSection GetSection(const wchar_t* name,
+        const wchar_t* attrName, const wchar_t* attrValue,
+        const wchar_t* attrName2, const wchar_t* attrValue2,
         bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, attrName, attrValue, 
+        return pIFData->GetSection(P(), name, attrName, attrValue,
             attrName2, attrValue2, autoCreate);
     }
-    
+
     //! 得到带整数标识属性参数的一个数据节点
     /*!
         \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
@@ -123,13 +127,13 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name, 
-        const wchar_t* attrName, ULONG attrValue, 
-        const wchar_t* attrName2, ULONG attrValue2, 
+    CConfigIOSection GetSection(const wchar_t* name,
+        const wchar_t* attrName, ULONG attrValue,
+        const wchar_t* attrName2, ULONG attrValue2,
         bool autoCreate = true)
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, attrName, attrValue, 
+        return pIFData->GetSection(P(), name, attrName, attrValue,
             attrName2, attrValue2, autoCreate);
     }
 
@@ -168,7 +172,7 @@ public:
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->AddSection(P(), name);
     }
-    
+
     //! 删除本数据节点的所有子节点
     /*!
         \param name 子节点数据节点名称，不能包含正斜号或反斜号

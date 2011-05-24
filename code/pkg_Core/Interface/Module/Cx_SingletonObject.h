@@ -100,6 +100,9 @@ public:
     }
 
 private:
+    Cx_SingletonObject(const Cx_SingletonObject&);
+    void operator=(const Cx_SingletonObject&);
+
     long        m_lRefCount;
 
     static Cx_SingletonObject<ClsType>*& Instance()

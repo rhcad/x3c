@@ -36,10 +36,10 @@ public:
     {
         InterlockedExchange((long*)&s_errcode, m_err);
     }
-    int& operator=(int err)
+    ErrCode& operator=(int err)
     {
         m_err = err;
-        return m_err;
+        return *this;
     }
     operator int&()
     {

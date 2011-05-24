@@ -41,6 +41,9 @@ public:
     }
 
 private:
+    CLockCount(const CLockCount&);
+    void operator=(const CLockCount&);
+
     long*   m_count;
 };
 

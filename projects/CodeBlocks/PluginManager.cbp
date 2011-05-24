@@ -35,9 +35,10 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-Weffc++" />
 					<Add option="-Wall" />
-					<Add option="-fexceptions" />
 					<Add option="-g" />
+					<Add option="-fexceptions" />
 					<Add option="-D_DEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />

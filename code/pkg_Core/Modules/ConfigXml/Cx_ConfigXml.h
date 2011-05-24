@@ -26,8 +26,8 @@ protected:
     virtual std::wstring GetFileName() const;
     virtual void SetFileName(const wchar_t* filename);
     virtual std::wstring GetRootName() const;
-    virtual void SetRootName(const wchar_t* rootName = L"root", 
-        const wchar_t* encoding = L"UTF-8", 
+    virtual void SetRootName(const wchar_t* rootName = L"root",
+        const wchar_t* encoding = L"UTF-8",
         const wchar_t* nmspace = L"");
     virtual void SetSchemaLocation(const wchar_t* location);
     virtual bool Reload();
@@ -48,22 +48,22 @@ protected:
     virtual ConfigIOSection GetSection(
         const wchar_t* name, bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, const wchar_t* name, 
-        const wchar_t* attrName, ULONG attrValue, 
+        Ix_ConfigSection* parent, const wchar_t* name,
+        const wchar_t* attrName, ULONG attrValue,
         bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, const wchar_t* name, 
-        const wchar_t* attrName, const wchar_t* attrValue, 
+        Ix_ConfigSection* parent, const wchar_t* name,
+        const wchar_t* attrName, const wchar_t* attrValue,
         bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, const wchar_t* name, 
-        const wchar_t* attrName, const wchar_t* attrValue, 
-        const wchar_t* attrName2, const wchar_t* attrValue2, 
+        Ix_ConfigSection* parent, const wchar_t* name,
+        const wchar_t* attrName, const wchar_t* attrValue,
+        const wchar_t* attrName2, const wchar_t* attrValue2,
         bool autoCreate = true);
     virtual ConfigIOSection GetSection(
-        Ix_ConfigSection* parent, const wchar_t* name, 
-        const wchar_t* attrName, ULONG attrValue, 
-        const wchar_t* attrName2, ULONG attrValue2, 
+        Ix_ConfigSection* parent, const wchar_t* name,
+        const wchar_t* attrName, ULONG attrValue,
+        const wchar_t* attrName2, ULONG attrValue2,
         bool autoCreate = true);
     virtual long GetSectionCount(
         Ix_ConfigSection* parent, const wchar_t* name);
@@ -72,13 +72,16 @@ protected:
     virtual ConfigIOSection AddSection(
         Ix_ConfigSection* parent, const wchar_t* name);
     virtual bool RemoveSection(Ix_ConfigSection* sec);
-    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
+    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName = L"", const wchar_t* attrValue = L"");
-    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
+    virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue);
     virtual ConfigIOSection GetParentSection(Ix_ConfigSection* sec);
 
 private:
+    Cx_ConfigXml(const Cx_ConfigXml&);
+    void operator=(const Cx_ConfigXml&);
+
     ConfigXmlImpl*  m_pImpl;
 };
 

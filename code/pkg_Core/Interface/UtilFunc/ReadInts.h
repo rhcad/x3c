@@ -14,7 +14,7 @@
 */
 inline bool IsIntChar(wchar_t c, bool signchar = false)
 {
-    return iswdigit(c) || signchar && (L'+' == c || L'-' == c);
+    return iswdigit(c) || (signchar && (L'+' == c || L'-' == c));
 }
 
 //! splitting integer numbers from a string.
@@ -49,7 +49,8 @@ long ReadInts(const wchar_t* str, IntType* arr, long size, bool signchar = false
         }
         if (j > i)
         {
-            int mincnt = _countof(buf) < 1 + j - i ? _countof(buf) : 1 + j - i;
+            int mincnt = _countof(buf);
+            mincnt = mincnt < (1 + j - i) ? mincnt : (1 + j - i);
             wcsncpy_s(buf, _countof(buf), str + i, mincnt);
             arr[count++] = static_cast<IntType>(wcstol(buf, NULL, 10));
         }

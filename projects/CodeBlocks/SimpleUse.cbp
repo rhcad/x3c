@@ -34,13 +34,14 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Weffc++" />
+					<Add option="-Wall" />
+					<Add option="-g" />
 					<Add option="-W" />
 					<Add option="-fexceptions" />
-					<Add option="-g" />
 					<Add option="-D_DEBUG" />
 					<Add option="-D_CONSOLE" />
 					<Add option="-D_MBCS" />
-					<Add option="-Wall" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
 					<Add directory="..\..\code\pkg_Example\Modules\SimpleUse" />

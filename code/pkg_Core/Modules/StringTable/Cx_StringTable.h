@@ -13,13 +13,13 @@ protected:
     ~Cx_StringTable();
 
 private:
-    bool GetValue(std::wstring& value, const std::wstring& name, 
+    bool GetValue(std::wstring& value, const std::wstring& name,
         std::wstring& module, std::wstring& id);
-    bool GetValue(std::wstring& value, 
+    bool GetValue(std::wstring& value,
         const std::wstring& module, const std::wstring& id);
     long LoadFiles(const std::wstring& path);
     long RegisterFile(const std::wstring& filename);
-    std::wstring GetValue(const std::wstring& module, 
+    std::wstring GetValue(const std::wstring& module,
         const std::wstring& id, bool* hasvalue = NULL);
 
 private:
@@ -28,6 +28,7 @@ private:
         std::wstring    module;
         Cx_Ptr          group;  // Ix_ConfigSection
         Cx_Ptr          file;   // Ix_ConfigData
+        ITEM() {}
     };
     typedef std::vector<ITEM>::iterator IT_ITEM;
 

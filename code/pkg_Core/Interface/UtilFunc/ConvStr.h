@@ -8,9 +8,13 @@
 
 #include <string>
 
-namespace std {
+#ifndef CP_UTF8
+#define CP_UTF8 65001
+#endif
 
-//! Convert from UNICODE string to ANSI string, std::w2a.
+namespace x3 {
+
+//! Convert from UNICODE string to ANSI string, x3::w2a.
 /*!
     \ingroup _GROUP_UTILFUNC
     \param s The source UNICODE string to be converted.
@@ -33,7 +37,7 @@ inline std::string w2a(const wchar_t* s, int codepage = 0)
     return str;
 }
 
-//! Convert from UNICODE string to ANSI string, std::w2a.
+//! Convert from UNICODE string to ANSI string, x3::w2a.
 /*!
     \ingroup _GROUP_UTILFUNC
     \param s The source UNICODE string to be converted.
@@ -45,7 +49,7 @@ inline std::string w2a(const std::wstring& s, int codepage = 0)
     return w2a(s.c_str(), codepage);
 }
 
-//! Convert from ANSI string to UNICODE string, std::a2w.
+//! Convert from ANSI string to UNICODE string, x3::a2w.
 /*!
     \ingroup _GROUP_UTILFUNC
     \param s The source ANSI string to be converted.
@@ -68,7 +72,7 @@ inline std::wstring a2w(const char* s, int codepage = 0)
     return wstr;
 }
 
-//! Convert from ANSI string to UNICODE string, std::a2w.
+//! Convert from ANSI string to UNICODE string, x3::a2w.
 /*!
     \ingroup _GROUP_UTILFUNC
     \param s The source ANSI string to be converted.

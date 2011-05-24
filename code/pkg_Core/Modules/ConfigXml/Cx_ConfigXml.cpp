@@ -21,7 +21,7 @@
 #include <ConvStr.h>
 static inline int _wrename (const wchar_t *oldfile, const wchar_t *newfile)
 {
-    return rename(std::w2a(oldfile).c_str(), std::w2a(newfile).c_str());
+    return rename(x3::w2a(oldfile).c_str(), x3::w2a(newfile).c_str());
 }
 #endif
 
@@ -159,7 +159,7 @@ XMLDOMElementPtr ConfigXmlImpl::GetParentNode(XMLDOMElementPtr xmlParent,
     {
         pEnd = wcschr(pStart, L'\\');
         pEnd2 = wcschr(pStart, L'/');
-        if (!pEnd || pEnd2 && pEnd2 < pEnd)
+        if (!pEnd || (pEnd2 && pEnd2 < pEnd))
             pEnd = pEnd2;
 
         if (NULL == pEnd)

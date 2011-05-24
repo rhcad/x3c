@@ -27,7 +27,7 @@ Interface: directory for storing interface files(*.h)
 
 
 
-Bug reports are welcome.  Please use the SourceForge bug tracking
+Bug reports and suggestions are welcome.  Please use the SourceForge bug tracking
 system at http://sourceforge.net/projects/x3c/develop.
 
 Email to the current maintainers of MakePluginPerl may be sent to <think.hy@gmail.com>.

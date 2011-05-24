@@ -26,11 +26,11 @@ public:
 
     // From Ix_PluginLoader
     //
-    virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
+    virtual long LoadPlugins(HMODULE instance, const wchar_t* path,
         const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true);
-    virtual long LoadPlugins(const wchar_t* path, 
+    virtual long LoadPlugins(const wchar_t* path,
         const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true);
-    virtual long LoadPluginFiles(const wchar_t* path, 
+    virtual long LoadPluginFiles(const wchar_t* path,
         const wchar_t* files, HMODULE instance = NULL);
     virtual long InitializePlugins();
     virtual bool RegisterPlugin(HMODULE instance);
@@ -44,11 +44,14 @@ public:
     virtual void FireFirstEvent(const char* obtype);
 
 private:
+    Cx_PluginLoader(const Cx_PluginLoader&);
+    void operator=(const Cx_PluginLoader&);
+
     bool issep(wchar_t c);
     bool ClearModuleItems(HMODULE hModule);
     void ReplaceSlashes(wchar_t* filename);
     void MakeFullPath(wchar_t* fullpath, HMODULE instance, const wchar_t* path);
-    void FindPlugins(std::vector<std::wstring>& filenames, 
+    void FindPlugins(std::vector<std::wstring>& filenames,
         const wchar_t* path, const wchar_t* ext, bool recursive);
     int GetPluginIndex(const wchar_t* filename);
     virtual bool LoadDelayPlugin(const wchar_t* filename);

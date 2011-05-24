@@ -12,8 +12,10 @@
 #ifdef _WIN32
 #include <io.h>
 #include <shellapi.h>
+#ifdef _MSC_VER
 #pragma comment(lib,"shell32.lib")
 #endif
+#endif // _WIN32
 
 static long s_nFileOpRet = 0;   // SHFileOperationW ·µ»ØÖµ
 

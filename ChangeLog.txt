@@ -1,5 +1,11 @@
 X3 C++ PluginFramework
 
+2011-05-24
+
+    * Disable copy operators. Replace std::w2a to x3::w2a.
+    * Implement configxml plugin using tinyxml (not completed).
+    * Change portability functions for Linux and Windows.
+
 2011-05-18
 
     * Implement portability for Linux.
