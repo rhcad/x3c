@@ -11,7 +11,7 @@
 #ifdef _MSC_VER
 #include "XmlUtil/XmlUtil.h"
 #else
-#include "OpenXml/XmlUtil.h"
+#include "TinyXml/XmlUtil.h"
 #endif
 
 struct ConfigXmlImpl;

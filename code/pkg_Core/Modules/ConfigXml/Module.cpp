@@ -12,7 +12,7 @@
 #ifdef _XMLDOM_HELPERS_H
 #include "XmlUtil/XmlUtil.cpp"
 #else
-#include "OpenXml/XmlUtil.cpp"
+#include "TinyXml/XmlUtil.cpp"
 #endif
 
 XBEGIN_DEFINE_MODULE()
