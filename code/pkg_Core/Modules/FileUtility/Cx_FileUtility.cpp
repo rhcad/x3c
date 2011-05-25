@@ -704,8 +704,6 @@ bool Cx_FileUtility::GetFileVersion(
         WORD& ver1, WORD& ver2, WORD& ver3, WORD& ver4,
         const std::wstring& filename)
 {
-    DWORD handle = 0;
-    wchar_t *block = NULL;
     bool ret = false;
 
     ver1 = 0;
@@ -714,6 +712,9 @@ bool Cx_FileUtility::GetFileVersion(
     ver4 = 0;
 
 #ifdef _MSC_VER
+    DWORD handle = 0;
+    wchar_t *block = NULL;
+
     UINT size = ::GetFileVersionInfoSizeW((wchar_t*)filename.c_str(), &handle);
     if (size > 0 && NULL != (block = new wchar_t[size]))
     {
@@ -739,13 +740,14 @@ bool Cx_FileUtility::GetFileVersion(
 bool Cx_FileUtility::GetFileDescription(
         std::wstring& description, const std::wstring& filename)
 {
-    DWORD handle = 0;
-    wchar_t *block = NULL;
     bool ret = false;
 
     description.resize(0);
 
 #ifdef _MSC_VER
+    DWORD handle = 0;
+    wchar_t *block = NULL;
+
     UINT size = ::GetFileVersionInfoSizeW((wchar_t*)filename.c_str(), &handle);
     if (size > 0 && NULL != (block = new wchar_t[size]))
     {

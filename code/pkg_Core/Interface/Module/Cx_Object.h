@@ -23,7 +23,7 @@ class Cx_Object
     , public Ix_Object
 {
 protected:
-    Cx_Object(bool bRef = true) : m_lRefCount(bRef ? 1 : 0)
+    Cx_Object(bool bRef = true) : m_refcount(bRef ? 1 : 0)
     {
         InterlockedIncrement(&ObjectCount());
     }
@@ -40,7 +40,7 @@ protected:
         {
             InterlockedIncrement(&RefCountByOthers());
         }
-        InterlockedIncrement(&m_lRefCount);
+        InterlockedIncrement(&m_refcount);
     }
 
     virtual void Release(HMODULE fromdll)
@@ -49,7 +49,7 @@ protected:
         {
             InterlockedDecrement(&RefCountByOthers());
         }
-        if (0 == InterlockedDecrement(&m_lRefCount))
+        if (0 == InterlockedDecrement(&m_refcount))
         {
             delete this;
         }
@@ -82,18 +82,18 @@ private:
     Cx_Object(const Cx_Object&);
     void operator=(const Cx_Object&);
 
-    long        m_lRefCount;
+    long        m_refcount;
 
     static long& ObjectCount()
     {
-        static long s_lObjCount = 0;
-        return s_lObjCount;
+        static long s_objcount = 0;
+        return s_objcount;
     }
 
     static long& RefCountByOthers()
     {
-        static long s_lRefCount = 0;
-        return s_lRefCount;
+        static long s_refcount = 0;
+        return s_refcount;
     }
 };
 

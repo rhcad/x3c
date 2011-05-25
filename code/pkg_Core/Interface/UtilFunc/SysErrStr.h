@@ -19,11 +19,11 @@ inline std::wstring GetSystemErrorString(unsigned long errorcode)
 
     if (errorcode != 0)
     {
+#ifdef FormatMessage
         wchar_t* p = NULL;
 
-#ifdef FormatMessage
         ::FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-            NULL, errorcode, 
+            NULL, errorcode,
             MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
             (wchar_t*)&p, 0, NULL);
 

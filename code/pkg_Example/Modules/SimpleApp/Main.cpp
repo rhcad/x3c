@@ -39,7 +39,7 @@ void MyFunc2(const Cx_Ptr& obj)
     if (pIFExample)
     {
         pIFExample->Foo(value);
-        printf("value: %d\n", value);
+        printf("value: %ld\n", value);
     }
 }
 
@@ -52,7 +52,7 @@ void Test()
     if (pIFExample)
     {
         pIFExample->Foo(value);    // 调用接口函数
-        printf("value: %d\n", value);
+        printf("value: %ld\n", value);
     }
 
     // 转换为其他接口

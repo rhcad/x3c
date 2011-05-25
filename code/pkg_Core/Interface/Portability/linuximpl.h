@@ -237,14 +237,4 @@ long InterlockedExchange(long* p, long v)
     return old;
 }
 
-void* InterlockedCompareExchange(void** p, void* newv, void* cmp)
-{
-    void* old = *p;
-    if (cmp == *p)
-    {
-        *(long*)p = (long)newv;
-    }
-    return old;
-}
-
 #endif // X3LINUX_PORTABILITY_IMPL_H

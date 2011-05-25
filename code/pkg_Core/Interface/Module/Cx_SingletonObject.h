@@ -27,7 +27,7 @@ class Cx_SingletonObject
     , public CModuleItem
 {
 protected:
-    Cx_SingletonObject(bool bRef = true) : m_lRefCount(bRef ? 1 : 0)
+    Cx_SingletonObject(bool bRef = true) : m_refcount(bRef ? 1 : 0)
     {
     }
 
@@ -46,7 +46,7 @@ protected:
         {
             InterlockedIncrement(&RefCountByOthers());
         }
-        InterlockedIncrement(&m_lRefCount);
+        InterlockedIncrement(&m_refcount);
     }
 
     virtual void Release(HMODULE fromdll)
@@ -55,7 +55,7 @@ protected:
         {
             InterlockedDecrement(&RefCountByOthers());
         }
-        InterlockedDecrement(&m_lRefCount);
+        InterlockedDecrement(&m_refcount);
     }
 
     virtual const char* GetClassName() const
@@ -70,13 +70,9 @@ public:
         {
             Cx_SingletonObject<ClsType>* p = new Cx_SingletonObject<ClsType>(false);
 
-#ifdef InterlockedCompareExchangePointer
-            if (InterlockedCompareExchangePointer(
-                (PVOID volatile *)(&Instance()), p, NULL) == NULL)
-#else
-            if (InterlockedCompareExchange((void**)(&Instance()), p, NULL) == NULL)
-#endif
+            if (1 == InterlockedIncrement(&Locker()))
             {
+                Instance() = p;
                 p->AddRef(fromdll);
                 p->AddModuleItem();
             }
@@ -84,6 +80,7 @@ public:
             {
                 delete p;   // has created by another thread
             }
+            InterlockedDecrement(&Locker());
         }
 
         return Instance();
@@ -91,7 +88,7 @@ public:
 
     static long STDCALL GetObjectCount()
     {
-        return (Instance() && Instance()->m_lRefCount > 0) ? 1 : 0;
+        return (Instance() && Instance()->m_refcount > 0) ? 1 : 0;
     }
 
     static long STDCALL GetRefCountByOthers()
@@ -103,18 +100,24 @@ private:
     Cx_SingletonObject(const Cx_SingletonObject&);
     void operator=(const Cx_SingletonObject&);
 
-    long        m_lRefCount;
+    long        m_refcount;
 
     static Cx_SingletonObject<ClsType>*& Instance()
     {
-        static Cx_SingletonObject<ClsType>* s_pSingleton = NULL;
-        return s_pSingleton;
+        static Cx_SingletonObject<ClsType>* s_obj = NULL;
+        return s_obj;
     }
 
     static long& RefCountByOthers()
     {
-        static long s_lRefCount = 0;
-        return s_lRefCount;
+        static long s_refcount = 0;
+        return s_refcount;
+    }
+
+    static long& Locker()
+    {
+        static long s_locker = 0;
+        return s_locker;
     }
 };
 

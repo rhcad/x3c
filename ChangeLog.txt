@@ -5,6 +5,7 @@ X3 C++ PluginFramework
     * Disable copy operators. Replace std::w2a to x3::w2a.
     * Implement configxml plugin using tinyxml (not completed).
     * Change portability functions for Linux and Windows.
+    * Not call InterlockedCompareExchange in Cx_SingletonObject.
 
 2011-05-18
 
