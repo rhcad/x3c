@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "ChangeManager"=vcproj\ChangeManager.dsp - Package Owner=<4>
+Project: "ChangeManager"=.\vcproj\ChangeManager.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -15,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ChangeObserverExample"=vcproj\ChangeObserverExample.dsp - Package Owner=<4>
+Project: "ChangeObserverExample"=.\vcproj\ChangeObserverExample.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -27,7 +27,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ConfigDB"=vcproj\ConfigDB.dsp - Package Owner=<4>
+Project: "ConfigDB"=.\vcproj\ConfigDB.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -39,7 +39,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ConfigXml"=vcproj\ConfigXml.dsp - Package Owner=<4>
+Project: "ConfigXml"=.\vcproj\ConfigXml.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -51,7 +51,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "FileUtility"=vcproj\FileUtility.dsp - Package Owner=<4>
+Project: "FileUtility"=.\vcproj\FileUtility.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -63,7 +63,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "LogManager"=vcproj\LogManager.dsp - Package Owner=<4>
+Project: "HollowView"=.\vcproj\HollowView.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -75,7 +75,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "LogWriter"=vcproj\LogWriter.dsp - Package Owner=<4>
+Project: "HollowViewApp"=.\vcproj\HollowViewApp.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -87,7 +87,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "MFCExtTempl"=vcproj\MFCExtTempl.dsp - Package Owner=<4>
+Project: "LogManager"=.\vcproj\LogManager.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -99,7 +99,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "PluginManager"=vcproj\PluginManager.dsp - Package Owner=<4>
+Project: "LogWriter"=.\vcproj\LogWriter.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -111,7 +111,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "SimpleApp"=vcproj\SimpleApp.dsp - Package Owner=<4>
+Project: "MFCExtTempl"=.\vcproj\MFCExtTempl.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -123,7 +123,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "SimpleUse"=vcproj\SimpleUse.dsp - Package Owner=<4>
+Project: "PluginManager"=.\vcproj\PluginManager.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -135,7 +135,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "StringTable"=vcproj\StringTable.dsp - Package Owner=<4>
+Project: "SimpleApp"=.\vcproj\SimpleApp.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -147,7 +147,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TestCore"=vcproj\TestCore.dsp - Package Owner=<4>
+Project: "SimpleUse"=.\vcproj\SimpleUse.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -159,7 +159,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TextUtility"=vcproj\TextUtility.dsp - Package Owner=<4>
+Project: "StringTable"=.\vcproj\StringTable.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -171,7 +171,31 @@ Package=<4>
 
 ###############################################################################
 
-Project: "Win32DllTempl"=vcproj\Win32DllTempl.dsp - Package Owner=<4>
+Project: "TestCore"=.\vcproj\TestCore.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "TextUtility"=.\vcproj\TextUtility.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "Win32DllTempl"=.\vcproj\Win32DllTempl.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

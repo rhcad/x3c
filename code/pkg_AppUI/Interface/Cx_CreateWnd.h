@@ -6,7 +6,9 @@
 #ifndef X3_VIEW_CREATEWND_IMPL_H_
 #define X3_VIEW_CREATEWND_IMPL_H_
 
+#ifdef _MSC_VER
 #pragma warning(disable:4097)   // typedef-name used as synonym
+#endif
 
 #include "Ix_CreateWnd.h"
 
@@ -22,11 +24,11 @@
     _XCLASSMETA_ENTRY(1, "Cx_Object<Cx_CreateWnd<" #cls ">>", clsid, "",    \
         reinterpret_cast<PFNXObjectCreator>(&Cx_Object<Cx_CreateWnd<cls> >::CreateObject),  \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<Cx_CreateWnd<cls> >::GetObjectCount),   \
-        reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<Cx_CreateWnd<cls> >::GetRefCountByOthers)), 
+        reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<Cx_CreateWnd<cls> >::GetRefCountByOthers)),
 #endif
 
 //! Template class to implement Ix_CreateWnd.
-/*! BASEWND is a window class which need to implement the following functions: 
+/*! BASEWND is a window class which need to implement the following functions:
     \code
     BOOL CreateWnd(CWnd* pParentWnd, UINT nID);
     void Refresh();
@@ -52,21 +54,21 @@ public:
     {
         ASSERT(NULL == m_pWnd);
     }
-    
+
     virtual HWND GetWindow() const
     {
         return m_pWnd->GetSafeHwnd();
     }
 
     // BASEWND class must has function: BOOL CreateWnd(CWnd* pParentWnd, UINT nID)
-    virtual bool CreateWnd(HWND hwndParent, UINT nID)
+    virtual bool CreateWnd(HWND hwndParent, int nID)
     {
 #ifdef _USRDLL
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
-        return !!m_pWnd->CreateWnd(CWnd::FromHandle(hwndParent), nID);
+        return m_pWnd && m_pWnd->CreateWnd(CWnd::FromHandle(hwndParent), nID);
     }
-    
+
     virtual void DestroyWnd()
     {
 #ifdef _USRDLL
@@ -79,14 +81,18 @@ public:
             m_pWnd = NULL;
         }
     }
-    
-    virtual BOOL DoCmdMsg(UINT nID, int nCode, void* pExtra, void* pInfo)
+
+    virtual bool DoCmdMsg(int nID, int nCode, void* pExtra, void* pInfo)
     {
 #ifdef _USRDLL
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
+#ifdef __AFX_H__
         AFX_CMDHANDLERINFO* pHandlerInfo = static_cast<AFX_CMDHANDLERINFO*>(pInfo);
-        return m_pWnd->OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+        return !!m_pWnd->OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+#else
+        return false;
+#endif
     }
 
     // BASEWND class may has function: void Refresh()
