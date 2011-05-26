@@ -7,12 +7,12 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="..\..\..\code\bin\unix\Release\Plugins\ChangeObserverExample.plugin" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\unix\Release\ChangeObserverExample" />
+				<Option output="../../../code/bin/unix/Release/Plugins/ChangeObserverExample.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/unix/Release/ChangeObserverExample" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-fexceptions" />
@@ -20,21 +20,21 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Example\Modules\ChangeObserverExample" />
-					<Add directory="..\..\..\code\pkg_Example\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\ChangeObserver" />
+					<Add directory="../../../code/pkg_Example/Modules/ChangeObserverExample" />
+					<Add directory="../../../code/pkg_Example/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/ChangeObserver" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
-				<Option output="..\..\..\code\bin\unix\Debug\Plugins\ChangeObserverExample.plugin" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\unix\Debug\ChangeObserverExample" />
+				<Option output="../../../code/bin/unix/Debug/Plugins/ChangeObserverExample.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/unix/Debug/ChangeObserverExample" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-Wall" />
@@ -43,28 +43,28 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Example\Modules\ChangeObserverExample" />
-					<Add directory="..\..\..\code\pkg_Example\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\ChangeObserver" />
+					<Add directory="../../../code/pkg_Example/Modules/ChangeObserverExample" />
+					<Add directory="../../../code/pkg_Example/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/ChangeObserver" />
 				</Compiler>
 			</Target>
 		</Build>
-		<Unit filename="..\..\..\code\pkg_Example\Interface\Ix_ChangeObserverTest.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserver.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserverB.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.cpp" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\DocEventObserver.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\DocObserverTest.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Module.cpp" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\NodeSelectionObserver.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Plugin.cpp" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Responsibility.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ResponsibilityB.h" />
-		<Unit filename="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h" />
+		<Unit filename="../../../code/pkg_Example/Interface/Ix_ChangeObserverTest.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/ChainObserver.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/ChainObserverB.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Cx_ObserverTest.cpp" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Cx_ObserverTest.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/DocEventObserver.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/DocObserverTest.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Module.cpp" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/NodeSelectionObserver.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Plugin.cpp" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Responsibility.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/ResponsibilityB.h" />
+		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/SelectionObserverTest.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

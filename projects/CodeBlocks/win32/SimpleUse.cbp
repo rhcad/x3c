@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="..\..\..\code\bin\gcc\Release\UnitTests\SimpleUse" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\gcc\Release\SimpleUse" />
+				<Option output="../../../code/bin/gcc/Release/UnitTests/SimpleUse" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/gcc/Release/SimpleUse" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -21,16 +21,16 @@
 					<Add option="-Wall" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Example\Modules\SimpleUse" />
-					<Add directory="..\..\..\code\pkg_Example\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\PluginManager" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="../../../code/pkg_Example/Modules/SimpleUse" />
+					<Add directory="../../../code/pkg_Example/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
-				<Option output="..\..\..\code\bin\gcc\Debug\UnitTests\SimpleUse" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\gcc\Debug\SimpleUse" />
+				<Option output="../../../code/bin/gcc/Debug/UnitTests/SimpleUse" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/gcc/Debug/SimpleUse" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -44,18 +44,18 @@
 					<Add option="-D_MBCS" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Example\Modules\SimpleUse" />
-					<Add directory="..\..\..\code\pkg_Example\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\PluginManager" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="../../../code/pkg_Example/Modules/SimpleUse" />
+					<Add directory="../../../code/pkg_Example/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 			</Target>
 		</Build>
 		<Linker>
 			<Add library="shlwapi" />
 		</Linker>
-		<Unit filename="..\..\..\code\pkg_Example\Modules\SimpleUse\Main.cpp" />
+		<Unit filename="../../../code/pkg_Example/Modules/SimpleUse/Main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

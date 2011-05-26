@@ -7,12 +7,12 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="..\..\..\code\bin\unix\Release\Plugins\LogManager.plugin" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\unix\Release\LogManager" />
+				<Option output="../../../code/bin/unix/Release/Plugins/LogManager.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/unix/Release/LogManager" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-fexceptions" />
@@ -20,20 +20,20 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Core\Modules\LogManager" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Log" />
+					<Add directory="../../../code/pkg_Core/Modules/LogManager" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/Log" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
-				<Option output="..\..\..\code\bin\unix\Debug\Plugins\LogManager.plugin" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\unix\Debug\LogManager" />
+				<Option output="../../../code/bin/unix/Debug/Plugins/LogManager.plugin" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/unix/Debug/LogManager" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-Wall" />
@@ -42,27 +42,27 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Core\Modules\LogManager" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Log" />
+					<Add directory="../../../code/pkg_Core/Modules/LogManager" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/Log" />
 				</Compiler>
 			</Target>
 		</Build>
 		<Linker></Linker>
-		<Unit filename="..\..\..\code\pkg_Core\Interface\Log\DebugR.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Interface\Log\ILogObserver.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Interface\Log\Ix_LogManager.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Interface\Log\LogHelper.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\LogManager\ClsID_LogManager.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\LogManager\Cx_LogManager.cpp" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\LogManager\Cx_LogManager.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\LogManager\LogManager.rc">
+		<Unit filename="../../../code/pkg_Core/Interface/Log/DebugR.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/Log/ILogObserver.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/Log/Ix_LogManager.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/Log/LogHelper.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogManager/ClsID_LogManager.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogManager/Cx_LogManager.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogManager/Cx_LogManager.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogManager/LogManager.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="..\..\..\code\pkg_Core\Modules\LogManager\Module.cpp" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\LogManager\Version.rc2" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogManager/Module.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogManager/Version.rc2" />
 		<Extensions>
 			<code_completion />
 			<debugger />

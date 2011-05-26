@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="..\..\..\code\bin\gcc\Release\UnitTests\TestCore" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\gcc\Release\TestCore" />
+				<Option output="../../../code/bin/gcc/Release/UnitTests/TestCore" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/gcc/Release/TestCore" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -22,22 +22,22 @@
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_UNICODE" />
 					<Add option="-DUNICODE" />
-					<Add directory="..\..\..\code\pkg_UnitTest\Modules\TestCore" />
-					<Add directory="..\..\..\code\pkg_UnitTest\Modules\Public" />
-					<Add directory="..\..\..\code\pkg_UnitTest\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\PluginManager" />
-					<Add directory="..\..\..\code\pkg_Utility\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="../../../code/pkg_UnitTest/Modules/TestCore" />
+					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
+					<Add directory="../../../code/pkg_UnitTest/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
+					<Add directory="../../../code/pkg_Utility/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 				<Linker>
 					<Add library="cppunit_dll" />
-					<Add directory="..\..\..\code\bin\gcc\Release\UnitTests" />
+					<Add directory="../../../code/bin/gcc/Release/UnitTests" />
 				</Linker>
 			</Target>
 			<Target title="Debug">
-				<Option output="..\..\..\code\bin\gcc\Debug\UnitTests\TestCore" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\gcc\Debug\TestCore" />
+				<Option output="../../../code/bin/gcc/Debug/UnitTests/TestCore" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/gcc/Debug/TestCore" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -51,17 +51,17 @@
 					<Add option="-D_WINDOWS" />
 					<Add option="-D_UNICODE" />
 					<Add option="-DUNICODE" />
-					<Add directory="..\..\..\code\pkg_UnitTest\Modules\TestCore" />
-					<Add directory="..\..\..\code\pkg_UnitTest\Modules\Public" />
-					<Add directory="..\..\..\code\pkg_UnitTest\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\PluginManager" />
-					<Add directory="..\..\..\code\pkg_Utility\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
+					<Add directory="../../../code/pkg_UnitTest/Modules/TestCore" />
+					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
+					<Add directory="../../../code/pkg_UnitTest/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
+					<Add directory="../../../code/pkg_Utility/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 				<Linker>
 					<Add library="cppunitd_dll" />
-					<Add directory="..\..\..\code\bin\gcc\Debug\UnitTests" />
+					<Add directory="../../../code/bin/gcc/Debug/UnitTests" />
 				</Linker>
 			</Target>
 		</Build>
@@ -69,21 +69,21 @@
 			<Add library="shlwapi" />
 			<Add library="ole32" />
 		</Linker>
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.h" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigDB.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigDB.h" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.h" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.h" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.h" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.cpp" />
-		<Unit filename="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/UnitTests.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestChangeObserver.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestChangeObserver.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestConfigDB.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestConfigDB.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLoadPlugin.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLoadPlugin.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLogging.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLogging.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestPluginManager.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestPluginManager.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestStringTable.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestStringTable.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

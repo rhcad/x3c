@@ -7,12 +7,12 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="..\..\..\code\bin\gcc\Release\Plugins\PluginManagerX3" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\gcc\Release\PluginManager" />
+				<Option output="../../../code/bin/gcc/Release/Plugins/PluginManagerX3" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/gcc/Release/PluginManager" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-fexceptions" />
@@ -20,20 +20,20 @@
 					<Add option="-DNDEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Core\Modules\PluginManager" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\PluginManager" />
+					<Add directory="../../../code/pkg_Core/Modules/PluginManager" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
-				<Option output="..\..\..\code\bin\gcc\Debug\Plugins\PluginManagerX3" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\..\obj\gcc\Debug\PluginManager" />
+				<Option output="../../../code/bin/gcc/Debug/Plugins/PluginManagerX3" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../../obj/gcc/Debug/PluginManager" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-Wall" />
@@ -42,29 +42,29 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-DUNICODE" />
 					<Add option="-D_UNICODE" />
-					<Add directory="..\..\..\code\pkg_Core\Modules\PluginManager" />
-					<Add directory="..\..\..\code\pkg_Core\Interface" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\Module" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\UtilFunc" />
-					<Add directory="..\..\..\code\pkg_Core\Interface\PluginManager" />
+					<Add directory="../../../code/pkg_Core/Modules/PluginManager" />
+					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Core/Interface/Module" />
+					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
+					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
 				</Compiler>
 			</Target>
 		</Build>
 		<Linker>
 			<Add library="shlwapi" />
 		</Linker>
-		<Unit filename="..\..\..\code\pkg_Core\Interface\PluginManager\Ix_PluginLoader.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Interface\PluginManager\PluginManager.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Interface\PluginManager\XComCreator.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.h" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\Module.cpp" />
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\PluginManager.rc">
+		<Unit filename="../../../code/pkg_Core/Interface/PluginManager/Ix_PluginLoader.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/PluginManager/PluginManager.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/PluginManager/XComCreator.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/Cx_ObjectFactory.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/Cx_ObjectFactory.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/Cx_PluginLoader.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/Cx_PluginLoader.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/Module.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/PluginManager.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="..\..\..\code\pkg_Core\Modules\PluginManager\Version.rc2" />
+		<Unit filename="../../../code/pkg_Core/Modules/PluginManager/Version.rc2" />
 		<Extensions>
 			<code_completion />
 			<debugger />

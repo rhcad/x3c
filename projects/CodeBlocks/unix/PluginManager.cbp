@@ -11,8 +11,8 @@
 				<Option object_output="../../../obj/unix/Release/PluginManager" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
@@ -31,8 +31,8 @@
 				<Option object_output="../../../obj/unix/Debug/PluginManager" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-Wall" />

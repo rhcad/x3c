@@ -11,8 +11,8 @@
 				<Option object_output="../../../obj/unix/Release/LogWriter" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-fexceptions" />
@@ -36,8 +36,8 @@
 				<Option object_output="../../../obj/unix/Debug/LogWriter" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
+				<Option createDefFile="0" />
+				<Option createStaticLib="0" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-Wall" />
