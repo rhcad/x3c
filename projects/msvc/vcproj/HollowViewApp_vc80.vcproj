@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\PluginManager;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\mfc"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\PluginManager;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\mfc;..\..\..\code\pkg_Core\Interface\ChangeObserver"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -127,7 +127,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\PluginManager;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\mfc"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\PluginManager;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\mfc;..\..\..\code\pkg_Core\Interface\ChangeObserver"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"

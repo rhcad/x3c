@@ -30,7 +30,7 @@ BOOL CHollowApp::InitInstance()
     VERIFY(AfxOleInit());
 	CWinApp::InitInstance();
 
-    VERIFY(s_loader.LoadPluginManager(L"../Plugins"));
+    VERIFY(s_loader.LoadCorePlugins(L"../Plugins"));
     s_loader.GetPluginLoader()->LoadPluginFiles(L"../Plugins",
         L"HollowView.plugin" PLNEXT);
     s_loader.GetPluginLoader()->InitializePlugins();

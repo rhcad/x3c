@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-05-26
+
+    * Add example projects: HollowView and HollowViewApp.
+    * Fix Cx_PluginLoader::LoadPluginFiles.
+
 2011-05-24
 
     * Disable copy operators. Replace std::w2a to x3::w2a.

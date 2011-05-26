@@ -21,4 +21,5 @@ protected:
 private:
     CEmbedWnd   m_wndLeft;
     CEmbedWnd   m_wndRight;
+    long        m_locker;
 };

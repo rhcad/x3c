@@ -92,6 +92,7 @@ BEGIN
     POPUP "&Demo"
     BEGIN
         MENUITEM "Test in view",                IDM_DEMO_INVIEW
+        MENUITEM "Test cmd observer",           IDM_DEMO_OBSERVER
     END
     POPUP "&View"
     BEGIN
@@ -183,6 +184,7 @@ BEGIN
     ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
     ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
     IDM_DEMO_INVIEW         "Click to test dispatching in view\nTest in view"
+    IDM_DEMO_OBSERVER       "Test cmd observer (CmdMsgObserverSimple)\nTest cmd observer"
 END
 
 STRINGTABLE 

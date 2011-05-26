@@ -107,6 +107,7 @@ private:    \
     static const MENU_MSG_MAP messageMap[];
 
 //! Implement command handler function entries in implement files (*.cpp).
+/*!
     \see MenuMsgMapFunctions, END_MENU_MSG_MAP, DECLARE_MENU_MSG_MAP
 */
 #define BEGIN_MENU_MSG_MAP(theClass)    \

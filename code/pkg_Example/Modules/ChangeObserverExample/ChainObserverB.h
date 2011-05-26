@@ -3,7 +3,6 @@
 
 #ifndef EXAMPLE_CHAINB_OBSERVER_H_
 #define EXAMPLE_CHAINB_OBSERVER_H_
-#pragma once
 
 #include <ChangeNotifyData.h>
 #include <typeinfo>
