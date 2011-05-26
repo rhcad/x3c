@@ -170,6 +170,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
         {
             wcsncpy_s(nameend, MAX_PATH - len0, files + i,
                 MAX_PATH - len0 < j - i ? MAX_PATH - len0 : j - i);
+            nameend[j - i] = 0;
             ReplaceSlashes(filename);
             filenames.push_back(filename);
         }
