@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\HollowView"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_AppUI\Interface\mfc" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_AppUI\Interface\mfc" /I "..\..\..\code\pkg_Core\Interface\ChangeObserver" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG" /d "_UNICODE" /d "_AFXDLL"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\HollowView"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_AppUI\Interface\mfc" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface\Module" /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Core\Interface\UtilFunc" /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_AppUI\Interface\mfc" /I "..\..\..\code\pkg_Core\Interface\ChangeObserver" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG" /d "_UNICODE" /d "_AFXDLL"
@@ -100,6 +100,10 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HollowView\WndA.h
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HollowView\CmdObserver.cpp
+# End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Example\Modules\HollowView\Module.cpp
