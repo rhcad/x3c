@@ -41,10 +41,17 @@ void Cx_PluginLoader::ReplaceSlashes(wchar_t* filename)
 {
     for (; *filename; ++filename)
     {
+#ifdef _WIN32
         if (L'/' == *filename)
         {
             *filename = L'\\';
         }
+#else
+        if (L'\\' == *filename)
+        {
+            *filename = L'/';
+        }
+#endif
     }
 }
 

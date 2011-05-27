@@ -593,6 +593,7 @@ WARN_LOGFILE           =
 INPUT                  = ../../code/pkg_Core \
                          ../../code/pkg_Utility \
                          ../../code/pkg_AppUI \
+                         ../../code/pkg_Example \
                          ../../doc/Doxygen/MainPage.txt
 
 # This tag can be used to specify the character encoding of the source files

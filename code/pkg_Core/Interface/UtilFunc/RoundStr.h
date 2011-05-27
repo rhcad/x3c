@@ -1,17 +1,17 @@
 //! \file RoundStr.h
-//! \brief 定义四舍五入字符串的函数 RoundStr
+//! \brief Define the function converting and round float-pointing number to string: RoundStr
 
 #ifndef UTILFUNC_ROUNDSTR_H_
 #define UTILFUNC_ROUNDSTR_H_
 
 #include <string>
 
-//! 得到四舍五入的字符串（去掉小数点后末尾的'0'）
+//! Returns a numeric string, rounded to the specified precision.
 /*!
     \ingroup _GROUP_UTILFUNC
-    \param value 要转换的浮点数
-    \param decimal 保留小数点后第几位数，超出部分四舍五入
-    \return 转换后的字符串
+    \param value float-pointing number to be rounded.
+    \param decimal a positive number thar value is rounded to the number of decimal places.
+    \return a numeric string whose zero digits ('0') after number point will be removed.
 */
 inline std::wstring RoundStr(double value, int decimal = 4)
 {

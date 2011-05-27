@@ -38,6 +38,7 @@ bool PathIsRelativeW(const wchar_t* path)
 
 void PathStripPathW(wchar_t* path)
 {
+    PathRemoveBackslashW(path);
     wchar_t* filename = PathFindFileNameW(path);
 
     if (filename && filename > path)
@@ -52,6 +53,7 @@ void PathStripPathW(wchar_t* path)
 
 void PathRemoveFileSpecW(wchar_t* path)
 {
+    PathRemoveBackslashW(path);
     wchar_t* filename = PathFindFileNameW(path);
 
     if (filename && filename > path)

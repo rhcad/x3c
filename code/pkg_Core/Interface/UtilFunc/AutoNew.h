@@ -1,9 +1,8 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
-//! \file AutoNew.h
-//! \brief 定义自动释放内存的辅助类 KAutoNew, KAutoNewArr, KAutoMalloc, KAutoNewArr2d
-
+/*! \file AutoNew.h
+ *  \brief Define helper classes to auto free memory: KAutoNew, KAutoNewArr, KAutoMalloc, KAutoNewArr2d
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \date   2011.5.19
+ */
 #ifndef __AUTOFREE_NEW_H
 #define __AUTOFREE_NEW_H
 
@@ -21,8 +20,8 @@
 //
 
 
-//! 自动释放内存的辅助类，对采用 new 申请内存的代码进行改善
-/*! 将“ T* p = new T; ”改善为“ KAutoNew<T> p (new T); ”
+//! Helper class to auto free memory (auto delete).
+/*! Use this to convert from " T* p = new T; ". to " KAutoNew<T> p (new T); ".
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
@@ -49,8 +48,8 @@ private:
     void operator=(const KAutoNew&);
 };
 
-//! 自动释放数组的辅助类，对采用 new[] 申请内存的代码进行改善
-/*! 将“ T* p = new T[5]; ”改善为“ KAutoNewArr<T> p (5); ”
+//! Helper class to auto free memory (auto delete[]).
+/*! Use this to convert from " T* p = new T[5]; ". to " KAutoNewArr<T> p (5); ".
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
@@ -124,12 +123,12 @@ private:
     KAutoNewArr(const KAutoNewArr&);
 };
 
-//! 自动释放数组的辅助类，采用 malloc 申请数组
-/*! 将“ T* p = (T*)malloc(5 * sizeof(T)); ”改善为“ KAutoMalloc<T> p (5); ”\n
-    本类还可以用于将静态一维数组定义改为动态内存形式，
-    例如对“double a[10000]”优化为“KAutoMalloc< double> a(10000)”；\n
-    对二维静态数组可使用 KAutoNewArr2d 来优化，例如“double a[1000][1000]”
+//! Helper class to auto free memory (malloc, realloc, free).
+/*! Use this to convert from " T* p = (T*)malloc(5 * sizeof(T)); ". to " KAutoMalloc<T> p (5); ".\n
+    This class can be used to convert from static array to dynamic array, such as converting from
+        " double a[10000] " to " KAutoMalloc< double> a(10000) ".
     \ingroup _GROUP_UTILFUNC
+    \see KAutoNewArr2d
 */
 template<typename T>
 class KAutoMalloc
@@ -207,12 +206,12 @@ private:
     KAutoMalloc(const KAutoMalloc&);
 };
 
-//! 自动释放二维数组的辅助类
-/*! 将“ T arr[100][200]; ”改善为“ KAutoNewArr2d<T> arr (100, 200); ”\n
-    本类还可以用于将静态二维数组定义改为动态内存形式，
-    例如对“double a[1000][1000]”优化为“KAutoNewArr2d< double> a(1000, 1000)”；\n
-    对一维静态数组可使用 KAutoMalloc 来优化，例如“double a[10000]”
+//! Helper class to auto free 2d array (arr[m][n]).
+/*! Use this to convert from " T arr[100][200]; ". to " KAutoNewArr2d<T> arr (100, 200); ".\n
+    This class can be used to convert from static array to dynamic array, such as converting from
+        " double a[1000][1000] " to " KAutoNewArr2d< double> a(1000, 1000) ".
     \ingroup _GROUP_UTILFUNC
+    \see KAutoMalloc
 */
 template<typename T, typename T2 = KAutoMalloc<T> >
 class KAutoNewArr2d : KAutoNewArr<T2>

@@ -1,36 +1,36 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
-//! \file LockCount.h
-//! \brief 定义自动锁定计数的辅助类 CLockCount
-
+/*! \file LockCount.h
+ *  \brief Define helper class to auto increment and decrement: CLockCount
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \date   2010.5.19
+ */
 #ifndef UTILFUNC_LOCKCOUNT_H_
 #define UTILFUNC_LOCKCOUNT_H_
 
-//! 自动锁定计数的辅助类
-/*! 使用本类在函数内定义局部变量，在退出函数析构时自动减少计数。
-    在其他函数中就可以通过判断该计数变量是否为初始值而知道是否进入特点状态。
+//! Helper class to auto increment and decrement.
+/*! Use this to declare local variable in functions,
+    then counter will be auto decreased (--counter;) when leave from the function.
+    So you can check the counter with initial value to known some status.
     \ingroup _GROUP_UTILFUNC
 */
 class CLockCount
 {
 public:
-    //! 构造函数，自动增加计数
+    //! Auto add counter.
     /*!
-        \param p 已有计数变量的地址，该计数变量的初始值一般为0
+        \param p address of counter, the initial value of counter is usually zero.
     */
     CLockCount(long* p) : m_count(p)
     {
         InterlockedIncrement(m_count);
     }
 
-    //! 析构函数，自动减少计数
+    //! Auto decrease counter.
     ~CLockCount()
     {
         Unlock();
     }
 
-    //! 解除锁定，自动减少计数
+    //! Auto decrease counter.
     void Unlock()
     {
         if (m_count)

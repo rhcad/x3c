@@ -1,3 +1,8 @@
+/*! \file EmbedWnd.cpp
+ *  \brief Implement the proxy window class of CEmbedWnd.
+ *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \date   2011.5.26
+ */
 #include <PluginInc.h>
 #include "EmbedWnd.h"
 #include <LockCount.h>
@@ -59,7 +64,7 @@ XCLSID CEmbedWnd::GetClsid() const
 	return m_clsid;
 }
 
-BOOL CEmbedWnd::DestroyWindow() 
+BOOL CEmbedWnd::DestroyWindow()
 {
 	InterfaceSafeCall(m_pIFWnd, DestroyWnd());
 	return CWnd::DestroyWindow();
@@ -70,7 +75,7 @@ BOOL CEmbedWnd::PreCreateWindow(CREATESTRUCT& cs)
 	if (!CWnd::PreCreateWindow(cs))
 		return FALSE;
 
-	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS, 
+	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS,
 		::LoadCursor(NULL, IDC_ARROW), HBRUSH(COLOR_WINDOW+1), NULL);
 
 	return TRUE;
@@ -78,8 +83,8 @@ BOOL CEmbedWnd::PreCreateWindow(CREATESTRUCT& cs)
 
 bool CEmbedWnd::Create(CWnd* pParentWnd, UINT nID, DWORD dwStyle, DWORD dwExStyle)
 {
-	return !!CWnd::CreateEx(dwExStyle, NULL, 
-		m_caption.IsEmpty() ? _T("EmbedWnd") : m_caption, 
+	return !!CWnd::CreateEx(dwExStyle, NULL,
+		m_caption.IsEmpty() ? _T("EmbedWnd") : m_caption,
 		dwStyle, CRect(0, 0, 0, 0), pParentWnd, nID);
 }
 
@@ -97,7 +102,7 @@ bool CEmbedWnd::CreateSubWnd(const XCLSID& clsidWnd)
 			{
 				ModifyStyleEx(WS_EX_STATICEDGE | WS_EX_CLIENTEDGE, 0);
 			}
-			
+
 			return true;
 		}
 	}
@@ -123,9 +128,9 @@ void CEmbedWnd::OnPaint()
 		}
 		else
 		{
-			::DrawTextA(dc.GetSafeHdc(), 
-				m_clsid.valid() ? m_clsid.str() : "?", 
-				-1, &rect, 
+			::DrawTextA(dc.GetSafeHdc(),
+				m_clsid.valid() ? m_clsid.str() : "?",
+				-1, &rect,
                 DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		}
 	}
@@ -136,7 +141,7 @@ void CEmbedWnd::Refresh()
 	InterfaceSafeCall(m_pIFWnd, Refresh());
 }
 
-BOOL CEmbedWnd::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo) 
+BOOL CEmbedWnd::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 {
 	CLockCount locker (&m_locker);
 	if (m_locker > 1)
@@ -165,7 +170,7 @@ BOOL CEmbedWnd::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* 
 	return CWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
-void CEmbedWnd::OnSetFocus(CWnd* pOldWnd) 
+void CEmbedWnd::OnSetFocus(CWnd* pOldWnd)
 {
 	CWnd::OnSetFocus(pOldWnd);
 
@@ -175,7 +180,7 @@ void CEmbedWnd::OnSetFocus(CWnd* pOldWnd)
 	}
 }
 
-void CEmbedWnd::OnSize(UINT nType, int cx, int cy) 
+void CEmbedWnd::OnSize(UINT nType, int cx, int cy)
 {
 	CWnd::OnSize(nType, cx, cy);
 

@@ -26,7 +26,7 @@
 
 #define STDCALL     __stdcall
 #define DECLEXPORT  __declspec(dllexport)
-#define OUTAPI      EXTERN_C DECLEXPORT
+#define OUTAPI      extern "C" DECLEXPORT
 
 #if _MSC_VER <= 1200        // VC6
 #ifndef interface
