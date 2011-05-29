@@ -88,16 +88,11 @@
     <ClInclude Include="..\..\Interface\ClsID_Example.h" />
     <ClInclude Include="..\..\Interface\Ix_Example.h" />
     <ClInclude Include="Cx_Example.h" />
-    <ClInclude Include=<PluginInc.h> />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cx_Example.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Plugin.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Version.rc2" />

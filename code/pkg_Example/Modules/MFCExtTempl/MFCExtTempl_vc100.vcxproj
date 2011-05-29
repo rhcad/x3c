@@ -122,7 +122,7 @@
     <ClInclude Include="..\..\Interface\Ix_Example.h" />
     <ClInclude Include="Cx_Example2.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include=<PluginInc.h> />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFCExtTempl.rc" />

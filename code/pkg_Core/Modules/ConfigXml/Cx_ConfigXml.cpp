@@ -17,7 +17,7 @@
 
 #define Cx_Section Cx_Interface<Ix_ConfigSection>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <ConvStr.h>
 static inline int _wrename (const wchar_t *oldfile, const wchar_t *newfile)
 {

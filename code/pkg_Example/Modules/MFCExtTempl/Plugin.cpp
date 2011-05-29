@@ -1,12 +1,12 @@
-#include <PluginInc.h>
+#include "stdafx.h"
 
-// 有该函数时，在插件加载时由插件管理器调用，可做关键初始化操作
+// Optional function to initialize this plugin when loaded by the plugin manager.
 OUTAPI bool InitializePlugin()
 {
     return true;
 }
 
-// 有该函数时，在插件卸载前由插件管理器调用，可做释放资源操作
+// Optional function to free this plugin when unloaded by the plugin manager.
 OUTAPI void UninitializePlugin()
 {
 }

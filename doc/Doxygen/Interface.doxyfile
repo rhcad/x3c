@@ -1378,7 +1378,7 @@ INCLUDE_FILE_PATTERNS  = *.h
 # instead of the = operator.
 
 PREDEFINED             = _WINDOWS \
-                         WIN32 \
+                         _WIN32 \
                          _UNICODE \
                          UNICODE \
                          interface=struct \

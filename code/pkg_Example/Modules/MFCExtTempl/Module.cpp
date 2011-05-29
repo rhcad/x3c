@@ -1,4 +1,4 @@
-#include <PluginInc.h>
+#include "stdafx.h"
 #include <afxdllx.h>
 #include <XModuleMacro.h>
 #include <XModuleImpl.h>
