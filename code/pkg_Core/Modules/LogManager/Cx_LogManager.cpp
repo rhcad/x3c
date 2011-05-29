@@ -3,7 +3,6 @@
 // Changes:
 // 2011-02-28: Avoid reenter in WriteLog.
 
-#define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_LogManager.h"
 #include <ILogObserver.h>

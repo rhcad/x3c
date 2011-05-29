@@ -283,10 +283,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portgcc.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portimpl.h"
 				>
 			</File>
@@ -295,7 +291,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3vc.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3unix.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3win.h"
 				>
 			</File>
 		</Filter>

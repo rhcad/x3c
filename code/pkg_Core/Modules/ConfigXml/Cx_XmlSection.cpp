@@ -3,7 +3,6 @@
 // Changes:
 // 2011-02-24: Set modified flag only if actually changed in Cx_XmlSection::SetXXX().
 
-#define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_XmlSection.h"
 #include "ConfigXmlImpl.h"

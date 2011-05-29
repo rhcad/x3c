@@ -3,19 +3,22 @@
 
 // author: Zhang Yun Gui, Tao Jian Lin
 // v1: 2010.12
-// v3: 2011.2.7, ooyg: Implement the delay-loaded feature.
-// v4: 2011.2.8, ooyg: Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
+// v3: 2011.02.07, ooyg: Implement the delay-loaded feature.
+// v4: 2011.02.08, ooyg: Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
+// v5: 2011.05.29, ooyg: Add Ix_PluginLoader2.
 
 #ifndef _X3_CORE_PLUGINLOADER_H
 #define _X3_CORE_PLUGINLOADER_H
 
 #include "Cx_ObjectFactory.h"
 #include "Ix_PluginLoader.h"
+#include "Ix_PluginLoader2.h"
 #include "Ix_PluginDelayLoad.h"
 
 class Cx_PluginLoader
     : public Cx_ObjectFactory
     , public Ix_PluginLoader
+    , public Ix_PluginLoader2
     , public Ix_PluginDelayLoad
 {
 public:
@@ -37,6 +40,11 @@ public:
     virtual bool LoadPlugin(const wchar_t* filename);
     virtual bool UnloadPlugin(const wchar_t* name);
     virtual long UnloadPlugins();
+
+    // From Ix_PluginLoader2
+    //
+    virtual long GetPluginCount();
+    virtual bool GetPluginFileName(long index, HMODULE& hdll, std::wstring& filename);
 
     // From Ix_PluginDelayLoad
     //

@@ -27,21 +27,37 @@
 
 #include "Ix_ObjectFactory.h"
 
+Ix_ObjectFactory* xGetObjectFactory()
+{
+    Ix_ObjectFactory* factory = NULL;
+    static bool enter = false;
+
+    if (!enter)
+    {
+        enter = true;
+
+        typedef Ix_ObjectFactory* (*FUNC_GET)();
+        FUNC_GET pfn = (FUNC_GET)GetProcAddress(
+            GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
+
+        factory = pfn ? (*pfn)() : NULL;
+        enter = false;
+    }
+
+    return factory;
+}
+
 int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
     *ppv = NULL;
 
-    typedef Ix_ObjectFactory* (*FUNC_GET)();
-    FUNC_GET pfn = (FUNC_GET)GetProcAddress(
-        GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
-
-    Ix_ObjectFactory* pFactory = pfn ? (*pfn)() : NULL;
-    if (NULL == pFactory)
+    Ix_ObjectFactory* factory = xGetObjectFactory();
+    if (NULL == factory)
         return 1;  // plugins must are already loaded using PluginManager.h
 
-    return pFactory->CreateObject(clsid, ppv, NULL);
+    return factory->CreateObject(clsid, ppv, NULL);
 }
 
 #else // USE_ONE_PLUGIN

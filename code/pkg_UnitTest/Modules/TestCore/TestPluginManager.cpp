@@ -18,7 +18,7 @@ TestPluginManager::~TestPluginManager(void)
 
 void TestPluginManager::setUp()
 {
-    VERIFY(LoadPlugins(L"PluginManagerX3" PLNEXT, false) == 0);
+    VERIFY(LoadPlugins(L"", false) >= 0);
 }
 
 void TestPluginManager::tearDown()

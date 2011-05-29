@@ -1,7 +1,7 @@
-// Included by X3Portability.h to declare functions for VC++ compiler.
+// Included by X3Portability.h to declare functions on Windows.
 
-#ifndef X3VC_PORTABILITY_H
-#define X3VC_PORTABILITY_H
+#ifndef X3WIN_PORTABILITY_H
+#define X3WIN_PORTABILITY_H
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0400
@@ -15,7 +15,7 @@
 #include <afxext.h>         // MFC extensions
 #include <afxdisp.h>        // MFC Automation classes
 #else
-#define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
+#define _WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
 #include <windows.h>        // Windows master include file
 #endif // _AFXDLL
 
@@ -75,4 +75,4 @@ inline bool SetFileAttributesNormal(const wchar_t* filename)
     return !!SetFileAttributesW(filename, FILE_ATTRIBUTE_NORMAL);
 }
 
-#endif // X3VC_PORTABILITY_H
+#endif // X3WIN_PORTABILITY_H

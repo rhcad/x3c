@@ -192,6 +192,11 @@ Ix_Module* xGetCurrentModule()
     return &s_xModuleObject;
 }
 
+Ix_ObjectFactory* xGetObjectFactory()
+{
+    return s_xModuleObject.GetObjectFactory();
+}
+
 bool xIsCreatorRegister(const XCLSID& clsid)
 {
     Ix_ObjectFactory* pFactory = s_xModuleObject.GetObjectFactory();

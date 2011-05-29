@@ -5,7 +5,6 @@
 // 2011-01-15, Zhang Yun Gui: IsSpaceChar() support '\r' and '\n'.
 //
 
-#define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_TextUtil.h"
 #include <ConvStr.h>

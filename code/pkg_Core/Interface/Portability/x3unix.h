@@ -1,7 +1,7 @@
-// Included by X3Portability.h to declare functions for GCC compiler.
+// Included by X3Portability.h to declare functions on linux or macosx.
 
-#ifndef X3GCC_PORTABILITY_H
-#define X3GCC_PORTABILITY_H
+#ifndef X3UNIX_PORTABILITY_H
+#define X3UNIX_PORTABILITY_H
 
 #include <string.h>
 #include <stdlib.h>
@@ -76,4 +76,4 @@ inline int _wcsicmp(const wchar_t* s1, const wchar_t* s2)
 inline int _wcsnicmp(const wchar_t* s1, const wchar_t* s2, int count)
     { return wcsncasecmp(s1, s2, count); }
 
-#endif // X3GCC_PORTABILITY_H
+#endif // X3UNIX_PORTABILITY_H

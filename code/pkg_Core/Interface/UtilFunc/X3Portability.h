@@ -5,12 +5,12 @@
 #define X3C_PORTABILITY_H
 
 #if defined(_WIN32)
-#include "../Portability/x3vc.h"
+#include "../Portability/x3win.h"
 #else
-#include "../Portability/portgcc.h"
+#include "../Portability/x3unix.h"
 #endif // _WIN32
 
-#ifdef _NEED_STDIO
+#ifndef NOSTDIO
 #include <stdio.h>
 #include <stdarg.h>
 #ifndef _STDIO_DEFINED

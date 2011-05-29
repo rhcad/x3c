@@ -3,7 +3,6 @@
 // Changes:
 // 2011-02-28: Add FOF_SILENT flag for SHFileOperationW.
 
-#define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_FileUtility.h"
 #include <SysErrStr.h>

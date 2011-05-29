@@ -59,6 +59,9 @@ static inline bool cmpdl(const char* dpname, const char* match)
     return false;
 }
 
+#include <../PluginManager/Ix_PluginLoader2.h>
+extern "C" Ix_ObjectFactory* xGetObjectFactory();
+
 HMODULE GetModuleHandleW(const wchar_t* filename)
 {
     std::string match(x3::w2a(filename));
@@ -69,6 +72,21 @@ HMODULE GetModuleHandleW(const wchar_t* filename)
         if (cmpdl(it->second.c_str(), match.c_str()))
         {
             return it->first;
+        }
+    }
+
+    Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+    if (factory)
+    {
+        HMODULE hdll = NULL;
+        std::wstring file;
+
+        for (int i = 0; factory->GetPluginFileName(i, hdll, file); i++)
+        {
+            if (cmpdl(W2A(file), match.c_str()))
+            {
+                return hdll;
+            }
         }
     }
 
@@ -112,31 +130,30 @@ void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
         {
             wcscpy_s(filename, size, x3::a2w(it->second).c_str());
         }
+
+        Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+        if (factory && 0 == filename[0])
+        {
+            HMODULE hdll2 = NULL;
+            std::wstring file;
+
+            for (int i = 0; factory->GetPluginFileName(i, hdll2, file); i++)
+            {
+                if (hdll2 == hdll)
+                {
+                    wcscpy_s(filename, size, file.c_str());
+                }
+            }
+        }
     }
 }
 
 void GetModuleFileNameA(HMODULE hdll, char* filename, int size)
 {
-    *filename = 0;
+    wchar_t wfile[MAX_PATH] = { 0 };
 
-    if (!hdll)
-    {
-        char tmp[32];
-        sprintf(tmp, "/proc/%d/exe", getpid());
-        int bytes = readlink(tmp, filename, size);
-        if (bytes > 0)
-        {
-            filename[std::min(bytes, size - 1)] = '\0';
-        }
-    }
-    else
-    {
-        std::map<HMODULE, std::string>::const_iterator it = s_plugins.find(hdll);
-        if (it != s_plugins.end())
-        {
-            strcpy_s(filename, size, it->second.c_str());
-        }
-    }
+    GetModuleFileNameW(hdll, wfile, MAX_PATH);
+    strcpy_s(filename, size, x3::w2a(wfile).c_str());
 }
 
 

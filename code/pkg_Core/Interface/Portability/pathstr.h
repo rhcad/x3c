@@ -28,7 +28,7 @@ wchar_t* PathFindFileNameW(const wchar_t* path)
 
     p1 = !p1 || (p2 && p2 > p1) ? p2 : p1;
 
-    return const_cast<wchar_t*>(p1 ? p1 + 1 : p1);
+    return const_cast<wchar_t*>(p1 ? p1 + 1 : path);
 }
 
 bool PathIsRelativeW(const wchar_t* path)

@@ -6,7 +6,6 @@
 // 2011-02-24: Check NULL string in Cx_ConfigXml::GetSection().
 // 2011-05-12: Output error info when saving file.
 
-#define _NEED_STDIO
 #include <PluginInc.h>
 #include "Cx_ConfigXml.h"
 #include "Cx_XmlSection.h"

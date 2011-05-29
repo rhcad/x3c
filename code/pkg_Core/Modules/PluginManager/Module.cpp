@@ -66,6 +66,11 @@ OUTAPI Ix_ObjectFactory* xGetRegisterBank()
     return &s_loader;
 }
 
+Ix_ObjectFactory* xGetObjectFactory()
+{
+    return &s_loader;
+}
+
 OUTAPI HMODULE xGetMainModuleHandle()
 {
     return s_loader.GetMainModuleHandle();

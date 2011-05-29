@@ -96,6 +96,11 @@ bool Cx_StringTable::GetValue(std::wstring& value,
 
 long Cx_StringTable::LoadFiles(const std::wstring& path)
 {
+    if (path.empty())
+    {
+        return 0;
+    }
+
     long count = 0;
     std::vector<std::wstring> files;
     CScanFilesByExtension scaner(&files, L".xml");

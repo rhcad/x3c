@@ -1,4 +1,3 @@
-#define _NEED_STDIO
 #include <PluginInc.h>
 
 #define USE_ONE_PLUGIN

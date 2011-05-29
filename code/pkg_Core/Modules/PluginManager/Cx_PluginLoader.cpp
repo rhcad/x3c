@@ -14,6 +14,7 @@
 //          Counting even a plugin is not loaded in InitializePlugins.
 //          Not call ReleaseModule if a plugin is not loaded in UnloadPlugins.
 //          Force load ConfigXml plugin if the class file is about to loaded.
+// v7: 2011.05.29, ooyg: Add Ix_PluginLoader2.
 
 #include <PluginInc.h>
 #include "Cx_PluginLoader.h"
@@ -306,7 +307,11 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
         return false;
     }
 
-    HMODULE hdll = LoadLibraryExW(filename);
+    wchar_t fullpath[MAX_PATH];
+    MakeFullPath(fullpath, NULL, filename);
+    PathRemoveBackslashW(fullpath);
+
+    HMODULE hdll = LoadLibraryExW(fullpath);
 
     if (hdll)
     {
@@ -419,6 +424,21 @@ bool Cx_PluginLoader::ClearModuleItems(HMODULE hModule)
     }
 
     return false;
+}
+
+long Cx_PluginLoader::GetPluginCount()
+{
+    return GetSize(m_modules);
+}
+
+bool Cx_PluginLoader::GetPluginFileName(long index, HMODULE& hdll, std::wstring& filename)
+{
+    bool valid = IsValidIndexOf(m_modules, index);
+
+    hdll = valid ? m_modules[index].hdll : NULL;
+    filename = valid ? m_modules[index].filename : L"";
+
+    return valid;
 }
 
 // The configure file of the delay-load feature:

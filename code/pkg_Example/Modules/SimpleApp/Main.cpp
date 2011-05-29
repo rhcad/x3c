@@ -1,4 +1,3 @@
-#define _NEED_STDIO
 #include <PluginInc.h>
 #include <PluginManager.h>
 #include <XComCreator.h>
