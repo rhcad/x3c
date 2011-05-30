@@ -34,45 +34,11 @@
 #endif
 #endif // VC6
 
-inline bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename)
-{
-    hfile = ::CreateFileW(filename,
-        GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
-    return hfile != INVALID_HANDLE_VALUE;
-}
-
-inline bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename)
-{
-    hfile = ::CreateFileW(filename,
-        GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
-    return hfile != INVALID_HANDLE_VALUE;
-}
-
-inline bool CloseFile(HANDLE file)
-{
-    return !!CloseHandle(file);
-}
-
-inline HMODULE LoadLibraryExW(const wchar_t* filename)
-{
-    return ::LoadLibraryExW(filename, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-}
-
-inline bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder)
-{
-    DWORD attr = GetFileAttributesW(filename);
-
-    if (readonly)
-        *readonly = !!(attr & FILE_ATTRIBUTE_READONLY);
-    if (folder)
-        *folder = !!(attr & FILE_ATTRIBUTE_DIRECTORY);
-
-    return attr != (DWORD)-1;
-}
-
-inline bool SetFileAttributesNormal(const wchar_t* filename)
-{
-    return !!SetFileAttributesW(filename, FILE_ATTRIBUTE_NORMAL);
-}
+bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename);
+bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename);
+bool CloseFile(HANDLE file);
+HMODULE LoadLibraryExW(const wchar_t* filename);
+bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
+bool SetFileAttributesNormal(const wchar_t* filename);
 
 #endif // X3WIN_PORTABILITY_H

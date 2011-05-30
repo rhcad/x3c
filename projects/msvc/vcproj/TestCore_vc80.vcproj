@@ -287,6 +287,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\win32impl.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\X3Portability.h"
 				>
 			</File>

@@ -16,9 +16,7 @@
  *  \date   2011.05.18
  */
 
-#ifndef _MSC_VER
 #include "../Portability/portimpl.h"
-#endif
 #ifdef X3_LOG_DEBUGR_H_
 #include "../Log/DebugR.cpp"
 #endif
@@ -29,22 +27,11 @@
 
 Ix_ObjectFactory* xGetObjectFactory()
 {
-    Ix_ObjectFactory* factory = NULL;
-    static bool enter = false;
+    typedef Ix_ObjectFactory* (*FUNC_GET)();
+    FUNC_GET pfn = (FUNC_GET)GetProcAddress(
+        GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
 
-    if (!enter)
-    {
-        enter = true;
-
-        typedef Ix_ObjectFactory* (*FUNC_GET)();
-        FUNC_GET pfn = (FUNC_GET)GetProcAddress(
-            GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
-
-        factory = pfn ? (*pfn)() : NULL;
-        enter = false;
-    }
-
-    return factory;
+    return pfn ? (*pfn)() : NULL;
 }
 
 int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)

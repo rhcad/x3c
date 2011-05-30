@@ -13,9 +13,7 @@
 #include "Cx_Module.h"
 #include "Ix_ObjectFactory.h"
 
-#ifndef _MSC_VER
 #include "../Portability/portimpl.h"
-#endif
 #ifdef X3_LOG_DEBUGR_H_
 #include "../Log/DebugR.cpp"
 #endif

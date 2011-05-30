@@ -3,7 +3,7 @@
 #ifndef X3LINUX_PORTABILITY_IMPL_H
 #define X3LINUX_PORTABILITY_IMPL_H
 
-#include <ConvStr.h>
+#include <../UtilFunc/ConvStr.h>
 #include <dlfcn.h>
 #include <stdio.h>
 
@@ -60,7 +60,10 @@ static inline bool cmpdl(const char* dpname, const char* match)
 }
 
 #include <../PluginManager/Ix_PluginLoader2.h>
+#include <../UtilFunc/LockCount.h>
+
 extern "C" Ix_ObjectFactory* xGetObjectFactory();
+static long s_objFactoryLocker = 0;
 
 HMODULE GetModuleHandleW(const wchar_t* filename)
 {
@@ -75,7 +78,10 @@ HMODULE GetModuleHandleW(const wchar_t* filename)
         }
     }
 
-    Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+    CLockCount locker(&s_objFactoryLocker);
+    Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
+        : dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+    
     if (factory)
     {
         HMODULE hdll = NULL;
@@ -131,7 +137,10 @@ void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
             wcscpy_s(filename, size, x3::a2w(it->second).c_str());
         }
 
-        Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+        CLockCount locker(&s_objFactoryLocker);
+        Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
+            : dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+
         if (factory && 0 == filename[0])
         {
             HMODULE hdll2 = NULL;

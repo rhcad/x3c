@@ -8,10 +8,7 @@
 #include <Ix_AppWorkPath.h>
 #include <RelToAbs.h>
 #include <Log/DebugR.cpp>
-
-#ifndef _WIN32
-#include "../Portability/portimpl.h"
-#endif
+#include <../Portability/portimpl.h>
 
 class Cx_PluginLoaderOut
     : public Cx_PluginLoader
