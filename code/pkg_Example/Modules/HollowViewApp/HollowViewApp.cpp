@@ -1,6 +1,6 @@
 #include <UtilFunc/PluginInc.h>
-#include <PluginManager.h>
-#include <XComCreator.h>
+#include <PluginManager/PluginManager.h>
+#include <PluginManager/XComCreator.h>
 
 #include "Resource.h"
 #include "MainFrm.h"

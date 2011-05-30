@@ -4,7 +4,7 @@
 #ifndef EXAMPLE_DOCEVENT_OBSERVER_H_
 #define EXAMPLE_DOCEVENT_OBSERVER_H_
 
-#include <ChangeNotifyData.h>
+#include <ChangeObserver/ChangeNotifyData.h>
 #include <typeinfo>
 
 //! 文档事件类型

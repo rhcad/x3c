@@ -23,9 +23,6 @@
 					<Add directory="../../../code/pkg_Example/Modules/ChangeObserverExample" />
 					<Add directory="../../../code/pkg_Example/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
-					<Add directory="../../../code/pkg_Core/Interface/ChangeObserver" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
@@ -46,9 +43,6 @@
 					<Add directory="../../../code/pkg_Example/Modules/ChangeObserverExample" />
 					<Add directory="../../../code/pkg_Example/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
-					<Add directory="../../../code/pkg_Core/Interface/ChangeObserver" />
 				</Compiler>
 			</Target>
 		</Build>

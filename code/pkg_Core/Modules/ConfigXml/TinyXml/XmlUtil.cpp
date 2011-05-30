@@ -1,6 +1,6 @@
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "XmlUtil.h"
-#include <RoundStr.h>
+#include <UtilFunc/RoundStr.h>
 
 // ticpp: http://ticpp.googlecode.com/svn/trunk
 //

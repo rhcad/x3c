@@ -1,7 +1,7 @@
 #include <UtilFunc/PluginInc.h>
 
 #define USE_ONE_PLUGIN
-#include <XComCreator.h>
+#include <PluginManager/XComCreator.h>
 
 extern HMODULE g_hPluginDll;    // ¼û XComCreator.h
 

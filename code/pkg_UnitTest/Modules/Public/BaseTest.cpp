@@ -3,7 +3,7 @@
 
 #include <UnitTestInc.h>
 #include "BaseTest.h"
-#include <PluginManager.h>
+#include <PluginManager/PluginManager.h>
 
 static CPluginManager s_loader;
 static wchar_t s_datapath[MAX_PATH] = { 0 };

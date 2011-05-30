@@ -21,9 +21,6 @@
 					<Add option="-D_UNICODE" />
 					<Add directory="../../../code/pkg_Core/Modules/PluginManager" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
-					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
@@ -42,9 +39,6 @@
 					<Add option="-D_UNICODE" />
 					<Add directory="../../../code/pkg_Core/Modules/PluginManager" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
-					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
 				</Compiler>
 			</Target>
 		</Build>

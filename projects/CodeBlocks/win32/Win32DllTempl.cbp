@@ -23,8 +23,6 @@
 					<Add directory="../../../code/pkg_Example/Modules/Win32DllTempl" />
 					<Add directory="../../../code/pkg_Example/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
@@ -45,8 +43,6 @@
 					<Add directory="../../../code/pkg_Example/Modules/Win32DllTempl" />
 					<Add directory="../../../code/pkg_Example/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 			</Target>
 		</Build>

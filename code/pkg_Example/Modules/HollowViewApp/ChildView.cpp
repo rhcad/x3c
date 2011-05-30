@@ -1,7 +1,7 @@
 #include <UtilFunc/PluginInc.h>
 #include "ChildView.h"
 #include <ClsID_ViewExample.h>
-#include <EmbedWnd.cpp>
+#include <mfc/EmbedWnd.cpp>
 #include <UtilFunc/LockCount.h>
 #include <RawCmdMsgObserver.h>
 

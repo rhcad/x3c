@@ -24,10 +24,6 @@
 					<Add option="-DINSIDE_LOG4CPLUS" />
 					<Add directory="../../../code/pkg_Core/Modules/LogWriter" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
-					<Add directory="../../../code/pkg_Core/Interface/Utility" />
-					<Add directory="../../../code/pkg_Core/Interface/Log" />
 					<Add directory="../../../code/pkg_Core/Modules/LogWriter/log4cplus/include" />
 				</Compiler>
 			</Target>
@@ -50,10 +46,6 @@
 					<Add option="-DINSIDE_LOG4CPLUS" />
 					<Add directory="../../../code/pkg_Core/Modules/LogWriter" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
-					<Add directory="../../../code/pkg_Core/Interface/Utility" />
-					<Add directory="../../../code/pkg_Core/Interface/Log" />
 					<Add directory="../../../code/pkg_Core/Modules/LogWriter/log4cplus/include" />
 				</Compiler>
 			</Target>

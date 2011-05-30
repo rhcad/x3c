@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\PluginManager;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\mfc;..\..\..\code\pkg_Core\Interface\ChangeObserver"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,7 +59,7 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -127,7 +127,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\PluginManager;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\mfc;..\..\..\code\pkg_Core\Interface\ChangeObserver"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
@@ -141,7 +141,7 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"

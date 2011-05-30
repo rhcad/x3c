@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\Module;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_Core\Interface\Utility;..\..\..\code\pkg_Core\Interface\Log;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;INSIDE_LOG4CPLUS;LOG4CPLUS_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Interface\Module;..\..\..\code\pkg_Core\Interface\UtilFunc;..\..\..\code\pkg_Core\Interface\Utility;..\..\..\code\pkg_Core\Interface\Log;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;INSIDE_LOG4CPLUS;LOG4CPLUS_STATIC"
 				RuntimeLibrary="2"
 				WarningLevel="4"

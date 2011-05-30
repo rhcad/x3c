@@ -26,9 +26,7 @@
 					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
 					<Add directory="../../../code/pkg_UnitTest/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
 					<Add directory="../../../code/pkg_Utility/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 				<Linker>
 					<Add directory="../../../code/bin/unix/Release/UnitTests" />
@@ -54,9 +52,7 @@
 					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
 					<Add directory="../../../code/pkg_UnitTest/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
 					<Add directory="../../../code/pkg_Utility/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 				<Linker>
 					<Add directory="../../../code/bin/unix/Debug/UnitTests" />

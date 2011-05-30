@@ -1,6 +1,6 @@
 #pragma once
 
-#include <EmbedWnd.h>
+#include <mfc/EmbedWnd.h>
 
 class CChildView : public CWnd
 {

@@ -4,7 +4,7 @@
 #ifndef EXAMPLE_NODESELECTION_OBSERVER_H_
 #define EXAMPLE_NODESELECTION_OBSERVER_H_
 
-#include <ChangeNotifyData.h>
+#include <ChangeObserver/ChangeNotifyData.h>
 #include <typeinfo>
 
 //! 作为例子的节点选择改变观察者类

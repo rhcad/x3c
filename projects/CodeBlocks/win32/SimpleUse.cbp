@@ -24,8 +24,6 @@
 					<Add directory="../../../code/pkg_Example/Modules/SimpleUse" />
 					<Add directory="../../../code/pkg_Example/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 			</Target>
 			<Target title="Debug">
@@ -47,8 +45,6 @@
 					<Add directory="../../../code/pkg_Example/Modules/SimpleUse" />
 					<Add directory="../../../code/pkg_Example/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/PluginManager" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 				</Compiler>
 			</Target>
 		</Build>

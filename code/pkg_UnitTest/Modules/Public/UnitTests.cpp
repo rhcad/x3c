@@ -5,7 +5,7 @@
 //
 
 #include <UnitTestInc.h>
-#include <XComCreator.h>
+#include <PluginManager/XComCreator.h>
 
 #if defined(_AFXDLL) && !defined(_CONSOLE)
 #include <cppunit/ui/mfc/TestRunner.h>

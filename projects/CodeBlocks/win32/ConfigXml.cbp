@@ -22,8 +22,6 @@
 					<Add option="-D_UNICODE" />
 					<Add directory="../../../code/pkg_Core/Modules/ConfigXml" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 					<Add directory="../../../code/pkg_Core/Interface/Xml" />
 				</Compiler>
 			</Target>
@@ -44,8 +42,6 @@
 					<Add option="-D_UNICODE" />
 					<Add directory="../../../code/pkg_Core/Modules/ConfigXml" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Core/Interface/Module" />
-					<Add directory="../../../code/pkg_Core/Interface/UtilFunc" />
 					<Add directory="../../../code/pkg_Core/Interface/Xml" />
 				</Compiler>
 			</Target>

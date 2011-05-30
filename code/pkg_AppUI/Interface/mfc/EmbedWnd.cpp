@@ -3,9 +3,9 @@
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.5.26
  */
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "EmbedWnd.h"
-#include <LockCount.h>
+#include <UtilFunc/LockCount.h>
 #include <afxpriv.h>
 
 static UINT	s_nViewRefreshID = 0;

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc"
+				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -116,7 +116,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface;..\..\..\pkg_Core\Interface\Module;..\..\..\pkg_Core\Interface\UtilFunc"
+				AdditionalIncludeDirectories="..\..\Interface;..\..\..\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="2"
 				WarningLevel="4"

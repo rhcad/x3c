@@ -4,7 +4,7 @@
 #ifndef EXAMPLE_CHAINB_OBSERVER_H_
 #define EXAMPLE_CHAINB_OBSERVER_H_
 
-#include <ChangeNotifyData.h>
+#include <ChangeObserver/ChangeNotifyData.h>
 #include <typeinfo>
 
 //! 作为例子的职责链观察者类
