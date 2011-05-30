@@ -5,13 +5,13 @@
 #define X3_PORTABILITY_IMPL_H
 
 #if defined (_WIN32)
-    #include "Portability/win32impl.h"
+    #include "win32impl.h"
 #else
-    #include "Portability/pathstr.h"
+    #include "pathstr.h"
     #if defined (__linux__)
-    #include "Portability/linuximpl.h"
+    #include "linuximpl.h"
     #elif defined (MACOS) || defined (_MAC)
-    #include "Portability/macimpl.h"
+    #include "macimpl.h"
     #endif
 #endif // _WIN32
 

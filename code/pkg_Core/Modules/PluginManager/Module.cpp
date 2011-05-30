@@ -3,12 +3,12 @@
 // v1: 2011.2.7, ooyg: Add Ix_AppWorkPath.
 // v2: 2011.2.8, ooyg: Add Ix_PluginDelayLoad.
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_PluginLoader.h"
-#include <Ix_AppWorkPath.h>
-#include <RelToAbs.h>
+#include <PluginManager/Ix_AppWorkPath.h>
+#include <UtilFunc/RelToAbs.h>
 #include <Log/DebugR.cpp>
-#include <../Portability/portimpl.h>
+#include <Portability/portimpl.h>
 
 class Cx_PluginLoaderOut
     : public Cx_PluginLoader

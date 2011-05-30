@@ -5,7 +5,7 @@
 #include "BaseTest.h"
 
 #include "Ix_ObjectFactory.h"
-#include "Ix_PluginLoader.h"
+#include "PluginManager/Ix_PluginLoader.h"
 
 class TestPluginManager : public BaseTest
 {

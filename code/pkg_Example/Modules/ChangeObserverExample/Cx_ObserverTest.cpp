@@ -1,6 +1,6 @@
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_ObserverTest.h"
-#include <AutoNew.h>
+#include <UtilFunc/AutoNew.h>
 #include "Responsibility.h"
 #include "ResponsibilityB.h"
 #include "DocObserverTest.h"

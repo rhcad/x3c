@@ -11,8 +11,8 @@
 #define _X3_CORE_PLUGINLOADER_H
 
 #include "Cx_ObjectFactory.h"
-#include "Ix_PluginLoader.h"
-#include "Ix_PluginLoader2.h"
+#include "PluginManager/Ix_PluginLoader.h"
+#include "PluginManager/Ix_PluginLoader2.h"
 #include "Ix_PluginDelayLoad.h"
 
 class Cx_PluginLoader

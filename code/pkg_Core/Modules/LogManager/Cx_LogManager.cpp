@@ -3,12 +3,12 @@
 // Changes:
 // 2011-02-28: Avoid reenter in WriteLog.
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_LogManager.h"
-#include <ILogObserver.h>
-#include <ConvStr.h>
+#include <Log/ILogObserver.h>
+#include <UtilFunc/ConvStr.h>
 #include <Xml/Ix_StringTable.h>
-#include <LockCount.h>
+#include <UtilFunc/LockCount.h>
 
 Cx_LogManager::Cx_LogManager()
     : m_groupLevel(0), m_loglock(0)

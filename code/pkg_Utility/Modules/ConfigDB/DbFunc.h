@@ -4,7 +4,7 @@
 #ifndef _X3_CONFIGDB_DBFUNC_H
 #define _X3_CONFIGDB_DBFUNC_H
 
-#include <ctrim.h>
+#include <UtilFunc/ctrim.h>
 #include "msado15.tlh"
 
 //! 数据库常用函数

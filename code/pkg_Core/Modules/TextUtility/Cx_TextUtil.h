@@ -4,8 +4,8 @@
 #ifndef _X3_UTILITY_TEXTUTIL_H
 #define _X3_UTILITY_TEXTUTIL_H
 
-#include <Ix_StringConvert.h>
-#include <Ix_TextFileUtil.h>
+#include <Utility/Ix_StringConvert.h>
+#include <Utility/Ix_TextFileUtil.h>
 
 class Cx_TextUtil
     : public Ix_StringConvert

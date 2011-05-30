@@ -6,10 +6,10 @@
 //    2011-01-10, Zhang Yun Gui: support MSXML6 and MSXML4
 //
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "XmlUtil.h"
-#include <RoundStr.h>
-#include <SysErrStr.h>
+#include <UtilFunc/RoundStr.h>
+#include <UtilFunc/SysErrStr.h>
 
 static HRESULT s_hr = S_OK;
 

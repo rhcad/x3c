@@ -8,7 +8,7 @@
 #ifndef _X3_CORE_CHANGEMANAGER_H
 #define _X3_CORE_CHANGEMANAGER_H
 
-#include <Ix_ChangeManager.h>
+#include <ChangeObserver/Ix_ChangeManager.h>
 
 #if defined(_MSC_VER) && _MSC_VER > 1200    // not VC6
     #include <hash_map>

@@ -4,8 +4,8 @@
 #ifndef _X3_CONFIGDB_CFGDBSECTION_H
 #define _X3_CONFIGDB_CFGDBSECTION_H
 
-#include <Ix_ConfigSection.h>
-#include <Ix_ConfigTransaction.h>
+#include <Xml/Ix_ConfigSection.h>
+#include <Xml/Ix_ConfigTransaction.h>
 #include "msado15.tlh"
 
 class Cx_CfgDatabase;

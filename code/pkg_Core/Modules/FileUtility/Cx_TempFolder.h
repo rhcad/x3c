@@ -4,7 +4,7 @@
 #ifndef _X3_UTILITY_TEMPFOLDER_H
 #define _X3_UTILITY_TEMPFOLDER_H
 
-#include "Ix_TempFolder.h"
+#include <Utility/Ix_TempFolder.h>
 
 class Cx_TempFolder : public Ix_TempFolder
 {

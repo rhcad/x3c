@@ -1,11 +1,11 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_ClipboardUtil.h"
 #ifdef _WIN32
-#include <ConvStr.h>
-#include <SysErrStr.h>
+#include <UtilFunc/ConvStr.h>
+#include <UtilFunc/SysErrStr.h>
 
 bool Cx_ClipboardUtil::CopyText(HWND wndOwner, const std::wstring& text)
 {

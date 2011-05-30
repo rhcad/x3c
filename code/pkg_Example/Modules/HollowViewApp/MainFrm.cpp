@@ -1,4 +1,4 @@
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "MainFrm.h"
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)

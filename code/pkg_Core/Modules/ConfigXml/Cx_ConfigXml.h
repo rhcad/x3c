@@ -4,9 +4,9 @@
 #ifndef _X3_CONFIGXML_CONFIGXML_H
 #define _X3_CONFIGXML_CONFIGXML_H
 
-#include <Ix_ConfigData.h>
-#include <Ix_ConfigXml.h>
-#include <Ix_ConfigTransaction.h>
+#include <Xml/Ix_ConfigData.h>
+#include <Xml/Ix_ConfigXml.h>
+#include <Xml/Ix_ConfigTransaction.h>
 
 struct ConfigXmlImpl;
 

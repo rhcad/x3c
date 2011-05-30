@@ -6,7 +6,7 @@
 #ifndef X3_OBSERVER_CMDMSG_OBSERVER_SIMPLE_H_
 #define X3_OBSERVER_CMDMSG_OBSERVER_SIMPLE_H_
 
-#include <RawCmdMsgObserver.h>
+#include "RawCmdMsgObserver.h"
 
 struct MENU_MSG_MAP;
 
@@ -36,7 +36,7 @@ protected:
 
 private:
     bool OnRawCommand(UINT id, int sender);
-    bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked, 
+    bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked,
         std::wstring& text, int sender);
     virtual const MENU_MSG_MAP* GetMsgMapEntry() const = 0;
 

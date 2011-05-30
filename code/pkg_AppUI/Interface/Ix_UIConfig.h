@@ -6,7 +6,7 @@
 #ifndef X3_APPUI_IUICONFIG_H_
 #define X3_APPUI_IUICONFIG_H_
 
-#include <ConfigIOSection.h>
+#include <Xml/ConfigIOSection.h>
 
 const XCLSID CLSID_UIConfig("4472ba6d-d833-40b9-899f-edc017ec9166");
 

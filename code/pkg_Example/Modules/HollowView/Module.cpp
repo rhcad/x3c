@@ -1,6 +1,6 @@
-#include <PluginInc.h>
-#include <XModuleMacro.h>
-#include <XModuleImpl.h>
+#include <UtilFunc/PluginInc.h>
+#include <Module/XModuleMacro.h>
+#include <Module/XModuleImpl.h>
 
 #include <Cx_CreateWnd.h>
 #include <ClsID_ViewExample.h>

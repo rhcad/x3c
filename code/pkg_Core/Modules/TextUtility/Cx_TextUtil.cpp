@@ -5,12 +5,12 @@
 // 2011-01-15, Zhang Yun Gui: IsSpaceChar() support '\r' and '\n'.
 //
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_TextUtil.h"
-#include <ConvStr.h>
-#include <SysErrStr.h>
-#include <ctrim.h>
-#include <AutoNew.h>
+#include <UtilFunc/ConvStr.h>
+#include <UtilFunc/SysErrStr.h>
+#include <UtilFunc/ctrim.h>
+#include <UtilFunc/AutoNew.h>
 
 // First bytes      Encoding assumed:
 // EF BB BF         UTF-8

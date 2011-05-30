@@ -16,11 +16,11 @@
 //          Force load ConfigXml plugin if the class file is about to loaded.
 // v7: 2011.05.29, ooyg: Add Ix_PluginLoader2.
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_PluginLoader.h"
-#include <Ix_AppWorkPath.h>
-#include <LockCount.h>
-#include <ScanFiles.h>
+#include <PluginManager/Ix_AppWorkPath.h>
+#include <UtilFunc/LockCount.h>
+#include <UtilFunc/ScanFiles.h>
 
 Cx_PluginLoader::Cx_PluginLoader()
     : m_instance(NULL)
@@ -640,7 +640,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/ConfigIOSection.h>
 #include <Xml/Ix_ConfigTransaction.h>
-#include <ConvStr.h>
+#include <UtilFunc/ConvStr.h>
 
 bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
 {

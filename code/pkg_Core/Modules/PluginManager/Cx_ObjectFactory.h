@@ -10,8 +10,8 @@
 #ifndef _X3_CORE_OBJECTFACTORY_H
 #define _X3_CORE_OBJECTFACTORY_H
 
-#include <XClassItem.h>
-#include <Ix_Module.h>
+#include <Module/XClassItem.h>
+#include <Module/Ix_Module.h>
 #include <Ix_ObjectFactory.h>
 
 #if defined(_MSC_VER) && _MSC_VER > 1200    // not VC6

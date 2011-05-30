@@ -1,10 +1,10 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_TempFolder.h"
-#include <Ix_FileUtility.h>
-#include <Ix_FileTransaction.h>
+#include <Utility/Ix_FileUtility.h>
+#include <Utility/Ix_FileTransaction.h>
 
 std::vector<std::wstring> Cx_TempFolder::c_arrToDel;
 

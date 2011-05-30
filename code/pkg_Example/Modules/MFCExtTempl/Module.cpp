@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <afxdllx.h>
-#include <XModuleMacro.h>
-#include <XModuleImpl.h>
+#include <Module/XModuleMacro.h>
+#include <Module/XModuleImpl.h>
 
 #include "Cx_Example2.h"
 

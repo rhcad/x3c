@@ -4,7 +4,7 @@
 #ifndef _X3_CORE_STRINGTABLE_H
 #define _X3_CORE_STRINGTABLE_H
 
-#include <Ix_StringTable.h>
+#include <Xml/Ix_StringTable.h>
 
 class Cx_StringTable : public Ix_StringTable
 {

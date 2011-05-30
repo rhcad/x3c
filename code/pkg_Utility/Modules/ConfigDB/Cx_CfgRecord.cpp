@@ -1,12 +1,12 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_CfgRecord.h"
 #include "Cx_CfgDatabase.h"
 #include "DbFunc.h"
-#include <RoundStr.h>
-#include <ReadInts.h>
+#include <UtilFunc/RoundStr.h>
+#include <UtilFunc/ReadInts.h>
 
 Cx_CfgRecord::Cx_CfgRecord()
     : m_bAdd(false), m_lTransaction(0), m_nKeyNewID(0)

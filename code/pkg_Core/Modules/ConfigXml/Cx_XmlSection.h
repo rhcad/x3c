@@ -4,9 +4,9 @@
 #ifndef _X3_CONFIGXML_XMLSECTION_H
 #define _X3_CONFIGXML_XMLSECTION_H
 
-#include <Ix_ConfigSection.h>
-#include <Ix_ConfigSectionXml.h>
-#include <Ix_ConfigTransaction.h>
+#include <Xml/Ix_ConfigSection.h>
+#include <Xml/Ix_ConfigSectionXml.h>
+#include <Xml/Ix_ConfigTransaction.h>
 
 #ifdef _MSC_VER
 #include "XmlUtil/XmlUtil.h"

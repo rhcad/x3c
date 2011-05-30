@@ -1,12 +1,12 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_GuidGenerator.h"
 
 #ifdef _WIN32
 #include <time.h>
-#include <SysErrStr.h>
+#include <UtilFunc/SysErrStr.h>
 #include <objbase.h>
 
 #pragma comment(lib,"Rpcrt4.lib")

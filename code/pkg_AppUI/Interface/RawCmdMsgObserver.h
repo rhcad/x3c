@@ -6,7 +6,7 @@
 #ifndef X3_OBSERVER_RAWCMDMSG_OBSERVER_H_
 #define X3_OBSERVER_RAWCMDMSG_OBSERVER_H_
 
-#include <ChangeNotifyData.h>
+#include <ChangeObserver/ChangeNotifyData.h>
 
 //! Window's command message observer data.
 /*!
@@ -35,7 +35,7 @@ struct RawCmdMsgEventData : public ChangeNotifyData
         \param[in,out] _text sets display text.
         \param[in] _sender additional infomation interpreted by message sender.
     */
-    RawCmdMsgEventData(UINT _id, bool& _enabled, bool& _checked, 
+    RawCmdMsgEventData(UINT _id, bool& _enabled, bool& _checked,
         std::wstring& _text, int _sender = 0)
         : ChangeNotifyData("RawCmdMsgEvent")
         , ret(false), id(_id), sender(_sender)
@@ -86,7 +86,7 @@ protected:
         \param[in] sender additional infomation interpreted by message sender.
         \return The message is handled by the derived class or not.
     */
-    virtual bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked, 
+    virtual bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked,
         std::wstring& text, int sender)
     {
         id; enabled; checked; text; sender;
@@ -106,7 +106,7 @@ private:
 
         if (mydata->enabled)
         {
-            mydata->ret = mydata->ret || OnRawUpdateCmdUI(mydata->id, 
+            mydata->ret = mydata->ret || OnRawUpdateCmdUI(mydata->id,
                 *mydata->enabled, *mydata->checked, *mydata->text, mydata->sender);
         }
         else

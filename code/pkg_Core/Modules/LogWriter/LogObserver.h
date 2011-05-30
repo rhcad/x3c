@@ -4,7 +4,7 @@
 #ifndef _X3_LOGWRITER_LOGOBSERVER_H
 #define _X3_LOGWRITER_LOGOBSERVER_H
 
-#include <ILogObserver.h>
+#include <Log/ILogObserver.h>
 
 #include <log4cplus/logger.h>
 using namespace log4cplus;

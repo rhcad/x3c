@@ -4,7 +4,7 @@
 #ifndef _X3_CONFIGDB_CONFIGFACTORY_H
 #define _X3_CONFIGDB_CONFIGFACTORY_H
 
-#include <Ix_ConfigDBFactory.h>
+#include <Xml/Ix_ConfigDBFactory.h>
 
 class Cx_ConfigFactory
     : public Ix_ConfigDBFactory

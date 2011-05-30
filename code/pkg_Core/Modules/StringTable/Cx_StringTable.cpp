@@ -1,12 +1,12 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_StringTable.h"
-#include <ScanFiles.h>
-#include <Ix_ConfigXml.h>
-#include <ConfigIOSection.h>
-#include <RelToAbs.h>
+#include <UtilFunc/ScanFiles.h>
+#include <Xml/Ix_ConfigXml.h>
+#include <Xml/ConfigIOSection.h>
+#include <UtilFunc/RelToAbs.h>
 
 Cx_StringTable::Cx_StringTable()
     : m_loaded(false)

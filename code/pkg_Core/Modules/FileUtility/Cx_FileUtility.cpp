@@ -3,10 +3,10 @@
 // Changes:
 // 2011-02-28: Add FOF_SILENT flag for SHFileOperationW.
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_FileUtility.h"
-#include <SysErrStr.h>
-#include <RelToAbs.h>
+#include <UtilFunc/SysErrStr.h>
+#include <UtilFunc/RelToAbs.h>
 
 #ifdef _WIN32
 #include <io.h>

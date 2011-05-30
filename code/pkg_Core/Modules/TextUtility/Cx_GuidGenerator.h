@@ -4,7 +4,7 @@
 #ifndef _X3_UTILITY_GUIDGENERATOR_H
 #define _X3_UTILITY_GUIDGENERATOR_H
 
-#include "Ix_GuidGenerator.h"
+#include <Utility/Ix_GuidGenerator.h>
 
 class Cx_GuidGenerator : public Ix_GuidGenerator
 {

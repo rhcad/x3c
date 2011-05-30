@@ -5,9 +5,9 @@
 // 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
 //
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_CfgDatabase.h"
-#include <Cx_SimpleObject.h>
+#include <Module/Cx_SimpleObject.h>
 #include "Cx_CfgRecordset.h"
 #include "Cx_CfgRecord.h"
 #include "DbFunc.h"

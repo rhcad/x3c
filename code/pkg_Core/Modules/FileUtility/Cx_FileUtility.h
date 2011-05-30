@@ -4,8 +4,8 @@
 #ifndef _X3_UTILITY_FILEUTILITY_H
 #define _X3_UTILITY_FILEUTILITY_H
 
-#include <Ix_FileUtility.h>
-#include <Ix_FileVersion.h>
+#include <Utility/Ix_FileUtility.h>
+#include <Utility/Ix_FileVersion.h>
 
 class Cx_FileUtility
     : public Ix_FileUtility

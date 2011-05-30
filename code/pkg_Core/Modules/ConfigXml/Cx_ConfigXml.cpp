@@ -6,18 +6,18 @@
 // 2011-02-24: Check NULL string in Cx_ConfigXml::GetSection().
 // 2011-05-12: Output error info when saving file.
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_ConfigXml.h"
 #include "Cx_XmlSection.h"
 #include "ConfigXmlImpl.h"
-#include <Cx_SimpleObject.h>
-#include <IFileCryptHandler.h>
+#include <Module/Cx_SimpleObject.h>
+#include <Xml/IFileCryptHandler.h>
 #include <math.h>
 
 #define Cx_Section Cx_Interface<Ix_ConfigSection>
 
 #ifndef _WIN32
-#include <ConvStr.h>
+#include <UtilFunc/ConvStr.h>
 static inline int _wrename (const wchar_t *oldfile, const wchar_t *newfile)
 {
     return rename(x3::w2a(oldfile).c_str(), x3::w2a(newfile).c_str());

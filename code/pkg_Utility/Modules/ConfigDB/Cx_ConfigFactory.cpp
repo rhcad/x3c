@@ -6,7 +6,7 @@
 //      Open access connection readonly if file is readonly.
 //
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "Cx_ConfigFactory.h"
 #include "Cx_CfgDatabase.h"
 #include "ClsID_Internal.h"

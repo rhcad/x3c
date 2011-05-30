@@ -4,7 +4,7 @@
 #ifndef _X3_UTILITY_CLIPBOARDUTIL_H
 #define _X3_UTILITY_CLIPBOARDUTIL_H
 
-#include <Ix_ClipboardUtil.h>
+#include <Utility/Ix_ClipboardUtil.h>
 
 class Cx_ClipboardUtil : public Ix_ClipboardUtil
 {

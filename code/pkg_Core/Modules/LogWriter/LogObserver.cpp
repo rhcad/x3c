@@ -5,15 +5,15 @@
 // v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
 // v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "LogObserver.h"
 
-#include <RelToAbs.h>
-#include <Ix_FileUtility.h>
-#include <Ix_TextFileUtil.h>
-#include <Ix_LogManager.h>
+#include <UtilFunc/RelToAbs.h>
+#include <Utility/Ix_FileUtility.h>
+#include <Utility/Ix_TextFileUtil.h>
+#include <Log/Ix_LogManager.h>
 #include <PluginManager/Ix_AppWorkPath.h>
-#include <ctrim.h>
+#include <UtilFunc/ctrim.h>
 
 #ifdef _MSC_VER                     // hide warnings
 #pragma warning(disable:4127)       // conditional expression is constant

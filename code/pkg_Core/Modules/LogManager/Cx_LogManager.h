@@ -4,7 +4,7 @@
 #ifndef _X3_CORE_LOGMANAGER_H
 #define _X3_CORE_LOGMANAGER_H
 
-#include <Ix_LogManager.h>
+#include <Log/Ix_LogManager.h>
 
 class Cx_LogManager
     : public Ix_LogManager

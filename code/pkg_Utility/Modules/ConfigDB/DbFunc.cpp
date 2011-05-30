@@ -1,9 +1,9 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "DbFunc.h"
-#include <ReadInts.h>
+#include <UtilFunc/ReadInts.h>
 
 void DbFunc::PrintComError(_com_error &e, const char* file, long lLine, const wchar_t* pszSQL)
 {

@@ -9,8 +9,8 @@
 #ifndef _X3_CONFIGDB_CFGDATABASE_H
 #define _X3_CONFIGDB_CFGDATABASE_H
 
-#include <Ix_ConfigData.h>
-#include <Ix_ConfigTransaction.h>
+#include <Xml/Ix_ConfigData.h>
+#include <Xml/Ix_ConfigTransaction.h>
 #include "Ix_InitDatabase.h"
 #include "Ix_SQLParser.h"
 #include "msado15.tlh"

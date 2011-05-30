@@ -1,8 +1,8 @@
-#include <PluginInc.h>
+#include <UtilFunc/PluginInc.h>
 #include "ChildView.h"
 #include <ClsID_ViewExample.h>
 #include <EmbedWnd.cpp>
-#include <LockCount.h>
+#include <UtilFunc/LockCount.h>
 #include <RawCmdMsgObserver.h>
 
 CChildView::CChildView() : m_locker(0)

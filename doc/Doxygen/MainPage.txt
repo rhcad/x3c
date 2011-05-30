@@ -16,7 +16,7 @@
     X3 C++ PluginFramework is a plugin-framework using C++ and STL, not using MFC/ATL/COM. \n
     It has many frequently-used and lightweight plugins (raw dll). \n
     We can use it to develop more plugins and applications easily on Windows and Linux.
-    
+
     This framework is licensed under the Apache Public License 2.0.\n
     Bug reports and suggestions are welcome.
     Please use the tracking system or forums at http://sourceforge.net/projects/x3c/develop .\n
@@ -27,21 +27,21 @@
     - \ref _GROUP_PLUGIN_CORE_ "The basic section." \n
         The basic interfaces and macros for developing plugins.\n
         It's a core section of the framework.\n\n
-        
+
     - \ref _GROUP_PLUGIN_LOG_ "Logging output." \n
         Logging output macros and interfaces.\n
         They are usually used to implement plugins.\n\n
-    
+
     - \ref _GROUP_CHANGE_OBSERVER_ "Event observer." \n
         Change observer classes for event-driven programming.\n\n
-        
+
     - \ref _GROUP_UTILFUNC "Frequently-used functions." \n
         Some frequently-used functions for developing plugins.\n\n
-        
+
     - \ref _GROUP_UTILITY_ "Frequently-used utilities." \n
         Some frequently-used utility interfaces for developing plugins.\n\n
-        
+
     - \ref _GROUP_PLUGIN_XML_ "XML interfaces." \n
         The interfaces for data I/O and data object management.\n
-        There is a plugin implemented using MSXML DOM Parser.\n\n
+        There is a plugin implemented using MSXML or TinyXML DOM Parser.\n\n
 */

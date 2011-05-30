@@ -4,7 +4,7 @@
 #ifndef _X3_UTILITY_FILETRANSACTION_H
 #define _X3_UTILITY_FILETRANSACTION_H
 
-#include "Ix_FileTransaction.h"
+#include <Utility/Ix_FileTransaction.h>
 
 class Cx_FileTransaction : public Ix_FileTransaction
 {
