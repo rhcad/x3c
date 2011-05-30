@@ -3,7 +3,9 @@
 #ifndef X3LINUX_PORTABILITY_IMPL_H
 #define X3LINUX_PORTABILITY_IMPL_H
 
-#include <../UtilFunc/ConvStr.h>
+#include "../PluginManager/Ix_PluginLoader2.h"
+#include "../UtilFunc/LockCount.h"
+#include "../UtilFunc/ConvStr.h"
 #include <dlfcn.h>
 #include <stdio.h>
 
@@ -68,9 +70,6 @@ static inline bool cmpdl(const char* dpname, const char* match)
 
     return false;
 }
-
-#include <../PluginManager/Ix_PluginLoader2.h>
-#include <../UtilFunc/LockCount.h>
 
 Ix_ObjectFactory* xGetObjectFactory();
 static long s_objFactoryLocker = 0;
