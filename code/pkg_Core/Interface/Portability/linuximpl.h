@@ -29,6 +29,16 @@ bool FreeLibrary(HMODULE hdll)
 
 HMODULE LoadLibraryW(const wchar_t* filename)
 {
+    wchar_t fullpath[MAX_PATH];
+
+    if (PathIsRelativeW(filename))
+    {
+        GetModuleFileNameW(NULL, fullpath, MAX_PATH);
+        PathRemoveFileSpecW(fullpath);
+        PathAppendW(fullpath, filename);
+        filename = fullpath;
+    }
+
     std::string name(x3::w2a(filename));
     HMODULE hdll = dlopen(name.c_str(), RTLD_LAZY);
 
@@ -62,7 +72,7 @@ static inline bool cmpdl(const char* dpname, const char* match)
 #include <../PluginManager/Ix_PluginLoader2.h>
 #include <../UtilFunc/LockCount.h>
 
-extern "C" Ix_ObjectFactory* xGetObjectFactory();
+Ix_ObjectFactory* xGetObjectFactory();
 static long s_objFactoryLocker = 0;
 
 HMODULE GetModuleHandleW(const wchar_t* filename)
@@ -81,7 +91,7 @@ HMODULE GetModuleHandleW(const wchar_t* filename)
     CLockCount locker(&s_objFactoryLocker);
     Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
         : dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
-    
+
     if (factory)
     {
         HMODULE hdll = NULL;

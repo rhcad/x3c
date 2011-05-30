@@ -67,6 +67,12 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
     return pfn ? (*pfn)(clsid.str(), ppv, NULL) : 1;
 }
 
+interface Ix_ObjectFactory;
+Ix_ObjectFactory* xGetObjectFactory()
+{
+    return NULL;
+}
+
 #endif // USE_ONE_PLUGIN
 
 HMODULE xGetModuleHandle()

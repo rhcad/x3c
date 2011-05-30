@@ -307,11 +307,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
         return false;
     }
 
-    wchar_t fullpath[MAX_PATH];
-    MakeFullPath(fullpath, NULL, filename);
-    PathRemoveBackslashW(fullpath);
-
-    HMODULE hdll = LoadLibraryExW(fullpath);
+    HMODULE hdll = LoadLibraryExW(filename);
 
     if (hdll)
     {
