@@ -11,7 +11,7 @@ public:
     }
 
 private:
-    virtual void OnNodeSelection(long objid, void* sender)
+    virtual void OnNodeSelection(long objid, NodeSelectionObserver* sender)
     {
         objid; sender;
     }
@@ -36,7 +36,7 @@ public:
     }
 
 private:
-    virtual void OnNodeSelection(long objid, void* sender)
+    virtual void OnNodeSelection(long objid, NodeSelectionObserver* sender)
     {
         if (this != sender)
         {

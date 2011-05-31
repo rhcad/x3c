@@ -1,5 +1,7 @@
 #include <UtilFunc/PluginInc.h>
+#include "Resource.h"
 #include "MainFrm.h"
+#include "../HollowView/MoveObserver.h"
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
@@ -9,17 +11,30 @@ END_MESSAGE_MAP()
 static UINT indicators[] =
 {
 	ID_SEPARATOR,
-	ID_INDICATOR_CAPS,
 	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
+	ID_INDICATOR_XY,
+};
+
+class CMainFrame::MyObserver : private MoveObserver
+{
+public:
+    MyObserver(CStatusBar* bar) : m_bar(bar) {}
+
+private:
+    virtual void OnMove(long x, long y, MoveObserver* sender);
+
+private:
+    CStatusBar* m_bar;
 };
 
 CMainFrame::CMainFrame()
 {
+    m_observer = new MyObserver(&m_wndStatusBar);
 }
 
 CMainFrame::~CMainFrame()
 {
+    delete m_observer;
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -66,4 +81,11 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 		return TRUE;
 
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+}
+
+void CMainFrame::MyObserver::OnMove(long x, long y, MoveObserver*)
+{
+    CString str;
+    str.Format(L"%ld, %ld", x, y);
+    m_bar->SetPaneText(m_bar->CommandToIndex(ID_INDICATOR_XY), str);
 }

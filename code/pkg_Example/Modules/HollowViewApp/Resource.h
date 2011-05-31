@@ -4,6 +4,7 @@
 //
 #define IDR_MAINFRAME				128
 #define IDR_HOLLOWTYPE				129
+#define ID_INDICATOR_XY				32770
 
 // Next default values for new objects
 //

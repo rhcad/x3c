@@ -18,4 +18,6 @@ protected:
 private:
 	CStatusBar  m_wndStatusBar;
 	CChildView  m_wndView;
+    class MyObserver;
+    MyObserver*  m_observer;
 };

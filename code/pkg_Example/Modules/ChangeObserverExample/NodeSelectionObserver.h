@@ -28,7 +28,7 @@ public:
         }
 
         long    objid;
-        void*   sender;
+        NodeSelectionObserver*   sender;
     };
 
 protected:
@@ -37,7 +37,7 @@ protected:
     }
 
     //! 让派生类响应节点选择改变通知
-    virtual void OnNodeSelection(long objid, void* sender)
+    virtual void OnNodeSelection(long objid, NodeSelectionObserver* sender)
     {
         objid; sender;
     }

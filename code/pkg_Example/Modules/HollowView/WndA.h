@@ -1,6 +1,8 @@
 #pragma once
 
-class CWndA : public CWnd
+#include "MoveObserver.h"
+
+class CWndA : public CWnd, private MoveObserver
 {
 public:
 	CWndA();
@@ -17,5 +19,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
+     virtual void OnMove(long x, long y, MoveObserver* sender);
+
+private:
     CPoint  m_point;
+    bool    m_selfmove;
 };

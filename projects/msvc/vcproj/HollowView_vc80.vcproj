@@ -213,6 +213,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\MoveObserver.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\Resource.h"
 				>
 			</File>

@@ -2,7 +2,7 @@
 #include <HollowViewRes.h>
 #include "WndA.h"
 
-CWndA::CWndA() : m_point(0, 0)
+CWndA::CWndA() : m_point(0, 0), m_selfmove(false)
 {
 }
 
@@ -46,14 +46,15 @@ void CWndA::OnPaint()
     CRect rect;
 
     GetClientRect(&rect);
-    str.Format(L"(%ld, %ld)", m_point.x, m_point.y);
+    str.Format(L"(%ld, %ld) %s", 
+        m_point.x, m_point.y, 
+        m_selfmove ? L" me" : L"from other view");
     dc.DrawText(str, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 }
 
 void CWndA::OnMouseMove(UINT nFlags, CPoint point)
 {
-    m_point = point;
-    Invalidate();
+    MoveObserver::Data(point.x, point.y, this).Notify();
 
 	CWnd::OnMouseMove(nFlags, point);
 }
@@ -61,4 +62,12 @@ void CWndA::OnMouseMove(UINT nFlags, CPoint point)
 void CWndA::OnDemoInView()
 {
     AfxMessageBox(L"CWndA::OnDemoInView()");
+}
+
+void CWndA::OnMove(long x, long y, MoveObserver* sender)
+{
+    m_selfmove = (sender == this);
+    m_point = CPoint(x, y);
+
+    Invalidate();
 }
