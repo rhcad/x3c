@@ -17,6 +17,7 @@
 #if defined(_MSC_VER) && _MSC_VER > 1200    // not VC6
     #include <hash_map>
     using stdext::hash_map;
+/*
 #elif defined(__GNUC__)                     // gcc
     #include <ext/hash_map>
     using __gnu_cxx::hash_map;
@@ -29,6 +30,7 @@
             }
         };
     } // of namespace __gnu_cxx
+*/
 #else                                       // VC6 or others
     #define hash_map std::map
 #endif

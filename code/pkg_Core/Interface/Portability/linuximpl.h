@@ -45,6 +45,16 @@ HMODULE LoadLibraryW(const wchar_t* filename)
     HMODULE hdll = dlopen(name.c_str(), RTLD_LAZY);
 
     seterr(dlerror());
+    if (!hdll)
+    {
+        char* tmpname = PathFindFileNameA(name.c_str());
+        if (tmpname && strncasecmp(tmpname, "lib", 3) != 0)
+        {
+            name.insert(tmpname - name.c_str(), "lib");
+            hdll = dlopen(name.c_str(), RTLD_LAZY);
+            seterr(dlerror());
+        }
+    }
     if (hdll)
     {
         s_plugins[hdll] = name;
@@ -60,6 +70,16 @@ HMODULE LoadLibraryExW(const wchar_t* filename)
 
 static inline bool cmpdl(const char* dpname, const char* match)
 {
+    match = PathFindFileNameA(match);
+    if (NULL == match)
+    {
+        return false;
+    }
+    if (strncasecmp(match, "lib", 3) == 0)
+    {
+        match += 3;
+    }
+
     int len = strlen(dpname);
     int len2 = strlen(match);
 

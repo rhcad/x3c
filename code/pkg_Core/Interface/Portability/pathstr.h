@@ -13,8 +13,8 @@ static inline bool IsPathSlash(wchar_t c)
 
 char* PathFindFileNameA(const char* path)
 {
-    const char* p1 = strrchr(path, '\\');
-    const char* p2 = strrchr(path, '/');
+    const char* p1 = path ? strrchr(path, '\\') : NULL;
+    const char* p2 = path ? strrchr(path, '/') : NULL;
 
     p1 = !p1 || (p2 && p2 > p1) ? p2 : p1;
 
@@ -23,8 +23,8 @@ char* PathFindFileNameA(const char* path)
 
 wchar_t* PathFindFileNameW(const wchar_t* path)
 {
-    const wchar_t* p1 = wcsrchr(path, L'\\');
-    const wchar_t* p2 = wcsrchr(path, L'/');
+    const wchar_t* p1 = path ? wcsrchr(path, L'\\') : NULL;
+    const wchar_t* p2 = path ? wcsrchr(path, L'/') : NULL;
 
     p1 = !p1 || (p2 && p2 > p1) ? p2 : p1;
 
