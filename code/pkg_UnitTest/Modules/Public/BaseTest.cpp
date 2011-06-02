@@ -11,7 +11,7 @@ static wchar_t s_temppath[MAX_PATH] = { 0 };
 
 BaseTest::BaseTest()
 {
-    MakeRootPath(s_datapath, L"TestData");
+    MakeRootPath(s_datapath, L"../TestData");
     MakeRootPath(s_temppath, L"Temp");
 }
 
@@ -71,8 +71,7 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         PathRemoveFileSpecW(path);      // bin\vc80\debug\tests
         PathRemoveFileSpecW(path);      // bin\vc80\debug
         PathRemoveFileSpecW(path);      // bin\vc80
-        PathRemoveFileSpecW(path);      // bin
-        PathAppendW(path, name);        // bin\name
+        PathAppendW(path, name);        // bin\vc80\name
 
 #ifdef _WIN32
         SetFileAttributesNormal(filename);

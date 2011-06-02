@@ -302,6 +302,46 @@
 				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3win.h"
 				>
 			</File>
+			<Filter
+				Name="Module"
+				>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_Module.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_Object.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_SimpleObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_SingletonObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Ix_Module.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XClassItem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XModuleImpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XModuleItem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XModuleMacro.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
