@@ -1,5 +1,9 @@
 X3 C++ PluginFramework
 
+2011-06-02, Li Jian (Aaron) <mcuit@hotmail.com>, Zhang Yun Gui
+
+    * Add makefile for Linux.
+
 2011-05-26
 
     * Add example projects: HollowView and HollowViewApp.
