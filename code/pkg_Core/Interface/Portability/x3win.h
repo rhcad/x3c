@@ -13,7 +13,9 @@
 #define _AFX_ALL_WARNINGS
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
+#ifndef _AFX_NO_OLE_SUPPORT
 #include <afxdisp.h>        // MFC Automation classes
+#endif
 #else
 #define _WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
 #include <windows.h>        // Windows master include file
@@ -28,7 +30,7 @@
 #define DECLEXPORT  __declspec(dllexport)
 #define OUTAPI      extern "C" DECLEXPORT
 
-#if _MSC_VER <= 1200        // VC6
+#if defined(_MSC_VER) && _MSC_VER <= 1200   // VC6
 #ifndef interface
 #include <objbase.h>
 #endif

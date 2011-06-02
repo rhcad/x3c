@@ -20,7 +20,8 @@ tools: some useful tools for development.
 
 Authors:
 Zhang Yun Gui <rhcad@hotmail.com>
-Huang Ye <think.hy@gmail.com>
+Huang Ye (thinkhy) <think.hy@gmail.com>
+Li Jian (Aaron) <mcuit@hotmail.com>
 
 ----------------------
 

@@ -21,7 +21,7 @@
 
 
 //! Helper class to auto free memory (auto delete).
-/*! Use this to convert from " T* p = new T; ". to " KAutoNew<T> p (new T); ".
+/*! Use this to convert from " T* p = new T; " to " KAutoNew<T> p (new T); ".
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
@@ -49,7 +49,7 @@ private:
 };
 
 //! Helper class to auto free memory (auto delete[]).
-/*! Use this to convert from " T* p = new T[5]; ". to " KAutoNewArr<T> p (5); ".
+/*! Use this to convert from " T* p = new T[5]; " to " KAutoNewArr<T> p (5); ".
     \ingroup _GROUP_UTILFUNC
 */
 template<typename T>
@@ -124,7 +124,7 @@ private:
 };
 
 //! Helper class to auto free memory (malloc, realloc, free).
-/*! Use this to convert from " T* p = (T*)malloc(5 * sizeof(T)); ". to " KAutoMalloc<T> p (5); ".\n
+/*! Use this to convert from " T* p = (T*)malloc(5 * sizeof(T)); " to " KAutoMalloc<T> p (5); ".\n
     This class can be used to convert from static array to dynamic array, such as converting from
         " double a[10000] " to " KAutoMalloc< double> a(10000) ".
     \ingroup _GROUP_UTILFUNC
@@ -207,14 +207,14 @@ private:
 };
 
 //! Helper class to auto free 2d array (arr[m][n]).
-/*! Use this to convert from " T arr[100][200]; ". to " KAutoNewArr2d<T> arr (100, 200); ".\n
+/*! Use this to convert from " T arr[100][200]; " to " KAutoNewArr2d<T> arr (100, 200); ".\n
     This class can be used to convert from static array to dynamic array, such as converting from
         " double a[1000][1000] " to " KAutoNewArr2d< double> a(1000, 1000) ".
     \ingroup _GROUP_UTILFUNC
     \see KAutoMalloc
 */
 template<typename T, typename T2 = KAutoMalloc<T> >
-class KAutoNewArr2d : KAutoNewArr<T2>
+class KAutoNewArr2d : public KAutoNewArr<T2>
 {
 public:
     KAutoNewArr2d(size_t count1, size_t count2)
