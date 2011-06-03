@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="gb2312"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
-	Name="TestCore"
-	ProjectGUID="{D26563C9-C48F-45FB-8EB6-1560B663F353}"
-	RootNamespace="TestCore"
+	Version="8.00"
+	Name="TestUtility"
+	ProjectGUID="{59922A29-CEB6-4723-9247-840BA51DBC6B}"
+	RootNamespace="TestUtility"
 	Keyword="Win32Proj"
-	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -18,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\UnitTests\"
-			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
+			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\UnitTests\"
+			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
@@ -42,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
-				PreprocessorDefinitions="WIN32;WINDOWS;_DEBUG"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Utility\Interface"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -64,7 +63,7 @@
 				AdditionalDependencies="cppunitd_dll.lib TestRunnerud.lib ole32.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(TargetDir)"
-				IgnoreDefaultLibraryNames=""
+				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
 				SubSystem="1"
@@ -90,13 +89,16 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\UnitTests\"
-			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
+			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\UnitTests\"
+			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
@@ -119,8 +121,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
-				PreprocessorDefinitions="WIN32;WINDOWS;NDEBUG"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Utility\Interface"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				RuntimeLibrary="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -139,7 +141,7 @@
 				AdditionalDependencies="cppunit_dll.lib TestRunneru.lib ole32.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(TargetDir)"
-				IgnoreDefaultLibraryNames=""
+				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
 				SubSystem="1"
@@ -167,6 +169,9 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -180,23 +185,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLogging.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestPluginManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestStringTable.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigDB.cpp"
 				>
 			</File>
 		</Filter>
@@ -206,23 +195,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLogging.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestPluginManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestStringTable.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigDB.h"
 				>
 			</File>
 		</Filter>

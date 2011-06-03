@@ -26,7 +26,6 @@
 					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
 					<Add directory="../../../code/pkg_UnitTest/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Utility/Interface" />
 				</Compiler>
 				<Linker>
 					<Add directory="../../../code/bin/UnitTests" />
@@ -52,7 +51,6 @@
 					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
 					<Add directory="../../../code/pkg_UnitTest/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
-					<Add directory="../../../code/pkg_Utility/Interface" />
 				</Compiler>
 				<Linker>
 					<Add directory="../../../code/bin/UnitTests" />

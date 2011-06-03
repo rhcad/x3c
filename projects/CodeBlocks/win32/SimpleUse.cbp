@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="../../../code/bin/gcc/Release/UnitTests/SimpleUse" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../code/bin/UnitTests/SimpleUse" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../../obj/gcc/Release/SimpleUse" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -27,7 +27,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Debug">
-				<Option output="../../../code/bin/gcc/Debug/UnitTests/SimpleUse" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../code/bin/UnitTests/SimpleUse" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../../obj/gcc/Debug/SimpleUse" />
 				<Option type="1" />
 				<Option compiler="gcc" />

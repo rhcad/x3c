@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Utility\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -121,7 +121,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Utility\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				RuntimeLibrary="2"
 				WarningLevel="4"
@@ -189,10 +189,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigDB.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestFileUtil.cpp"
 				>
 			</File>
@@ -220,10 +216,6 @@
 			>
 			<File
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigDB.h"
 				>
 			</File>
 			<File

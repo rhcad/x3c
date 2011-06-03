@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="TestCore"
-	ProjectGUID="{D26563C9-C48F-45FB-8EB6-1560B663F353}"
-	RootNamespace="TestCore"
+	Name="TestUtility"
+	ProjectGUID="{80F24908-2D45-44C9-8550-A9FA2FFEB30E}"
+	RootNamespace="TestUtility"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Utility\Interface"
 				PreprocessorDefinitions="WIN32;WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Utility\Interface"
 				PreprocessorDefinitions="WIN32;WINDOWS;NDEBUG"
 				RuntimeLibrary="2"
 				WarningLevel="4"
@@ -180,23 +180,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLogging.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestPluginManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestStringTable.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigDB.cpp"
 				>
 			</File>
 		</Filter>
@@ -206,23 +190,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLogging.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestPluginManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestStringTable.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigDB.h"
 				>
 			</File>
 		</Filter>
