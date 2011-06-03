@@ -8,6 +8,8 @@ CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_UnitTest/Interface
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_UnitTest/Modules/Public
 
 C_FLAGS  +=   -D_CONSOLE
+C_FLAGS  +=   -L/usr/lib
+C_FLAGS  +=   -L/usr/local/lib
 
 all:
 	$(CC) $(CFLAGS) -c  TestConfigDB.cpp
@@ -16,7 +18,7 @@ all:
 	$(CC) $(CFLAGS) -c  TestLoadPlugin.cpp
 	$(CC) $(CFLAGS) -c  TestStringTable.cpp
 	$(CC) $(CFLAGS) -c  TestFileUtil.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestCore *.o -ldl -lcppunit
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/libTestCore.so *.o -ldl -lcppunit
 clean:
 	rm -rf *.so
 	rm -rf *.o

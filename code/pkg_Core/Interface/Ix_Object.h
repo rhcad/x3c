@@ -89,12 +89,4 @@ private:
     char m_clsid[40];
 };
 
-// Default extension name of plugins
-//
-#ifdef _WIN32
-#define PLNEXT  L".dll"
-#else
-#define PLNEXT  L".so"
-#endif
-
 #endif // X3_CORE_IOBJECT_H_

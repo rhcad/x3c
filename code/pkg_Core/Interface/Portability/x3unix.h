@@ -10,6 +10,7 @@
 #define STDCALL
 #define DECLEXPORT
 #define OUTAPI      extern "C" DECLEXPORT
+#define PLNEXT      L".so"
 
 #ifndef MAX_PATH
 #define MAX_PATH 256

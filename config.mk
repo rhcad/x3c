@@ -1,6 +1,8 @@
-HOME=/root
+# The working directory for downloading or compiling.
+# HOME may be '/home/yourname', '/usr/local/src' or '/root'.
+HOME=/usr/local/src
 
-# The installation directory of the DVSDK (eg: /home/yourname/x3c)
+# The installation directory of the DVSDK, 'x3c' may need to change for yourself.
 DVSDK_INSTALL_DIR=$(HOME)/x3c
 
 CODE_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/code
