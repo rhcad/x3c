@@ -5,8 +5,9 @@ CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Utility/Interface
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Example/Interface
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_UnitTest/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_UnitTest/Modules/TestCore
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_UnitTest/Modules/Public
+
+C_FLAGS  +=   -D_CONSOLE
 
 all:
 	$(CC) $(CFLAGS) -c  TestConfigDB.cpp
@@ -15,7 +16,7 @@ all:
 	$(CC) $(CFLAGS) -c  TestLoadPlugin.cpp
 	$(CC) $(CFLAGS) -c  TestStringTable.cpp
 	$(CC) $(CFLAGS) -c  TestFileUtil.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestCore *.o
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestCore *.o -ldl -lcppunit
 clean:
 	rm -rf *.so
 	rm -rf *.o

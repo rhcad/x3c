@@ -3,16 +3,11 @@
 ROOTDIR = ../../..
 include $(ROOTDIR)/config.mk
 
-SUBDIRS = $(sort $(dir $(wildcard */)))
+SUBDIRS = $(filter-out Public/, $(sort $(dir $(wildcard */))))
 CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
 
-.PHONY: Public TestCore
-
-Public:
-	@echo
-	@echo Making all in subdirectory $@...
-	$(MAKE) -C Public
+.PHONY: TestCore
 
 TestCore:
 	@echo

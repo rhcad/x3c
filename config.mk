@@ -1,6 +1,6 @@
 HOME=/root
 
-# The installation directory of the DVSDK
+# The installation directory of the DVSDK (eg: /home/yourname/x3c)
 DVSDK_INSTALL_DIR=$(HOME)/x3c
 
 CODE_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/code

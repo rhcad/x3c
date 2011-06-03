@@ -2,7 +2,6 @@ ROOTDIR = ../../../..
 include $(ROOTDIR)/config.mk
 
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Modules/LogWriter
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Modules/LogWriter/log4cplus/include
 
 CFLAGS   +=   -DUNICODE

@@ -4,7 +4,6 @@ include $(ROOTDIR)/config.mk
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_AppUI/Interface
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Example/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Example/Modules/HollowView
 
 all:
 	$(CC) $(CFLAGS) -c  CmdObserver.cpp

@@ -2,7 +2,6 @@ ROOTDIR = ../../../..
 include $(ROOTDIR)/config.mk
 
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Modules/StringTable
 
 all:
 	$(CC) $(CFLAGS) -c  Cx_StringTable.cpp

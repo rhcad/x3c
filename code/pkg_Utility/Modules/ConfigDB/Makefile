@@ -2,7 +2,6 @@ ROOTDIR = ../../../..
 include $(ROOTDIR)/config.mk
 
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Utility/Modules/ConfigDB
 CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Utility/Interface/Database
 
 all:
