@@ -184,6 +184,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigXml.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.cpp"
 				>
 			</File>
@@ -207,6 +211,10 @@
 			>
 			<File
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestConfigXml.h"
 				>
 			</File>
 			<File

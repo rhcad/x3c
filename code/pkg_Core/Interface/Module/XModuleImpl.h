@@ -179,7 +179,7 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 }
 
 //! Return DLL handle of the current plugin module.
-//! Using it can check how many objects are used by other modules)
+//! Using it can check how many objects are used by other modules.
 HMODULE xGetModuleHandle()
 {
     return s_xModuleObject.GetModuleInstance();

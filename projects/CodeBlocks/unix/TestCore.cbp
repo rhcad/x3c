@@ -66,6 +66,8 @@
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/UnitTests.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestChangeObserver.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestChangeObserver.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestConfigXml.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestConfigXml.h" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLoadPlugin.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLoadPlugin.h" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestLogging.cpp" />

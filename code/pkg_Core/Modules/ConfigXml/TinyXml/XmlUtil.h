@@ -4,14 +4,72 @@
 #ifndef __XMLUTIL_TINYXML_INCLUDED_
 #define __XMLUTIL_TINYXML_INCLUDED_
 
+// ticpp: http://ticpp.googlecode.com/svn/trunk
 #define TIXML_USE_STL
 #include "tinyxml.h"
 
-// ticpp: http://ticpp.googlecode.com/svn/trunk
-//
-typedef TiXmlDocument*  XMLDOMDocumentPtr;
-typedef TiXmlElement*   XMLDOMElementPtr;
-typedef TiXmlNode*      XMLDOMNodePtr;
+template <class T>
+class XMLDOMPtr
+{
+public:
+    XMLDOMPtr(int /*null*/ = 0) : m_data(NULL)
+    {
+    }
+
+    XMLDOMPtr(const XMLDOMPtr& src) : m_data(src.m_data)
+    {
+        if (m_data)
+        {
+            InterlockedIncrement(&(m_data->second));
+        }
+    }
+
+    ~XMLDOMPtr()
+    {
+        Free();
+    }
+
+    XMLDOMPtr& operator=(const XMLDOMPtr& src)
+    {
+        if (this != &src)
+        {
+            Free();
+            m_data = src.m_data;
+            if (m_data)
+            {
+                InterlockedIncrement(&(m_data->second));
+            }
+        }
+        return *this;
+    }
+
+    XMLDOMPtr& operator=(int /*null*/)
+    {
+        Free();
+        return *this;
+    }
+
+    void Free()
+    {
+        if (m_data)
+        {
+            if (0 == InterlockedDecrement(&(m_data->second)))
+            {
+                delete m_data->first;
+            }
+            m_data = NULL;
+        }
+    }
+
+    operator T*() { return m_data ? m_data->first : NULL; }
+    operator const T*() const { return m_data ? m_data->first : NULL; }
+
+private:
+    std::pair<T*, long>*    m_data;
+};
+
+typedef XMLDOMPtr<TiXmlDocument> XMLDOMDocumentPtr;
+typedef XMLDOMPtr<TiXmlElement> XMLDOMElementPtr;
 
 //! XML文件加解密的接口
 interface IXmlFileCrypt
@@ -305,12 +363,12 @@ public:
 
     //! 得到节点内容，识别CDATA
     /*! 节点的内容既可以是简单的文字内容，也可以是CDATA节点
-        \param[in] pNode XML元素对象
+        \param[in] ele XML元素对象
         \param[in] defValue 节点内容的默认值
         \return 给定节点的内容
     */
     static std::wstring GetText(
-        const XMLDOMNodePtr& pNode,
+        const XMLDOMElementPtr& ele,
         const wchar_t* defValue = L"");
 
     //! 得到一个节点的CDATA值
@@ -325,13 +383,13 @@ public:
 
     //! 设置节点内容
     /*!
-        \param[in] pNode XML元素对象
-        \param[in] pszText 给定节点的内容
+        \param[in] ele XML元素对象
+        \param[in] text 给定节点的内容
         \return 是否设置成功
     */
     static bool SetText(
-        const XMLDOMNodePtr& pNode,
-        const wchar_t* pszText);
+        const XMLDOMElementPtr& ele,
+        const wchar_t* text);
 
     //! 设置节点内容
     /*!
@@ -342,13 +400,13 @@ public:
         函数转换为宽字节字符串，再用本函数设置节点内容，这样就能将特定语言编码的
         内容转换为UNICODE的XML内容。
 
-        \param[in] pNode XML元素对象
-        \param[in] pszText 给定节点的UNICODE内容，末尾有零结束符
+        \param[in] ele XML元素对象
+        \param[in] text 给定节点的UNICODE内容，末尾有零结束符
         \return 是否设置成功
     */
     static bool SetTextW(
-        const XMLDOMNodePtr& pNode,
-        const wchar_t* pszText);
+        const XMLDOMElementPtr& ele,
+        const wchar_t* text);
 
     //! 设置一个节点的CDATA值
     /*!
@@ -378,110 +436,110 @@ public:
     //! 删除一个属性
     /*!
         \param[in] ele XML元素对象
-        \param[in] pszName 要删除的属性名称
+        \param[in] name 要删除的属性名称
         \return 是否删除了属性
     */
     static bool DelAttribute(
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName);
+        const wchar_t* name);
 
     //! 得到一个属性节点内容
     /*!
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称
+        \param[in] name 该元素的属性节点名称
         \param[in] defValue 属性内容的默认值
         \return 该元素的属性内容
     */
     static std::wstring GetAttribute(
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         const wchar_t* defValue = L"");
 
     //! 得到一个属性节点整数内容
     /*!
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称
+        \param[in] name 该元素的属性节点名称
         \param[in] defValue 属性内容的默认整数值
         \return 该元素的属性内容整数值
     */
     static int GetAttributeInt(
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         int defValue = 0);
 
     //! 得到一个属性节点布尔值内容
     /*!
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称
+        \param[in] name 该元素的属性节点名称
         \param[in] defValue 属性内容的默认布尔值
         \return 该元素的属性内容布尔值
     */
     static bool GetAttributeBool(
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         int defValue = 0);
 
     //! 得到一个属性节点浮点型内容
     /*!
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称
+        \param[in] name 该元素的属性节点名称
         \param[in] defValue 属性内容的默认浮点型值
-        \param[out] pstrUnit 如果传入变量地址，则存放属性内容尾部的的单位名称
+        \param[out] unitName 如果传入变量地址，则存放属性内容尾部的的单位名称
         \return 该元素的属性内容浮点型值
     */
     static double GetAttributeFloat(
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         double defValue = 0,
-        std::wstring* pstrUnit = NULL);
+        std::wstring* unitName = NULL);
 
     //! 设置一个属性节点内容
     /*!
         \param[in] doc XML文档对象
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称，没有则自动创建属性节点
+        \param[in] name 该元素的属性节点名称，没有则自动创建属性节点
         \param[in] value 属性内容
         \return 是否设置成功
     */
     static bool SetAttribute(
         const XMLDOMDocumentPtr& doc,
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         const wchar_t* value);
 
     //! 设置一个属性节点整数内容
     /*!
         \param[in] doc XML文档对象
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称，没有则自动创建属性节点
+        \param[in] name 该元素的属性节点名称，没有则自动创建属性节点
         \param[in] value 属性的整数内容
         \return 是否设置成功
     */
     static bool SetAttributeInt(
         const XMLDOMDocumentPtr& doc,
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         int value);
 
     //! 设置一个属性节点布尔值属性值
     /*!
         \param[in] doc XML文档对象
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称，没有则自动创建属性节点
+        \param[in] name 该元素的属性节点名称，没有则自动创建属性节点
         \param[in] value 属性的布尔内容，自动转换成“true”或“false”
         \return 是否设置成功
     */
     static bool SetAttributeBool(
         const XMLDOMDocumentPtr& doc,
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         int value);
 
     //! 设置一个属性节点浮点型内容
     /*!
         \param[in] doc XML文档对象
         \param[in] ele XML元素对象
-        \param[in] pszName 该元素的属性节点名称，没有则自动创建属性节点
+        \param[in] name 该元素的属性节点名称，没有则自动创建属性节点
         \param[in] value 属性的浮点型内容
         \param[in] unitName 在属性内容尾部附加的单位名称，为空则忽略
         \param[in] decimal 保留小数点后第几位数，超出部分四舍五入
@@ -490,7 +548,7 @@ public:
     static bool SetAttributeFloat(
         const XMLDOMDocumentPtr& doc,
         const XMLDOMElementPtr& ele,
-        const wchar_t* pszName,
+        const wchar_t* name,
         double value,
         const wchar_t* unitName = L"",
         int decimal = 4);
@@ -550,14 +608,14 @@ public:
         \param[in] ele XML元素对象
         \param[in] fieldName 该元素的子元素节点名称
         \param[in] defValue 子节点内容的默认浮点型值
-        \param[out] pstrUnit 如果传入变量地址，则存放子节点内容尾部的的单位名称
+        \param[out] unitName 如果传入变量地址，则存放子节点内容尾部的的单位名称
         \return 该子节点内容浮点型值
     */
     static double GetFieldFloat(
         const XMLDOMElementPtr& ele,
         const wchar_t* fieldName,
         double defValue = 0,
-        std::wstring* pstrUnit = NULL);
+        std::wstring* unitName = NULL);
 
     //! 设置一个节点的整数属性值
     /*!

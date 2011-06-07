@@ -7,9 +7,9 @@
  *        These projects are usual unit-test applications, COM/Active controls,
  *        simple applications or non plugin-system applications. \n
  *
- *    Usage: Include this file in a cpp file such as StdAfx.cpp, so you can use Cx_Interface.
- *    (1) Load plugins using PluginManager.h before using those interfaces.\n
- *    (2) or, if just use only one plugin, you can do as following and not need PluginManager.h :
+ *    Usage: Include this file in a cpp file such as StdAfx.cpp, so you can use Cx_Interface.\n
+ *    - Load plugins using PluginManager.h before using those interfaces.\n
+ *    - If just use only one plugin, you can do as following and not need PluginManager.h :\n
  *    define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll.
  *
  *  \author Zhang Yun Gui, X3 C++ PluginFramework

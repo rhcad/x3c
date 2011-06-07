@@ -7,19 +7,19 @@
 CFG=TestCore - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "TestCore.mak".
-!MESSAGE
+!MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "TestCore.mak" CFG="TestCore - Win32 Debug"
-!MESSAGE
+!MESSAGE 
 !MESSAGE Possible choices for configuration are:
-!MESSAGE
+!MESSAGE 
 !MESSAGE "TestCore - Win32 Release" (based on "Win32 (x86) Console Application")
 !MESSAGE "TestCore - Win32 Debug" (based on "Win32 (x86) Console Application")
-!MESSAGE
+!MESSAGE 
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -78,7 +78,7 @@ LINK32=link.exe
 # ADD LINK32 cppunitd_dll.lib TestRunnerud.lib ole32.lib /nologo /entry:"wWinMainCRTStartup" /subsystem:console /pdb:"..\..\..\obj\vc60\Debug\Symbols/TestCore.pdb" /debug /machine:I386 /pdbtype:sept /libpath:"..\..\..\code\bin\vc60\Debug\UnitTests"
 # SUBTRACT LINK32 /pdb:none
 
-!ENDIF
+!ENDIF 
 
 # Begin Target
 
@@ -90,6 +90,10 @@ LINK32=link.exe
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigXml.cpp
 # End Source File
 # Begin Source File
 
@@ -114,6 +118,10 @@ SOURCE=..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.cpp
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_UnitTest\Modules\TestCore\TestConfigXml.h
 # End Source File
 # Begin Source File
 
