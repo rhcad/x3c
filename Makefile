@@ -1,4 +1,5 @@
-include config.mk
+ROOTDIR = .
+include $(ROOTDIR)/config.mk
 
 .PHONY:	code clean
 
@@ -9,11 +10,12 @@ all:	code
 #==============================================================================
 
 code:
-	$(MAKE) -C $(CODE_INSTALL_DIR)
+	$(MAKE) -C code
+
 #==============================================================================
 # Clean up the targets built by 'make all'.
 #==============================================================================
 clean:	code_clean
 code_clean:
-	$(MAKE) -C $(CODE_INSTALL_DIR) clean
+	$(MAKE) -C code clean
 

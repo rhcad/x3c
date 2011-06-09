@@ -12,7 +12,7 @@ template <class T>
 class XMLDOMPtr
 {
 public:
-    XMLDOMPtr(int /*null*/ = 0) : m_data(NULL)
+    XMLDOMPtr(void* /*null*/ = 0) : m_data(NULL)
     {
     }
 
@@ -43,7 +43,7 @@ public:
         return *this;
     }
 
-    XMLDOMPtr& operator=(int /*null*/)
+    XMLDOMPtr& operator=(void* /*null*/)
     {
         Free();
         return *this;
