@@ -1,5 +1,12 @@
 X3 C++ PluginFramework
 
+2011-06-15
+
+    * Write error code for LoadLibraryExW in PluginManager.
+    * Add notes for including XComCreator.h
+    * Fix *.vcproj
+    * Add 'IDS_CHANGE_FAIL' in ConfigXml plugin.
+
 ------v1.0.9------
 
 2011-06-02, Li Jian (Aaron) <mcuit@hotmail.com>, Zhang Yun Gui

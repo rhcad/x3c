@@ -554,6 +554,10 @@ Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
     {
         m_pImpl->SetModified();
     }
+    else
+    {
+        LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"AddSection");
+    }
 
     return pIFRet;
 }
@@ -571,6 +575,10 @@ bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)
         {
             bRet = true;
             m_pImpl->SetModified();
+        }
+        else
+        {
+            LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveSection");
         }
     }
 
@@ -602,7 +610,13 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
         count = CXmlUtil::DelChildren(p->m_xmlNode,
             name, attrName, attrValue);
         if (count > 0)
+        {
             m_pImpl->SetModified();
+        }
+        else
+        {
+            LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveChildren");
+        }
     }
 
     return count;
