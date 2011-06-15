@@ -183,15 +183,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_ObserverTest.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Module.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Plugin.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Plugin.cpp"
 				>
 			</File>
 		</Filter>
@@ -201,19 +201,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_ObserverTest.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Cx_ObserverTest.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\DocObserverTest.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\DocObserverTest.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Responsibility.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Responsibility.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\ResponsibilityB.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ResponsibilityB.h"
 				>
 			</File>
 		</Filter>
@@ -221,15 +221,15 @@
 			Name="Interface"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\ChainObserver.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserver.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\ChainObserverB.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserverB.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\DocEventObserver.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\DocEventObserver.h"
 				>
 			</File>
 			<File
@@ -237,11 +237,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\NodeSelectionObserver.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\NodeSelectionObserver.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\SelectionObserverTest.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h"
 				>
 			</File>
 		</Filter>

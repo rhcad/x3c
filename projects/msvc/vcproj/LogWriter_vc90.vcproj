@@ -180,22 +180,22 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\LogObserver.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\LogObserver.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\Module.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Plugin.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\Plugin.cpp"
 				>
 			</File>
 			<Filter
 				Name="log4cplus"
 				>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\appender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -217,7 +217,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\appenderattachableimpl.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\appenderattachableimpl.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -239,7 +239,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\configurator.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\configurator.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -261,7 +261,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\consoleappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\consoleappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -283,7 +283,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\factory.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\factory.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -305,7 +305,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\fileappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\fileappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -327,7 +327,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\filter.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\filter.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -349,7 +349,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\global-init.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\global-init.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -371,7 +371,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\hierarchy.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\hierarchy.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -393,7 +393,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\hierarchylocker.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\hierarchylocker.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -415,7 +415,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\layout.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\layout.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -437,7 +437,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\logger.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\logger.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -459,7 +459,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\loggerimpl.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loggerimpl.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -481,7 +481,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\loggingevent.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loggingevent.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -503,7 +503,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\loglevel.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loglevel.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -525,7 +525,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\loglog.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\loglog.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -547,7 +547,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\logloguser.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\logloguser.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -569,7 +569,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\ndc.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\ndc.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -591,7 +591,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\nteventlogappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\nteventlogappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -613,7 +613,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\nullappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\nullappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -635,7 +635,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\objectregistry.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\objectregistry.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -657,7 +657,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\patternlayout.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\patternlayout.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -679,7 +679,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\pointer.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\pointer.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -701,7 +701,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\property.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\property.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -723,7 +723,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\rootlogger.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\rootlogger.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -745,7 +745,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\sleep.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\sleep.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -767,7 +767,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\socket-win32.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socket-win32.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -789,7 +789,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\socket.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socket.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -811,7 +811,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\socketappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socketappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -833,7 +833,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\socketbuffer.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\socketbuffer.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -855,7 +855,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\stringhelper.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\stringhelper.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -877,7 +877,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\syncprims.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\syncprims.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -899,7 +899,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\syslogappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\syslogappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -921,7 +921,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\threads.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\threads.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -943,7 +943,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\timehelper.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\timehelper.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -965,7 +965,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\win32consoleappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\win32consoleappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -987,7 +987,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\log4cplus\src\win32debugappender.cxx"
+					RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\src\win32debugappender.cxx"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -1016,7 +1016,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\LogObserver.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\LogObserver.h"
 				>
 			</File>
 		</Filter>
@@ -1026,11 +1026,11 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\LogWriter.rc"
+				RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\LogWriter.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Version.rc2"
+				RelativePath="..\..\..\code\pkg_Core\Modules\LogWriter\Version.rc2"
 				>
 			</File>
 		</Filter>

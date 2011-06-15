@@ -183,23 +183,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_FileTransaction.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Cx_FileTransaction.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_FileUtility.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_TempFolder.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Module.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Plugin.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Plugin.cpp"
 				>
 			</File>
 		</Filter>
@@ -209,19 +209,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_FileTransaction.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Cx_FileTransaction.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_FileUtility.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Cx_FileUtility.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_TempFolder.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Cx_TempFolder.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\FileTransaction.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\FileTransaction.h"
 				>
 			</File>
 		</Filter>
@@ -231,11 +231,11 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\FileUtility.rc"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\FileUtility.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Version.rc2"
+				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Version.rc2"
 				>
 			</File>
 		</Filter>

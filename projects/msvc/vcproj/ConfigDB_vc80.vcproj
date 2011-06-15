@@ -185,31 +185,31 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgDatabase.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgDbSection.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgDbSection.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgRecord.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgRecord.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgRecordset.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgRecordset.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_ConfigFactory.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_ConfigFactory.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\DbFunc.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\DbFunc.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Module.cpp"
 				>
 			</File>
 		</Filter>
@@ -219,31 +219,31 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgDatabase.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgDatabase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgDbSection.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgDbSection.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgRecord.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgRecord.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_CfgRecordset.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_CfgRecordset.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_ConfigFactory.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_ConfigFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Cx_SQLParser.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Cx_SQLParser.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\DbFunc.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\DbFunc.h"
 				>
 			</File>
 		</Filter>
@@ -253,11 +253,11 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\ConfigDB.rc"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\ConfigDB.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Version.rc2"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Version.rc2"
 				>
 			</File>
 		</Filter>
@@ -265,7 +265,7 @@
 			Name="Interface"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\ClsID_Internal.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\ClsID_Internal.h"
 				>
 			</File>
 			<File
@@ -273,11 +273,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Ix_InitDatabase.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Ix_InitDatabase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Utility\Modules\$(ProjectName)\Ix_SQLParser.h"
+				RelativePath="..\..\..\code\pkg_Utility\Modules\ConfigDB\Ix_SQLParser.h"
 				>
 			</File>
 		</Filter>

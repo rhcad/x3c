@@ -3,6 +3,8 @@
 #ifndef X3WIN32_PORTABILITY_IMPL_H
 #define X3WIN32_PORTABILITY_IMPL_H
 
+#include "x3win.h"
+
 bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename)
 {
     hfile = ::CreateFileW(filename,

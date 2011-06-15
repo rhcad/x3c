@@ -178,15 +178,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_Example.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\Win32DllTempl\Module.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Plugin.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\Win32DllTempl\Plugin.cpp"
 				>
 			</File>
 		</Filter>
@@ -196,7 +196,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_Example.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\Win32DllTempl\Cx_Example.h"
 				>
 			</File>
 		</Filter>
@@ -206,11 +206,11 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Version.rc2"
+				RelativePath="..\..\..\code\pkg_Example\Modules\Win32DllTempl\Version.rc2"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Win32DllTempl.rc"
+				RelativePath="..\..\..\code\pkg_Example\Modules\Win32DllTempl\Win32DllTempl.rc"
 				>
 			</File>
 		</Filter>

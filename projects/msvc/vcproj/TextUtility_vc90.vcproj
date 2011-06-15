@@ -178,19 +178,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_ClipboardUtil.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_GuidGenerator.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_GuidGenerator.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_TextUtil.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Module.cpp"
 				>
 			</File>
 		</Filter>
@@ -200,15 +200,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_ClipboardUtil.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_GuidGenerator.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_GuidGenerator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Cx_TextUtil.h"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.h"
 				>
 			</File>
 		</Filter>
@@ -218,11 +218,11 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\TextUtility.rc"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\TextUtility.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\$(ProjectName)\Version.rc2"
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Version.rc2"
 				>
 			</File>
 		</Filter>

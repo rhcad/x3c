@@ -185,7 +185,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.cpp"
 				>
 			</File>
 			<File
@@ -193,23 +193,23 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestFileUtil.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestFileUtil.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLogging.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestPluginManager.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestStringTable.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.cpp"
 				>
 			</File>
 		</Filter>
@@ -219,7 +219,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestChangeObserver.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestChangeObserver.h"
 				>
 			</File>
 			<File
@@ -227,23 +227,23 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestFileUtil.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestFileUtil.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLoadPlugin.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLoadPlugin.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestLogging.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestLogging.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestPluginManager.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestPluginManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\$(ProjectName)\TestStringTable.h"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.h"
 				>
 			</File>
 		</Filter>

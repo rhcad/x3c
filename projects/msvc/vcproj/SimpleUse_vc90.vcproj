@@ -172,7 +172,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Main.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\SimpleUse\Main.cpp"
 				>
 			</File>
 		</Filter>

@@ -199,7 +199,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\Module.cpp"
 				>
 			</File>
 			<File
@@ -231,7 +231,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\HollowView.rc"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\HollowView.rc"
 				>
 			</File>
 		</Filter>

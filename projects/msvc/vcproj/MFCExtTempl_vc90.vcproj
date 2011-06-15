@@ -190,15 +190,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_Example2.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\MFCExtTempl\Cx_Example2.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\MFCExtTempl\Module.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Plugin.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\MFCExtTempl\Plugin.cpp"
 				>
 			</File>
 		</Filter>
@@ -208,11 +208,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Cx_Example2.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\MFCExtTempl\Cx_Example2.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\Resource.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\MFCExtTempl\Resource.h"
 				>
 			</File>
 		</Filter>
@@ -222,7 +222,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\$(ProjectName)\MFCExtTempl.rc"
+				RelativePath="..\..\..\code\pkg_Example\Modules\MFCExtTempl\MFCExtTempl.rc"
 				>
 			</File>
 		</Filter>
