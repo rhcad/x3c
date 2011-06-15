@@ -1,5 +1,7 @@
 #include <UtilFunc/PluginInc.h>
 #include <PluginManager/PluginManager.h>
+
+// Include XComCreator.h in one and only one cpp file.
 #include <PluginManager/XComCreator.h>
 
 #include "Resource.h"

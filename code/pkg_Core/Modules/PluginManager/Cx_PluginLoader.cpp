@@ -308,6 +308,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
     }
 
     HMODULE hdll = LoadLibraryExW(filename);
+    DWORD errcode = GetLastError();
 
     if (hdll)
     {
@@ -331,7 +332,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
     }
     else if (PathFileExistsW(filename))
     {
-        LOG_WARNING2(L"Fail to load plugin.", filename);
+        LOG_WARNING2(L"Fail to load plugin.", errcode << L", " << filename);
     }
 
     return hdll != NULL;
