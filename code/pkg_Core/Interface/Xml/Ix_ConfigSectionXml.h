@@ -14,8 +14,11 @@
     \ingroup _GROUP_PLUGIN_XML_
     \see Ix_ConfigSection
 */
-interface Ix_ConfigSectionXml
+class Ix_ConfigSectionXml
 {
+public:
+    virtual ~Ix_ConfigSectionXml() {}
+
     //! 设置每个配置项是否为子元素项
     /*! 默认值为false（每个配置项对应于一个XML属性）
         \param element true表示每个配置项(例如 GetString(L"Name") )为一个XML子元素项，

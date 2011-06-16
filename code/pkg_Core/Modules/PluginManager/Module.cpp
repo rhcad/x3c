@@ -26,8 +26,8 @@ public:
 public:
     int CreateObject(const X3CLSID& clsid, Ix_Object** ppv, HMODULE fromdll)
     {
-        if (X3CLS_AppWorkPath == clsid
-            || X3CLS_PluginDelayLoad == clsid)
+        if (x3::CLSID_AppWorkPath == clsid
+            || x3::CLSID_PluginDelayLoad == clsid)
         {
             *ppv = this;
             return 0;

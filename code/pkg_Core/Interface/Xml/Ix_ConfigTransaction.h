@@ -12,8 +12,11 @@
 /*! Ix_ConfigSection 和 Ix_ConfigData 一般都可转换到该接口
     \see Cx_ConfigTransaction
 */
-interface Ix_ConfigTransaction
+class Ix_ConfigTransaction
 {
+public:
+    virtual ~Ix_ConfigTransaction() {}
+
     //! 准备写配置
     virtual void BeginTransaction() = 0;
 

@@ -15,8 +15,11 @@
     \ingroup _GROUP_PLUGIN_LOG_
     \see x3::RegisterLogObserver, UnRegisterLogObserver, Cx_LogObserverImpl
 */
-interface Ix_LogObserver
+class Ix_LogObserver
 {
+public:
+    virtual ~Ix_LogObserver() {}
+
     //! Notification of beginning a new logging group.
     /*!
         \param level group number of the new group, base 1.

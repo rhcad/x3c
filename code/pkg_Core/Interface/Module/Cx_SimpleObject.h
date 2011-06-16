@@ -21,11 +21,11 @@
         return objRet;
     }
     \endcode
-    The implement class must be registered in X3BEGIN_MODULE group. eg:
+    The implement class must be registered in XBEGIN_DEFINE_MODULE group. eg:
     \code
-    X3BEGIN_MODULE()
-        X3_CLASS_ENTRY(X3CLSID(), Cx_MyInternal)
-    X3END_MODULE()
+    XBEGIN_DEFINE_MODULE()
+        XDEFINE_CLASSMAP_ENTRY(X3CLSID(), Cx_MyInternal)
+    XEND_DEFINE_MODULE()
     \endcode
     \ingroup _GROUP_PLUGIN_CORE2_
 */

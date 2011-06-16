@@ -11,10 +11,6 @@
 #include <wctype.h>
 #endif
 
-#ifndef interface
-#define interface struct
-#endif
-
 #ifndef max
 #define max(a,b) ((a)>(b)?(a):(b))
 #endif

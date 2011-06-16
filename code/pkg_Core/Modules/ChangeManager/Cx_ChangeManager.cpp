@@ -28,7 +28,7 @@ void Cx_ChangeManager::RegisterObserver(const char* type,
     {
         m_callers.push_back(key);
 
-        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(X3CLS_PluginDelayLoad);
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
         if (pIFLoader)
         {
             pIFLoader->AddObserverPlugin(fromdll, type);
@@ -71,7 +71,7 @@ void Cx_ChangeManager::ChangeNotify(const char* type, ChangeNotifyData* data)
     {
         m_types.push_back(type);
 
-        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(X3CLS_PluginDelayLoad);
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
         if (pIFLoader)
         {
             pIFLoader->FireFirstEvent(type);

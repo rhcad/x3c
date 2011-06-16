@@ -10,6 +10,6 @@
 #include <XComPtr.h>
 
 //! 文本实用技术类ID
-const X3CLSID X3CLS_TextUtil("c1638294-2a0f-402a-96ea-174512ee982c");
+X3CLSID_DEFINE(CLSID_TextUtil, "c1638294-2a0f-402a-96ea-174512ee982c");
 
 #endif // X3_CLS_TEXTUTIL_H_

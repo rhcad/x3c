@@ -13,8 +13,11 @@
  *  \brief Plugin loading interface
  *  \see   Ix_ObjectFactory
  */
-interface Ix_PluginLoader
+class Ix_PluginLoader
 {
+public:
+    virtual ~Ix_PluginLoader() {}
+
     //! Load all plugins in the module's path.
     /*!
         \param instance used as relative base, null as exe module.

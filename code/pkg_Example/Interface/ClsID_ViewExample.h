@@ -1,7 +1,7 @@
-#ifndef X3CLS_VIEW_EXAMPLE_H
-#define X3CLS_VIEW_EXAMPLE_H
+#ifndef CLSID_VIEW_EXAMPLE_H
+#define CLSID_VIEW_EXAMPLE_H
 
-const X3CLSID X3CLS_ExampleWndA("96b94d2e-8023-454e-a6be-e41ab07ae206");
-const X3CLSID X3CLS_ExampleWndB("184c7468-526b-426b-af87-8bb10a84dc30");
+const X3CLSID CLSID_ExampleWndA("96b94d2e-8023-454e-a6be-e41ab07ae206");
+const X3CLSID CLSID_ExampleWndB("184c7468-526b-426b-af87-8bb10a84dc30");
 
-#endif // X3CLS_VIEW_EXAMPLE_H
+#endif // CLSID_VIEW_EXAMPLE_H

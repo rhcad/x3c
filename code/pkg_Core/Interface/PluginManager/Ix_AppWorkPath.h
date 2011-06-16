@@ -8,15 +8,18 @@
 
 #include "XComPtr.h"
 
-const X3CLSID X3CLS_AppWorkPath("b2615355-772d-4195-94eb-59c31250a537");
+X3CLSID_DEFINE(CLSID_AppWorkPath, "b2615355-772d-4195-94eb-59c31250a537");
 
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \interface Ix_AppWorkPath
  *  \brief interface of getting applicaton's writtable path.
- *  \see   X3CLS_AppWorkPath, GetAppWorkPath()
+ *  \see   x3::CLSID_AppWorkPath, GetAppWorkPath()
  */
-interface Ix_AppWorkPath
+class Ix_AppWorkPath
 {
+public:
+    virtual ~Ix_AppWorkPath() {}
+
     //! Get applicaton's writtable absolute path.
     virtual std::wstring GetWorkPath() = 0;
 
@@ -28,7 +31,7 @@ interface Ix_AppWorkPath
 //! \ingroup _GROUP_PLUGIN_CORE_
 inline std::wstring GetAppWorkPath()
 {
-    Cx_Interface<Ix_AppWorkPath> pIFPath(X3CLS_AppWorkPath);
+    Cx_Interface<Ix_AppWorkPath> pIFPath(x3::CLSID_AppWorkPath);
 #ifdef ASSERT
     ASSERT(pIFPath.IsNotNull());
 #endif

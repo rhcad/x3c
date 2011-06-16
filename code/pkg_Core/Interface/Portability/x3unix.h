@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <wchar.h>
 
-#define STDCALL
 #define DECLEXPORT
 #define OUTAPI      extern "C" DECLEXPORT
 #define PLNEXT      L".so"

@@ -12,10 +12,13 @@
 /*!
     \interface Ix_StringConvert
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_TextUtil, StringConvert(), Ix_TextFileUtil, ConvStr.h
+    \see x3::CLSID_TextUtil, StringConvert(), Ix_TextFileUtil, ConvStr.h
 */
-interface Ix_StringConvert
+class Ix_StringConvert
 {
+public:
+    virtual ~Ix_StringConvert() {}
+
     //! È¥µôÎÄ×ÖÁ½¶ËµÄ¿Õ°××Ö·û£¨°ë½Ç¿Õ¸ñ¡¢È«½Ç¿Õ¸ñ¡¢»»ÐÐ·û£©
     /*!
         \param[in,out] text ´ý×ª»»µÄ×Ö·û´®
@@ -105,7 +108,7 @@ namespace x3 {
 */
 inline Cx_Interface<Ix_StringConvert> StringConvert()
 {
-    Cx_Interface<Ix_StringConvert> pIFUtility(X3CLS_TextUtil);
+    Cx_Interface<Ix_StringConvert> pIFUtility(x3::CLSID_TextUtil);
 #ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
 #endif

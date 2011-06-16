@@ -63,7 +63,7 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
         conn << L"Jet OLEDB:Database Password=" << password << L";" ;
     }
 
-    Cx_Interface<Ix_InitDatabase> pIFDB(X3CLS_CfgDatabase);
+    Cx_Interface<Ix_InitDatabase> pIFDB(x3::CLSID_CfgDatabase);
     ASSERT(pIFDB.IsNotNull());
     Ix_SQLParser* pSQLParser = new SQLParser_Access();
 
@@ -93,7 +93,7 @@ Cx_Ptr Cx_ConfigFactory::OpenSQLServerDB(const std::wstring& server,
         conn << L"Password=" << password << L";" ;
     }
 
-    Cx_Interface<Ix_InitDatabase> pIFDB(X3CLS_CfgDatabase);
+    Cx_Interface<Ix_InitDatabase> pIFDB(x3::CLSID_CfgDatabase);
     ASSERT(pIFDB.IsNotNull());
     Ix_SQLParser* pSQLParser = new SQLParser_SQLServer();
 

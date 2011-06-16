@@ -7,6 +7,6 @@
 
 #include "Cx_LogManager.h"
 
-X3BEGIN_MODULE()
-    X3_CLASS_Singleton(X3CLS_LogManager, Cx_LogManager)
-X3END_MODULE_DLL()
+XBEGIN_DEFINE_MODULE()
+    XDEFINE_CLASSMAP_ENTRY_Singleton(x3::CLSID_LogManager, Cx_LogManager)
+XEND_DEFINE_MODULE_DLL()

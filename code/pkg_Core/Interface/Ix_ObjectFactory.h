@@ -13,8 +13,11 @@
  *  \brief Object creator interface
  *  \see   Ix_Object, Ix_Module
  */
-interface Ix_ObjectFactory
+class Ix_ObjectFactory
 {
+public:
+    virtual ~Ix_ObjectFactory() {}
+
     //! Check if the class is loaded.
     virtual bool IsCreatorRegister(const X3CLSID& clsid) = 0;
 

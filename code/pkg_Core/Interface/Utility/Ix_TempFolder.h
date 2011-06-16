@@ -8,16 +8,19 @@
 
 #include <Ix_Object.h>
 
-const X3CLSID X3CLS_TempFolder("6d215195-061e-4c03-827d-8c692c293617");
+X3CLSID_DEFINE(CLSID_TempFolder, "6d215195-061e-4c03-827d-8c692c293617");
 
 //! 临时目录操作的接口
 /*!
     \interface Ix_TempFolder
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_TempFolder
+    \see x3::CLSID_TempFolder
 */
-interface Ix_TempFolder
+class Ix_TempFolder
 {
+public:
+    virtual ~Ix_TempFolder() {}
+
     //! 设置根目录，影响后续所有新创建的对象
     /*!
         \param path 根目录的全名

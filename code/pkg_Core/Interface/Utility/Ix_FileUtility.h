@@ -8,16 +8,19 @@
 
 #include <XComPtr.h>
 
-const X3CLSID X3CLS_FileUtility("933b3bf9-69d0-4be7-8e49-92b73669d8db");
+X3CLSID_DEFINE(CLSID_FileUtility, "933b3bf9-69d0-4be7-8e49-92b73669d8db");
 
 //! 文件和目录的实用操作的接口(文件检测)
 /*!
     \interface Ix_FileUtility1
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_FileUtility, FileUtility()
+    \see x3::CLSID_FileUtility, FileUtility()
 */
-interface Ix_FileUtility1
+class Ix_FileUtility1
 {
+public:
+    virtual ~Ix_FileUtility1() {}
+
     //! 检查一个目录或文件是否存在
     /*!
         \param filename 目录或文件的文件全名，如果是目录则末尾要有斜号
@@ -55,10 +58,13 @@ interface Ix_FileUtility1
 /*!
     \interface Ix_FileUtility2
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_FileUtility, FileUtility()
+    \see x3::CLSID_FileUtility, FileUtility()
 */
-interface Ix_FileUtility2
+class Ix_FileUtility2
 {
+public:
+    virtual ~Ix_FileUtility2() {}
+
     //! 为一个文件全名级联创建中间目录
     /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param filename 文件或目录的全名
@@ -117,10 +123,13 @@ interface Ix_FileUtility2
 /*!
     \interface Ix_FileUtility3
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_FileUtility, FileUtility()
+    \see x3::CLSID_FileUtility, FileUtility()
 */
-interface Ix_FileUtility3
+class Ix_FileUtility3
 {
+public:
+    virtual ~Ix_FileUtility3() {}
+
     //! 相对路径转换为绝对路径
     /*! 将一个相对于给定参考路径的相对路径转换为绝对路径，如果已经是绝对路径则不变
         \param relFile 要转换的相对路径，例如“./abc”、“/Root”、“../1/2.dat”
@@ -181,10 +190,13 @@ interface Ix_FileUtility3
 /*!
     \interface Ix_FileUtility4
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_FileUtility, FileUtility()
+    \see x3::CLSID_FileUtility, FileUtility()
 */
-interface Ix_FileUtility4
+class Ix_FileUtility4
 {
+public:
+    virtual ~Ix_FileUtility4() {}
+
     //! 得到文件名标题，无路径和后缀名
     virtual std::wstring GetFileTitle(const wchar_t* filename) = 0;
 
@@ -217,15 +229,17 @@ interface Ix_FileUtility4
 /*!
     \interface Ix_FileUtility
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_FileUtility
+    \see x3::CLSID_FileUtility
     \see x3::FileUtility()->xxx(), RelToAbs.h 文件实用函数
 */
-interface Ix_FileUtility
+class Ix_FileUtility
     : public Ix_FileUtility1
     , public Ix_FileUtility2
     , public Ix_FileUtility3
     , public Ix_FileUtility4
 {
+public:
+    virtual ~Ix_FileUtility() {}
 };
 
 namespace x3 {
@@ -237,7 +251,7 @@ namespace x3 {
 */
 inline Cx_Interface<Ix_FileUtility> FileUtility()
 {
-    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
 #ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
 #endif

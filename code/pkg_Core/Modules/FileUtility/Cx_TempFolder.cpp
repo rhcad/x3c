@@ -23,7 +23,7 @@ bool Cx_TempFolder::DeleteFolder()
 
     if (!m_wstrPath.empty())
     {
-        Cx_Interface<Ix_FileTransaction> pIFTransaction(X3CLS_FileTransaction);
+        Cx_Interface<Ix_FileTransaction> pIFTransaction(x3::CLSID_FileTransaction);
         bRet = pIFTransaction->DeletePathFile(m_wstrPath.c_str());
         if (bRet)
             m_wstrPath.resize(0);
@@ -53,7 +53,7 @@ std::wstring Cx_TempFolder::CreateFolder(const std::wstring& wstrPrefix)
 {
     ASSERT(!m_wstrRootPath.empty());
 
-    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
 
     DeleteFolder();
     for (int i = 1; i < 9999; i++)
@@ -81,7 +81,7 @@ std::wstring Cx_TempFolder::GetPath() const
 std::wstring Cx_TempFolder::CreateFileName(const std::wstring& wstrPrefix, 
                                            const std::wstring& wstrExtName)
 {
-    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
 
     std::wstring strFileName;
     

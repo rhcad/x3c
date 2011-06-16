@@ -12,15 +12,15 @@
 
 #include "Ix_CreateWnd.h"
 
-//! The macro to register window class in X3BEGIN_MODULE() group.
+//! The macro to register window class in XBEGIN_DEFINE_MODULE() group.
 /*!
     \ingroup _GROUP_APPUI_
     \param clsid window class unique id.
     \param cls window class deriving from CWnd or other window class.
-    \see Cx_CreateWnd, X3_CLASS_ENTRY
+    \see Cx_CreateWnd, XDEFINE_CLASSMAP_ENTRY
 */
-#if defined(X3_CLASS_ENTRY) && !defined(X3_CLASS_ENTRY_Wnd)
-#define X3_CLASS_ENTRY_Wnd(clsid, cls) \
+#if defined(XDEFINE_CLASSMAP_ENTRY) && !defined(XDEFINE_CLASSMAP_ENTRY_Wnd)
+#define XDEFINE_CLASSMAP_ENTRY_Wnd(clsid, cls) \
     X3CLASSENTRY(1, "Cx_Object<Cx_CreateWnd<" #cls ">>", clsid, "",    \
         reinterpret_cast<PFNXObjectCreator>(&Cx_Object<Cx_CreateWnd<cls> >::CreateObject),  \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<Cx_CreateWnd<cls> >::GetObjectCount),   \
@@ -34,7 +34,7 @@
     void Refresh();
     \endcode
     \ingroup _GROUP_APPUI_
-    \see X3_CLASS_ENTRY_Wnd
+    \see XDEFINE_CLASSMAP_ENTRY_Wnd
 */
 template <class BASEWND>
 class Cx_CreateWnd : public Ix_CreateWnd

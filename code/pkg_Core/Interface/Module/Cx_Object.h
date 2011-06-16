@@ -12,9 +12,9 @@
 HMODULE x3GetModuleHandle();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief The regular implement template class used by X3_CLASS_ENTRY.
+ *  \brief The regular implement template class used by XDEFINE_CLASSMAP_ENTRY.
  *  \note  The template parameter is a class which implement a interface.
- *  \see   Cx_SingletonObject, X3_CLASS_ENTRY
+ *  \see   Cx_SingletonObject, XDEFINE_CLASSMAP_ENTRY
  *  \internal
  */
 template <class ClsType>
@@ -61,19 +61,19 @@ protected:
     }
 
 public:
-    static Ix_Object* STDCALL CreateObject(HMODULE fromdll)
+    static Ix_Object* CreateObject(HMODULE fromdll)
     {
         Cx_Object<ClsType>* p = new Cx_Object<ClsType>(false);
         p->AddRef(fromdll);
         return p;
     }
 
-    static long STDCALL GetObjectCount()
+    static long GetObjectCount()
     {
         return ObjectCount();
     }
 
-    static long STDCALL GetRefCountByOthers()
+    static long GetRefCountByOthers()
     {
         return RefCountByOthers();
     }

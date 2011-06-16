@@ -4,7 +4,7 @@
 #ifndef X3_UNITTEST_BASETEST_H_
 #define X3_UNITTEST_BASETEST_H_
 
-interface Ix_PluginLoader;
+class Ix_PluginLoader;
 
 //! ²âÊÔÓÃÀı»ùÀà
 class BaseTest : public CppUnit::TestFixture

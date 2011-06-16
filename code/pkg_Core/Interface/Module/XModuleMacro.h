@@ -1,5 +1,5 @@
 /*! \file   XModuleMacro.h
- *  \brief  Define macros of class factory registry, such as X3BEGIN_MODULE.
+ *  \brief  Define macros of class factory registry, such as XBEGIN_DEFINE_MODULE.
  *  \note   This file and XModuleImpl.h may be included in different CPP files.\n
  *      if you don't want to use this file and XModuleImpl.h, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
@@ -8,14 +8,14 @@
 #ifndef X3_PLUGINIMPL_MODULEMACRO_H_
 #define X3_PLUGINIMPL_MODULEMACRO_H_
 
-// X3BEGIN_MODULE()
-//     X3_CLASS_ENTRY(clsid, cls)
-//     X3_CLASS_Singleton(clsid, cls)
-//     X3_INTERFACE_Singleton(clsid, iid, cls)
-// X3END_MODULE()
-// X3END_MODULE_DLL()
-// X3END_MODULE_MFCEXTDLL()
-// X3END_MODULE_MFCDLL()
+// XBEGIN_DEFINE_MODULE()
+//     XDEFINE_CLASSMAP_ENTRY(clsid, cls)
+//     XDEFINE_CLASSMAP_ENTRY_Singleton(clsid, cls)
+//     XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton(clsid, iid, cls)
+// XEND_DEFINE_MODULE()
+// XEND_DEFINE_MODULE_DLL()
+// XEND_DEFINE_MODULE_MFCEXTDLL()
+// XEND_DEFINE_MODULE_MFCDLL()
 
 #include "XClassItem.h"
 #include "Cx_Object.h"
@@ -24,10 +24,10 @@
 //! Begin group of class factory registry.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \see X3END_MODULE
-    \see X3END_MODULE_DLL, X3END_MODULE_MFCEXTDLL
+    \see XEND_DEFINE_MODULE
+    \see XEND_DEFINE_MODULE_DLL, XEND_DEFINE_MODULE_MFCEXTDLL
 */
-#define X3BEGIN_MODULE()  \
+#define XBEGIN_DEFINE_MODULE()  \
     const X3CLASSENTRY X3CLASSENTRY::s_classes[] = {
 
 //! Register a regular class.
@@ -36,7 +36,7 @@
     \param clsid class unique id, X3CLSID constant.
     \param cls implement class
 */
-#define X3_CLASS_ENTRY(clsid, cls)      \
+#define XDEFINE_CLASSMAP_ENTRY(clsid, cls)      \
     X3CLASSENTRY(1, "Cx_Object<" #cls ">", clsid, "",  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_Object<cls>::CreateObject), \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<cls>::GetObjectCount),  \
@@ -48,7 +48,7 @@
     \param clsid class unique id, X3CLSID constant.
     \param cls implement class
 */
-#define X3_CLASS_Singleton(clsid, cls)    \
+#define XDEFINE_CLASSMAP_ENTRY_Singleton(clsid, cls)    \
     X3CLASSENTRY(MIN_SINGLETON_TYPE,   \
         "Cx_SingletonObject<" #cls ">", clsid, "",  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_SingletonObject<cls>::CreateObject),    \
@@ -61,7 +61,7 @@
     \param iid the specific interface id name. char array constant.
     \param cls implement class
 */
-#define X3_INTERFACE_Singleton(iid, cls)     \
+#define XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton(iid, cls)     \
     X3CLASSENTRY(MIN_SINGLETON_TYPE + 1,   \
         "Cx_SingletonObject<" #cls ">", X3CLSID(), iid,  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_SingletonObject<cls>::CreateObject),    \
@@ -71,9 +71,9 @@
 //! End group of class factory registry.
 /*!
     \ingroup _GROUP_PLUGIN_CORE_
-    \see X3END_MODULE_DLL, X3END_MODULE_MFCEXTDLL
+    \see XEND_DEFINE_MODULE_DLL, XEND_DEFINE_MODULE_MFCEXTDLL
 */
-#define X3END_MODULE() \
+#define XEND_DEFINE_MODULE() \
         X3CLASSENTRY() \
     };
 
@@ -84,10 +84,10 @@
 //! End group of class factory registry and implement entry function of Win32DLL(USRDLL).
 /*! Using this macro need include this file and XModuleImpl.h file.
     \ingroup _GROUP_PLUGIN_CORE_
-    \see X3END_MODULE_MFCEXTDLL, X3END_MODULE_MFCDLL
+    \see XEND_DEFINE_MODULE_MFCEXTDLL, XEND_DEFINE_MODULE_MFCDLL
 */
 #if defined(_USRDLL) && defined(APIENTRY)
-#define X3END_MODULE_DLL() \
+#define XEND_DEFINE_MODULE_DLL() \
         X3CLASSENTRY() \
     };  \
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
@@ -103,17 +103,17 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
     return TRUE;    \
 }
 #else
-#define X3END_MODULE_DLL() \
+#define XEND_DEFINE_MODULE_DLL() \
         X3CLASSENTRY() \
     };
-#endif // X3END_MODULE_DLL
+#endif // XEND_DEFINE_MODULE_DLL
 
 //! End group of class factory registry and implement entry function of MFC Extension DLL.
 /*! Using this macro need include this file and XModuleImpl.h file.
     \ingroup _GROUP_PLUGIN_CORE_
-    \see X3END_MODULE_DLL, X3END_MODULE_MFCDLL
+    \see XEND_DEFINE_MODULE_DLL, XEND_DEFINE_MODULE_MFCDLL
 */
-#define X3END_MODULE_MFCEXTDLL() \
+#define XEND_DEFINE_MODULE_MFCEXTDLL() \
         X3CLASSENTRY() \
     };  \
 static AFX_EXTENSION_MODULE MFCExtDLL = { NULL, NULL }; \
@@ -141,9 +141,9 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)    \
     \note Call the following statemant before call any MFC function: \n
             AFX_MANAGE_STATE(AfxGetStaticModuleState());
     \ingroup _GROUP_PLUGIN_CORE_
-    \see X3END_MODULE_DLL, X3END_MODULE_MFCEXTDLL
+    \see XEND_DEFINE_MODULE_DLL, XEND_DEFINE_MODULE_MFCEXTDLL
 */
-#define X3END_MODULE_MFCDLL() \
+#define XEND_DEFINE_MODULE_MFCDLL() \
         X3CLASSENTRY() \
     };  \
 class CPluginApp : public CWinApp   \

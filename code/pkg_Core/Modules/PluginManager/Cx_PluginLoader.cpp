@@ -657,7 +657,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
         wcscpy_s(m_clsfile, MAX_PATH, m_inifile);
         PathRenameExtensionW(m_clsfile, L".clsbuf");
 
-        if (pIFFile.Create(X3CLS_ConfigXmlFile))
+        if (pIFFile.Create(x3::CLSID_ConfigXmlFile))
         {
             m_cache = pIFFile;
             pIFFile->SetFileName(m_clsfile);

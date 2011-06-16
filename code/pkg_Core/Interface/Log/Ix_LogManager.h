@@ -18,19 +18,22 @@ enum x3LogType
     x3LogType_Fatal      //!< fatal error info.
 };
 
-interface Ix_LogObserver;
+class Ix_LogObserver;
 
-const X3CLSID X3CLS_LogManager("bbf48a97-9aef-4368-9dc0-2d2937c326ec");
+X3CLSID_DEFINE(CLSID_LogManager, "bbf48a97-9aef-4368-9dc0-2d2937c326ec");
 
 //! interface of logging output observer manager.
 /*! Used by RegisterLogObserver, X3LogGroup and X3LOG_WARNING.
     \interface Ix_LogManager
     \ingroup _GROUP_PLUGIN_LOG_
-    \see X3CLS_LogManager, Ix_StringTable
+    \see x3::CLSID_LogManager, Ix_StringTable
     \see x3::RegisterLogObserver, UnRegisterObserver
 */
-interface Ix_LogManager
+class Ix_LogManager
 {
+public:
+    virtual ~Ix_LogManager() {}
+
     //! Add a logging output observer.
     virtual bool RegisterObserver(Ix_LogObserver* observer) = 0;
 

@@ -35,7 +35,7 @@ public:
     //! Broadcast change event.
     void Notify()
     {
-        Cx_Interface<Ix_ChangeManager> pIFManager(X3CLS_ChangeManager);
+        Cx_Interface<Ix_ChangeManager> pIFManager(x3::CLSID_ChangeManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->ChangeNotify(m_type, this);
@@ -100,7 +100,7 @@ protected:
     //! Delay register observer (passing false to constructor).
     void RegisterObserver()
     {
-        Cx_Interface<Ix_ChangeManager> pIFManager(X3CLS_ChangeManager);
+        Cx_Interface<Ix_ChangeManager> pIFManager(x3::CLSID_ChangeManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->RegisterObserver(GetChangeType(), this, x3GetModuleHandle());
@@ -111,7 +111,7 @@ public:
     //! Destructor for unregister observer.
     virtual ~Cx_ChangeObserver()
     {
-        Cx_Interface<Ix_ChangeManager> pIFManager(X3CLS_ChangeManager);
+        Cx_Interface<Ix_ChangeManager> pIFManager(x3::CLSID_ChangeManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->UnRegisterObserver(GetChangeType(), this);

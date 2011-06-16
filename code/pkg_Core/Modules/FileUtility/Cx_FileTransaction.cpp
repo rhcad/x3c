@@ -41,7 +41,7 @@ bool Cx_FileTransaction::IsRollbacking() const
 
 bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycle)
 {
-    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
 
     if (NULL == pszFileName || 0 == pszFileName[0]
         || !pIFUtility->IsPathFileExists(pszFileName))

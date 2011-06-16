@@ -12,8 +12,10 @@
  *  \note  DO NOT call it's function directly.\n You can use Cx_Interface or Cx_Ptr instead of using it.
  *  \see autoptr class: Cx_Ptr, Cx_Interface
  */
-interface Ix_Object
+class Ix_Object
 {
+public:
+    virtual ~Ix_Object() {}
     virtual void AddRef(HMODULE fromdll) = 0;
     virtual void Release(HMODULE fromdll) = 0;
     virtual const char* GetClassName() const = 0;
@@ -88,5 +90,9 @@ public:
 private:
     char m_clsid[40];
 };
+
+#define X3CLSID_DEFINE(clsid, str)  \
+    namespace x3 { const X3CLSID clsid(str); }  \
+    typedef int dumy_ ## clsid
 
 #endif // X3_CORE_IOBJECT_H_

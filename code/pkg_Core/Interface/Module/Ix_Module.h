@@ -8,7 +8,7 @@
 
 #include "Ix_Object.h"
 
-interface Ix_ObjectFactory;
+class Ix_ObjectFactory;
 
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \interface Ix_Module
@@ -16,8 +16,11 @@ interface Ix_ObjectFactory;
  *  \note  Each plugin (DLL) has a Ix_Module object which can get from x3GetCurrentModule().
  *  \see x3GetCurrentModule, x3IsCreatorRegister, Ix_ObjectFactory
  */
-interface Ix_Module
+class Ix_Module
 {
+public:
+    virtual ~Ix_Module() {}
+
     //! Free all single instance objects when this plugin is unloading.
     virtual void ClearModuleItems() = 0;
 

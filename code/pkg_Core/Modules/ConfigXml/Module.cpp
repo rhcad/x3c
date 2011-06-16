@@ -14,7 +14,7 @@
 #include "TinyXml/XmlUtil.cpp"
 #endif
 
-X3BEGIN_MODULE()
-    X3_CLASS_ENTRY(X3CLS_ConfigXmlFile, Cx_ConfigXml)
-    X3_CLASS_ENTRY(X3CLSID(), Cx_XmlSection)
-X3END_MODULE_DLL()
+XBEGIN_DEFINE_MODULE()
+    XDEFINE_CLASSMAP_ENTRY(x3::CLSID_ConfigXmlFile, Cx_ConfigXml)
+    XDEFINE_CLASSMAP_ENTRY(X3CLSID(), Cx_XmlSection)
+XEND_DEFINE_MODULE_DLL()

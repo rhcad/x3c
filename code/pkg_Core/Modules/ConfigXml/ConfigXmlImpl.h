@@ -6,8 +6,8 @@
 #ifndef _X3_CONFIGXML_CONFIGXMLIMPL_H
 #define _X3_CONFIGXML_CONFIGXMLIMPL_H
 
-interface IFileCryptHandler;
-interface Ix_ConfigData;
+class IFileCryptHandler;
+class Ix_ConfigData;
 
 struct ConfigXmlImpl
 {

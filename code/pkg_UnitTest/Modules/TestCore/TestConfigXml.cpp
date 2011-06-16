@@ -24,15 +24,16 @@ void TestConfigXml::tearDown()
 
 void TestConfigXml::testSetXmlContent()
 {
-    Cx_Interface<Ix_ConfigXml> pIFXml(X3CLS_ConfigXmlFile);
+    Cx_Interface<Ix_ConfigXml> pIFXml(x3::CLSID_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());
-    VERIFY(pIFXml->SetXmlContent(L"<?xml version=\"1.0\"?><test></test>"));
+    bool ret = pIFXml->SetXmlContent(L"<?xml version=\"1.0\"?><test></test>");
+    VERIFY(ret);
     ASSERT(pIFXml->GetRootName() == L"test");
 }
 
 void TestConfigXml::testNewDoc()
 {
-    Cx_Interface<Ix_ConfigXml> pIFXml(X3CLS_ConfigXmlFile);
+    Cx_Interface<Ix_ConfigXml> pIFXml(x3::CLSID_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());
 
     Cx_ConfigSection root(pIFXml->GetData()->GetSection(L""));

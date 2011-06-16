@@ -9,8 +9,8 @@
 #include "Cx_FileTransaction.h"
 #include "Cx_TempFolder.h"
 
-X3BEGIN_MODULE()
-    X3_CLASS_Singleton(X3CLS_FileUtility, Cx_FileUtility)
-    X3_CLASS_ENTRY(X3CLS_FileTransaction, Cx_FileTransaction)
-    X3_CLASS_ENTRY(X3CLS_TempFolder, Cx_TempFolder)
-X3END_MODULE_DLL()
+XBEGIN_DEFINE_MODULE()
+    XDEFINE_CLASSMAP_ENTRY_Singleton(x3::CLSID_FileUtility, Cx_FileUtility)
+    XDEFINE_CLASSMAP_ENTRY(x3::CLSID_FileTransaction, Cx_FileTransaction)
+    XDEFINE_CLASSMAP_ENTRY(x3::CLSID_TempFolder, Cx_TempFolder)
+XEND_DEFINE_MODULE_DLL()

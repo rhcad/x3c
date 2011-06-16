@@ -68,7 +68,7 @@ void TestPluginManager::testCreateObject()
     VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 
     Ix_Object* ixObject=NULL;
-    VERIFY(0==pFactory->CreateObject(X3CLS_LogManager, &ixObject,NULL));
+    VERIFY(0==pFactory->CreateObject(x3::CLSID_LogManager, &ixObject,NULL));
     ixObject->Release(NULL);
 
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
@@ -79,13 +79,13 @@ void TestPluginManager::testIsCreatorRegister()
     Ix_ObjectFactory* pFactory = GetManagerObjectFactory();
     VERIFY(pFactory);
 
-    VERIFY(false == pFactory->IsCreatorRegister(X3CLS_LogManager));
+    VERIFY(false == pFactory->IsCreatorRegister(x3::CLSID_LogManager));
 
     Ix_PluginLoader* pLoader = dynamic_cast<Ix_PluginLoader*>(pFactory);
     VERIFY(pLoader);
     VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 
-    VERIFY(true == pFactory->IsCreatorRegister(X3CLS_LogManager));
+    VERIFY(true == pFactory->IsCreatorRegister(x3::CLSID_LogManager));
 
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 }
@@ -95,7 +95,7 @@ void TestPluginManager::testCreateSpecialInterfaceObjects()
     Ix_ObjectFactory* pFactory = GetManagerObjectFactory();
     VERIFY(pFactory);
 
-    VERIFY(false == pFactory->IsCreatorRegister(X3CLS_LogManager));
+    VERIFY(false == pFactory->IsCreatorRegister(x3::CLSID_LogManager));
 
     Ix_PluginLoader* pLoader = dynamic_cast<Ix_PluginLoader*>(pFactory);
     VERIFY(pLoader);

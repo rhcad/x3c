@@ -10,16 +10,19 @@
 
 #include "Ix_ChangeObserver.h"
 
-const X3CLSID X3CLS_ChangeManager("34c6e7c0-fe4a-45a1-b227-3da06e08499f");
+X3CLSID_DEFINE(CLSID_ChangeManager, "34c6e7c0-fe4a-45a1-b227-3da06e08499f");
 
 //! interface of change observer manager.
 /*!
     \interface Ix_ChangeManager
     \ingroup _GROUP_CHANGE_OBSERVER_
-    \see X3CLS_ChangeManager
+    \see x3::CLSID_ChangeManager
 */
-interface Ix_ChangeManager
+class Ix_ChangeManager
 {
+public:
+    virtual ~Ix_ChangeManager() {}
+
     //! Add a change observer.
     /*!
         \param type observer type interpreted by specific system.

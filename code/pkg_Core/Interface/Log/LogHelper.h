@@ -152,7 +152,7 @@ namespace x3 {
 */
 inline bool RegisterLogObserver(Ix_LogObserver* observer)
 {
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
         return pIFManager->RegisterObserver(observer);
@@ -167,7 +167,7 @@ inline bool RegisterLogObserver(Ix_LogObserver* observer)
 */
 inline void UnRegisterLogObserver(Ix_LogObserver* observer)
 {
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
         pIFManager->UnRegisterObserver(observer);
@@ -200,7 +200,7 @@ public:
     */
     X3LogGroup(const wchar_t* msg, const wchar_t* extra = NULL)
     {
-        Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
+        Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->PushGroup(msg, extra);
@@ -209,7 +209,7 @@ public:
     //! Destructor, auto end the logging group.
     ~X3LogGroup()
     {
-        Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
+        Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->PopGroup();
@@ -223,7 +223,7 @@ public:
 
 #define X3LOG_EVENT_(msg, type, file, line)                     \
     do {                                                        \
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);   \
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);   \
     if (pIFManager.IsNotNull())                                 \
     {                                                           \
         std::wostringstream _buf;                               \
@@ -233,7 +233,7 @@ public:
 
 #define X3LOG_EVENT_2(name, extra, type, file, line)            \
     do {                                                        \
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);   \
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);   \
     if (pIFManager.IsNotNull())                                 \
     {                                                           \
         std::wostringstream _buf;                               \
@@ -252,7 +252,7 @@ public:
 */
 #define X3LOG_EVENT_ANSI(name, extra, type, file, line)         \
     do {                                                        \
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);   \
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);   \
     if (pIFManager.IsNotNull())                                 \
     {                                                           \
         std::ostringstream _buf;                                \

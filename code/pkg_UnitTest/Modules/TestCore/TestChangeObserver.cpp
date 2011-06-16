@@ -25,14 +25,14 @@ void TestChangeObserver::tearDown()
 
 void TestChangeObserver::testResponsibilityChain()
 {
-    Cx_Interface<Ix_ChangeObserverTest> pIFTest(X3CLS_ChangeObserverTest);
+    Cx_Interface<Ix_ChangeObserverTest> pIFTest(CLSID_ChangeObserverTest);
     ASSERT(pIFTest.IsNotNull());
     VERIFY(pIFTest->TestResponsibilityChain());
 }
 
 void TestChangeObserver::testResponsibilityChain2()
 {
-    Cx_Interface<Ix_ChangeObserverTest> pIFTest(X3CLS_ChangeObserverTest);
+    Cx_Interface<Ix_ChangeObserverTest> pIFTest(CLSID_ChangeObserverTest);
     ASSERT(pIFTest.IsNotNull());
     VERIFY(pIFTest->TestResponsibilityChain2(1, 'x'));
     VERIFY(pIFTest->TestResponsibilityChain2(0, '-'));
@@ -41,14 +41,14 @@ void TestChangeObserver::testResponsibilityChain2()
 
 void TestChangeObserver::testEventObserver()
 {
-    Cx_Interface<Ix_ChangeObserverTest> pIFTest(X3CLS_ChangeObserverTest);
+    Cx_Interface<Ix_ChangeObserverTest> pIFTest(CLSID_ChangeObserverTest);
     ASSERT(pIFTest.IsNotNull());
     VERIFY(pIFTest->TestEventObserver());
 }
 
 void TestChangeObserver::testSelectionObserver()
 {
-    Cx_Interface<Ix_ChangeObserverTest> pIFTest(X3CLS_ChangeObserverTest);
+    Cx_Interface<Ix_ChangeObserverTest> pIFTest(CLSID_ChangeObserverTest);
     ASSERT(pIFTest.IsNotNull());
     VERIFY(pIFTest->TestSelectionObserver());
 }

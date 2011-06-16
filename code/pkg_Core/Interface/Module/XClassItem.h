@@ -9,13 +9,13 @@
 #include "Ix_Object.h"
 
 //! class factory function.
-typedef Ix_Object* (STDCALL *PFNXObjectCreator)(HMODULE);
+typedef Ix_Object* (*PFNXObjectCreator)(HMODULE);
 
 //! object count of a class.
-typedef long (STDCALL *PFNXGetObjectCount)();
+typedef long (*PFNXGetObjectCount)();
 
 //! object (used by other modules) count of a class.
-typedef long (STDCALL *PFNXRefCountByOthers)();
+typedef long (*PFNXRefCountByOthers)();
 
 #define MIN_SINGLETON_TYPE  10
 
@@ -23,7 +23,7 @@ typedef long (STDCALL *PFNXRefCountByOthers)();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
  *  \brief class factory registry.
- *  \see   x3GetClassEntryTable, X3BEGIN_MODULE
+ *  \see   x3GetClassEntryTable, XBEGIN_DEFINE_MODULE
  *  \internal
  */
 struct X3CLASSENTRY
@@ -31,12 +31,12 @@ struct X3CLASSENTRY
     BYTE                type;               //!< see MIN_SINGLETON_TYPE and XModuleMacro.h
     const char*         className;          //!< implement class name
     X3CLSID             clsid;              //!< class id. may be empty if iidSpecial is valid.
-    const char*         iidSpecial;         //!< special interface name, see X3_INTERFACE_Singleton.
+    const char*         iidSpecial;         //!< special interface name, see XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton.
     PFNXObjectCreator   pfnObjectCreator;   //!< class factory function
     PFNXGetObjectCount  pfnGetObjectCount;  //!< object count of this class
     PFNXRefCountByOthers    pfnRefCountByOthers;    //!< count of objects used by other modules
 
-    //! Used by X3_CLASS_ENTRY, X3_CLASS_Singleton
+    //! Used by XDEFINE_CLASSMAP_ENTRY, XDEFINE_CLASSMAP_ENTRY_Singleton
     X3CLASSENTRY(BYTE      _type,
         const char*             _className,
         const X3CLSID&          _clsid,
@@ -53,7 +53,7 @@ struct X3CLASSENTRY
     {
     }
 
-    //! Used by X3END_MODULE
+    //! Used by XEND_DEFINE_MODULE
     X3CLASSENTRY()
         : type(0), className(""), clsid(""), iidSpecial("")
         , pfnObjectCreator(NULL), pfnGetObjectCount(NULL)
@@ -61,7 +61,7 @@ struct X3CLASSENTRY
     {
     }
 
-    //! class factory registries. filled by X3BEGIN_MODULE.
+    //! class factory registries. filled by XBEGIN_DEFINE_MODULE.
     static const X3CLASSENTRY s_classes[];
 };
 

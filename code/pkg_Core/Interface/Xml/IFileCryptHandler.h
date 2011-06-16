@@ -7,8 +7,11 @@
 #define X3_IFILECRYPTHANDLER_H_
 
 //! Interface of file encryption and decryption.
-interface IFileCryptHandler
+class IFileCryptHandler
 {
+public:
+    virtual ~IFileCryptHandler() {}
+
     //! Read decrypted content from a file encrypted.
     /*!
         \param[in] filename full filename of the file encrypted.

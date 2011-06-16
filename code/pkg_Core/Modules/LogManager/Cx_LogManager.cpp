@@ -162,7 +162,7 @@ bool Cx_LogManager::CheckMsgParam(std::wstring& msg2,
 
     if (!msg2.empty() && L'@' == msg2[0])  // @Module:IDS_XXX
     {
-        Cx_Interface<Ix_StringTable> pIFTable(X3CLS_StringTable);
+        Cx_Interface<Ix_StringTable> pIFTable(x3::CLSID_StringTable);
         ret = pIFTable && pIFTable->GetValue(msg2, msg2, module, idname);
 
         if (msg2.empty())

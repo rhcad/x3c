@@ -4,6 +4,6 @@
 
 #include "Cx_ObserverTest.h"
 
-X3BEGIN_MODULE()
-    X3_CLASS_ENTRY(X3CLS_ChangeObserverTest, Cx_ObserverTest)
-X3END_MODULE_DLL()
+XBEGIN_DEFINE_MODULE()
+    XDEFINE_CLASSMAP_ENTRY(CLSID_ChangeObserverTest, Cx_ObserverTest)
+XEND_DEFINE_MODULE_DLL()

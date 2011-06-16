@@ -127,7 +127,7 @@ long Cx_StringTable::LoadFiles(const std::wstring& path)
 
 long Cx_StringTable::RegisterFile(const std::wstring& filename)
 {
-    Cx_Interface<Ix_ConfigXml> pIFFile(X3CLS_ConfigXmlFile);
+    Cx_Interface<Ix_ConfigXml> pIFFile(x3::CLSID_ConfigXmlFile);
     if (pIFFile.IsNull())
     {
         return 0;

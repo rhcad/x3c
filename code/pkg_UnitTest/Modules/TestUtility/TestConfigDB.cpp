@@ -37,13 +37,13 @@ void TestConfigDB::tearDown()
 
 Cx_Ptr TestConfigDB::GetDatabase(const wchar_t* filename)
 {
-    Cx_Interface<Ix_ConfigDBFactory> pIFFactory(X3CLS_ConfigDBFactory);
+    Cx_Interface<Ix_ConfigDBFactory> pIFFactory(x3::CLSID_ConfigDBFactory);
     ASSERT(pIFFactory.IsNotNull());
 
     std::wstring srcfile(MakeDataPath(L"Access", filename));
     m_dbfile = MakeDataPath(NULL, filename);
 
-    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
     if (pIFUtility && !pIFUtility->IsPathFileExists(m_dbfile.c_str()))
     {
         pIFUtility->CopyPathFile(srcfile.c_str(), m_dbfile.c_str());

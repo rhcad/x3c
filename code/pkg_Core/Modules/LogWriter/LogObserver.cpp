@@ -30,7 +30,7 @@ CLogObserver::CLogObserver()
     std::locale::global(std::locale(""));
 #endif
 
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
         pIFManager->RegisterObserver(this);
@@ -39,7 +39,7 @@ CLogObserver::CLogObserver()
 
 CLogObserver::~CLogObserver()
 {
-    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
+    Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
         pIFManager->UnRegisterObserver(this);
@@ -60,7 +60,7 @@ bool CLogObserver::CopyLogFilesToServer()
 {
 	bool ret = false;
 #ifdef _WIN32
-    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
     wchar_t path[MAX_PATH] = { 0 };
     wchar_t hostname[33] = { 0 };
     unsigned long namesize = 33;
@@ -116,7 +116,7 @@ void CLogObserver::InitLogFile()
 
         MakerInitVars();
 
-        Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
+        Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
         if (pIFUtility && !pIFUtility->CreateDirectory(m_path.c_str(), true))
         {
             m_path = x3::MakeTempFileName(L"Log", false);
@@ -172,7 +172,7 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxBackupIndex=3" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.layout=log4cplus::TTCCLayout" << std::endl;
 
-    Cx_Interface<Ix_TextFileUtil> pIFTextUtil(X3CLS_TextUtil);
+    Cx_Interface<Ix_TextFileUtil> pIFTextUtil(x3::CLSID_TextUtil);
     InterfaceSafeCall(pIFTextUtil, SaveTextFile(buf.str(), filename, false));
 }
 

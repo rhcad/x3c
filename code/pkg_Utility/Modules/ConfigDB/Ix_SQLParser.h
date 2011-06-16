@@ -4,8 +4,11 @@
 #pragma once
 
 //! 不同数据库提供源的SQL指令的接口
-interface Ix_SQLParser
+class Ix_SQLParser
 {
+public:
+    virtual ~Ix_SQLParser() {}
+
     //! 销毁本对象
     virtual void Release() = 0;
 

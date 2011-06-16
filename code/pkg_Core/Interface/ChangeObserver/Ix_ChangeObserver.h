@@ -13,8 +13,11 @@ class ChangeNotifyData;
     \interface Ix_ChangeObserver
     \ingroup _GROUP_CHANGE_OBSERVER_
 */
-interface Ix_ChangeObserver
+class Ix_ChangeObserver
 {
+public:
+    virtual ~Ix_ChangeObserver() {}
+
     //! Notification of a event.
     /*!
         \param data the event data, it is usually a local variable's address.

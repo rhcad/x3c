@@ -12,10 +12,13 @@
 /*!
     \interface Ix_TextFileUtil
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_TextUtil, TextFileUtil(), Ix_StringConvert
+    \see x3::CLSID_TextUtil, TextFileUtil(), Ix_StringConvert
 */
-interface Ix_TextFileUtil
+class Ix_TextFileUtil
 {
+public:
+    virtual ~Ix_TextFileUtil() {}
+
     //! 读取一个文本文件
     /*!
         \param[out] content 读取到的内容
@@ -118,7 +121,7 @@ namespace x3 {
 */
 inline Cx_Interface<Ix_TextFileUtil> TextFileUtil()
 {
-    Cx_Interface<Ix_TextFileUtil> pIFUtility(X3CLS_TextUtil);
+    Cx_Interface<Ix_TextFileUtil> pIFUtility(x3::CLSID_TextUtil);
 #ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
 #endif

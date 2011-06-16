@@ -3,4 +3,4 @@
 
 #pragma once
 
-const X3CLSID X3CLS_CfgDatabase("14e8e601-3189-4408-8f3c-57721e3d19db");
+X3CLSID_DEFINE(CLSID_CfgDatabase, "14e8e601-3189-4408-8f3c-57721e3d19db");

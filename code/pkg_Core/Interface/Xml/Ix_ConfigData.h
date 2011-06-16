@@ -15,8 +15,11 @@
     \interface Ix_ConfigData
     \ingroup _GROUP_PLUGIN_XML_
 */
-interface Ix_ConfigData
+class Ix_ConfigData
 {
+public:
+    virtual ~Ix_ConfigData() {}
+
     //! 一个数据节点，同辅助类 Cx_ConfigSection
     typedef Cx_Interface<Ix_ConfigSection> ConfigSection;
 

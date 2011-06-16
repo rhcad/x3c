@@ -8,7 +8,7 @@
 
 #include <XComPtr.h>
 
-interface Ix_ConfigData;
+class Ix_ConfigData;
 
 //! 数据节点的值读写接口
 /*! 可使用 Cx_ConfigSection 来更方便的使用本接口。\n
@@ -18,8 +18,11 @@ interface Ix_ConfigData;
     \ingroup _GROUP_PLUGIN_XML_
     \see Cx_ConfigSection, Ix_ConfigData
 */
-interface Ix_ConfigSection
+class Ix_ConfigSection
 {
+public:
+    virtual ~Ix_ConfigSection() {}
+
     //! 返回拥有者配置管理接口对象
     virtual Ix_ConfigData* GetData() const = 0;
 

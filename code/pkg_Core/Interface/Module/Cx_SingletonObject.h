@@ -13,12 +13,12 @@
 HMODULE x3GetModuleHandle();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief Single instance implement template class used by X3_CLASS_Singleton.
+ *  \brief Single instance implement template class used by XDEFINE_CLASSMAP_ENTRY_Singleton.
  *  \brief The template parameter is a class which implement a interface.
  *  \internal
  *  \see   Cx_Object \n
- *         X3_CLASS_Singleton \n
- *         X3_INTERFACE_Singleton
+ *         XDEFINE_CLASSMAP_ENTRY_Singleton \n
+ *         XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton
  */
 template <class ClsType>
 class Cx_SingletonObject
@@ -64,7 +64,7 @@ protected:
     }
 
 public:
-    static Ix_Object* STDCALL CreateObject(HMODULE fromdll)
+    static Ix_Object* CreateObject(HMODULE fromdll)
     {
         if (NULL == Instance())
         {
@@ -86,12 +86,12 @@ public:
         return Instance();
     }
 
-    static long STDCALL GetObjectCount()
+    static long GetObjectCount()
     {
         return (Instance() && Instance()->m_refcount > 0) ? 1 : 0;
     }
 
-    static long STDCALL GetRefCountByOthers()
+    static long GetRefCountByOthers()
     {
         return RefCountByOthers();
     }

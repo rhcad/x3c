@@ -67,7 +67,7 @@ int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
     return pfn ? (*pfn)(clsid.str(), ppv, NULL) : 1;
 }
 
-interface Ix_ObjectFactory;
+class Ix_ObjectFactory;
 Ix_ObjectFactory* x3GetObjectFactory()
 {
     return NULL;

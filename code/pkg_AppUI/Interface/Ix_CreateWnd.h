@@ -13,8 +13,11 @@
     \ingroup _GROUP_APPUI_
     \see Cx_CreateWnd
 */
-interface Ix_CreateWnd
+class Ix_CreateWnd
 {
+public:
+    virtual ~Ix_CreateWnd() {}
+
     //! Return window handle.
     virtual HWND GetWindow() const = 0;
 

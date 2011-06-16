@@ -8,16 +8,19 @@
 
 #include <Ix_Object.h>
 
-const X3CLSID X3CLS_ClipboardUtil("fc957aed-3c48-461e-b9b8-6ff255f2e71d");
+X3CLSID_DEFINE(CLSID_ClipboardUtil, "fc957aed-3c48-461e-b9b8-6ff255f2e71d");
 
 //! 剪贴板实用操作的单实例接口
 /*!
     \interface Ix_ClipboardUtil
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_ClipboardUtil
+    \see x3::CLSID_ClipboardUtil
 */
-interface Ix_ClipboardUtil
+class Ix_ClipboardUtil
 {
+public:
+    virtual ~Ix_ClipboardUtil() {}
+
     //! 将给定文本复制到剪贴板
     /*!
         \param wndOwner 当前窗口句柄，将关联到剪贴板上

@@ -9,20 +9,23 @@
 #include <XComPtr.h>
 
 //! XML配置数据对象的类ID
-const X3CLSID X3CLS_ConfigXmlFile("c93e1e3d-0362-4856-9a4a-31c119e324f7");
+X3CLSID_DEFINE(CLSID_ConfigXmlFile, "c93e1e3d-0362-4856-9a4a-31c119e324f7");
 
-interface Ix_ConfigData;
-interface Ix_ConfigSection;
-interface IFileCryptHandler;
+class Ix_ConfigData;
+class Ix_ConfigSection;
+class IFileCryptHandler;
 
 //! XML配置数据初始化的接口
 /*! 使用 IFileCryptHandler 可拦截XML文件读写过程
     \interface Ix_ConfigXml
     \ingroup _GROUP_PLUGIN_XML_
-    \see X3CLS_ConfigXmlFile, Ix_ConfigData, Ix_ConfigTransaction
+    \see x3::CLSID_ConfigXmlFile, Ix_ConfigData, Ix_ConfigTransaction
 */
-interface Ix_ConfigXml
+class Ix_ConfigXml
 {
+public:
+    virtual ~Ix_ConfigXml() {}
+
     //! 返回配置管理接口对象
     virtual Ix_ConfigData* GetData() = 0;
 

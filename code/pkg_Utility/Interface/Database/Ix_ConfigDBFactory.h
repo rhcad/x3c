@@ -8,7 +8,7 @@
 
 #include <XComPtr.h>
 
-const X3CLSID X3CLS_ConfigDBFactory("6f3ca83f-6193-48ce-a188-24b2afb45432");
+X3CLSID_DEFINE(CLSID_ConfigDBFactory, "6f3ca83f-6193-48ce-a188-24b2afb45432");
 
 //! 数据库数据读写对象的创建接口
 /*! 将数据库的增删改查以数据节点(Ix_ConfigData, Cx_ConfigSection)的简化方式进行操作。\n
@@ -17,10 +17,13 @@ const X3CLSID X3CLS_ConfigDBFactory("6f3ca83f-6193-48ce-a188-24b2afb45432");
     在增加或修改记录时可以使用以@开头的函数名，例如 CURDATE(), CURTIME(), NOW() ，内部会自动换为对应的数据库函数名。
     \interface Ix_ConfigDBFactory
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_ConfigDBFactory, Cx_CfgDatabase
+    \see x3::CLSID_ConfigDBFactory, Cx_CfgDatabase
 */
-interface Ix_ConfigDBFactory
+class Ix_ConfigDBFactory
 {
+public:
+    virtual ~Ix_ConfigDBFactory() {}
+
     //! 打开Access数据库文件
     /*!
         \param filename 数据库文件全名(*.mdb, *.accdb)

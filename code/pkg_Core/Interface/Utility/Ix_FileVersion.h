@@ -12,10 +12,13 @@
 /*!
     \interface Ix_FileVersion
     \ingroup _GROUP_UTILITY_
-    \see X3CLS_FileUtility, FileUtility()
+    \see x3::CLSID_FileUtility, FileUtility()
 */
-interface Ix_FileVersion
+class Ix_FileVersion
 {
+public:
+    virtual ~Ix_FileVersion() {}
+
     //! 获取模块的文件版本号
     /*!
         \param[out] version 填充版本号，例如“1.0.12.0”
