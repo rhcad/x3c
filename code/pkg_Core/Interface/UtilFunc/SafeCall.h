@@ -16,9 +16,7 @@
 #define InterfaceSafeCallWithReturn(p, f, v)    if (p.IsNotNull()) return p->f; else return (v);
 #endif // SafeCall
 
-#ifndef DeletePtrInContainer
-#undef SafeDelete
-#undef SafeDeleteArray
+namespace x3 {
 
 //! Delete pointer object.
 /*!
@@ -61,6 +59,5 @@ void DeletePtrInContainer(CONTAINER& container)
     container.resize(0);
 }
 
-#endif // DeletePtrInContainer
-
+} // x3
 #endif // __APPCORE_SAFECALL_H

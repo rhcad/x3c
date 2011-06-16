@@ -4,7 +4,7 @@
 #include <UtilFunc/PluginInc.h>
 #include "Cx_TempFolder.h"
 
-OUTAPI void UninitializePlugin()
+OUTAPI void x3UninitializePlugin()
 {
     Cx_TempFolder::DeleteFolders();
 }

@@ -23,23 +23,23 @@ typedef long (STDCALL *PFNXRefCountByOthers)();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
  *  \brief class factory registry.
- *  \see   _xGetClassEntryTable, XBEGIN_DEFINE_MODULE
+ *  \see   x3GetClassEntryTable, X3BEGIN_MODULE
  *  \internal
  */
-struct _XCLASSMETA_ENTRY
+struct X3CLASSENTRY
 {
     BYTE                type;               //!< see MIN_SINGLETON_TYPE and XModuleMacro.h
     const char*         className;          //!< implement class name
-    XCLSID              clsid;              //!< class id. may be empty if iidSpecial is valid.
-    const char*         iidSpecial;         //!< special interface name, see XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton.
+    X3CLSID             clsid;              //!< class id. may be empty if iidSpecial is valid.
+    const char*         iidSpecial;         //!< special interface name, see X3_INTERFACE_Singleton.
     PFNXObjectCreator   pfnObjectCreator;   //!< class factory function
     PFNXGetObjectCount  pfnGetObjectCount;  //!< object count of this class
     PFNXRefCountByOthers    pfnRefCountByOthers;    //!< count of objects used by other modules
 
-    //! Used by XDEFINE_CLASSMAP_ENTRY, XDEFINE_CLASSMAP_ENTRY_Singleton
-    _XCLASSMETA_ENTRY(BYTE      _type,
+    //! Used by X3_CLASS_ENTRY, X3_CLASS_Singleton
+    X3CLASSENTRY(BYTE      _type,
         const char*             _className,
-        const XCLSID&           _clsid,
+        const X3CLSID&          _clsid,
         const char*             _iidSpecial,
         PFNXObjectCreator       _pfnObjectCreator,
         PFNXGetObjectCount      _pfnGetObjectCount = NULL,
@@ -53,16 +53,16 @@ struct _XCLASSMETA_ENTRY
     {
     }
 
-    //! Used by XEND_DEFINE_MODULE
-    _XCLASSMETA_ENTRY()
+    //! Used by X3END_MODULE
+    X3CLASSENTRY()
         : type(0), className(""), clsid(""), iidSpecial("")
         , pfnObjectCreator(NULL), pfnGetObjectCount(NULL)
         , pfnRefCountByOthers(NULL)
     {
     }
 
-    //! class factory registries. filled by XBEGIN_DEFINE_MODULE.
-    static const _XCLASSMETA_ENTRY s_classes[];
+    //! class factory registries. filled by X3BEGIN_MODULE.
+    static const X3CLASSENTRY s_classes[];
 };
 
 #pragma pack(pop)

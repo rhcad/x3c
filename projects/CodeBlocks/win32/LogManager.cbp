@@ -48,7 +48,7 @@
 			<Add library="shlwapi" />
 		</Linker>
 		<Unit filename="../../../code/pkg_Core/Interface/Log/DebugR.h" />
-		<Unit filename="../../../code/pkg_Core/Interface/Log/ILogObserver.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/Log/Ix_LogObserver.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/Log/Ix_LogManager.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/Log/LogHelper.h" />
 		<Unit filename="../../../code/pkg_Core/Modules/LogManager/ClsID_LogManager.h" />

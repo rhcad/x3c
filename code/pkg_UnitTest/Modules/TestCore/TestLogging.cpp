@@ -26,101 +26,101 @@ void TestLogging::tearDown()
 
 void TestLogging::testAllMacros()
 {
-    LOG_DEBUG(L"test");
-    LOG_DEBUG2(L"test", L"extra");
-    LOG_INFO(L"test");
-    LOG_INFO2(L"test", L"extra");
-    LOG_WARNING(L"test");
-    LOG_WARNING2(L"test", L"extra");
-    LOG_ERROR(L"test");
-    LOG_ERROR2(L"test", L"extra");
-    LOG_FATAL(L"test");
-    LOG_FATAL2(L"test", L"extra");
-    LOG_EVENT_ANSI("test", L"extra", kLogType_Error, "xxx", 100);
+    X3LOG_DEBUG(L"test");
+    X3LOG_DEBUG2(L"test", L"extra");
+    X3LOG_INFO(L"test");
+    X3LOG_INFO2(L"test", L"extra");
+    X3LOG_WARNING(L"test");
+    X3LOG_WARNING2(L"test", L"extra");
+    X3LOG_ERROR(L"test");
+    X3LOG_ERROR2(L"test", L"extra");
+    X3LOG_FATAL(L"test");
+    X3LOG_FATAL2(L"test", L"extra");
+    X3LOG_EVENT_ANSI("test", L"extra", x3LogType_Error, "xxx", 100);
 }
 
 void TestLogging::testAllMacrosWithID()
 {
-    LOG_DEBUG(L"@Test:debug");
-    LOG_DEBUG2(L"@Test:IDS_DEBUG", L"extra");
-    LOG_INFO(L"@Test:Name");
-    LOG_INFO2(L"@Test:Name", L"extra");
-    LOG_WARNING(L"@Test:Name");
-    LOG_WARNING2(L"@Test:Name", L"extra");
-    LOG_ERROR(L"@Test:Name");
-    LOG_ERROR2(L"@Test:Name", L"extra");
-    LOG_FATAL(L"@Test:Name");
-    LOG_FATAL2(L"@Test:Name", L"extra");
-    LOG_EVENT_ANSI("@Test:Name", L"extra", kLogType_Debug, __FILE__, __LINE__);
+    X3LOG_DEBUG(L"@Test:debug");
+    X3LOG_DEBUG2(L"@Test:IDS_DEBUG", L"extra");
+    X3LOG_INFO(L"@Test:Name");
+    X3LOG_INFO2(L"@Test:Name", L"extra");
+    X3LOG_WARNING(L"@Test:Name");
+    X3LOG_WARNING2(L"@Test:Name", L"extra");
+    X3LOG_ERROR(L"@Test:Name");
+    X3LOG_ERROR2(L"@Test:Name", L"extra");
+    X3LOG_FATAL(L"@Test:Name");
+    X3LOG_FATAL2(L"@Test:Name", L"extra");
+    X3LOG_EVENT_ANSI("@Test:Name", L"extra", x3LogType_Debug, __FILE__, __LINE__);
 }
 
 void TestLogging::testMultiTypes()
 {
-    LOG_WARNING2(L"Name", L"Name");
-    LOG_WARNING2(L"Name", "Name");
-    //LOG_WARNING2(L"Name", CString(L"Name"));
-    LOG_WARNING2(L"Name", std::wstring(L"Name"));
-    //LOG_WARNING2(L"Name", std::string("Name"));
-    LOG_WARNING2(L"Name", 10);
-    LOG_WARNING2(L"Name", 10L);
-    LOG_WARNING2(L"Name", GetLastError());
-    LOG_WARNING2(L"Name", 10.2);
-    LOG_WARNING2(L"Name", 10.2f);
-    LOG_WARNING2(L"Name", true);
-    LOG_WARNING2(L"Name", this);
-    LOG_EVENT_ANSI("@Test:Name", 10, kLogType_Info, __FILE__, __LINE__);
+    X3LOG_WARNING2(L"Name", L"Name");
+    X3LOG_WARNING2(L"Name", "Name");
+    //X3LOG_WARNING2(L"Name", CString(L"Name"));
+    X3LOG_WARNING2(L"Name", std::wstring(L"Name"));
+    //X3LOG_WARNING2(L"Name", std::string("Name"));
+    X3LOG_WARNING2(L"Name", 10);
+    X3LOG_WARNING2(L"Name", 10L);
+    X3LOG_WARNING2(L"Name", GetLastError());
+    X3LOG_WARNING2(L"Name", 10.2);
+    X3LOG_WARNING2(L"Name", 10.2f);
+    X3LOG_WARNING2(L"Name", true);
+    X3LOG_WARNING2(L"Name", this);
+    X3LOG_EVENT_ANSI("@Test:Name", 10, x3LogType_Info, __FILE__, __LINE__);
 }
 
 void TestLogging::testIdFormat()
 {
-    LOG_INFO(L"@Test:");
-    LOG_INFO(L"@Test");
-    LOG_INFO(L"@Test ");
-    LOG_INFO(L"@Test:Name");
-    LOG_INFO(L"@Test:NAME");
-    LOG_INFO(L"@Test:Name ");
-    LOG_INFO(L"@@");
-    LOG_INFO(L"@");
-    LOG_INFO(L"");
-    LOG_INFO(L" ");
-    LOG_INFO(L"Test");
+    X3LOG_INFO(L"@Test:");
+    X3LOG_INFO(L"@Test");
+    X3LOG_INFO(L"@Test ");
+    X3LOG_INFO(L"@Test:Name");
+    X3LOG_INFO(L"@Test:NAME");
+    X3LOG_INFO(L"@Test:Name ");
+    X3LOG_INFO(L"@@");
+    X3LOG_INFO(L"@");
+    X3LOG_INFO(L"");
+    X3LOG_INFO(L" ");
+    X3LOG_INFO(L"Test");
 }
 
 void TestLogging::testGroup()
 {
     {
-        CAutoLogGroup group(L"testGroup1");
+        X3LogGroup group(L"testGroup1");
     }
     {
-        CAutoLogGroup group(L"testGroup2", L"message");
+        X3LogGroup group(L"testGroup2", L"message");
     }
     {
-        CAutoLogGroup group(L"testGroup3", NULL);
+        X3LogGroup group(L"testGroup3", NULL);
     }
     {
-        CAutoLogGroup group(L"@Test:Name");
+        X3LogGroup group(L"@Test:Name");
     }
     {
-        CAutoLogGroup group(L"testGroup4");
-        LOG_INFO(L"test");
+        X3LogGroup group(L"testGroup4");
+        X3LOG_INFO(L"test");
     }
     {
-        CAutoLogGroup group(L"testGroup5");
-        LOG_WARNING2(L"test", L"message");
+        X3LogGroup group(L"testGroup5");
+        X3LOG_WARNING2(L"test", L"message");
     }
     {
-        CAutoLogGroup group(L"testGroup6");
-        LOG_WARNING2(L"test", L"message");
+        X3LogGroup group(L"testGroup6");
+        X3LOG_WARNING2(L"test", L"message");
         {
-            CAutoLogGroup group2(L"testGroup7");
-            LOG_INFO(L"test");
+            X3LogGroup group2(L"testGroup7");
+            X3LOG_INFO(L"test");
         }
     }
 }
 
-#include <Log/ILogObserver.h>
+#include <Log/Ix_LogObserver.h>
 
-class MyLogObserver : public CLogObserverImpl
+class MyLogObserver : public Cx_LogObserverImpl
 {
 public:
     MyLogObserver() : m_count(0)
@@ -164,9 +164,9 @@ void TestLogging::testObserver()
 {
     MyLogObserver observer;
 
-    VERIFY(RegisterLogObserver(&observer));
+    VERIFY(x3::RegisterLogObserver(&observer));
     testAllMacros();
-    UnRegisterLogObserver(&observer);
+    x3::UnRegisterLogObserver(&observer);
 
     ASSERT(observer.GetCount() > 0);
 }

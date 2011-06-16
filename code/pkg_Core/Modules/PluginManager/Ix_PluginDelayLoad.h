@@ -8,12 +8,12 @@
 
 #include "Ix_Object.h"
 
-const XCLSID CLSID_PluginDelayLoad("8f2a7b90-8134-4e16-9830-861df9b7f42a");
+const X3CLSID X3CLS_PluginDelayLoad("8f2a7b90-8134-4e16-9830-861df9b7f42a");
 
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \interface Ix_PluginDelayLoad
  *  \brief Plugin delay-loading interface.
- *  \see   CLSID_PluginDelayLoad
+ *  \see   X3CLS_PluginDelayLoad
  */
 interface Ix_PluginDelayLoad
 {

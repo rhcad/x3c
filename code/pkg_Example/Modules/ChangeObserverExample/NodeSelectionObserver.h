@@ -4,7 +4,7 @@
 #ifndef EXAMPLE_NODESELECTION_OBSERVER_H_
 #define EXAMPLE_NODESELECTION_OBSERVER_H_
 
-#include <ChangeObserver/ChangeNotifyData.h>
+#include <ChangeObserver/Cx_ChangeObserver.h>
 #include <typeinfo>
 
 //! 作为例子的节点选择改变观察者类
@@ -12,7 +12,7 @@
     \note 建议派生类从本类私有继承
     \ingroup _GROUP_CHANGE_OBSERVER_
 */
-class NodeSelectionObserver : public ChangeObserver
+class NodeSelectionObserver : public Cx_ChangeObserver
 {
     NOCOPY_CONSTRUCTOR(NodeSelectionObserver);
 public:
@@ -32,7 +32,7 @@ public:
     };
 
 protected:
-    NodeSelectionObserver() : ChangeObserver(typeid(NodeSelectionObserver).name())
+    NodeSelectionObserver() : Cx_ChangeObserver(typeid(NodeSelectionObserver).name())
     {
     }
 

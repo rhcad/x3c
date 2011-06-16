@@ -25,7 +25,7 @@ public:
 
     virtual bool DoStep()
     {
-        return FileUtility()->DeletePathFile(m_wstrFileName.c_str(), m_bRecycle);
+        return x3::FileUtility()->DeletePathFile(m_wstrFileName.c_str(), m_bRecycle);
     }
 
 private:
@@ -43,7 +43,7 @@ public:
 
     virtual bool DoStep()
     {
-        return FileUtility()->RenamePathFile(m_wstrOldFile.c_str(), m_wstrNewFile.c_str());
+        return x3::FileUtility()->RenamePathFile(m_wstrOldFile.c_str(), m_wstrNewFile.c_str());
     }
 
 private:

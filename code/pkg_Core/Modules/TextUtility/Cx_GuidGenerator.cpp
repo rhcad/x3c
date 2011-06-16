@@ -42,7 +42,7 @@ std::wstring Cx_GuidGenerator::CreateGuid(bool withBrackets)
     }
     else
     {
-        LOG_WARNING2(L"@TextUtility:IDS_COCREATEGUID_FAIL", GetSystemErrorString(hr));
+        X3LOG_WARNING2(L"@TextUtility:IDS_COCREATEGUID_FAIL", GetSystemErrorString(hr));
     }
 
     return wstrGuid;

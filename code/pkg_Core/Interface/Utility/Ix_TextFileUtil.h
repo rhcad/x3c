@@ -12,7 +12,7 @@
 /*!
     \interface Ix_TextFileUtil
     \ingroup _GROUP_UTILITY_
-    \see CLSID_TextUtil, TextFileUtil(), Ix_StringConvert
+    \see X3CLS_TextUtil, TextFileUtil(), Ix_StringConvert
 */
 interface Ix_TextFileUtil
 {
@@ -109,6 +109,8 @@ interface Ix_TextFileUtil
     virtual bool IsSpaceLine(const std::wstring& text) = 0;
 };
 
+namespace x3 {
+
 //! 得到文本转换操作对象
 /*!
     \ingroup _GROUP_UTILITY_
@@ -116,11 +118,13 @@ interface Ix_TextFileUtil
 */
 inline Cx_Interface<Ix_TextFileUtil> TextFileUtil()
 {
-    Cx_Interface<Ix_TextFileUtil> pIFUtility(CLSID_TextUtil);
+    Cx_Interface<Ix_TextFileUtil> pIFUtility(X3CLS_TextUtil);
 #ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
 #endif
     return pIFUtility;
 }
+
+} // x3
 
 #endif // X3_UTIL_ITEXTFILEUTIL_H_

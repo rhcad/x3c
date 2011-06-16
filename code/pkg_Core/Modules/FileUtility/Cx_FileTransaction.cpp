@@ -41,7 +41,7 @@ bool Cx_FileTransaction::IsRollbacking() const
 
 bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycle)
 {
-    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
 
     if (NULL == pszFileName || 0 == pszFileName[0]
         || !pIFUtility->IsPathFileExists(pszFileName))
@@ -49,7 +49,7 @@ bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycl
 
     if (CFileTransactions::Instance().IsRollbacking())
     {
-        LOG_ERROR2(L"@FileUtility:IDS_DELETEFILE_ROLLBACK", pszFileName);
+        X3LOG_ERROR2(L"@FileUtility:IDS_DELETEFILE_ROLLBACK", pszFileName);
         return false;
     }
 
@@ -75,7 +75,7 @@ bool Cx_FileTransaction::DeletePathFile(const wchar_t* pszFileName, bool bRecycl
     }
     else
     {
-        LOG_ERROR2(L"@FileUtility:IDS_DELFILE_FAIL", pszFileName);
+        X3LOG_ERROR2(L"@FileUtility:IDS_DELFILE_FAIL", pszFileName);
         CFileTransactions::Instance().EndTransaction(false);
     }
 

@@ -1,5 +1,5 @@
 /*! \file XComCreator.h
- *  \brief Implement xCreateObject() to use Cx_Interface. XModuleMacro.h and XModuleImpl.h are not needed.
+ *  \brief Implement x3CreateObject() to use Cx_Interface. XModuleMacro.h and XModuleImpl.h are not needed.
  *
  *  \note This file is used in projects which need not to
  *        implement interface and want use interface only,
@@ -25,22 +25,22 @@
 
 #include "Ix_ObjectFactory.h"
 
-Ix_ObjectFactory* xGetObjectFactory()
+Ix_ObjectFactory* x3GetObjectFactory()
 {
     typedef Ix_ObjectFactory* (*FUNC_GET)();
     FUNC_GET pfn = (FUNC_GET)GetProcAddress(
-        GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
+        GetModuleHandleW(L"PluginManagerX3" PLNEXT), "x3GetRegisterBank");
 
     return pfn ? (*pfn)() : NULL;
 }
 
-int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
     *ppv = NULL;
 
-    Ix_ObjectFactory* factory = xGetObjectFactory();
+    Ix_ObjectFactory* factory = x3GetObjectFactory();
     if (NULL == factory)
         return 1;  // plugins must are already loaded using PluginManager.h
 
@@ -50,11 +50,11 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 #else // USE_ONE_PLUGIN
 
 // Define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll,
-// thus xCreateObject() can work and Cx_Interface can be used.
+// thus x3CreateObject() can work and Cx_Interface can be used.
 
 HMODULE     g_hPluginDll = NULL;
 
-int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
@@ -62,20 +62,20 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
     typedef int (*FUNC_CREATE)(const char*, Ix_Object**, HMODULE);
     FUNC_CREATE pfn = (FUNC_CREATE)GetProcAddress(
-        g_hPluginDll, "_xInternalCreateObject");
+        g_hPluginDll, "x3InternalCreateObject");
 
     return pfn ? (*pfn)(clsid.str(), ppv, NULL) : 1;
 }
 
 interface Ix_ObjectFactory;
-Ix_ObjectFactory* xGetObjectFactory()
+Ix_ObjectFactory* x3GetObjectFactory()
 {
     return NULL;
 }
 
 #endif // USE_ONE_PLUGIN
 
-HMODULE xGetModuleHandle()
+HMODULE x3GetModuleHandle()
 {
     return NULL;
 }

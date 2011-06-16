@@ -78,7 +78,7 @@ LINK32=link.exe
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Core\Interface\ChangeObserver\ChangeNotifyData.h
+SOURCE=..\..\..\code\pkg_Core\Interface\ChangeObserver\Cx_ChangeObserver.h
 # End Source File
 # Begin Source File
 

@@ -8,16 +8,16 @@
 
 #include <XComPtr.h>
 
-const XCLSID CLSID_ConfigDBFactory("6f3ca83f-6193-48ce-a188-24b2afb45432");
+const X3CLSID X3CLS_ConfigDBFactory("6f3ca83f-6193-48ce-a188-24b2afb45432");
 
 //! 数据库数据读写对象的创建接口
-/*! 将数据库的增删改查以数据节点(Ix_ConfigData, CConfigIOSection)的简化方式进行操作。\n
+/*! 将数据库的增删改查以数据节点(Ix_ConfigData, Cx_ConfigSection)的简化方式进行操作。\n
     Ix_ConfigData接口的部分含义重新定义了，见 Cx_CfgDatabase 对应函数的说明。\n
     在增加记录时可以使用 \@NEWID 标记某个字段取值为(最大ID+1)；\n
     在增加或修改记录时可以使用以@开头的函数名，例如 CURDATE(), CURTIME(), NOW() ，内部会自动换为对应的数据库函数名。
     \interface Ix_ConfigDBFactory
     \ingroup _GROUP_UTILITY_
-    \see CLSID_ConfigDBFactory, Cx_CfgDatabase
+    \see X3CLS_ConfigDBFactory, Cx_CfgDatabase
 */
 interface Ix_ConfigDBFactory
 {

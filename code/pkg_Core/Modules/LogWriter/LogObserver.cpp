@@ -30,7 +30,7 @@ CLogObserver::CLogObserver()
     std::locale::global(std::locale(""));
 #endif
 
-    Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
+    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
     if (pIFManager.IsNotNull())
     {
         pIFManager->RegisterObserver(this);
@@ -39,7 +39,7 @@ CLogObserver::CLogObserver()
 
 CLogObserver::~CLogObserver()
 {
-    Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
+    Cx_Interface<Ix_LogManager> pIFManager(X3CLS_LogManager);
     if (pIFManager.IsNotNull())
     {
         pIFManager->UnRegisterObserver(this);
@@ -60,7 +60,7 @@ bool CLogObserver::CopyLogFilesToServer()
 {
 	bool ret = false;
 #ifdef _WIN32
-    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
     wchar_t path[MAX_PATH] = { 0 };
     wchar_t hostname[33] = { 0 };
     unsigned long namesize = 33;
@@ -116,10 +116,10 @@ void CLogObserver::InitLogFile()
 
         MakerInitVars();
 
-        Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+        Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
         if (pIFUtility && !pIFUtility->CreateDirectory(m_path.c_str(), true))
         {
-            m_path = MakeTempFileName(L"Log", false);
+            m_path = x3::MakeTempFileName(L"Log", false);
             pIFUtility->CreateDirectory(m_path.c_str(), true);
         }
 
@@ -152,7 +152,7 @@ void CLogObserver::MakerInitVars()
 
     if (m_appname.empty())
     {
-        GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+        GetModuleFileNameW(x3::GetMainModuleHandle(), path, MAX_PATH);
         wchar_t* name = PathFindFileNameW(path);
         PathRemoveExtensionW(name);
         m_appname = helpers::toLower(name);
@@ -172,7 +172,7 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxBackupIndex=3" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.layout=log4cplus::TTCCLayout" << std::endl;
 
-    Cx_Interface<Ix_TextFileUtil> pIFTextUtil(CLSID_TextUtil);
+    Cx_Interface<Ix_TextFileUtil> pIFTextUtil(X3CLS_TextUtil);
     InterfaceSafeCall(pIFTextUtil, SaveTextFile(buf.str(), filename, false));
 }
 
@@ -283,24 +283,24 @@ void CLogObserver::OnWriteLog(int type,
 
     switch (type)
     {
-    case kLogType_Debug:
+    case x3LogType_Debug:
         LOG4CPLUS_DEBUG_STR(GetLogger(), buf.str());
         break;
-    case kLogType_Info:
+    case x3LogType_Info:
         LOG4CPLUS_INFO_STR(GetLogger(), buf.str());
         break;
-    case kLogType_Warning:
+    case x3LogType_Warning:
         LOG4CPLUS_WARN_STR(GetLogger(), buf.str());
         break;
-    case kLogType_Error:
+    case x3LogType_Error:
         LOG4CPLUS_ERROR_STR(GetLogger(), buf.str());
         break;
-    case kLogType_Fatal:
+    case x3LogType_Fatal:
         LOG4CPLUS_FATAL_STR(GetLogger(), buf.str());
         break;
     }
 
-    m_haserr |= (type > kLogType_Info) ? 0x03 : 0x04;
+    m_haserr |= (type > x3LogType_Info) ? 0x03 : 0x04;
 }
 
 #ifdef _MSC_VER     // hide warnings

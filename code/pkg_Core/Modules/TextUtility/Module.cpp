@@ -9,10 +9,10 @@
 #include "Cx_GuidGenerator.h"
 #include "Cx_ClipboardUtil.h"
 
-XBEGIN_DEFINE_MODULE()
-    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_TextUtil, Cx_TextUtil)
+X3BEGIN_MODULE()
+    X3_CLASS_Singleton(X3CLS_TextUtil, Cx_TextUtil)
 #ifdef _WIN32
-    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_GuidGenerator, Cx_GuidGenerator)
-    XDEFINE_CLASSMAP_ENTRY_Singleton(CLSID_ClipboardUtil, Cx_ClipboardUtil)
+    X3_CLASS_Singleton(X3CLS_GuidGenerator, Cx_GuidGenerator)
+    X3_CLASS_Singleton(X3CLS_ClipboardUtil, Cx_ClipboardUtil)
 #endif
-XEND_DEFINE_MODULE_WIN32DLL()
+X3END_MODULE_DLL()

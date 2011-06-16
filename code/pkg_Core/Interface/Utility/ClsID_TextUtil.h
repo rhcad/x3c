@@ -4,12 +4,12 @@
 /*! \file ClsID_TextUtil.h
  *  \brief 定义文本实用技术类ID
  */
-#ifndef X3_CLSID_TEXTUTIL_H_
-#define X3_CLSID_TEXTUTIL_H_
+#ifndef X3_CLS_TEXTUTIL_H_
+#define X3_CLS_TEXTUTIL_H_
 
 #include <XComPtr.h>
 
 //! 文本实用技术类ID
-const XCLSID CLSID_TextUtil("c1638294-2a0f-402a-96ea-174512ee982c");
+const X3CLSID X3CLS_TextUtil("c1638294-2a0f-402a-96ea-174512ee982c");
 
-#endif // X3_CLSID_TEXTUTIL_H_
+#endif // X3_CLS_TEXTUTIL_H_

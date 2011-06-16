@@ -19,12 +19,12 @@ Cx_ObjectFactory::~Cx_ObjectFactory()
 {
 }
 
-bool Cx_ObjectFactory::IsCreatorRegister(const XCLSID& clsid)
+bool Cx_ObjectFactory::IsCreatorRegister(const X3CLSID& clsid)
 {
     return FindEntry(clsid) != NULL;
 }
 
-int Cx_ObjectFactory::CreateObject(const XCLSID& clsid,
+int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
                                    Ix_Object** ppv,
                                    HMODULE fromdll)
 {
@@ -32,7 +32,7 @@ int Cx_ObjectFactory::CreateObject(const XCLSID& clsid,
     *ppv = NULL;
 
     int moduleIndex = -1;
-    _XCLASSMETA_ENTRY* pEntry = FindEntry(clsid, &moduleIndex);
+    X3CLASSENTRY* pEntry = FindEntry(clsid, &moduleIndex);
 
     if (pEntry && !pEntry->pfnObjectCreator && moduleIndex >= 0)
     {
@@ -69,14 +69,14 @@ long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
 
     for (; it != m_clsmap.end(); ++it)
     {
-        const _XCLASSMETA_ENTRY& cls = it->second.first;
+        const X3CLASSENTRY& cls = it->second.first;
         if (_stricmp(iid, cls.iidSpecial) == 0
             && cls.pfnObjectCreator)
         {
             Ix_Object* pIF = NULL;
-            pIF = (cls.pfnObjectCreator)(xGetModuleHandle());
+            pIF = (cls.pfnObjectCreator)(x3GetModuleHandle());
             ASSERT(pIF);
-            pIF->Release(xGetModuleHandle());
+            pIF->Release(x3GetModuleHandle());
             count++;
         }
     }
@@ -87,7 +87,7 @@ long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
 bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
         long index, const char* iid, Ix_Object** ppv)
 {
-    bool bRet = IsValidIndexOf(m_modules, index) && ppv != NULL;
+    bool bRet = x3::IsValidIndexOf(m_modules, index) && ppv != NULL;
     if (!bRet)
     {
         return false;
@@ -106,7 +106,7 @@ bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
             && _stricmp(iid, mit->second.first.iidSpecial) == 0
             && mit->second.first.pfnObjectCreator)
         {
-            *ppv = (mit->second.first.pfnObjectCreator)(xGetModuleHandle());
+            *ppv = (mit->second.first.pfnObjectCreator)(x3GetModuleHandle());
             return true;
         }
     }
@@ -114,13 +114,13 @@ bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
     return false;
 }
 
-bool Cx_ObjectFactory::HasCreatorReplaced(const XCLSID& clsid)
+bool Cx_ObjectFactory::HasCreatorReplaced(const X3CLSID& clsid)
 {
     clsid;
     return false;
 }
 
-_XCLASSMETA_ENTRY* Cx_ObjectFactory::FindEntry(const XCLSID& clsid,
+X3CLASSENTRY* Cx_ObjectFactory::FindEntry(const X3CLSID& clsid,
                                                int* moduleIndex)
 {
     CLSMAP::iterator it = m_clsmap.find(clsid.str());
@@ -138,7 +138,7 @@ int Cx_ObjectFactory::FindModule(HMODULE hModule)
         return -1;
     }
 
-    int i = GetSize(m_modules);
+    int i = x3::GetSize(m_modules);
 
     while (--i >= 0 && m_modules[i].hdll != hModule)
     {
@@ -157,7 +157,7 @@ Ix_Module* Cx_ObjectFactory::GetModule(HMODULE hModule)
 
     typedef Ix_Module* (*FUNC_MODULE)(Ix_ObjectFactory*, HMODULE);
     FUNC_MODULE pfn = (FUNC_MODULE)GetProcAddress(
-        hModule, "_xGetModuleInterface");
+        hModule, "x3GetModuleInterface");
 
     if (pfn != NULL)
     {
@@ -180,11 +180,11 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
 
     if (!m_modules[moduleIndex].clsids.empty())
     {
-        return GetSize(m_modules[moduleIndex].clsids);
+        return x3::GetSize(m_modules[moduleIndex].clsids);
     }
 
-    typedef DWORD (*FUNC_GET)(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
-    FUNC_GET pfn = (FUNC_GET)GetProcAddress(hModule, "_xGetClassEntryTable");
+    typedef DWORD (*FUNC_GET)(DWORD*, DWORD*, X3CLASSENTRY*, DWORD);
+    FUNC_GET pfn = (FUNC_GET)GetProcAddress(hModule, "x3GetClassEntryTable");
 
     if (!pfn)       // is not a plugin
     {
@@ -199,14 +199,14 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
         return 0;
     }
 
-    std::vector<_XCLASSMETA_ENTRY> table(classCount);
-    DWORD size = sizeof(_XCLASSMETA_ENTRY);
+    std::vector<X3CLASSENTRY> table(classCount);
+    DWORD size = sizeof(X3CLASSENTRY);
 
     classCount = (*pfn)(NULL, &size, &table[0], classCount);
 
     for (int i = 0; i < classCount; i++)
     {
-        _XCLASSMETA_ENTRY& cls = table[i];
+        X3CLASSENTRY& cls = table[i];
 
         if (cls.clsid.valid())
         {
@@ -217,7 +217,7 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
             char tmpclsid[40] = { 0 };
 
             sprintf_s(tmpclsid, 40, "iid%lx:%d", hModule, i);
-            cls.clsid = XCLSID(tmpclsid);
+            cls.clsid = X3CLSID(tmpclsid);
             RegisterClass(moduleIndex, cls);
         }
     }
@@ -226,10 +226,10 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
 }
 
 bool Cx_ObjectFactory::RegisterClass(int moduleIndex,
-                                     const _XCLASSMETA_ENTRY& cls)
+                                     const X3CLASSENTRY& cls)
 {
     ASSERT(moduleIndex >= 0 && cls.clsid.valid());
-    _XCLASSMETA_ENTRY* pOldCls = FindEntry(cls.clsid);
+    X3CLASSENTRY* pOldCls = FindEntry(cls.clsid);
 
     if (pOldCls && pOldCls->pfnObjectCreator)
     {

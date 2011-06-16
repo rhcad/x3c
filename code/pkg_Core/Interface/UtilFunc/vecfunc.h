@@ -22,6 +22,8 @@
 #pragma warning (pop)
 #endif
 
+namespace x3 {
+
 #ifdef __AFX_H__
 //! Converts safely from CString variable to std::wstring, avoid null address problem.
 inline std::wstring towstr(const CString& str)
@@ -116,4 +118,5 @@ bool IsValidIndexOf(const _Ta& arr, long index)
     return index >= 0 && index < static_cast<long>(arr.size());
 }
 
+} // x3
 #endif // __STL_VECTOR_FUNCTIONS_H

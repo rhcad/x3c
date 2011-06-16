@@ -106,7 +106,7 @@ public:
     {
         typedef Ix_ObjectFactory* (*FUNC_GETREGISTERBANK)();
         FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(
-            GetModuleHandleW(m_filename), "xGetRegisterBank");
+            GetModuleHandleW(m_filename), "x3GetRegisterBank");
 
         return pfn ? (*pfn)() : NULL;
     }

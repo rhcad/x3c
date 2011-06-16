@@ -5,7 +5,7 @@
 #include "Cx_StringTable.h"
 #include <UtilFunc/ScanFiles.h>
 #include <Xml/Ix_ConfigXml.h>
-#include <Xml/ConfigIOSection.h>
+#include <Xml/Cx_ConfigSection.h>
 #include <UtilFunc/RelToAbs.h>
 
 Cx_StringTable::Cx_StringTable()
@@ -29,7 +29,7 @@ std::wstring Cx_StringTable::GetValue(const std::wstring& module,
     }
     if (value.empty())
     {
-        LOG_WARNING2(L"@StringTable:IDS_NO_STRVALUE", module + L":" + id);
+        X3LOG_WARNING2(L"@StringTable:IDS_NO_STRVALUE", module + L":" + id);
     }
 
     return value;
@@ -75,7 +75,7 @@ bool Cx_StringTable::GetValue(std::wstring& value,
 {
     if (!m_loaded)
     {
-        LoadFiles(RelToAbsWithPlugin(L"../Translations/Strings", false));
+        LoadFiles(x3::RelToAbsWithPlugin(L"../Translations/Strings", false));
     }
 
     IT_ITEM it = Find(module);
@@ -83,10 +83,10 @@ bool Cx_StringTable::GetValue(std::wstring& value,
     value.resize(0);
     if (it != m_groups.end())
     {
-        CConfigIOSection group(it->group);
+        Cx_ConfigSection group(it->group);
         ASSERT(group.IsNotNull());
 
-        CConfigIOSection sec(group.GetSection(L"string", L"id", id.c_str(), false));
+        Cx_ConfigSection sec(group.GetSection(L"string", L"id", id.c_str(), false));
         value = sec->GetString(L"value");
         ReplaceLf(value);
     }
@@ -103,9 +103,9 @@ long Cx_StringTable::LoadFiles(const std::wstring& path)
 
     long count = 0;
     std::vector<std::wstring> files;
-    CScanFilesByExtension scaner(&files, L".xml");
+    x3::CScanFilesByExtension scaner(&files, L".xml");
 
-    ScanFiles(&scaner, path.c_str(), false);
+    x3::ScanFiles(&scaner, path.c_str(), false);
     m_loaded = true;
 
     std::vector<std::wstring>::const_iterator it = files.begin();
@@ -119,7 +119,7 @@ long Cx_StringTable::LoadFiles(const std::wstring& path)
     
     if (0 == count)
     {
-        LOG_INFO2(L"@StringTable:IDS_NO_STRFILE", path);
+        X3LOG_INFO2(L"@StringTable:IDS_NO_STRFILE", path);
     }
 
     return count;
@@ -127,19 +127,19 @@ long Cx_StringTable::LoadFiles(const std::wstring& path)
 
 long Cx_StringTable::RegisterFile(const std::wstring& filename)
 {
-    Cx_Interface<Ix_ConfigXml> pIFFile(CLSID_ConfigXmlFile);
+    Cx_Interface<Ix_ConfigXml> pIFFile(X3CLS_ConfigXmlFile);
     if (pIFFile.IsNull())
     {
         return 0;
     }
 
     pIFFile->SetFileName(filename.c_str());
-    LOG_DEBUG2(L"@StringTable:IDS_LOAD_STRFILE", PathFindFileNameW(filename.c_str()));
+    X3LOG_DEBUG2(L"@StringTable:IDS_LOAD_STRFILE", PathFindFileNameW(filename.c_str()));
 
     long count = 0;
     for (int i = 0; i < 99; i++)
     {
-        CConfigIOSection sec (pIFFile->GetData()->GetSectionByIndex(NULL, L"module", i));
+        Cx_ConfigSection sec (pIFFile->GetData()->GetSectionByIndex(NULL, L"module", i));
         ITEM item;
 
         item.file = pIFFile->GetData();
@@ -156,7 +156,7 @@ long Cx_StringTable::RegisterFile(const std::wstring& filename)
         }
         else
         {
-            LOG_WARNING2(L"@StringTable:IDS_IGNORE_STRGROUP", item.module);
+            X3LOG_WARNING2(L"@StringTable:IDS_IGNORE_STRGROUP", item.module);
         }
     }
 

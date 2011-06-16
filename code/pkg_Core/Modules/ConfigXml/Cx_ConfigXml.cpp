@@ -95,13 +95,13 @@ bool ConfigXmlImpl::Reload()
         else
         {
             m_xmlDoc = NULL;
-            LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_ROOT_MISMATCH", m_strFileName);
+            X3LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_ROOT_MISMATCH", m_strFileName);
         }
     }
     else
     {
         if (PathFileExistsW(m_strFileName.c_str()))
-            LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_FAIL", m_strFileName);
+            X3LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_FAIL", m_strFileName);
     }
 
     if (NULL == m_xmlDoc || NULL == m_xmlRoot)
@@ -278,19 +278,19 @@ bool Cx_ConfigXml::SetXmlContent(const std::wstring& content)
         if (!bRet)
         {
             m_pImpl->m_xmlDoc = NULL;
-            LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_ROOT_MISMATCH",
+            X3LOG_WARNING2(L"@ConfigXml:IDS_LOADXML_ROOT_MISMATCH",
                 CXmlUtil::GetRootName(m_pImpl->m_xmlDoc));
         }
     }
     else if (content.empty())
     {
-        LOG_WARNING(L"@ConfigXml:IDS_LOADXML_EMPTY");
+        X3LOG_WARNING(L"@ConfigXml:IDS_LOADXML_EMPTY");
     }
     else
     {
         wchar_t buf[81];
         wcsncpy_s(buf, _countof(buf), content.c_str(), _countof(buf));
-        LOG_WARNING2(L"@ConfigXml:IDS_LOADXMLSTR_FAIL", buf);
+        X3LOG_WARNING2(L"@ConfigXml:IDS_LOADXMLSTR_FAIL", buf);
     }
 
     if (!bRet)
@@ -346,11 +346,11 @@ bool Cx_ConfigXml::EndTransaction()
 
         if (bRet)
         {
-            LOG_DEBUG2(L"@ConfigXml:IDS_SAVEXML_OK", m_pImpl->m_strFileName);
+            X3LOG_DEBUG2(L"@ConfigXml:IDS_SAVEXML_OK", m_pImpl->m_strFileName);
         }
         else
         {
-            LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
+            X3LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
                 CXmlUtil::GetLastErrorResult()
                 << L", " << m_pImpl->m_strFileName);
         }
@@ -372,7 +372,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
 
     if (strFileName.empty())
     {
-        LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", L"--");
+        X3LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL", L"--");
         return false;
     }
 
@@ -388,7 +388,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     }
     else
     {
-        LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
+        X3LOG_WARNING2(L"@ConfigXml:IDS_SAVEXML_FAIL",
             CXmlUtil::GetLastErrorResult() << L", " << strFileName);
     }
 
@@ -556,7 +556,7 @@ Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
     }
     else
     {
-        LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"AddSection");
+        X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"AddSection");
     }
 
     return pIFRet;
@@ -578,7 +578,7 @@ bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)
         }
         else
         {
-            LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveSection");
+            X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveSection");
         }
     }
 
@@ -615,7 +615,7 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
         }
         else
         {
-            LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveChildren");
+            X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveChildren");
         }
     }
 

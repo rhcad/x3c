@@ -9,7 +9,7 @@
 #include <XComPtr.h>
 
 //! XML配置数据对象的类ID
-const XCLSID CLSID_ConfigXmlFile("c93e1e3d-0362-4856-9a4a-31c119e324f7");
+const X3CLSID X3CLS_ConfigXmlFile("c93e1e3d-0362-4856-9a4a-31c119e324f7");
 
 interface Ix_ConfigData;
 interface Ix_ConfigSection;
@@ -19,7 +19,7 @@ interface IFileCryptHandler;
 /*! 使用 IFileCryptHandler 可拦截XML文件读写过程
     \interface Ix_ConfigXml
     \ingroup _GROUP_PLUGIN_XML_
-    \see CLSID_ConfigXmlFile, Ix_ConfigData, Ix_ConfigTransaction
+    \see X3CLS_ConfigXmlFile, Ix_ConfigData, Ix_ConfigTransaction
 */
 interface Ix_ConfigXml
 {

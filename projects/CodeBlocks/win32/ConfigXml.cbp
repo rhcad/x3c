@@ -49,7 +49,7 @@
 		<Linker>
 			<Add library="shlwapi" />
 		</Linker>
-		<Unit filename="../../../code/pkg_Core/Interface/Xml/ConfigIOSection.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/Xml/Cx_ConfigSection.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/Xml/IFileCryptHandler.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/Xml/Ix_ConfigData.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/Xml/Ix_ConfigSection.h" />

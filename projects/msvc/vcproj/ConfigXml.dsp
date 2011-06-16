@@ -78,7 +78,7 @@ LINK32=link.exe
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Core\Interface\Xml\ConfigIOSection.h
+SOURCE=..\..\..\code\pkg_Core\Interface\Xml\Cx_ConfigSection.h
 # End Source File
 # Begin Source File
 

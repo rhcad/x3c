@@ -222,7 +222,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Log\ILogObserver.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\Log\Ix_LogObserver.h"
 				>
 			</File>
 			<File

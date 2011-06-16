@@ -32,7 +32,7 @@ DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
     else
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
+        X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
 
@@ -132,7 +132,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
     if (!OpenFileForRead(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
+        X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -144,7 +144,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
         {
             if (dwLength > nLenLimitMB * 1024L * 1024L)
             {
-                LOG_WARNING2(L"@TextUtility:IDS_HUGE_FILE",
+                X3LOG_WARNING2(L"@TextUtility:IDS_HUGE_FILE",
                     (dwLength / (1024.0*1024.0)) << L"MB, " << filename);
                 dwLength = nLenLimitMB * 1024L * 1024L;
             }
@@ -162,7 +162,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
                 bRet = GetFileContent(content, buf.ptr, dwBytesRead, codepage);
                 if (!bRet)
                 {
-                    LOG_WARNING2(L"@TextUtility:IDS_NOT_ANSIFILE", filename);
+                    X3LOG_WARNING2(L"@TextUtility:IDS_NOT_ANSIFILE", filename);
                 }
             }
         }
@@ -193,7 +193,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
     if (!OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
+        X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -213,7 +213,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
         {
             std::string strAnsi (x3::w2a(content, codepage));
 
-            dwLen = GetSize(strAnsi);
+            dwLen = x3::GetSize(strAnsi);
             ::WriteFile(hFile, strAnsi.c_str(), dwLen, &dwBytes, NULL);
             bRet = (dwBytes == dwLen);
         }
@@ -236,7 +236,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
     if (!OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
-        LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
+        X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
             GetSystemErrorString(err) << L", " << filename);
     }
     else
@@ -256,7 +256,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
         }
         else
         {
-            dwLen = GetSize(content);
+            dwLen = x3::GetSize(content);
             ::WriteFile(hFile, content.c_str(), dwLen, &dwBytes, NULL);
             bRet = (dwBytes == dwLen);
         }
@@ -348,14 +348,14 @@ static inline bool IsSpaceChar(wchar_t cChar, const wchar_t* targets = NULL)
 
 bool Cx_TextUtil::IsSpaceLine(const std::wstring& text)
 {
-    int i = GetSize(text);
+    int i = x3::GetSize(text);
     while (--i >= 0 && IsSpaceChar(text[i])) {}
     return i < 0;
 }
 
 bool Cx_TextUtil::TrimSpace(std::wstring& text, const wchar_t* targets)
 {
-    const int nOldLen = GetSize(text);
+    const int nOldLen = x3::GetSize(text);
     int i = nOldLen;
     while (--i >= 0 && IsSpaceChar(text[i], targets)) {}
 
@@ -364,7 +364,7 @@ bool Cx_TextUtil::TrimSpace(std::wstring& text, const wchar_t* targets)
         text.erase(text.begin() + (i + 1), text.end());
     }
 
-    int n = GetSize(text);
+    int n = x3::GetSize(text);
     for (i = 0; i < n && IsSpaceChar(text[i], targets); i++) {}
 
     if (i > 0)
@@ -372,12 +372,12 @@ bool Cx_TextUtil::TrimSpace(std::wstring& text, const wchar_t* targets)
         text.erase(text.begin(), text.begin() + i);
     }
 
-    return nOldLen > GetSize(text);
+    return nOldLen > x3::GetSize(text);
 }
 
 bool Cx_TextUtil::TrimLeft(std::wstring& text, const wchar_t* targets)
 {
-    const int len = GetSize(text);
+    const int len = x3::GetSize(text);
     int i = 0;
 
     for (; i < len && IsSpaceChar(text[i], targets); i++) {}
@@ -391,7 +391,7 @@ bool Cx_TextUtil::TrimLeft(std::wstring& text, const wchar_t* targets)
 
 bool Cx_TextUtil::TrimRight(std::wstring& text, const wchar_t* targets)
 {
-    const int len = GetSize(text);
+    const int len = x3::GetSize(text);
     int i = len;
     while (--i >= 0 && IsSpaceChar(text[i], targets)) {}
 
@@ -406,7 +406,7 @@ bool Cx_TextUtil::TrimRight(std::wstring& text, const wchar_t* targets)
 bool Cx_TextUtil::RemoveInvalidChars(std::wstring& text, const wchar_t* targets)
 {
     std::vector<long> arrIndex;
-    long i = GetSize(text);
+    long i = x3::GetSize(text);
 
     while (--i >= 0)
     {
@@ -428,7 +428,7 @@ bool Cx_TextUtil::RemoveInvalidChars(std::wstring& text, const wchar_t* targets)
         }
     }
 
-    long nCount = GetSize(arrIndex);
+    long nCount = x3::GetSize(arrIndex);
     for (i = 0; i < nCount; i++)
     {
         text.erase(arrIndex[i]);

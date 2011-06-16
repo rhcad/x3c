@@ -1,5 +1,11 @@
 X3 C++ PluginFramework
 
+------v1.0.10------
+
+2011-06-16
+
+    * Add x3 namespace in revision 159.
+
 2011-06-15
 
     * Write error code for LoadLibraryExW in PluginManager.
@@ -97,7 +103,7 @@ X3 C++ PluginFramework
 2011-02-08
 
     * PluginManager: Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
-    * ChangeObserver: Support delay-load feature for observer plugins.
+    * Cx_ChangeObserver: Support delay-load feature for observer plugins.
 
 2011-02-07
 

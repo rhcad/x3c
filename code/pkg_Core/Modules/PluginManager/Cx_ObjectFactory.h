@@ -43,15 +43,15 @@ public:
     virtual ~Cx_ObjectFactory();
 
 public:
-    virtual bool IsCreatorRegister(const XCLSID& clsid);
-    virtual int CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll);
+    virtual bool IsCreatorRegister(const X3CLSID& clsid);
+    virtual int CreateObject(const X3CLSID& clsid, Ix_Object** ppv, HMODULE fromdll);
     virtual long CreateSpecialInterfaceObjects(const char* iid);
     virtual bool QuerySpecialInterfaceObject(long index, const char* iid, Ix_Object** ppv);
-    virtual bool HasCreatorReplaced(const XCLSID& clsid);
+    virtual bool HasCreatorReplaced(const X3CLSID& clsid);
 
 protected:
-    typedef std::vector<XCLSID>         CLSIDS;
-    typedef std::pair<_XCLASSMETA_ENTRY, long>  MAPITEM;    //!< entry+moduleIndex
+    typedef std::vector<X3CLSID>         CLSIDS;
+    typedef std::pair<X3CLASSENTRY, long>  MAPITEM;    //!< entry+moduleIndex
     typedef hash_map<std::string, MAPITEM>    CLSMAP;       //!< clsid+item
 
     struct MODULEINFO                   //!< plugin module info
@@ -75,13 +75,13 @@ protected:
     Ix_Module* GetModule(HMODULE hModule);
     long RegisterClassEntryTable(HMODULE hModule);
     void ReleaseModule(HMODULE hModule);
-    _XCLASSMETA_ENTRY* FindEntry(const XCLSID& clsid, int* moduleIndex = NULL);
+    X3CLASSENTRY* FindEntry(const X3CLSID& clsid, int* moduleIndex = NULL);
 
 private:
     Cx_ObjectFactory(const Cx_ObjectFactory&);
     void operator=(const Cx_ObjectFactory&);
 
-    bool RegisterClass(int moduleIndex, const _XCLASSMETA_ENTRY& cls);
+    bool RegisterClass(int moduleIndex, const X3CLASSENTRY& cls);
     virtual bool LoadDelayPlugin(const wchar_t* filename) = 0;
 };
 

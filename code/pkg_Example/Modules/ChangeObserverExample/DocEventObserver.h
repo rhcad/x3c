@@ -4,7 +4,7 @@
 #ifndef EXAMPLE_DOCEVENT_OBSERVER_H_
 #define EXAMPLE_DOCEVENT_OBSERVER_H_
 
-#include <ChangeObserver/ChangeNotifyData.h>
+#include <ChangeObserver/Cx_ChangeObserver.h>
 #include <typeinfo>
 
 //! 文档事件类型
@@ -20,7 +20,7 @@ enum kDocEventType
     \note 建议派生类从本类私有继承
     \ingroup _GROUP_CHANGE_OBSERVER_
 */
-class DocEventObserver : public ChangeObserver
+class DocEventObserver : public Cx_ChangeObserver
 {
     NOCOPY_CONSTRUCTOR(DocEventObserver);
 public:
@@ -38,7 +38,7 @@ public:
     };
 
 protected:
-    DocEventObserver() : ChangeObserver(typeid(DocEventObserver).name())
+    DocEventObserver() : Cx_ChangeObserver(typeid(DocEventObserver).name())
     {
     }
 

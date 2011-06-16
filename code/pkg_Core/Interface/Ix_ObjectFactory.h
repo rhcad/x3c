@@ -16,10 +16,10 @@
 interface Ix_ObjectFactory
 {
     //! Check if the class is loaded.
-    virtual bool IsCreatorRegister(const XCLSID& clsid) = 0;
+    virtual bool IsCreatorRegister(const X3CLSID& clsid) = 0;
 
     //! Create an object with the class id.
-    virtual int CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll) = 0;
+    virtual int CreateObject(const X3CLSID& clsid, Ix_Object** ppv, HMODULE fromdll) = 0;
 
     //! Create singleton objects that support the specified interface in all plugins.
     /*!
@@ -38,7 +38,7 @@ interface Ix_ObjectFactory
     virtual bool QuerySpecialInterfaceObject(long index, const char* iid, Ix_Object** ppv) = 0;
 
     //! Return if any class factory is replaced.
-    virtual bool HasCreatorReplaced(const XCLSID& clsid) = 0;
+    virtual bool HasCreatorReplaced(const X3CLSID& clsid) = 0;
 };
 
 #endif // X3_CORE_IOBJECTFACTORY_H_

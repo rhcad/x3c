@@ -1,10 +1,10 @@
 #ifndef EXAMPLE_MOVE_OBSERVER_H_
 #define EXAMPLE_MOVE_OBSERVER_H_
 
-#include <ChangeObserver/ChangeNotifyData.h>
+#include <ChangeObserver/Cx_ChangeObserver.h>
 #include <typeinfo>
 
-class MoveObserver : public ChangeObserver
+class MoveObserver : public Cx_ChangeObserver
 {
     NOCOPY_CONSTRUCTOR(MoveObserver);
 public:
@@ -24,7 +24,7 @@ public:
     };
 
 protected:
-    MoveObserver() : ChangeObserver(typeid(MoveObserver).name())
+    MoveObserver() : Cx_ChangeObserver(typeid(MoveObserver).name())
     {
     }
 

@@ -1,5 +1,5 @@
 /*! \file Ix_ConfigTransaction.h
- *  \brief 定义写配置事务的辅助类 CConfigTransaction
+ *  \brief 定义写配置事务的辅助类 Cx_ConfigTransaction
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -10,7 +10,7 @@
 
 //! 配置数据保存事务的接口
 /*! Ix_ConfigSection 和 Ix_ConfigData 一般都可转换到该接口
-    \see CConfigTransaction
+    \see Cx_ConfigTransaction
 */
 interface Ix_ConfigTransaction
 {
@@ -30,11 +30,11 @@ interface Ix_ConfigTransaction
     \ingroup _GROUP_PLUGIN_XML_
     \see Ix_ConfigSection, Ix_ConfigData
 */
-class CConfigTransaction
+class Cx_ConfigTransaction
 {
 public:
     //! 构造函数，准备写配置
-    CConfigTransaction(const Cx_Ptr& obj) : m_trans(obj)
+    Cx_ConfigTransaction(const Cx_Ptr& obj) : m_trans(obj)
     {
         if (m_trans)
         {
@@ -44,7 +44,7 @@ public:
 
 #ifdef X3_XML_ICONFIGDATA_H_
     //! 构造函数，准备写配置
-    CConfigTransaction(const Cx_Interface<Ix_ConfigData>& p) : m_trans(p)
+    Cx_ConfigTransaction(const Cx_Interface<Ix_ConfigData>& p) : m_trans(p)
     {
         if (m_trans)
         {
@@ -54,7 +54,7 @@ public:
 #endif
 
     //! 析构函数，结束写配置
-    ~CConfigTransaction()
+    ~Cx_ConfigTransaction()
     {
         Submit();
     }

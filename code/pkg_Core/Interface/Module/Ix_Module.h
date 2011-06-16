@@ -13,8 +13,8 @@ interface Ix_ObjectFactory;
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \interface Ix_Module
  *  \brief the plugin module interface.
- *  \note  Each plugin (DLL) has a Ix_Module object which can get from xGetCurrentModule().
- *  \see xGetCurrentModule, xIsCreatorRegister, Ix_ObjectFactory
+ *  \note  Each plugin (DLL) has a Ix_Module object which can get from x3GetCurrentModule().
+ *  \see x3GetCurrentModule, x3IsCreatorRegister, Ix_ObjectFactory
  */
 interface Ix_Module
 {
@@ -42,7 +42,7 @@ interface Ix_Module
     \ingroup _GROUP_PLUGIN_CORE_
     \return the only one module object in the current project.
 */
-Ix_Module* xGetCurrentModule();
+Ix_Module* x3GetCurrentModule();
 
 //! Check the class factory of the specified class id has registered or not.
 /*!
@@ -50,6 +50,6 @@ Ix_Module* xGetCurrentModule();
     \param clsid the specified class id.
     \return the class factory has registered (plugin loaded namely) or not.
 */
-bool xIsCreatorRegister(const XCLSID& clsid);
+bool x3IsCreatorRegister(const X3CLSID& clsid);
 
 #endif // X3_PLUGINIMPL_IMODULE_H_

@@ -55,7 +55,7 @@ interface Ix_PluginLoader
 
     //! Initialize all plugins after loaded.
     /*! Auto skip the plugins which has initialized.
-        \return count of plugins which has initialized (or no InitializePlugin) this time.
+        \return count of plugins which has initialized (or no x3InitializePlugin) this time.
     */
     virtual long InitializePlugins() = 0;
 

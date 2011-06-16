@@ -6,7 +6,7 @@
 #ifndef X3_LOG_DEBUGR_H_
 #define X3_LOG_DEBUGR_H_
 
-int XCrtDbgReport(const char* file, long line, const char* msg);
+int x3CrtDbgReport(const char* file, long line, const char* msg);
 
 #ifndef _MSC_VER
 inline void __debugbreak() {}
@@ -19,14 +19,14 @@ inline void __debugbreak() {}
 
 #define ASSERT(expr)    \
     (void) ((!!(expr)) || \
-    (1 != XCrtDbgReport(__FILE__, __LINE__, #expr)) || \
+    (1 != x3CrtDbgReport(__FILE__, __LINE__, #expr)) || \
     (__debugbreak(), 0))
 
 #define VERIFY  ASSERT
 
 #define ASSERT_MESSAGE(expr, msg)   \
     (void) ((!!(expr)) || \
-    (1 != XCrtDbgReport(__FILE__, __LINE__, msg)) || \
+    (1 != x3CrtDbgReport(__FILE__, __LINE__, msg)) || \
     (__debugbreak(), 0))
 
 #endif // X3_LOG_DEBUGR_H_

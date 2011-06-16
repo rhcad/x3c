@@ -45,7 +45,7 @@ public:
     bool GetRecordCount(long& count, const std::wstring& sqlSelect);
 
     //! 执行SQL语句，返回记录集
-    ConfigIOSection OpenRecordset(const std::wstring& sqlSelect);
+    ConfigSection OpenRecordset(const std::wstring& sqlSelect);
 
     //! 返回SQL指令翻译对象
     Ix_SQLParser* GetSQLParser();
@@ -81,16 +81,16 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigIOSection GetSection(const wchar_t* sqlSelect, bool ignore = true);
+    ConfigSection GetSection(const wchar_t* sqlSelect, bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
     /*! 本函数可用于根据编号条件查找并修改记录，例如： \code
-    CConfigIOSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
-    CConfigIOSection secRec(secRecordset.GetSectionByIndex(L"", 0));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
     secRec->SetString(L"title", L"test3");
     secRec->SetString(L"create_time", L"@CURDATE()");
     secRec->SetDate(L"update_date", 2010, 3, 10);
-    VERIFY(CConfigTransaction(Cx_Ptr(secRec.P())).Submit());
+    VERIFY(Cx_ConfigTransaction(Cx_Ptr(secRec.P())).Submit());
         \endcode
         \param nullP 必须为NULL
         \param sqlSelect SQL语句，以“SELECT ”开始，包含“FROM ”，可包含查询条件等子语句
@@ -99,7 +99,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigIOSection GetSection(
+    ConfigSection GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, ULONG condValue, 
         bool ignore = true);
@@ -113,7 +113,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigIOSection GetSection(
+    ConfigSection GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, const wchar_t* condValue, 
         bool ignore = true);
@@ -129,7 +129,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigIOSection GetSection(
+    ConfigSection GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, const wchar_t* condValue, 
         const wchar_t* fieldName2, const wchar_t* condValue2, 
@@ -146,7 +146,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigIOSection GetSection(
+    ConfigSection GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, ULONG condValue, 
         const wchar_t* fieldName2, ULONG condValue2, 
@@ -154,7 +154,7 @@ protected:
 
     //! 返回记录集的记录条数
     /*! 代码示例： \code
-    CConfigIOSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
     if (1 == secRecordset.GetSectionCount(L"")) { }
         \endcode
         \param pRecordset 记录集对象，通过 GetSection() 得到的
@@ -165,11 +165,11 @@ protected:
 
     //! 返回一个记录集的指定序号的记录对象
     /*! 本函数用于对记录集进行遍历读取，代码示例： \code
-    CConfigIOSection secRecordset(pIFDb->GetSection(
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(
         L"SELECT id,title FROM article WHERE id=4"));
     for (long iRec = 0; iRec < 99; iRec++)
     {
-        CConfigIOSection secRec(secRecordset.GetSectionByIndex(L"", iRec));
+        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", iRec));
         if (!secRec->IsValid())
             break;
         ULONG nID = secRec->GetUInt32(L"id");
@@ -181,23 +181,23 @@ protected:
         \param index 记录的序号，取值必须为0、记录集的当前序号、或当前序号+1
         \return 记录对象 Cx_CfgRecord ,不为空
     */
-    ConfigIOSection GetSectionByIndex(
+    ConfigSection GetSectionByIndex(
         Ix_ConfigSection* pRecordset, const wchar_t* ignore, long index);
 
     //! 增加一个新记录，待设置各个字段的值
     /*! 此时还未在数据库中增加记录。
         可以使用 \@NEWID 标记某个字段取值为(最大ID+1)，例如： \code
-    CConfigIOSection secRec(pIFDb->AddSection(NULL, L"table"));
+    Cx_ConfigSection secRec(pIFDb->AddSection(NULL, L"table"));
     secNewRec->SetString(L"id", L"@NEWID");
     secNewRec->SetString(L"title", L"test12");
-    VERIFY(CConfigTransaction(Cx_Ptr(secNewRec.P())).Submit());
+    VERIFY(Cx_ConfigTransaction(Cx_Ptr(secNewRec.P())).Submit());
     ULONG nID = secNewRec->GetUInt32(L"id");
         \endcode
         \param nullP 必须为NULL
         \param table 数据库表名，例如“book”
         \return 新记录对象 Cx_CfgRecord
     */
-    ConfigIOSection AddSection(Ix_ConfigSection* nullP, const wchar_t* table);
+    ConfigSection AddSection(Ix_ConfigSection* nullP, const wchar_t* table);
 
     //! 不支持本函数
     bool RemoveSection(Ix_ConfigSection*);
@@ -229,7 +229,7 @@ protected:
         const wchar_t* field, ULONG condValue);
 
     //! 得到一个数据节点的上一级节点(本函数不支持)
-    ConfigIOSection GetParentSection(Ix_ConfigSection*);
+    ConfigSection GetParentSection(Ix_ConfigSection*);
 };
 
 #endif // _X3_CONFIGDB_CFGDATABASE_H

@@ -6,6 +6,8 @@
 
 #include <string>
 
+namespace x3 {
+
 //! Returns a numeric string, rounded to the specified precision.
 /*!
     \ingroup _GROUP_UTILFUNC
@@ -36,4 +38,5 @@ inline std::wstring RoundStr(double value, int decimal = 4)
     return buf;
 }
 
+} // x3
 #endif // UTILFUNC_ROUNDSTR_H_

@@ -12,7 +12,7 @@
 /*!
     \interface Ix_FileVersion
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileUtility, FileUtility()
+    \see X3CLS_FileUtility, FileUtility()
 */
 interface Ix_FileVersion
 {

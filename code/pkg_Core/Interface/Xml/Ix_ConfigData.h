@@ -10,15 +10,15 @@
 
 //! 配置数据接口
 /*! 本接口所操作的数据对象相当于是在树状层次结构中的全部数据节点，
-    而 CConfigIOSection 则对应于一个数据节点。\n
-    立即保存可使用 CConfigTransaction 转换本对象和保存。
+    而 Cx_ConfigSection 则对应于一个数据节点。\n
+    立即保存可使用 Cx_ConfigTransaction 转换本对象和保存。
     \interface Ix_ConfigData
     \ingroup _GROUP_PLUGIN_XML_
 */
 interface Ix_ConfigData
 {
-    //! 一个数据节点，同辅助类 CConfigIOSection
-    typedef Cx_Interface<Ix_ConfigSection> ConfigIOSection;
+    //! 一个数据节点，同辅助类 Cx_ConfigSection
+    typedef Cx_Interface<Ix_ConfigSection> ConfigSection;
 
     //! 得到根节点下的一个数据节点对象
     /*!
@@ -27,7 +27,7 @@ interface Ix_ConfigData
         \param autoCreate 不存在时是否自动添加数据节点
         \return 新的数据节点，不存在时根据autoCreate自动添加
     */
-    virtual ConfigIOSection GetSection(
+    virtual ConfigSection GetSection(
         const wchar_t* name, bool autoCreate = true) = 0;
     
     //! 得到带整数标识属性参数的一个数据节点
@@ -39,7 +39,7 @@ interface Ix_ConfigData
         \param autoCreate 不存在时是否自动添加数据节点
         \return 新的数据节点，不存在则自动添加
     */
-    virtual ConfigIOSection GetSection(
+    virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, ULONG attrValue, 
         bool autoCreate = true) = 0;
@@ -53,7 +53,7 @@ interface Ix_ConfigData
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    virtual ConfigIOSection GetSection(
+    virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, const wchar_t* attrValue, 
         bool autoCreate = true) = 0;
@@ -69,7 +69,7 @@ interface Ix_ConfigData
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    virtual ConfigIOSection GetSection(
+    virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, const wchar_t* attrValue, 
         const wchar_t* attrName2, const wchar_t* attrValue2, 
@@ -86,7 +86,7 @@ interface Ix_ConfigData
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    virtual ConfigIOSection GetSection(
+    virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, ULONG attrValue, 
         const wchar_t* attrName2, ULONG attrValue2, 
@@ -110,7 +110,7 @@ interface Ix_ConfigData
         \return 新的数据节点，如果不存在则对该对象的读写操作将忽略，可以用 IsValid() 来检查是否为无效节点
         \see GetSectionCount
     */
-    virtual ConfigIOSection GetSectionByIndex(
+    virtual ConfigSection GetSectionByIndex(
         Ix_ConfigSection* parent, const wchar_t* name, long index) = 0;
     
     //! 添加一个数据节点
@@ -119,7 +119,7 @@ interface Ix_ConfigData
         \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
         \return 新的数据节点
     */
-    virtual ConfigIOSection AddSection(
+    virtual ConfigSection AddSection(
         Ix_ConfigSection* parent, const wchar_t* name) = 0;
 
     //! 删除一个数据节点
@@ -156,7 +156,7 @@ interface Ix_ConfigData
         \param sec 指定的数据节点对象
         \return 上一级数据节点对象，如果sec为根节点，则返回节点为无效节点(IsValid()==false)
     */
-    virtual ConfigIOSection GetParentSection(Ix_ConfigSection* sec) = 0;
+    virtual ConfigSection GetParentSection(Ix_ConfigSection* sec) = 0;
 };
 
 #endif // X3_XML_ICONFIGDATA_H_

@@ -8,13 +8,13 @@
 
 #include <XComPtr.h>
 
-const XCLSID CLSID_GuidGenerator("8c14f0c5-7795-4ec3-b13a-982f653a700a");
+const X3CLSID X3CLS_GuidGenerator("8c14f0c5-7795-4ec3-b13a-982f653a700a");
 
 //! 全局唯一编号生成器的接口
 /*!
     \interface Ix_GuidGenerator
     \ingroup _GROUP_UTILITY_
-    \see CLSID_GuidGenerator
+    \see X3CLS_GuidGenerator
 */
 interface Ix_GuidGenerator
 {
@@ -31,6 +31,8 @@ interface Ix_GuidGenerator
     virtual ULONG CreateID(long type = 0) = 0;
 };
 
+namespace x3 {
+
 //! 生成新的GUID串
 /*!
     \ingroup _GROUP_UTILITY_
@@ -38,7 +40,7 @@ interface Ix_GuidGenerator
 */
 inline std::wstring CreateGuid(bool withBrackets = false)
 {
-    Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+    Cx_Interface<Ix_GuidGenerator> pIFGenerator(X3CLS_GuidGenerator);
 #ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
 #endif
@@ -52,7 +54,7 @@ inline std::wstring CreateGuid(bool withBrackets = false)
 */
 inline std::wstring RemoveGuidBrackets(const std::wstring& uid)
 {
-    Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+    Cx_Interface<Ix_GuidGenerator> pIFGenerator(X3CLS_GuidGenerator);
 #ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
 #endif
@@ -66,7 +68,7 @@ inline std::wstring RemoveGuidBrackets(const std::wstring& uid)
 */
 inline ULONG GuidCreateID(long type = 0)
 {
-    Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+    Cx_Interface<Ix_GuidGenerator> pIFGenerator(X3CLS_GuidGenerator);
 #ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
 #endif
@@ -79,11 +81,13 @@ inline ULONG GuidCreateID(long type = 0)
 */
 inline std::wstring GetCurrentTimeString(bool hasYear = true)
 {
-    Cx_Interface<Ix_GuidGenerator> pIFGenerator(CLSID_GuidGenerator);
+    Cx_Interface<Ix_GuidGenerator> pIFGenerator(X3CLS_GuidGenerator);
 #ifdef ASSERT
     ASSERT(pIFGenerator.IsNotNull());
 #endif
     return pIFGenerator->GetCurrentTimeString(hasYear);
 }
+
+} // x3
 
 #endif // X3_UTIL_IGUIDGENERATOR_H_

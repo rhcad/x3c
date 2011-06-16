@@ -5,7 +5,7 @@
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_LogManager.h"
-#include <Log/ILogObserver.h>
+#include <Log/Ix_LogObserver.h>
 #include <UtilFunc/ConvStr.h>
 #include <Xml/Ix_StringTable.h>
 #include <UtilFunc/LockCount.h>
@@ -19,9 +19,9 @@ Cx_LogManager::~Cx_LogManager()
 {
 }
 
-bool Cx_LogManager::RegisterObserver(ILogObserver* observer)
+bool Cx_LogManager::RegisterObserver(Ix_LogObserver* observer)
 {
-    if (observer != NULL && find_value(m_observers, observer) < 0)
+    if (observer != NULL && x3::find_value(m_observers, observer) < 0)
     {
         m_observers.push_back(observer);
         return true;
@@ -29,9 +29,9 @@ bool Cx_LogManager::RegisterObserver(ILogObserver* observer)
     return false;
 }
 
-void Cx_LogManager::UnRegisterObserver(ILogObserver* observer)
+void Cx_LogManager::UnRegisterObserver(Ix_LogObserver* observer)
 {
-    erase_value(m_observers, observer);
+    x3::erase_value(m_observers, observer);
 }
 
 bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra)
@@ -59,7 +59,7 @@ bool Cx_LogManager::PopGroup()
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
+bool Cx_LogManager::WriteLog(x3LogType type, const wchar_t* msg,
     const wchar_t* extra, const char* file, long line)
 {
     CLockCount locker(&m_loglock);
@@ -81,9 +81,9 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
 #if defined(_DEBUG) && defined(OutputDebugString)
     const wchar_t* names[] = { L"> LogInfo: ",
         L"> LogWarning: ", L"> LogError: ", L"> FatalError: " };
-    if (type >= kLogType_Info && type <= kLogType_Fatal)
+    if (type >= x3LogType_Info && type <= x3LogType_Fatal)
     {
-        OutputDebugStringW(names[type - kLogType_Info]);
+        OutputDebugStringW(names[type - x3LogType_Info]);
         OutputDebugStringW(msg);
         if (!extra2.empty())
         {
@@ -97,7 +97,7 @@ bool Cx_LogManager::WriteLog(kLogType type, const wchar_t* msg,
     return true;
 }
 
-bool Cx_LogManager::WriteLog(kLogType type, const char* msg,
+bool Cx_LogManager::WriteLog(x3LogType type, const char* msg,
     const char* extra, const char* file, long line)
 {
     return WriteLog(type, x3::a2w(msg).c_str(),
@@ -106,7 +106,7 @@ bool Cx_LogManager::WriteLog(kLogType type, const char* msg,
 
 int Cx_LogManager::CrtDbgReport(const char* msg, const char* file, long line)
 {
-    WriteLog(kLogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED",
+    WriteLog(x3LogType_Fatal, L"@LogManager:IDS_ASSERTION_FAILED",
         x3::a2w(msg).c_str(), file, line);
 
 #ifndef _WIN32
@@ -162,7 +162,7 @@ bool Cx_LogManager::CheckMsgParam(std::wstring& msg2,
 
     if (!msg2.empty() && L'@' == msg2[0])  // @Module:IDS_XXX
     {
-        Cx_Interface<Ix_StringTable> pIFTable(CLSID_StringTable);
+        Cx_Interface<Ix_StringTable> pIFTable(X3CLS_StringTable);
         ret = pIFTable && pIFTable->GetValue(msg2, msg2, module, idname);
 
         if (msg2.empty())

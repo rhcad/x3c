@@ -8,13 +8,13 @@
 
 #include <XComPtr.h>
 
-const XCLSID CLSID_FileUtility("933b3bf9-69d0-4be7-8e49-92b73669d8db");
+const X3CLSID X3CLS_FileUtility("933b3bf9-69d0-4be7-8e49-92b73669d8db");
 
 //! 文件和目录的实用操作的接口(文件检测)
 /*!
     \interface Ix_FileUtility1
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileUtility, FileUtility()
+    \see X3CLS_FileUtility, FileUtility()
 */
 interface Ix_FileUtility1
 {
@@ -55,12 +55,12 @@ interface Ix_FileUtility1
 /*!
     \interface Ix_FileUtility2
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileUtility, FileUtility()
+    \see X3CLS_FileUtility, FileUtility()
 */
 interface Ix_FileUtility2
 {
     //! 为一个文件全名级联创建中间目录
-    /*! 失败时会用 LOG_ERROR2 记录日志
+    /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param filename 文件或目录的全名
         \param isPath 给定的filename是路径名还是文件名
         \return 是否创建成功
@@ -68,14 +68,14 @@ interface Ix_FileUtility2
     virtual bool CreateDirectory(const wchar_t* filename, bool isPath) = 0;
 
     //! 确保一个文件名是可写的(自动创建目录和去掉只读属性)
-    /*! 失败时会用 LOG_ERROR2 记录日志
+    /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param filename 文件全名
         \return 是否可创建文件或可改写
     */
     virtual bool VerifyFileCanWrite(const wchar_t* filename) = 0;
 
     //! 删除一个目录或文件
-    /*! 失败时会用 LOG_ERROR2 记录日志
+    /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param filename 目录或文件的文件全名
         \param recycle true表示放进回收站，false表示直接删除
         \return 是否执行成功. 文件全名为空或文件不存在则返回true
@@ -83,7 +83,7 @@ interface Ix_FileUtility2
     virtual bool DeletePathFile(const wchar_t* filename, bool recycle = false) = 0;
 
     //! 移动一个目录或文件
-    /*! 失败时会用 LOG_ERROR2 记录日志，自动创建目标文件的文件夹
+    /*! 失败时会用 X3LOG_ERROR2 记录日志，自动创建目标文件的文件夹
         \param oldFile 原来的目录或文件的文件全名
         \param newFile 新的目录或文件的文件全名
         \return 是否执行成功. oldFile为空或原文件不存在则返回true
@@ -91,7 +91,7 @@ interface Ix_FileUtility2
     virtual bool MovePathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
     //! 重命名一个目录或文件
-    /*! 失败时会用 LOG_ERROR2 记录日志
+    /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param oldFile 原来的目录或文件的文件全名
         \param newFile 新的目录或文件的文件全名
         \return 是否执行成功. oldFile为空或原文件不存在则返回true
@@ -99,7 +99,7 @@ interface Ix_FileUtility2
     virtual bool RenamePathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
     //! 复制一个目录或文件
-    /*! 失败时会用 LOG_ERROR2 记录日志，自动创建目标文件的文件夹
+    /*! 失败时会用 X3LOG_ERROR2 记录日志，自动创建目标文件的文件夹
         \param oldFile 原来的目录或文件的文件全名
         \param newFile 新的目录或文件的文件全名
         \return 是否执行成功. oldFile为空或原文件不存在则返回true
@@ -117,7 +117,7 @@ interface Ix_FileUtility2
 /*!
     \interface Ix_FileUtility3
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileUtility, FileUtility()
+    \see X3CLS_FileUtility, FileUtility()
 */
 interface Ix_FileUtility3
 {
@@ -181,7 +181,7 @@ interface Ix_FileUtility3
 /*!
     \interface Ix_FileUtility4
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileUtility, FileUtility()
+    \see X3CLS_FileUtility, FileUtility()
 */
 interface Ix_FileUtility4
 {
@@ -217,8 +217,8 @@ interface Ix_FileUtility4
 /*!
     \interface Ix_FileUtility
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileUtility
-    \see FileUtility()->xxx(), RelToAbs.h 文件实用函数
+    \see X3CLS_FileUtility
+    \see x3::FileUtility()->xxx(), RelToAbs.h 文件实用函数
 */
 interface Ix_FileUtility
     : public Ix_FileUtility1
@@ -228,6 +228,8 @@ interface Ix_FileUtility
 {
 };
 
+namespace x3 {
+
 //! 得到文件操作对象
 /*!
     \ingroup _GROUP_UTILITY_
@@ -235,11 +237,13 @@ interface Ix_FileUtility
 */
 inline Cx_Interface<Ix_FileUtility> FileUtility()
 {
-    Cx_Interface<Ix_FileUtility> pIFUtility(CLSID_FileUtility);
+    Cx_Interface<Ix_FileUtility> pIFUtility(X3CLS_FileUtility);
 #ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
 #endif
     return pIFUtility;
 }
+
+} // x3
 
 #endif // X3_UTIL_IFILEUTILITY_H_

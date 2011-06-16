@@ -18,7 +18,7 @@ class CEmbedWnd : public CWnd
 {
 	DECLARE_DYNCREATE(CEmbedWnd)
 public:
-	CEmbedWnd(const XCLSID& clsidWnd = XCLSID());
+	CEmbedWnd(const X3CLSID& clsidWnd = X3CLSID());
 	virtual ~CEmbedWnd();
 
 // Attributes
@@ -36,7 +36,7 @@ public:
 	void SetCaption(LPCTSTR text);
 
 	//! Returns the child window's class id.
-	XCLSID GetClsid() const;
+	X3CLSID GetClsid() const;
 
 // Operations
 public:
@@ -47,7 +47,7 @@ public:
 		DWORD dwExStyle = WS_EX_STATICEDGE);
 
     //! Create the child window which Ix_CreateWnd is implemented.
-	bool CreateSubWnd(const XCLSID& clsidWnd);
+	bool CreateSubWnd(const X3CLSID& clsidWnd);
 
 	//! Call Ix_CreateWnd::Refresh.
 	void Refresh();
@@ -87,7 +87,7 @@ protected:
 private:
 	Cx_Interface<Ix_CreateWnd>	m_pIFWnd;
 	CString			m_caption;
-	XCLSID			m_clsid;
+	X3CLSID			m_clsid;
 	int				m_menuIndex;
     long            m_locker;
 };

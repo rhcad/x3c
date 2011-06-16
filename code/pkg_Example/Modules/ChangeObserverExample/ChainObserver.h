@@ -4,7 +4,7 @@
 #ifndef EXAMPLE_CHAIN_OBSERVER_H_
 #define EXAMPLE_CHAIN_OBSERVER_H_
 
-#include <ChangeObserver/ChangeNotifyData.h>
+#include <ChangeObserver/Cx_ChangeObserver.h>
 #include <typeinfo>
 
 //! 作为例子的职责链观察者类
@@ -12,7 +12,7 @@
     \note 建议派生类从本类私有继承
     \ingroup _GROUP_CHANGE_OBSERVER_
 */
-class ChainObserver : public ChangeObserver
+class ChainObserver : public Cx_ChangeObserver
 {
 public:
     //! ChainObserver 观察者的通知数据类
@@ -28,7 +28,7 @@ public:
     };
 
 protected:
-    ChainObserver() : ChangeObserver(typeid(ChainObserver).name())
+    ChainObserver() : Cx_ChangeObserver(typeid(ChainObserver).name())
     {
     }
 

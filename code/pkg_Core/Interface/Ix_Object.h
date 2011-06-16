@@ -1,5 +1,5 @@
 /*! \file Ix_Object.h
- *  \brief Define Ix_Object (the basic interface) and XCLSID
+ *  \brief Define Ix_Object (the basic interface) and X3CLSID
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -22,55 +22,55 @@ interface Ix_Object
 //! class unique id
 /*! \ingroup _GROUP_PLUGIN_CORE_
     \code
-    const XCLSID CLSID_ExampleTool("97380b78-a3b4-4784-ba07-c928561988c8");
+    const X3CLSID CLSID_ExampleTool("97380b78-a3b4-4784-ba07-c928561988c8");
     \endcode
 */
-class XCLSID
+class X3CLSID
 {
 public:
-    XCLSID()
+    X3CLSID()
     {
         m_clsid[0] = 0;
     }
 
-    XCLSID(const char* clsid)
+    X3CLSID(const char* clsid)
     {
         strncpy_s(m_clsid, 40, clsid ? clsid : "", 40);
     }
 
-    XCLSID(const XCLSID& src)
+    X3CLSID(const X3CLSID& src)
     {
         strncpy_s(m_clsid, 40, src.m_clsid, 40);
     }
 
-    XCLSID& operator=(const char* clsid)
+    X3CLSID& operator=(const char* clsid)
     {
         strncpy_s(m_clsid, 40, clsid ? clsid : "", 40);
         return *this;
     }
 
-    XCLSID& operator=(const XCLSID& src)
+    X3CLSID& operator=(const X3CLSID& src)
     {
         strncpy_s(m_clsid, 40, src.m_clsid, 40);
         return *this;
     }
 
-    bool operator==(const XCLSID& src) const
+    bool operator==(const X3CLSID& src) const
     {
         return strcmp(m_clsid, src.m_clsid) == 0;
     }
 
-    bool operator!=(const XCLSID& src) const
+    bool operator!=(const X3CLSID& src) const
     {
         return strcmp(m_clsid, src.m_clsid) != 0;
     }
 
-    bool operator>(const XCLSID& src) const
+    bool operator>(const X3CLSID& src) const
     {
         return strcmp(m_clsid, src.m_clsid) > 0;
     }
 
-    bool operator<(const XCLSID& src) const
+    bool operator<(const X3CLSID& src) const
     {
         return strcmp(m_clsid, src.m_clsid) < 0;
     }

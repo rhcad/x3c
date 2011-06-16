@@ -9,12 +9,12 @@
 #include "Ix_Object.h"
 #include <typeinfo>
 
-HMODULE xGetModuleHandle();
+HMODULE x3GetModuleHandle();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief The regular implement template class used by XDEFINE_CLASSMAP_ENTRY.
+ *  \brief The regular implement template class used by X3_CLASS_ENTRY.
  *  \note  The template parameter is a class which implement a interface.
- *  \see   Cx_SingletonObject, XDEFINE_CLASSMAP_ENTRY
+ *  \see   Cx_SingletonObject, X3_CLASS_ENTRY
  *  \internal
  */
 template <class ClsType>
@@ -36,7 +36,7 @@ protected:
 protected:
     virtual void AddRef(HMODULE fromdll)
     {
-        if (fromdll != xGetModuleHandle())
+        if (fromdll != x3GetModuleHandle())
         {
             InterlockedIncrement(&RefCountByOthers());
         }
@@ -45,7 +45,7 @@ protected:
 
     virtual void Release(HMODULE fromdll)
     {
-        if (fromdll != xGetModuleHandle())
+        if (fromdll != x3GetModuleHandle())
         {
             InterlockedDecrement(&RefCountByOthers());
         }

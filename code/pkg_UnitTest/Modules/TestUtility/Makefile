@@ -12,7 +12,7 @@ C_FLAGS  +=   -L/usr/local/lib
 
 all:
 	$(CC) $(CFLAGS) -c  TestConfigDB.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/libTestUtility.so *.o -ldl -lcppunit
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestUtility.app *.o -ldl -lcppunit
 clean:
 	rm -rf *.so
 	rm -rf *.o

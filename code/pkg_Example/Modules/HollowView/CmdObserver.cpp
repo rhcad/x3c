@@ -14,15 +14,15 @@ private:
 
 static CCmdObserver*    s_observer = NULL;
 
-OUTAPI bool InitializePlugin()
+OUTAPI bool x3InitializePlugin()
 {
     s_observer = new CCmdObserver;
     return true;
 }
 
-OUTAPI void UninitializePlugin()
+OUTAPI void x3UninitializePlugin()
 {
-    SafeDelete(s_observer);
+    x3::SafeDelete(s_observer);
 }
 
 BEGIN_MENU_MSG_MAP(CCmdObserver)

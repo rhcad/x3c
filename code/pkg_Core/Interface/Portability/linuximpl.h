@@ -92,7 +92,7 @@ static inline bool cmpdl(const char* dpname, const char* match)
     return false;
 }
 
-Ix_ObjectFactory* xGetObjectFactory();
+Ix_ObjectFactory* x3GetObjectFactory();
 static long s_objFactoryLocker = 0;
 
 HMODULE GetModuleHandleW(const wchar_t* filename)
@@ -110,7 +110,7 @@ HMODULE GetModuleHandleW(const wchar_t* filename)
 
     CLockCount locker(&s_objFactoryLocker);
     Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
-        : dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+        : dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
 
     if (factory)
     {
@@ -169,7 +169,7 @@ void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
 
         CLockCount locker(&s_objFactoryLocker);
         Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
-            : dynamic_cast<Ix_PluginLoader2*>(xGetObjectFactory());
+            : dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
 
         if (factory && 0 == filename[0])
         {

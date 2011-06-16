@@ -68,7 +68,7 @@ void TestPluginManager::testCreateObject()
     VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 
     Ix_Object* ixObject=NULL;
-    VERIFY(0==pFactory->CreateObject(CLSID_LogManager, &ixObject,NULL));
+    VERIFY(0==pFactory->CreateObject(X3CLS_LogManager, &ixObject,NULL));
     ixObject->Release(NULL);
 
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
@@ -79,13 +79,13 @@ void TestPluginManager::testIsCreatorRegister()
     Ix_ObjectFactory* pFactory = GetManagerObjectFactory();
     VERIFY(pFactory);
 
-    VERIFY(false == pFactory->IsCreatorRegister(CLSID_LogManager));
+    VERIFY(false == pFactory->IsCreatorRegister(X3CLS_LogManager));
 
     Ix_PluginLoader* pLoader = dynamic_cast<Ix_PluginLoader*>(pFactory);
     VERIFY(pLoader);
     VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 
-    VERIFY(true == pFactory->IsCreatorRegister(CLSID_LogManager));
+    VERIFY(true == pFactory->IsCreatorRegister(X3CLS_LogManager));
 
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 }
@@ -95,7 +95,7 @@ void TestPluginManager::testCreateSpecialInterfaceObjects()
     Ix_ObjectFactory* pFactory = GetManagerObjectFactory();
     VERIFY(pFactory);
 
-    VERIFY(false == pFactory->IsCreatorRegister(CLSID_LogManager));
+    VERIFY(false == pFactory->IsCreatorRegister(X3CLS_LogManager));
 
     Ix_PluginLoader* pLoader = dynamic_cast<Ix_PluginLoader*>(pFactory);
     VERIFY(pLoader);
@@ -126,7 +126,7 @@ Ix_PluginLoader* TestPluginManager::GetManagerLoader(void)
 Ix_ObjectFactory* TestPluginManager::GetManagerObjectFactory(void)
 {
     typedef Ix_ObjectFactory* (*FUNC_GETREGISTERBANK)();
-    FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(GetModuleHandleW(L"PluginManagerX3" PLNEXT), "xGetRegisterBank");
+    FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(GetModuleHandleW(L"PluginManagerX3" PLNEXT), "x3GetRegisterBank");
     VERIFY(pfn != NULL);
 
     Ix_ObjectFactory* pFactory = (*pfn)();

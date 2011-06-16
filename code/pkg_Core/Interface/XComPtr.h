@@ -10,11 +10,11 @@
 
 // Create an object with the class id.
 // It is implemented in XModuleImpl.h or XComCreator.h
-int xCreateObject(const XCLSID& clsid, Ix_Object** ppv);
+int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv);
 
 // Return the current module handle for making a distinction between plugins.
 // It is implemented in XModuleImpl.h or XComCreator.h
-HMODULE xGetModuleHandle();
+HMODULE x3GetModuleHandle();
 
 #if defined(_MSC_VER) && !defined(_CPPRTTI)
 #error must enable RTTI (compiled with /GR)
@@ -23,9 +23,9 @@ HMODULE xGetModuleHandle();
 class Cx_Ptr;
 
 //! An autoptr class with a specified interface.
-/*! xCreateObject() is implemented in XModuleImpl.h or XComCreator.h.
+/*! x3CreateObject() is implemented in XModuleImpl.h or XComCreator.h.
     \ingroup _GROUP_PLUGIN_CORE_
-    \see Cx_Ptr, xCreateObject
+    \see Cx_Ptr, x3CreateObject
 */
 template <class IF_Type>
 class Cx_Interface
@@ -45,7 +45,7 @@ public:
     {
         if (m_pInterface)
         {
-            m_pObj->AddRef(xGetModuleHandle());
+            m_pObj->AddRef(x3GetModuleHandle());
         }
     }
 
@@ -55,7 +55,7 @@ public:
         {
             m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
             //ASSERT(m_pObj != NULL);
-            m_pObj->AddRef(xGetModuleHandle());
+            m_pObj->AddRef(x3GetModuleHandle());
         }
     }
 
@@ -71,7 +71,7 @@ public:
             {
                 m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
                 //ASSERT(m_pObj != NULL);
-                m_pObj->AddRef(xGetModuleHandle());
+                m_pObj->AddRef(x3GetModuleHandle());
             }
         }
     }
@@ -87,19 +87,19 @@ public:
             {
                 m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
                 //ASSERT(m_pObj != NULL);
-                m_pObj->AddRef(xGetModuleHandle());
+                m_pObj->AddRef(x3GetModuleHandle());
             }
         }
     }
 
-    explicit Cx_Interface(const XCLSID& clsid) : m_pInterface(NULL), m_pObj(NULL)
+    explicit Cx_Interface(const X3CLSID& clsid) : m_pInterface(NULL), m_pObj(NULL)
     {
-        if (0 == xCreateObject(clsid, &m_pObj))
+        if (0 == x3CreateObject(clsid, &m_pObj))
         {
             m_pInterface = dynamic_cast<IF_Type*>(m_pObj);
             if (NULL == m_pInterface)
             {
-                m_pObj->Release(xGetModuleHandle());
+                m_pObj->Release(x3GetModuleHandle());
                 m_pObj = NULL;
             }
         }
@@ -133,7 +133,7 @@ public:
             {
                 m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
                 //ASSERT(m_pObj != NULL);
-                m_pObj->AddRef(xGetModuleHandle());
+                m_pObj->AddRef(x3GetModuleHandle());
             }
         }
 
@@ -253,7 +253,7 @@ public:
             }
             else
             {
-                pIF->Release(xGetModuleHandle());
+                pIF->Release(x3GetModuleHandle());
                 pIF = NULL;
                 return false;
             }
@@ -262,16 +262,16 @@ public:
         return true;
     }
 
-    bool Create(const XCLSID& clsid)
+    bool Create(const X3CLSID& clsid)
     {
         Unload();
 
-        if (0 == xCreateObject(clsid, &m_pObj))
+        if (0 == x3CreateObject(clsid, &m_pObj))
         {
             m_pInterface = dynamic_cast<IF_Type*>(m_pObj);
             if (NULL == m_pInterface)
             {
-                m_pObj->Release(xGetModuleHandle());
+                m_pObj->Release(x3GetModuleHandle());
                 m_pObj = NULL;
             }
         }
@@ -284,7 +284,7 @@ private:
     {
         if (m_pObj)
         {
-            m_pObj->Release(xGetModuleHandle());
+            m_pObj->Release(x3GetModuleHandle());
             m_pObj = NULL;
             m_pInterface = NULL;
         }
@@ -297,11 +297,11 @@ private:
         {
             if (pObj)
             {
-                pObj->AddRef(xGetModuleHandle());
+                pObj->AddRef(x3GetModuleHandle());
             }
             if (m_pObj)
             {
-                m_pObj->Release(xGetModuleHandle());
+                m_pObj->Release(x3GetModuleHandle());
             }
             m_pObj = pObj;
             m_pInterface = pIF;
@@ -314,9 +314,9 @@ private:
 };
 
 //! An autoptr class with the Ix_Object interface.
-/*! xCreateObject() is implemented in XModuleImpl.h or XComCreator.h.
+/*! x3CreateObject() is implemented in XModuleImpl.h or XComCreator.h.
     \ingroup _GROUP_PLUGIN_CORE_
-    \see Ix_Object, Cx_Interface, xCreateObject
+    \see Ix_Object, Cx_Interface, x3CreateObject
 */
 class Cx_Ptr
 {
@@ -329,7 +329,7 @@ public:
     {
         if (m_pInterface)
         {
-            m_pInterface->AddRef(xGetModuleHandle());
+            m_pInterface->AddRef(x3GetModuleHandle());
         }
     }
 
@@ -339,7 +339,7 @@ public:
         m_pInterface = dynamic_cast<Ix_Object*>(pInterface);
         if (m_pInterface)
         {
-            m_pInterface->AddRef(xGetModuleHandle());
+            m_pInterface->AddRef(x3GetModuleHandle());
         }
     }
 
@@ -349,13 +349,13 @@ public:
         m_pInterface = dynamic_cast<Ix_Object*>(pIF.P());
         if (m_pInterface)
         {
-            m_pInterface->AddRef(xGetModuleHandle());
+            m_pInterface->AddRef(x3GetModuleHandle());
         }
     }
 
-    explicit Cx_Ptr(const XCLSID& clsid) : m_pInterface(NULL)
+    explicit Cx_Ptr(const X3CLSID& clsid) : m_pInterface(NULL)
     {
-        xCreateObject(clsid, &m_pInterface);
+        x3CreateObject(clsid, &m_pInterface);
     }
 
     ~Cx_Ptr()
@@ -377,7 +377,7 @@ public:
         m_pInterface = dynamic_cast<Ix_Object*>(pInterface);
         if (m_pInterface)
         {
-            m_pInterface->AddRef(xGetModuleHandle());
+            m_pInterface->AddRef(x3GetModuleHandle());
         }
 
         return *this;
@@ -477,10 +477,10 @@ public:
         m_pInterface = pIF;
     }
 
-    bool Create(const XCLSID& clsid)
+    bool Create(const X3CLSID& clsid)
     {
         Unload();
-        return 0 == xCreateObject(clsid, &m_pInterface);
+        return 0 == x3CreateObject(clsid, &m_pInterface);
     }
 
 private:
@@ -488,7 +488,7 @@ private:
     {
         if (m_pInterface)
         {
-            m_pInterface->Release(xGetModuleHandle());
+            m_pInterface->Release(x3GetModuleHandle());
             m_pInterface = NULL;
         }
     }
@@ -499,11 +499,11 @@ private:
         {
             if (pIF)
             {
-                pIF->AddRef(xGetModuleHandle());
+                pIF->AddRef(x3GetModuleHandle());
             }
             if (m_pInterface)
             {
-                m_pInterface->Release(xGetModuleHandle());
+                m_pInterface->Release(x3GetModuleHandle());
             }
             m_pInterface = pIF;
         }
@@ -524,7 +524,7 @@ Cx_Interface<IF_Type>::Cx_Interface(const Cx_Ptr& src) : m_pInterface(NULL), m_p
         if (m_pInterface)
         {
             m_pObj = src.P();
-            m_pObj->AddRef(xGetModuleHandle());
+            m_pObj->AddRef(x3GetModuleHandle());
         }
     }
 }
@@ -540,7 +540,7 @@ Cx_Interface<IF_Type>& Cx_Interface<IF_Type>::operator=(const Cx_Ptr& src)
         if (m_pInterface)
         {
             m_pObj = src.P();
-            m_pObj->AddRef(xGetModuleHandle());
+            m_pObj->AddRef(x3GetModuleHandle());
         }
     }
 

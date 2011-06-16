@@ -19,7 +19,7 @@ public:
     Cx_Module();
     virtual ~Cx_Module();
 
-    //! Initialize this plugin. Used by _xGetModuleInterface().
+    //! Initialize this plugin. Used by x3GetModuleInterface().
     void Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule);
 
 public:

@@ -6,7 +6,7 @@
 
 static CLogObserver* s_pObserver = NULL;
 
-OUTAPI bool InitializePlugin()
+OUTAPI bool x3InitializePlugin()
 {
     ASSERT(!s_pObserver);
     s_pObserver = new CLogObserver;
@@ -14,7 +14,7 @@ OUTAPI bool InitializePlugin()
     return true;
 }
 
-OUTAPI void UninitializePlugin()
+OUTAPI void x3UninitializePlugin()
 {
-    SafeDelete(s_pObserver);
+    x3::SafeDelete(s_pObserver);
 }

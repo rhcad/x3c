@@ -8,9 +8,17 @@
 
 #include <UtilFunc/X3Portability.h>
 
+#ifndef NO_VECFUNC
 #include <UtilFunc/vecfunc.h>   // STL master include file and functions
+#endif
+#ifndef NO_SAFECALL
 #include <UtilFunc/SafeCall.h>  // SafeCall and InterfaceSafeCall
+#endif
+#ifndef NO_DEBUGR
 #include <Log/DebugR.h>         // ASSERT, VERIFY and ASSERT_MESSAGE
-#include <Log/LogHelper.h>      // LOG_WARNING ...
+#endif
+#ifndef NO_LOGHELPER
+#include <Log/LogHelper.h>      // X3LOG_WARNING, X3LogGroup ...
+#endif
 
 #endif // X3PLUGIN_INC_H

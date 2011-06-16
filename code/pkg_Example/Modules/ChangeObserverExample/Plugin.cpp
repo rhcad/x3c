@@ -4,14 +4,14 @@
 static CDocObserverTestOnRun* s_observer = NULL;
 
 // Optional function to initialize this plugin when loaded by the plugin manager.
-OUTAPI bool InitializePlugin()
+OUTAPI bool x3InitializePlugin()
 {
     s_observer = new CDocObserverTestOnRun;
     return true;
 }
 
 // Optional function to free this plugin when unloaded by the plugin manager.
-OUTAPI void UninitializePlugin()
+OUTAPI void x3UninitializePlugin()
 {
-    SafeDelete(s_observer);
+    x3::SafeDelete(s_observer);
 }

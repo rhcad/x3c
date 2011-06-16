@@ -42,8 +42,8 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
     }
 
-    m_wndLeft.CreateSubWnd(CLSID_ExampleWndA);
-    m_wndRight.CreateSubWnd(CLSID_ExampleWndB);
+    m_wndLeft.CreateSubWnd(X3CLS_ExampleWndA);
+    m_wndRight.CreateSubWnd(X3CLS_ExampleWndB);
 	
 	return 0;
 }

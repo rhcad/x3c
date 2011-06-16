@@ -9,7 +9,7 @@ all:
 	$(CC) $(CFLAGS) -c  ChildView.cpp
 	$(CC) $(CFLAGS) -c  HollowViewApp.cpp
 	$(CC) $(CFLAGS) -c  MainFrm.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/libHollowViewApp.so *.o
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/HollowViewApp.app *.o
 clean:
 	rm -rf *.so
 	rm -rf *.o

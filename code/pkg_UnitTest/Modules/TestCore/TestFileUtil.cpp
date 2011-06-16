@@ -23,10 +23,10 @@ void TestFileUtil::tearDown()
 
 void TestFileUtil::testCopyFolder()
 {
-    ASSERT(FileUtility()->CopyPathFile(L"D:\\FxData\\", L"D:\\Test\\"));
+    ASSERT(x3::FileUtility()->CopyPathFile(L"D:\\FxData\\", L"D:\\Test\\"));
 }
 
 void TestFileUtil::testDelFolder()
 {
-    ASSERT(FileUtility()->DeletePathFile(L"D:\\Test\\"));
+    ASSERT(x3::FileUtility()->DeletePathFile(L"D:\\Test\\"));
 }

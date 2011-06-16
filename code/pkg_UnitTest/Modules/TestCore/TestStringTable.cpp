@@ -25,7 +25,7 @@ void TestStringTable::tearDown()
 
 void TestStringTable::testSimple()
 {
-    Cx_Interface<Ix_StringTable> pIFTable(CLSID_StringTable);
+    Cx_Interface<Ix_StringTable> pIFTable(X3CLS_StringTable);
     ASSERT(pIFTable);
 
     pIFTable->LoadFiles(L"");

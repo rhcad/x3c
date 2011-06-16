@@ -42,7 +42,7 @@ bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,
         {
             if (FAILED(hr = m_pCon.CreateInstance(__uuidof(Connection))))
             {
-                LOG_ERROR(L"@ConfigDB:IDS_CREATEINSTANCE_FAIL");
+                X3LOG_ERROR(L"@ConfigDB:IDS_CREATEINSTANCE_FAIL");
                 _com_util::CheckError(hr);
             }
         }
@@ -56,7 +56,7 @@ bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,
 
         if (FAILED(hr = m_pCon->raw_Open(NULL, NULL, NULL, adConnectUnspecified)))
         {
-            LOG_ERROR(L"@ConfigDB:IDS_CONNECT_FAIL");
+            X3LOG_ERROR(L"@ConfigDB:IDS_CONNECT_FAIL");
             _com_issue_errorex(hr, m_pCon, __uuidof(m_pCon));
         }
 

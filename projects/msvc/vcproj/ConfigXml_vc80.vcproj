@@ -231,7 +231,7 @@
 			Name="Interface"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Xml\ConfigIOSection.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\Xml\Cx_ConfigSection.h"
 				>
 			</File>
 			<File

@@ -9,33 +9,33 @@
 #include "Ix_Object.h"
 
 //! Logging type.
-enum kLogType
+enum x3LogType
 {
-    kLogType_Debug,     //!< debug info
-    kLogType_Info,      //!< infomation
-    kLogType_Warning,   //!< warning info.
-    kLogType_Error,     //!< error info.
-    kLogType_Fatal      //!< fatal error info.
+    x3LogType_Debug,     //!< debug info
+    x3LogType_Info,      //!< infomation
+    x3LogType_Warning,   //!< warning info.
+    x3LogType_Error,     //!< error info.
+    x3LogType_Fatal      //!< fatal error info.
 };
 
-interface ILogObserver;
+interface Ix_LogObserver;
 
-const XCLSID CLSID_LogManager("bbf48a97-9aef-4368-9dc0-2d2937c326ec");
+const X3CLSID X3CLS_LogManager("bbf48a97-9aef-4368-9dc0-2d2937c326ec");
 
 //! interface of logging output observer manager.
-/*! Used by RegisterLogObserver, CAutoLogGroup and LOG_WARNING.
+/*! Used by RegisterLogObserver, X3LogGroup and X3LOG_WARNING.
     \interface Ix_LogManager
     \ingroup _GROUP_PLUGIN_LOG_
-    \see CLSID_LogManager, Ix_StringTable
-    \see RegisterLogObserver, UnRegisterObserver
+    \see X3CLS_LogManager, Ix_StringTable
+    \see x3::RegisterLogObserver, UnRegisterObserver
 */
 interface Ix_LogManager
 {
     //! Add a logging output observer.
-    virtual bool RegisterObserver(ILogObserver* observer) = 0;
+    virtual bool RegisterObserver(Ix_LogObserver* observer) = 0;
 
     //! Remove a logging output observer.
-    virtual void UnRegisterObserver(ILogObserver* observer) = 0;
+    virtual void UnRegisterObserver(Ix_LogObserver* observer) = 0;
 
     //! Beginning a new logging group.
     /*!
@@ -44,14 +44,14 @@ interface Ix_LogManager
             then the manager will translate into localization text using Ix_StringTable.
         \param extra additional context info.
         \return true if successful.
-        \see CAutoLogGroup, PopGroup
+        \see X3LogGroup, PopGroup
     */
     virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra) = 0;
 
     //! Ending a logging group.
     /*!
         \return true if successful.
-        \see CAutoLogGroup, PushGroup
+        \see X3LogGroup, PushGroup
     */
     virtual bool PopGroup() = 0;
 
@@ -65,9 +65,9 @@ interface Ix_LogManager
         \param file source file name, __FILE__
         \param line code line, __LINE__
         \return true if successful.
-        \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
+        \see X3LOG_WARNING, X3LOG_WARNING2, X3LOG_ERROR, X3LOG_ERROR2
     */
-    virtual bool WriteLog(kLogType type, const wchar_t* msg, 
+    virtual bool WriteLog(x3LogType type, const wchar_t* msg, 
         const wchar_t* extra, const char* file, long line) = 0;
 
     //! Output a logging info.(ANSI string)
@@ -80,9 +80,9 @@ interface Ix_LogManager
         \param file source file name, __FILE__
         \param line code line, __LINE__
         \return true if successful.
-        \see LOG_WARNING, LOG_WARNING2, LOG_ERROR, LOG_ERROR2
+        \see X3LOG_WARNING, X3LOG_WARNING2, X3LOG_ERROR, X3LOG_ERROR2
     */
-    virtual bool WriteLog(kLogType type, const char* msg, 
+    virtual bool WriteLog(x3LogType type, const char* msg, 
         const char* extra, const char* file, long line) = 0;
 
     //! Show assert info, used by XCrtDbgReport.

@@ -8,13 +8,13 @@
 
 #include <Ix_Object.h>
 
-const XCLSID CLSID_ClipboardUtil("fc957aed-3c48-461e-b9b8-6ff255f2e71d");
+const X3CLSID X3CLS_ClipboardUtil("fc957aed-3c48-461e-b9b8-6ff255f2e71d");
 
 //! 剪贴板实用操作的单实例接口
 /*!
     \interface Ix_ClipboardUtil
     \ingroup _GROUP_UTILITY_
-    \see CLSID_ClipboardUtil
+    \see X3CLS_ClipboardUtil
 */
 interface Ix_ClipboardUtil
 {

@@ -1,5 +1,5 @@
-/*! \file ConfigIOSection.h
- *  \brief 定义配置读写接口的封装类 CConfigIOSection
+/*! \file Cx_ConfigSection.h
+ *  \brief 定义配置读写接口的封装类 Cx_ConfigSection
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -13,22 +13,22 @@
     而 Ix_ConfigData 则对应于全部数据节点。
     \ingroup _GROUP_PLUGIN_XML_
 */
-class CConfigIOSection : public Cx_Interface<Ix_ConfigSection>
+class Cx_ConfigSection : public Cx_Interface<Ix_ConfigSection>
 {
 public:
     //! 构造函数
-    CConfigIOSection()
+    Cx_ConfigSection()
     {
     }
 
     //! 拷贝构造函数
-    CConfigIOSection(const Cx_Interface<Ix_ConfigSection>& src)
+    Cx_ConfigSection(const Cx_Interface<Ix_ConfigSection>& src)
         : Cx_Interface<Ix_ConfigSection>(src)
     {
     }
 
     //! 从Cx_Ptr构造
-    CConfigIOSection(const Cx_Ptr& objConfigIO)
+    Cx_ConfigSection(const Cx_Ptr& objConfigIO)
     {
         Cx_Interface<Ix_ConfigSection> pIFSec(objConfigIO);
         if (pIFSec.IsNotNull())
@@ -38,7 +38,7 @@ public:
     }
 
     //! 赋值操作符函数
-    CConfigIOSection& operator=(const Cx_Interface<Ix_ConfigSection>& src)
+    Cx_ConfigSection& operator=(const Cx_Interface<Ix_ConfigSection>& src)
     {
         if (&src != this)
         {
@@ -48,7 +48,7 @@ public:
     }
 
     //! 析构函数
-    virtual ~CConfigIOSection()
+    virtual ~Cx_ConfigSection()
     {
         Release();
     }
@@ -59,7 +59,7 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(
+    Cx_ConfigSection GetSection(
         const wchar_t* name, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -74,7 +74,7 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name,
+    Cx_ConfigSection GetSection(const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
@@ -89,7 +89,7 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name,
+    Cx_ConfigSection GetSection(const wchar_t* name,
         const wchar_t* attrName, const wchar_t* attrValue,
         bool autoCreate = true) const
     {
@@ -107,7 +107,7 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name,
+    Cx_ConfigSection GetSection(const wchar_t* name,
         const wchar_t* attrName, const wchar_t* attrValue,
         const wchar_t* attrName2, const wchar_t* attrValue2,
         bool autoCreate = true) const
@@ -127,7 +127,7 @@ public:
         \param autoCreate 不存在时是否自动添加
         \return 新的数据节点，不存在则自动添加
     */
-    CConfigIOSection GetSection(const wchar_t* name,
+    Cx_ConfigSection GetSection(const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue,
         const wchar_t* attrName2, ULONG attrValue2,
         bool autoCreate = true)
@@ -156,7 +156,7 @@ public:
         \return 新的数据节点，如果不存在则对该对象的读写操作将忽略，可以用 IsValid() 来检查是否为无效节点
         \see GetSectionCount
     */
-    CConfigIOSection GetSectionByIndex(const wchar_t* name, long index) const
+    Cx_ConfigSection GetSectionByIndex(const wchar_t* name, long index) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->GetSectionByIndex(P(), name, index);
@@ -167,7 +167,7 @@ public:
         \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
         \return 新的数据节点
     */
-    CConfigIOSection AddSection(const wchar_t* name)
+    Cx_ConfigSection AddSection(const wchar_t* name)
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->AddSection(P(), name);
@@ -203,7 +203,7 @@ public:
     /*! 如果本节点为根节点，则返回节点为无效节点(IsValid()==false)
         \return 上一级数据节点对象
     */
-    CConfigIOSection GetParentSection()
+    Cx_ConfigSection GetParentSection()
     {
         Ix_ConfigData* pIFData = P()->GetData();
         return pIFData->GetParentSection(P());

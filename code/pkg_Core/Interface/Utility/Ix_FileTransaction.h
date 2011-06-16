@@ -8,13 +8,13 @@
 
 #include <Ix_Object.h>
 
-const XCLSID CLSID_FileTransaction("66087749-6a2d-40b7-86d9-687664f91e1b");
+const X3CLSID X3CLS_FileTransaction("66087749-6a2d-40b7-86d9-687664f91e1b");
 
 //! 文件操作事务的接口
 /*!
     \interface Ix_FileTransaction
     \ingroup _GROUP_UTILITY_
-    \see CLSID_FileTransaction
+    \see X3CLS_FileTransaction
 */
 interface Ix_FileTransaction
 {

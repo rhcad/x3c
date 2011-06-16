@@ -24,10 +24,10 @@ public:
     std::wstring    m_path;
 
 public:
-    int CreateObject(const XCLSID& clsid, Ix_Object** ppv, HMODULE fromdll)
+    int CreateObject(const X3CLSID& clsid, Ix_Object** ppv, HMODULE fromdll)
     {
-        if (CLSID_AppWorkPath == clsid
-            || CLSID_PluginDelayLoad == clsid)
+        if (X3CLS_AppWorkPath == clsid
+            || X3CLS_PluginDelayLoad == clsid)
         {
             *ppv = this;
             return 0;
@@ -41,13 +41,13 @@ private:
 
     std::wstring GetWorkPath()
     {
-        return m_path.empty() ? FileNameRelToAbs(L"", false) : m_path;
+        return m_path.empty() ? x3::FileNameRelToAbs(L"", false) : m_path;
     }
 
     void SetWorkPath(const std::wstring& path)
     {
         m_path = path;
-        EnsurePathHasSlash(m_path);
+        x3::EnsurePathHasSlash(m_path);
     }
 
 private:
@@ -58,29 +58,29 @@ private:
 
 static Cx_PluginLoaderOut s_loader;
 
-OUTAPI Ix_ObjectFactory* xGetRegisterBank()
+OUTAPI Ix_ObjectFactory* x3GetRegisterBank()
 {
     return &s_loader;
 }
 
-Ix_ObjectFactory* xGetObjectFactory()
+Ix_ObjectFactory* x3GetObjectFactory()
 {
     return &s_loader;
 }
 
-OUTAPI HMODULE xGetMainModuleHandle()
+OUTAPI HMODULE x3GetMainModuleHandle()
 {
     return s_loader.GetMainModuleHandle();
 }
 
-HMODULE xGetModuleHandle()
+HMODULE x3GetModuleHandle()
 {
     return s_loader.m_hModule;
 }
 
-int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
 {
-    return s_loader.CreateObject(clsid, ppv, xGetModuleHandle());
+    return s_loader.CreateObject(clsid, ppv, x3GetModuleHandle());
 }
 
 #if defined(_USRDLL) && defined(APIENTRY)

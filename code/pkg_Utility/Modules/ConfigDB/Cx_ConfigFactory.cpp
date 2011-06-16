@@ -30,12 +30,12 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
 
     if (!exist)
     {
-        LOG_ERROR2(L"@ConfigDB:IDS_NO_FILE", filename);
+        X3LOG_ERROR2(L"@ConfigDB:IDS_NO_FILE", filename);
         return Cx_Ptr();
     }
     if (readonly)
     {
-        LOG_INFO2(L"@ConfigDB:IDS_FILE_READONLY", filename);
+        X3LOG_INFO2(L"@ConfigDB:IDS_FILE_READONLY", filename);
     }
 
     std::wostringstream conn;
@@ -63,7 +63,7 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
         conn << L"Jet OLEDB:Database Password=" << password << L";" ;
     }
 
-    Cx_Interface<Ix_InitDatabase> pIFDB(CLSID_CfgDatabase);
+    Cx_Interface<Ix_InitDatabase> pIFDB(X3CLS_CfgDatabase);
     ASSERT(pIFDB.IsNotNull());
     Ix_SQLParser* pSQLParser = new SQLParser_Access();
 
@@ -93,7 +93,7 @@ Cx_Ptr Cx_ConfigFactory::OpenSQLServerDB(const std::wstring& server,
         conn << L"Password=" << password << L";" ;
     }
 
-    Cx_Interface<Ix_InitDatabase> pIFDB(CLSID_CfgDatabase);
+    Cx_Interface<Ix_InitDatabase> pIFDB(X3CLS_CfgDatabase);
     ASSERT(pIFDB.IsNotNull());
     Ix_SQLParser* pSQLParser = new SQLParser_SQLServer();
 

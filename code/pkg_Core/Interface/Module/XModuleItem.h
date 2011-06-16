@@ -10,13 +10,13 @@
  *  \brief the base class of single instance classes.
  *  \internal
  */
-class CModuleItem
+class Cx_ModuleItem
 {
 protected:
-    CModuleItem() : m_index(-1)
+    Cx_ModuleItem() : m_index(-1)
     {
     }
-    virtual ~CModuleItem()
+    virtual ~Cx_ModuleItem()
     {
     }
 
@@ -51,14 +51,14 @@ public:
         }
     }
 
-    //! Init the single instance stack. _xGetModuleInterface will call it.
+    //! Init the single instance stack. x3GetModuleInterface will call it.
     static void InitModuleItems(long nCount)
     {
         if (NULL == Items() && nCount > 0)
         {
             MaxCount() = (nCount > MaxCount()) ? nCount : MaxCount();
             Index() = MaxCount();
-            Items() = new CModuleItem*[MaxCount()];
+            Items() = new Cx_ModuleItem*[MaxCount()];
         }
     }
 
@@ -75,9 +75,9 @@ private:
         static long s_index = 0;
         return s_index;
     }
-    static CModuleItem**& Items()
+    static Cx_ModuleItem**& Items()
     {
-        static CModuleItem** s_pItems = NULL;
+        static Cx_ModuleItem** s_pItems = NULL;
         return s_pItems;
     }
 };

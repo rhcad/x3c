@@ -9,6 +9,8 @@
 #include "vecfunc.h"
 #include <XComPtr.h>
 
+namespace x3 {
+
 //! Returns a object of the specified index in a array container.
 /*!
     \ingroup _GROUP_UTILFUNC
@@ -115,4 +117,5 @@ long find_pair(_Ta& arr, Pair_Type& p)
     return find_if(arr, std::bind2nd(FindPairByPtr<IF_Type, Pair_Type>(), p));
 }
 
+} // x3
 #endif // UTILFUNC_VECPTR_H_

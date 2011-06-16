@@ -8,13 +8,13 @@
 
 #include "Ix_Object.h"
 
-const XCLSID CLSID_StringTable("b8c36b29-59c3-4db2-be43-fd4982e6e71d");
+const X3CLSID X3CLS_StringTable("b8c36b29-59c3-4db2-be43-fd4982e6e71d");
 
 //! 本地化字符串表的接口
 /*! 本地化字符串XML文件存放于主程序目录的 Translations/Strings 目录下
     \interface Ix_StringTable
     \ingroup _GROUP_PLUGIN_XML_
-    \see CLSID_StringTable
+    \see X3CLS_StringTable
 */
 interface Ix_StringTable
 {
@@ -58,6 +58,7 @@ interface Ix_StringTable
 };
 
 #ifdef X3_CORE_XCOMPTR_H_
+namespace x3 {
 //! 得到一个模块的指定ID名称对应的字符串值
 /*!
     \param[in] module 模块名
@@ -68,9 +69,10 @@ interface Ix_StringTable
 inline std::wstring GetStringValue(const std::wstring& module, 
     const std::wstring& id, bool* hasvalue = NULL)
 {
-    Cx_Interface<Ix_StringTable> pIFTable(CLSID_StringTable);
+    Cx_Interface<Ix_StringTable> pIFTable(X3CLS_StringTable);
     return pIFTable ? pIFTable->GetValue(module, id, hasvalue) : std::wstring();
 }
+} // x3
 #endif
 
 #endif // X3_XML_ISTRINGTABLE_H_

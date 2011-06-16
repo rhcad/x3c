@@ -10,21 +10,21 @@
 #include "XModuleItem.h"
 #include <typeinfo>
 
-HMODULE xGetModuleHandle();
+HMODULE x3GetModuleHandle();
 
 /*! \ingroup _GROUP_PLUGIN_CORE2_
- *  \brief Single instance implement template class used by XDEFINE_CLASSMAP_ENTRY_Singleton.
+ *  \brief Single instance implement template class used by X3_CLASS_Singleton.
  *  \brief The template parameter is a class which implement a interface.
  *  \internal
  *  \see   Cx_Object \n
- *         XDEFINE_CLASSMAP_ENTRY_Singleton \n
- *         XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton
+ *         X3_CLASS_Singleton \n
+ *         X3_INTERFACE_Singleton
  */
 template <class ClsType>
 class Cx_SingletonObject
     : public ClsType
     , public Ix_Object
-    , public CModuleItem
+    , public Cx_ModuleItem
 {
 protected:
     Cx_SingletonObject(bool bRef = true) : m_refcount(bRef ? 1 : 0)
@@ -42,7 +42,7 @@ protected:
 protected:
     virtual void AddRef(HMODULE fromdll)
     {
-        if (fromdll != xGetModuleHandle())
+        if (fromdll != x3GetModuleHandle())
         {
             InterlockedIncrement(&RefCountByOthers());
         }
@@ -51,7 +51,7 @@ protected:
 
     virtual void Release(HMODULE fromdll)
     {
-        if (fromdll != xGetModuleHandle())
+        if (fromdll != x3GetModuleHandle())
         {
             InterlockedDecrement(&RefCountByOthers());
         }

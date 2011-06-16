@@ -8,6 +8,8 @@
 
 #include <string>
 
+namespace x3 {
+
 //! Callback interface for directory scanning.
 interface IScanFilesCallback
 {
@@ -153,4 +155,5 @@ private:
     void operator=(const CScanFilesByExtension&);
 };
 
+} // x3
 #endif // UTILFUNC_SCANFILES_H_

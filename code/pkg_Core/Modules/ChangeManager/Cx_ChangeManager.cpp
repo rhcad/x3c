@@ -24,11 +24,11 @@ void Cx_ChangeManager::RegisterObserver(const char* type,
     ASSERT(observer && type);
 
     std::pair<HMODULE, std::string> key(fromdll, type);
-    if (fromdll && find_value(m_callers, key) < 0)
+    if (fromdll && x3::find_value(m_callers, key) < 0)
     {
         m_callers.push_back(key);
 
-        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(CLSID_PluginDelayLoad);
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(X3CLS_PluginDelayLoad);
         if (pIFLoader)
         {
             pIFLoader->AddObserverPlugin(fromdll, type);
@@ -67,11 +67,11 @@ void Cx_ChangeManager::ChangeNotify(const char* type, ChangeNotifyData* data)
 {
     ASSERT(data != NULL);
 
-    if (find_value(m_types, std::string(type)) < 0)
+    if (x3::find_value(m_types, std::string(type)) < 0)
     {
         m_types.push_back(type);
 
-        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(CLSID_PluginDelayLoad);
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(X3CLS_PluginDelayLoad);
         if (pIFLoader)
         {
             pIFLoader->FireFirstEvent(type);

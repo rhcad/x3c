@@ -108,7 +108,7 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
     return count;
 }
 
-class CScanPluginsByExt : public CScanFilesCallback
+class CScanPluginsByExt : public x3::CScanFilesCallback
 {
 public:
     CScanPluginsByExt(std::vector<std::wstring>* files, const wchar_t* ext)
@@ -141,7 +141,7 @@ void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
                                   bool recursive)
 {
     CScanPluginsByExt scanner(&filenames, ext);
-    ScanFiles(&scanner, path, recursive);
+    x3::ScanFiles(&scanner, path, recursive);
 }
 
 bool Cx_PluginLoader::issep(wchar_t c)
@@ -203,7 +203,7 @@ long Cx_PluginLoader::InitializePlugins()
 {
     long count = 0;
 
-    for (long i = 0; i < GetSize(m_modules); i++)
+    for (long i = 0; i < x3::GetSize(m_modules); i++)
     {
         if (m_modules[i].inited)
         {
@@ -218,12 +218,12 @@ long Cx_PluginLoader::InitializePlugins()
 
         typedef bool (*FUNC_INIT)();
         FUNC_INIT pfn = (FUNC_INIT)GetProcAddress(
-            m_modules[i].hdll, "InitializePlugin");
+            m_modules[i].hdll, "x3InitializePlugin");
 
         if (pfn && !(*pfn)())
         {
             GetModuleFileNameW(m_modules[i].hdll, m_modules[i].filename, MAX_PATH);
-            LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", m_modules[i].filename);
+            X3LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", m_modules[i].filename);
             VERIFY(UnloadPlugin(m_modules[i].filename));
             i--;
         }
@@ -242,7 +242,7 @@ long Cx_PluginLoader::InitializePlugins()
 int Cx_PluginLoader::GetPluginIndex(const wchar_t* filename)
 {
     const wchar_t* title = PathFindFileNameW(filename);
-    int i = GetSize(m_modules);
+    int i = x3::GetSize(m_modules);
 
     while (--i >= 0)
     {
@@ -301,7 +301,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
     {
         if (_wcsicmp(filename, m_modules[existIndex].filename) != 0)
         {
-            LOG_DEBUG2(L"The plugin is already loaded.",
+            X3LOG_DEBUG2(L"The plugin is already loaded.",
                 filename << L", " << (m_modules[existIndex].filename));
         }
         return false;
@@ -332,7 +332,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
     }
     else if (PathFileExistsW(filename))
     {
-        LOG_WARNING2(L"Fail to load plugin.", errcode << L", " << filename);
+        X3LOG_WARNING2(L"Fail to load plugin.", errcode << L", " << filename);
     }
 
     return hdll != NULL;
@@ -351,7 +351,7 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 
     typedef bool (*FUNC_CANUNLOAD)();
     FUNC_CANUNLOAD pfnCan = (FUNC_CANUNLOAD)GetProcAddress(
-        hdll, "xCanUnloadPlugin");
+        hdll, "x3CanUnloadPlugin");
 
     if (pfnCan && !pfnCan())
     {
@@ -360,7 +360,7 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 
     typedef void (*FUNC_UNLOAD)();
     FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
-        hdll, "UninitializePlugin");
+        hdll, "x3UninitializePlugin");
 
     if (pfnUnload)
     {
@@ -382,23 +382,23 @@ long Cx_PluginLoader::UnloadPlugins()
     long i = 0;
     long count = 0;
 
-    for (i = GetSize(m_modules) - 1; i >= 0; i--)
+    for (i = x3::GetSize(m_modules) - 1; i >= 0; i--)
     {
         typedef void (*FUNC_UNLOAD)();
         FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
-            m_modules[i].hdll, "UninitializePlugin");
+            m_modules[i].hdll, "x3UninitializePlugin");
         if (pfnUnload)
         {
             pfnUnload();
         }
     }
 
-    for (i = GetSize(m_modules) - 1; i >= 0; i--)
+    for (i = x3::GetSize(m_modules) - 1; i >= 0; i--)
     {
         ClearModuleItems(m_modules[i].hdll);
     }
 
-    for (i = GetSize(m_modules) - 1; i >= 0; i--)
+    for (i = x3::GetSize(m_modules) - 1; i >= 0; i--)
     {
         if (m_modules[i].hdll)
         {
@@ -425,12 +425,12 @@ bool Cx_PluginLoader::ClearModuleItems(HMODULE hModule)
 
 long Cx_PluginLoader::GetPluginCount()
 {
-    return GetSize(m_modules);
+    return x3::GetSize(m_modules);
 }
 
 bool Cx_PluginLoader::GetPluginFileName(long index, HMODULE& hdll, std::wstring& filename)
 {
-    bool valid = IsValidIndexOf(m_modules, index);
+    bool valid = x3::IsValidIndexOf(m_modules, index);
 
     hdll = valid ? m_modules[index].hdll : NULL;
     filename = valid ? m_modules[index].filename : L"";
@@ -526,7 +526,7 @@ bool Cx_PluginLoader::IsDelayPlugin(const wchar_t* filename)
 
     for (; it != m_delayFiles.end(); ++it)
     {
-        int len2 = len - GetSize(*it);
+        int len2 = len - x3::GetSize(*it);
         const wchar_t* fnend = &filename[0 > len2 ? 0 : len2];
         if (_wcsicmp(fnend, it->c_str()) == 0)
         {
@@ -563,11 +563,11 @@ bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
 
         typedef bool (*FUNC_PLUGINLOAD)();
         FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
-            m_modules[moduleIndex].hdll, "InitializePlugin");
+            m_modules[moduleIndex].hdll, "x3InitializePlugin");
 
         if (pfn && !(*pfn)())
         {
-            LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", filename);
+            X3LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", filename);
             VERIFY(UnloadPlugin(filename));
         }
         else
@@ -607,7 +607,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
         moduleInfo.inited = false;
         wcsncpy_s(moduleInfo.filename, MAX_PATH, filename, MAX_PATH);
 
-        moduleIndex = GetSize(m_modules);
+        moduleIndex = x3::GetSize(m_modules);
         m_modules.push_back(moduleInfo);
     }
 
@@ -616,7 +616,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
         return true;
     }
 
-    _XCLASSMETA_ENTRY cls;
+    X3CLASSENTRY cls;
     CLSIDS clsids;
 
     if (!LoadClsids(clsids, filename))
@@ -639,7 +639,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 }
 
 #include <Xml/Ix_ConfigXml.h>
-#include <Xml/ConfigIOSection.h>
+#include <Xml/Cx_ConfigSection.h>
 #include <Xml/Ix_ConfigTransaction.h>
 #include <UtilFunc/ConvStr.h>
 
@@ -657,7 +657,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
         wcscpy_s(m_clsfile, MAX_PATH, m_inifile);
         PathRenameExtensionW(m_clsfile, L".clsbuf");
 
-        if (pIFFile.Create(CLSID_ConfigXmlFile))
+        if (pIFFile.Create(X3CLS_ConfigXmlFile))
         {
             m_cache = pIFFile;
             pIFFile->SetFileName(m_clsfile);
@@ -668,19 +668,19 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
 
     if (pIFFile)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
+        Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
         seclist = seclist.GetSection(L"clsids", false);
 
         for (int i = 0; i < 999; i++)
         {
-            CConfigIOSection sec(seclist.GetSectionByIndex(L"clsid", i));
+            Cx_ConfigSection sec(seclist.GetSectionByIndex(L"clsid", i));
             if (!sec->IsValid())
             {
                 break;
             }
-            XCLSID clsid(x3::w2a(sec->GetString(L"id")).c_str());
-            if (clsid.valid() && find_value(clsids, clsid) < 0)
+            X3CLSID clsid(x3::w2a(sec->GetString(L"id")).c_str());
+            if (clsid.valid() && x3::find_value(clsids, clsid) < 0)
             {
                 clsids.push_back(clsid);
             }
@@ -690,7 +690,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     bool has = !clsids.empty();
     if (!has)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
+        Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
         seclist = seclist.GetSection(L"observers", false);
         has = (seclist.GetSectionCount(L"observer") > 0);
@@ -705,7 +705,7 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
 
     if (pIFFile)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
+        Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"plugins/plugin", L"filename", PathFindFileNameW(filename)));
 
         seclist = seclist.GetSection(L"clsids");
@@ -714,10 +714,10 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
         for (CLSIDS::const_iterator it = clsids.begin();
             it != clsids.end(); ++it)
         {
-            CConfigIOSection sec(seclist.GetSection(
+            Cx_ConfigSection sec(seclist.GetSection(
                 L"clsid", L"id", x3::a2w(it->str()).c_str()));
 
-            _XCLASSMETA_ENTRY* pEntry = FindEntry(*it);
+            X3CLASSENTRY* pEntry = FindEntry(*it);
             if (pEntry && pEntry->pfnObjectCreator)
             {
                 sec->SetString(L"class", x3::a2w(pEntry->className).c_str());
@@ -730,7 +730,7 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
 
 bool Cx_PluginLoader::SaveClsids()
 {
-    CConfigTransaction autosave(m_cache);
+    Cx_ConfigTransaction autosave(m_cache);
     return autosave.Submit();
 }
 
@@ -744,7 +744,7 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
         Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
         if (pIFFile)
         {
-            CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
+            Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
                 L"observers/observer", L"type", x3::a2w(obtype).c_str()));
             seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
 
@@ -761,12 +761,12 @@ void Cx_PluginLoader::FireFirstEvent(const char* obtype)
 
     if (pIFFile)
     {
-        CConfigIOSection seclist(pIFFile->GetData()->GetSection(NULL,
+        Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
             L"observers/observer", L"type", x3::a2w(obtype).c_str(), false));
 
         for (int i = 0; i < 999; i++)
         {
-            CConfigIOSection sec(seclist.GetSectionByIndex(L"plugin", i));
+            Cx_ConfigSection sec(seclist.GetSectionByIndex(L"plugin", i));
             std::wstring shortflname(sec->GetString(L"filename"));
 
             if (shortflname.empty())

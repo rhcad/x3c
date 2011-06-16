@@ -35,14 +35,14 @@ bool Cx_ClipboardUtil::CopyText(HWND wndOwner, const std::wstring& text)
                 else
                 {
                     err = GetLastError();
-                    LOG_WARNING2(L"@TextUtility:IDS_SETCLIP_FAIL", GetSystemErrorString(err));
+                    X3LOG_WARNING2(L"@TextUtility:IDS_SETCLIP_FAIL", GetSystemErrorString(err));
                 }
             }
         }
         else
         {
             err = GetLastError();
-            LOG_WARNING2(L"@TextUtility:IDS_ALLOCMEM_FAIL", GetSystemErrorString(err));
+            X3LOG_WARNING2(L"@TextUtility:IDS_ALLOCMEM_FAIL", GetSystemErrorString(err));
         }
 
         ::CloseClipboard();
@@ -50,7 +50,7 @@ bool Cx_ClipboardUtil::CopyText(HWND wndOwner, const std::wstring& text)
     else
     {
         err = GetLastError();
-        LOG_WARNING2(L"@TextUtility:IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
+        X3LOG_WARNING2(L"@TextUtility:IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
     }
 
     return bRet;
@@ -63,14 +63,14 @@ bool Cx_ClipboardUtil::PasteText(HWND wndOwner, std::wstring& text, bool clear)
     if (!::IsClipboardFormatAvailable(CF_UNICODETEXT)
         && !::IsClipboardFormatAvailable(CF_TEXT))
     {
-        LOG_INFO(L"@TextUtility:IDS_CLIP_NOTEXT");
+        X3LOG_INFO(L"@TextUtility:IDS_CLIP_NOTEXT");
         return false;
     }
 
     if (!::OpenClipboard(wndOwner))
     {
         DWORD err = GetLastError();
-        LOG_WARNING2(L"@TextUtility:IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
+        X3LOG_WARNING2(L"@TextUtility:IDS_OPENCLIP_FAIL", GetSystemErrorString(err));
     }
     else
     {

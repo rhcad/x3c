@@ -1,5 +1,5 @@
-/*! \file ILogObserver.h
- *  \brief Define logging output observer interface: ILogObserver
+/*! \file Ix_LogObserver.h
+ *  \brief Define logging output observer interface: Ix_LogObserver
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
@@ -9,13 +9,13 @@
 #include "Ix_Object.h"
 
 //! logging output observer interface.
-/*! Use RegisterLogObserver(ILogObserver*) to register a observer,
+/*! Use RegisterLogObserver(Ix_LogObserver*) to register a observer,
     and use UnRegisterLogObserver to unregister.
-    \interface ILogObserver
+    \interface Ix_LogObserver
     \ingroup _GROUP_PLUGIN_LOG_
-    \see RegisterLogObserver, UnRegisterLogObserver, CLogObserverImpl
+    \see x3::RegisterLogObserver, UnRegisterLogObserver, Cx_LogObserverImpl
 */
-interface ILogObserver
+interface Ix_LogObserver
 {
     //! Notification of beginning a new logging group.
     /*!
@@ -37,7 +37,7 @@ interface ILogObserver
 
     //! Notification of outputting a logging info.
     /*!
-        \param type logging type, see kLogType.
+        \param type logging type, see x3LogType.
         \param msg logging text, may be localization text.
         \param extra additional context info.
         \param module module name extracting from logging text.
@@ -55,11 +55,11 @@ interface ILogObserver
 /*!
     \ingroup _GROUP_PLUGIN_LOG_
 */
-class CLogObserverImpl : public ILogObserver
+class Cx_LogObserverImpl : public Ix_LogObserver
 {
 public:
-    CLogObserverImpl() {}
-    virtual ~CLogObserverImpl() {}
+    Cx_LogObserverImpl() {}
+    virtual ~Cx_LogObserverImpl() {}
 
     virtual void OnPushGroup(long level, 
         const std::wstring& msg, const std::wstring& extra, 

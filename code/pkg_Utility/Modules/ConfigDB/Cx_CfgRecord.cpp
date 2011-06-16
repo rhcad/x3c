@@ -216,7 +216,7 @@ std::wstring Cx_CfgRecord::GetString(const wchar_t* pszEntry, const wchar_t* psz
         try
         {
             _variant_t var(m_pRs->GetFields()->GetItem(pszEntry)->GetValue());
-            return towstr(DbFunc::GetBSTR(var, pszDefault));
+            return x3::towstr(DbFunc::GetBSTR(var, pszDefault));
         }
         CATCH_DB_STR_ERROR
     }
@@ -360,7 +360,7 @@ double Cx_CfgRecord::GetDouble(const wchar_t* pszEntry, double dDefault)
 
 bool Cx_CfgRecord::SetDouble(const wchar_t* pszEntry, double dValue)
 {
-    return AddFieldValue(pszEntry, RoundStr(dValue, 5).c_str());
+    return AddFieldValue(pszEntry, x3::RoundStr(dValue, 5).c_str());
 }
 
 float Cx_CfgRecord::GetFloat(const wchar_t* pszEntry, float fDefault)
@@ -370,7 +370,7 @@ float Cx_CfgRecord::GetFloat(const wchar_t* pszEntry, float fDefault)
 
 bool Cx_CfgRecord::SetFloat(const wchar_t* pszEntry, float fValue)
 {
-    return AddFieldValue(pszEntry, RoundStr(fValue, 5).c_str());
+    return AddFieldValue(pszEntry, x3::RoundStr(fValue, 5).c_str());
 }
 
 DWORD Cx_CfgRecord::GetRGB(const wchar_t* pszEntry, DWORD crDefault)

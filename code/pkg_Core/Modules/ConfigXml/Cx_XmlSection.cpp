@@ -422,7 +422,7 @@ bool Cx_XmlSection::SetDoubleArray(const wchar_t* name, const double* items, lon
     {
         if (i > 0)
             sbuf << L", ";
-        sbuf << RoundStr(items[i]);
+        sbuf << x3::RoundStr(items[i]);
     }
     return SetString(name, sbuf.str().c_str());
 }
@@ -439,7 +439,7 @@ bool Cx_XmlSection::SetIntArray(const wchar_t* name, const long* items, long cou
     {
         if (i > 0)
             sbuf << L", ";
-        sbuf << RoundStr(items[i], 0);
+        sbuf << x3::RoundStr(items[i], 0);
     }
     return SetString(name, sbuf.str().c_str());
 }

@@ -49,7 +49,7 @@ void Test()
     long value = 0;
 
     // 使用类ID和接口创建对象
-    Cx_Interface<Ix_Example> pIFExample(CLSID_Example);
+    Cx_Interface<Ix_Example> pIFExample(X3CLS_Example);
     if (pIFExample)
     {
         pIFExample->Foo(value);    // 调用接口函数

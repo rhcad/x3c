@@ -12,7 +12,7 @@
 /*!
     \interface Ix_StringConvert
     \ingroup _GROUP_UTILITY_
-    \see CLSID_TextUtil, StringConvert(), Ix_TextFileUtil, ConvStr.h
+    \see X3CLS_TextUtil, StringConvert(), Ix_TextFileUtil, ConvStr.h
 */
 interface Ix_StringConvert
 {
@@ -96,6 +96,8 @@ interface Ix_StringConvert
     virtual std::wstring ToUnicode(const std::string& text, int codepage = 0) = 0;
 };
 
+namespace x3 {
+
 //! 得到文本转换操作对象
 /*!
     \ingroup _GROUP_UTILITY_
@@ -103,11 +105,13 @@ interface Ix_StringConvert
 */
 inline Cx_Interface<Ix_StringConvert> StringConvert()
 {
-    Cx_Interface<Ix_StringConvert> pIFUtility(CLSID_TextUtil);
+    Cx_Interface<Ix_StringConvert> pIFUtility(X3CLS_TextUtil);
 #ifdef ASSERT
     ASSERT(pIFUtility.IsNotNull());
 #endif
     return pIFUtility;
 }
+
+} // x3
 
 #endif // X3_UTIL_ISTRINGCONVERT_H_

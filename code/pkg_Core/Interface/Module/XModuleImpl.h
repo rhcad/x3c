@@ -1,5 +1,5 @@
 /*! \file XModuleImpl.h
- *  \brief Implement plugin's export functions and xCreateObject.
+ *  \brief Implement plugin's export functions and x3CreateObject.
  *  \note Include this file in one and only one CPP file of your plugin project.\n
  *        If you don't want to use XModuleMacro.h and this file, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
@@ -18,34 +18,34 @@
 #include "../Log/DebugR.cpp"
 #endif
 
-OUTAPI Ix_Module*   _xGetModuleInterface(Ix_ObjectFactory*, HMODULE);
-OUTAPI DWORD    _xGetClassEntryTable(DWORD*, DWORD*, _XCLASSMETA_ENTRY*, DWORD);
-OUTAPI int      _xInternalCreateObject(const char*, Ix_Object**, HMODULE);
-OUTAPI bool     xCanUnloadPlugin();
+OUTAPI Ix_Module*   x3GetModuleInterface(Ix_ObjectFactory*, HMODULE);
+OUTAPI DWORD    x3GetClassEntryTable(DWORD*, DWORD*, X3CLASSENTRY*, DWORD);
+OUTAPI int      x3InternalCreateObject(const char*, Ix_Object**, HMODULE);
+OUTAPI bool     x3CanUnloadPlugin();
 
 //! the only one module object in this project.
-static Cx_Module    s_xModuleObject;
+static Cx_Module    s_x3Module;
 
 //! A export function used by the plugin manager.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
     \param pFactory the plugin manager object, skip if NULL.
     \param hModule DLL handle of this plugin, skip if NULL.
     \return the module object in this plugin.
-    \see _xInternalCreateObject, _xGetClassEntryTable, xPluginOnLoad, xPluginOnUnload
+    \see x3InternalCreateObject, x3GetClassEntryTable, xPluginOnLoad, xPluginOnUnload
 */
-OUTAPI Ix_Module* _xGetModuleInterface(Ix_ObjectFactory* pFactory, HMODULE hModule)
+OUTAPI Ix_Module* x3GetModuleInterface(Ix_ObjectFactory* pFactory, HMODULE hModule)
 {
     if (pFactory || hModule)
     {
-        s_xModuleObject.Initialize(pFactory, hModule);
+        s_x3Module.Initialize(pFactory, hModule);
     }
-    return &s_xModuleObject;
+    return &s_x3Module;
 }
 
 static long GetClassCount(BYTE minType)
 {
     int nClassCount = 0;
-    const _XCLASSMETA_ENTRY* pCls = _XCLASSMETA_ENTRY::s_classes;
+    const X3CLASSENTRY* pCls = X3CLASSENTRY::s_classes;
 
     for (; pCls->pfnObjectCreator; ++pCls)
     {
@@ -61,14 +61,14 @@ static long GetClassCount(BYTE minType)
 //! Get class factory registries of the plugin module.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
     \param[out] pBuildInfo Fill C++ building info, skip if NULL.
-    \param[in,out] pEntrySize Pass in sizeof _XCLASSMETA_ENTRY and fill actual size, skip if NULL.
+    \param[in,out] pEntrySize Pass in sizeof X3CLASSENTRY and fill actual size, skip if NULL.
     \param[out] pTable Pass in array address and fill items. Return actual count if pTable is NULL.
     \param[in] nMaxCount max count of elements in pTable.
     \return element count of actual copied. Return actual count if pTable is NULL.
-    \see _xGetModuleInterface, xPluginOnLoad, xPluginOnUnload
+    \see x3GetModuleInterface, xPluginOnLoad, xPluginOnUnload
 */
-OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
-                                  _XCLASSMETA_ENTRY* pTable, DWORD nMaxCount)
+OUTAPI DWORD x3GetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
+                                  X3CLASSENTRY* pTable, DWORD nMaxCount)
 {
     if (pBuildInfo)
     {
@@ -84,12 +84,12 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
 #endif
     }
 
-    DWORD nEntrySize = sizeof(_XCLASSMETA_ENTRY);
+    DWORD nEntrySize = sizeof(X3CLASSENTRY);
 
     if (pEntrySize)
     {
         nEntrySize = nEntrySize < *pEntrySize ? nEntrySize : *pEntrySize;
-        nEntrySize = nEntrySize ? nEntrySize : sizeof(_XCLASSMETA_ENTRY);
+        nEntrySize = nEntrySize ? nEntrySize : sizeof(X3CLASSENTRY);
         *pEntrySize = nEntrySize;
     }
 
@@ -104,7 +104,7 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
     for (DWORD i = 0; i < nClassCount; i++)
     {
         memcpy((BYTE*)pTable + i * nEntrySize,
-            _XCLASSMETA_ENTRY::s_classes + i, nEntrySize);
+            X3CLASSENTRY::s_classes + i, nEntrySize);
     }
 
     return nClassCount;
@@ -116,16 +116,16 @@ OUTAPI DWORD _xGetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
     \param ppv Pass in a valid address and return a new object.
     \param fromdll DLL handle of the caller's module.
     \return 0 or failed.
-    \see _xGetModuleInterface, xCreateObject, _xGetModuleInterface
+    \see x3GetModuleInterface, x3CreateObject, x3GetModuleInterface
 */
-OUTAPI int _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fromdll)
+OUTAPI int x3InternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fromdll)
 {
     if (NULL == ppv)
         return 1;
     *ppv = NULL;
 
-    XCLSID clsid2(clsid);
-    const _XCLASSMETA_ENTRY* pCls = _XCLASSMETA_ENTRY::s_classes;
+    X3CLSID clsid2(clsid);
+    const X3CLASSENTRY* pCls = X3CLASSENTRY::s_classes;
 
     for (; pCls->pfnObjectCreator; ++pCls)
     {
@@ -146,9 +146,9 @@ OUTAPI int _xInternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fr
     \param clsid class unique id, must be valid.
     \param ppv Pass in a valid address and return a new object.
     \return 0 or failed.
-    \see _xInternalCreateObject, Ix_ObjectFactory, xIsCreatorRegister
+    \see x3InternalCreateObject, Ix_ObjectFactory, x3IsCreatorRegister
 */
-int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
@@ -156,11 +156,11 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
     int hr = 0;
     bool bRetry = true;
-    Ix_ObjectFactory* pFactory = s_xModuleObject.GetObjectFactory();
+    Ix_ObjectFactory* pFactory = s_x3Module.GetObjectFactory();
 
     if (pFactory && pFactory->HasCreatorReplaced(clsid))
     {
-        hr = pFactory->CreateObject(clsid, ppv, xGetModuleHandle());
+        hr = pFactory->CreateObject(clsid, ppv, x3GetModuleHandle());
         if (0 == hr)
         {
             return hr;
@@ -168,11 +168,11 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
         bRetry = false;
     }
 
-    hr = _xInternalCreateObject(clsid.str(), ppv, xGetModuleHandle());
+    hr = x3InternalCreateObject(clsid.str(), ppv, x3GetModuleHandle());
 
     if (hr != 0 && pFactory && bRetry)
     {
-        hr = pFactory->CreateObject(clsid, ppv, xGetModuleHandle());
+        hr = pFactory->CreateObject(clsid, ppv, x3GetModuleHandle());
     }
 
     return hr;
@@ -180,24 +180,24 @@ int xCreateObject(const XCLSID& clsid, Ix_Object** ppv)
 
 //! Return DLL handle of the current plugin module.
 //! Using it can check how many objects are used by other modules.
-HMODULE xGetModuleHandle()
+HMODULE x3GetModuleHandle()
 {
-    return s_xModuleObject.GetModuleInstance();
+    return s_x3Module.GetModuleInstance();
 }
 
-Ix_Module* xGetCurrentModule()
+Ix_Module* x3GetCurrentModule()
 {
-    return &s_xModuleObject;
+    return &s_x3Module;
 }
 
-Ix_ObjectFactory* xGetObjectFactory()
+Ix_ObjectFactory* x3GetObjectFactory()
 {
-    return s_xModuleObject.GetObjectFactory();
+    return s_x3Module.GetObjectFactory();
 }
 
-bool xIsCreatorRegister(const XCLSID& clsid)
+bool x3IsCreatorRegister(const X3CLSID& clsid)
 {
-    Ix_ObjectFactory* pFactory = s_xModuleObject.GetObjectFactory();
+    Ix_ObjectFactory* pFactory = s_x3Module.GetObjectFactory();
     return pFactory && pFactory->IsCreatorRegister(clsid);
 }
 
@@ -211,7 +211,7 @@ Cx_Module::~Cx_Module()
 
 void Cx_Module::ClearModuleItems()
 {
-    CModuleItem::ClearModuleItems();
+    Cx_ModuleItem::ClearModuleItems();
 }
 
 void Cx_Module::Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule)
@@ -224,7 +224,7 @@ void Cx_Module::Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule)
         m_hResource = m_hModule;
     }
 
-    CModuleItem::InitModuleItems(GetClassCount(MIN_SINGLETON_TYPE));
+    Cx_ModuleItem::InitModuleItems(GetClassCount(MIN_SINGLETON_TYPE));
 }
 
 HMODULE Cx_Module::SetModuleResourceHandle(HMODULE hResource)
@@ -237,7 +237,7 @@ HMODULE Cx_Module::SetModuleResourceHandle(HMODULE hResource)
 long Cx_Module::GetUnfreeObjectCount()
 {
     long n, nTotal = 0;
-    const _XCLASSMETA_ENTRY* pCls = _XCLASSMETA_ENTRY::s_classes;
+    const X3CLASSENTRY* pCls = X3CLASSENTRY::s_classes;
 
     for (; pCls->pfnObjectCreator; ++pCls)
     {
@@ -263,9 +263,9 @@ long Cx_Module::GetUnfreeObjectCount()
 /*! \ingroup _GROUP_PLUGIN_CORE2_
  *  \brief Return true if this module can be safe unloaded (there is no object using by other modules).
  */
-OUTAPI bool xCanUnloadPlugin()
+OUTAPI bool x3CanUnloadPlugin()
 {
-    const _XCLASSMETA_ENTRY* pCls = _XCLASSMETA_ENTRY::s_classes;
+    const X3CLASSENTRY* pCls = X3CLASSENTRY::s_classes;
 
     for (; pCls->pfnObjectCreator; ++pCls)
     {

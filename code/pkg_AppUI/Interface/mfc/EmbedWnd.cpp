@@ -20,7 +20,7 @@ BEGIN_MESSAGE_MAP(CEmbedWnd, CWnd)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-CEmbedWnd::CEmbedWnd(const XCLSID& clsidWnd)
+CEmbedWnd::CEmbedWnd(const X3CLSID& clsidWnd)
 	: m_clsid(clsidWnd), m_menuIndex(-1), m_locker(0)
 {
 }
@@ -59,7 +59,7 @@ void CEmbedWnd::SetCaption(LPCTSTR text)
 	m_caption = text;
 }
 
-XCLSID CEmbedWnd::GetClsid() const
+X3CLSID CEmbedWnd::GetClsid() const
 {
 	return m_clsid;
 }
@@ -88,7 +88,7 @@ bool CEmbedWnd::Create(CWnd* pParentWnd, UINT nID, DWORD dwStyle, DWORD dwExStyl
 		dwStyle, CRect(0, 0, 0, 0), pParentWnd, nID);
 }
 
-bool CEmbedWnd::CreateSubWnd(const XCLSID& clsidWnd)
+bool CEmbedWnd::CreateSubWnd(const X3CLSID& clsidWnd)
 {
 	ASSERT(m_pIFWnd.IsNull() && GetSafeHwnd());
 

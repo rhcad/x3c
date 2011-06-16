@@ -1,12 +1,12 @@
 /*! \file DebugR.cpp
- *  \brief XCrtDbgReport
+ *  \brief Implement x3CrtDbgReport().
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 
 #ifndef _WIN32
 
-int XCrtDbgReport(const char* file, long line, const char* msg)
+int x3CrtDbgReport(const char* file, long line, const char* msg)
 {
 #ifdef LOG_EVENT_ANSI
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
@@ -34,7 +34,7 @@ int XCrtDbgReport(const char* file, long line, const char* msg)
 #endif
 #include <signal.h>
 
-int XCrtDbgReport(const char* file, long line, const char* msg)
+int x3CrtDbgReport(const char* file, long line, const char* msg)
 {
     file;line;msg;
     int code = 0;

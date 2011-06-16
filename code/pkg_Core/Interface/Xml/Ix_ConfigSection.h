@@ -11,12 +11,12 @@
 interface Ix_ConfigData;
 
 //! 数据节点的值读写接口
-/*! 可使用 CConfigIOSection 来更方便的使用本接口。\n
+/*! 可使用 Cx_ConfigSection 来更方便的使用本接口。\n
     本接口所操作的数据对象相当于是在树状层次结构中的一个数据节点，
     而 Ix_ConfigData 则对应于全部数据节点。
     \interface Ix_ConfigSection
     \ingroup _GROUP_PLUGIN_XML_
-    \see CConfigIOSection, Ix_ConfigData
+    \see Cx_ConfigSection, Ix_ConfigData
 */
 interface Ix_ConfigSection
 {

@@ -8,13 +8,13 @@
 
 #include <Ix_Object.h>
 
-const XCLSID CLSID_TempFolder("6d215195-061e-4c03-827d-8c692c293617");
+const X3CLSID X3CLS_TempFolder("6d215195-061e-4c03-827d-8c692c293617");
 
 //! 临时目录操作的接口
 /*!
     \interface Ix_TempFolder
     \ingroup _GROUP_UTILITY_
-    \see CLSID_TempFolder
+    \see X3CLS_TempFolder
 */
 interface Ix_TempFolder
 {

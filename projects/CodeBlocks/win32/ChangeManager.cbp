@@ -44,7 +44,7 @@
 				</Compiler>
 			</Target>
 		</Build>
-		<Unit filename="../../../code/pkg_Core/Interface/ChangeObserver/ChangeNotifyData.h" />
+		<Unit filename="../../../code/pkg_Core/Interface/ChangeObserver/Cx_ChangeObserver.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/ChangeObserver/Ix_ChangeManager.h" />
 		<Unit filename="../../../code/pkg_Core/Interface/ChangeObserver/Ix_ChangeObserver.h" />
 		<Unit filename="../../../code/pkg_Core/Modules/ChangeManager/ChangeManager.rc">

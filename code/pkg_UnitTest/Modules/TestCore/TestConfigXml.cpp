@@ -4,7 +4,7 @@
 #include <UnitTestInc.h>
 #include "TestConfigXml.h"
 #include <Xml/Ix_ConfigXml.h>
-#include <Xml/ConfigIOSection.h>
+#include <Xml/Cx_ConfigSection.h>
 
 CPPUNIT_TEST_SUITE_REGISTRATION( TestConfigXml );
 
@@ -24,7 +24,7 @@ void TestConfigXml::tearDown()
 
 void TestConfigXml::testSetXmlContent()
 {
-    Cx_Interface<Ix_ConfigXml> pIFXml(CLSID_ConfigXmlFile);
+    Cx_Interface<Ix_ConfigXml> pIFXml(X3CLS_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());
     VERIFY(pIFXml->SetXmlContent(L"<?xml version=\"1.0\"?><test></test>"));
     ASSERT(pIFXml->GetRootName() == L"test");
@@ -32,10 +32,10 @@ void TestConfigXml::testSetXmlContent()
 
 void TestConfigXml::testNewDoc()
 {
-    Cx_Interface<Ix_ConfigXml> pIFXml(CLSID_ConfigXmlFile);
+    Cx_Interface<Ix_ConfigXml> pIFXml(X3CLS_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());
 
-    CConfigIOSection root(pIFXml->GetData()->GetSection(L""));
+    Cx_ConfigSection root(pIFXml->GetData()->GetSection(L""));
     std::wstring content;
 
     VERIFY(pIFXml->GetXmlContent(content, root.P()));

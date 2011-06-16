@@ -82,7 +82,7 @@ SOURCE=..\..\..\code\pkg_Core\Interface\Log\DebugR.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Core\Interface\Log\ILogObserver.h
+SOURCE=..\..\..\code\pkg_Core\Interface\Log\Ix_LogObserver.h
 # End Source File
 # Begin Source File
 

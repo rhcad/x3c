@@ -33,6 +33,6 @@ public:
 private:
     virtual void OnDocEventAfterOpen()
     {
-        LOG_INFO(L"CDocObserverTestOnRun::OnDocEventAfterOpen");
+        X3LOG_INFO(L"CDocObserverTestOnRun::OnDocEventAfterOpen");
     }
 };

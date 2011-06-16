@@ -132,7 +132,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
             buf << GetSystemErrorString(dwError) << L", ";
         }
         buf << filename;
-        LOG_ERROR2(L"@FileUtility:IDS_CREATEDIR_FAIL", buf.str());
+        X3LOG_ERROR2(L"@FileUtility:IDS_CREATEDIR_FAIL", buf.str());
         return false;
     }
 
@@ -153,7 +153,7 @@ bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* filename)
     if (IsPathFileExists(filename)
         && !SetFileAttributesNormal(filename))
     {
-        LOG_ERROR2(L"@FileUtility:IDS_FILE_CANNOT_WRITE", filename);
+        X3LOG_ERROR2(L"@FileUtility:IDS_FILE_CANNOT_WRITE", filename);
         return false;
     }
 
@@ -203,11 +203,11 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
 
         if (IsPath(filename, true))
         {
-            LOG_WARNING2(L"@FileUtility:IDS_DELFOLDER_FAIL", buf.str());
+            X3LOG_WARNING2(L"@FileUtility:IDS_DELFOLDER_FAIL", buf.str());
         }
         else
         {
-            LOG_ERROR2(L"@FileUtility:IDS_DELFILE_FAIL", buf.str());
+            X3LOG_ERROR2(L"@FileUtility:IDS_DELFILE_FAIL", buf.str());
         }
 
         return false;
@@ -230,7 +230,7 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
     if (!IsPathFileExists(oldfile))
     {
         InterlockedExchange(&s_nFileOpRet, GetLastError());
-        LOG_INFO2(L"@FileUtility:IDS_FILE_NOTEXIST", oldfile << L", " << s_nFileOpRet);
+        X3LOG_INFO2(L"@FileUtility:IDS_FILE_NOTEXIST", oldfile << L", " << s_nFileOpRet);
         return false;
     }
     else
@@ -281,7 +281,7 @@ bool Cx_FileUtility::MovePathFile(const wchar_t* oldfile, const wchar_t* newfile
             std::wostringstream buf;
             buf << GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
-            LOG_ERROR2(L"@FileUtility:IDS_MOVEFILE_FAIL", buf.str());
+            X3LOG_ERROR2(L"@FileUtility:IDS_MOVEFILE_FAIL", buf.str());
         }
         return false;
     }
@@ -297,7 +297,7 @@ bool Cx_FileUtility::RenamePathFile(const wchar_t* oldfile, const wchar_t* newfi
             std::wostringstream buf;
             buf << GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
-            LOG_ERROR2(L"@FileUtility:IDS_RENFILE_FAIL", buf.str());
+            X3LOG_ERROR2(L"@FileUtility:IDS_RENFILE_FAIL", buf.str());
         }
         return false;
     }
@@ -312,7 +312,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
     }
     if (!IsPathFileExists(oldfile))
     {
-        LOG_INFO2(L"@FileUtility:IDS_FILE_NOTEXIST", oldfile);
+        X3LOG_INFO2(L"@FileUtility:IDS_FILE_NOTEXIST", oldfile);
         return false;
     }
 
@@ -331,7 +331,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
             std::wostringstream buf;
             buf << GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
-            LOG_ERROR2(L"@FileUtility:IDS_COPYFILE_FAIL", buf.str());
+            X3LOG_ERROR2(L"@FileUtility:IDS_COPYFILE_FAIL", buf.str());
         }
         return false;
     }
@@ -365,7 +365,7 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
             }
             else
             {
-                GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
+                GetModuleFileNameW(x3::GetMainModuleHandle(), szPath, MAX_PATH);
             }
 
             wcsncpy_s(wcschr(szPath, L':') + 1, MAX_PATH, pszRel, MAX_PATH);
@@ -383,7 +383,7 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
             }
             else
             {
-                GetModuleFileNameW(GetMainModuleHandle(), szPath, MAX_PATH);
+                GetModuleFileNameW(x3::GetMainModuleHandle(), szPath, MAX_PATH);
                 PathRemoveFileSpecW(szPath);
             }
             PathAppendW(szPath, pszRel);
@@ -413,7 +413,7 @@ std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
     {
         if (!IsNotNull(pszBase))
         {
-            GetModuleFileNameW(GetMainModuleHandle(), szBasePath, MAX_PATH);
+            GetModuleFileNameW(x3::GetMainModuleHandle(), szBasePath, MAX_PATH);
             pszBase = szBasePath;
             bBaseIsFile = true;
         }
@@ -570,7 +570,7 @@ std::wstring Cx_FileUtility::CreateFileName(const std::wstring& wstrPath,
 
         std::wstring wstrFile (RelToAbs(szFileName, true, wstrPath.c_str(), false));
 
-        if (!FileUtility()->IsPathFileExists(wstrFile.c_str()))
+        if (!x3::FileUtility()->IsPathFileExists(wstrFile.c_str()))
         {
             if (!bReturnRel)
             {

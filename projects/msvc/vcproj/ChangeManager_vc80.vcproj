@@ -219,7 +219,7 @@
 			Name="Interface"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\ChangeObserver\ChangeNotifyData.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\ChangeObserver\Cx_ChangeObserver.h"
 				>
 			</File>
 			<File

@@ -14,13 +14,13 @@ protected:
     virtual ~Cx_LogManager();
 
 protected:
-    virtual bool RegisterObserver(ILogObserver* observer);
-    virtual void UnRegisterObserver(ILogObserver* observer);
+    virtual bool RegisterObserver(Ix_LogObserver* observer);
+    virtual void UnRegisterObserver(Ix_LogObserver* observer);
     virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra);
     virtual bool PopGroup();
-    virtual bool WriteLog(kLogType type, const wchar_t* msg, 
+    virtual bool WriteLog(x3LogType type, const wchar_t* msg, 
         const wchar_t* extra, const char* file, long line);
-    virtual bool WriteLog(kLogType type, const char* msg, 
+    virtual bool WriteLog(x3LogType type, const char* msg, 
         const char* extra, const char* file, long line);
     virtual int CrtDbgReport(const char* msg, const char* file, long line);
 
@@ -31,8 +31,8 @@ private:
         const wchar_t* msg, const wchar_t* extra);
 
 private:
-    typedef std::vector<ILogObserver*>::iterator ObserverIt;
-    std::vector<ILogObserver*>      m_observers;
+    typedef std::vector<Ix_LogObserver*>::iterator ObserverIt;
+    std::vector<Ix_LogObserver*>      m_observers;
     long                            m_groupLevel;
     long                            m_loglock;
 };

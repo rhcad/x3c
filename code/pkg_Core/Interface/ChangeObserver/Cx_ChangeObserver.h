@@ -1,5 +1,5 @@
-/*! \file ChangeNotifyData.h
- *  \brief Define the base classes of change observer data: ChangeNotifyData, ChangeObserver.
+/*! \file Cx_ChangeObserver.h
+ *  \brief Define the base classes of change observer data: ChangeNotifyData, Cx_ChangeObserver.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \version
  *      2010.10.22: First release.
@@ -11,15 +11,17 @@
 #include "XComPtr.h"
 #include "Ix_ChangeManager.h"
 
+#ifndef NOCOPY_CONSTRUCTOR
 #define NOCOPY_CONSTRUCTOR(cls) \
 private:                \
     cls(const cls&);    \
     void operator=(const cls&)
+#endif
 
 //! The base class of change observer event data.
 /*!
     \ingroup _GROUP_CHANGE_OBSERVER_
-    \see ChangeObserver
+    \see Cx_ChangeObserver
 */
 class ChangeNotifyData
 {
@@ -33,7 +35,7 @@ public:
     //! Broadcast change event.
     void Notify()
     {
-        Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
+        Cx_Interface<Ix_ChangeManager> pIFManager(X3CLS_ChangeManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->ChangeNotify(m_type, this);
@@ -63,7 +65,7 @@ private:
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see ChangeNotifyData
 */
-class ChangeObserver : public Ix_ChangeObserver
+class Cx_ChangeObserver : public Ix_ChangeObserver
 {
 private:
     //! Process the change event.
@@ -74,7 +76,7 @@ private:
 
 protected:
     //! Constructor. type is unique observer name passed from derived class.
-    ChangeObserver(const char* type, bool register_now = true)
+    Cx_ChangeObserver(const char* type, bool register_now = true)
         : m_type(type), m_times(0)
     {
         if (register_now)
@@ -98,18 +100,18 @@ protected:
     //! Delay register observer (passing false to constructor).
     void RegisterObserver()
     {
-        Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
+        Cx_Interface<Ix_ChangeManager> pIFManager(X3CLS_ChangeManager);
         if (pIFManager.IsNotNull())
         {
-            pIFManager->RegisterObserver(GetChangeType(), this, xGetModuleHandle());
+            pIFManager->RegisterObserver(GetChangeType(), this, x3GetModuleHandle());
         }
     }
 
 public:
     //! Destructor for unregister observer.
-    virtual ~ChangeObserver()
+    virtual ~Cx_ChangeObserver()
     {
-        Cx_Interface<Ix_ChangeManager> pIFManager(CLSID_ChangeManager);
+        Cx_Interface<Ix_ChangeManager> pIFManager(X3CLS_ChangeManager);
         if (pIFManager.IsNotNull())
         {
             pIFManager->UnRegisterObserver(GetChangeType(), this);
@@ -126,8 +128,8 @@ private:
     }
 
 private:
-    ChangeObserver();
-    NOCOPY_CONSTRUCTOR(ChangeObserver);
+    Cx_ChangeObserver();
+    NOCOPY_CONSTRUCTOR(Cx_ChangeObserver);
 
     const char*     m_type;
     long            m_times;

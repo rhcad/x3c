@@ -9,12 +9,14 @@
 #include "XComPtr.h"
 #include <string>
 
+namespace x3 {
+
 //! Return the module handle of main application which load plugins initiative.
 inline HMODULE GetMainModuleHandle()
 {
     HMODULE hModule = GetModuleHandleW(L"PluginManagerX3" PLNEXT);
     typedef HMODULE (*FUNC_GET)();
-    FUNC_GET fn = (FUNC_GET)GetProcAddress(hModule, "xGetMainModuleHandle");
+    FUNC_GET fn = (FUNC_GET)GetProcAddress(hModule, "x3GetMainModuleHandle");
     return fn ? (*fn)() : NULL;
 }
 
@@ -24,13 +26,13 @@ inline HMODULE GetMainModuleHandle()
     \param relname Relative path or file name to be converted.
     \param isfile 'relname' is a file name or path.
     \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see FileNameRelToAbs
+    \see x3::FileNameRelToAbs
 */
 inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = true)
 {
     wchar_t path[MAX_PATH] = { 0 };
 
-    GetModuleFileNameW(xGetModuleHandle(), path, MAX_PATH);
+    GetModuleFileNameW(x3GetModuleHandle(), path, MAX_PATH);
     PathRemoveFileSpecW(path);
     PathAppendW(path, relname);
 
@@ -49,7 +51,7 @@ inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = tru
     \param relname Relative path or file name to be converted.
     \param isfile 'relname' is a file name or path.
     \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see GetMainModuleHandle
+    \see x3::GetMainModuleHandle
 */
 inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
 {
@@ -75,7 +77,7 @@ inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
     \param relname Relative path or file name to be converted such as 'Log.txt' and 'myapp/output'.
     \param isfile 'relname' is a file name or path.
     \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see GetMainModuleHandle
+    \see x3::GetMainModuleHandle
 */
 inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile = true)
 {
@@ -121,4 +123,5 @@ inline std::wstring EnsurePathHasSlash(std::wstring& path)
     return path;
 }
 
+} // x3
 #endif // UTILFUNC_RELTOABS_H_

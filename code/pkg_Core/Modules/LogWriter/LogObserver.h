@@ -4,12 +4,12 @@
 #ifndef _X3_LOGWRITER_LOGOBSERVER_H
 #define _X3_LOGWRITER_LOGOBSERVER_H
 
-#include <Log/ILogObserver.h>
+#include <Log/Ix_LogObserver.h>
 
 #include <log4cplus/logger.h>
 using namespace log4cplus;
 
-class CLogObserver : public CLogObserverImpl
+class CLogObserver : public Cx_LogObserverImpl
 {
 public:
     CLogObserver();

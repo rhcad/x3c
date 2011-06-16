@@ -6,7 +6,7 @@
 #ifndef X3_OBSERVER_RAWCMDMSG_OBSERVER_H_
 #define X3_OBSERVER_RAWCMDMSG_OBSERVER_H_
 
-#include <ChangeObserver/ChangeNotifyData.h>
+#include <ChangeObserver/Cx_ChangeObserver.h>
 
 //! Window's command message observer data.
 /*!
@@ -56,11 +56,11 @@ struct RawCmdMsgEventData : public ChangeNotifyData
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see RawCmdMsgEventData
 */
-class RawCmdMsgObserver : public ChangeObserver
+class RawCmdMsgObserver : public Cx_ChangeObserver
 {
 protected:
     //! Constructor
-    RawCmdMsgObserver() : ChangeObserver("RawCmdMsgEvent")
+    RawCmdMsgObserver() : Cx_ChangeObserver("RawCmdMsgEvent")
     {
     }
 
