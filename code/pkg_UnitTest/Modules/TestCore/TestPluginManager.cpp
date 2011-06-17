@@ -90,30 +90,6 @@ void TestPluginManager::testIsCreatorRegister()
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 }
 
-void TestPluginManager::testCreateSpecialInterfaceObjects()
-{
-    Ix_ObjectFactory* pFactory = GetManagerObjectFactory();
-    VERIFY(pFactory);
-
-    VERIFY(false == pFactory->IsCreatorRegister(x3::CLSID_LogManager));
-
-    Ix_PluginLoader* pLoader = dynamic_cast<Ix_PluginLoader*>(pFactory);
-    VERIFY(pLoader);
-    VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
-
-    //VERIFY(pFactory->CreateSpecialInterfaceObjects("testCreateSpecialInterfaceObjects")>0);
-
-    VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
-}
-
-void TestPluginManager::testQuerySpecialInterfaceObject()
-{
-}
-
-void TestPluginManager::testHasCreatorReplaced()
-{
-}
-
 Ix_PluginLoader* TestPluginManager::GetManagerLoader(void)
 {
     Ix_ObjectFactory* pFactory = GetManagerObjectFactory();

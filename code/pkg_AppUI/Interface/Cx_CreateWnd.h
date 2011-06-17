@@ -21,7 +21,7 @@
 */
 #if defined(XDEFINE_CLASSMAP_ENTRY) && !defined(XDEFINE_CLASSMAP_ENTRY_Wnd)
 #define XDEFINE_CLASSMAP_ENTRY_Wnd(clsid, cls) \
-    X3CLASSENTRY(1, "Cx_Object<Cx_CreateWnd<" #cls ">>", clsid, "",    \
+    X3CLASSENTRY(1, "Cx_Object<Cx_CreateWnd<" #cls ">>", clsid,    \
         reinterpret_cast<PFNXObjectCreator>(&Cx_Object<Cx_CreateWnd<cls> >::CreateObject),  \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<Cx_CreateWnd<cls> >::GetObjectCount),   \
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<Cx_CreateWnd<cls> >::GetRefCountByOthers)),

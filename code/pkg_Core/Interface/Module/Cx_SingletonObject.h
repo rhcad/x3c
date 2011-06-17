@@ -16,9 +16,7 @@ HMODULE x3GetModuleHandle();
  *  \brief Single instance implement template class used by XDEFINE_CLASSMAP_ENTRY_Singleton.
  *  \brief The template parameter is a class which implement a interface.
  *  \internal
- *  \see   Cx_Object \n
- *         XDEFINE_CLASSMAP_ENTRY_Singleton \n
- *         XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton
+ *  \see   Cx_Object, XDEFINE_CLASSMAP_ENTRY_Singleton
  */
 template <class ClsType>
 class Cx_SingletonObject

@@ -154,28 +154,18 @@ int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
         return 1;
     *ppv = NULL;
 
-    int hr = 0;
-    bool bRetry = true;
-    Ix_ObjectFactory* pFactory = s_x3Module.GetObjectFactory();
+    int ret = x3InternalCreateObject(clsid.str(), ppv, x3GetModuleHandle());
 
-    if (pFactory && pFactory->HasCreatorReplaced(clsid))
+    if (ret != 0)
     {
-        hr = pFactory->CreateObject(clsid, ppv, x3GetModuleHandle());
-        if (0 == hr)
+        Ix_ObjectFactory* pFactory = s_x3Module.GetObjectFactory();
+        if (pFactory)
         {
-            return hr;
+            ret = pFactory->CreateObject(clsid, ppv, x3GetModuleHandle());
         }
-        bRetry = false;
     }
 
-    hr = x3InternalCreateObject(clsid.str(), ppv, x3GetModuleHandle());
-
-    if (hr != 0 && pFactory && bRetry)
-    {
-        hr = pFactory->CreateObject(clsid, ppv, x3GetModuleHandle());
-    }
-
-    return hr;
+    return ret;
 }
 
 //! Return DLL handle of the current plugin module.
@@ -216,15 +206,24 @@ void Cx_Module::ClearModuleItems()
 
 void Cx_Module::Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule)
 {
-    m_pFactory = pFactory;
+    bool changed = false;
 
+    if (m_pFactory != pFactory)
+    {
+        m_pFactory = pFactory;
+        changed = true;
+    }
     if (hModule && !m_hModule)
     {
         m_hModule = hModule;
         m_hResource = m_hModule;
+        changed = true;
     }
 
-    Cx_ModuleItem::InitModuleItems(GetClassCount(MIN_SINGLETON_TYPE));
+    if (changed)
+    {
+        Cx_ModuleItem::InitModuleItems(GetClassCount(MIN_SINGLETON_TYPE));
+    }
 }
 
 HMODULE Cx_Module::SetModuleResourceHandle(HMODULE hResource)

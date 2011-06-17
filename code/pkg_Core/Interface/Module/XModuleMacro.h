@@ -11,7 +11,6 @@
 // XBEGIN_DEFINE_MODULE()
 //     XDEFINE_CLASSMAP_ENTRY(clsid, cls)
 //     XDEFINE_CLASSMAP_ENTRY_Singleton(clsid, cls)
-//     XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton(clsid, iid, cls)
 // XEND_DEFINE_MODULE()
 // XEND_DEFINE_MODULE_DLL()
 // XEND_DEFINE_MODULE_MFCEXTDLL()
@@ -37,7 +36,7 @@
     \param cls implement class
 */
 #define XDEFINE_CLASSMAP_ENTRY(clsid, cls)      \
-    X3CLASSENTRY(1, "Cx_Object<" #cls ">", clsid, "",  \
+    X3CLASSENTRY(1, "Cx_Object<" #cls ">", clsid,  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_Object<cls>::CreateObject), \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_Object<cls>::GetObjectCount),  \
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<cls>::GetRefCountByOthers)),
@@ -50,20 +49,7 @@
 */
 #define XDEFINE_CLASSMAP_ENTRY_Singleton(clsid, cls)    \
     X3CLASSENTRY(MIN_SINGLETON_TYPE,   \
-        "Cx_SingletonObject<" #cls ">", clsid, "",  \
-        reinterpret_cast<PFNXObjectCreator>(&Cx_SingletonObject<cls>::CreateObject),    \
-        reinterpret_cast<PFNXGetObjectCount>(&Cx_SingletonObject<cls>::GetObjectCount), \
-        reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)),
-
-//! Register a single instance class that support the specific interface.
-/*!
-    \ingroup _GROUP_PLUGIN_CORE_
-    \param iid the specific interface id name. char array constant.
-    \param cls implement class
-*/
-#define XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton(iid, cls)     \
-    X3CLASSENTRY(MIN_SINGLETON_TYPE + 1,   \
-        "Cx_SingletonObject<" #cls ">", X3CLSID(), iid,  \
+        "Cx_SingletonObject<" #cls ">", clsid,  \
         reinterpret_cast<PFNXObjectCreator>(&Cx_SingletonObject<cls>::CreateObject),    \
         reinterpret_cast<PFNXGetObjectCount>(&Cx_SingletonObject<cls>::GetObjectCount), \
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_SingletonObject<cls>::GetRefCountByOthers)),

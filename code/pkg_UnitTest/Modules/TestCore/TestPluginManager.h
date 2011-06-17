@@ -18,9 +18,6 @@ class TestPluginManager : public BaseTest
 
     CPPUNIT_TEST( testCreateObject );
     CPPUNIT_TEST( testIsCreatorRegister );
-    CPPUNIT_TEST( testCreateSpecialInterfaceObjects );
-    CPPUNIT_TEST( testQuerySpecialInterfaceObject );
-    CPPUNIT_TEST( testHasCreatorReplaced );
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -39,9 +36,6 @@ public:
 
     void testCreateObject();
     void testIsCreatorRegister();
-    void testCreateSpecialInterfaceObjects();
-    void testQuerySpecialInterfaceObject();
-    void testHasCreatorReplaced();
 
 private:
     Ix_PluginLoader* GetManagerLoader(void);

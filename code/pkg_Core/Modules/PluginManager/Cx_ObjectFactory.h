@@ -45,9 +45,6 @@ public:
 public:
     virtual bool IsCreatorRegister(const X3CLSID& clsid);
     virtual int CreateObject(const X3CLSID& clsid, Ix_Object** ppv, HMODULE fromdll);
-    virtual long CreateSpecialInterfaceObjects(const char* iid);
-    virtual bool QuerySpecialInterfaceObject(long index, const char* iid, Ix_Object** ppv);
-    virtual bool HasCreatorReplaced(const X3CLSID& clsid);
 
 protected:
     typedef std::vector<X3CLSID>         CLSIDS;

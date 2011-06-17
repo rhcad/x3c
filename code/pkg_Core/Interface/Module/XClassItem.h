@@ -26,27 +26,25 @@ typedef long (*PFNXRefCountByOthers)();
  *  \see   x3GetClassEntryTable, XBEGIN_DEFINE_MODULE
  *  \internal
  */
-struct X3CLASSENTRY
+class X3CLASSENTRY
 {
+public:
     BYTE                type;               //!< see MIN_SINGLETON_TYPE and XModuleMacro.h
     const char*         className;          //!< implement class name
-    X3CLSID             clsid;              //!< class id. may be empty if iidSpecial is valid.
-    const char*         iidSpecial;         //!< special interface name, see XDEFINE_SPECIAL_INTERFACE_ENTRY_Singleton.
+    X3CLSID             clsid;              //!< class id
     PFNXObjectCreator   pfnObjectCreator;   //!< class factory function
     PFNXGetObjectCount  pfnGetObjectCount;  //!< object count of this class
     PFNXRefCountByOthers    pfnRefCountByOthers;    //!< count of objects used by other modules
 
     //! Used by XDEFINE_CLASSMAP_ENTRY, XDEFINE_CLASSMAP_ENTRY_Singleton
-    X3CLASSENTRY(BYTE      _type,
+    X3CLASSENTRY(BYTE           _type,
         const char*             _className,
         const X3CLSID&          _clsid,
-        const char*             _iidSpecial,
         PFNXObjectCreator       _pfnObjectCreator,
         PFNXGetObjectCount      _pfnGetObjectCount = NULL,
         PFNXRefCountByOthers    _pfnRefCountByOthers = NULL)
 
-        : type(_type), className(_className)
-        , clsid(_clsid), iidSpecial(_iidSpecial)
+        : type(_type), className(_className), clsid(_clsid)
         , pfnObjectCreator(_pfnObjectCreator)
         , pfnGetObjectCount(_pfnGetObjectCount)
         , pfnRefCountByOthers(_pfnRefCountByOthers)
@@ -55,7 +53,7 @@ struct X3CLASSENTRY
 
     //! Used by XEND_DEFINE_MODULE
     X3CLASSENTRY()
-        : type(0), className(""), clsid(""), iidSpecial("")
+        : type(0), className(""), clsid("")
         , pfnObjectCreator(NULL), pfnGetObjectCount(NULL)
         , pfnRefCountByOthers(NULL)
     {

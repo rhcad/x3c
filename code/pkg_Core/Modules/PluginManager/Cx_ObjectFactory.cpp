@@ -60,66 +60,6 @@ int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
     }
 }
 
-long Cx_ObjectFactory::CreateSpecialInterfaceObjects(const char* iid)
-{
-    ASSERT(iid && *iid);
-
-    long count = 0;
-    CLSMAP::const_iterator it = m_clsmap.begin();
-
-    for (; it != m_clsmap.end(); ++it)
-    {
-        const X3CLASSENTRY& cls = it->second.first;
-        if (_stricmp(iid, cls.iidSpecial) == 0
-            && cls.pfnObjectCreator)
-        {
-            Ix_Object* pIF = NULL;
-            pIF = (cls.pfnObjectCreator)(x3GetModuleHandle());
-            ASSERT(pIF);
-            pIF->Release(x3GetModuleHandle());
-            count++;
-        }
-    }
-
-    return count;
-}
-
-bool Cx_ObjectFactory::QuerySpecialInterfaceObject(
-        long index, const char* iid, Ix_Object** ppv)
-{
-    bool bRet = x3::IsValidIndexOf(m_modules, index) && ppv != NULL;
-    if (!bRet)
-    {
-        return false;
-    }
-
-    *ppv = NULL;
-
-    const CLSIDS& clsids = m_modules[index].clsids;
-    CLSIDS::const_iterator it = clsids.begin();
-
-    for (; it != clsids.end(); ++it)
-    {
-        CLSMAP::const_iterator mit = m_clsmap.find(it->str());
-
-        if (mit != m_clsmap.end()
-            && _stricmp(iid, mit->second.first.iidSpecial) == 0
-            && mit->second.first.pfnObjectCreator)
-        {
-            *ppv = (mit->second.first.pfnObjectCreator)(x3GetModuleHandle());
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool Cx_ObjectFactory::HasCreatorReplaced(const X3CLSID& clsid)
-{
-    clsid;
-    return false;
-}
-
 X3CLASSENTRY* Cx_ObjectFactory::FindEntry(const X3CLSID& clsid,
                                                int* moduleIndex)
 {
@@ -206,18 +146,10 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
 
     for (int i = 0; i < classCount; i++)
     {
-        X3CLASSENTRY& cls = table[i];
+        const X3CLASSENTRY& cls = table[i];
 
         if (cls.clsid.valid())
         {
-            RegisterClass(moduleIndex, cls);
-        }
-        if (cls.iidSpecial && *cls.iidSpecial)
-        {
-            char tmpclsid[40] = { 0 };
-
-            sprintf_s(tmpclsid, 40, "iid%lx:%d", hModule, i);
-            cls.clsid = X3CLSID(tmpclsid);
             RegisterClass(moduleIndex, cls);
         }
     }
