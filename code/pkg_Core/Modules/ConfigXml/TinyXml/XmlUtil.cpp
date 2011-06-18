@@ -588,7 +588,7 @@ bool CXmlUtil::SetAttributeFloat(const XMLDOMDocumentPtr& doc,
                                  const wchar_t* unitName,
                                  int decimal)
 {
-    std::wstring str (RoundStr(value, decimal));
+    std::wstring str (x3::RoundStr(value, decimal));
     str += unitName;
     return SetAttribute(doc, ele, name, str.c_str());
 }
@@ -614,7 +614,7 @@ bool CXmlUtil::SetFieldFloat(const XMLDOMDocumentPtr& doc,
                              const wchar_t* unitName,
                              int decimal)
 {
-    std::wstring str (RoundStr(value, decimal));
+    std::wstring str (x3::RoundStr(value, decimal));
     str += unitName;
     return SetField(doc, ele, fieldName, str.c_str());
 }

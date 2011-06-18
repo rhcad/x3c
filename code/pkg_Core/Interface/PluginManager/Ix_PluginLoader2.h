@@ -13,8 +13,11 @@
  *  \brief Plugin loading interface
  *  \see   Ix_PluginLoader, Ix_ObjectFactory, xGetObjectFactory()
  */
-interface Ix_PluginLoader2
+class Ix_PluginLoader2
 {
+public:
+    virtual ~Ix_PluginLoader2() {}
+
     virtual long GetPluginCount() = 0;
     virtual bool GetPluginFileName(long index, HMODULE& hdll, std::wstring& filename) = 0;
 };

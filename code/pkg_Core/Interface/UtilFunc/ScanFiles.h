@@ -11,8 +11,11 @@
 namespace x3 {
 
 //! Callback interface for directory scanning.
-interface IScanFilesCallback
+class IScanFilesCallback
 {
+public:
+    virtual ~IScanFilesCallback() {}
+
     //! Notify when a subfolder is found.
     /*!
         \param[in] path absolute path ending with slash char.

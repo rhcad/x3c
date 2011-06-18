@@ -72,8 +72,11 @@ typedef XMLDOMPtr<TiXmlDocument> XMLDOMDocumentPtr;
 typedef XMLDOMPtr<TiXmlElement> XMLDOMElementPtr;
 
 //! XML文件加解密的接口
-interface IXmlFileCrypt
+class IXmlFileCrypt
 {
+public:
+    virtual ~IXmlFileCrypt() {}
+
     //! 装载一个加密的XML文件
     /*!
         \param[out] doc 输出新的XML文档对象
@@ -736,7 +739,7 @@ public:
 
     //! 得到上一级节点
     static bool GetParentNode(
-        XMLDOMElementPtr& parent, 
+        XMLDOMElementPtr& parent,
         XMLDOMElementPtr& node);
 };
 

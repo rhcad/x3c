@@ -8,7 +8,7 @@
 
 #include <Xml/Cx_ConfigSection.h>
 
-const XCLSID CLSID_UIConfig("4472ba6d-d833-40b9-899f-edc017ec9166");
+X3CLSID_DEFINE(CLSID_UIConfig, "4472ba6d-d833-40b9-899f-edc017ec9166");
 
 //! UI config options interface
 /*!
@@ -16,13 +16,16 @@ const XCLSID CLSID_UIConfig("4472ba6d-d833-40b9-899f-edc017ec9166");
     \ingroup _GROUP_APPUI_
     \see CLSID_UIConfig
 */
-interface Ix_UIConfig
+class Ix_UIConfig
 {
+public:
+    virtual ~Ix_UIConfig() {}
+
     //! Return UI config data object, not null.
     virtual Ix_ConfigData* GetUIConfig() = 0;
 
     //! Return a config node object of the specified name.
-    virtual CConfigIOSection GetUISection(const wchar_t* name) = 0;
+    virtual Cx_ConfigSection GetUISection(const wchar_t* name) = 0;
 
     //! Save UI config data if modified.
     virtual bool Save() = 0;
