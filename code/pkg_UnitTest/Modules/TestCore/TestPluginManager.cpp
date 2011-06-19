@@ -98,13 +98,11 @@ Ix_PluginLoader* TestPluginManager::GetManagerLoader(void)
     return pLoader;
 }
 
-
 Ix_ObjectFactory* TestPluginManager::GetManagerObjectFactory(void)
 {
     typedef Ix_ObjectFactory* (*FUNC_GETREGISTERBANK)();
-    FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(GetModuleHandleW(L"PluginManagerX3" PLNEXT), "x3GetRegisterBank");
-    VERIFY(pfn != NULL);
+    FUNC_GETREGISTERBANK pfnBank = (FUNC_GETREGISTERBANK)GetProcAddress(GetModuleHandleW(L"PluginManagerX3" PLNEXT), "x3GetRegisterBank");
+    ASSERT(pfnBank != NULL);
 
-    Ix_ObjectFactory* pFactory = (*pfn)();
-    return pFactory;
+    return pfnBank ? (*pfnBank)() : NULL;
 }

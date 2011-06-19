@@ -23,15 +23,11 @@
 
 #ifndef USE_ONE_PLUGIN
 
-#include "Ix_ObjectFactory.h"
+#include "PluginManager.h"
 
 Ix_ObjectFactory* x3GetObjectFactory()
 {
-    typedef Ix_ObjectFactory* (*FUNC_GET)();
-    FUNC_GET pfn = (FUNC_GET)GetProcAddress(
-        GetModuleHandleW(L"PluginManagerX3" PLNEXT), "x3GetRegisterBank");
-
-    return pfn ? (*pfn)() : NULL;
+    return CPluginManager::Factory();
 }
 
 int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)

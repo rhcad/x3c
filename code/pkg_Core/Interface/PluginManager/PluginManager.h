@@ -16,7 +16,7 @@
 class CPluginManager
 {
 public:
-    CPluginManager() : m_dll(NULL)
+    CPluginManager()
     {
         wcscpy_s(m_filename, MAX_PATH, L"PluginManagerX3" PLNEXT);
     }
@@ -29,7 +29,7 @@ public:
     //! Unload plugin manager and plugins
     void Unload(bool all = false)
     {
-        if (all || m_dll)
+        if (all || Handle())
         {
             Ix_PluginLoader* pLoader = GetPluginLoader();
             if (pLoader != NULL)
@@ -37,10 +37,11 @@ public:
                 pLoader->UnloadPlugins();
             }
         }
-        if (m_dll != NULL)
+        if (Handle() != NULL)
         {
-            FreeLibrary(m_dll);
-            m_dll = NULL;
+            FreeLibrary(Handle());
+            Handle() = NULL;
+            Factory() = NULL;
         }
     }
 
@@ -57,13 +58,14 @@ public:
         PathAppendW(m_filename, subdir);
         PathAppendW(m_filename, L"PluginManagerX3" PLNEXT);
 
-        if (GetModuleHandleW(m_filename) || m_dll)
+        if (GetModuleHandleW(m_filename) || Handle())
         {
             return true;
         }
 
-        m_dll = LoadLibraryW(m_filename);
-        return m_dll && GetObjectFactory();
+        Handle() = LoadLibraryW(m_filename);
+
+        return Handle() && GetObjectFactory();
     }
 
     //! Load plugin manager and core plugins.
@@ -101,14 +103,25 @@ public:
         return false;
     }
 
-    //! Return the object creator object.
+    //! Return the object creator.
     Ix_ObjectFactory* GetObjectFactory()
     {
-        typedef Ix_ObjectFactory* (*FUNC_GETREGISTERBANK)();
-        FUNC_GETREGISTERBANK pfn = (FUNC_GETREGISTERBANK)GetProcAddress(
-            GetModuleHandleW(m_filename), "x3GetRegisterBank");
+        typedef Ix_ObjectFactory* (*FUNC)();
+        Ix_ObjectFactory* p = Factory();
 
-        return pfn ? (*pfn)() : NULL;
+        if (!p)
+        {
+            HMODULE hdll = Handle() ? Handle() : GetModuleHandleW(m_filename);
+            FUNC pfn = (FUNC)GetProcAddress(hdll, "x3GetRegisterBank");
+
+            p = pfn ? (*pfn)() : NULL;
+            if (p && Handle())
+            {
+                Factory() = p;
+            }
+        }
+
+        return p;
     }
 
     //! Return the plugin loading object.
@@ -117,11 +130,22 @@ public:
         return dynamic_cast<Ix_PluginLoader*>(GetObjectFactory());
     }
 
+    static HMODULE& Handle()
+    {
+        static HMODULE s_dll = NULL;
+        return s_dll;
+    }
+
+    static Ix_ObjectFactory*& Factory()
+    {
+        static Ix_ObjectFactory* s_factory = NULL;
+        return s_factory;
+    }
+
 private:
     CPluginManager(const CPluginManager&);
     void operator=(const CPluginManager&);
 
-    HMODULE     m_dll;
     wchar_t     m_filename[MAX_PATH];
 };
 

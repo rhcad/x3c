@@ -459,6 +459,7 @@ bool Cx_PluginLoader::GetPluginFileName(long index, HMODULE& hdll, std::wstring&
 
 void Cx_PluginLoader::VerifyLoadFileNames()
 {
+#ifdef _WIN32
     if (0 == m_inifile[0])
     {
         GetModuleFileNameW(m_instance, m_inifile, MAX_PATH);
@@ -471,6 +472,7 @@ void Cx_PluginLoader::VerifyLoadFileNames()
 
         LoadFileNames(L"Plugins", m_inifile);
     }
+#endif
 }
 
 void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,

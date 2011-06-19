@@ -5,7 +5,7 @@
 
 #include "x3unix.h"
 #include "../PluginManager/Ix_PluginLoader2.h"
-#include "../UtilFunc/LockCount.h"
+#include "../PluginManager/PluginManager.h"
 #include "../UtilFunc/ConvStr.h"
 #include <dlfcn.h>
 #include <stdio.h>
@@ -93,10 +93,15 @@ static inline bool cmpdl(const char* dpname, const char* match)
 }
 
 Ix_ObjectFactory* x3GetObjectFactory();
-static long s_objFactoryLocker = 0;
 
 HMODULE GetModuleHandleW(const wchar_t* filename)
 {
+    if (CPluginManager::Handle()
+        && _wcsicmp(filename, L"PluginManagerX3" PLNEXT) == 0)
+    {
+        return CPluginManager::Handle();
+    }
+
     std::string match(x3::w2a(filename));
     std::map<HMODULE, std::string>::const_iterator it;
 
@@ -108,9 +113,7 @@ HMODULE GetModuleHandleW(const wchar_t* filename)
         }
     }
 
-    CLockCount locker(&s_objFactoryLocker);
-    Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
-        : dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
+    Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
 
     if (factory)
     {
@@ -167,9 +170,7 @@ void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
             wcscpy_s(filename, size, x3::a2w(it->second).c_str());
         }
 
-        CLockCount locker(&s_objFactoryLocker);
-        Ix_PluginLoader2* factory = (s_objFactoryLocker > 1) ? NULL
-            : dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
+        Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
 
         if (factory && 0 == filename[0])
         {

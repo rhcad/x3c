@@ -10,5 +10,3 @@ all:
 clean:
 	rm -rf *.so
 	rm -rf *.o
-
-
