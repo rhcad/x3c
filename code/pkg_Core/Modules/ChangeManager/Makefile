@@ -6,7 +6,7 @@ CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
 ChangeObserver:
 	$(CC) $(CFLAGS) -c  Cx_ChangeManager.cpp
 	$(CC) $(CFLAGS) -c  Module.cpp
-	$(CC) $(C_FLAGS) -o $(PLUGINS_DIR)/libChangeManager.so *.o
+	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libChangeManager.so *.o
 clean:
 	rm -rf ChangeObserver
 	rm -rf *.so

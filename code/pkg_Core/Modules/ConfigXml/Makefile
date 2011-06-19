@@ -9,9 +9,7 @@ all:
 	$(CC) $(CFLAGS) -c  Cx_ConfigXml.cpp
 	$(CC) $(CFLAGS) -c  Cx_XmlSection.cpp
 	$(CC) $(CFLAGS) -c  Module.cpp
-	$(CC) $(C_FLAGS) -o $(PLUGINS_DIR)/libConfigXml.so *.o
+	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libConfigXml.so *.o
 clean:
 	rm -rf *.so
 	rm -rf *.o
-
-

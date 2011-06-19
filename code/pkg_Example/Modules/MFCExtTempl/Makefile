@@ -8,7 +8,7 @@ all:
 	$(CC) $(CFLAGS) -c  Cx_Example2.cpp
 	$(CC) $(CFLAGS) -c  Plugin.cpp
 	$(CC) $(CFLAGS) -c  Module.cpp
-	$(CC) $(C_FLAGS) -o $(PLUGINS_DIR)/libMFCExtTempl.so *.o
+	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libMFCExtTempl.so *.o
 clean:
 	rm -rf *.so
 	rm -rf *.o

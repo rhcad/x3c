@@ -9,7 +9,7 @@ all:
 	$(CC) $(CFLAGS) -c  Cx_TempFolder.cpp
 	$(CC) $(CFLAGS) -c  Plugin.cpp
 	$(CC) $(CFLAGS) -c  Module.cpp
-	$(CC) $(C_FLAGS) -o $(PLUGINS_DIR)/libFileUtility.so *.o
+	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libFileUtility.so *.o
 clean:
 	rm -rf *.so
 	rm -rf *.o

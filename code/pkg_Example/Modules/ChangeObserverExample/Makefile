@@ -8,7 +8,7 @@ all:
 	$(CC) $(CFLAGS) -c  Plugin.cpp
 	$(CC) $(CFLAGS) -c  Cx_ObserverTest.cpp
 	$(CC) $(CFLAGS) -c  Module.cpp
-	$(CC) $(C_FLAGS) -o $(PLUGINS_DIR)/libChangeObserverExample.so *.o
+	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libChangeObserverExample.so *.o
 clean:
 	rm -rf *.so
 	rm -rf *.o

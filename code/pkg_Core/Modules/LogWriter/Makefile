@@ -12,7 +12,7 @@ all:
 	$(CC) $(CFLAGS) -c  LogObserver.cpp
 	$(CC) $(CFLAGS) -c  Module.cpp
 	$(CC) $(CFLAGS) -c  Plugin.cpp
-	$(CC) $(C_FLAGS) -o $(PLUGINS_DIR)/libLogWriter.so *.o
+	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libLogWriter.so *.o
 clean:
 	rm -rf *.so
 	rm -rf *.o

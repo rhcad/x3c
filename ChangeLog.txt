@@ -1,10 +1,14 @@
 X3 C++ PluginFramework
 
+2011-06-19
+
+    * Add '-shared' to C_FLAGS only for plugins (lib*.so, except *.app).
+    * Add 'static const' keyword to class id definition.
+
 2011-06-17
 
     * Remove Ix_ObjectFactory::HasCreatorReplaced, SpecialInterfaceObject.
-    * Add 'static const' keyword to class id definition.
-    * Add '-fPIC' to C_FLAGS in config.mk for Linux x64.
+    * Remove iidSpecial field in X3CLASSENTRY.
 
 ------v1.0.10------
 

@@ -1,9 +1,11 @@
 # Included by Makefile
 
 INCLUDE_DIR   =$(ROOTDIR)/code
-PLUGINS_DIR   =$(ROOTDIR)/code/bin/Plugins
-UNITTESTS_DIR =$(ROOTDIR)/code/bin/UnitTests
 
-C_FLAGS += -Wall -g -shared -fPIC
-CFLAGS += -fPIC
+INSTALL_DIR   =$(ROOTDIR)/code/bin
+PLUGINS_DIR   =$(INSTALL_DIR)/Plugins
+UNITTESTS_DIR =$(INSTALL_DIR)/UnitTests
+
 CC = g++
+C_FLAGS += -Wall -g
+C_FLAGS_SO = $(C_FLAGS) -shared
