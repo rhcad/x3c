@@ -3,6 +3,8 @@ X3 C++ PluginFramework
 2011-06-17
 
     * Remove Ix_ObjectFactory::HasCreatorReplaced, SpecialInterfaceObject.
+    * Add 'static const' keyword to class id definition.
+    * Add '-fPIC' to C_FLAGS in config.mk for Linux x64.
 
 ------v1.0.10------
 

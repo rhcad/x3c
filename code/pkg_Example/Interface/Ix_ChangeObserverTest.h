@@ -1,7 +1,7 @@
 #ifndef CHANGEOBSERVERTEST_INTERFACE_H
 #define CHANGEOBSERVERTEST_INTERFACE_H
 
-const X3CLSID CLSID_ChangeObserverTest("e57cc552-b227-4c2c-bf19-099083b79bf4");
+static const X3CLSID CLSID_ChangeObserverTest("e57cc552-b227-4c2c-bf19-099083b79bf4");
 
 class Ix_ChangeObserverTest
 {

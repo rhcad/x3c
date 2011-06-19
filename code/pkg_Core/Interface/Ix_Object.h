@@ -24,7 +24,7 @@ public:
 //! class unique id
 /*! \ingroup _GROUP_PLUGIN_CORE_
     \code
-    const X3CLSID CLSID_ExampleTool("97380b78-a3b4-4784-ba07-c928561988c8");
+    static const X3CLSID CLSID_ExampleTool("97380b78-a3b4-4784-ba07-c928561988c8");
     \endcode
 */
 class X3CLSID
@@ -92,7 +92,7 @@ private:
 };
 
 #define X3CLSID_DEFINE(clsid, str)  \
-    namespace x3 { const X3CLSID clsid(str); }  \
+    namespace x3 { static const X3CLSID clsid(str); }  \
     typedef int dumy_ ## clsid
 
 #endif // X3_CORE_IOBJECT_H_
