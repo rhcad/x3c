@@ -64,7 +64,7 @@ bool CXmlUtil::NewXMLFile(XMLDOMDocumentPtr& doc,
                           const wchar_t* pszRootName,
                           const wchar_t* pszEncoding,
                           const wchar_t* pszNameSpace,
-                          const wchar_t* pszComment)
+                          const wchar_t* comment)
 {
     LocalHResult hr;
 
@@ -88,10 +88,10 @@ bool CXmlUtil::NewXMLFile(XMLDOMDocumentPtr& doc,
         _bstr_t(L"xml"), _bstr_t(strHeader.c_str()), &pHeader);
     hr = pDocNode->appendChild(pHeader, NULL);
 
-    if (IsNotEmpty(pszComment))
+    if (IsNotEmpty(comment))
     {
         XMLDOMComment* pComment = NULL;
-        hr = doc->createComment(_bstr_t(pszComment), &pComment);
+        hr = doc->createComment(_bstr_t(comment), &pComment);
         if (pComment != NULL)
         {
             hr = doc->appendChild(XMLDOMNodePtr(pComment), NULL);
@@ -129,14 +129,14 @@ bool CXmlUtil::NewXMLFile2(XMLDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
-                           const wchar_t* pszFileName,
+                           const wchar_t* filename,
                            IXmlFileCrypt* pCryptHandler)
 {
     LocalHResult hr;
-    if (!IsNotEmpty(pszFileName))
+    if (!IsNotEmpty(filename))
         return false;
 
-    if (pCryptHandler && pCryptHandler->Decrypt(doc, pszFileName))
+    if (pCryptHandler && pCryptHandler->Decrypt(doc, filename))
     {
         ASSERT(doc != NULL);
         return true;
@@ -156,7 +156,7 @@ bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
 
     VARIANT vt;
     V_VT(&vt) = VT_BSTR;
-    V_BSTR(&vt) = ::SysAllocString(pszFileName);
+    V_BSTR(&vt) = ::SysAllocString(filename);
 
     try
     {
@@ -178,13 +178,13 @@ bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
-                           const wchar_t* pszFileName,
+                           const wchar_t* filename,
                            XMLDOMElementPtr& root,
                            const wchar_t* pszRootName,
                            IXmlFileCrypt* pCryptHandler)
 {
     root = NULL;
-    if (LoadXMLFile(doc, pszFileName, pCryptHandler))
+    if (LoadXMLFile(doc, filename, pCryptHandler))
     {
         if (!GetRoot(root, doc, pszRootName))
             doc = NULL;
@@ -193,16 +193,16 @@ bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
 }
 
 bool CXmlUtil::SaveXMLFile(const XMLDOMDocumentPtr& doc,
-                           const wchar_t* pszFileName,
+                           const wchar_t* filename,
                            IXmlFileCrypt* pCryptHandler)
 {
     LocalHResult hr = E_INVALIDARG;
-    if (!IsNotEmpty(pszFileName))
+    if (!IsNotEmpty(filename))
         return false;
 
     VARIANT vt;
     V_VT(&vt) = VT_BSTR;
-    V_BSTR(&vt) = ::SysAllocString(pszFileName);
+    V_BSTR(&vt) = ::SysAllocString(filename);
 
     try
     {
@@ -220,7 +220,7 @@ bool CXmlUtil::SaveXMLFile(const XMLDOMDocumentPtr& doc,
 
     if (SUCCEEDED(hr) && pCryptHandler)
     {
-        pCryptHandler->CryptFile(pszFileName);
+        pCryptHandler->CryptFile(filename);
     }
 
     return SUCCEEDED(hr);
@@ -333,16 +333,16 @@ std::wstring CXmlUtil::GetRootName(const XMLDOMDocumentPtr& doc)
 }
 
 bool CXmlUtil::CreateDocComment(const XMLDOMDocumentPtr& doc,
-                                const wchar_t* pszComment)
+                                const wchar_t* comment)
 {
     LocalHResult hr;
-    if (doc != NULL && IsNotEmpty(pszComment))
+    if (doc != NULL && IsNotEmpty(comment))
     {
         XMLDOMElementPtr ele;
         hr = doc->get_documentElement(&ele);
 
         XMLDOMComment* pComment = NULL;
-        hr = doc->createComment(_bstr_t(pszComment), &pComment);
+        hr = doc->createComment(_bstr_t(comment), &pComment);
         if (pComment != NULL)
         {
             hr = doc->insertBefore(XMLDOMNodePtr(pComment), _variant_t(ele), NULL);
@@ -357,13 +357,13 @@ bool CXmlUtil::CreateDocComment(const XMLDOMDocumentPtr& doc,
 
 bool CXmlUtil::CreateNodeComment(const XMLDOMDocumentPtr& doc,
                                  const XMLDOMElementPtr& ele,
-                                 const wchar_t* pszComment)
+                                 const wchar_t* comment)
 {
     LocalHResult hr;
-    if (doc != NULL && ele != NULL && IsNotEmpty(pszComment))
+    if (doc != NULL && ele != NULL && IsNotEmpty(comment))
     {
         XMLDOMComment* pComment = NULL;
-        hr = doc->createComment(_bstr_t(pszComment), &pComment);
+        hr = doc->createComment(_bstr_t(comment), &pComment);
         if (pComment != NULL)
         {
             hr = ele->appendChild(XMLDOMNodePtr(pComment), NULL);
@@ -420,19 +420,19 @@ static long GetChildIndex(const XMLDOMElementPtr& ele,
         hr = nl->get_length(&n);
         for (int i = 0; i < n; i++)
         {
-            XMLDOMNodePtr pNode;
-            hr = nl->get_item(i, &pNode);
-            if (NULL == pNode)
+            XMLDOMNodePtr node;
+            hr = nl->get_item(i, &node);
+            if (NULL == node)
                 continue;
 
             BSTR bstr = NULL;
-            hr = pNode->get_nodeName(&bstr);
+            hr = node->get_nodeName(&bstr);
             if (bstr != NULL && _wcsicmp(bstr, pszChildName) == 0)
             {
                 nCount++;
                 if (nCount > nMaxIndex)
                 {
-                    pRet = pNode;
+                    pRet = node;
                     ::SysFreeString(bstr);
                     break;
                 }
@@ -531,9 +531,9 @@ bool CXmlUtil::DelChild(const XMLDOMElementPtr& parent,
 
     if (parent != NULL && eleDel != NULL)
     {
-        XMLDOMNodePtr pNode;
-        hr = eleDel->get_parentNode(&pNode);
-        if (pNode == parent)
+        XMLDOMNodePtr node;
+        hr = eleDel->get_parentNode(&node);
+        if (node == parent)
         {
             bRet = SUCCEEDED(hr = parent->removeChild(eleDel, NULL));
             if (bRet)
@@ -574,9 +574,9 @@ long CXmlUtil::FindElement(XMLDOMElementPtr& outEle,
                            const XMLDOMElementPtr& parent,
                            const wchar_t* pszElement,
                            const wchar_t* pszField,
-                           const wchar_t* pszValue)
+                           const wchar_t* value)
 {
-    NL(pszValue);
+    NL(value);
     XMLDOMElementPtr ele;
     long nCount = GetChildCount(parent, pszElement);
     long i;
@@ -585,7 +585,7 @@ long CXmlUtil::FindElement(XMLDOMElementPtr& outEle,
     for (i = nCount - 1; i >= 0; i--)
     {
         if (GetChild(ele, parent, pszElement, i)
-            && _wcsicmp(GetField(ele, pszField).c_str(), pszValue) == 0)
+            && _wcsicmp(GetField(ele, pszField).c_str(), value) == 0)
         {
             outEle = ele;
             break;
@@ -599,11 +599,11 @@ long CXmlUtil::FindElementByAttr(XMLDOMElementPtr& outEle,
                                  const XMLDOMElementPtr& parent,
                                  const wchar_t* pszElement,
                                  const wchar_t* pszAttr1,
-                                 const wchar_t* pszValue1,
+                                 const wchar_t* value1,
                                  const wchar_t* pszAttr2,
-                                 const wchar_t* pszValue2)
+                                 const wchar_t* value2)
 {
-    NL(pszAttr1); NL(pszValue1); NL(pszAttr2); NL(pszValue2);
+    NL(pszAttr1); NL(value1); NL(pszAttr2); NL(value2);
     XMLDOMElementPtr ele;
     long i = GetChildCount(parent, pszElement);
 
@@ -612,9 +612,9 @@ long CXmlUtil::FindElementByAttr(XMLDOMElementPtr& outEle,
     {
         if (GetChild(ele, parent, pszElement, i))
         {
-            if (_wcsicmp(GetAttribute(ele, pszAttr1).c_str(), pszValue1) == 0
+            if (_wcsicmp(GetAttribute(ele, pszAttr1).c_str(), value1) == 0
                 && (!IsNotEmpty(pszAttr2) || _wcsicmp(
-                    GetAttribute(ele, pszAttr2).c_str(), pszValue2) == 0))
+                    GetAttribute(ele, pszAttr2).c_str(), value2) == 0))
             {
                 outEle = ele;
                 break;
@@ -642,16 +642,16 @@ std::wstring CXmlUtil::GetTagName(const XMLDOMElementPtr& ele)
     return wstrTagName;
 }
 
-std::wstring CXmlUtil::GetText(const XMLDOMNodePtr& pNode, const wchar_t* pszDefault)
+std::wstring CXmlUtil::GetText(const XMLDOMNodePtr& node, const wchar_t* defaultText)
 {
     LocalHResult hr;
-    NL(pszDefault);
-    std::wstring strText(pszDefault);
+    NL(defaultText);
+    std::wstring strText(defaultText);
     BSTR bstr = NULL;
 
-    if (pNode != NULL)
+    if (node != NULL)
     {
-        hr = pNode->get_text(&bstr);
+        hr = node->get_text(&bstr);
         if (bstr != NULL)
         {
             strText = bstr;
@@ -660,30 +660,30 @@ std::wstring CXmlUtil::GetText(const XMLDOMNodePtr& pNode, const wchar_t* pszDef
 
         VARIANT_BOOL bHasChild;
         if (strText.empty()
-            && SUCCEEDED(hr = pNode->hasChildNodes(&bHasChild)) && bHasChild)
+            && SUCCEEDED(hr = node->hasChildNodes(&bHasChild)) && bHasChild)
         {
-            strText = GetTextCDATA(pNode, pszDefault);
+            strText = GetTextCDATA(node, defaultText);
         }
     }
 
     return strText;
 }
 
-bool CXmlUtil::SetText(const XMLDOMNodePtr& pNode, const wchar_t* pszText)
+bool CXmlUtil::SetText(const XMLDOMNodePtr& node, const wchar_t* text)
 {
     LocalHResult hr;
     bool bRet = false;
-    if (pNode != NULL)
-        bRet = SUCCEEDED(hr = pNode->put_text(_bstr_t(pszText)));
+    if (node != NULL)
+        bRet = SUCCEEDED(hr = node->put_text(_bstr_t(text)));
     return bRet;
 }
 
-bool CXmlUtil::SetTextW(const XMLDOMNodePtr& pNode, const wchar_t* pszText)
+bool CXmlUtil::SetTextW(const XMLDOMNodePtr& node, const wchar_t* text)
 {
     LocalHResult hr;
     bool bRet = false;
-    if (pNode != NULL)
-        bRet = SUCCEEDED(hr = pNode->put_text(_bstr_t(pszText)));
+    if (node != NULL)
+        bRet = SUCCEEDED(hr = node->put_text(_bstr_t(text)));
     return bRet;
 }
 
@@ -698,17 +698,17 @@ bool CXmlUtil::GetParentNode(XMLDOMElementPtr& parent, XMLDOMElementPtr& node)
 }
 
 bool CXmlUtil::DelAttribute(const XMLDOMElementPtr& ele,
-                            const wchar_t* pszName)
+                            const wchar_t* name)
 {
     LocalHResult hr;
-    XMLDOMAttributePtr pNode = NULL;
+    XMLDOMAttributePtr node = NULL;
 
-    if (ele != NULL && IsNotEmpty(pszName))
-        hr = ele->getAttributeNode(_bstr_t(pszName), &pNode);
+    if (ele != NULL && IsNotEmpty(name))
+        hr = ele->getAttributeNode(_bstr_t(name), &node);
 
-    if (pNode != NULL)
+    if (node != NULL)
     {
-        XMLDOMElementPtr pItem(pNode);
+        XMLDOMElementPtr pItem(node);
         return SUCCEEDED(hr = ele->removeChild(pItem, NULL));
     }
 
@@ -716,20 +716,20 @@ bool CXmlUtil::DelAttribute(const XMLDOMElementPtr& ele,
 }
 
 std::wstring CXmlUtil::GetAttribute(const XMLDOMElementPtr& ele,
-                                    const wchar_t* pszName,
-                                    const wchar_t* pszDefault)
+                                    const wchar_t* name,
+                                    const wchar_t* defaultText)
 {
-    NL(pszDefault);
-    std::wstring strValue (pszDefault);
-    XMLDOMAttributePtr pNode = NULL;
+    NL(defaultText);
+    std::wstring strValue (defaultText);
+    XMLDOMAttributePtr node = NULL;
     LocalHResult hr;
 
-    if (IsNotEmpty(pszName) && ele != NULL)
-        hr = ele->getAttributeNode(_bstr_t(pszName), &pNode);
-    if (pNode != NULL)
+    if (IsNotEmpty(name) && ele != NULL)
+        hr = ele->getAttributeNode(_bstr_t(name), &node);
+    if (node != NULL)
     {
         BSTR bstr = NULL;
-        hr = pNode->get_text(&bstr);
+        hr = node->get_text(&bstr);
         if (bstr != NULL)
         {
             strValue = bstr;
@@ -742,15 +742,15 @@ std::wstring CXmlUtil::GetAttribute(const XMLDOMElementPtr& ele,
 
 bool CXmlUtil::SetAttribute(const XMLDOMDocumentPtr&,
                             const XMLDOMElementPtr& ele,
-                            const wchar_t* pszName,
-                            const wchar_t* pszValue)
+                            const wchar_t* name,
+                            const wchar_t* value)
 {
     LocalHResult hr;
     bool bRet = false;
 
-    if (IsNotEmpty(pszName) && ele != NULL)
+    if (IsNotEmpty(name) && ele != NULL)
     {
-        hr = ele->setAttribute(_bstr_t(pszName), _variant_t(pszValue));
+        hr = ele->setAttribute(_bstr_t(name), _variant_t(value));
         bRet = SUCCEEDED(hr);
     }
 
@@ -758,11 +758,11 @@ bool CXmlUtil::SetAttribute(const XMLDOMDocumentPtr&,
 }
 
 UINT CXmlUtil::GetAttributeInt(const XMLDOMElementPtr& ele,
-                               const wchar_t* pszName,
-                               INT nDef)
+                               const wchar_t* name,
+                               INT defValue)
 {
-    UINT nRet = nDef;
-    std::wstring str = GetAttribute(ele, pszName);
+    UINT nRet = defValue;
+    std::wstring str = GetAttribute(ele, name);
 
     if (_wcsicmp(str.c_str(), L"true") == 0)
         return 1;
@@ -777,32 +777,32 @@ UINT CXmlUtil::GetAttributeInt(const XMLDOMElementPtr& ele,
 
 bool CXmlUtil::SetAttributeInt(const XMLDOMDocumentPtr& doc,
                                const XMLDOMElementPtr& ele,
-                               const wchar_t* pszName,
-                               INT nVal)
+                               const wchar_t* name,
+                               INT value)
 {
     wchar_t szNum[35];
-    _itow_s(nVal, szNum, 35, 10);
-    return SetAttribute(doc, ele, pszName, szNum);
+    _itow_s(value, szNum, 35, 10);
+    return SetAttribute(doc, ele, name, szNum);
 }
 
 bool CXmlUtil::SetAttributeBool(const XMLDOMDocumentPtr& doc,
                                 const XMLDOMElementPtr& ele,
-                                const wchar_t* pszName,
-                                BOOL bVal)
+                                const wchar_t* name,
+                                BOOL value)
 {
-    return SetAttribute(doc, ele, pszName, bVal ? L"true" : L"false");
+    return SetAttribute(doc, ele, name, value ? L"true" : L"false");
 }
 
 std::wstring CXmlUtil::GetField(const XMLDOMElementPtr& ele,
-                                const wchar_t* pszFieldName,
-                                const wchar_t* pszDefault)
+                                const wchar_t* filename,
+                                const wchar_t* defaultText)
 {
-    NL(pszDefault);
-    std::wstring strValue (pszDefault);
+    NL(defaultText);
+    std::wstring strValue (defaultText);
     LocalHResult hr;
 
     XMLDOMNodePtr pRet = NULL;
-    GetChildIndex(ele, pszFieldName, 0, pRet);
+    GetChildIndex(ele, filename, 0, pRet);
     if (pRet != NULL)
     {
         BSTR bstr = NULL;
@@ -817,7 +817,7 @@ std::wstring CXmlUtil::GetField(const XMLDOMElementPtr& ele,
         if (strValue.empty()
             && SUCCEEDED(hr = pRet->hasChildNodes(&bHasChild)) && bHasChild)
         {
-            strValue = GetFieldCDATA(ele, pszFieldName, pszDefault);
+            strValue = GetFieldCDATA(ele, filename, defaultText);
         }
     }
 
@@ -826,34 +826,34 @@ std::wstring CXmlUtil::GetField(const XMLDOMElementPtr& ele,
 
 bool CXmlUtil::SetField(const XMLDOMDocumentPtr& doc,
                         const XMLDOMElementPtr& ele,
-                        const wchar_t* pszFieldName,
-                        const wchar_t* pszValue)
+                        const wchar_t* filename,
+                        const wchar_t* value)
 {
     bool bRet = false;
-    XMLDOMElementPtr pNode;
+    XMLDOMElementPtr node;
     LocalHResult hr;
 
-    if (GetChildOrAdd(pNode, doc, ele, pszFieldName))
+    if (GetChildOrAdd(node, doc, ele, filename))
     {
-        bRet = SUCCEEDED(hr = pNode->put_text(_bstr_t(pszValue)));
+        bRet = SUCCEEDED(hr = node->put_text(_bstr_t(value)));
     }
 
     return bRet;
 }
 
 bool CXmlUtil::GetFieldBool(const XMLDOMElementPtr& ele,
-                            const wchar_t* pszFieldName,
-                            BOOL bDef)
+                            const wchar_t* filename,
+                            BOOL defValue)
 {
-    return GetFieldInt(ele, pszFieldName, bDef) != 0;
+    return GetFieldInt(ele, filename, defValue) != 0;
 }
 
 UINT CXmlUtil::GetFieldInt(const XMLDOMElementPtr& ele,
-                           const wchar_t* pszFieldName,
-                           INT nDef)
+                           const wchar_t* filename,
+                           INT defValue)
 {
-    UINT nRet = nDef;
-    std::wstring str = GetField(ele, pszFieldName);
+    UINT nRet = defValue;
+    std::wstring str = GetField(ele, filename);
 
     if (_wcsicmp(str.c_str(), L"true") == 0)
         return 1;
@@ -874,50 +874,50 @@ UINT CXmlUtil::GetFieldInt(const XMLDOMElementPtr& ele,
 
 bool CXmlUtil::SetFieldInt(const XMLDOMDocumentPtr& doc,
                            const XMLDOMElementPtr& ele,
-                           const wchar_t* pszFieldName,
-                           INT nVal)
+                           const wchar_t* filename,
+                           INT value)
 {
     wchar_t szNum[35];
-    _itow_s(nVal, szNum, 35, 10);
-    return SetField(doc, ele, pszFieldName, szNum);
+    _itow_s(value, szNum, 35, 10);
+    return SetField(doc, ele, filename, szNum);
 }
 
 bool CXmlUtil::SetFieldBool(const XMLDOMDocumentPtr& doc,
                             const XMLDOMElementPtr& ele,
-                            const wchar_t* pszFieldName,
-                            BOOL bVal)
+                            const wchar_t* filename,
+                            BOOL value)
 {
-    return SetField(doc, ele, pszFieldName, bVal ? L"true" : L"false");
+    return SetField(doc, ele, filename, value ? L"true" : L"false");
 }
 
 bool CXmlUtil::SetFieldHex(const XMLDOMDocumentPtr& doc,
                            const XMLDOMElementPtr& ele,
-                           const wchar_t* pszFieldName,
-                           INT nVal,
-                           INT nDigits)
+                           const wchar_t* filename,
+                           INT value,
+                           INT digits)
 {
     wchar_t buf[20] = L"0x000000";
 
-    if (nDigits > 0 && nDigits <= 6)
+    if (digits > 0 && digits <= 6)
     {
-        _itow_s(nVal, buf + 8, 20 - 8, 16);
+        _itow_s(value, buf + 8, 20 - 8, 16);
         int nLen = lstrlenW(buf + 8);
-        nLen = 6 + nLen - max(nDigits, nLen);
+        nLen = 6 + nLen - max(digits, nLen);
         for (int i = 0; buf[2+i-1] != 0; i++)
             buf[2+i] = buf[2+nLen+i];
     }
     else
     {
-        _itow_s(nVal, buf + 2, 20 - 2, 16);
+        _itow_s(value, buf + 2, 20 - 2, 16);
     }
 
-    return SetField(doc, ele, pszFieldName, buf);
+    return SetField(doc, ele, filename, buf);
 }
 
-std::wstring CXmlUtil::GetTextCDATA(const XMLDOMElementPtr& ele, const wchar_t* pszDefault)
+std::wstring CXmlUtil::GetTextCDATA(const XMLDOMElementPtr& ele, const wchar_t* defaultText)
 {
-    NL(pszDefault);
-    std::wstring strValue (pszDefault);
+    NL(defaultText);
+    std::wstring strValue (defaultText);
     XMLDOMNodePtr pCDATA;
     LocalHResult hr;
 
@@ -945,17 +945,17 @@ std::wstring CXmlUtil::GetTextCDATA(const XMLDOMElementPtr& ele, const wchar_t* 
 }
 
 std::wstring CXmlUtil::GetFieldCDATA(const XMLDOMElementPtr& ele,
-                                     const wchar_t* pszFieldName,
-                                     const wchar_t* pszDefault)
+                                     const wchar_t* filename,
+                                     const wchar_t* defaultText)
 {
     XMLDOMNodePtr pRet = NULL;
-    GetChildIndex(ele, pszFieldName, 0, pRet);
-    return GetTextCDATA(pRet, pszDefault);
+    GetChildIndex(ele, filename, 0, pRet);
+    return GetTextCDATA(pRet, defaultText);
 }
 
 bool CXmlUtil::SetTextCDATA(const XMLDOMDocumentPtr& doc,
                             const XMLDOMElementPtr& ele,
-                            const wchar_t* pszValue)
+                            const wchar_t* value)
 {
     bool bRet = false;
     VARIANT_BOOL bHasChild;
@@ -978,7 +978,7 @@ bool CXmlUtil::SetTextCDATA(const XMLDOMDocumentPtr& doc,
         hr = doc->createNode(type, NULL, NULL, &pCDATA);
         if (pCDATA != NULL)
         {
-            hr = pCDATA->put_text(_bstr_t(pszValue));
+            hr = pCDATA->put_text(_bstr_t(value));
             bRet = SUCCEEDED(hr = ele->appendChild(pCDATA, NULL));
         }
     }
@@ -988,75 +988,75 @@ bool CXmlUtil::SetTextCDATA(const XMLDOMDocumentPtr& doc,
 
 bool CXmlUtil::SetFieldCDATA(const XMLDOMDocumentPtr& doc,
                              const XMLDOMElementPtr& ele,
-                             const wchar_t* pszFieldName,
-                             const wchar_t* pszValue)
+                             const wchar_t* filename,
+                             const wchar_t* value)
 {
     bool bRet = false;
     XMLDOMElementPtr pChild;
 
-    if (GetChildOrAdd(pChild, doc, ele, pszFieldName))
+    if (GetChildOrAdd(pChild, doc, ele, filename))
     {
-        bRet = SetTextCDATA(doc, pChild, pszValue);
+        bRet = SetTextCDATA(doc, pChild, value);
     }
 
     return bRet;
 }
 
 bool CXmlUtil::GetAttributeBool(const XMLDOMElementPtr& ele,
-                                const wchar_t* pszName,
-                                BOOL bDef)
+                                const wchar_t* name,
+                                BOOL defValue)
 {
-    return GetAttributeInt(ele, pszName, bDef) != 0;
+    return GetAttributeInt(ele, name, defValue) != 0;
 }
 
 double CXmlUtil::GetAttributeFloat(const XMLDOMElementPtr& ele,
-                                   const wchar_t* pszName,
-                                   double dDef,
-                                   std::wstring* pstrUnit)
+                                   const wchar_t* name,
+                                   double value,
+                                   std::wstring* unitName)
 {
     wchar_t* endptr = NULL;
-    std::wstring str = GetAttribute(ele, pszName);
+    std::wstring str = GetAttribute(ele, name);
     if (!str.empty())
-        dDef = wcstod(str.c_str(), &endptr);
-    if (pstrUnit != NULL)
-        *pstrUnit = (endptr != NULL) ? endptr : L"";
-    return dDef;
+        value = wcstod(str.c_str(), &endptr);
+    if (unitName != NULL)
+        *unitName = (endptr != NULL) ? endptr : L"";
+    return value;
 }
 
 bool CXmlUtil::SetAttributeFloat(const XMLDOMDocumentPtr& doc,
                                  const XMLDOMElementPtr& ele,
-                                 const wchar_t* pszName,
-                                 double dVal,
-                                 const wchar_t* pszUnit,
+                                 const wchar_t* name,
+                                 double value,
+                                 const wchar_t* unitName,
                                  int decimal)
 {
-    std::wstring str (x3::RoundStr(dVal, decimal));
-    str += pszUnit;
-    return SetAttribute(doc, ele, pszName, str.c_str());
+    std::wstring str (x3::RoundStr(value, decimal));
+    str += unitName;
+    return SetAttribute(doc, ele, name, str.c_str());
 }
 
 double CXmlUtil::GetFieldFloat(const XMLDOMElementPtr& ele,
-                               const wchar_t* pszFieldName,
-                               double dDef,
-                               std::wstring* pstrUnit)
+                               const wchar_t* filename,
+                               double value,
+                               std::wstring* unitName)
 {
     wchar_t* endptr = NULL;
-    std::wstring str = GetField(ele, pszFieldName);
+    std::wstring str = GetField(ele, filename);
     if (!str.empty())
-        dDef = wcstod(str.c_str(), &endptr);
-    if (pstrUnit != NULL)
-        *pstrUnit = (endptr != NULL) ? endptr : L"";
-    return dDef;
+        value = wcstod(str.c_str(), &endptr);
+    if (unitName != NULL)
+        *unitName = (endptr != NULL) ? endptr : L"";
+    return value;
 }
 
 bool CXmlUtil::SetFieldFloat(const XMLDOMDocumentPtr& doc,
                              const XMLDOMElementPtr& ele,
-                             const wchar_t* pszFieldName,
-                             double dVal,
-                             const wchar_t* pszUnit,
+                             const wchar_t* filename,
+                             double value,
+                             const wchar_t* unitName,
                              int decimal)
 {
-    std::wstring str (x3::RoundStr(dVal, decimal));
-    str += pszUnit;
-    return SetField(doc, ele, pszFieldName, str.c_str());
+    std::wstring str (x3::RoundStr(value, decimal));
+    str += unitName;
+    return SetField(doc, ele, filename, str.c_str());
 }

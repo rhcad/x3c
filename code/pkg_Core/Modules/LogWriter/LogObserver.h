@@ -34,7 +34,7 @@ private:
     bool CopyLogFilesToServer();
 
 private:
-    std::wstring    m_path;         // logging path ending with backsplash.
+    std::wstring    m_path;         // logging path ending with backslash.
     std::wstring    m_appname;      // application name for logging.
     bool            m_inited;       // logging file is setted or not.
     long            m_level;        // group level of current group.

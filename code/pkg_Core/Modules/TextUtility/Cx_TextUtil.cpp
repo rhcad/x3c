@@ -490,17 +490,17 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
 
         for (; psrc[i] != 0; i++)
         {
-            if (psrc[i] >= 0xA3B0 && psrc[i] <= 0xA3B9)     // £°..£¹
+            if (psrc[i] >= 0xA3B0 && psrc[i] <= 0xA3B9)     // Chinese 0..9
             {
                 pdest[i] = wchar_t(L'0' + psrc[i] - 0xA3B0);
                 n++;
             }
-            else if (psrc[i] >= 0xA3C1 && psrc[i] <= 0xA3DA)    // £Á..£Ú
+            else if (psrc[i] >= 0xA3C1 && psrc[i] <= 0xA3DA)    // A..Z
             {
                 pdest[i] = wchar_t(L'A' + psrc[i] - 0xA3C1);
                 n++;
             }
-            else if (psrc[i] >= 0xA3E1 && psrc[i] <= 0xA3FA)    // £á..£ú
+            else if (psrc[i] >= 0xA3E1 && psrc[i] <= 0xA3FA)    // a..z
             {
                 pdest[i] = wchar_t(L'a' + psrc[i] - 0xA3E1);
                 n++;

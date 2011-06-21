@@ -81,7 +81,7 @@ public:
         \param filename 文件全名
         \param codepage 要保存为哪种编码的ANSI编码文件，
             例如 CP_UTF8 表示UTF-8格式编码，默认为CP_ACP
-        \return 是否执行成功
+        \return true if successful.
     */
     virtual bool UnicodeToAnsi(const std::wstring& filename, int codepage = 0) = 0;
 
@@ -90,7 +90,7 @@ public:
         \param filename 文件全名
         \param codepage 如果文件以前是ANSI编码，则指定是哪种编码，
             例如 CP_UTF8 表示UTF-8格式编码，默认为CP_ACP
-        \return 是否执行成功
+        \return true if successful.
     */
     virtual bool AnsiToUnicode(const std::wstring& filename, int codepage = 0) = 0;
 

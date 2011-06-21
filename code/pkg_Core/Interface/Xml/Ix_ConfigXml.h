@@ -1,5 +1,5 @@
 /*! \file Ix_ConfigXml.h
- *  \brief 定义XML配置初始化的接口 Ix_ConfigXml
+ *  \brief Define the interface for xml data initialization: Ix_ConfigXml
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -8,15 +8,15 @@
 
 #include <XComPtr.h>
 
-//! XML配置数据对象的类ID
 X3CLSID_DEFINE(CLSID_ConfigXmlFile, "c93e1e3d-0362-4856-9a4a-31c119e324f7");
 
 class Ix_ConfigData;
 class Ix_ConfigSection;
 class IFileCryptHandler;
 
-//! XML配置数据初始化的接口
-/*! 使用 IFileCryptHandler 可拦截XML文件读写过程
+//! The interface for xml data initialization.
+/*! This interface can be casted to Ix_ConfigData or Ix_ConfigTransaction.\n
+    May use IFileCryptHandler to change xml file's reading and writing.
     \interface Ix_ConfigXml
     \ingroup _GROUP_PLUGIN_XML_
     \see x3::CLSID_ConfigXmlFile, Ix_ConfigData, Ix_ConfigTransaction
@@ -26,85 +26,87 @@ class Ix_ConfigXml
 public:
     virtual ~Ix_ConfigXml() {}
 
-    //! 返回配置管理接口对象
+    //! Return the configure data object.
     virtual Ix_ConfigData* GetData() = 0;
 
-    //! 返回配置文件全名
+    //! Return file name (see SetFileName).
     virtual std::wstring GetFileName() const = 0;
 
-    //! 设置配置文件全名
-    /*! 读写XML文件之前必须设置文件全名
-        \param filename 文件全名，也可以是WebService的URL
+    //! Set file name for reading or saving.
+    /*! Call this before reading or saving.
+        \param filename absolute file name, or Web Service URL.
     */
     virtual void SetFileName(const wchar_t* filename) = 0;
 
-    //! 返回实际根节点名称
-    /*! 没有装载XML文件时会临时加载XML文件
-        \return 实际根节点名称，在没有装载XML文件时不一定和 SetRootName() 的结果相同
+    //! Return the root element name.
+    /*! When the xml file hasn't been loaded, this function will temporarily load it,
+        and the result name may be different from SetRootName().
+        \return the actual root element name.
         \see SetRootName, Reload
     */
     virtual std::wstring GetRootName() const = 0;
 
-    //! 设置根节点名称和XML语言编码
+    //! Set the root element name and xml encoding.
     /*!
-        \param rootName 根节点名称，用于新建XML或在读取XML时检查合法性，
-            为空则不检查XML内容的根节点
-        \param encoding XML语言编码，新建XML文件时使用
-        \param nmspace XML命名空间，新建XML文件时使用
+        \param rootName the root element name, 
+            used to verify xml structure while reading.\n
+            If rootName is empty then not comparing the root element name.
+        \param encoding xml encoding used while creating new document.
+        \param nmspace xml namespace name used while creating new document.
         \see GetRootName, Reload
     */
     virtual void SetRootName(const wchar_t* rootName = L"root", 
         const wchar_t* encoding = L"UTF-8", 
         const wchar_t* nmspace = L"") = 0;
 
-    //! 设置引用的Schema文件的位置
-    /*! 如果设置了该属性，则在新建XML文档时使用
-        \param location Schema文件的位置，可以为相对文件名
+    //! Set the schema file location for creating new document.
+    /*!
+        \param location the schema file location, can be relative file name.
         \see GetRootName, Reload
     */
     virtual void SetSchemaLocation(const wchar_t* location) = 0;
 
-    //! 重新装载XML文件
-    /*! 放弃当前XML文档的内容，重新装载XML文档。
-        如果调用过 SetRootName() 且其结果与XML内容的根节点不同则返回false；
-        如果没有调用过 SetRootName()，则自动识别根节点名称
-        \return 是否成功装载XML文件，失败时将新建XML文档内容
+    //! Reload xml document regardless changes.
+    /*! This function will verify the root element name when SetRootName() is called before,
+        thus returns false if the root element name is different from SetRootName().
+        \return true if loading successful, otherwise returns false and create new document.
     */
     virtual bool Reload() = 0;
 
-    //! 保存XML内容到指定的文件
-    /*! 本函数不改变文档的待保存状态，也不受该状态影响
-        \param filename 文件全名，空串表示使用当前文件全名
-        \return 是否保存成功
+    //! Save this document to a file.
+    /*! This function doesn't change the modified status of this document.
+        \param filename absolute file name to save, 
+            empty string is represented as the current file name.
+        \return true if saving successful.
     */
     virtual bool Save(const wchar_t* filename = L"") const = 0;
 
-    //! 得到整个文档的XML内容
-    /*! 如果还未新建或加载XML文件，则自动调用 Reload()
-        \param[out] content XML内容，没有“UTF-8”之类的XML语言编码部分
-        \return 是否获取成功
+    //! Get xml content of the whole document.
+    /*! It'll auto call Reload() when the document hasn't been loaded.
+        \param[out] content xml content that hasn't xml encoding text.
+        \return true if successful.
     */
     virtual bool GetXmlContent(std::wstring& content) const = 0;
 
-    //! 装载XML内容
-    /*! 如果调用过 SetRootName() 且其结果与XML内容的根节点不同则返回false
-        \param content XML内容，自动跳过Unicode前缀标志
-        \return 是否装载成功
+    //! Load document from the string content.
+    /*! This function will verify the root element name when SetRootName() is called before.
+        \param content the xml content, auto skip the UNICODE flags.
+        \return true if loading successful, otherwise returns false and create new document.
     */
     virtual bool SetXmlContent(const std::wstring& content) = 0;
 
-    //! 得到一个节点的XML内容
+    //! Get xml content of a element node.
     /*!
-        \param[out] content XML内容，没有“UTF-8”之类的XML语言编码部分
-        \param[in] node 指定的一个节点
-        \return 是否获取成功
+        \param[out] content xml content that hasn't xml encoding text.
+        \param[in] node the element node.
+        \return true if successful.
     */
     virtual bool GetXmlContent(std::wstring& content, Ix_ConfigSection* node) const = 0;
 
-    //! 设置XML文件加解密的操作对象
-    /*!
-        \param[in] handler 新的加解密的操作对象
-        \return 原来的加解密的操作对象
+    //! Set file encryption handler.
+    /*! Call the handler before loading file or after saving file.
+        \param[in] handler new encryption handler.
+        \return old encryption handler.
     */
     virtual IFileCryptHandler* SetCryptHandler(IFileCryptHandler* handler) = 0;
 };

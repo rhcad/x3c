@@ -84,7 +84,7 @@ public:
     /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param filename 目录或文件的文件全名
         \param recycle true表示放进回收站，false表示直接删除
-        \return 是否执行成功. 文件全名为空或文件不存在则返回true
+        \return true if successful. 文件全名为空或文件不存在则返回true
     */
     virtual bool DeletePathFile(const wchar_t* filename, bool recycle = false) = 0;
 
@@ -92,7 +92,7 @@ public:
     /*! 失败时会用 X3LOG_ERROR2 记录日志，自动创建目标文件的文件夹
         \param oldFile 原来的目录或文件的文件全名
         \param newFile 新的目录或文件的文件全名
-        \return 是否执行成功. oldFile为空或原文件不存在则返回true
+        \return true if successful. oldFile为空或原文件不存在则返回true
     */
     virtual bool MovePathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
@@ -100,7 +100,7 @@ public:
     /*! 失败时会用 X3LOG_ERROR2 记录日志
         \param oldFile 原来的目录或文件的文件全名
         \param newFile 新的目录或文件的文件全名
-        \return 是否执行成功. oldFile为空或原文件不存在则返回true
+        \return true if successful. oldFile为空或原文件不存在则返回true
     */
     virtual bool RenamePathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 
@@ -108,7 +108,7 @@ public:
     /*! 失败时会用 X3LOG_ERROR2 记录日志，自动创建目标文件的文件夹
         \param oldFile 原来的目录或文件的文件全名
         \param newFile 新的目录或文件的文件全名
-        \return 是否执行成功. oldFile为空或原文件不存在则返回true
+        \return true if successful. oldFile为空或原文件不存在则返回true
     */
     virtual bool CopyPathFile(const wchar_t* oldFile, const wchar_t* newFile) = 0;
 

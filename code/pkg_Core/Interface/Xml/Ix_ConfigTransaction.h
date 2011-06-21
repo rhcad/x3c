@@ -1,5 +1,5 @@
 /*! \file Ix_ConfigTransaction.h
- *  \brief 定义写配置事务的辅助类 Cx_ConfigTransaction
+ *  \brief Define configure transaction helper class: Cx_ConfigTransaction
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -8,35 +8,39 @@
 
 #include <XComPtr.h>
 
-//! 配置数据保存事务的接口
-/*! Ix_ConfigSection 和 Ix_ConfigData 一般都可转换到该接口
+//! Configure transaction interface.
+/*! Ix_ConfigSection and Ix_ConfigData can be casted to this interface.
     \see Cx_ConfigTransaction
+    \see Ix_ConfigSection, Ix_ConfigData
 */
 class Ix_ConfigTransaction
 {
 public:
     virtual ~Ix_ConfigTransaction() {}
 
-    //! 准备写配置
+    //! Begin to change configure data.
     virtual void BeginTransaction() = 0;
 
-    //! 结束写配置
+    //! End to change configure data.
+    /*! The configure data will be saved when transaction counter becomes to zero.
+        \return false if error occurred, otherwise returns true.
+    */
     virtual bool EndTransaction() = 0;
 
-    //! 返回内容改变的总次数，可用于比较某次是否改变
+    //! Return the total count of configure data changes.
     virtual ULONG GetModifiedCount() = 0;
 };
 
-//! 写配置事务的辅助类
-/*! 在要保存配置的函数中，用本类在函数内定义局部变量，
-    标明即将调用改变内容的函数，退出函数析构时就可永久保存配置
+//! Configure transaction helper class.
+/*! Use this class to declare local variable in functions,
+    so EndTransaction() will be automatic called to save configure data.
     \ingroup _GROUP_PLUGIN_XML_
     \see Ix_ConfigSection, Ix_ConfigData
 */
 class Cx_ConfigTransaction
 {
 public:
-    //! 构造函数，准备写配置
+    //! Begin to change configure data.
     Cx_ConfigTransaction(const Cx_Ptr& obj) : m_trans(obj)
     {
         if (m_trans)
@@ -46,7 +50,7 @@ public:
     }
 
 #ifdef X3_XML_ICONFIGDATA_H_
-    //! 构造函数，准备写配置
+    //! Begin to change configure data.
     Cx_ConfigTransaction(const Cx_Interface<Ix_ConfigData>& p) : m_trans(p)
     {
         if (m_trans)
@@ -56,13 +60,13 @@ public:
     }
 #endif
 
-    //! 析构函数，结束写配置
+    //! End to change configure data.
     ~Cx_ConfigTransaction()
     {
         Submit();
     }
 
-    //! 结束写配置
+    //! End to change configure data.
     bool Submit()
     {
         bool ret = false;

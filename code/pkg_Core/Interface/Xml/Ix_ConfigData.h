@@ -1,5 +1,5 @@
 /*! \file Ix_ConfigData.h
- *  \brief 定义配置数据接口 Ix_ConfigData
+ *  \brief Define the configure data interface: Ix_ConfigData
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -8,69 +8,71 @@
 
 #include "Ix_ConfigSection.h"
 
-//! 配置数据接口
-/*! 本接口所操作的数据对象相当于是在树状层次结构中的全部数据节点，
-    而 Cx_ConfigSection 则对应于一个数据节点。\n
-    立即保存可使用 Cx_ConfigTransaction 转换本对象和保存。
+//! The configure data interface.
+/*! This interface object is represented as all data nodes as hierarchical structure.\n
+    Cx_ConfigSection object is represented as one node.\n
+    This interface can be casted to Ix_ConfigTransaction so can used to save immediately.
     \interface Ix_ConfigData
     \ingroup _GROUP_PLUGIN_XML_
+    \see Cx_ConfigTransaction, Cx_ConfigSection
 */
 class Ix_ConfigData
 {
 public:
     virtual ~Ix_ConfigData() {}
 
-    //! 一个数据节点，同辅助类 Cx_ConfigSection
+    //! A data node, same as Cx_ConfigSection.
     typedef Cx_Interface<Ix_ConfigSection> ConfigSection;
 
-    //! 得到根节点下的一个数据节点对象
+    //! Get a child node of the root node.
     /*!
-        \param name 数据节点名称，以正斜号或反斜号分隔多级绝对路径.
-            为空串则返回根节点的数据节点
-        \param autoCreate 不存在时是否自动添加数据节点
-        \return 新的数据节点，不存在时根据autoCreate自动添加
+        \param name The child node name.\n
+            The name may contains slash chars for multiple levels.\n
+            Empty string is represented as getting the root node.
+        \param autoCreate true if enable to auto create new node.
+        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
     */
     virtual ConfigSection GetSection(
         const wchar_t* name, bool autoCreate = true) = 0;
     
-    //! 得到带整数标识属性参数的一个数据节点
+    //! Returns a child node by node name and integer property value.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \param attrName 标识一个子数据节点的属性名称
-        \param attrValue 该标识项对应的属性值
-        \param autoCreate 不存在时是否自动添加数据节点
-        \return 新的数据节点，不存在则自动添加
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \param attrName a field name of the child node.
+        \param attrValue the field value of the child node.
+        \param autoCreate true if enable to auto create new node.
+        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
     */
     virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, ULONG attrValue, 
         bool autoCreate = true) = 0;
 
-    //! 得到带属性参数的一个数据节点
+    //! Returns a child node by node name and string property value.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \param attrName 标识一个子数据节点的属性名称
-        \param attrValue 该标识项对应的属性值
-        \param autoCreate 不存在时是否自动添加
-        \return 新的数据节点，不存在则自动添加
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \param attrName a field name of the child node.
+        \param attrValue the field value of the child node.
+        \param autoCreate true if enable to auto create new node.
+        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
     */
     virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, const wchar_t* attrValue, 
         bool autoCreate = true) = 0;
 
-    //! 得到带属性参数的一个数据节点
+    //! Returns a child node by node name and string property value.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \param attrName 标识一个子数据节点的第一个属性名称
-        \param attrValue 该标识项对应的属性值
-        \param attrName2 标识一个子数据节点的第二个属性名称
-        \param attrValue2 该标识项对应的attrName2的属性值
-        \param autoCreate 不存在时是否自动添加
-        \return 新的数据节点，不存在则自动添加
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \param attrName a field name of the child node.
+        \param attrValue the field value of the child node.
+        \param attrName2 another field name of the child node.
+        \param attrValue2 the field value of attrName2.
+        \param autoCreate true if enable to auto create new node.
+        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
     */
     virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
@@ -78,16 +80,16 @@ public:
         const wchar_t* attrName2, const wchar_t* attrValue2, 
         bool autoCreate = true) = 0;
 
-    //! 得到带整数标识属性参数的一个数据节点
+    //! Returns a child node by node name and integer property value.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \param attrName 标识一个子数据节点的第一个属性名称
-        \param attrValue 该标识项对应的属性值
-        \param attrName2 标识一个子数据节点的第二个属性名称
-        \param attrValue2 该标识项对应的attrName2的属性值
-        \param autoCreate 不存在时是否自动添加
-        \return 新的数据节点，不存在则自动添加
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \param attrName a field name of the child node.
+        \param attrValue the field value of the child node.
+        \param attrName2 another field name of the child node.
+        \param attrValue2 the field value of attrName2.
+        \param autoCreate true if enable to auto create new node.
+        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
     */
     virtual ConfigSection GetSection(
         Ix_ConfigSection* parent, const wchar_t* name, 
@@ -95,69 +97,71 @@ public:
         const wchar_t* attrName2, ULONG attrValue2, 
         bool autoCreate = true) = 0;
 
-    //! 得到节点名对应的子节点个数
+    //! Returns the child count by child node name.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \return 子数据节点的个数
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \return the child count.
         \see GetSectionByIndex
     */
     virtual long GetSectionCount(
         Ix_ConfigSection* parent, const wchar_t* name) = 0;
 
-    //! 在节点名对应的子节点中得到指定序号的子数据节点
+    //! Returns the child node of the specified order.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \param index 要取的子数据节点的序号
-        \return 新的数据节点，如果不存在则对该对象的读写操作将忽略，可以用 IsValid() 来检查是否为无效节点
-        \see GetSectionCount
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \param index the child index (0 to GetSectionCount()).
+        \return the child node (Cx_ConfigSection) even not exist actually.\n
+             I/O operations will be ignored when the internal object is not exist.\n
+        \see GetSectionCount, Ix_ConfigSection::IsValid().
     */
     virtual ConfigSection GetSectionByIndex(
         Ix_ConfigSection* parent, const wchar_t* name, long index) = 0;
     
-    //! 添加一个数据节点
+    //! Add a child node.
     /*!
-        \param parent 上一级的数据节点，为NULL则取根节点
-        \param name 数据节点名称，以正斜号或反斜号分隔多级相对路径
-        \return 新的数据节点
+        \param parent the parent node. Empty string is represented as the root node.
+        \param name the child node name. the name may contains slash chars for multiple levels.
+        \return the new node (Cx_ConfigSection).
     */
     virtual ConfigSection AddSection(
         Ix_ConfigSection* parent, const wchar_t* name) = 0;
 
-    //! 删除一个数据节点
+    //! Removes a child nodes.
     /*!
-        \param sec 要删除的数据节点对象，只清除其内部数据，不释放该对象
-        \return 是否删除成功
+        \param sec the node whose internal object will be free.
+        \return true if successful.
     */
     virtual bool RemoveSection(Ix_ConfigSection* sec) = 0;
     
-    //! 删除指定的数据节点的所有子节点
+    //! Removes all child nodes of the specified node.
     /*!
-        \param parent 要删除节点的上一级数据节点
-        \param name 子节点名称，不能包含正斜号或反斜号
-        \param attrName 子节点的标识属性名，可选值
-        \param attrValue 标识属性名对应的值，attrName不为空时有效
-        \return 删除的子节点个数
+        \param parent the specified parent node.
+        \param name the child node name that can not contains slash chars.
+        \param attrName the optional field name of the child node.
+        \param attrValue the field value valid if attrName is not empty.
+        \return the count of nodes removed.
     */
     virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName = L"", const wchar_t* attrValue = L"") = 0;
 
-    //! 删除指定的数据节点的所有子节点
+    //! Removes all child nodes of the specified node.
     /*!
-        \param parent 要删除节点的上一级数据节点
-        \param name 子节点名称，不能包含正斜号或反斜号
-        \param attrName 子节点的标识属性名，不为空
-        \param attrValue 标识属性名attrName对应的值
-        \return 删除的子节点个数
+        \param parent the specified parent node.
+        \param name the child node name that can not contains slash chars.
+        \param attrName the field name of the child node, not empty.
+        \param attrValue the field value of attrName.
+        \return the count of nodes removed.
     */
     virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, ULONG attrValue) = 0;
 
-    //! 得到一个数据节点的上一级节点
+    //! Returns the parent node of the specified node.
     /*!
-        \param sec 指定的数据节点对象
-        \return 上一级数据节点对象，如果sec为根节点，则返回节点为无效节点(IsValid()==false)
+        \param sec the specified node.
+        \return the parent node. The result node will be invalid
+            (Ix_ConfigSection::IsValid()==false) if sec is root node.
     */
     virtual ConfigSection GetParentSection(Ix_ConfigSection* sec) = 0;
 };

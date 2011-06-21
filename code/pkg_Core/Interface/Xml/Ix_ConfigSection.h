@@ -1,5 +1,5 @@
 /*! \file Ix_ConfigSection.h
- *  \brief 定义数据节点的值读写接口 Ix_ConfigSection
+ *  \brief Define the configure data node interface: Ix_ConfigSection
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
@@ -10,10 +10,10 @@
 
 class Ix_ConfigData;
 
-//! 数据节点的值读写接口
-/*! 可使用 Cx_ConfigSection 来更方便的使用本接口。\n
-    本接口所操作的数据对象相当于是在树状层次结构中的一个数据节点，
-    而 Ix_ConfigData 则对应于全部数据节点。
+//! The configure data node interface.
+/*! Use Cx_ConfigSection instead of using this interface.\n
+    This interface object is represented as a data node in hierarchical structure nodes.\n
+    Ix_ConfigData object is represented as all nodes.
     \interface Ix_ConfigSection
     \ingroup _GROUP_PLUGIN_XML_
     \see Cx_ConfigSection, Ix_ConfigData
@@ -23,270 +23,255 @@ class Ix_ConfigSection
 public:
     virtual ~Ix_ConfigSection() {}
 
-    //! 返回拥有者配置管理接口对象
+    //! Return the owner object.
     virtual Ix_ConfigData* GetData() const = 0;
 
-    //! 返回内部数据是否合法
-    /*!
-        \return 其内部是否有对应的实际数据节点
-    */
+    //! Return true if the internal data is valid (has actual internal node).
     virtual bool IsValid() const = 0;
 
-    //! 得到值类型为字符串的配置项
+    //! Get a field value as string type.
     /*!
-        \param name 配置属性名称
-        \param defValue 默认值，当还没有对应的配置项时取为该值
-        \return 该配置项的值
+        \param name the field name.
+        \param defValue default value if the field hasn't value.
+        \return the field value.
         \see SetString
     */
     virtual std::wstring GetString(const wchar_t* name, const wchar_t* defValue = L"") = 0;
 
-    //! 设置值类型为字符串的配置项
+    //! Set a field value as string type.
     /*!
-        \param name 配置属性名称
-        \param value 新的值
-        \return 是否改变了内容
+        \param name the field name.
+        \param value the new field value.
+        \return true if the field value changed.
         \see GetString
     */
     virtual bool SetString(const wchar_t* name, const wchar_t* value) = 0;
 
-    //! 得到值类型为整数的配置项
-    /*! 本函数会自动将取到的“true”和“false”转换为整数。
-        \param name 配置属性名称
-        \param defValue 默认值，当其内容为空串或没有时取为该值
-        \return 该配置项的值
+    //! Get a field value as integer type.
+    /*! This function will automatic convert "true" and "false" value to integer.
+        \param name the field name.
+        \param defValue default value if the field hasn't value or has empty string value.
+        \return the field value.
     */
     virtual int GetInt(const wchar_t* name, int defValue = 0) = 0;
 
-    //! 设置值类型为整数的配置项
+    //! Set a field value as integer type.
     /*!
-        \param name 配置属性名称
-        \param value 新的值
-        \return 是否改变了内容
+        \param name the field name.
+        \param value the new field value.
+        \return true if the field value changed.
     */
     virtual bool SetInt(const wchar_t* name, int value) = 0;
 
-    //! 得到值类型为长整数的配置项
-    /*! 参数说明参考 GetInt()
-    */
+    //! Get a field value as long integer type.
+    //! \copydoc GetInt()
     virtual long GetInt32(const wchar_t* name, long defValue = 0) = 0;
 
-    //! 设置值类型为长整数的配置项
-    /*! 参数说明参考 SetInt()
-    */
+    //! Set a field value as long integer type.
+    //! \copydoc SetInt()
     virtual bool SetInt32(const wchar_t* name, long value) = 0;
 
-    //! 得到值类型为无符号长整数的配置项
-    /*! 参数说明参考 GetInt()
-    */
+    //! Get a field value as unsigned long type.
+    //! \copydoc GetInt()
     virtual ULONG GetUInt32(const wchar_t* name, ULONG defValue = 0) = 0;
 
-    //! 设置值类型为无符号长整数的配置项
-    /*! 参数说明参考 SetInt()
-    */
+    //! Set a field value as unsigned long type.
+    //! \copydoc SetInt()
     virtual bool SetUInt32(const wchar_t* name, ULONG value) = 0;
 
-    //! 得到值类型为短整数的配置项
-    /*! 参数说明参考 GetInt()
-    */
+    //! Get a field value as short integer type.
+    //! \copydoc GetInt()
     virtual short GetInt16(const wchar_t* name, short defValue = 0) = 0;
 
-    //! 设置值类型为短整数的配置项
-    /*! 参数说明参考 SetInt()
-    */
+    //! Set a field value as short integer type.
+    //! \copydoc SetInt()
     virtual bool SetInt16(const wchar_t* name, short value) = 0;
 
-    //! 得到值类型为无符号短整数的配置项
-    /*! 参数说明参考 GetInt()
-    */
+    //! Get a field value as unsigned short integer type.
+    //! \copydoc GetInt()
     virtual WORD GetUInt16(const wchar_t* name, WORD defValue = 0) = 0;
 
-    //! 设置值类型为无符号短整数的配置项
-    /*! 参数说明参考 SetInt()
-    */
+    //! Set a field value as unsigned short integer type.
+    //! \copydoc SetInt()
     virtual bool SetUInt16(const wchar_t* name, WORD value) = 0;
 
-    //! 得到值类型为布尔的配置项
-    /*!
-        \param name 配置属性名称
-        \param defValue 默认值，当其内容为空串或没有时取为该值
-        \return 该配置项的值，内容为非零整数值或“true”时返回true，其余为false
+    //! Get a field value as bool type.
+    /*! This function will automatic convert "true" and "false" value to bool value.
+        \param name the field name.
+        \param defValue default value if the field hasn't value or has empty string value.
+        \return the field value.
     */
     virtual bool GetBool(const wchar_t* name, int defValue) = 0;
 
-    //! 设置值类型为布尔的配置项
+    //! Set a field value as bool type.
     /*!
-        \param name 配置属性名称
-        \param value 新的值
-        \return 是否改变了内容
+        \param name the field name.
+        \param value the new field value.
+        \return true if the field value changed.
     */
     virtual bool SetBool(const wchar_t* name, int value) = 0;
 
-    //! 得到值类型为浮点数的配置项
+    //! Get a field value as double type.
     /*!
-        \param name 配置属性名称
-        \param defValue 默认值，当其内容为空串或没有时取为该值
-        \return 该配置项的值
+        \param name the field name.
+        \param defValue default value if the field hasn't value or has empty string value.
+        \return the field value.
     */
     virtual double GetDouble(const wchar_t* name, double defValue = 0) = 0;
 
-    //! 设置值类型为浮点数的配置项
+    //! Set a field value as double type.
     /*!
-        \param name 配置属性名称
-        \param value 新的值
-        \return 是否改变了内容
+        \param name the field name.
+        \param value the new field value.
+        \return true if the field value changed.
     */
     virtual bool SetDouble(const wchar_t* name, double value) = 0;
 
-    //! 得到值类型为浮点数的配置项
-    /*!
-        参数说明参见 GetDouble()
-    */
+    //! Get a field value as float type.
+    //! \copydoc GetDouble()
     virtual float GetFloat(const wchar_t* name, float defValue = 0) = 0;
 
-    //! 设置值类型为浮点数的配置项
-    /*!
-        参数说明参见 SetDouble()
-    */
+    //! Set a field value as float type.
+    //! \copydoc SetDouble()
     virtual bool SetFloat(const wchar_t* name, float value) = 0;
 
-    //! 得到值类型为RGB颜色(COLORREF)的配置项
+    //! Get a field value as COLORREF type.
     /*!
-        \param name 配置属性名称
-        \param defValue 默认值，当其内容没有包含三个整数时取为该值
-        \return 该配置项的值，使用了 RGB(r,g,b) 宏
+        \param name the field name.
+        \param defValue default value if the field value not contains three integers.
+        \return the field value as 0x00bbggrr form.
     */
     virtual DWORD GetRGB(const wchar_t* name, DWORD defValue) = 0;
 
-    //! 设置值类型为RGB颜色值(COLORREF)的配置项
+    //! Set a field value as COLORREF type.
     /*!
-        \param name 配置属性名称
-        \param value 新的值，仅取低6位的三个颜色分量
-        \return 是否改变了内容
+        \param name the field name.
+        \param value the new field value as 0x00bbggrr form.
+        \return true if the field value changed.
     */
     virtual bool SetRGB(const wchar_t* name, DWORD value) = 0;
 
-    //! 得到值类型为CMYK颜色值的配置项
+    //! Get a field value as CMYK color type.
     /*!
-        \param[in] name 配置属性名称
-        \param[out] c 读取成功时填充CMYK颜色值的C部分，失败时不改变其值
-        \param[out] m 读取成功时填充CMYK颜色值的M部分，失败时不改变其值
-        \param[out] y 读取成功时填充CMYK颜色值的Y部分，失败时不改变其值
-        \param[out] k 读取成功时填充CMYK颜色值的K部分，失败时不改变其值
-        \return 是否读取成功
+        \param[in] name the field name.
+        \param[out] c fills C value if successful.
+        \param[out] m fills M value if successful.
+        \param[out] y fills Y value if successful.
+        \param[out] k fills K value if successful.
+        \return true if successful.
     */
     virtual bool GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD& k) = 0;
 
-    //! 设置值类型为CMYK颜色值的配置项
+    //! Set a field value as CMYK color type.
     /*!
-        \param name 配置属性名称
-        \param c CMYK颜色值的C部分
-        \param m CMYK颜色值的M部分
-        \param y CMYK颜色值的Y部分
-        \param k CMYK颜色值的K部分
-        \return 是否改变了内容
+        \param name the field name.
+        \param c the C component of the CMYK value.
+        \param m the M component of the CMYK value.
+        \param y the Y component of the CMYK value.
+        \param k the K component of the CMYK value.
+        \return true if the field value changed.
     */
     virtual bool SetCMYK(const wchar_t* name, WORD c, WORD m, WORD y, WORD k) = 0;
 
-    //! 得到值类型为日期值的配置项
+    //! Get a field value as date type.
     /*!
-        \param[in] name 配置属性名称
-        \param[out] year 读取成功时填充年份(1980-2099)，失败时不改变其值
-        \param[out] month 读取成功时填充月份(0-12)，失败时不改变其值
-        \param[out] day 读取成功时填充日(0-31)，失败时不改变其值
-        \return 是否读取成功
+        \param[in] name the field name.
+        \param[out] year fills year value (1980-2099) if successful.
+        \param[out] month fills month value (0-12) if successful.
+        \param[out] day fills day value (0-31) if successful.
+        \return true if successful.
     */
     virtual bool GetDate(const wchar_t* name, int& year, int& month, int& day) = 0;
 
-    //! 设置值类型为日期值的配置项
+    //! Set a field value as date type.
     /*!
-        \param name 配置属性名称
-        \param year 年份(1980-2099)
-        \param month 月份(0-12)
-        \param day 日(0-31)
-        \return 是否改变了内容
+        \param name the field name.
+        \param year year value (1980-2099)
+        \param month month value (0-12)
+        \param day day value (0-31)
+        \return true if the field value changed.
     */
     virtual bool SetDate(const wchar_t* name, int year, int month, int day) = 0;
 
-    //! 得到值类型为日期时间值的配置项
+    //! Get a field value as date time type.
     /*!
-        \param[in] name 配置属性名称
-        \param[out] year 读取成功时填充年份(1980-2099)，失败时不改变其值
-        \param[out] month 读取成功时填充月份(0-12)，失败时不改变其值
-        \param[out] day 读取成功时填充日(0-31)，失败时不改变其值
-        \param[out] hour 读取成功时填充小时(0-24)，失败时不改变其值
-        \param[out] minute 读取成功时填充分钟(0-60)，失败时不改变其值
-        \param[out] second 读取成功时填充秒(0-60)，失败时不改变其值
-        \return 是否读取成功
+        \param[in] name the field name.
+        \param[out] year fills year value (1980-2099) if successful.
+        \param[out] month fills month value (0-12) if successful.
+        \param[out] day fills day value (0-31) if successful.
+        \param[out] hour fills hour value (0-24) if successful.
+        \param[out] minute fills minute value (0-60) if successful.
+        \param[out] second fills second value (0-60) if successful.
+        \return true if successful.
     */
     virtual bool GetDateTime(const wchar_t* name, int& year, int& month, int& day,
         int& hour, int& minute, int& second) = 0;
 
-    //! 设置值类型为日期时间值的配置项
+    //! Set a field value as date time type.
     /*!
-        \param name 配置属性名称
-        \param year 年份(1980-2099)
-        \param month 月份(0-12)
-        \param day 日(0-31)
-        \param hour 小时(0-24)
-        \param minute 分钟(0-60)
-        \param second 秒(0-60)
-        \return 是否改变了内容
+        \param name the field name.
+        \param year year value (1980-2099)
+        \param month month value (0-12)
+        \param day day value (0-31)
+        \param hour hour value (0-24)
+        \param minute minute value (0-60)
+        \param second second value (0-60)
+        \return true if the field value changed.
     */
     virtual bool SetDateTime(const wchar_t* name, int year, int month, int day,
         int hour, int minute, int second) = 0;
 
-    //! 得到值类型为浮点数数组的配置项
+    //! Get a field value as double array type.
     /*!
-        \param[in] name 配置属性名称
-        \param[out] items 要填充的浮点数数组，最多填充 count 个
-        \param[in] count 数组的元素最大个数
-        \return 读取到的元素个数，不超过 count
+        \param[in] name the field name.
+        \param[out] items fills values (limit to count) if successful.
+        \param[in] count the max element count of items.
+        \return the count of elements read (0 to count).
     */
     virtual long GetDoubleArray(const wchar_t* name, double* items, long count) = 0;
 
-    //! 设置值类型为浮点数数组的配置项
+    //! Set a field value as double array type.
     /*!
-        \param name 配置属性名称
-        \param items 要保存的浮点数数组
-        \param count 数组的元素个数
-        \return 是否设置成功
+        \param name the field name.
+        \param items the values to save.
+        \param count the element count of items.
+        \return true if successful.
     */
     virtual bool SetDoubleArray(const wchar_t* name, const double* items, long count) = 0;
 
-    //! 得到值类型为整数数组的配置项
+    //! Get a field value as integer array type.
     /*!
-        \param[in] name 配置属性名称
-        \param[out] items 要填充的整数数组，最多填充 count 个
-        \param[in] count 数组的元素最大个数
-        \return 读取到的元素个数，不超过 count
+        \param[in] name the field name.
+        \param[out] items fills values (limit to count) if successful.
+        \param[in] count the max element count of items.
+        \return the count of elements read (0 to count).
     */
     virtual long GetIntArray(const wchar_t* name, long* items, long count) = 0;
 
-    //! 设置值类型为整数数组的配置项
+    //! Set a field value as integer array type.
     /*!
-        \param name 配置属性名称
-        \param items 要保存的整数数组
-        \param count 数组的元素个数
-        \return 是否设置成功
+        \param name the field name.
+        \param items the values to save.
+        \param count the element count of items.
+        \return true if successful.
     */
     virtual bool SetIntArray(const wchar_t* name, const long* items, long count) = 0;
 
-    //! 得到值类型为二进制缓冲的配置项
+    //! Get a field value as buffer type.
     /*!
-        \param[in] name 配置属性名称
-        \param[out] buf 要填充的缓冲，最多填充 size 字节
-        \param[in] size 缓冲的最大长度
-        \return 读取到的缓冲字节长度，不超过 size
+        \param[in] name the field name.
+        \param[out] buf fills (limit to size bytes) if successful.
+        \param[in] size buffer size in bytes.
+        \return bytes read (0 to count).
     */
     virtual long GetBinary(const wchar_t* name, void* buf, long size) = 0;
 
-    //! 设置值类型为二进制缓冲的配置项
+    //! Set a field value as buffer type.
     /*!
-        \param name 配置属性名称
-        \param buf 要保存的缓冲
-        \param size 缓冲的字节长度
-        \return 是否设置成功
+        \param name the field name.
+        \param buf the buffer to save.
+        \param size buffer size in bytes.
+        \return true if successful.
     */
     virtual bool SetBinary(const wchar_t* name, const void* buf, long size) = 0;
 };

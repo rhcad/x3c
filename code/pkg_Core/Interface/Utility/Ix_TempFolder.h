@@ -29,7 +29,7 @@ public:
 
     //! 删除创建的临时目录
     /*! 如果不调用本函数，该临时子目录会在本对象销毁时或程序退出时也会自动删除
-        \return 是否删除成功
+        \return true if successful.
     */
     virtual bool DeleteFolder() = 0;
 

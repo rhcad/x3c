@@ -228,7 +228,7 @@ protected:
     long RemoveChildren(Ix_ConfigSection* nullP, const wchar_t* table, 
         const wchar_t* field, ULONG condValue);
 
-    //! 得到一个数据节点的上一级节点(本函数不支持)
+    //! Returns the parent node of the specified node.(This function is not supported.)
     ConfigSection GetParentSection(Ix_ConfigSection*);
 };
 
