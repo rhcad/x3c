@@ -1,17 +1,17 @@
 ROOTDIR = ../../../..
 include $(ROOTDIR)/config.mk
 
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Modules/LogWriter/log4cplus/include
+CFLAGS_SO   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
+CFLAGS_SO   +=   -I$(INCLUDE_DIR)/pkg_Core/Modules/LogWriter/log4cplus/include
 
-CFLAGS   +=   -DUNICODE
-CFLAGS   +=   -DINSIDE_LOG4CPLUS
-CFLAGS   +=   -DLOG4CPLUS_STATIC
+CFLAGS_SO   +=   -DUNICODE
+CFLAGS_SO   +=   -DINSIDE_LOG4CPLUS
+CFLAGS_SO   +=   -DLOG4CPLUS_STATIC
 
 all:
-	$(CC) $(CFLAGS) -c  LogObserver.cpp
-	$(CC) $(CFLAGS) -c  Module.cpp
-	$(CC) $(CFLAGS) -c  Plugin.cpp
+	$(CC) $(CFLAGS_SO) -c  LogObserver.cpp
+	$(CC) $(CFLAGS_SO) -c  Module.cpp
+	$(CC) $(CFLAGS_SO) -c  Plugin.cpp
 	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libLogWriter.so *.o
 clean:
 	rm -rf *.so

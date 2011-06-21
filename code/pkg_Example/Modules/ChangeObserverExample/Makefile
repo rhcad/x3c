@@ -1,13 +1,13 @@
 ROOTDIR = ../../../..
 include $(ROOTDIR)/config.mk
 
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
-CFLAGS   +=   -I$(INCLUDE_DIR)/pkg_Example/Interface
+CFLAGS_SO   +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
+CFLAGS_SO   +=   -I$(INCLUDE_DIR)/pkg_Example/Interface
 
 all:
-	$(CC) $(CFLAGS) -c  Plugin.cpp
-	$(CC) $(CFLAGS) -c  Cx_ObserverTest.cpp
-	$(CC) $(CFLAGS) -c  Module.cpp
+	$(CC) $(CFLAGS_SO) -c  Plugin.cpp
+	$(CC) $(CFLAGS_SO) -c  Cx_ObserverTest.cpp
+	$(CC) $(CFLAGS_SO) -c  Module.cpp
 	$(CC) $(C_FLAGS_SO) -o $(PLUGINS_DIR)/libChangeObserverExample.so *.o
 clean:
 	rm -rf *.so
