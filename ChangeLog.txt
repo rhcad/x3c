@@ -1,5 +1,12 @@
 X3 C++ PluginFramework
 
+2011-06-21
+
+    * Remove IsDelayPlugin(), so all plugins will be delay loaded.
+    * Refact in Cx_PluginManager.
+    * Avoid some callings between plugins when loading plugins.
+    * Call DestroyWnd() in CEmbedWnd::~CEmbedWnd().
+
 2011-06-19
 
     * Add '-shared' to C_FLAGS only for plugins (lib*.so, except *.app).

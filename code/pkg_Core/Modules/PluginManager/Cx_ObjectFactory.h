@@ -70,7 +70,7 @@ protected:
 protected:
     int FindModule(HMODULE hModule);
     Ix_Module* GetModule(HMODULE hModule);
-    long RegisterClassEntryTable(HMODULE hModule);
+    long RegisterClassEntryTable(int moduleIndex);
     void ReleaseModule(HMODULE hModule);
     X3CLASSENTRY* FindEntry(const X3CLSID& clsid, int* moduleIndex = NULL);
 

@@ -5,7 +5,6 @@
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_PluginLoader.h"
-#include <PluginManager/Ix_AppWorkPath.h>
 #include <UtilFunc/RelToAbs.h>
 #include <Log/DebugR.cpp>
 #include <Portability/portimpl.h>
@@ -13,7 +12,6 @@
 class Cx_PluginLoaderOut
     : public Cx_PluginLoader
     , public Ix_Object
-    , public Ix_AppWorkPath
 {
 public:
     Cx_PluginLoaderOut() : m_hModule(NULL)
@@ -41,7 +39,17 @@ private:
 
     std::wstring GetWorkPath()
     {
-        return m_path.empty() ? x3::FileNameRelToAbs(L"", false) : m_path;
+        if (m_path.empty())
+        {
+            wchar_t path[MAX_PATH] = { 0 };
+
+            GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+            PathRemoveFileSpecW(path);
+            PathAddBackslashW(path);
+            m_path = path;
+        }
+
+        return m_path;
     }
 
     void SetWorkPath(const std::wstring& path)

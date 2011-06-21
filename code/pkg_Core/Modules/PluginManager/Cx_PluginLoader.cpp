@@ -25,7 +25,6 @@
 Cx_PluginLoader::Cx_PluginLoader()
     : m_instance(NULL)
 {
-    m_inifile[0] = 0;
     m_clsfile[0] = 0;
 }
 
@@ -91,17 +90,26 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
     std::vector<std::wstring> filenames;
 
     MakeFullPath(fullpath, NULL, path);
-    VerifyLoadFileNames();
     FindPlugins(filenames, fullpath, ext, recursive);
 
-    long count = 0;
-    std::vector<std::wstring>::iterator it;
+    return InLoadPlugins(filenames);
+}
 
-    for (it = filenames.begin(); it != filenames.end(); ++it)
+long Cx_PluginLoader::InLoadPlugins(const std::vector<std::wstring>& filenames)
+{
+    long count = 0;
+    std::vector<std::wstring>::const_iterator it;
+
+    if (!filenames.empty())
     {
-        if (LoadPluginOrDelay(it->c_str()))
+        LoadCacheFile(filenames.front().c_str());
+
+        for (it = filenames.begin(); it != filenames.end(); ++it)
         {
-            count++;
+            if (LoadPluginOrDelay(it->c_str()))
+            {
+                count++;
+            }
         }
     }
 
@@ -157,7 +165,6 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
 
     m_instance = instance;
     MakeFullPath(filename, instance, path);
-    VerifyLoadFileNames();
 
     const int len0 = wcslen(filename);
     wchar_t* nameend = filename + len0;
@@ -185,18 +192,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
         i = j;
     }
 
-    int count = 0;
-    std::vector<std::wstring>::const_iterator it = filenames.begin();
-
-    for (; it != filenames.end(); ++it)
-    {
-        if (LoadPluginOrDelay(it->c_str()))
-        {
-            count++;
-        }
-    }
-
-    return count;
+    return InLoadPlugins(filenames);
 }
 
 long Cx_PluginLoader::InitializePlugins()
@@ -282,10 +278,11 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
         }
         else
         {
+            moduleIndex = x3::GetSize(m_modules);
             m_modules.push_back(moduleInfo);
         }
 
-        RegisterClassEntryTable(instance);
+        RegisterClassEntryTable(moduleIndex);
 
         return true;
     }
@@ -438,121 +435,26 @@ bool Cx_PluginLoader::GetPluginFileName(long index, HMODULE& hdll, std::wstring&
     return valid;
 }
 
-// The configure file of the delay-load feature:
-//     <ExePath>\Config\<ExeName>.ini
-// The encode of ini file is recommend Unicode.
-//
-// The class cache file will be saved as <ExePath>\Config\<ExeName>.clsbuf
-// You can change the configure path using Ix_AppWorkPath.
-//
-// Example content of the configure file:
-//     [Plugins]
-//     Plugin2.plugin.dll==
-//     MyExample.plugin.dll==
-//     \Example.plugin.dll==
-//     /HasSlashCanExactCompare.plugin.dll==
-//
-// If you want delay-load all plugins, you can add '.plugin.dll' or '.dll' as following:
-//     [Plugins]
-//     .plugin.dll==
-//
-
-void Cx_PluginLoader::VerifyLoadFileNames()
+bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
 {
-#ifdef _WIN32
-    if (0 == m_inifile[0])
-    {
-        GetModuleFileNameW(m_instance, m_inifile, MAX_PATH);
-        PathRenameExtensionW(m_inifile, L".ini");
-        std::wstring name(PathFindFileNameW(m_inifile));
-
-        wcsncpy_s(m_inifile, MAX_PATH, GetAppWorkPath().c_str(), MAX_PATH);
-        PathAppendW(m_inifile, L"Config");
-        PathAppendW(m_inifile, name.c_str());
-
-        LoadFileNames(L"Plugins", m_inifile);
-    }
-#endif
-}
-
-void Cx_PluginLoader::LoadFileNames(const wchar_t* sectionName,
-                                    const wchar_t* iniFile)
-{
-    DWORD size = 1024;
-    DWORD retsize = size;
-    wchar_t* buf = NULL;
-
-    m_delayFiles.clear();
-#ifdef _WIN32
-    while (true)
-    {
-        buf = new wchar_t[size];
-        wmemset(buf, 0, size);
-
-        retsize = GetPrivateProfileSectionW(sectionName, buf, size, iniFile);
-        if (retsize <= size - sizeof(wchar_t))
-        {
-            break;
-        }
-        else
-        {
-            delete[] buf;
-            buf = NULL;
-            size += 512;
-        }
-    }
-
-    for (wchar_t* pw = buf;  *pw != 0;  pw += wcslen(pw) + 1)
-    {
-        ReplaceSlashes(pw);
-
-        std::wstring filename(pw);
-        unsigned pos = filename.find(L'=');
-
-        if (pos != std::wstring::npos)
-        {
-            filename = filename.substr(0, pos);
-            m_delayFiles.push_back(filename);
-        }
-    }
-
-    delete[] buf;
-    buf = NULL;
-#endif
-}
-
-bool Cx_PluginLoader::IsDelayPlugin(const wchar_t* filename)
-{
-    int len = wcslen(filename);
-    std::vector<std::wstring>::const_iterator it = m_delayFiles.begin();
-
-    for (; it != m_delayFiles.end(); ++it)
-    {
-        int len2 = len - x3::GetSize(*it);
-        const wchar_t* fnend = &filename[0 > len2 ? 0 : len2];
-        if (_wcsicmp(fnend, it->c_str()) == 0)
-        {
-            break;
-        }
-    }
-
-    return it != m_delayFiles.end();
-}
-
-bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* filename)
-{
-    if (m_unloading != 0 || GetPluginIndex(filename) >= 0)
+    if (m_unloading != 0 || GetPluginIndex(pluginFile) >= 0)
     {
         return false;
     }
 
-    if (IsDelayPlugin(filename))
+    bool ret = false;
+
+    if (m_cache)
     {
-        return LoadPluginCache(filename)
-            || (LoadPlugin(filename) && (BuildPluginCache(filename) || 1));
+        ret = LoadPluginCache(pluginFile)
+            || (LoadPlugin(pluginFile) && (BuildPluginCache(pluginFile) || 1));
+    }
+    else
+    {
+        ret = LoadPlugin(pluginFile);
     }
 
-    return LoadPlugin(filename);
+    return ret;
 }
 
 bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
@@ -583,21 +485,34 @@ bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
     return ret;
 }
 
-bool Cx_PluginLoader::BuildPluginCache(const wchar_t* filename)
+bool Cx_PluginLoader::BuildPluginCache(const wchar_t* pluginFile)
 {
-    int moduleIndex = GetPluginIndex(filename);
+    int moduleIndex = GetPluginIndex(pluginFile);
     ASSERT(moduleIndex >= 0);
 
     CLSIDS oldids;
-    LoadClsids(oldids, filename);
+    LoadClsids(oldids, pluginFile);
 
     return oldids != m_modules[moduleIndex].clsids
-        && SaveClsids(m_modules[moduleIndex].clsids, filename);
+        && SaveClsids(m_modules[moduleIndex].clsids, pluginFile);
 }
 
 bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 {
     int moduleIndex = GetPluginIndex(filename);
+
+    if (moduleIndex >= 0 && !m_modules[moduleIndex].clsids.empty())
+    {
+        return true;
+    }
+
+    X3CLASSENTRY cls;
+    CLSIDS clsids;
+
+    if (!LoadClsids(clsids, filename))
+    {
+        return false;
+    }
 
     if (moduleIndex < 0)
     {
@@ -611,19 +526,6 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 
         moduleIndex = x3::GetSize(m_modules);
         m_modules.push_back(moduleInfo);
-    }
-
-    if (!m_modules[moduleIndex].clsids.empty())
-    {
-        return true;
-    }
-
-    X3CLASSENTRY cls;
-    CLSIDS clsids;
-
-    if (!LoadClsids(clsids, filename))
-    {
-        return false;
     }
 
     memset(&cls, 0, sizeof(cls));
@@ -645,33 +547,46 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 #include <Xml/Ix_ConfigTransaction.h>
 #include <UtilFunc/ConvStr.h>
 
-bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
+bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
 {
-    Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
+    bool loaded = false;
 
-    if (pIFFile.IsNull() && 0 == m_clsfile[0])
+    if (m_cache.IsNull() && 0 == m_clsfile[0])
     {
-        wcscpy_s(m_clsfile, MAX_PATH, filename);
+        // Ensure ConfigXml.plugin is loaded.
+        wcscpy_s(m_clsfile, MAX_PATH, pluginFile);
         PathRemoveFileSpecW(m_clsfile);
         PathAppendW(m_clsfile, L"ConfigXml.plugin" PLNEXT);
-        LoadPlugin(m_clsfile);
+        loaded = LoadPlugin(m_clsfile);
 
-        wcscpy_s(m_clsfile, MAX_PATH, m_inifile);
-        PathRenameExtensionW(m_clsfile, L".clsbuf");
+        // Get application name.
+        GetModuleFileNameW(m_instance, m_clsfile, MAX_PATH);
+        std::wstring appname(PathFindFileNameW(m_clsfile));
 
-        if (pIFFile.Create(x3::CLSID_ConfigXmlFile))
+        // Make cache file name.
+        wcsncpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str(), MAX_PATH);
+        PathAppendW(m_clsfile, (appname + L".clsbuf").c_str());
+
+        if (m_cache.Create(x3::CLSID_ConfigXmlFile))
         {
-            m_cache = pIFFile;
+            Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
             pIFFile->SetFileName(m_clsfile);
         }
     }
+
+    return loaded;
+}
+
+bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* pluginFile)
+{
+    Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
 
     clsids.clear();
 
     if (pIFFile)
     {
         Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
-            L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
+            L"plugins/plugin", L"filename", PathFindFileNameW(pluginFile), false));
         seclist = seclist.GetSection(L"clsids", false);
 
         for (int i = 0; i < 999; i++)
@@ -693,7 +608,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     if (!has)
     {
         Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
-            L"plugins/plugin", L"filename", PathFindFileNameW(filename), false));
+            L"plugins/plugin", L"filename", PathFindFileNameW(pluginFile), false));
         seclist = seclist.GetSection(L"observers", false);
         has = (seclist.GetSectionCount(L"observer") > 0);
     }
@@ -701,14 +616,14 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* filename)
     return has;
 }
 
-bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* filename)
+bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* pluginFile)
 {
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
 
     if (pIFFile)
     {
         Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
-            L"plugins/plugin", L"filename", PathFindFileNameW(filename)));
+            L"plugins/plugin", L"filename", PathFindFileNameW(pluginFile)));
 
         seclist = seclist.GetSection(L"clsids");
         seclist.RemoveChildren(L"clsid");
@@ -739,21 +654,19 @@ bool Cx_PluginLoader::SaveClsids()
 void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
 {
     wchar_t filename[MAX_PATH] = { 0 };
+    Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
 
-    GetModuleFileNameW(hdll, filename, MAX_PATH);
-    if (IsDelayPlugin(filename))
+    if (pIFFile)
     {
-        Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
-        if (pIFFile)
-        {
-            Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
-                L"observers/observer", L"type", x3::a2w(obtype).c_str()));
-            seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
+        GetModuleFileNameW(hdll, filename, MAX_PATH);
 
-            seclist = pIFFile->GetData()->GetSection(NULL,
-                L"plugins/plugin", L"filename", PathFindFileNameW(filename));
-            seclist.GetSection(L"observers/observer", L"type", x3::a2w(obtype).c_str());
-        }
+        Cx_ConfigSection seclist(pIFFile->GetData()->GetSection(NULL,
+            L"observers/observer", L"type", x3::a2w(obtype).c_str()));
+        seclist.GetSection(L"plugin", L"filename", PathFindFileNameW(filename));
+
+        seclist = pIFFile->GetData()->GetSection(NULL,
+            L"plugins/plugin", L"filename", PathFindFileNameW(filename));
+        seclist.GetSection(L"observers/observer", L"type", x3::a2w(obtype).c_str());
     }
 }
 

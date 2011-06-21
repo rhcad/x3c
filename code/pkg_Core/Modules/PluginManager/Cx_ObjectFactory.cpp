@@ -61,7 +61,7 @@ int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
 }
 
 X3CLASSENTRY* Cx_ObjectFactory::FindEntry(const X3CLSID& clsid,
-                                               int* moduleIndex)
+                                          int* moduleIndex)
 {
     CLSMAP::iterator it = m_clsmap.find(clsid.str());
     if (moduleIndex)
@@ -110,13 +110,12 @@ Ix_Module* Cx_ObjectFactory::GetModule(HMODULE hModule)
     }
 }
 
-long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
+long Cx_ObjectFactory::RegisterClassEntryTable(int moduleIndex)
 {
-    int moduleIndex = FindModule(hModule);
-    ASSERT(moduleIndex >= 0);   // must call RegisterPlugin before
-
-    Ix_Module* pModule = GetModule(hModule);
-    ASSERT(pModule);            // must call RegisterPlugin before
+    ASSERT(moduleIndex >= 0);
+    HMODULE hdll = m_modules[moduleIndex].hdll;
+    Ix_Module* pModule = m_modules[moduleIndex].module;
+    ASSERT(hdll && pModule);
 
     if (!m_modules[moduleIndex].clsids.empty())
     {
@@ -124,7 +123,7 @@ long Cx_ObjectFactory::RegisterClassEntryTable(HMODULE hModule)
     }
 
     typedef DWORD (*FUNC_GET)(DWORD*, DWORD*, X3CLASSENTRY*, DWORD);
-    FUNC_GET pfn = (FUNC_GET)GetProcAddress(hModule, "x3GetClassEntryTable");
+    FUNC_GET pfn = (FUNC_GET)GetProcAddress(hdll, "x3GetClassEntryTable");
 
     if (!pfn)       // is not a plugin
     {

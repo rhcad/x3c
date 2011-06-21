@@ -13,6 +13,7 @@
 #include "Cx_ObjectFactory.h"
 #include "PluginManager/Ix_PluginLoader.h"
 #include "PluginManager/Ix_PluginLoader2.h"
+#include <PluginManager/Ix_AppWorkPath.h>
 #include "Ix_PluginDelayLoad.h"
 
 class Cx_PluginLoader
@@ -20,6 +21,7 @@ class Cx_PluginLoader
     , public Ix_PluginLoader
     , public Ix_PluginLoader2
     , public Ix_PluginDelayLoad
+    , public Ix_AppWorkPath
 {
 public:
     Cx_PluginLoader();
@@ -61,23 +63,20 @@ private:
     void MakeFullPath(wchar_t* fullpath, HMODULE instance, const wchar_t* path);
     void FindPlugins(std::vector<std::wstring>& filenames,
         const wchar_t* path, const wchar_t* ext, bool recursive);
+    long InLoadPlugins(const std::vector<std::wstring>& filenames);
     int GetPluginIndex(const wchar_t* filename);
     virtual bool LoadDelayPlugin(const wchar_t* filename);
-    void VerifyLoadFileNames();
-    void LoadFileNames(const wchar_t* sectionName, const wchar_t* iniFile);
-    bool IsDelayPlugin(const wchar_t* filename);
-    bool LoadPluginOrDelay(const wchar_t* filename);
-    bool BuildPluginCache(const wchar_t* filename);
-    bool LoadPluginCache(const wchar_t* filename);
-    bool LoadClsids(CLSIDS& clsids, const wchar_t* filename);
-    bool SaveClsids(const CLSIDS& clsids, const wchar_t* filename);
+    bool LoadPluginOrDelay(const wchar_t* pluginFile);
+    bool BuildPluginCache(const wchar_t* pluginFile);
+    bool LoadPluginCache(const wchar_t* pluginFile);
+    bool LoadCacheFile(const wchar_t* pluginFile);
+    bool LoadClsids(CLSIDS& clsids, const wchar_t* pluginFile);
+    bool SaveClsids(const CLSIDS& clsids, const wchar_t* pluginFile);
     bool SaveClsids();
 
 private:
     HMODULE                     m_instance;
-    wchar_t                     m_inifile[MAX_PATH];
     wchar_t                     m_clsfile[MAX_PATH];
-    std::vector<std::wstring>   m_delayFiles;
     Cx_Ptr                      m_cache;
 };
 

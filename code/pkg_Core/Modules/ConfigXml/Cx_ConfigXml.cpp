@@ -576,10 +576,6 @@ bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)
             bRet = true;
             m_pImpl->SetModified();
         }
-        else
-        {
-            X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveSection");
-        }
     }
 
     return bRet;

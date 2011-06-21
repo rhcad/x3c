@@ -11,7 +11,7 @@
 /*! \ingroup _GROUP_PLUGIN_CORE2_
  *  \interface Ix_PluginLoader2
  *  \brief Plugin loading interface
- *  \see   Ix_PluginLoader, Ix_ObjectFactory, xGetObjectFactory()
+ *  \see   Ix_PluginLoader, Ix_ObjectFactory, x3GetObjectFactory()
  */
 class Ix_PluginLoader2
 {

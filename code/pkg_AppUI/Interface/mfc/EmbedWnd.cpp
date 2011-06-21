@@ -27,6 +27,7 @@ CEmbedWnd::CEmbedWnd(const X3CLSID& clsidWnd)
 
 CEmbedWnd::~CEmbedWnd()
 {
+    InterfaceSafeCall(m_pIFWnd, DestroyWnd());
 }
 
 void CEmbedWnd::SetViewRefreshID(UINT nID)
