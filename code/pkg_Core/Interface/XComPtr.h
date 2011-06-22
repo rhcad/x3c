@@ -41,55 +41,30 @@ public:
 #if defined(_MSC_VER) && _MSC_VER > 1200 || defined(__GNUC__) // not VC60
 
     Cx_Interface(const thisClass& src)
-        : m_pInterface(src.m_pInterface), m_pObj(src.m_pObj)
+        : m_pInterface(src.m_pInterface), m_pObj(copyi(src.m_pObj))
     {
-        if (m_pInterface)
-        {
-            m_pObj->AddRef(x3GetModuleHandle());
-        }
     }
 
-    Cx_Interface(IF_Type* pInterface) : m_pInterface(pInterface), m_pObj(NULL)
+    Cx_Interface(IF_Type* pInterface, bool addref = true)
+        : m_pInterface(pInterface)
+        , m_pObj(copyi(dynamic_cast<Ix_Object*>(pInterface), addref))
     {
-        if (m_pInterface)
-        {
-            m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
-            //ASSERT(m_pObj != NULL);
-            m_pObj->AddRef(x3GetModuleHandle());
-        }
     }
 
 #endif // _MSC_VER
 
     template <class IF_Type2>
-    explicit Cx_Interface(IF_Type2* pInterface) : m_pInterface(NULL), m_pObj(NULL)
+    explicit Cx_Interface(IF_Type2* pInterface, bool addref = true)
+        : m_pInterface(dynamic_cast<IF_Type*>(pInterface))
+        , m_pObj(copyi(dynamic_cast<Ix_Object*>(pInterface), addref))
     {
-        if (pInterface)
-        {
-            m_pInterface = dynamic_cast<IF_Type*>(pInterface);
-            if (m_pInterface)
-            {
-                m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
-                //ASSERT(m_pObj != NULL);
-                m_pObj->AddRef(x3GetModuleHandle());
-            }
-        }
     }
 
     template <class IF_Type2>
     explicit Cx_Interface(const Cx_Interface<IF_Type2>& pIF)
-        : m_pInterface(NULL), m_pObj(NULL)
+        : m_pInterface(dynamic_cast<IF_Type*>(pIF.P()))
+        , m_pObj(copyi(dynamic_cast<Ix_Object*>(pIF.P())))
     {
-        if (pIF)
-        {
-            m_pInterface = dynamic_cast<IF_Type*>(pIF.P());
-            if (m_pInterface)
-            {
-                m_pObj = dynamic_cast<Ix_Object*>(m_pInterface);
-                //ASSERT(m_pObj != NULL);
-                m_pObj->AddRef(x3GetModuleHandle());
-            }
-        }
     }
 
     explicit Cx_Interface(const X3CLSID& clsid) : m_pInterface(NULL), m_pObj(NULL)
@@ -306,6 +281,15 @@ private:
             m_pObj = pObj;
             m_pInterface = pIF;
         }
+    }
+
+    static Ix_Object* copyi(Ix_Object* p, bool addref = true)
+    {
+        if (p && addref)
+        {
+            p->AddRef(x3GetModuleHandle());
+        }
+        return p;
     }
 
 private:

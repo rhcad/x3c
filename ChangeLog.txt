@@ -6,6 +6,7 @@ X3 C++ PluginFramework
     * Refact in Cx_PluginManager.
     * Avoid some callings between plugins when loading plugins.
     * Call DestroyWnd() in CEmbedWnd::~CEmbedWnd().
+    * Fix copy construction of Cx_Interface and Cx_ConfigSection for vc60.
 
 2011-06-19
 

@@ -418,7 +418,7 @@ Cx_Section Cx_ConfigXml::GetSection(const wchar_t* name, bool autoCreate)
             pIFCfg->m_xmlParent, strName.c_str());
     }
 
-    return pIFRet;
+    return Cx_Section(pIFRet.DetachInterface(), false);
 }
 
 Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
@@ -492,7 +492,7 @@ Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
     pIFCfg->m_xmlParent = xmlParent;
     pIFCfg->m_xmlNode = xmlNode;
 
-    return pIFRet;
+    return Cx_Section(pIFRet.DetachInterface(), false);
 }
 
 long Cx_ConfigXml::GetSectionCount(Ix_ConfigSection* parent,
@@ -515,7 +515,7 @@ Cx_Section Cx_ConfigXml::GetSectionByIndex(
     CXmlUtil::GetChild(pIFCfg->m_xmlNode, pIFCfg->m_xmlParent,
         strName.c_str(), index);
 
-    return pIFRet;
+    return Cx_Section(pIFRet.DetachInterface(), false);
 }
 
 Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
@@ -536,7 +536,7 @@ Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
         pIFCfg->m_xmlNode = NULL;
     }
 
-    return pIFRet;
+    return Cx_Section(pIFRet.DetachInterface(), false);
 }
 
 Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
@@ -559,7 +559,7 @@ Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
         X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"AddSection");
     }
 
-    return pIFRet;
+    return Cx_Section(pIFRet.DetachInterface(), false);
 }
 
 bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)

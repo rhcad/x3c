@@ -21,17 +21,13 @@ public:
     }
 
     Cx_ConfigSection(const Cx_Interface<Ix_ConfigSection>& src)
-        : Cx_Interface<Ix_ConfigSection>(src)
+        : Cx_Interface<Ix_ConfigSection>(src.P())
     {
     }
 
     Cx_ConfigSection(const Cx_Ptr& objConfigIO)
+        : Cx_Interface<Ix_ConfigSection>(objConfigIO)
     {
-        Cx_Interface<Ix_ConfigSection> pIFSec(objConfigIO);
-        if (pIFSec.IsNotNull())
-        {
-            Cx_Interface<Ix_ConfigSection>::operator=(pIFSec);
-        }
     }
 
     Cx_ConfigSection& operator=(const Cx_Interface<Ix_ConfigSection>& src)
@@ -43,7 +39,7 @@ public:
         return *this;
     }
 
-    virtual ~Cx_ConfigSection()
+    ~Cx_ConfigSection()
     {
         Release();
     }
