@@ -437,7 +437,11 @@ bool Cx_PluginLoader::GetPluginFileName(long index, HMODULE& hdll, std::wstring&
 
 bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
 {
-    if (m_unloading != 0 || GetPluginIndex(pluginFile) >= 0)
+    if (GetPluginIndex(pluginFile) >= 0)
+    {
+        return true;
+    }
+    if (m_unloading != 0)
     {
         return false;
     }

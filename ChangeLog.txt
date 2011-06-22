@@ -7,6 +7,7 @@ X3 C++ PluginFramework
     * Avoid some callings between plugins when loading plugins.
     * Call DestroyWnd() in CEmbedWnd::~CEmbedWnd().
     * Fix copy construction of Cx_Interface and Cx_ConfigSection for vc60.
+    * Returns true if a plugin has already loaded before in Cx_PluginLoader::LoadPluginOrDelay().
 
 2011-06-19
 
