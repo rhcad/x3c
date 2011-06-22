@@ -559,17 +559,17 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
         PathAppendW(m_clsfile, L"ConfigXml.plugin" PLNEXT);
         loaded = LoadPlugin(m_clsfile);
 
-        // Get application name.
-        GetModuleFileNameW(m_instance, m_clsfile, MAX_PATH);
-        std::wstring appname(PathFindFileNameW(m_clsfile));
-
-        // Make cache file name.
-        wcsncpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str(), MAX_PATH);
-        PathAppendW(m_clsfile, appname.c_str());
-        PathRenameExtensionW(m_clsfile, L".clsbuf");
-
         if (m_cache.Create(x3::CLSID_ConfigXmlFile))
         {
+            // Get application name.
+            GetModuleFileNameW(m_instance, m_clsfile, MAX_PATH);
+            std::wstring appname(PathFindFileNameW(m_clsfile));
+
+            // Make cache file name.
+            wcsncpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str(), MAX_PATH);
+            PathAppendW(m_clsfile, appname.c_str());
+            PathRenameExtensionW(m_clsfile, L".clsbuf");
+
             Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
             pIFFile->SetFileName(m_clsfile);
         }
