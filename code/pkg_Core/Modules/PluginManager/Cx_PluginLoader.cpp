@@ -565,7 +565,8 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
 
         // Make cache file name.
         wcsncpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str(), MAX_PATH);
-        PathAppendW(m_clsfile, (appname + L".clsbuf").c_str());
+        PathAppendW(m_clsfile, appname.c_str());
+        PathRenameExtensionW(m_clsfile, L".clsbuf");
 
         if (m_cache.Create(x3::CLSID_ConfigXmlFile))
         {
