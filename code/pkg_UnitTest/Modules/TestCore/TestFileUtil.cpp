@@ -23,7 +23,8 @@ void TestFileUtil::tearDown()
 
 void TestFileUtil::testCopyFolder()
 {
-    ASSERT(x3::FileUtility()->CopyPathFile(L"D:\\FxData\\", L"D:\\Test\\"));
+    std::wstring path(MakeDataPath(L"", L""));
+    ASSERT(x3::FileUtility()->CopyPathFile(path.c_str(), L"D:\\Test\\"));
 }
 
 void TestFileUtil::testDelFolder()
