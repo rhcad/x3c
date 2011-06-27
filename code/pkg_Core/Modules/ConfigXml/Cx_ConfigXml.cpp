@@ -609,10 +609,6 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
         {
             m_pImpl->SetModified();
         }
-        else
-        {
-            X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"RemoveChildren");
-        }
     }
 
     return count;
