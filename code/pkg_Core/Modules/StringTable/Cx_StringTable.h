@@ -30,7 +30,7 @@ private:
         Cx_Ptr          file;   // Ix_ConfigData
         ITEM() {}
     };
-    typedef std::vector<ITEM>::iterator IT_ITEM;
+    typedef std::list<ITEM>::iterator IT_ITEM;
 
     IT_ITEM Find(const std::wstring& module)
     {
@@ -47,7 +47,7 @@ private:
     }
 
 private:
-    std::vector<ITEM>   m_groups;
+    std::list<ITEM>     m_groups;
     bool                m_loaded;
 };
 

@@ -24,7 +24,7 @@ void Cx_ChangeManager::RegisterObserver(const char* type,
     ASSERT(observer && type);
 
     std::pair<HMODULE, std::string> key(fromdll, type);
-    if (fromdll && x3::find_value(m_callers, key) < 0)
+    if (fromdll && !x3::has_value(m_callers, key))
     {
         m_callers.push_back(key);
 
@@ -67,7 +67,7 @@ void Cx_ChangeManager::ChangeNotify(const char* type, ChangeNotifyData* data)
 {
     ASSERT(data != NULL);
 
-    if (x3::find_value(m_types, std::string(type)) < 0)
+    if (!x3::has_value(m_types, std::string(type)))
     {
         m_types.push_back(type);
 

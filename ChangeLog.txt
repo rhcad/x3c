@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-06-27
+
+    * Change vector to list in StringTable, ChangeManager and PluginManager.
+    * Add x3::has_value() in vecfunc.h.
+
 2011-06-21
 
     * Remove IsDelayPlugin(), so all plugins will be delay loaded.

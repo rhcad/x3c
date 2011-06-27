@@ -38,6 +38,7 @@ inline std::wstring towstr(const CString& str)
     \param arr STL container variable (vector, list, map). eg: " vector<Ix_xxx*> arr; "
     \param _P The condition expression for matching elements. eg: " std::bind2nd(std::equal_to<Ix_xxx*>(), pObj) "
     \return the element is removed or not.
+    \see erase_value, find_if
 */
 template<class _Ta, class _Pr> inline
 bool erase_if(_Ta& arr, _Pr _P)
@@ -59,6 +60,7 @@ bool erase_if(_Ta& arr, _Pr _P)
     \param arr STL container variable (vector, list, map). eg: " vector<Ix_xxx*> arr; "
     \param p The element value for matching. It's type is same as the element type of 'arr'. eg: " Ix_xxx* pObj"
     \return the element is removed or not.
+    \see erase_if, find_value
 */
 template<class _Ta, class _Tp> inline
 bool erase_value(_Ta& arr, _Tp& p)
@@ -72,6 +74,7 @@ bool erase_value(_Ta& arr, _Tp& p)
     \param arr STL vector variable. eg: " vector<Ix_xxx*> arr; "
     \param _P The condition expression for matching elements. eg: " std::bind2nd(std::equal_to<Ix_xxx*>(), pObj) "
     \return the position index of an element, or -1 if not found.
+    \see find_value, has_value
 */
 template<class _Ta, class _Pr> inline
 long find_if(const _Ta& arr, _Pr _P)
@@ -86,11 +89,28 @@ long find_if(const _Ta& arr, _Pr _P)
     \param arr STL container variable (vector, list, map). eg: " vector<Ix_xxx*> arr; "
     \param p The element value for matching. It's type is same as the element type of 'arr'. eg: " Ix_xxx* pObj"
     \return the position index of an element, or -1 if not found.
+    \see has_value, find_if
 */
 template<class _Ta, class _Tp> inline
 long find_value(const _Ta& arr, const _Tp& p)
 {
     return find_if(arr, std::bind2nd(std::equal_to<_Tp>(), p));
+}
+
+//! Checks whether a container has an element that match a element value or not.
+/*!
+    \ingroup _GROUP_UTILFUNC
+    \param arr STL container variable (vector, list, map). eg: " vector<Ix_xxx*> arr; "
+    \param p The element value for matching. It's type is same as the element type of 'arr'. eg: " Ix_xxx* pObj"
+    \return true if the container has the element.
+    \see find_value, find_if
+*/
+template<class _Ta, class _Tp> inline
+bool has_value(const _Ta& arr, const _Tp& p)
+{
+    typename _Ta::const_iterator it = std::find_if(arr.begin(), arr.end(),
+        std::bind2nd(std::equal_to<_Tp>(), p));
+    return it != arr.end();
 }
 
 //! Returns element count of a container.

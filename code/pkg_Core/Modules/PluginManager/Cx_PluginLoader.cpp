@@ -201,32 +201,32 @@ long Cx_PluginLoader::InitializePlugins()
 
     for (long i = 0; i < x3::GetSize(m_modules); i++)
     {
-        if (m_modules[i].inited)
+        if (m_modules[i]->inited)
         {
             continue;
         }
-        if (!m_modules[i].hdll) // delay-load
+        if (!m_modules[i]->hdll) // delay-load
         {
             count++;
-            m_modules[i].inited = true;
+            m_modules[i]->inited = true;
             continue;
         }
 
         typedef bool (*FUNC_INIT)();
         FUNC_INIT pfn = (FUNC_INIT)GetProcAddress(
-            m_modules[i].hdll, "x3InitializePlugin");
+            m_modules[i]->hdll, "x3InitializePlugin");
 
         if (pfn && !(*pfn)())
         {
-            GetModuleFileNameW(m_modules[i].hdll, m_modules[i].filename, MAX_PATH);
-            X3LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", m_modules[i].filename);
-            VERIFY(UnloadPlugin(m_modules[i].filename));
+            GetModuleFileNameW(m_modules[i]->hdll, m_modules[i]->filename, MAX_PATH);
+            X3LOG_WARNING2(L"@PluginManager:IDS_INITPLUGIN_FAIL", m_modules[i]->filename);
+            VERIFY(UnloadPlugin(m_modules[i]->filename));
             i--;
         }
         else
         {
             count++;
-            m_modules[i].inited = true;
+            m_modules[i]->inited = true;
         }
     }
 
@@ -243,7 +243,7 @@ int Cx_PluginLoader::GetPluginIndex(const wchar_t* filename)
     while (--i >= 0)
     {
         // ignore folders
-        if (_wcsicmp(title, PathFindFileNameW(m_modules[i].filename)) == 0)
+        if (_wcsicmp(title, PathFindFileNameW(m_modules[i]->filename)) == 0)
         {
             break;
         }
@@ -263,7 +263,7 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
 
     if (pModule != NULL)
     {
-        MODULEINFO moduleInfo;
+        MODULE moduleInfo;
 
         moduleInfo.hdll = instance;
         moduleInfo.module = pModule;
@@ -274,12 +274,15 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
         int moduleIndex = GetPluginIndex(moduleInfo.filename);
         if (moduleIndex >= 0)
         {
-            m_modules[moduleIndex] = moduleInfo;
+            ASSERT(m_modules[moduleIndex] != NULL);
+            *m_modules[moduleIndex] = moduleInfo;
         }
         else
         {
+            MODULE* module = new MODULE;
+            *module = moduleInfo;
+            m_modules.push_back(module);
             moduleIndex = x3::GetSize(m_modules);
-            m_modules.push_back(moduleInfo);
         }
 
         RegisterClassEntryTable(moduleIndex);
@@ -294,12 +297,12 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 {
     int existIndex = GetPluginIndex(filename);
 
-    if (existIndex >= 0 && m_modules[existIndex].hdll)
+    if (existIndex >= 0 && m_modules[existIndex]->hdll)
     {
-        if (_wcsicmp(filename, m_modules[existIndex].filename) != 0)
+        if (_wcsicmp(filename, m_modules[existIndex]->filename) != 0)
         {
             X3LOG_DEBUG2(L"The plugin is already loaded.",
-                filename << L", " << (m_modules[existIndex].filename));
+                filename << L", " << (m_modules[existIndex]->filename));
         }
         return false;
     }
@@ -316,7 +319,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
             ASSERT(moduleIndex >= 0);
             ASSERT(existIndex < 0 || existIndex == moduleIndex);
 
-            m_modules[moduleIndex].owned = true;
+            m_modules[moduleIndex]->owned = true;
 #ifdef _WIN32
             DisableThreadLibraryCalls(hdll);
 #endif
@@ -339,7 +342,7 @@ bool Cx_PluginLoader::UnloadPlugin(const wchar_t* name)
 {
     CLockCount locker(&m_unloading);
     int moduleIndex = GetPluginIndex(name);
-    HMODULE hdll = moduleIndex < 0 ? NULL : m_modules[moduleIndex].hdll;
+    HMODULE hdll = moduleIndex < 0 ? NULL : m_modules[moduleIndex]->hdll;
 
     if (NULL == hdll)
     {
@@ -383,7 +386,7 @@ long Cx_PluginLoader::UnloadPlugins()
     {
         typedef void (*FUNC_UNLOAD)();
         FUNC_UNLOAD pfnUnload = (FUNC_UNLOAD)GetProcAddress(
-            m_modules[i].hdll, "x3UninitializePlugin");
+            m_modules[i]->hdll, "x3UninitializePlugin");
         if (pfnUnload)
         {
             pfnUnload();
@@ -392,14 +395,14 @@ long Cx_PluginLoader::UnloadPlugins()
 
     for (i = x3::GetSize(m_modules) - 1; i >= 0; i--)
     {
-        ClearModuleItems(m_modules[i].hdll);
+        ClearModuleItems(m_modules[i]->hdll);
     }
 
     for (i = x3::GetSize(m_modules) - 1; i >= 0; i--)
     {
-        if (m_modules[i].hdll)
+        if (m_modules[i]->hdll)
         {
-            ReleaseModule(m_modules[i].hdll);
+            ReleaseModule(m_modules[i]->hdll);
             count++;
         }
     }
@@ -429,8 +432,8 @@ bool Cx_PluginLoader::GetPluginFileName(long index, HMODULE& hdll, std::wstring&
 {
     bool valid = x3::IsValidIndexOf(m_modules, index);
 
-    hdll = valid ? m_modules[index].hdll : NULL;
-    filename = valid ? m_modules[index].filename : L"";
+    hdll = valid ? m_modules[index]->hdll : NULL;
+    filename = valid ? m_modules[index]->filename : L"";
 
     return valid;
 }
@@ -471,7 +474,7 @@ bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
 
         typedef bool (*FUNC_PLUGINLOAD)();
         FUNC_PLUGINLOAD pfn = (FUNC_PLUGINLOAD)GetProcAddress(
-            m_modules[moduleIndex].hdll, "x3InitializePlugin");
+            m_modules[moduleIndex]->hdll, "x3InitializePlugin");
 
         if (pfn && !(*pfn)())
         {
@@ -480,7 +483,7 @@ bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
         }
         else
         {
-            m_modules[moduleIndex].inited = true;
+            m_modules[moduleIndex]->inited = true;
             BuildPluginCache(filename);
             ret = true;
         }
@@ -497,15 +500,15 @@ bool Cx_PluginLoader::BuildPluginCache(const wchar_t* pluginFile)
     CLSIDS oldids;
     LoadClsids(oldids, pluginFile);
 
-    return oldids != m_modules[moduleIndex].clsids
-        && SaveClsids(m_modules[moduleIndex].clsids, pluginFile);
+    return oldids != m_modules[moduleIndex]->clsids
+        && SaveClsids(m_modules[moduleIndex]->clsids, pluginFile);
 }
 
 bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 {
     int moduleIndex = GetPluginIndex(filename);
 
-    if (moduleIndex >= 0 && !m_modules[moduleIndex].clsids.empty())
+    if (moduleIndex >= 0 && !m_modules[moduleIndex]->clsids.empty())
     {
         return true;
     }
@@ -520,16 +523,16 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
 
     if (moduleIndex < 0)
     {
-        MODULEINFO moduleInfo;
+        MODULE* module = new MODULE;
 
-        moduleInfo.hdll = NULL;
-        moduleInfo.module = NULL;
-        moduleInfo.owned = false;
-        moduleInfo.inited = false;
-        wcsncpy_s(moduleInfo.filename, MAX_PATH, filename, MAX_PATH);
+        module->hdll = NULL;
+        module->module = NULL;
+        module->owned = false;
+        module->inited = false;
+        wcsncpy_s(module->filename, MAX_PATH, filename, MAX_PATH);
 
         moduleIndex = x3::GetSize(m_modules);
-        m_modules.push_back(moduleInfo);
+        m_modules.push_back(module);
     }
 
     memset(&cls, 0, sizeof(cls));
@@ -539,7 +542,7 @@ bool Cx_PluginLoader::LoadPluginCache(const wchar_t* filename)
         if (m_clsmap.find(cls.clsid.str()) == m_clsmap.end())
         {
             m_clsmap[cls.clsid.str()] = MAPITEM(cls, moduleIndex);
-            m_modules[moduleIndex].clsids.push_back(cls.clsid);
+            m_modules[moduleIndex]->clsids.push_back(cls.clsid);
         }
     }
 
@@ -696,9 +699,9 @@ void Cx_PluginLoader::FireFirstEvent(const char* obtype)
 
             int moduleIndex = GetPluginIndex(shortflname.c_str());
 
-            if (moduleIndex >= 0 && !m_modules[moduleIndex].hdll)
+            if (moduleIndex >= 0 && !m_modules[moduleIndex]->hdll)
             {
-                LoadDelayPlugin(m_modules[moduleIndex].filename);
+                LoadDelayPlugin(m_modules[moduleIndex]->filename);
             }
         }
     }

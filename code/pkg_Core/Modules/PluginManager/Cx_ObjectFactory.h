@@ -51,7 +51,7 @@ protected:
     typedef std::pair<X3CLASSENTRY, long>  MAPITEM;    //!< entry+moduleIndex
     typedef hash_map<std::string, MAPITEM>    CLSMAP;       //!< clsid+item
 
-    struct MODULEINFO                   //!< plugin module info
+    struct MODULE                   //!< plugin module info
     {
         HMODULE             hdll;       //!< DLL handle of the plugin
         Ix_Module*          module;     //!< plugin module object
@@ -60,10 +60,10 @@ protected:
         bool                inited;     //!< InitializePlugins() has been called or not
         wchar_t             filename[MAX_PATH];   //!< plugin filename
 
-        MODULEINFO() : hdll(NULL), module(NULL), owned(false), inited(false) {}
+        MODULE() : hdll(NULL), module(NULL), owned(false), inited(false) {}
     };
 
-    std::vector<MODULEINFO> m_modules;  //!< all plugin modules
+    std::vector<MODULE*>    m_modules;  //!< all plugin modules
     CLSMAP                  m_clsmap;   //!< map from clsid to class factory
     long                    m_unloading;    //!< positive if a a plugin is unloading
 

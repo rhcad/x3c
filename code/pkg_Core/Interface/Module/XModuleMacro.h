@@ -74,8 +74,7 @@
 */
 #if defined(_USRDLL) && defined(APIENTRY)
 #define XEND_DEFINE_MODULE_DLL() \
-        X3CLASSENTRY() \
-    };  \
+        XEND_DEFINE_MODULE()    \
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
 {   \
     if (dwReason == DLL_PROCESS_ATTACH) \
@@ -90,8 +89,7 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
 }
 #else
 #define XEND_DEFINE_MODULE_DLL() \
-        X3CLASSENTRY() \
-    };
+        XEND_DEFINE_MODULE()
 #endif // XEND_DEFINE_MODULE_DLL
 
 //! End group of class factory registry and implement entry function of MFC Extension DLL.
@@ -100,8 +98,7 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID)   \
     \see XEND_DEFINE_MODULE_DLL, XEND_DEFINE_MODULE_MFCDLL
 */
 #define XEND_DEFINE_MODULE_MFCEXTDLL() \
-        X3CLASSENTRY() \
-    };  \
+        XEND_DEFINE_MODULE()    \
 static AFX_EXTENSION_MODULE MFCExtDLL = { NULL, NULL }; \
 extern "C" int APIENTRY \
 DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)    \
@@ -130,8 +127,7 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)    \
     \see XEND_DEFINE_MODULE_DLL, XEND_DEFINE_MODULE_MFCEXTDLL
 */
 #define XEND_DEFINE_MODULE_MFCDLL() \
-        X3CLASSENTRY() \
-    };  \
+        XEND_DEFINE_MODULE()    \
 class CPluginApp : public CWinApp   \
 {   \
 public: \

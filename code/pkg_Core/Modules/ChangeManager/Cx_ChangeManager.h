@@ -49,8 +49,8 @@ private:
     typedef ObserverMap::iterator MAP_IT;
     ObserverMap     m_observers;
 
-    std::vector<std::pair<HMODULE, std::string> >   m_callers;
-    std::vector<std::string>                        m_types;
+    std::list<std::pair<HMODULE, std::string> >     m_callers;
+    std::list<std::string>                          m_types;
 };
 
 #endif // _X3_CORE_CHANGEMANAGER_H
