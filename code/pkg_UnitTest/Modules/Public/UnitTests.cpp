@@ -35,6 +35,11 @@ CUnitTestsApp theApp;
 
 #else   // Console application
 
+#include <cppunit/ui/text/TestRunner.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/XmlOutputter.h>
+#include <cppunit/CompilerOutputter.h>
+
 int main(int argc, char** argv)
 {
     // Get the top level suite from the registry
