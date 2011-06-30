@@ -6,13 +6,19 @@
 
 #include "Cx_CfgDbSection.h"
 
+const X3CLSID CLSID_CfgRecord("3bf6f952-65a9-4350-a472-d0d1b183adae");
+
 class Cx_CfgRecord
     : public Cx_CfgDbSection
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_CfgRecord)
+        X3USE_INTERFACE_ENTRY(Cx_CfgDbSection)
+    X3END_CLASS_DECLARE()
+protected:
     Cx_CfgRecord();
     virtual ~Cx_CfgRecord();
 
+public:
     void InitializeForAdd(Cx_CfgDatabase* pDB, const std::wstring& wstrTable);
     void InitializeForRead(Cx_CfgDatabase* pDB, _RecordsetPtr pRs, const std::wstring& wstrSQL);
 

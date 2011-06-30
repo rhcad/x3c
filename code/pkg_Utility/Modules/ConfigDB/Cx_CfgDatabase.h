@@ -23,7 +23,12 @@ class Cx_CfgDatabase
     , public Ix_ConfigTransaction
     , public Ix_InitDatabase
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_CfgDatabase)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigData)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigTransaction)
+        X3DEFINE_INTERFACE_ENTRY(Ix_InitDatabase)
+    X3END_CLASS_DECLARE()
+protected:
     //! ¹¹Ôìº¯Êý
     Cx_CfgDatabase();
 

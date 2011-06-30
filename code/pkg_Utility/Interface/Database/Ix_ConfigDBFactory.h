@@ -1,7 +1,7 @@
 /*! \file Ix_ConfigDBFactory.h
  *  \brief 定义配置数据的创建接口 Ix_ConfigDBFactory
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ICONFIGDBFACTORY_H_
 #define X3_UTIL_ICONFIGDBFACTORY_H_
@@ -19,10 +19,10 @@ X3CLSID_DEFINE(CLSID_ConfigDBFactory, "6f3ca83f-6193-48ce-a188-24b2afb45432");
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_ConfigDBFactory, Cx_CfgDatabase
 */
-class Ix_ConfigDBFactory
+class Ix_ConfigDBFactory : public Ix_Object
 {
 public:
-    virtual ~Ix_ConfigDBFactory() {}
+    X3DEFINE_IID(Ix_ConfigDBFactory)
 
     //! 打开Access数据库文件
     /*!

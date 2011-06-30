@@ -3,7 +3,7 @@
  *  \note Include this file in one and only one CPP file of your plugin project.\n
  *        If you don't want to use XModuleMacro.h and this file, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.05.18
+ *  \date   2011.06.30
  */
 #ifndef X3_PLUGINIMPL_MODULEIMPL_H_
 #define X3_PLUGINIMPL_MODULEIMPL_H_
@@ -20,7 +20,7 @@
 
 OUTAPI Ix_Module*   x3GetModuleInterface(Ix_ObjectFactory*, HMODULE);
 OUTAPI DWORD    x3GetClassEntryTable(DWORD*, DWORD*, X3CLASSENTRY*, DWORD);
-OUTAPI int      x3InternalCreateObject(const char*, Ix_Object**, HMODULE);
+OUTAPI int      x3InternalCreateObject(const char*, X3IID, Ix_Object**, HMODULE);
 OUTAPI bool     x3CanUnloadPlugin();
 
 //! the only one module object in this project.
@@ -113,12 +113,14 @@ OUTAPI DWORD x3GetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
 //! A export function to create object whose class is implement in this project.
 /*! \ingroup _GROUP_PLUGIN_CORE2_
     \param clsid class unique id, must be valid.
+    \param iid interface id, see X3DEFINE_IID.
     \param ppv Pass in a valid address and return a new object.
     \param fromdll DLL handle of the caller's module.
     \return 0 or failed.
     \see x3GetModuleInterface, x3CreateObject, x3GetModuleInterface
 */
-OUTAPI int x3InternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fromdll)
+OUTAPI int x3InternalCreateObject(const char* clsid, X3IID iid, 
+                                  Ix_Object** ppv, HMODULE fromdll)
 {
     if (NULL == ppv)
         return 1;
@@ -131,7 +133,7 @@ OUTAPI int x3InternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fr
     {
         if (clsid2 == pCls->clsid)
         {
-            *ppv = (*pCls->pfnObjectCreator)(fromdll);
+            *ppv = (*pCls->pfnObjectCreator)(iid, fromdll);
             return 0;
         }
     }
@@ -144,24 +146,25 @@ OUTAPI int x3InternalCreateObject(const char* clsid, Ix_Object** ppv, HMODULE fr
     Autoptr classes (Cx_Interface and Cx_Ptr) will call it. \n
     If you don't want to use this file, then you can use XComCreator.h file.
     \param clsid class unique id, must be valid.
+    \param iid interface id, see X3DEFINE_IID.
     \param ppv Pass in a valid address and return a new object.
     \return 0 or failed.
     \see x3InternalCreateObject, Ix_ObjectFactory, x3IsCreatorRegister
 */
-int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, X3IID iid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
     *ppv = NULL;
 
-    int ret = x3InternalCreateObject(clsid.str(), ppv, x3GetModuleHandle());
+    int ret = x3InternalCreateObject(clsid.str(), iid, ppv, x3GetModuleHandle());
 
     if (ret != 0)
     {
         Ix_ObjectFactory* pFactory = s_x3Module.GetObjectFactory();
         if (pFactory)
         {
-            ret = pFactory->CreateObject(clsid, ppv, x3GetModuleHandle());
+            ret = pFactory->CreateObject(clsid, iid, ppv, x3GetModuleHandle());
         }
     }
 

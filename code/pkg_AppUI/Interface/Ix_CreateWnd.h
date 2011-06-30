@@ -1,10 +1,12 @@
 /*! \file Ix_CreateWnd.h
  *  \brief Define window creator interface: Ix_CreateWnd
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.5.26
+ *  \date   2011.6.30
  */
 #ifndef X3_VIEW_ICREATEWND_H_
 #define X3_VIEW_ICREATEWND_H_
+
+#include <Ix_Object.h>
 
 //! Window creator interface
 /*! Use Cx_CreateWnd<YourWndClass> to implement this interface.
@@ -13,10 +15,10 @@
     \ingroup _GROUP_APPUI_
     \see Cx_CreateWnd
 */
-class Ix_CreateWnd
+class Ix_CreateWnd : public Ix_Object
 {
 public:
-    virtual ~Ix_CreateWnd() {}
+    X3DEFINE_IID(Ix_CreateWnd)
 
     //! Return window handle.
     virtual HWND GetWindow() const = 0;

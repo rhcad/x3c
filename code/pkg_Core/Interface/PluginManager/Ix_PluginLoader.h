@@ -1,7 +1,7 @@
 /*! \file Ix_PluginLoader.h
  *  \brief Define plugin loading interface: Ix_PluginLoader
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.28
+ *  \date   2011.06.30
  */
 #ifndef X3_MANAGER_IPLUGINLOADER_H_
 #define X3_MANAGER_IPLUGINLOADER_H_
@@ -13,10 +13,10 @@
  *  \brief Plugin loading interface
  *  \see   Ix_ObjectFactory
  */
-class Ix_PluginLoader
+class Ix_PluginLoader : public Ix_Object
 {
 public:
-    virtual ~Ix_PluginLoader() {}
+    X3DEFINE_IID(Ix_PluginLoader)
 
     //! Load all plugins in the module's path.
     /*!

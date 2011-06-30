@@ -1,13 +1,12 @@
 /*! \file Cx_Object.h
  *  \brief Define the regular implement template class: Cx_Object<cls>
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.06.30
  */
 #ifndef X3_PLUGINIMPL_OBJECT_H_
 #define X3_PLUGINIMPL_OBJECT_H_
 
 #include "Ix_Object.h"
-#include <typeinfo>
 
 HMODULE x3GetModuleHandle();
 
@@ -18,12 +17,10 @@ HMODULE x3GetModuleHandle();
  *  \internal
  */
 template <class ClsType>
-class Cx_Object
-    : public ClsType
-    , public Ix_Object
+class Cx_Object : public ClsType
 {
 protected:
-    Cx_Object(bool bRef = true) : m_refcount(bRef ? 1 : 0)
+    Cx_Object() : m_refcount(1)
     {
         InterlockedIncrement(&ObjectCount());
     }
@@ -34,38 +31,52 @@ protected:
     }
 
 protected:
-    virtual void AddRef(HMODULE fromdll)
+    virtual long AddRef(HMODULE fromdll)
     {
         if (fromdll != x3GetModuleHandle())
         {
             InterlockedIncrement(&RefCountByOthers());
         }
-        InterlockedIncrement(&m_refcount);
+        return InterlockedIncrement(&m_refcount);
     }
 
-    virtual void Release(HMODULE fromdll)
+    virtual long Release(HMODULE fromdll)
     {
         if (fromdll != x3GetModuleHandle())
         {
             InterlockedDecrement(&RefCountByOthers());
         }
-        if (0 == InterlockedDecrement(&m_refcount))
+
+        long ret = InterlockedDecrement(&m_refcount);
+
+        if (0 == ret)
         {
             delete this;
         }
+
+        return ret;
+    }
+
+    virtual bool QueryInterface(X3IID iid, Ix_Object** ppv, HMODULE fromdll)
+    {
+        return ClsType::DoQueryInterface(this, iid, ppv, fromdll);
     }
 
     virtual const char* GetClassName() const
     {
-        return typeid(*this).name();
+        return ClsType::DoGetClassName();
     }
 
 public:
-    static Ix_Object* CreateObject(HMODULE fromdll)
+    static Ix_Object* CreateObject(X3IID iid, HMODULE fromdll)
     {
-        Cx_Object<ClsType>* p = new Cx_Object<ClsType>(false);
-        p->AddRef(fromdll);
-        return p;
+        Ix_Object* ret = NULL;
+        Cx_Object<ClsType>* p = new Cx_Object<ClsType>();
+
+        p->QueryInterface(iid, &ret, fromdll);
+        p->Release(fromdll);
+
+        return ret;
     }
 
     static long GetObjectCount()

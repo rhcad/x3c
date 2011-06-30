@@ -13,8 +13,10 @@
  *    define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll.
  *
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.05.18
+ *  \date   2011.06.30
  */
+ #ifndef _X3_COMCREATOR_IMPL_H
+ #define _X3_COMCREATOR_IMPL_H
 
 #include "../Portability/portimpl.h"
 #ifdef X3_LOG_DEBUGR_H_
@@ -30,7 +32,7 @@ Ix_ObjectFactory* x3GetObjectFactory()
     return CPluginManager::Factory();
 }
 
-int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, X3IID iid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
@@ -40,7 +42,7 @@ int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
     if (NULL == factory)
         return 1;  // plugins must are already loaded using PluginManager.h
 
-    return factory->CreateObject(clsid, ppv, NULL);
+    return factory->CreateObject(clsid, iid, ppv, NULL);
 }
 
 #else // USE_ONE_PLUGIN
@@ -50,17 +52,17 @@ int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
 
 HMODULE     g_hPluginDll = NULL;
 
-int x3CreateObject(const X3CLSID& clsid, Ix_Object** ppv)
+int x3CreateObject(const X3CLSID& clsid, X3IID iid, Ix_Object** ppv)
 {
     if (NULL == ppv)
         return 1;
     *ppv = NULL;
 
-    typedef int (*FUNC_CREATE)(const char*, Ix_Object**, HMODULE);
+    typedef int (*FUNC_CREATE)(const char*, X3IID, Ix_Object**, HMODULE);
     FUNC_CREATE pfn = (FUNC_CREATE)GetProcAddress(
         g_hPluginDll, "x3InternalCreateObject");
 
-    return pfn ? (*pfn)(clsid.str(), ppv, NULL) : 1;
+    return pfn ? (*pfn)(clsid.str(), iid, ppv, NULL) : 1;
 }
 
 class Ix_ObjectFactory;
@@ -75,3 +77,5 @@ HMODULE x3GetModuleHandle()
 {
     return NULL;
 }
+
+#endif // _X3_COMCREATOR_IMPL_H

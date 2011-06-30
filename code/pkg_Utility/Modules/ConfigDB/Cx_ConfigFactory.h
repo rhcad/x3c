@@ -9,11 +9,14 @@
 class Cx_ConfigFactory
     : public Ix_ConfigDBFactory
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_ConfigFactory)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigDBFactory)
+    X3END_CLASS_DECLARE()
+protected:
     Cx_ConfigFactory();
     virtual ~Cx_ConfigFactory();
 
-protected:
+private:
     // From Ix_ConfigDBFactory
     //
     virtual Cx_Ptr OpenAccessDB(

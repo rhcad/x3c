@@ -7,7 +7,6 @@
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_CfgDatabase.h"
-#include <Module/Cx_SimpleObject.h>
 #include "Cx_CfgRecordset.h"
 #include "Cx_CfgRecord.h"
 #include "DbFunc.h"
@@ -161,7 +160,11 @@ bool Cx_CfgDatabase::GetRecordCount(long& count, const std::wstring& sqlSelect)
 
 void Cx_CfgDatabase::CreateNullSection(Cx_Interface<Ix_ConfigSection>& pIFSec)
 {
-    Cx_SimpleObject<Cx_CfgDbSection>::Create(pIFSec)->InitializeNullObject(this);
+    pIFSec.Create(CLSID_NullObject);
+    Cx_CfgDbSection* pNullObj = static_cast<Cx_CfgDbSection*>(pIFSec.P());
+    ASSERT(pNullObj != NULL);
+
+    pNullObj->InitializeNullObject(this);
 }
 
 static std::wstring EnsureSQLHasSelect(const std::wstring& sql)
@@ -181,8 +184,9 @@ static std::wstring EnsureSQLHasSelect(const std::wstring& sql)
 
 Cx_Section Cx_CfgDatabase::OpenRecordset(const std::wstring& sqlSelect)
 {
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_CfgRecordset* pRecordset = Cx_SimpleObject<Cx_CfgRecordset>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_CfgRecordset);
+    Cx_CfgRecordset* pRecordset = static_cast<Cx_CfgRecordset*>(pIFRet.P());
+    ASSERT(pRecordset != NULL);
 
     pRecordset->InitializeBySQL(this, EnsureSQLHasSelect(sqlSelect));
 
@@ -270,7 +274,7 @@ Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* 
 
 long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, const wchar_t*)
 {
-    Cx_CfgRecordset* pRecordset = dynamic_cast<Cx_CfgRecordset*>(pParent);
+    Cx_CfgRecordset* pRecordset = static_cast<Cx_CfgRecordset*>(pParent);
     ASSERT_MESSAGE(pRecordset != NULL, "Database::GetSectionCount(pParent, ...): "
         "pParent must be recordset object returnd by GetSection()");
 
@@ -279,7 +283,7 @@ long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, const wchar_t*)
 
 Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, const wchar_t*, long nIndex)
 {
-    Cx_CfgRecordset* pRecordset = dynamic_cast<Cx_CfgRecordset*>(pParent);
+    Cx_CfgRecordset* pRecordset = static_cast<Cx_CfgRecordset*>(pParent);
     ASSERT_MESSAGE(pRecordset != NULL, "Database::GetSectionByIndex(pParent, ...): "
         "pParent must be recordset object returnd by GetSection()");
 
@@ -293,7 +297,10 @@ Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, const wc
             _RecordsetPtr pRs = pRecordset->GetCurRecord();
             if (pRs != NULL && !pRs->adoEOF)
             {
-                pRecord = Cx_SimpleObject<Cx_CfgRecord>::Create(pIFRet);
+                pIFRet.Create(CLSID_CfgRecord);
+                pRecord = static_cast<Cx_CfgRecord*>(pIFRet.P());
+                ASSERT(pRecord != NULL);
+
                 pRecord->InitializeForRead(this, pRs, pRecordset->GetSQLCommand());
             }
         }
@@ -313,8 +320,9 @@ Cx_Section Cx_CfgDatabase::AddSection(Ix_ConfigSection* pParent, const wchar_t* 
     ASSERT_MESSAGE(NULL == pParent, "Database::AddSection(pParent, ...): pParent must be NULL");
     ASSERT_MESSAGE(DbFunc::IsDBName(table), "Invalid table name.");
 
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_CfgRecord* pRecord = Cx_SimpleObject<Cx_CfgRecord>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_CfgRecord);
+    Cx_CfgRecord* pRecord = static_cast<Cx_CfgRecord*>(pIFRet.P());
+    ASSERT(pRecord != NULL);
 
     pRecord->InitializeForAdd(this, table);
 

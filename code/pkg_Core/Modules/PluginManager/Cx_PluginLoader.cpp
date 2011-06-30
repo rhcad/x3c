@@ -279,10 +279,10 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
         }
         else
         {
+            moduleIndex = x3::GetSize(m_modules);
             MODULE* module = new MODULE;
             *module = moduleInfo;
             m_modules.push_back(module);
-            moduleIndex = x3::GetSize(m_modules);
         }
 
         RegisterClassEntryTable(moduleIndex);
@@ -566,7 +566,8 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
         PathAppendW(m_clsfile, L"ConfigXml.plugin" PLNEXT);
         loaded = LoadPlugin(m_clsfile);
 
-        if (m_cache.Create(x3::CLSID_ConfigXmlFile))
+        Cx_Interface<Ix_ConfigXml> pIFFile(x3::CLSID_ConfigXmlFile);
+        if (pIFFile)
         {
             // Get application name.
             GetModuleFileNameW(m_instance, m_clsfile, MAX_PATH);
@@ -577,8 +578,8 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
             PathAppendW(m_clsfile, appname.c_str());
             PathRenameExtensionW(m_clsfile, L".clsbuf");
 
-            Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
             pIFFile->SetFileName(m_clsfile);
+            m_cache = pIFFile;
         }
     }
 

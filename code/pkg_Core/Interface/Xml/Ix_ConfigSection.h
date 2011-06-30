@@ -1,7 +1,7 @@
 /*! \file Ix_ConfigSection.h
  *  \brief Define the configure data node interface: Ix_ConfigSection
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGSECTION_H_
 #define X3_XML_ICONFIGSECTION_H_
@@ -18,10 +18,10 @@ class Ix_ConfigData;
     \ingroup _GROUP_PLUGIN_XML_
     \see Cx_ConfigSection, Ix_ConfigData
 */
-class Ix_ConfigSection
+class Ix_ConfigSection : public Ix_Object
 {
 public:
-    virtual ~Ix_ConfigSection() {}
+    X3DEFINE_IID(Ix_ConfigSection)
 
     //! Return the owner object.
     virtual Ix_ConfigData* GetData() const = 0;

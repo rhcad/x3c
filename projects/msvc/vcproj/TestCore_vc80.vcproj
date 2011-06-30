@@ -314,10 +314,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_SimpleObject.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_SingletonObject.h"
 					>
 				</File>
@@ -327,6 +323,10 @@
 				</File>
 				<File
 					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XClassItem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XClassMacro.h"
 					>
 				</File>
 				<File

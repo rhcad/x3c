@@ -5,8 +5,8 @@
 
 extern HMODULE g_hPluginDll;    // ¼û XComCreator.h
 
-bool LoadPlugin(const wchar_t* filename);
-void Test();
+static bool LoadPlugin(const wchar_t* filename);
+static void Test();
 
 #if defined(_MSC_VER) && defined(UNICODE)
 #define main wmain
@@ -55,7 +55,7 @@ void MyFunc2(const Cx_Ptr& obj)
     }
 }
 
-void Test()
+static void Test()
 {
     long value = 0;
 

@@ -9,11 +9,14 @@
 class Cx_LogManager
     : public Ix_LogManager
 {
+    X3BEGIN_CLASS_DECLARE(Cx_LogManager)
+        X3DEFINE_INTERFACE_ENTRY(Ix_LogManager)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_LogManager();
     virtual ~Cx_LogManager();
 
-protected:
+private:
     virtual bool RegisterObserver(Ix_LogObserver* observer);
     virtual void UnRegisterObserver(Ix_LogObserver* observer);
     virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra);

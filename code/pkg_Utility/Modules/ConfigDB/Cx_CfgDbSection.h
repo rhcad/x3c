@@ -10,20 +10,27 @@
 
 class Cx_CfgDatabase;
 
+const X3CLSID CLSID_NullObject("6c24d79d-ab0b-49f7-a9d5-cc76115aac6f");
+
 class Cx_CfgDbSection
     : public Ix_ConfigSection
     , public Ix_ConfigTransaction
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_CfgDbSection)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigSection)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigTransaction)
+    X3END_CLASS_DECLARE()
+protected:
     Cx_CfgDbSection();
     virtual ~Cx_CfgDbSection();
 
+public:
     void InitializeNullObject(Cx_CfgDatabase* pDB);
 
 protected:
     Cx_CfgDatabase*     m_pDB;
 
-protected:
+private:
     // From Ix_ConfigTransaction
     //
     virtual void BeginTransaction();

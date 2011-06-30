@@ -4,6 +4,7 @@
  *  \version
  *      2010.10.22: First release.
  *      2011.02.08: Add parameter 'fromdll' in RegisterObserver.
+ *      2011.06.30: Remove RTTI.
  */
 #ifndef X3_OBSERVER_ICHANGEMANAGER_H_
 #define X3_OBSERVER_ICHANGEMANAGER_H_
@@ -18,10 +19,10 @@ X3CLSID_DEFINE(CLSID_ChangeManager, "34c6e7c0-fe4a-45a1-b227-3da06e08499f");
     \ingroup _GROUP_CHANGE_OBSERVER_
     \see x3::CLSID_ChangeManager
 */
-class Ix_ChangeManager
+class Ix_ChangeManager : public Ix_Object
 {
 public:
-    virtual ~Ix_ChangeManager() {}
+    X3DEFINE_IID(Ix_ChangeManager)
 
     //! Add a change observer.
     /*!

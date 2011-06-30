@@ -1,7 +1,7 @@
 /*! \file Ix_ConfigXml.h
  *  \brief Define the interface for xml data initialization: Ix_ConfigXml
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGXML_H_
 #define X3_XML_ICONFIGXML_H_
@@ -21,10 +21,10 @@ class IFileCryptHandler;
     \ingroup _GROUP_PLUGIN_XML_
     \see x3::CLSID_ConfigXmlFile, Ix_ConfigData, Ix_ConfigTransaction
 */
-class Ix_ConfigXml
+class Ix_ConfigXml : public Ix_Object
 {
 public:
-    virtual ~Ix_ConfigXml() {}
+    X3DEFINE_IID(Ix_ConfigXml)
 
     //! Return the configure data object.
     virtual Ix_ConfigData* GetData() = 0;

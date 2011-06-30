@@ -5,7 +5,6 @@
 #define EXAMPLE_CHAINB_OBSERVER_H_
 
 #include <ChangeObserver/Cx_ChangeObserver.h>
-#include <typeinfo>
 
 //! 作为例子的职责链观察者类
 /*! 本例子用于让多个派生类都能处理同一个调用，有多种通知函数
@@ -44,14 +43,14 @@ public:
 
     private:
         Data(int _type, int* _value, char* _c)
-            : ChangeNotifyData(typeid(ChainObserverB).name())
+            : ChangeNotifyData("ChainObserverB")
             , type(_type), ret(false), value(_value), c(_c)
         {
         }
     };
 
 protected:
-    ChainObserverB() : Cx_ChangeObserver(typeid(ChainObserverB).name())
+    ChainObserverB() : Cx_ChangeObserver("ChainObserverB")
     {
     }
 
@@ -70,8 +69,7 @@ protected:
 private:
     void DoUpdate(ChangeNotifyData* data)
     {
-        Data* mydata = dynamic_cast<Data*>(data);
-        ASSERT(mydata);
+        Data* mydata = static_cast<Data*>(data);
 
         switch (mydata->type)
         {

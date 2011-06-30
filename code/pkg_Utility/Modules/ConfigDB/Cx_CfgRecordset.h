@@ -6,16 +6,21 @@
 
 #include "Cx_CfgDbSection.h"
 
+const X3CLSID CLSID_CfgRecordset("677221ae-8bc2-4ddb-a85a-6f5b05bb1678");
+
 class Cx_CfgRecordset
     : public Cx_CfgDbSection
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_CfgRecordset)
+        X3USE_INTERFACE_ENTRY(Cx_CfgDbSection)
+    X3END_CLASS_DECLARE()
+protected:
     Cx_CfgRecordset();
     virtual ~Cx_CfgRecordset();
 
+public:
     void InitializeBySQL(Cx_CfgDatabase* pDB, const std::wstring& wstrSQL);
 
-public:
     std::wstring GetTableName() const;
     std::wstring GetSQLCommand() const;
     long GetCurIndex() const;

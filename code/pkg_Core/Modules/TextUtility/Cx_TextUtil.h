@@ -11,6 +11,10 @@ class Cx_TextUtil
     : public Ix_StringConvert
     , public Ix_TextFileUtil
 {
+    X3BEGIN_CLASS_DECLARE(Cx_TextUtil)
+        X3DEFINE_INTERFACE_ENTRY(Ix_StringConvert)
+        X3DEFINE_INTERFACE_ENTRY(Ix_TextFileUtil)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_TextUtil() {}
     virtual ~Cx_TextUtil() {}

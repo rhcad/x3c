@@ -1,5 +1,12 @@
 X3 C++ PluginFramework
 
+2011-06-30
+
+    * Remove RTTI (not use dynamic_cast).
+    * Add XClassMacro.h
+
+------v1.0.11------
+
 2011-06-27
 
     * Change vector to list in StringTable, ChangeManager and PluginManager.

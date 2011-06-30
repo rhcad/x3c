@@ -1,7 +1,7 @@
 /*! \file Ix_ConfigSectionXml.h
  *  \brief Define the xml node interface: Ix_ConfigSectionXml
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGSECTIONXML_H_
 #define X3_XML_ICONFIGSECTIONXML_H_
@@ -14,10 +14,10 @@
     \ingroup _GROUP_PLUGIN_XML_
     \see Ix_ConfigSection
 */
-class Ix_ConfigSectionXml
+class Ix_ConfigSectionXml : public Ix_Object
 {
 public:
-    virtual ~Ix_ConfigSectionXml() {}
+    X3DEFINE_IID(Ix_ConfigSectionXml)
 
     //! Set the fields of this element node are xml element nodes or xml property nodes.
     /*! This switch value is used in Ix_ConfigSection::GetString() and so on.\n

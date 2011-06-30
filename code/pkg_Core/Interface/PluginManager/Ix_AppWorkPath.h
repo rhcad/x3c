@@ -1,7 +1,7 @@
 /*! \file Ix_AppWorkPath.h
  *  \brief Define interface of getting applicaton's writtable path: Ix_AppWorkPath
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.02.07
+ *  \date   2011.06.30
  */
 #ifndef X3_MANAGER_IWORKPATH_H_
 #define X3_MANAGER_IWORKPATH_H_
@@ -15,10 +15,10 @@ X3CLSID_DEFINE(CLSID_AppWorkPath, "b2615355-772d-4195-94eb-59c31250a537");
  *  \brief interface of getting applicaton's writtable path.
  *  \see   x3::CLSID_AppWorkPath, GetAppWorkPath()
  */
-class Ix_AppWorkPath
+class Ix_AppWorkPath : public Ix_Object
 {
 public:
-    virtual ~Ix_AppWorkPath() {}
+    X3DEFINE_IID(Ix_AppWorkPath)
 
     //! Get applicaton's writtable absolute path.
     virtual std::wstring GetWorkPath() = 0;

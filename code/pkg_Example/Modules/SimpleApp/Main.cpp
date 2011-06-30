@@ -4,7 +4,7 @@
 // Include XComCreator.h in one and only one cpp file.
 #include <PluginManager/XComCreator.h>
 
-void Test();
+static void Test();
 
 #if defined(_MSC_VER) && defined(UNICODE)
 #define main wmain
@@ -44,7 +44,7 @@ void MyFunc2(const Cx_Ptr& obj)
     }
 }
 
-void Test()
+static void Test()
 {
     long value = 0;
 

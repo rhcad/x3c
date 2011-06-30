@@ -1,7 +1,7 @@
 /*! \file Ix_LogManager.h
  *  \brief Define interface of logging output observer manager: Ix_LogManager
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.06.30
  */
 #ifndef X3_LOG_ILOGMANAGER_H_
 #define X3_LOG_ILOGMANAGER_H_
@@ -29,10 +29,10 @@ X3CLSID_DEFINE(CLSID_LogManager, "bbf48a97-9aef-4368-9dc0-2d2937c326ec");
     \see x3::CLSID_LogManager, Ix_StringTable
     \see x3::RegisterLogObserver, UnRegisterObserver
 */
-class Ix_LogManager
+class Ix_LogManager : public Ix_Object
 {
 public:
-    virtual ~Ix_LogManager() {}
+    X3DEFINE_IID(Ix_LogManager)
 
     //! Add a logging output observer.
     virtual bool RegisterObserver(Ix_LogObserver* observer) = 0;

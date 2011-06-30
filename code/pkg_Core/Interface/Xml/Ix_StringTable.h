@@ -1,7 +1,7 @@
 /*! \file Ix_StringTable.h
  *  \brief Define the localization string table interface: Ix_StringTable
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.28
+ *  \date   2011.06.30
  */
 #ifndef X3_XML_ISTRINGTABLE_H_
 #define X3_XML_ISTRINGTABLE_H_
@@ -17,10 +17,10 @@ X3CLSID_DEFINE(CLSID_StringTable, "b8c36b29-59c3-4db2-be43-fd4982e6e71d");
     \ingroup _GROUP_PLUGIN_XML_
     \see x3::CLSID_StringTable
 */
-class Ix_StringTable
+class Ix_StringTable : public Ix_Object
 {
 public:
-    virtual ~Ix_StringTable() {}
+    X3DEFINE_IID(Ix_StringTable)
 
     //! Get the string value of the specified module and id name.
     /*!

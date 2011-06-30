@@ -1,7 +1,7 @@
 /*! \file Ix_TextFileUtil.h
  *  \brief 定义文本文件读写操作的接口 Ix_TextFileUtil
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.11.4
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ITEXTFILEUTIL_H_
 #define X3_UTIL_ITEXTFILEUTIL_H_
@@ -14,10 +14,10 @@
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_TextUtil, TextFileUtil(), Ix_StringConvert
 */
-class Ix_TextFileUtil
+class Ix_TextFileUtil : public Ix_Object
 {
 public:
-    virtual ~Ix_TextFileUtil() {}
+    X3DEFINE_IID(Ix_TextFileUtil)
 
     //! 读取一个文本文件
     /*!

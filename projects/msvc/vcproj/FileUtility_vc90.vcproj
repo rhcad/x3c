@@ -193,10 +193,6 @@
 				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Module.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Modules\FileUtility\Plugin.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"

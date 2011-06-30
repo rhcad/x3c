@@ -62,7 +62,6 @@
 			<Option compilerVar="WINDRES" />
 		</Unit>
 		<Unit filename="../../../code/pkg_Core/Modules/FileUtility/Module.cpp" />
-		<Unit filename="../../../code/pkg_Core/Modules/FileUtility/Plugin.cpp" />
 		<Unit filename="../../../code/pkg_Core/Modules/FileUtility/Version.rc2" />
 		<Extensions>
 			<code_completion />

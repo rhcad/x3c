@@ -1,7 +1,7 @@
 /*! \file Ix_GuidGenerator.h
  *  \brief 定义GUID生成器的接口 Ix_GuidGenerator
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IGUIDGENERATOR_H_
 #define X3_UTIL_IGUIDGENERATOR_H_
@@ -16,10 +16,10 @@ X3CLSID_DEFINE(CLSID_GuidGenerator, "8c14f0c5-7795-4ec3-b13a-982f653a700a");
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_GuidGenerator
 */
-class Ix_GuidGenerator
+class Ix_GuidGenerator : public Ix_Object
 {
 public:
-    virtual ~Ix_GuidGenerator() {}
+    X3DEFINE_IID(Ix_GuidGenerator)
 
     //! 生成新的GUID串
     virtual std::wstring CreateGuid(bool withBrackets = false) = 0;

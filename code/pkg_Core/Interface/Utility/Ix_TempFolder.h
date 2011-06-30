@@ -1,7 +1,7 @@
 /*! \file Ix_TempFolder.h
  *  \brief 定义临时目录操作的接口 Ix_TempFolder
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ITEMPFOLDER_H_
 #define X3_UTIL_ITEMPFOLDER_H_
@@ -16,10 +16,10 @@ X3CLSID_DEFINE(CLSID_TempFolder, "6d215195-061e-4c03-827d-8c692c293617");
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_TempFolder
 */
-class Ix_TempFolder
+class Ix_TempFolder : public Ix_Object
 {
 public:
-    virtual ~Ix_TempFolder() {}
+    X3DEFINE_IID(Ix_TempFolder)
 
     //! 设置根目录，影响后续所有新创建的对象
     /*!

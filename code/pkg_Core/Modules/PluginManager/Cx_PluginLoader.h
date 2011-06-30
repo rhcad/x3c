@@ -23,6 +23,13 @@ class Cx_PluginLoader
     , public Ix_PluginDelayLoad
     , public Ix_AppWorkPath
 {
+    X3BEGIN_CLASS_DECLARE(Cx_PluginLoader)
+        X3DEFINE_INTERFACE_ENTRY(Ix_PluginLoader)
+        X3DEFINE_INTERFACE_ENTRY(Ix_PluginLoader2)
+        X3DEFINE_INTERFACE_ENTRY(Ix_PluginDelayLoad)
+        X3DEFINE_INTERFACE_ENTRY(Ix_AppWorkPath)
+        X3USE_INTERFACE_ENTRY(Cx_ObjectFactory)
+    X3END_CLASS_DECLARE()
 public:
     Cx_PluginLoader();
     virtual ~Cx_PluginLoader();
@@ -52,6 +59,10 @@ public:
     //
     virtual void AddObserverPlugin(HMODULE hdll, const char* obtype);
     virtual void FireFirstEvent(const char* obtype);
+
+    // Ix_AppWorkPath, implemented in Cx_PluginLoaderOut.
+    virtual std::wstring GetWorkPath() { ASSERT(0); return L""; }
+    virtual void SetWorkPath(const std::wstring&) { ASSERT(0); }
 
 private:
     Cx_PluginLoader(const Cx_PluginLoader&);

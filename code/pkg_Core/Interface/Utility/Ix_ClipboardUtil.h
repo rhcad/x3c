@@ -1,7 +1,7 @@
 /*! \file Ix_ClipboardUtil.h
  *  \brief 剪贴板实用操作的接口 Ix_ClipboardUtil
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ICLIPBOARDUTIL_H_
 #define X3_UTIL_ICLIPBOARDUTIL_H_
@@ -16,10 +16,10 @@ X3CLSID_DEFINE(CLSID_ClipboardUtil, "fc957aed-3c48-461e-b9b8-6ff255f2e71d");
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_ClipboardUtil
 */
-class Ix_ClipboardUtil
+class Ix_ClipboardUtil : public Ix_Object
 {
 public:
-    virtual ~Ix_ClipboardUtil() {}
+    X3DEFINE_IID(Ix_ClipboardUtil)
 
     //! 将给定文本复制到剪贴板
     /*!

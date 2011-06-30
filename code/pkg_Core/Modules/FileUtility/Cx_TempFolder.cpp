@@ -6,6 +6,8 @@
 #include <Utility/Ix_FileUtility.h>
 #include <Utility/Ix_FileTransaction.h>
 
+extern bool DeletePathFile_(const wchar_t* filename, bool bRecycle, HWND hwnd);
+
 std::vector<std::wstring> Cx_TempFolder::c_arrToDel;
 
 Cx_TempFolder::Cx_TempFolder()
@@ -14,7 +16,12 @@ Cx_TempFolder::Cx_TempFolder()
 
 Cx_TempFolder::~Cx_TempFolder()
 {
-    DeleteFolder();
+    while (!c_arrToDel.empty())
+    {
+        std::wstring wstrPath(c_arrToDel.back());
+        c_arrToDel.pop_back();
+        DeletePathFile_(wstrPath.c_str(), false, NULL);
+    }
 }
 
 bool Cx_TempFolder::DeleteFolder()
@@ -32,16 +39,6 @@ bool Cx_TempFolder::DeleteFolder()
     }
 
     return bRet;
-}
-
-void Cx_TempFolder::DeleteFolders()
-{
-    while (!c_arrToDel.empty())
-    {
-        std::wstring wstrPath(c_arrToDel.back());
-        c_arrToDel.pop_back();
-        x3::FileUtility()->DeletePathFile(wstrPath.c_str());
-    }
 }
 
 void Cx_TempFolder::SetRootPath(const std::wstring& wstrPath)

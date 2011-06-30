@@ -1,7 +1,7 @@
 /*! \file Ix_FileVersion.h
  *  \brief 定义临时目录操作的接口 Ix_FileVersion
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.12.28
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IFILEVERSION_H_
 #define X3_UTIL_IFILEVERSION_H_
@@ -14,10 +14,10 @@
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_FileUtility, FileUtility()
 */
-class Ix_FileVersion
+class Ix_FileVersion : public Ix_Object
 {
 public:
-    virtual ~Ix_FileVersion() {}
+    X3DEFINE_IID(Ix_FileVersion)
 
     //! 获取模块的文件版本号
     /*!

@@ -1,7 +1,7 @@
 /*! \file Ix_FileUtility.h
  *  \brief 定义文件和目录的实用操作的接口 Ix_FileUtility
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IFILEUTILITY_H_
 #define X3_UTIL_IFILEUTILITY_H_
@@ -232,14 +232,14 @@ public:
     \see x3::CLSID_FileUtility
     \see x3::FileUtility()->xxx(), RelToAbs.h 文件实用函数
 */
-class Ix_FileUtility
-    : public Ix_FileUtility1
+class Ix_FileUtility : public Ix_Object
+    , public Ix_FileUtility1
     , public Ix_FileUtility2
     , public Ix_FileUtility3
     , public Ix_FileUtility4
 {
 public:
-    virtual ~Ix_FileUtility() {}
+    X3DEFINE_IID(Ix_FileUtility)
 };
 
 namespace x3 {

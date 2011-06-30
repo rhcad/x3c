@@ -7,19 +7,19 @@
 CFG=MFCExtTempl - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "MFCExtTempl.mak".
-!MESSAGE
+!MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "MFCExtTempl.mak" CFG="MFCExtTempl - Win32 Debug"
-!MESSAGE
+!MESSAGE 
 !MESSAGE Possible choices for configuration are:
-!MESSAGE
+!MESSAGE 
 !MESSAGE "MFCExtTempl - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "MFCExtTempl - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE
+!MESSAGE 
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\MFCExtTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /c
+# ADD CPP /nologo /MD /W4 /GR- /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG" /d "_UNICODE" /d "_AFXDLL"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\MFCExtTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR- /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG" /d "_UNICODE" /d "_AFXDLL"
@@ -67,7 +67,7 @@ LINK32=link.exe
 # ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/MFCExtTempl.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/MFCExtTempl.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/MFCExtTempl.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
-!ENDIF
+!ENDIF 
 
 # Begin Target
 
@@ -96,7 +96,6 @@ SOURCE=..\..\..\code\pkg_Example\Modules\MFCExtTempl\Cx_Example2.h
 
 SOURCE=..\..\..\code\pkg_Example\Modules\MFCExtTempl\Resource.h
 # End Source File
-
 # End Group
 # Begin Group "Source Files"
 
@@ -113,7 +112,6 @@ SOURCE=..\..\..\code\pkg_Example\Modules\MFCExtTempl\Module.cpp
 
 SOURCE=..\..\..\code\pkg_Example\Modules\MFCExtTempl\Plugin.cpp
 # End Source File
-
 # End Group
 # Begin Group "Resource Files"
 

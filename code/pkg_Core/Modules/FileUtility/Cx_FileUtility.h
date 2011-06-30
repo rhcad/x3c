@@ -11,11 +11,15 @@ class Cx_FileUtility
     : public Ix_FileUtility
     , public Ix_FileVersion
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_FileUtility)
+        X3DEFINE_INTERFACE_ENTRY(Ix_FileUtility)
+        X3DEFINE_INTERFACE_ENTRY(Ix_FileVersion)
+    X3END_CLASS_DECLARE()
+protected:
     Cx_FileUtility();
     virtual ~Cx_FileUtility() {}
 
-public:
+private:
     // From Ix_FileUtility
     virtual bool IsPathFileExists(const wchar_t* filename, bool bWrite = false);
     virtual bool IsPath(const wchar_t* filename, bool bCheckExists = false);

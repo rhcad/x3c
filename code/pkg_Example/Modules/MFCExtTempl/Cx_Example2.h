@@ -6,6 +6,10 @@ class Cx_Example2
     : public Ix_Example
     , public Ix_Example2
 {
+    X3BEGIN_CLASS_DECLARE(Cx_Example2)
+        X3DEFINE_INTERFACE_ENTRY(Ix_Example)
+        X3DEFINE_INTERFACE_ENTRY(Ix_Example2)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_Example2();
     virtual ~Cx_Example2();

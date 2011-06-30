@@ -1,25 +1,44 @@
 /*! \file Ix_Object.h
  *  \brief Define Ix_Object (the basic interface) and X3CLSID
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.6.30
  */
 #ifndef X3_CORE_IOBJECT_H_
 #define X3_CORE_IOBJECT_H_
+
+//! interface id of a class.
+//! \see X3DEFINE_IID
+typedef long X3IID;
 
 /*! \interface Ix_Object
  *  \ingroup _GROUP_PLUGIN_CORE2_
  *  \brief The basic interface that all X3 class can support it.
  *  \note  DO NOT call it's function directly.\n You can use Cx_Interface or Cx_Ptr instead of using it.
  *  \see autoptr class: Cx_Ptr, Cx_Interface
+ *  \see X3DEFINE_IID, X3END_CLASS_DECLARE
  */
 class Ix_Object
 {
 public:
+    virtual void test() = 0;
     virtual ~Ix_Object() {}
-    virtual void AddRef(HMODULE fromdll) = 0;
-    virtual void Release(HMODULE fromdll) = 0;
+    virtual long AddRef(HMODULE fromdll) = 0;
+    virtual long Release(HMODULE fromdll) = 0;
+    virtual bool QueryInterface(X3IID iid, Ix_Object** ppv, HMODULE fromdll) = 0;
     virtual const char* GetClassName() const = 0;
 };
+
+namespace x3 {
+
+inline long hashkey(const char* str)
+{
+	long value = 0;
+    while (*str)
+		value = (value<<5) + value + *str++;
+	return value;
+}
+
+} // x3
 
 //! class unique id
 /*! \ingroup _GROUP_PLUGIN_CORE_
@@ -94,5 +113,24 @@ private:
 #define X3CLSID_DEFINE(clsid, str)  \
     namespace x3 { static const X3CLSID clsid(str); }  \
     typedef int dumy_ ## clsid
+
+//! Declare GetIID() in a interface derived from Ix_Object.
+/*!
+	\ingroup _GROUP_PLUGIN_CORE_
+	\param _Interface interface name.
+    \code
+    class Ix_Example : public Ix_Object
+    {
+    public:
+        X3DEFINE_IID(Ix_Example)
+        virtual void foo() = 0;
+    };
+    \endcode
+    \see X3END_CLASS_DECLARE
+*/
+#define X3DEFINE_IID(_Interface) \
+    virtual ~_Interface() {}     \
+    virtual void test() {}      \
+    static X3IID GetIID() { static X3IID id = x3::hashkey(#_Interface); return id; }
 
 #endif // X3_CORE_IOBJECT_H_

@@ -1,14 +1,13 @@
 /*! \file Cx_SingletonObject.h
  *  \brief Define single instance implement template class: Cx_SingletonObject<cls>
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.06.30
  */
 #ifndef X3_CX_SINGLETONOBJECT_H_
 #define X3_CX_SINGLETONOBJECT_H_
 
 #include "Ix_Object.h"
 #include "XModuleItem.h"
-#include <typeinfo>
 
 HMODULE x3GetModuleHandle();
 
@@ -21,7 +20,6 @@ HMODULE x3GetModuleHandle();
 template <class ClsType>
 class Cx_SingletonObject
     : public ClsType
-    , public Ix_Object
     , public Cx_ModuleItem
 {
 protected:
@@ -38,31 +36,36 @@ protected:
     }
 
 protected:
-    virtual void AddRef(HMODULE fromdll)
+    virtual long AddRef(HMODULE fromdll)
     {
         if (fromdll != x3GetModuleHandle())
         {
             InterlockedIncrement(&RefCountByOthers());
         }
-        InterlockedIncrement(&m_refcount);
+        return InterlockedIncrement(&m_refcount);
     }
 
-    virtual void Release(HMODULE fromdll)
+    virtual long Release(HMODULE fromdll)
     {
         if (fromdll != x3GetModuleHandle())
         {
             InterlockedDecrement(&RefCountByOthers());
         }
-        InterlockedDecrement(&m_refcount);
+        return InterlockedDecrement(&m_refcount);
+    }
+
+    virtual bool QueryInterface(X3IID iid, Ix_Object** ppv, HMODULE fromdll)
+    {
+        return ClsType::DoQueryInterface(this, iid, ppv, fromdll);
     }
 
     virtual const char* GetClassName() const
     {
-        return typeid(*this).name();
+        return ClsType::DoGetClassName();
     }
 
 public:
-    static Ix_Object* CreateObject(HMODULE fromdll)
+    static Ix_Object* CreateObject(X3IID iid, HMODULE fromdll)
     {
         if (NULL == Instance())
         {
@@ -81,7 +84,10 @@ public:
             InterlockedDecrement(&Locker());
         }
 
-        return Instance();
+        Ix_Object* ret = NULL;
+        Instance()->QueryInterface(iid, &ret, fromdll);
+
+        return ret;
     }
 
     static long GetObjectCount()

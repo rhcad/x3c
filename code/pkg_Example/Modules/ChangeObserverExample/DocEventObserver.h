@@ -5,7 +5,6 @@
 #define EXAMPLE_DOCEVENT_OBSERVER_H_
 
 #include <ChangeObserver/Cx_ChangeObserver.h>
-#include <typeinfo>
 
 //! 文档事件类型
 enum kDocEventType
@@ -30,7 +29,7 @@ public:
         NOCOPY_CONSTRUCTOR(Data);
     public:
         Data(kDocEventType _event)
-            : ChangeNotifyData(typeid(DocEventObserver).name()), event(_event)
+            : ChangeNotifyData("DocEventObserver"), event(_event)
         {
         }
 
@@ -38,7 +37,7 @@ public:
     };
 
 protected:
-    DocEventObserver() : Cx_ChangeObserver(typeid(DocEventObserver).name())
+    DocEventObserver() : Cx_ChangeObserver("DocEventObserver")
     {
     }
 
@@ -54,8 +53,7 @@ protected:
 private:
     void DoUpdate(ChangeNotifyData* data)
     {
-        Data* mydata = dynamic_cast<Data*>(data);
-        ASSERT(mydata);
+        Data* mydata = static_cast<Data*>(data);
 
         switch (mydata->event)
         {

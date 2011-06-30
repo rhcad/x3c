@@ -8,6 +8,9 @@
 
 class Cx_StringTable : public Ix_StringTable
 {
+    X3BEGIN_CLASS_DECLARE(Cx_StringTable)
+        X3DEFINE_INTERFACE_ENTRY(Ix_StringTable)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_StringTable();
     ~Cx_StringTable();

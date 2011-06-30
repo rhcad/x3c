@@ -5,12 +5,12 @@
 // 2011-02-18: Not call CoUninitialize if another plugin (eg. StringTable) is using this plugin.
 // 2011-02-24: Check NULL string in Cx_ConfigXml::GetSection().
 // 2011-05-12: Output error info when saving file.
+// 2011.06.30: Remove RTTI.
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_ConfigXml.h"
 #include "Cx_XmlSection.h"
 #include "ConfigXmlImpl.h"
-#include <Module/Cx_SimpleObject.h>
 #include <Xml/IFileCryptHandler.h>
 #include <math.h>
 
@@ -137,7 +137,7 @@ XMLDOMElementPtr ConfigXmlImpl::GetParentNode(Ix_ConfigSection* parent,
     XMLDOMElementPtr xmlParent = GetRoot();
     if (parent)
     {
-        Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(parent);
+        Cx_XmlSection* p = static_cast<Cx_XmlSection*>(parent);
         ASSERT_MESSAGE(p != NULL, "type mismatch: Ix_ConfigSection");
 
         xmlParent = p->m_xmlNode;
@@ -307,7 +307,7 @@ bool Cx_ConfigXml::GetXmlContent(std::wstring& content,
 
     if (node)
     {
-        Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(node);
+        Cx_XmlSection* p = static_cast<Cx_XmlSection*>(node);
         ASSERT_MESSAGE(p != NULL, "type mismatch: Ix_ConfigSection");
 
         content = CXmlUtil::GetNodeXMLString(p->m_xmlNode);
@@ -397,8 +397,9 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
 
 Cx_Section Cx_ConfigXml::GetSection(const wchar_t* name, bool autoCreate)
 {
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_XmlSection* pIFCfg = Cx_SimpleObject<Cx_XmlSection>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
+    Cx_XmlSection* pIFCfg = static_cast<Cx_XmlSection*>(pIFRet.P());
+    ASSERT(pIFCfg != NULL);
 
     std::wstring strName (name ? name : L"");
     pIFCfg->m_pData = m_pImpl;
@@ -485,8 +486,9 @@ Cx_Section Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
         }
     }
 
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_XmlSection* pIFCfg = Cx_SimpleObject<Cx_XmlSection>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
+    Cx_XmlSection* pIFCfg = static_cast<Cx_XmlSection*>(pIFRet.P());
+    ASSERT(pIFCfg != NULL);
 
     pIFCfg->m_pData = m_pImpl;
     pIFCfg->m_xmlParent = xmlParent;
@@ -507,8 +509,9 @@ Cx_Section Cx_ConfigXml::GetSectionByIndex(
     Ix_ConfigSection* parent, const wchar_t* name, long index)
 {
     std::wstring strName (name ? name : L"");
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_XmlSection* pIFCfg = Cx_SimpleObject<Cx_XmlSection>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
+    Cx_XmlSection* pIFCfg = static_cast<Cx_XmlSection*>(pIFRet.P());
+    ASSERT(pIFCfg != NULL);
 
     pIFCfg->m_pData = m_pImpl;
     pIFCfg->m_xmlParent = m_pImpl->GetParentNode(parent, strName);
@@ -521,8 +524,9 @@ Cx_Section Cx_ConfigXml::GetSectionByIndex(
 Cx_Section Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
 {
     std::wstring strName(L"");
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_XmlSection* pIFCfg = Cx_SimpleObject<Cx_XmlSection>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
+    Cx_XmlSection* pIFCfg = static_cast<Cx_XmlSection*>(pIFRet.P());
+    ASSERT(pIFCfg != NULL);
 
     pIFCfg->m_pData = m_pImpl;
     pIFCfg->m_xmlNode = m_pImpl->GetParentNode(sec, strName);
@@ -543,8 +547,9 @@ Cx_Section Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
                                     const wchar_t* name)
 {
     std::wstring strName (name ? name : L"");
-    Cx_Interface<Ix_ConfigSection> pIFRet;
-    Cx_XmlSection* pIFCfg = Cx_SimpleObject<Cx_XmlSection>::Create(pIFRet);
+    Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
+    Cx_XmlSection* pIFCfg = static_cast<Cx_XmlSection*>(pIFRet.P());
+    ASSERT(pIFCfg != NULL);
 
     pIFCfg->m_pData = m_pImpl;
     pIFCfg->m_xmlParent = m_pImpl->GetParentNode(parent, strName);
@@ -568,7 +573,7 @@ bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)
 
     if (sec != NULL)
     {
-        Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(sec);
+        Cx_XmlSection* p = static_cast<Cx_XmlSection*>(sec);
         ASSERT_MESSAGE(p != NULL, "type mismatch: Ix_ConfigSection");
 
         if (CXmlUtil::DelChild(p->m_xmlParent, p->m_xmlNode))
@@ -600,7 +605,7 @@ long Cx_ConfigXml::RemoveChildren(Ix_ConfigSection* parent,
 
     if (parent && name)
     {
-        Cx_XmlSection* p = dynamic_cast<Cx_XmlSection*>(parent);
+        Cx_XmlSection* p = static_cast<Cx_XmlSection*>(parent);
         ASSERT_MESSAGE(p != NULL, "type mismatch: Ix_ConfigSection");
 
         count = CXmlUtil::DelChildren(p->m_xmlNode,

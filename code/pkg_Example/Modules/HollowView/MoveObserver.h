@@ -2,7 +2,6 @@
 #define EXAMPLE_MOVE_OBSERVER_H_
 
 #include <ChangeObserver/Cx_ChangeObserver.h>
-#include <typeinfo>
 
 class MoveObserver : public Cx_ChangeObserver
 {
@@ -13,7 +12,7 @@ public:
         NOCOPY_CONSTRUCTOR(Data);
     public:
         Data(long _x, long _y, MoveObserver* _sender)
-            : ChangeNotifyData(typeid(MoveObserver).name())
+            : ChangeNotifyData("MoveObserver")
             , x(_x), y(_y), sender(_sender)
         {
         }
@@ -24,7 +23,7 @@ public:
     };
 
 protected:
-    MoveObserver() : Cx_ChangeObserver(typeid(MoveObserver).name())
+    MoveObserver() : Cx_ChangeObserver("MoveObserver")
     {
     }
 
@@ -36,7 +35,7 @@ protected:
 private:
     void DoUpdate(ChangeNotifyData* data)
     {
-        Data* mydata = dynamic_cast<Data*>(data);
+        Data* mydata = static_cast<Data*>(data);
         ASSERT(mydata);
         OnMove(mydata->x, mydata->y, mydata->sender);
     }

@@ -1,7 +1,7 @@
 /*! \file Ix_StringConvert.h
  *  \brief 定义文本转换实用操作的接口 Ix_StringConvert
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.12.28
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ISTRINGCONVERT_H_
 #define X3_UTIL_ISTRINGCONVERT_H_
@@ -14,10 +14,10 @@
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_TextUtil, StringConvert(), Ix_TextFileUtil, ConvStr.h
 */
-class Ix_StringConvert
+class Ix_StringConvert : public Ix_Object
 {
 public:
-    virtual ~Ix_StringConvert() {}
+    X3DEFINE_IID(Ix_StringConvert)
 
     //! 去掉文字两端的空白字符（半角空格、全角空格、换行符）
     /*!

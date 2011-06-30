@@ -15,11 +15,16 @@ class Cx_ConfigXml
     , public Ix_ConfigXml
     , public Ix_ConfigTransaction
 {
+    X3BEGIN_CLASS_DECLARE(Cx_ConfigXml)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigData)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigXml)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigTransaction)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_ConfigXml();
     virtual ~Cx_ConfigXml();
 
-protected:
+private:
     // From Ix_ConfigXml
     //
     virtual Ix_ConfigData* GetData();

@@ -1,7 +1,7 @@
 /*! \file   XClassItem.h
  *  \brief  Internal used definitions of class factory.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.06.30
  */
 #ifndef X3_PLUGINIMPL_CLASSITEM_H_
 #define X3_PLUGINIMPL_CLASSITEM_H_
@@ -9,7 +9,7 @@
 #include "Ix_Object.h"
 
 //! class factory function.
-typedef Ix_Object* (*PFNXObjectCreator)(HMODULE);
+typedef Ix_Object* (*PFNXObjectCreator)(X3IID, HMODULE);
 
 //! object count of a class.
 typedef long (*PFNXGetObjectCount)();

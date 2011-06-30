@@ -99,7 +99,7 @@ private:
 #ifdef _USRDLL
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
-        RawCmdMsgEventData* mydata = dynamic_cast<RawCmdMsgEventData*>(data);
+        RawCmdMsgEventData* mydata = static_cast<RawCmdMsgEventData*>(data);
 #ifdef ASSERT
         ASSERT(mydata);
 #endif

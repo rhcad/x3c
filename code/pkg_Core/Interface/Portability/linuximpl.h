@@ -113,7 +113,7 @@ HMODULE GetModuleHandleW(const wchar_t* filename)
         }
     }
 
-    Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
+    Cx_Interface<Ix_PluginLoader2> factory(x3GetObjectFactory());
 
     if (factory)
     {
@@ -170,7 +170,7 @@ void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size)
             wcscpy_s(filename, size, x3::a2w(it->second).c_str());
         }
 
-        Ix_PluginLoader2* factory = dynamic_cast<Ix_PluginLoader2*>(x3GetObjectFactory());
+        Cx_Interface<Ix_PluginLoader2> factory(x3GetObjectFactory());
 
         if (factory && 0 == filename[0])
         {

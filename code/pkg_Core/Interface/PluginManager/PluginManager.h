@@ -1,13 +1,14 @@
 /*! \file PluginManager.h
  *  \brief Define plugin manager wrapper class
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.28
+ *  \date   2011.06.30
  */
 #ifndef X3_MANAGER_PLUGINMANAGER_H_
 #define X3_MANAGER_PLUGINMANAGER_H_
 
 #include "Ix_ObjectFactory.h"
 #include "Ix_PluginLoader.h"
+#include "XComPtr.h"
 
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \brief Plugin manager wrapper class
@@ -127,7 +128,8 @@ public:
     //! Return the plugin loading object.
     Ix_PluginLoader* GetPluginLoader()
     {
-        return dynamic_cast<Ix_PluginLoader*>(GetObjectFactory());
+        Cx_Interface<Ix_PluginLoader> factory(GetObjectFactory());
+        return factory.P();
     }
 
     static HMODULE& Handle()

@@ -1,7 +1,7 @@
 /*! \file Ix_FileTransaction.h
  *  \brief 定义文件事务实用操作的接口 Ix_FileTransaction
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IFILETRANSACTION_H_
 #define X3_UTIL_IFILETRANSACTION_H_
@@ -16,10 +16,10 @@ X3CLSID_DEFINE(CLSID_FileTransaction, "66087749-6a2d-40b7-86d9-687664f91e1b");
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_FileTransaction
 */
-class Ix_FileTransaction
+class Ix_FileTransaction : public Ix_Object
 {
 public:
-    virtual ~Ix_FileTransaction() {}
+    X3DEFINE_IID(Ix_FileTransaction)
 
     //! 从挂起状态回滚事务
     virtual void Rollback() = 0;

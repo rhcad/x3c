@@ -1,7 +1,7 @@
 /*! \file Cx_CreateWnd.h
  *  \brief Define template class (Cx_CreateWnd) to implement Ix_CreateWnd.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.28
+ *  \date   2011.6.30
  */
 #ifndef X3_VIEW_CREATEWND_IMPL_H_
 #define X3_VIEW_CREATEWND_IMPL_H_
@@ -39,6 +39,9 @@
 template <class BASEWND>
 class Cx_CreateWnd : public Ix_CreateWnd
 {
+    X3BEGIN_CLASS_DECLARE(Cx_CreateWnd)
+        X3DEFINE_INTERFACE_ENTRY(Ix_CreateWnd)
+    X3END_CLASS_DECLARE()
 public:
     typedef Cx_CreateWnd<BASEWND> Cx_BaseWnd;
 

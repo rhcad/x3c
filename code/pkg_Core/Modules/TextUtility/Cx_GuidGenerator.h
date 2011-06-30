@@ -8,11 +8,14 @@
 
 class Cx_GuidGenerator : public Ix_GuidGenerator
 {
-public:
+    X3BEGIN_CLASS_DECLARE(Cx_GuidGenerator)
+        X3DEFINE_INTERFACE_ENTRY(Ix_GuidGenerator)
+    X3END_CLASS_DECLARE()
+protected:
     Cx_GuidGenerator() {}
     virtual ~Cx_GuidGenerator() {}
 
-public:
+private:
     // From Ix_GuidGenerator
     virtual std::wstring CreateGuid(bool withBrackets = false);
     virtual std::wstring RemoveGuidBrackets(const std::wstring& uid);

@@ -15,10 +15,10 @@ X3CLSID_DEFINE(CLSID_PluginDelayLoad, "8f2a7b90-8134-4e16-9830-861df9b7f42a");
  *  \brief Plugin delay-loading interface.
  *  \see   x3::CLSID_PluginDelayLoad
  */
-class Ix_PluginDelayLoad
+class Ix_PluginDelayLoad : public Ix_Object
 {
 public:
-    virtual ~Ix_PluginDelayLoad() {}
+    X3DEFINE_IID(Ix_PluginDelayLoad)
 
     //! Register a plugin as observer owner.
     virtual void AddObserverPlugin(HMODULE hdll, const char* obtype) = 0;

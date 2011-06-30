@@ -39,7 +39,7 @@ static void ReplaceSlash(wchar_t* path)
     }
 }
 
-bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
+static bool IsPathFileExists_(const wchar_t* filename, bool bWrite)
 {
     if (!IsNotNull(filename))
         return false;
@@ -50,7 +50,12 @@ bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
 #endif
 }
 
-bool Cx_FileUtility::IsPath(const wchar_t* filename, bool bCheckExists)
+bool Cx_FileUtility::IsPathFileExists(const wchar_t* filename, bool bWrite)
+{
+    return IsPathFileExists_(filename, bWrite);
+}
+
+static bool IsPath_(const wchar_t* filename, bool bCheckExists)
 {
     if (IsNotNull(filename))
     {
@@ -67,6 +72,11 @@ bool Cx_FileUtility::IsPath(const wchar_t* filename, bool bCheckExists)
     }
 
     return false;
+}
+
+bool Cx_FileUtility::IsPath(const wchar_t* filename, bool bCheckExists)
+{
+    return IsPath_(filename, bCheckExists);
 }
 
 Cx_FileUtility::Cx_FileUtility()
@@ -160,14 +170,14 @@ bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* filename)
     return true;
 }
 
-bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
+bool DeletePathFile_(const wchar_t* filename, bool bRecycle, HWND hwnd)
 {
     if (!IsNotNull(filename))
     {
         return true;
     }
     ASSERT(!PathIsRelativeW(filename));
-    if (!IsPathFileExists(filename))
+    if (!IsPathFileExists_(filename, false))
     {
         return true;
     }
@@ -181,7 +191,7 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
 #ifdef _WIN32
     SHFILEOPSTRUCTW op;
     memset(&op, 0, sizeof(op));
-    op.hwnd = m_hMsgBoxOwnerWnd;
+    op.hwnd = hwnd;
     op.wFunc = FO_DELETE;
     op.pFrom = szFile;
     op.pTo = NULL;
@@ -190,7 +200,7 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
     {
         op.fFlags |= FOF_ALLOWUNDO;
     }
-    if (NULL == m_hMsgBoxOwnerWnd)
+    if (NULL == hwnd)
     {
         op.fFlags |= FOF_NOERRORUI | FOF_SILENT;
     }
@@ -201,7 +211,7 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
         std::wostringstream buf;
         buf << GetSystemErrorString(s_nFileOpRet) << L", " << filename;
 
-        if (IsPath(filename, true))
+        if (IsPath_(filename, true))
         {
             X3LOG_WARNING2(L"@FileUtility:IDS_DELFOLDER_FAIL", buf.str());
         }
@@ -215,6 +225,11 @@ bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
 #endif
 
     return true;
+}
+
+bool Cx_FileUtility::DeletePathFile(const wchar_t* filename, bool bRecycle)
+{
+    return DeletePathFile_(filename, bRecycle, m_hMsgBoxOwnerWnd);
 }
 
 bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,

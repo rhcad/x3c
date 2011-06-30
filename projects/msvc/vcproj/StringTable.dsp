@@ -7,19 +7,19 @@
 CFG=StringTable - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "StringTable.mak".
-!MESSAGE
+!MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "StringTable.mak" CFG="StringTable - Win32 Debug"
-!MESSAGE
+!MESSAGE 
 !MESSAGE Possible choices for configuration are:
-!MESSAGE
+!MESSAGE 
 !MESSAGE "StringTable - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "StringTable - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE
+!MESSAGE 
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\StringTable"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
+# ADD CPP /nologo /MD /W4 /GR- /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\StringTable"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR- /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -67,7 +67,7 @@ LINK32=link.exe
 # ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/StringTable.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/StringTable.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/StringTable.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
-!ENDIF
+!ENDIF 
 
 # Begin Target
 
@@ -88,7 +88,6 @@ SOURCE=..\..\..\code\pkg_Core\Interface\Xml\Ix_StringTable.h
 
 SOURCE=..\..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.h
 # End Source File
-
 # End Group
 # Begin Group "Source Files"
 
@@ -101,7 +100,6 @@ SOURCE=..\..\..\code\pkg_Core\Modules\StringTable\Cx_StringTable.cpp
 
 SOURCE=..\..\..\code\pkg_Core\Modules\StringTable\Module.cpp
 # End Source File
-
 # End Group
 # Begin Group "Resource Files"
 

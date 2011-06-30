@@ -4,6 +4,7 @@
 // author: Zhang Yun Gui
 // v2, 2011.1.5: Change to hash_multimap
 // v3, 2011.2.8: Support delay-load feature for observer plugins.
+// v4, 2011.06.30: Remove RTTI.
 
 #ifndef _X3_CORE_CHANGEMANAGER_H
 #define _X3_CORE_CHANGEMANAGER_H
@@ -33,11 +34,14 @@
 
 class Cx_ChangeManager : public Ix_ChangeManager
 {
+    X3BEGIN_CLASS_DECLARE(Cx_ChangeManager)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ChangeManager)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_ChangeManager();
     virtual ~Cx_ChangeManager();
 
-protected:
+private:
     virtual void RegisterObserver(const char* type, 
         Ix_ChangeObserver* observer, HMODULE fromdll = NULL);
     virtual void UnRegisterObserver(const char* type, Ix_ChangeObserver* observer);

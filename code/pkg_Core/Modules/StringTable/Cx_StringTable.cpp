@@ -145,6 +145,7 @@ long Cx_StringTable::RegisterFile(const std::wstring& filename)
         item.file = pIFFile->GetData();
         item.group = sec;
         item.module = sec->GetString(L"name");
+        ASSERT(item.group && item.file);
 
         if (item.module.empty())
             break;

@@ -5,7 +5,6 @@
 #define EXAMPLE_NODESELECTION_OBSERVER_H_
 
 #include <ChangeObserver/Cx_ChangeObserver.h>
-#include <typeinfo>
 
 //! 作为例子的节点选择改变观察者类
 /*! 本例子用于让派生类都响应节点变化，并可避免连锁循环变化
@@ -22,7 +21,7 @@ public:
         NOCOPY_CONSTRUCTOR(Data);
     public:
         Data(long _objid, NodeSelectionObserver* _sender)
-            : ChangeNotifyData(typeid(NodeSelectionObserver).name())
+            : ChangeNotifyData("NodeSelectionObserver")
             , objid(_objid), sender(_sender)
         {
         }
@@ -32,7 +31,7 @@ public:
     };
 
 protected:
-    NodeSelectionObserver() : Cx_ChangeObserver(typeid(NodeSelectionObserver).name())
+    NodeSelectionObserver() : Cx_ChangeObserver("NodeSelectionObserver")
     {
     }
 
@@ -45,8 +44,7 @@ protected:
 private:
     void DoUpdate(ChangeNotifyData* data)
     {
-        Data* mydata = dynamic_cast<Data*>(data);
-        ASSERT(mydata);
+        Data* mydata = static_cast<Data*>(data);
         OnNodeSelection(mydata->objid, mydata->sender);
     }
 };

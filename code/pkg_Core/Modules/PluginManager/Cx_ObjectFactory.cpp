@@ -31,6 +31,7 @@ bool Cx_ObjectFactory::IsCreatorRegister(const X3CLSID& clsid)
 }
 
 int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
+                                   X3IID iid,
                                    Ix_Object** ppv,
                                    HMODULE fromdll)
 {
@@ -56,14 +57,10 @@ int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
 
     if (pEntry && pEntry->pfnObjectCreator)
     {
-        *ppv = pEntry->pfnObjectCreator(fromdll);
-        ASSERT(*ppv);
-        return 0;
+        *ppv = pEntry->pfnObjectCreator(iid, fromdll);
     }
-    else
-    {
-        return 3;
-    }
+
+    return *ppv ? 0 : 3;
 }
 
 X3CLASSENTRY* Cx_ObjectFactory::FindEntry(const X3CLSID& clsid,
@@ -170,12 +167,14 @@ bool Cx_ObjectFactory::RegisterClass(int moduleIndex,
 
     if (pOldCls && pOldCls->pfnObjectCreator)
     {
+#ifdef OutputDebugString
         char msg[256] = { 0 };
         sprintf_s(msg, 256,
             "The classid '%s' is already registered by '%s', "
-            "then '%s' register fail.",
+            "then '%s' register fail.\n",
             cls.clsid.str(), pOldCls->className, cls.className);
-        ASSERT_MESSAGE(false, msg);
+        OutputDebugStringA(msg);
+#endif
         return false;
     }
 

@@ -1,7 +1,7 @@
 /*! \file PluginInc.h
  *  \brief Include frequently-used files for plugin project.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.5.18
+ *  \date   2011.06.30
  */
 #ifndef X3PLUGIN_INC_H
 #define X3PLUGIN_INC_H
@@ -19,6 +19,9 @@
 #endif
 #ifndef NO_LOGHELPER
 #include <Log/LogHelper.h>      // X3LOG_WARNING, X3LogGroup ...
+#endif
+#ifndef NO_CLASSMACRO
+#include <Module/XClassMacro.h> // X3BEGIN_CLASS_DECLARE
 #endif
 
 #endif // X3PLUGIN_INC_H

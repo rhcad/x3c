@@ -38,13 +38,16 @@
 class Cx_ObjectFactory
     : public Ix_ObjectFactory
 {
+    X3BEGIN_CLASS_DECLARE(Cx_ObjectFactory)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ObjectFactory)
+    X3END_CLASS_DECLARE()
 public:
     Cx_ObjectFactory();
     virtual ~Cx_ObjectFactory();
 
 public:
     virtual bool IsCreatorRegister(const X3CLSID& clsid);
-    virtual int CreateObject(const X3CLSID& clsid, Ix_Object** ppv, HMODULE fromdll);
+    virtual int CreateObject(const X3CLSID& clsid, X3IID iid, Ix_Object** ppv, HMODULE fromdll);
 
 protected:
     typedef std::vector<X3CLSID>         CLSIDS;

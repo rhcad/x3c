@@ -1,7 +1,7 @@
 /*! \file Ix_ConfigTransaction.h
  *  \brief Define configure transaction helper class: Cx_ConfigTransaction
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.22
+ *  \date   2011.06.30
  */
 #ifndef X3_XML_CONFIGTRANSACTION_H_
 #define X3_XML_CONFIGTRANSACTION_H_
@@ -13,10 +13,10 @@
     \see Cx_ConfigTransaction
     \see Ix_ConfigSection, Ix_ConfigData
 */
-class Ix_ConfigTransaction
+class Ix_ConfigTransaction : public Ix_Object
 {
 public:
-    virtual ~Ix_ConfigTransaction() {}
+    X3DEFINE_IID(Ix_ConfigTransaction)
 
     //! Begin to change configure data.
     virtual void BeginTransaction() = 0;

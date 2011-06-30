@@ -7,19 +7,19 @@
 CFG=TestUtility - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "TestUtility.mak".
-!MESSAGE
+!MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "TestUtility.mak" CFG="TestUtility - Win32 Debug"
-!MESSAGE
+!MESSAGE 
 !MESSAGE Possible choices for configuration are:
-!MESSAGE
+!MESSAGE 
 !MESSAGE "TestUtility - Win32 Release" (based on "Win32 (x86) Console Application")
 !MESSAGE "TestUtility - Win32 Debug" (based on "Win32 (x86) Console Application")
-!MESSAGE
+!MESSAGE 
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -42,7 +42,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FD /c
-# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Utility\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /FD /c
+# ADD CPP /nologo /MD /W4 /GR- /GX /O2 /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Utility\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /FD /c
 # ADD BASE RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
 # ADD RSC /l 0x804 /d "NDEBUG" /d "_AFXDLL"
 BSC32=bscmake.exe
@@ -67,7 +67,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FD /GZ /c
-# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Utility\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR- /GX /ZI /Od /I "..\..\..\code\pkg_UnitTest\Modules\Public" /I "..\..\..\code\pkg_UnitTest\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Utility\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_UNICODE" /FD /GZ /c
 # ADD BASE RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
 # ADD RSC /l 0x804 /d "_DEBUG" /d "_AFXDLL"
 BSC32=bscmake.exe
@@ -78,7 +78,7 @@ LINK32=link.exe
 # ADD LINK32 cppunitd_dll.lib TestRunnerud.lib ole32.lib /nologo /entry:"wWinMainCRTStartup" /subsystem:console /pdb:"..\..\..\obj\vc60\Debug\Symbols/TestUtility.pdb" /debug /machine:I386 /pdbtype:sept /libpath:"..\..\..\code\bin\vc60\Debug\UnitTests"
 # SUBTRACT LINK32 /pdb:none
 
-!ENDIF
+!ENDIF 
 
 # Begin Target
 

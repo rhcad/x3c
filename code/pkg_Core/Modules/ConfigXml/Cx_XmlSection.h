@@ -16,11 +16,18 @@
 
 struct ConfigXmlImpl;
 
+const X3CLSID CLSID_XmlSection("2f1732f8-6402-4a46-9cd6-64a137ee2032");
+
 class Cx_XmlSection
     : public Ix_ConfigSection
     , public Ix_ConfigSectionXml
     , public Ix_ConfigTransaction
 {
+    X3BEGIN_CLASS_DECLARE(Cx_XmlSection)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigSection)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigSectionXml)
+        X3DEFINE_INTERFACE_ENTRY(Ix_ConfigTransaction)
+    X3END_CLASS_DECLARE()
 protected:
     Cx_XmlSection();
     virtual ~Cx_XmlSection();
@@ -31,7 +38,7 @@ public:
     XMLDOMElementPtr    m_xmlNode;
     bool                m_bSubElement;
 
-protected:
+private:
     // From Ix_ConfigSectionXml
     //
     virtual void UseSubElement(bool element);
