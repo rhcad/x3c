@@ -14,7 +14,7 @@ X3CLSID_DEFINE(CLSID_UIConfig, "4472ba6d-d833-40b9-899f-edc017ec9166");
 /*!
     \interface Ix_UIConfig
     \ingroup _GROUP_APPUI_
-    \see CLSID_UIConfig
+    \see x3::CLSID_UIConfig
 */
 class Ix_UIConfig
 {

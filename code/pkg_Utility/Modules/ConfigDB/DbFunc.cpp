@@ -123,7 +123,7 @@ bool DbFunc::GetDate(COleDateTime& dt, const _variant_t &v)
     else if (VT_BSTR == v.vt)
     {
         int nums[3];
-        if (ReadInts(v.bstrVal, nums, 3) == 3)
+        if (x3::ReadInts(v.bstrVal, nums, 3) == 3)
         {
             dt.SetDate(nums[0], nums[1], nums[2]);
             bRet = (dt.GetStatus() == dt.valid);
@@ -145,7 +145,7 @@ bool DbFunc::GetDateTime(COleDateTime& dt, const _variant_t &v)
     else if (VT_BSTR == v.vt)
     {
         int nums[6] = { 0, 0, 0, 0, 0, 0 };
-        if (ReadInts(v.bstrVal, nums, 6) >= 3)
+        if (x3::ReadInts(v.bstrVal, nums, 6) >= 3)
         {
             dt.SetDateTime(nums[0], nums[1], nums[2], nums[3], nums[4], nums[5]);
             bRet = (dt.GetYear() >= 1980);

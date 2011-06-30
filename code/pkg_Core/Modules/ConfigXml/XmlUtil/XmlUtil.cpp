@@ -57,7 +57,7 @@ public:
 
 std::wstring CXmlUtil::GetLastErrorResult()
 {
-    return GetSystemErrorString(s_hr);
+    return x3::GetSystemErrorString(s_hr);
 }
 
 bool CXmlUtil::NewXMLFile(XMLDOMDocumentPtr& doc,

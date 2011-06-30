@@ -33,7 +33,7 @@ DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
-            GetSystemErrorString(err) << L", " << filename);
+            x3::GetSystemErrorString(err) << L", " << filename);
     }
 
     return dwBytesRead;
@@ -133,7 +133,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
-            GetSystemErrorString(err) << L", " << filename);
+            x3::GetSystemErrorString(err) << L", " << filename);
     }
     else
     {
@@ -194,7 +194,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
-            GetSystemErrorString(err) << L", " << filename);
+            x3::GetSystemErrorString(err) << L", " << filename);
     }
     else
     {
@@ -237,7 +237,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
-            GetSystemErrorString(err) << L", " << filename);
+            x3::GetSystemErrorString(err) << L", " << filename);
     }
     else
     {

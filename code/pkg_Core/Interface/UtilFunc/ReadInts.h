@@ -6,6 +6,8 @@
 #ifndef UTILFUNC_READINTS_H_
 #define UTILFUNC_READINTS_H_
 
+namespace x3 {
+
 //! Check if a character is element of integer number.
 /*!
     \param c a character to check.
@@ -107,4 +109,5 @@ inline long ReadDoubleArray(const wchar_t* str, double* arr, long size)
     return count;
 }
 
+} // x3
 #endif // UTILFUNC_READINTS_H_

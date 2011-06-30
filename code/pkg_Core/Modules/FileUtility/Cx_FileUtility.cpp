@@ -139,7 +139,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
         std::wostringstream buf;
         if (dwError != 0)
         {
-            buf << GetSystemErrorString(dwError) << L", ";
+            buf << x3::GetSystemErrorString(dwError) << L", ";
         }
         buf << filename;
         X3LOG_ERROR2(L"@FileUtility:IDS_CREATEDIR_FAIL", buf.str());
@@ -209,7 +209,7 @@ bool DeletePathFile_(const wchar_t* filename, bool bRecycle, HWND hwnd)
     if (s_nFileOpRet != 0)
     {
         std::wostringstream buf;
-        buf << GetSystemErrorString(s_nFileOpRet) << L", " << filename;
+        buf << x3::GetSystemErrorString(s_nFileOpRet) << L", " << filename;
 
         if (IsPath_(filename, true))
         {
@@ -294,7 +294,7 @@ bool Cx_FileUtility::MovePathFile(const wchar_t* oldfile, const wchar_t* newfile
         if (s_nFileOpRet != 0)
         {
             std::wostringstream buf;
-            buf << GetSystemErrorString(s_nFileOpRet);
+            buf << x3::GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
             X3LOG_ERROR2(L"@FileUtility:IDS_MOVEFILE_FAIL", buf.str());
         }
@@ -310,7 +310,7 @@ bool Cx_FileUtility::RenamePathFile(const wchar_t* oldfile, const wchar_t* newfi
         if (s_nFileOpRet != 0)
         {
             std::wostringstream buf;
-            buf << GetSystemErrorString(s_nFileOpRet);
+            buf << x3::GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
             X3LOG_ERROR2(L"@FileUtility:IDS_RENFILE_FAIL", buf.str());
         }
@@ -344,7 +344,7 @@ bool Cx_FileUtility::CopyPathFile(const wchar_t* oldfile, const wchar_t* newfile
         if (s_nFileOpRet != 0)
         {
             std::wostringstream buf;
-            buf << GetSystemErrorString(s_nFileOpRet);
+            buf << x3::GetSystemErrorString(s_nFileOpRet);
             buf << L", " << oldfile << L"->" << newfile;
             X3LOG_ERROR2(L"@FileUtility:IDS_COPYFILE_FAIL", buf.str());
         }

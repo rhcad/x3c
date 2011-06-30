@@ -32,7 +32,7 @@ namespace x3 {
 //! Get applicaton's writtable absolute path.
 /*!
     \ingroup _GROUP_APPUI_
-    \see x3::RelToAbsWithPlugin, x3::FileNameRelToAbs()
+    \see x3::RelToAbsWithPlugin(), x3::FileNameRelToAbs()
 */
 inline std::wstring GetAppWorkPath()
 {

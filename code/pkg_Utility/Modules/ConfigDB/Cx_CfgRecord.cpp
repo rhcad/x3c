@@ -386,7 +386,7 @@ bool Cx_CfgRecord::SetRGB(const wchar_t* pszEntry, DWORD crValue)
 bool Cx_CfgRecord::GetCMYK(const wchar_t* pszEntry, WORD& c, WORD& m, WORD& y, WORD& k)
 {
     WORD nums[4] = { 0, 0, 0, 0 };
-    bool bRet = (ReadInts(GetString(pszEntry).c_str(), nums, 4) == 4);
+    bool bRet = (x3::ReadInts(GetString(pszEntry).c_str(), nums, 4) == 4);
     if (bRet)
     {
         c = nums[0];

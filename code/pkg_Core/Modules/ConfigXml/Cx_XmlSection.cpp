@@ -316,7 +316,7 @@ bool Cx_XmlSection::SetFloat(const wchar_t* name, float value)
 DWORD Cx_XmlSection::GetRGB(const wchar_t* name, DWORD defValue)
 {
     BYTE nums[3] = { 0, 0, 0 };
-    if (ReadInts(GetString(name).c_str(), nums, 3) == 3)
+    if (x3::ReadInts(GetString(name).c_str(), nums, 3) == 3)
         defValue = nums[0] | nums[1] << 8 | nums[2] << 16;
     return defValue;
 }
@@ -332,7 +332,7 @@ bool Cx_XmlSection::SetRGB(const wchar_t* name, DWORD value)
 bool Cx_XmlSection::GetCMYK(const wchar_t* name, WORD& c, WORD& m, WORD& y, WORD& k)
 {
     WORD nums[4] = { 0, 0, 0, 0 };
-    bool bRet = (ReadInts(GetString(name).c_str(), nums, 4) == 4);
+    bool bRet = (x3::ReadInts(GetString(name).c_str(), nums, 4) == 4);
     if (bRet)
     {
         c = nums[0];
@@ -354,7 +354,7 @@ bool Cx_XmlSection::GetDate(const wchar_t* name, int& year, int& month, int& day
 {
     int nums[3] = { 0, 0, 0 };
 
-    bool bRet = (ReadInts(GetString(name).c_str(), nums, 3) == 3);
+    bool bRet = (x3::ReadInts(GetString(name).c_str(), nums, 3) == 3);
 
     bRet = bRet && (nums[0] >= 1980 && nums[0] <= 2099);
     bRet = bRet && (nums[1] >= 0 && nums[1] <= 12);
@@ -382,7 +382,7 @@ bool Cx_XmlSection::GetDateTime(const wchar_t* name, int& year, int& month, int&
 {
     int nums[6] = { 0, 0, 0, 0, 0, 0 };
 
-    bool bRet = (ReadInts(GetString(name).c_str(), nums, 6) >= 3);
+    bool bRet = (x3::ReadInts(GetString(name).c_str(), nums, 6) >= 3);
 
     bRet = bRet && (nums[0] >= 1980 && nums[0] <= 2099);
     bRet = bRet && (nums[1] >= 0 && nums[1] <= 12);
@@ -412,7 +412,7 @@ bool Cx_XmlSection::SetDateTime(const wchar_t* name, int year, int month, int da
 
 long Cx_XmlSection::GetDoubleArray(const wchar_t* name, double* items, long count)
 {
-    return ReadDoubleArray(GetString(name).c_str(), items, count);
+    return x3::ReadDoubleArray(GetString(name).c_str(), items, count);
 }
 
 bool Cx_XmlSection::SetDoubleArray(const wchar_t* name, const double* items, long count)
@@ -429,7 +429,7 @@ bool Cx_XmlSection::SetDoubleArray(const wchar_t* name, const double* items, lon
 
 long Cx_XmlSection::GetIntArray(const wchar_t* name, long* items, long count)
 {
-    return ReadInts(GetString(name).c_str(), items, count);
+    return x3::ReadInts(GetString(name).c_str(), items, count);
 }
 
 bool Cx_XmlSection::SetIntArray(const wchar_t* name, const long* items, long count)

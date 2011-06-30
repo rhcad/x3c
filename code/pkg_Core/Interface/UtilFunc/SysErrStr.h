@@ -6,6 +6,8 @@
 
 #include <string>
 
+namespace x3 {
+
 //! Obtains error message strings for a error code.
 /*!
     \ingroup _GROUP_UTILFUNC
@@ -42,4 +44,5 @@ inline std::wstring GetSystemErrorString(unsigned long errorcode)
     return retstr;
 }
 
+} // x3
 #endif // UTILFUNC_SYSERRSTR_H_
