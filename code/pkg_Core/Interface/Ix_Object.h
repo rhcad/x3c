@@ -125,7 +125,7 @@ private:
         virtual void foo() = 0;
     };
     \endcode
-    \see X3END_CLASS_DECLARE
+    \see X3BEGIN_CLASS_DECLARE
 */
 #define X3DEFINE_IID(_Interface) \
     virtual ~_Interface() {}     \

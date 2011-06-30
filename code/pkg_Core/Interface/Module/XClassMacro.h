@@ -29,7 +29,7 @@
         Cx_Example();
         virtual ~Cx_Example();
     private:
-        ...
+        virtual void foo();
     };
     \endcode
 */
@@ -65,6 +65,10 @@ public: \
             return true;    \
         }
 
+//! End group of class definition.
+/*!
+    \see X3BEGIN_CLASS_DECLARE, X3DEFINE_INTERFACE_ENTRY
+*/
 #define X3END_CLASS_DECLARE() \
         return false; \
     }

@@ -13,7 +13,7 @@ X3CLSID_DEFINE(CLSID_AppWorkPath, "b2615355-772d-4195-94eb-59c31250a537");
 /*! \ingroup _GROUP_PLUGIN_CORE_
  *  \interface Ix_AppWorkPath
  *  \brief interface of getting applicaton's writtable path.
- *  \see   x3::CLSID_AppWorkPath, GetAppWorkPath()
+ *  \see   x3::CLSID_AppWorkPath, x3::GetAppWorkPath()
  */
 class Ix_AppWorkPath : public Ix_Object
 {
@@ -27,6 +27,8 @@ public:
     virtual void SetWorkPath(const std::wstring& path) = 0;
 };
 
+namespace x3 {
+
 //! Get applicaton's writtable absolute path.
 //! \ingroup _GROUP_PLUGIN_CORE_
 inline std::wstring GetAppWorkPath()
@@ -37,5 +39,7 @@ inline std::wstring GetAppWorkPath()
 #endif
     return pIFPath->GetWorkPath();
 }
+
+} // x3
 
 #endif // X3_MANAGER_IWORKPATH_H_

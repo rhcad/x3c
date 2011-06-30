@@ -143,7 +143,7 @@ void CLogObserver::MakerInitVars()
 
     if (m_path.empty())
     {
-        m_path = GetAppWorkPath() + L"log";
+        m_path = x3::GetAppWorkPath() + L"log";
     }
 
     wcsncpy_s(path, MAX_PATH, m_path.c_str(), MAX_PATH);
