@@ -20,7 +20,6 @@ typedef long X3IID;
 class Ix_Object
 {
 public:
-    virtual void test() = 0;
     virtual ~Ix_Object() {}
     virtual long AddRef(HMODULE fromdll) = 0;
     virtual long Release(HMODULE fromdll) = 0;
@@ -130,7 +129,6 @@ private:
 */
 #define X3DEFINE_IID(_Interface) \
     virtual ~_Interface() {}     \
-    virtual void test() {}      \
     static X3IID GetIID() { static X3IID id = x3::hashkey(#_Interface); return id; }
 
 #endif // X3_CORE_IOBJECT_H_

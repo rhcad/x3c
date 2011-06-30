@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * Remove RTTI (not use dynamic_cast).
     * Add XClassMacro.h
+    * Remove FileUtility/Plugin.cpp
 
 ------v1.0.11------
 
