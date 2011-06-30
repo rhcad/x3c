@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_AppWorkPath, "b2615355-772d-4195-94eb-59c31250a537");
 
-/*! \ingroup _GROUP_PLUGIN_CORE_
+/*! \ingroup _GROUP_APPUI_
  *  \interface Ix_AppWorkPath
  *  \brief interface of getting applicaton's writtable path.
  *  \see   x3::CLSID_AppWorkPath, x3::GetAppWorkPath()
@@ -30,7 +30,10 @@ public:
 namespace x3 {
 
 //! Get applicaton's writtable absolute path.
-//! \ingroup _GROUP_PLUGIN_CORE_
+/*!
+    \ingroup _GROUP_APPUI_
+    \see x3::RelToAbsWithPlugin, x3::FileNameRelToAbs()
+*/
 inline std::wstring GetAppWorkPath()
 {
     Cx_Interface<Ix_AppWorkPath> pIFPath(x3::CLSID_AppWorkPath);

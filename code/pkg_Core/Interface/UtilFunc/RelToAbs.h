@@ -26,7 +26,7 @@ inline HMODULE GetMainModuleHandle()
     \param relname Relative path or file name to be converted.
     \param isfile 'relname' is a file name or path.
     \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see x3::FileNameRelToAbs
+    \see x3::FileNameRelToAbs, x3::GetAppWorkPath()
 */
 inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = true)
 {
@@ -51,7 +51,7 @@ inline std::wstring RelToAbsWithPlugin(const wchar_t* relname, bool isfile = tru
     \param relname Relative path or file name to be converted.
     \param isfile 'relname' is a file name or path.
     \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see x3::GetMainModuleHandle
+    \see x3::RelToAbsWithPlugin, x3::GetAppWorkPath()
 */
 inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
 {
@@ -77,7 +77,7 @@ inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
     \param relname Relative path or file name to be converted such as 'Log.txt' and 'myapp/output'.
     \param isfile 'relname' is a file name or path.
     \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see x3::GetMainModuleHandle
+    \see x3::GetAppWorkPath()
 */
 inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile = true)
 {

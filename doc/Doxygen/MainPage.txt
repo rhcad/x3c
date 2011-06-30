@@ -49,4 +49,7 @@
     - \ref _GROUP_PLUGIN_XML_ "XML interfaces." \n
         The interfaces for data I/O and data object management.\n
         There is a plugin implemented using MSXML or TinyXML DOM Parser.\n\n
+
+    - \ref _GROUP_APPUI_ "Application's UI." \n
+        Some frequently-used interfaces for UI window.\n\n
 */
