@@ -35,7 +35,7 @@ public:
     X3DEFINE_IID(Ix_LogManager)
 
     //! Add a logging output observer.
-    virtual bool RegisterObserver(Ix_LogObserver* observer) = 0;
+    virtual bool RegisterObserver(Ix_LogObserver* observer, HMODULE fromdll) = 0;
 
     //! Remove a logging output observer.
     virtual void UnRegisterObserver(Ix_LogObserver* observer) = 0;

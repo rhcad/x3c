@@ -1,7 +1,7 @@
 /*! \file LogHelper.h
  *  \brief Define logging macros such as X3LOG_WARNING and X3LogGroup.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.07.01
  */
 #ifndef X3_LOG_LOGHELPER_H_
 #define X3_LOG_LOGHELPER_H_
@@ -155,7 +155,7 @@ inline bool RegisterLogObserver(Ix_LogObserver* observer)
     Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
-        return pIFManager->RegisterObserver(observer);
+        return pIFManager->RegisterObserver(observer, x3GetModuleHandle());
     }
     return false;
 }

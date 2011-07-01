@@ -2,6 +2,7 @@
 // http://sourceforge.net/projects/x3c/
 // Changes:
 // 2011-02-28: Avoid reenter in WriteLog.
+// 2011-07-01: Support delay-load feature for logging observer plugins.
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_LogManager.h"
@@ -9,6 +10,7 @@
 #include <UtilFunc/ConvStr.h>
 #include <Xml/Ix_StringTable.h>
 #include <UtilFunc/LockCount.h>
+#include "../PluginManager/Ix_PluginDelayLoad.h"
 
 Cx_LogManager::Cx_LogManager()
     : m_groupLevel(0), m_loglock(0)
@@ -19,19 +21,50 @@ Cx_LogManager::~Cx_LogManager()
 {
 }
 
-bool Cx_LogManager::RegisterObserver(Ix_LogObserver* observer)
+bool Cx_LogManager::RegisterObserver(Ix_LogObserver* observer, HMODULE fromdll)
 {
-    if (observer != NULL && x3::find_value(m_observers, observer) < 0)
+    ITEM item(observer, fromdll);
+
+    if (observer != NULL && x3::find_value(m_observers, item) < 0)
     {
-        m_observers.push_back(observer);
+        m_observers.push_back(item);
+
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
+        if (pIFLoader)
+        {
+            pIFLoader->AddObserverPlugin(fromdll, "x3::LogObserver");
+        }
+
         return true;
     }
+
     return false;
 }
 
 void Cx_LogManager::UnRegisterObserver(Ix_LogObserver* observer)
 {
-    x3::erase_value(m_observers, observer);
+    for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
+    {
+        if (it->first == observer)
+        {
+            m_observers.erase(it);
+            break;
+        }
+    }
+}
+
+void Cx_LogManager::FireFirstEvent()
+{
+    static bool fired = false;
+    if (!fired)
+    {
+        fired = true;
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
+        if (pIFLoader)
+        {
+            pIFLoader->FireFirstEvent("x3::LogObserver");
+        }
+    }
 }
 
 bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra)
@@ -40,9 +73,11 @@ bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra)
     CheckMsgParam(msg2, extra2, module, idname, msg, extra);
 
     InterlockedIncrement(&m_groupLevel);
+    FireFirstEvent();
+
     for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        (*it)->OnPushGroup(m_groupLevel, msg2, extra2, module, idname);
+        it->first->OnPushGroup(m_groupLevel, msg2, extra2, module, idname);
     }
 
     return true;
@@ -52,7 +87,7 @@ bool Cx_LogManager::PopGroup()
 {
     for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        (*it)->OnPopGroup(m_groupLevel);
+        it->first->OnPopGroup(m_groupLevel);
     }
     InterlockedDecrement(&m_groupLevel);
 
@@ -70,11 +105,13 @@ bool Cx_LogManager::WriteLog(x3LogType type, const wchar_t* msg,
 
     std::wstring wstrFile(x3::a2w(TrimFileName(file)));
     std::wstring msg2, extra2, module, idname;
+
     CheckMsgParam(msg2, extra2, module, idname, msg, extra);
+    FireFirstEvent();
 
     for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        (*it)->OnWriteLog(type, msg2, extra2,
+        it->first->OnWriteLog(type, msg2, extra2,
             module, idname, wstrFile, line);
     }
 

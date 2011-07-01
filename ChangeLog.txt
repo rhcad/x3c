@@ -1,5 +1,11 @@
 X3 C++ PluginFramework
 
+2011-07-01
+
+    * Support delay-load feature for logging observer plugins.
+
+------v1.1.0------
+
 2011-06-30
 
     * Remove RTTI (not use dynamic_cast).

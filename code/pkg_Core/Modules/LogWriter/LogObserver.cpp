@@ -1,9 +1,10 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
-// v2: 2011.02.07, ooyg: Using Ix_AppWorkPath to get logging path.
-// v3: 2011.02.21, ooyg: Replace "\n" to "\\n" in LogWriter plugin.
-// v4: 2011.02.24, ooyg: Copy log files to server if error message has fired.
-// v4: 2011.02.28, ooyg: Hide progress UI in CopyLogFilesToServer.
+// 2011.02.07: Using Ix_AppWorkPath to get logging path.
+// 2011.02.21: Replace "\n" to "\\n" in LogWriter plugin.
+// 2011.02.24: Copy log files to server if error message has fired.
+// 2011.02.28: Hide progress UI in CopyLogFilesToServer.
+// 2011-07-01: Support delay-load feature for logging observer plugins.
 
 #include <UtilFunc/PluginInc.h>
 #include "LogObserver.h"
@@ -33,7 +34,7 @@ CLogObserver::CLogObserver()
     Cx_Interface<Ix_LogManager> pIFManager(x3::CLSID_LogManager);
     if (pIFManager.IsNotNull())
     {
-        pIFManager->RegisterObserver(this);
+        pIFManager->RegisterObserver(this, x3GetModuleHandle());
     }
 }
 

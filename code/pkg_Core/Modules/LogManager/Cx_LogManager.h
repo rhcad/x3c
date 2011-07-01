@@ -17,7 +17,7 @@ protected:
     virtual ~Cx_LogManager();
 
 private:
-    virtual bool RegisterObserver(Ix_LogObserver* observer);
+    virtual bool RegisterObserver(Ix_LogObserver* observer, HMODULE fromdll);
     virtual void UnRegisterObserver(Ix_LogObserver* observer);
     virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra);
     virtual bool PopGroup();
@@ -32,10 +32,12 @@ private:
     bool CheckMsgParam(std::wstring& msg2, std::wstring& extra2, 
         std::wstring& module, std::wstring& idname, 
         const wchar_t* msg, const wchar_t* extra);
+    void FireFirstEvent();
 
 private:
-    typedef std::vector<Ix_LogObserver*>::iterator ObserverIt;
-    std::vector<Ix_LogObserver*>      m_observers;
+    typedef std::pair<Ix_LogObserver*, HMODULE> ITEM;
+    typedef std::vector<ITEM>::iterator ObserverIt;
+    std::vector<ITEM>               m_observers;
     long                            m_groupLevel;
     long                            m_loglock;
 };
