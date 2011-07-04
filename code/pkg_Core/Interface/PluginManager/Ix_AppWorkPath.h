@@ -1,7 +1,7 @@
 /*! \file Ix_AppWorkPath.h
  *  \brief Define interface of getting applicaton's writtable path: Ix_AppWorkPath
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.06.30
+ *  \date   2011.07.04
  */
 #ifndef X3_MANAGER_IWORKPATH_H_
 #define X3_MANAGER_IWORKPATH_H_
@@ -21,19 +21,29 @@ public:
     X3DEFINE_IID(Ix_AppWorkPath)
 
     //! Get applicaton's writtable absolute path.
+    /*! The default path is same as GetLocalAppDataPath(L"x3c") if SetWorkPath() is not called.
+        \see GetLocalAppDataPath, SetWorkPath
+    */
     virtual std::wstring GetWorkPath() = 0;
 
     //! Set applicaton's writtable absolute path. (call before loading plugins)
+    /*! \see GetLocalAppDataPath, GetWorkPath
+    */
     virtual void SetWorkPath(const std::wstring& path) = 0;
+
+    //! Return path as calling SHGetKnownFolderPath(FOLDERID_LocalAppData, ...)
+    /*! The path form is "X:\Users\auser\AppData\Local\company\"
+        or the executable file's folder if failed to call SHGetKnownFolderPath().
+        \param company append company name to path if not empty.
+        \return the absolute path.
+    */
+    virtual std::wstring GetLocalAppDataPath(const wchar_t* company) = 0;
 };
 
 namespace x3 {
 
-//! Get applicaton's writtable absolute path.
-/*!
-    \ingroup _GROUP_APPUI_
-    \see x3::RelToAbsWithPlugin(), x3::FileNameRelToAbs()
-*/
+//! \copydoc Ix_AppWorkPath::GetWorkPath()
+//! \ingroup _GROUP_APPUI_
 inline std::wstring GetAppWorkPath()
 {
     Cx_Interface<Ix_AppWorkPath> pIFPath(x3::CLSID_AppWorkPath);

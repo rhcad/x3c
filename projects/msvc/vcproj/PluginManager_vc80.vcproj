@@ -191,6 +191,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Modules\PluginManager\DelayLoad.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\PluginManager\Module.cpp"
 				>
 			</File>

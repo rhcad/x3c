@@ -7,19 +7,19 @@
 CFG=PluginManager - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE 
+!MESSAGE
 !MESSAGE NMAKE /f "PluginManager.mak".
-!MESSAGE 
+!MESSAGE
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE 
+!MESSAGE
 !MESSAGE NMAKE /f "PluginManager.mak" CFG="PluginManager - Win32 Debug"
-!MESSAGE 
+!MESSAGE
 !MESSAGE Possible choices for configuration are:
-!MESSAGE 
+!MESSAGE
 !MESSAGE "PluginManager - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "PluginManager - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE 
+!MESSAGE
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -67,7 +67,7 @@ LINK32=link.exe
 # ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/PluginManager.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/PluginManagerX3.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/PluginManager.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
-!ENDIF 
+!ENDIF
 
 # Begin Target
 
@@ -111,6 +111,10 @@ SOURCE=..\..\..\code\pkg_Core\Modules\PluginManager\Cx_ObjectFactory.cpp
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\PluginManager\Cx_PluginLoader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Core\Modules\PluginManager\DelayLoad.cpp
 # End Source File
 # Begin Source File
 

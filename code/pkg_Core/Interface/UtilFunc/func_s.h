@@ -51,19 +51,19 @@ inline int vswprintf_s(wchar_t *buffer, size_t size, const wchar_t *format, va_l
 #endif // _INC_STDIO
 
 inline int strcpy_s(char *str, size_t size, const char *src)
-    { return strncpy(str, src, size) != NULL; }
+    { return strncpy(str, src, size) ? 0 : -1; }
 inline int wcscpy_s(wchar_t *str, size_t size, const wchar_t *src)
-    { return wcsncpy(str, src, size) != NULL; }
+    { return wcsncpy(str, src, size) ? 0 : -1; }
 
 inline int strncpy_s(char *str, size_t size, const char *src, size_t len)
-    { return strncpy(str, src, min(size, len)) != NULL; }
+    { return strncpy(str, src, min(size, len)) ? 0 : -1; }
 inline int wcsncpy_s(wchar_t *str, size_t size, const wchar_t *src, size_t len)
-    { return wcsncpy(str, src, min(size, len)) != NULL; }
+    { return wcsncpy(str, src, min(size, len)) ? 0 : -1; }
 
 inline int strcat_s(char *str, size_t, const char *src)
-    { return strcat(str, src) != NULL; }
+    { return strcat(str, src) ? 0 : -1; }
 inline int wcscat_s(wchar_t *str, size_t, const wchar_t *src)
-    { return wcscat(str, src) != NULL; }
+    { return wcscat(str, src) ? 0 : -1; }
 
 inline wchar_t * _wcslwr_s(wchar_t *str)
     { for (wchar_t* p = str; *p; p++) towlower(*p); return str; }

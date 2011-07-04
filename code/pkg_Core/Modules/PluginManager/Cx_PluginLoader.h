@@ -63,6 +63,7 @@ public:
     // Ix_AppWorkPath, implemented in Cx_PluginLoaderOut.
     virtual std::wstring GetWorkPath() { ASSERT(0); return L""; }
     virtual void SetWorkPath(const std::wstring&) { ASSERT(0); }
+    virtual std::wstring GetLocalAppDataPath(const wchar_t*) { ASSERT(0); return L""; }
 
 private:
     Cx_PluginLoader(const Cx_PluginLoader&);

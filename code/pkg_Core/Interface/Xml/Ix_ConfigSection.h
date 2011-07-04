@@ -63,35 +63,27 @@ public:
     */
     virtual bool SetInt(const wchar_t* name, int value) = 0;
 
-    //! Get a field value as long integer type.
     //! \copydoc GetInt()
     virtual long GetInt32(const wchar_t* name, long defValue = 0) = 0;
 
-    //! Set a field value as long integer type.
     //! \copydoc SetInt()
     virtual bool SetInt32(const wchar_t* name, long value) = 0;
 
-    //! Get a field value as unsigned long type.
     //! \copydoc GetInt()
     virtual ULONG GetUInt32(const wchar_t* name, ULONG defValue = 0) = 0;
 
-    //! Set a field value as unsigned long type.
     //! \copydoc SetInt()
     virtual bool SetUInt32(const wchar_t* name, ULONG value) = 0;
 
-    //! Get a field value as short integer type.
     //! \copydoc GetInt()
     virtual short GetInt16(const wchar_t* name, short defValue = 0) = 0;
 
-    //! Set a field value as short integer type.
     //! \copydoc SetInt()
     virtual bool SetInt16(const wchar_t* name, short value) = 0;
 
-    //! Get a field value as unsigned short integer type.
     //! \copydoc GetInt()
     virtual WORD GetUInt16(const wchar_t* name, WORD defValue = 0) = 0;
 
-    //! Set a field value as unsigned short integer type.
     //! \copydoc SetInt()
     virtual bool SetUInt16(const wchar_t* name, WORD value) = 0;
 
@@ -111,7 +103,7 @@ public:
     */
     virtual bool SetBool(const wchar_t* name, int value) = 0;
 
-    //! Get a field value as double type.
+    //! Get a field value as floating-point type.
     /*!
         \param name the field name.
         \param defValue default value if the field hasn't value or has empty string value.
@@ -119,7 +111,7 @@ public:
     */
     virtual double GetDouble(const wchar_t* name, double defValue = 0) = 0;
 
-    //! Set a field value as double type.
+    //! Set a field value as floating-point type.
     /*!
         \param name the field name.
         \param value the new field value.
@@ -127,11 +119,9 @@ public:
     */
     virtual bool SetDouble(const wchar_t* name, double value) = 0;
 
-    //! Get a field value as float type.
     //! \copydoc GetDouble()
     virtual float GetFloat(const wchar_t* name, float defValue = 0) = 0;
 
-    //! Set a field value as float type.
     //! \copydoc SetDouble()
     virtual bool SetFloat(const wchar_t* name, float value) = 0;
 
