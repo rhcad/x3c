@@ -32,8 +32,8 @@ static Cx_Module    s_x3Module;
     \param hModule DLL handle of this plugin, skip if NULL.
     \return the module object in this plugin.
     \see x3InternalCreateObject, x3GetClassEntryTable
-    \see OUTAPI bool x3InitializePlugin()
-    \see OUTAPI void x3UninitializePlugin()
+    \see optional export function: OUTAPI bool x3InitializePlugin()
+    \see optional export function: OUTAPI void x3UninitializePlugin()
 */
 OUTAPI Ix_Module* x3GetModuleInterface(Ix_ObjectFactory* pFactory, HMODULE hModule)
 {
@@ -68,8 +68,8 @@ static long GetClassCount(BYTE minType)
     \param[in] nMaxCount max count of elements in pTable.
     \return element count of actual copied. Return actual count if pTable is NULL.
     \see x3GetModuleInterface
-    \see OUTAPI bool x3InitializePlugin()
-    \see OUTAPI void x3UninitializePlugin()
+    \see optional export function: OUTAPI bool x3InitializePlugin()
+    \see optional export function: OUTAPI void x3UninitializePlugin()
 */
 OUTAPI DWORD x3GetClassEntryTable(DWORD* pBuildInfo, DWORD* pEntrySize,
                                   X3CLASSENTRY* pTable, DWORD nMaxCount)

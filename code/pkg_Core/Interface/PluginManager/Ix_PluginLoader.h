@@ -60,7 +60,7 @@ public:
     /*! Initialize a plugin by calling it's x3InitializePlugin() export function.\n
         Automatic skip the plugin which has initialized or has not x3InitializePlugin.
         \return count of plugins which has initialized (or has not x3InitializePlugin) this time.
-        \see OUTAPI bool x3InitializePlugin()
+        \see optional export function: OUTAPI bool x3InitializePlugin()
     */
     virtual long InitializePlugins() = 0;
 
@@ -86,14 +86,14 @@ public:
     /*! Automatic call plugin's x3CanUnloadPlugin() and x3UninitializePlugin() export functions.
         \param name plugin filename regardless folder, such as 'MyData.plugin.dll'.
         \return if unload success.
-        \see OUTAPI void x3UninitializePlugin()
+        \see optional export function: OUTAPI void x3UninitializePlugin()
     */
     virtual bool UnloadPlugin(const wchar_t* name) = 0;
 
     //! Unload all plugins.
     /*! Automatic call plugin's x3UninitializePlugin() export function.
         \return count of plugins unloaded.
-        \see OUTAPI void x3UninitializePlugin()
+        \see optional export function: OUTAPI void x3UninitializePlugin()
     */
     virtual long UnloadPlugins() = 0;
 };

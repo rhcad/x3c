@@ -243,6 +243,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\Ix_PluginLoader2.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\PluginManager.h"
 				>
 			</File>
