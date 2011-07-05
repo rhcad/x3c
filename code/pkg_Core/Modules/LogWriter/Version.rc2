@@ -4,7 +4,7 @@
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,6
+ FILEVERSION 1,0,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -20,7 +20,7 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "FileDescription", "Logging Writer Plugin\0"
-            VALUE "FileVersion", "1.0.0.6\0"
+            VALUE "FileVersion", "1.0.1.0\0"
             VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
             VALUE "OriginalFilename", "LogWriter.plugin.dll\0"
             VALUE "ProductName", "X3 C++ PluginFramework\0"
