@@ -15,7 +15,7 @@ typedef long X3IID;
  *  \brief The basic interface that all X3 class can support it.
  *  \note  DO NOT call it's function directly.\n You can use Cx_Interface or Cx_Ptr instead of using it.
  *  \see autoptr class: Cx_Ptr, Cx_Interface
- *  \see X3DEFINE_IID, X3END_CLASS_DECLARE
+ *  \see X3DEFINE_IID, X3BEGIN_CLASS_DECLARE
  */
 class Ix_Object
 {

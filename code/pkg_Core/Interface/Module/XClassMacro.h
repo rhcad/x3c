@@ -19,11 +19,11 @@
     \param cls class name.
     \see X3END_CLASS_DECLARE, X3DEFINE_INTERFACE_ENTRY, X3USE_INTERFACE_ENTRY
     \code
-    class Cx_Example : public Base, public Ix_Example
+    class Cx_Example : public Cx_Base, public Ix_Example
     {
         X3BEGIN_CLASS_DECLARE(Cx_Example)
             X3DEFINE_INTERFACE_ENTRY(Ix_Example)
-            X3USE_INTERFACE_ENTRY(Base)
+            X3USE_INTERFACE_ENTRY(Cx_Base)
         X3END_CLASS_DECLARE()
     protected:
         Cx_Example();
@@ -53,7 +53,7 @@ public: \
             return true;    \
         }
 
-//! Indicate this class is derived from a class.
+//! Indicate this class is derived from a implement class.
 /*! All interfaces of the base class are supported by this class.
     \ingroup _GROUP_PLUGIN_CORE_
     \param _BaseClass base class that has the group declared using X3BEGIN_CLASS_DECLARE.
