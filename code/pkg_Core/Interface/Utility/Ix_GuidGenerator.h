@@ -1,5 +1,5 @@
 /*! \file Ix_GuidGenerator.h
- *  \brief 定义GUID生成器的接口 Ix_GuidGenerator
+ *  \brief Define GUID generator interface: Ix_GuidGenerator
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_GuidGenerator, "8c14f0c5-7795-4ec3-b13a-982f653a700a");
 
-//! 全局唯一编号生成器的接口
+//! GUID generator interface.
 /*!
     \interface Ix_GuidGenerator
     \ingroup _GROUP_UTILITY_
@@ -21,22 +21,22 @@ class Ix_GuidGenerator : public Ix_Object
 public:
     X3DEFINE_IID(Ix_GuidGenerator)
 
-    //! 生成新的GUID串
+    //! Get new GUID string.
     virtual std::wstring CreateGuid(bool withBrackets = false) = 0;
 
-    //! 得到没有两端大括号的GUID串
+    //! Get GUID string without braces.
     virtual std::wstring RemoveGuidBrackets(const std::wstring& uid) = 0;
 
-    //! 得到当前日期时间的字符串，格式为“YYYY-MM-DD HH:MM:SS”
+    //! Get string of current date and time as format "YYYY-MM-DD HH:MM:SS".
     virtual std::wstring GetCurrentTimeString(bool hasYear = true) = 0;
 
-    //! 创建唯一ID，当前进程运行时有效
+    //! Get new unique id (valid in current process).
     virtual ULONG CreateID(long type = 0) = 0;
 };
 
 namespace x3 {
 
-//! 生成新的GUID串
+//! Get new GUID string.
 /*!
     \ingroup _GROUP_UTILITY_
     \see RemoveGuidBrackets, Ix_GuidGenerator
@@ -50,7 +50,7 @@ inline std::wstring CreateGuid(bool withBrackets = false)
     return pIFGenerator->CreateGuid(withBrackets);
 }
 
-//! 得到没有两端大括号的GUID串
+//! Get GUID string without braces.
 /*!
     \ingroup _GROUP_UTILITY_
     \see CreateGuid, Ix_GuidGenerator
@@ -64,7 +64,7 @@ inline std::wstring RemoveGuidBrackets(const std::wstring& uid)
     return pIFGenerator->RemoveGuidBrackets(uid);
 }
 
-//! 创建唯一ID，当前进程运行时有效
+//! Get new unique id (valid in current process).
 /*!
     \ingroup _GROUP_UTILITY_
     \see Ix_GuidGenerator
@@ -78,7 +78,7 @@ inline ULONG GuidCreateID(long type = 0)
     return pIFGenerator->CreateID(type);
 }
 
-//! 得到当前日期时间的字符串，格式为“YYYY-MM-DD HH:MM:SS”
+//! Get string of current date and time as format "YYYY-MM-DD HH:MM:SS".
 /*!
     \ingroup _GROUP_UTILITY_
 */

@@ -1,5 +1,5 @@
 /*! \file Ix_ConfigDBFactory.h
- *  \brief 定义配置数据的创建接口 Ix_ConfigDBFactory
+ *  \brief Define database I/O operator's creator interface: Ix_ConfigDBFactory
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_ConfigDBFactory, "6f3ca83f-6193-48ce-a188-24b2afb45432");
 
-//! 数据库数据读写对象的创建接口
+//! Database I/O operator's creator interface
 /*! 将数据库的增删改查以数据节点(Ix_ConfigData, Cx_ConfigSection)的简化方式进行操作。\n
     Ix_ConfigData接口的部分含义重新定义了，见 Cx_CfgDatabase 对应函数的说明。\n
     在增加记录时可以使用 \@NEWID 标记某个字段取值为(最大ID+1)；\n

@@ -1,5 +1,5 @@
 /*! \file Ix_StringConvert.h
- *  \brief 定义文本转换实用操作的接口 Ix_StringConvert
+ *  \brief Define text format converter interface: Ix_StringConvert
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -8,7 +8,7 @@
 
 #include "ClsID_TextUtil.h"
 
-//! 文本转换实用操作的接口
+//! Text format converter interface.
 /*!
     \interface Ix_StringConvert
     \ingroup _GROUP_UTILITY_
@@ -101,7 +101,7 @@ public:
 
 namespace x3 {
 
-//! 得到文本转换操作对象
+//! Get text format converter object.
 /*!
     \ingroup _GROUP_UTILITY_
     \see Ix_TextFileUtil

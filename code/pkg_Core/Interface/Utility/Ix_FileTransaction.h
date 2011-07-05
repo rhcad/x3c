@@ -1,5 +1,5 @@
 /*! \file Ix_FileTransaction.h
- *  \brief 定义文件事务实用操作的接口 Ix_FileTransaction
+ *  \brief Define interface of file operation with transaction: Ix_FileTransaction
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_FileTransaction, "66087749-6a2d-40b7-86d9-687664f91e1b");
 
-//! 文件操作事务的接口
+//! interface of file operation with transaction.
 /*!
     \interface Ix_FileTransaction
     \ingroup _GROUP_UTILITY_

@@ -1,5 +1,5 @@
 /*! \file Cx_CfgDatabase.h
- *  \brief 定义数据库访问的实现类 Cx_CfgDatabase
+ *  \brief Define database I/O operator implement class: Cx_CfgDatabase
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2010.9.25
  */
@@ -17,7 +17,7 @@
 
 class Cx_CfgRecordset;
 
-//! 数据库访问的实现类
+//! Database I/O operator implement class.
 class Cx_CfgDatabase
     : public Ix_ConfigData
     , public Ix_ConfigTransaction

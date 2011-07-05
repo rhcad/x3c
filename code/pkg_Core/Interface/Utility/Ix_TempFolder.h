@@ -1,5 +1,5 @@
 /*! \file Ix_TempFolder.h
- *  \brief 定义临时目录操作的接口 Ix_TempFolder
+ *  \brief Define temporary directory operation interface: Ix_TempFolder
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_TempFolder, "6d215195-061e-4c03-827d-8c692c293617");
 
-//! 临时目录操作的接口
+//! Temporary directory operation interface.
 /*!
     \interface Ix_TempFolder
     \ingroup _GROUP_UTILITY_

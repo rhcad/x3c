@@ -1,5 +1,5 @@
 /*! \file Ix_FileUtility.h
- *  \brief 定义文件和目录的实用操作的接口 Ix_FileUtility
+ *  \brief Define file operation interface: Ix_FileUtility
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_FileUtility, "933b3bf9-69d0-4be7-8e49-92b73669d8db");
 
-//! 文件和目录的实用操作的接口(文件检测)
+//! File operation interface(querying file information)
 /*!
     \interface Ix_FileUtility1
     \ingroup _GROUP_UTILITY_
@@ -54,7 +54,7 @@ public:
     virtual DWORD GetFileSize(const std::wstring& filename) = 0;
 };
 
-//! 文件和目录的实用操作的接口(文件改动操作)
+//! File operation interface(changing file)
 /*!
     \interface Ix_FileUtility2
     \ingroup _GROUP_UTILITY_
@@ -119,7 +119,7 @@ public:
     virtual HWND GetMsgBoxOwnerWnd() = 0;
 };
 
-//! 文件和目录的实用操作的接口(文件名转换)
+//! File operation interface(changing file name)
 /*!
     \interface Ix_FileUtility3
     \ingroup _GROUP_UTILITY_
@@ -186,7 +186,7 @@ public:
         bool returnRel = true) = 0;
 };
 
-//! 文件和目录的实用操作的接口(文件名提取)
+//! File operation interface(getting parts of file name)
 /*!
     \interface Ix_FileUtility4
     \ingroup _GROUP_UTILITY_
@@ -225,12 +225,12 @@ public:
         long* samePartCount = NULL) = 0;
 };
 
-//! 文件和目录的实用操作的接口
+//! File operation interface
 /*!
     \interface Ix_FileUtility
     \ingroup _GROUP_UTILITY_
     \see x3::CLSID_FileUtility
-    \see x3::FileUtility()->xxx(), RelToAbs.h 文件实用函数
+    \see x3::FileUtility(), RelToAbs.h
 */
 class Ix_FileUtility : public Ix_Object
     , public Ix_FileUtility1
@@ -244,10 +244,10 @@ public:
 
 namespace x3 {
 
-//! 得到文件操作对象
+//! Get file operator object.
 /*!
     \ingroup _GROUP_UTILITY_
-    \see RelToAbs.h 文件实用函数
+    \see RelToAbs.h
 */
 inline Cx_Interface<Ix_FileUtility> FileUtility()
 {

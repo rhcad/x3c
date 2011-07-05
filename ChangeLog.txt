@@ -1,9 +1,12 @@
 X3 C++ PluginFramework
 
+------v1.1.1------
+
 2011-07-04
 
     * Add GetLocalAppDataPath() using SHGetKnownFolderPath for Vista, Win7 and Win2008.
     * Move delay-load implement code into DelayLoad.cpp
+    * Update plugin version to 1.0.1.0 in Version.rc2
 
 2011-07-01
 

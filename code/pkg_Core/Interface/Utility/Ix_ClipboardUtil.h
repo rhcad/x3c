@@ -1,5 +1,5 @@
 /*! \file Ix_ClipboardUtil.h
- *  \brief 剪贴板实用操作的接口 Ix_ClipboardUtil
+ *  \brief Define clipboard operation interface: Ix_ClipboardUtil
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_ClipboardUtil, "fc957aed-3c48-461e-b9b8-6ff255f2e71d");
 
-//! 剪贴板实用操作的单实例接口
+//! Clipboard operation interface.
 /*!
     \interface Ix_ClipboardUtil
     \ingroup _GROUP_UTILITY_

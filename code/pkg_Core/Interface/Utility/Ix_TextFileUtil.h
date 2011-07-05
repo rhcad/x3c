@@ -1,5 +1,5 @@
 /*! \file Ix_TextFileUtil.h
- *  \brief 定义文本文件读写操作的接口 Ix_TextFileUtil
+ *  \brief Define text format file I/O operation interface: Ix_TextFileUtil
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
@@ -8,7 +8,7 @@
 
 #include "ClsID_TextUtil.h"
 
-//! 文本文件读写操作的接口
+//! Text format file I/O operation interface.
 /*!
     \interface Ix_TextFileUtil
     \ingroup _GROUP_UTILITY_
@@ -114,7 +114,7 @@ public:
 
 namespace x3 {
 
-//! 得到文本转换操作对象
+//! Get text format file I/O operator object.
 /*!
     \ingroup _GROUP_UTILITY_
     \see Ix_StringConvert
