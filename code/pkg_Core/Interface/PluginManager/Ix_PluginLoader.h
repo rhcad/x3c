@@ -56,9 +56,10 @@ public:
     */
     virtual long LoadPluginFiles(const wchar_t* path, const wchar_t* files, HMODULE instance = NULL) = 0;
 
-    //! Initialize all plugins after loaded.
-    /*! Auto skip the plugins which has initialized.
-        \return count of plugins which has initialized (or no x3InitializePlugin) this time.
+    //! Initialize all plugins after they are loaded.
+    /*! Initialize a plugin by calling it's x3InitializePlugin() export function.\n
+        Automatic skip the plugin which has initialized or has not x3InitializePlugin.
+        \return count of plugins which has initialized (or has not x3InitializePlugin) this time.
     */
     virtual long InitializePlugins() = 0;
 
@@ -81,14 +82,14 @@ public:
     virtual bool LoadPlugin(const wchar_t* filename) = 0;
 
     //! Unload a plugin.
-    /*!
-        \param name plugin filename, such as 'MyData.plugin.dll'.
+    /*! Automatic call plugin's x3CanUnloadPlugin() and x3UninitializePlugin() export functions.
+        \param name plugin filename regardless folder, such as 'MyData.plugin.dll'.
         \return if unload success.
     */
     virtual bool UnloadPlugin(const wchar_t* name) = 0;
 
     //! Unload all plugins.
-    /*!
+    /*! Automatic call plugin's x3UninitializePlugin() export function.
         \return count of plugins unloaded.
     */
     virtual long UnloadPlugins() = 0;

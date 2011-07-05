@@ -2,6 +2,12 @@ X3 C++ PluginFramework
 
 ------v1.1.1------
 
+2011-07-05
+
+    * Add UML diagram.
+    * Remove 'ASSERT(0 == nul)' in XComPtr.h
+    * Add notes in Ix_PluginLoader.h and XModuleImpl.h
+
 2011-07-04
 
     * Add GetLocalAppDataPath() using SHGetKnownFolderPath for Vista, Win7 and Win2008.
