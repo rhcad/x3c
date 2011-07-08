@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DocEventObserver.h"
+#include <ObserverExample/DocEventObserver.h>
 
 class CDocObserverTest
     : private DocEventObserver
@@ -12,9 +12,10 @@ public:
     }
 
 private:
-    virtual void OnDocEventAfterOpen()
+    virtual bool OnDocEventAfterOpen()
     {
         (*m_data)++;
+        return true;
     }
 
 private:
@@ -31,8 +32,9 @@ public:
     }
 
 private:
-    virtual void OnDocEventAfterOpen()
+    virtual bool OnDocEventAfterOpen()
     {
         X3LOG_INFO(L"CDocObserverTestOnRun::OnDocEventAfterOpen");
+        return true;
     }
 };

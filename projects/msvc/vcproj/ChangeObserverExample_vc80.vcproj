@@ -216,32 +216,32 @@
 				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ResponsibilityB.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Interface"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserver.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\ObserverExample\ChainObserver.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserverB.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\ObserverExample\ChainObserverB.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\DocEventObserver.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\ObserverExample\DocEventObserver.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Interface\Ix_ChangeObserverTest.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\ObserverExample\Ix_ChangeObserverTest.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\NodeSelectionObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\ObserverExample\NodeSelectionObserver.h"
 				>
 			</File>
 		</Filter>

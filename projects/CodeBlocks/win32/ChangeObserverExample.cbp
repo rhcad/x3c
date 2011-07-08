@@ -46,15 +46,15 @@
 				</Compiler>
 			</Target>
 		</Build>
-		<Unit filename="../../../code/pkg_Example/Interface/Ix_ChangeObserverTest.h" />
-		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/ChainObserver.h" />
-		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/ChainObserverB.h" />
+		<Unit filename="../../../code/pkg_Example/Interface/ObserverExample/Ix_ChangeObserverTest.h" />
+		<Unit filename="../../../code/pkg_Example/Interface/ObserverExample/ChainObserver.h" />
+		<Unit filename="../../../code/pkg_Example/Interface/ObserverExample/ChainObserverB.h" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Cx_ObserverTest.cpp" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Cx_ObserverTest.h" />
-		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/DocEventObserver.h" />
+		<Unit filename="../../../code/pkg_Example/Interface/ObserverExample/DocEventObserver.h" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/DocObserverTest.h" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Module.cpp" />
-		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/NodeSelectionObserver.h" />
+		<Unit filename="../../../code/pkg_Example/Interface/ObserverExample/NodeSelectionObserver.h" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Plugin.cpp" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/Responsibility.h" />
 		<Unit filename="../../../code/pkg_Example/Modules/ChangeObserverExample/ResponsibilityB.h" />

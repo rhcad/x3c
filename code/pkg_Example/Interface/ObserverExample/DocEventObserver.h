@@ -29,11 +29,13 @@ public:
         NOCOPY_CONSTRUCTOR(Data);
     public:
         Data(kDocEventType _event)
-            : ChangeNotifyData("DocEventObserver"), event(_event)
+            : ChangeNotifyData("DocEventObserver")
+            , event(_event), count(0)
         {
         }
 
-        kDocEventType event;
+        kDocEventType   event;
+        long            count;
     };
 
 protected:
@@ -42,13 +44,13 @@ protected:
     }
 
     //! 响应文档打开之前的通知
-    virtual void OnDocEventBeforeOpen() {}
+    virtual bool OnDocEventBeforeOpen() { return false; }
 
     //! 响应文档打开之后的通知
-    virtual void OnDocEventAfterOpen() {}
+    virtual bool OnDocEventAfterOpen() { return false; }
 
     //! 响应文档打开失败的通知
-    virtual void OnDocEventOpenFail() {}
+    virtual bool OnDocEventOpenFail() { return false; }
 
 private:
     void DoUpdate(ChangeNotifyData* data)
@@ -58,15 +60,18 @@ private:
         switch (mydata->event)
         {
         case kDocEvent_BeforeOpen:
-            OnDocEventBeforeOpen();
+            if (OnDocEventBeforeOpen())
+                mydata->count++;
             break;
 
         case kDocEvent_AfterOpen:
-            OnDocEventAfterOpen();
+            if (OnDocEventAfterOpen())
+                mydata->count++;
             break;
 
         case kDocEvent_OpenFail:
-            OnDocEventOpenFail();
+            if (OnDocEventOpenFail())
+                mydata->count++;
             break;
 
         default:

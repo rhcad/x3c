@@ -142,7 +142,7 @@ BEGIN
             VALUE "InternalName", "HollowViewApp"
             VALUE "LegalCopyright", "Copyright (C) 2011"
             VALUE "OriginalFilename", "HollowViewApp.EXE"
-            VALUE "ProductName", "HollowViewApp Application"
+            VALUE "ProductName", "X3C Example\0"
             VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END

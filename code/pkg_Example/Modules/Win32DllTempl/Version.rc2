@@ -19,7 +19,7 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "FileDescription", "TODO: Plugin Name\0"
+            VALUE "FileDescription", "Win32DllTempl plugin\0"
             VALUE "FileVersion", "1.0.0.1\0"
             VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
             VALUE "OriginalFilename", "Win32DllTempl.plugin.dll\0"

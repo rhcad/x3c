@@ -3,7 +3,8 @@
 
 #include <UnitTestInc.h>
 #include "TestChangeObserver.h"
-#include <../../pkg_Example/Interface/Ix_ChangeObserverTest.h>
+#include <../../pkg_Example/Interface/ObserverExample/Ix_ChangeObserverTest.h>
+#include <../../pkg_Example/Interface/ObserverExample/DocEventObserver.h>
 
 CPPUNIT_TEST_SUITE_REGISTRATION( TestChangeObserver );
 
@@ -21,6 +22,13 @@ void TestChangeObserver::setUp()
 void TestChangeObserver::tearDown()
 {
     UnloadPlugins();
+}
+
+void TestChangeObserver::testNotifyEvent()
+{
+    DocEventObserver::Data data(kDocEvent_AfterOpen);
+    data.Notify();
+    ASSERT(data.count > 0);
 }
 
 void TestChangeObserver::testResponsibilityChain()

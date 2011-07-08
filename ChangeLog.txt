@@ -1,5 +1,12 @@
 X3 C++ PluginFramework
 
+2011-07-08
+
+    * Refact and optimize delay-loading code in PluginManager.
+    * Move interface file to Interface\ObserverExample in ChangeObserverExample.
+    * Add a test case for observer delay-load feature.
+    * Add class cache UML diagram.
+
 ------v1.1.1------
 
 2011-07-05

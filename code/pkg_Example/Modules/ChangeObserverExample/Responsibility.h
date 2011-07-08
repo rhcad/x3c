@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ChainObserver.h"
+#include <ObserverExample/ChainObserver.h>
 
 class CResponsibility1
     : private ChainObserver

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Ix_ChangeObserverTest.h>
+#include <ObserverExample/Ix_ChangeObserverTest.h>
 
 class Cx_ObserverTest
     : public Ix_ChangeObserverTest

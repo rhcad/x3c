@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\ChangeObserverExample"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR- /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
+# ADD CPP /nologo /MD /W4 /GX /O2 /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\ChangeObserverExample"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR- /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_Example\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -78,27 +78,23 @@ LINK32=link.exe
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserver.h
+SOURCE=..\..\..\code\pkg_Example\Interface\ObserverExample\ChainObserver.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ChainObserverB.h
+SOURCE=..\..\..\code\pkg_Example\Interface\ObserverExample\ChainObserverB.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\DocEventObserver.h
+SOURCE=..\..\..\code\pkg_Example\Interface\ObserverExample\DocEventObserver.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Interface\Ix_ChangeObserverTest.h
+SOURCE=..\..\..\code\pkg_Example\Interface\ObserverExample\Ix_ChangeObserverTest.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\NodeSelectionObserver.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h
+SOURCE=..\..\..\code\pkg_Example\Interface\ObserverExample\NodeSelectionObserver.h
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -119,6 +115,10 @@ SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\Responsibility.h
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\ResponsibilityB.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\ChangeObserverExample\SelectionObserverTest.h
 # End Source File
 # End Group
 # Begin Group "Source Files"

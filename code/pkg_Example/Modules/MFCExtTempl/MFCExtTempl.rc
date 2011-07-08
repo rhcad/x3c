@@ -81,7 +81,7 @@ BEGIN
         BLOCK "080404B0"
 		BEGIN 
 			VALUE "CompanyName",     "\0"
-			VALUE "FileDescription", "TODO: ²å¼þÃû³Æ\0"
+			VALUE "FileDescription", "MFCExtTempl plugin\0"
 			VALUE "FileVersion",     "1.0.0.1\0"
 			VALUE "InternalName",    "MFCExtTempl\0"
 			VALUE "LegalCopyright",  "\0"

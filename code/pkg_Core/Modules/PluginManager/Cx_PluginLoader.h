@@ -79,8 +79,8 @@ private:
     int GetPluginIndex(const wchar_t* filename);
     virtual bool LoadDelayPlugin(const wchar_t* filename);
     bool LoadPluginOrDelay(const wchar_t* pluginFile);
-    bool BuildPluginCache(const wchar_t* pluginFile);
-    bool LoadPluginCache(const wchar_t* pluginFile);
+    bool BuildPluginCache(int moduleIndex);
+    bool LoadClsidsFromCache(const wchar_t* pluginFile);
     bool LoadCacheFile(const wchar_t* pluginFile);
     bool LoadClsids(CLSIDS& clsids, const wchar_t* pluginFile);
     bool SaveClsids(const CLSIDS& clsids, const wchar_t* pluginFile);

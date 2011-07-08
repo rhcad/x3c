@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NodeSelectionObserver.h"
+#include <ObserverExample/NodeSelectionObserver.h>
 
 class CNodeSelectionTestOnlyReceive : private NodeSelectionObserver
 {

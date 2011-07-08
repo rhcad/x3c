@@ -64,8 +64,7 @@ LANGUAGE 4, 2
 //
 
 VS_VERSION_INFO     VERSIONINFO
-  FILEVERSION       1,0,0,1
-  PRODUCTVERSION    1,0,0,0
+ FILEVERSION       1,0,0,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -81,14 +80,13 @@ BEGIN
         BLOCK "080404B0"
 		BEGIN
 			VALUE "CompanyName",     "\0"
-			VALUE "FileDescription", "TODO: 插件名称\0"
+			VALUE "FileDescription", "HollowView plugin\0"
 			VALUE "FileVersion",     "1.0.0.1\0"
 			VALUE "InternalName",    "HollowView\0"
 			VALUE "LegalCopyright",  "\0"
 			VALUE "LegalTrademarks", "\0"
 			VALUE "OriginalFilename","HollowView.dll\0"
-			VALUE "ProductName",     "TODO: 产品名称\0"
-			VALUE "ProductVersion",  "1.0.0.0\0"
+			VALUE "ProductName", "X3C Example\0"
 		END
 	END
 	BLOCK "VarFileInfo"
