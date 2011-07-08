@@ -123,8 +123,9 @@ bool Cx_PluginLoaderOut::GetLocalAppDataPath_(wchar_t* path)
 {
     bool ret = false;
 #ifdef WINOLEAPI_
-    const GUID uuidLocalAppData = {0xF1B32785,0x6FBA,0x4FCF,{0x9D,0x55,
-        0x7B,0x8E,0x7F,0x15,0x70,0x91}};
+    // FOLDERID_LocalAppDataGUID {F1B32785-6FBA-4FCF-9D55-7B8E7F157091}
+    const GUID uuidLocalAppData = {0xF1B32785,0x6FBA,0x4FCF,
+        {0x9D,0x55,0x7B,0x8E,0x7F,0x15,0x70,0x91}};
 
     typedef HRESULT (STDAPICALLTYPE *PFNGET)(REFGUID, DWORD, HANDLE, PWSTR*);
     HMODULE hdll = LoadLibraryW(L"SHELL32.DLL");
