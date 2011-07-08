@@ -1,12 +1,6 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-// author: Zhang Yun Gui, Tao Jian Lin
-// v2: 2011.01.05, ooyg: Change class-table to hash_map
-// v3: 2011.02.04, ooyg: Add filename in MODULEINFO. Add module index in class map.
-// v4: 2011.02.07, ooyg: Implement the delay-loaded feature.
-// v5: 2011.02.16, ooyg: Avoid plugin loading when a plugin is unloading.
-
 #ifndef _X3_CORE_OBJECTFACTORY_H
 #define _X3_CORE_OBJECTFACTORY_H
 
@@ -69,6 +63,7 @@ protected:
     std::vector<MODULE*>    m_modules;  //!< all plugin modules
     CLSMAP                  m_clsmap;   //!< map from clsid to class factory
     long                    m_unloading;    //!< positive if a a plugin is unloading
+    long                    m_loading;      //!< positive if a a plugin is loading
 
 protected:
     int FindModule(HMODULE hModule);

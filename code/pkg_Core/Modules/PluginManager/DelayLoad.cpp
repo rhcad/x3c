@@ -3,6 +3,7 @@
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_PluginLoader.h"
+#include <UtilFunc/LockCount.h>
 
 bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
 {
@@ -36,6 +37,7 @@ bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
 
 bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
 {
+    CLockCount locker(&m_loading);
     bool ret = false;
 
     if (LoadPlugin(filename))
@@ -240,7 +242,7 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
     wchar_t filename[MAX_PATH] = { 0 };
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
 
-    if (pIFFile)
+    if (pIFFile && m_loading > 0)
     {
         GetModuleFileNameW(hdll, filename, MAX_PATH);
         const wchar_t* name = PathFindFileNameW(filename);

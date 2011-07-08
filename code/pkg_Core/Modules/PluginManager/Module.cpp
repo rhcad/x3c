@@ -1,8 +1,5 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
-// v1: 2011.2.7, ooyg: Add Ix_AppWorkPath.
-// v2: 2011.2.8, ooyg: Add Ix_PluginDelayLoad.
-// v3: 2011.7.4, ooyg: Add GetLocalAppDataPath using SHGetKnownFolderPath.
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_PluginLoader.h"

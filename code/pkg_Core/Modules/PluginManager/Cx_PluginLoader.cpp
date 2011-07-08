@@ -1,21 +1,6 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-// author: Zhang Yun Gui, Tao Jian Lin
-// v1: 2010.12
-// v2: 2011.2.4, ooyg: Support absolute path in LoadPlugins().
-//          Unload plugin if fail to call InitializePlugins().
-//          Reuse element position in RegisterPlugin().
-// v3: 2011.02.07, ooyg: Implement the delay-loaded feature.
-// v4: 2011.02.08, ooyg: Call SaveClsids() only if clsids have changed.
-//          Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
-// v5: 2011.02.14, ooyg: Ignore folders in GetPluginIndex. Rewrite LoadPlugin().
-// v6: 2011.02.16, ooyg: Avoid plugin loading when a plugin is unloading.
-//          Counting even a plugin is not loaded in InitializePlugins.
-//          Not call ReleaseModule if a plugin is not loaded in UnloadPlugins.
-//          Force load ConfigXml plugin if the class file is about to loaded.
-// v7: 2011.05.29, ooyg: Add Ix_PluginLoader2.
-
 #include <UtilFunc/PluginInc.h>
 #include "Cx_PluginLoader.h"
 #include <PluginManager/Ix_AppWorkPath.h>
@@ -197,6 +182,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
 
 long Cx_PluginLoader::InitializePlugins()
 {
+    CLockCount locker(&m_loading);
     long count = 0;
 
     for (long i = 0; i < x3::GetSize(m_modules); i++)
@@ -295,6 +281,7 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
 
 bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 {
+    CLockCount locker(&m_loading);
     int existIndex = GetPluginIndex(filename);
 
     if (existIndex >= 0 && m_modules[existIndex]->hdll)

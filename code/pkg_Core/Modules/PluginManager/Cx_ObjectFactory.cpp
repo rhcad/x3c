@@ -1,17 +1,11 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-// author: Zhang Yun Gui, Tao Jian Lin
-// v2: 2011.01.05, ooyg: change class-table to hash_map
-// v3: 2011.02.04, ooyg: Don't remove element in ReleaseModule().
-// v4: 2011.02.07, ooyg: Implement the delay-loaded feature.
-// v5: 2011.02.16, ooyg: Avoid plugin loading when a plugin is unloading.
-
 #include <UtilFunc/PluginInc.h>
 #include "Cx_ObjectFactory.h"
 
 Cx_ObjectFactory::Cx_ObjectFactory()
-    : m_unloading(0)
+    : m_unloading(0), m_loading(0)
 {
 }
 

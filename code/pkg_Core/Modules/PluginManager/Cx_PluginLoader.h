@@ -1,12 +1,6 @@
 // Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
 // http://sourceforge.net/projects/x3c/
 
-// author: Zhang Yun Gui, Tao Jian Lin
-// v1: 2010.12
-// v3: 2011.02.07, ooyg: Implement the delay-loaded feature.
-// v4: 2011.02.08, ooyg: Implement Ix_PluginDelayLoad to support delay-load feature for observer plugins.
-// v5: 2011.05.29, ooyg: Add Ix_PluginLoader2.
-
 #ifndef _X3_CORE_PLUGINLOADER_H
 #define _X3_CORE_PLUGINLOADER_H
 
