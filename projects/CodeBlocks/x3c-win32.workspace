@@ -3,6 +3,7 @@
 	<Workspace title="Workspace">
 		<Project filename="win32\ChangeManager.cbp" />
 		<Project filename="win32\ChangeObserverExample.cbp" />
+		<Project filename="win32\ConfigXml.cbp" />
 		<Project filename="win32\FileUtility.cbp" />
 		<Project filename="win32\LogManager.cbp" />
 		<Project filename="win32\LogWriter.cbp" />
@@ -13,6 +14,6 @@
 		<Project filename="win32\TextUtility.cbp" />
 		<Project filename="win32\Win32DllTempl.cbp" />
 		<Project filename="win32\TestCore.cbp" active="1" />
-		<Project filename="win32\ConfigXml.cbp" />
+		<Project filename="win32\ComHook.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

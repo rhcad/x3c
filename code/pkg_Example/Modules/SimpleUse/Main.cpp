@@ -2,10 +2,10 @@
 
 #define USE_ONE_PLUGIN
 #include <PluginManager/XComCreator.h>
+#include <UtilFunc/LoadDllHelper.h>
 
-extern HMODULE g_hPluginDll;    // ¼û XComCreator.h
+extern HMODULE g_hPluginDll;    // see XComCreator.h
 
-static bool LoadPlugin(const wchar_t* filename);
 static void Test();
 
 #if defined(_MSC_VER) && defined(UNICODE)
@@ -14,31 +14,19 @@ static void Test();
 
 int main()
 {
-    if (LoadPlugin( L"../Plugins/Win32DllTempl.plugin" PLNEXT) )
+    LoadDllHelper dll (NULL, &g_hPluginDll);
+
+    if (dll.Load(L"../Plugins/Win32DllTempl.plugin" PLNEXT))
     {
         Test();
-
-        FreeLibrary(g_hPluginDll);
-        g_hPluginDll = NULL;
     }
-    if (LoadPlugin( L"../Plugins/MFCExtTempl.plugin" PLNEXT) )
+    if (dll.Load( L"../Plugins/MFCExtTempl.plugin" PLNEXT))
     {
         Test();
-
-        FreeLibrary(g_hPluginDll);
-        g_hPluginDll = NULL;
     }
 
     return 0;
 }
-
-bool LoadPlugin(const wchar_t* filename)
-{
-    g_hPluginDll = LoadLibraryW(filename);
-
-    return g_hPluginDll != NULL;
-}
-
 
 #include <Ix_Example.h>
 

@@ -27,6 +27,18 @@ Package=<4>
 
 ###############################################################################
 
+Project: "ComHook"=.\vcproj\ComHook.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
 Project: "ConfigDB"=.\vcproj\ConfigDB.dsp - Package Owner=<4>
 
 Package=<5>

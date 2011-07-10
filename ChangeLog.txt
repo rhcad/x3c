@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-07-10
+
+    * Add UtilFunc/LoadDllHelper.h
+    * Add ComHook plugin to hook CoCreateInstance on Windows.
+
 2011-07-08
 
     * Refact and optimize delay-loading code in PluginManager.

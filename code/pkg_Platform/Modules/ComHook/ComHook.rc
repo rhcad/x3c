@@ -1,0 +1,5 @@
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE 0, 0   // LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(936)
+#include "Version.rc2"
+#endif
