@@ -226,11 +226,23 @@
 			Name="Interface"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\Ix_AppWorkPath.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\Ix_PluginLoader.h"
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\Ix_PluginLoader2.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\PluginManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\PluginManager\Ix_PluginDelayLoad.h"
 				>
 			</File>
 			<File

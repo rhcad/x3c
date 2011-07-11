@@ -10,7 +10,7 @@
 #include <UtilFunc/ConvStr.h>
 #include <Xml/Ix_StringTable.h>
 #include <UtilFunc/LockCount.h>
-#include "../PluginManager/Ix_PluginDelayLoad.h"
+#include <PluginManager/Ix_PluginDelayLoad.h>
 
 Cx_LogManager::Cx_LogManager()
     : m_groupLevel(0), m_loglock(0)

@@ -21,10 +21,10 @@ public:
     X3DEFINE_IID(Ix_PluginDelayLoad)
 
     //! Register a plugin as observer owner.
-    virtual void AddObserverPlugin(HMODULE hdll, const char* obtype) = 0;
+    virtual void AddObserverPlugin(HMODULE hdll, const char* obtype, const wchar_t* subtype = L"") = 0;
 
     //! Load observer plugins when the event is first fired.
-    virtual void FireFirstEvent(const char* obtype) = 0;
+    virtual void FireFirstEvent(const char* obtype, const wchar_t* subtype = L"") = 0;
 };
 
 #endif // X3_MANAGER_IPLUGINDELAYLOAD_H_

@@ -5,10 +5,10 @@
 #define _X3_CORE_PLUGINLOADER_H
 
 #include "Cx_ObjectFactory.h"
-#include "PluginManager/Ix_PluginLoader.h"
-#include "PluginManager/Ix_PluginLoader2.h"
+#include <PluginManager/Ix_PluginLoader.h>
+#include <PluginManager/Ix_PluginLoader2.h>
 #include <PluginManager/Ix_AppWorkPath.h>
-#include "Ix_PluginDelayLoad.h"
+#include <PluginManager/Ix_PluginDelayLoad.h>
 
 class Cx_PluginLoader
     : public Cx_ObjectFactory
@@ -51,8 +51,8 @@ public:
 
     // From Ix_PluginDelayLoad
     //
-    virtual void AddObserverPlugin(HMODULE hdll, const char* obtype);
-    virtual void FireFirstEvent(const char* obtype);
+    virtual void AddObserverPlugin(HMODULE hdll, const char* obtype, const wchar_t* subtype = L"");
+    virtual void FireFirstEvent(const char* obtype, const wchar_t* subtype = L"");
 
     // Ix_AppWorkPath, implemented in Cx_PluginLoaderOut.
     virtual std::wstring GetWorkPath() { ASSERT(0); return L""; }

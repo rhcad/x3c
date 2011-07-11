@@ -237,7 +237,8 @@ bool Cx_PluginLoader::SaveClsids()
     return autosave.Submit();
 }
 
-void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
+void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype, 
+                                        const wchar_t* subtype)
 {
     wchar_t filename[MAX_PATH] = { 0 };
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
@@ -248,7 +249,9 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
         const wchar_t* name = PathFindFileNameW(filename);
 
         Cx_ConfigSection secObserver(pIFFile->GetData()->GetSection(NULL,
-            L"observers/observer", L"type", x3::a2w(obtype).c_str()));
+            L"observers/observer", 
+            L"type", x3::a2w(obtype).c_str(), 
+            L"subtype", subtype));
         secObserver.GetSection(L"plugin", L"name", name);
 
         Cx_ConfigSection secPlugin(pIFFile->GetData()->GetSection(NULL,
@@ -258,14 +261,16 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype)
     }
 }
 
-void Cx_PluginLoader::FireFirstEvent(const char* obtype)
+void Cx_PluginLoader::FireFirstEvent(const char* obtype, const wchar_t* subtype)
 {
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
 
     if (pIFFile)
     {
         Cx_ConfigSection secObserver(pIFFile->GetData()->GetSection(NULL,
-            L"observers/observer", L"type", x3::a2w(obtype).c_str(), false));
+            L"observers/observer", 
+            L"type", x3::a2w(obtype).c_str(), 
+            L"subtype", subtype, false));
 
         for (int i = 0; i < 999; i++)
         {

@@ -7,7 +7,7 @@
 
 #include <UtilFunc/PluginInc.h>
 #include "Cx_ChangeManager.h"
-#include "../PluginManager/Ix_PluginDelayLoad.h"
+#include <PluginManager/Ix_PluginDelayLoad.h>
 
 Cx_ChangeManager::Cx_ChangeManager()
 {
