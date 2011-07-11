@@ -3,7 +3,7 @@
  *  \note Include this file in one and only one CPP file of your plugin project.\n
  *        If you don't want to use XModuleMacro.h and this file, then you can use XComCreator.h file.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.06.30
+ *  \date   2011.07.11
  */
 #ifndef X3_PLUGINIMPL_MODULEIMPL_H_
 #define X3_PLUGINIMPL_MODULEIMPL_H_
@@ -283,6 +283,15 @@ OUTAPI bool x3CanUnloadPlugin()
             return false;
         }
     }
+
+#ifdef _WIN32
+    typedef HRESULT (WINAPI *COMFUNC)(void);
+    COMFUNC proc = (COMFUNC)GetProcAddress(x3GetModuleHandle(), "DllCanUnloadNow");
+    if (proc && (*proc)() != S_OK)
+    {
+        return false;
+    }
+#endif
 
     return true;
 }

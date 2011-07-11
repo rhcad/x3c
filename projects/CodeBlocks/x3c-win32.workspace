@@ -15,5 +15,6 @@
 		<Project filename="win32\Win32DllTempl.cbp" />
 		<Project filename="win32\TestCore.cbp" active="1" />
 		<Project filename="win32\ComHook.cbp" />
+		<Project filename="win32\TestPlatform.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

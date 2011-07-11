@@ -17,13 +17,13 @@ BaseTest::BaseTest()
 
 long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 {
-    // Initialize COM
+    if (NULL == s_loader.Handle())
+    {
 #ifdef _WIN32
-    VERIFY(SUCCEEDED(CoInitialize(NULL)));
+        VERIFY(SUCCEEDED(CoInitialize(NULL)));
 #endif
-
-    // Load plugins
-    VERIFY(s_loader.LoadPluginManager(L"../Plugins"));
+        VERIFY(s_loader.LoadPluginManager(L"../Plugins"));
+    }
 
     if (loadCore)
     {

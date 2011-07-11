@@ -11,6 +11,7 @@ public:
 
 private:
     static HRESULT CreateInstance(REFCLSID rclsid, REFIID riid, LPVOID FAR* ppv);
+    static HMODULE FindModule(const std::wstring& clsid);
 };
 
 #endif // _COMHOOK_COMCREATOR_H
