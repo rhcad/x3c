@@ -64,7 +64,7 @@ std::wstring DbFunc::GetLevel1Name(const wchar_t* name)
 {
     wchar_t buf[41];
 
-    wcsncpy_s(buf, _countof(buf), name ? name : L"", _countof(buf));
+    wcscpy_s(buf, _countof(buf), name ? name : L"");
     cutstr(wcschr(buf, L'\\'));
     cutstr(wcschr(buf, L'/'));
     cutstr(wcschr(buf, L' '));

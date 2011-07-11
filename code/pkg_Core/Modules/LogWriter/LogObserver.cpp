@@ -87,7 +87,7 @@ bool CLogObserver::GetServerPath(wchar_t* path)
 #ifdef _WIN32
     wchar_t inifile[MAX_PATH];
 
-    wcsncpy_s(inifile, MAX_PATH, m_path.c_str(), MAX_PATH);
+    wcscpy_s(inifile, MAX_PATH, m_path.c_str());
     PathAppendW(inifile, L"LogWriter.ini");
 
     if (0 == m_copyflags)
@@ -118,14 +118,10 @@ void CLogObserver::InitLogFile()
         MakerInitVars();
 
         Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
-        if (pIFUtility && !pIFUtility->CreateDirectory(m_path.c_str(), true))
-        {
-            m_path = x3::MakeTempFileName(L"Log", false);
-            pIFUtility->CreateDirectory(m_path.c_str(), true);
-        }
+        SafeCall(pIFUtility, CreateDirectory(m_path.c_str(), true));
 
         wchar_t propfile[MAX_PATH] = {0};
-        wcsncpy_s(propfile, MAX_PATH, m_path.c_str(), MAX_PATH);
+        wcscpy_s(propfile, MAX_PATH, m_path.c_str());
         PathAppendW(propfile, m_appname.c_str());
         wcscat_s(propfile, _countof(propfile), L".properties");
 
@@ -147,7 +143,7 @@ void CLogObserver::MakerInitVars()
         m_path = x3::GetAppWorkPath() + L"log";
     }
 
-    wcsncpy_s(path, MAX_PATH, m_path.c_str(), MAX_PATH);
+    wcscpy_s(path, MAX_PATH, m_path.c_str());
     PathAddBackslashW(path);
     m_path = path;
 

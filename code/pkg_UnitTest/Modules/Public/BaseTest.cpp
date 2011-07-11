@@ -4,6 +4,7 @@
 #include <UnitTestInc.h>
 #include "BaseTest.h"
 #include <PluginManager/PluginManager.h>
+#include <PluginManager/Ix_AppWorkPath.h>
 
 static CPluginManager s_loader;
 static wchar_t s_datapath[MAX_PATH] = { 0 };
@@ -52,22 +53,16 @@ void BaseTest::UnloadPlugins()
 #endif
 }
 
-Ix_PluginLoader* BaseTest::GetPluginLoader()
-{
-    return s_loader.GetPluginLoader();
-}
-
 void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
 {
     wchar_t filename[MAX_PATH];
 
     if (0 == path[0])
     {
-        GetModuleFileNameW(NULL, filename, MAX_PATH);
-        PathRemoveFileSpecW(filename);
+        wcscpy_s(filename, MAX_PATH, x3::GetAppWorkPath().c_str());
         PathAppendW(filename, L"UnitTests.ini");
 
-        wcsncpy_s(path, MAX_PATH, filename, MAX_PATH);
+        wcscpy_s(path, MAX_PATH, filename);
         PathRemoveFileSpecW(path);      // bin\vc80\debug\tests
         PathRemoveFileSpecW(path);      // bin\vc80\debug
         PathRemoveFileSpecW(path);      // bin\vc80
@@ -89,12 +84,12 @@ std::wstring BaseTest::MakeDataPath(const wchar_t* folder, const wchar_t* file)
 
     if (folder && *folder)
     {
-        wcsncpy_s(filename, MAX_PATH, s_datapath, MAX_PATH);
+        wcscpy_s(filename, MAX_PATH, s_datapath);
         PathAppendW(filename, folder);
     }
     else
     {
-        wcsncpy_s(filename, MAX_PATH, s_temppath, MAX_PATH);
+        wcscpy_s(filename, MAX_PATH, s_temppath);
         ::CreateDirectoryW(s_temppath, NULL);
     }
 

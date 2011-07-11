@@ -70,40 +70,6 @@ inline std::wstring FileNameRelToAbs(const wchar_t* relname, bool isfile = true)
     return path;
 }
 
-//! Generate a absolute path in windows temporary path.
-/*! The result path is a subfolder of the windows temporary path (using GetTempPath).\n
-    The subfolder name is file name of the main application which load plugins initiative.
-    \ingroup _GROUP_UTILFUNC
-    \param relname Relative path or file name to be converted such as 'Log.txt' and 'myapp/output'.
-    \param isfile 'relname' is a file name or path.
-    \return Absolute path converted. If isfile is false then the result will end with slash char.
-    \see x3::GetAppWorkPath()
-*/
-inline std::wstring MakeTempFileName(const wchar_t* relname = L"", bool isfile = true)
-{
-    wchar_t path[MAX_PATH] = { 0 };
-    wchar_t exename[MAX_PATH] = { 0 };
-
-    GetModuleFileNameW(GetMainModuleHandle(), exename, MAX_PATH);
-    PathStripPathW(exename);
-    PathRemoveExtensionW(exename);
-
-    GetTempPathW(MAX_PATH - 1, path);
-    PathAppendW(path, exename);
-    if (relname && *relname)
-    {
-        PathAppendW(path, relname);
-    }
-
-    PathRemoveBackslashW(path);
-    if ( !(isfile && relname && *relname) )
-    {
-        PathAddBackslashW(path);
-    }
-
-    return path;
-}
-
 //! Ensure a path ending with slash char.
 /*!
     \ingroup _GROUP_UTILFUNC

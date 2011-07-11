@@ -101,7 +101,7 @@ bool Cx_PluginLoader::LoadClsidsFromCache(const wchar_t* filename)
         module->module = NULL;
         module->owned = false;
         module->inited = false;
-        wcsncpy_s(module->filename, MAX_PATH, filename, MAX_PATH);
+        wcscpy_s(module->filename, MAX_PATH, filename);
 
         moduleIndex = x3::GetSize(m_modules);
         m_modules.push_back(module);
@@ -146,7 +146,7 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
             std::wstring appname(PathFindFileNameW(m_clsfile));
 
             // Make cache file name.
-            wcsncpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str(), MAX_PATH);
+            wcscpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str());
             PathAppendW(m_clsfile, appname.c_str());
             PathRenameExtensionW(m_clsfile, L".clsbuf");
 

@@ -196,7 +196,7 @@ X3 C++ PluginFramework
 2011-01-15
 
     * Remove cppunit 1.12.1 include files.
-    * Replace StrCpyNW to wcsncpy_s (because for VC6 shell32.dll no StrCpyNW entry point in Win7).
+    * Replace StrCpyNW to wcscpy_s (because for VC6 shell32.dll no StrCpyNW entry point in Win7).
     * Simplify license note in *.h and *.cpp.
 
     * PluginManager\PluginManager.h: add TextUtility.plugin.dll in LoadCorePlugins().

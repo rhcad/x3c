@@ -95,7 +95,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
         return false;
     }
 
-    wcsncpy_s(path, MAX_PATH, filename, MAX_PATH);
+    wcscpy_s(path, MAX_PATH, filename);
     ReplaceSlash(path);
     if (bIsPath)
     {
@@ -184,7 +184,7 @@ bool DeletePathFile_(const wchar_t* filename, bool bRecycle, HWND hwnd)
 
     wchar_t szFile[MAX_PATH];
     memset(szFile, 0, sizeof(szFile));
-    wcsncpy_s(szFile, MAX_PATH, filename, MAX_PATH);
+    wcscpy_s(szFile, MAX_PATH, filename);
     ReplaceSlash(szFile);
     PathRemoveBackslashW(szFile);
 
@@ -256,10 +256,10 @@ bool Cx_FileUtility::TwoFileOperation(const wchar_t* oldfile,
 
         memset(szOld, 0, sizeof(szOld));
         memset(szNew, 0, sizeof(szNew));   // pTo必须以两个\0结束
-        wcsncpy_s(szOld, MAX_PATH, oldfile, MAX_PATH);
+        wcscpy_s(szOld, MAX_PATH, oldfile);
         ReplaceSlash(szOld);
         PathRemoveBackslashW(szOld);
-        wcsncpy_s(szNew, MAX_PATH, newfile, MAX_PATH);
+        wcscpy_s(szNew, MAX_PATH, newfile);
         ReplaceSlash(szNew);
         PathRemoveBackslashW(szNew);
 
@@ -376,20 +376,20 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
         {
             if (IsNotNull(pszBase))
             {
-                wcsncpy_s(szPath, MAX_PATH, pszBase, MAX_PATH);
+                wcscpy_s(szPath, MAX_PATH, pszBase);
             }
             else
             {
                 GetModuleFileNameW(x3::GetMainModuleHandle(), szPath, MAX_PATH);
             }
 
-            wcsncpy_s(wcschr(szPath, L':') + 1, MAX_PATH, pszRel, MAX_PATH);
+            wcscpy_s(wcschr(szPath, L':') + 1, MAX_PATH, pszRel);
         }
         else if (PathIsRelativeW(pszRel))
         {
             if (IsNotNull(pszBase))
             {
-                wcsncpy_s(szPath, MAX_PATH, pszBase, MAX_PATH);
+                wcscpy_s(szPath, MAX_PATH, pszBase);
                 if (bBaseIsFile)
                 {
                     ReplaceSlash(szPath);
@@ -405,7 +405,7 @@ std::wstring Cx_FileUtility::RelToAbs(const wchar_t* pszRel, bool bRelIsFile,
         }
         else
         {
-            wcsncpy_s(szPath, MAX_PATH, pszRel, MAX_PATH);
+            wcscpy_s(szPath, MAX_PATH, pszRel);
         }
 
         PathRemoveBackslashW(szPath);
@@ -448,7 +448,7 @@ std::wstring Cx_FileUtility::AbsToRel(const wchar_t* pszAbs, bool bAbsIsFile,
         else
 #endif
         {
-            wcsncpy_s(szPath, MAX_PATH, pszAbs, MAX_PATH);
+            wcscpy_s(szPath, MAX_PATH, pszAbs);
         }
     }
 
@@ -463,7 +463,7 @@ std::wstring Cx_FileUtility::ChangeFileNameSuffix(const wchar_t* filename,
     if (filename != NULL && pszSuffix != NULL)
     {
         ASSERT(wcschr(pszSuffix, L'.') != NULL);
-        wcsncpy_s(szNewFile, MAX_PATH, filename, MAX_PATH);
+        wcscpy_s(szNewFile, MAX_PATH, filename);
         PathRenameExtensionW(szNewFile, pszSuffix);
     }
 
@@ -479,7 +479,7 @@ std::wstring Cx_FileUtility::GetFileTitle(const wchar_t* filename)
         wchar_t* pszName = PathFindFileNameW(filename);
         if (pszName != NULL)
         {
-            wcsncpy_s(szNewFile, MAX_PATH, pszName, MAX_PATH);
+            wcscpy_s(szNewFile, MAX_PATH, pszName);
             ReplaceSlash(szNewFile);
             PathRemoveExtensionW(szNewFile);
         }
@@ -494,7 +494,7 @@ std::wstring Cx_FileUtility::GetFileName(const wchar_t* filename)
         return L"";
 
     wchar_t szTemp[MAX_PATH];
-    wcsncpy_s(szTemp, MAX_PATH, PathFindFileNameW(filename), MAX_PATH);
+    wcscpy_s(szTemp, MAX_PATH, PathFindFileNameW(filename));
     PathRemoveBackslashW(szTemp);
 
     return szTemp;
@@ -511,7 +511,7 @@ std::wstring Cx_FileUtility::GetPathOfFile(const wchar_t* filename)
 
     if (filename != NULL)
     {
-        wcsncpy_s(szPath, MAX_PATH, filename, MAX_PATH);
+        wcscpy_s(szPath, MAX_PATH, filename);
         ReplaceSlash(szPath);
         PathRemoveBackslashW(szPath);
         PathRemoveFileSpecW(szPath);
@@ -534,7 +534,7 @@ std::wstring Cx_FileUtility::MakeFileName(const std::wstring& wstrPath,
     {
         return szFileName;
     }
-    wcsncpy_s(szFileName, MAX_PATH, wstrPath.c_str(), MAX_PATH);
+    wcscpy_s(szFileName, MAX_PATH, wstrPath.c_str());
 
     if (wstrExtName.empty())
     {

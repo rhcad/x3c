@@ -242,10 +242,6 @@ DWORD GetFileSize(HANDLE file, DWORD* high)
     return 0;
 }
 
-void GetTempPathW(DWORD len, wchar_t* buf)
-{
-}
-
 bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder)
 {
     return false;

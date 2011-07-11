@@ -51,7 +51,7 @@ void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, HMODULE instance,
     }
     else
     {
-        wcsncpy_s(fullpath, MAX_PATH, path, MAX_PATH);
+        wcscpy_s(fullpath, MAX_PATH, path);
     }
     ReplaceSlashes(fullpath);
     PathAddBackslashW(fullpath);

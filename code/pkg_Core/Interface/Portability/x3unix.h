@@ -56,7 +56,6 @@ void PathAppendW(wchar_t* path, const wchar_t* more);
 wchar_t* PathAddBackslashW(wchar_t* path);
 void PathRenameExtensionW(wchar_t* path, const wchar_t* more);
 
-void GetTempPathW(DWORD len, wchar_t* buf);
 bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
 bool SetFileAttributesNormal(const wchar_t* filename);
 DWORD GetLastError();

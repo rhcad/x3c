@@ -21,7 +21,7 @@ public:
     virtual BOOL InitInstance()
     {
         AfxOleInit();
-        SetRegistryKey(_T("Founder\\UnitTests"));
+        SetRegistryKey(_T("x3c\\UnitTests"));
 
         CppUnit::MfcUi::TestRunner runner;
         runner.addTest( CppUnit::TestFactoryRegistry::getRegistry().makeTest() );

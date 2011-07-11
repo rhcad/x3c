@@ -1,9 +1,8 @@
 pkg_UnitTest: unittest projects, using cppunit 1.12.1.
 
-Download cppunit files from one of these addresses:
+Download cppunit files from one of these sites:
     http://sourceforge.net/projects/cppunit/files/cppunit/1.12.1/
     http://files.cnblogs.com/rhcad/cppunit-1.12.1-vc689&gcc.zip
-    \\dampub\Tools\CodeCheck\C++\CppUnit\cppunit-1.12.1  (Founder server)
 
 Then copy 'cppunit' folder to 'pkg_UnitTest\Interface\cppunit\'.
 

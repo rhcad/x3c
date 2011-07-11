@@ -57,7 +57,7 @@ public:
             return false;
 
         wchar_t tmpfile[256] = { 0 };
-        wcsncpy_s(tmpfile, _countof(tmpfile), filename, _countof(tmpfile));
+        wcscpy_s(tmpfile, _countof(tmpfile), filename);
         tmpfile[_countof(tmpfile) - 5] = 0;
         wcscat_s(tmpfile, _countof(tmpfile), L".tmp");
 
@@ -289,7 +289,7 @@ bool Cx_ConfigXml::SetXmlContent(const std::wstring& content)
     else
     {
         wchar_t buf[81];
-        wcsncpy_s(buf, _countof(buf), content.c_str(), _countof(buf));
+        wcscpy_s(buf, _countof(buf), content.c_str());
         X3LOG_WARNING2(L"@ConfigXml:IDS_LOADXMLSTR_FAIL", buf);
     }
 
