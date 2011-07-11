@@ -6,7 +6,6 @@ static PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname);
 static PROC* FindFunctionAddress(PIMAGE_THUNK_DATA thunk, PROC oldproc);
 static bool ReplaceFunction(PROC* addr, PROC newproc);
 
-//! Replace a API function in the import directory of the current process.
 bool HookModuleFunction(LPCSTR dllname, PROC oldproc, PROC newproc)
 {
     ASSERT(dllname && oldproc && newproc);

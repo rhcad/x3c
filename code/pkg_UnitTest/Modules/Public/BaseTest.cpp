@@ -12,8 +12,6 @@ static wchar_t s_temppath[MAX_PATH] = { 0 };
 
 BaseTest::BaseTest()
 {
-    MakeRootPath(s_datapath, L"../TestData");
-    MakeRootPath(s_temppath, L"Temp");
 }
 
 long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
@@ -55,10 +53,10 @@ void BaseTest::UnloadPlugins()
 
 void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
 {
-    wchar_t filename[MAX_PATH];
-
     if (0 == path[0])
     {
+        wchar_t filename[MAX_PATH];
+
         wcscpy_s(filename, MAX_PATH, x3::GetAppWorkPath().c_str());
         PathAppendW(filename, L"UnitTests.ini");
 
@@ -80,15 +78,17 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
 
 std::wstring BaseTest::MakeDataPath(const wchar_t* folder, const wchar_t* file)
 {
-    wchar_t filename[MAX_PATH];
+    wchar_t filename[MAX_PATH] = { 0 };
 
     if (folder && *folder)
     {
+        MakeRootPath(s_datapath, L"../TestData");
         wcscpy_s(filename, MAX_PATH, s_datapath);
         PathAppendW(filename, folder);
     }
-    else
+    else if (0 == s_temppath[0])
     {
+        MakeRootPath(s_temppath, L"Temp");
         wcscpy_s(filename, MAX_PATH, s_temppath);
         ::CreateDirectoryW(s_temppath, NULL);
     }

@@ -59,6 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="ole32.lib"
 				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="oldnames.lib"
@@ -135,6 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="ole32.lib"
 				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="oldnames.lib"
@@ -191,6 +193,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\ComHook\ComFileMap.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Platform\Modules\ComHook\Module.cpp"
 				>
 			</File>
@@ -201,7 +207,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\ComHook\ComFileMap.h"
 				>
 			</File>
 		</Filter>

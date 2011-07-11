@@ -7,19 +7,19 @@
 CFG=ComHook - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "ComHook.mak".
-!MESSAGE
+!MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
-!MESSAGE
+!MESSAGE 
 !MESSAGE NMAKE /f "ComHook.mak" CFG="ComHook - Win32 Debug"
-!MESSAGE
+!MESSAGE 
 !MESSAGE Possible choices for configuration are:
-!MESSAGE
+!MESSAGE 
 !MESSAGE "ComHook - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "ComHook - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE
+!MESSAGE 
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\ComHook"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR- /GX /O2 /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
+# ADD CPP /nologo /MD /W4 /GX /O2 /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -45,7 +45,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/ComHook.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/ComHook.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\Plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/ComHook.lib"
+# ADD LINK32 ole32.lib /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/ComHook.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/ComHook.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\Plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/ComHook.lib"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "ComHook - Win32 Debug"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\ComHook"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR- /GX /ZI /Od /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -64,10 +64,10 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/ComHook.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/ComHook.lib" /pdbtype:sept
+# ADD LINK32 ole32.lib /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/ComHook.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/ComHook.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
-!ENDIF
+!ENDIF 
 
 # Begin Target
 
@@ -82,7 +82,15 @@ LINK32=link.exe
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComFileMap.h
 # End Source File
 # End Group
 # Begin Group "Source Files"
@@ -94,11 +102,15 @@ SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\Module.cpp
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.cpp
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComFileMap.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\Module.cpp
 # End Source File
 # End Group
 # Begin Group "Resource Files"
@@ -106,11 +118,11 @@ SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.cpp
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\Version.rc2
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComHook.rc
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComHook.rc
+SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\Version.rc2
 # End Source File
 # End Group
 # End Target
