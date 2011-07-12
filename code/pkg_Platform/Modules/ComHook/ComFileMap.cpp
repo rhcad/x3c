@@ -66,6 +66,7 @@ void CComFileMap::LoadMapFile(const std::wstring& filename)
         {
             break;
         }
+        ASSERT(m_map.find(clsid) == m_map.end());
         m_map[clsid] = file;
     }
 }
