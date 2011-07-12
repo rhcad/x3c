@@ -14,9 +14,9 @@ bool CComCreator::Init()
 
 void CComCreator::Free()
 {
+    HookModuleFunction("ole32.dll", (PROC)Hook_CoCreateInstance, s_oldfunc);
     s_modules.Free();
     s_filemap.Free();
-    HookModuleFunction("ole32.dll", (PROC)Hook_CoCreateInstance, s_oldfunc);
 }
 
 HRESULT WINAPI CComCreator::Hook_CoCreateInstance(
@@ -75,6 +75,7 @@ HRESULT CComCreator::CreateInstance(
 
         if (pfnGet != NULL)
         {
+            const CLSID IID_IClassFactory = {1,0,0,{0xC0,0,0,0,0,0,0,0x46}};
             hr = (*pfnGet)(rclsid, IID_IClassFactory, (void**)&factory);
         }
         if (factory != NULL)

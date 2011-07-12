@@ -29,7 +29,7 @@ std::wstring CComFileMap::GetComFile(const std::wstring& clsid)
     {
         std::vector<std::wstring> files;
         x3::CScanFilesByExtension scanner(&files, L".xml");
-        std::wstring path(x3::FileNameRelToAbs(L"config\\commap", false));
+        std::wstring path(x3::RelToAbsWithPlugin(L"../config/commap", false));
 
         x3::ScanFiles(&scanner, path.c_str(), true);
         m_loaded = true;
