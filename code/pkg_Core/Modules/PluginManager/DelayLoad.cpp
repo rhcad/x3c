@@ -35,7 +35,7 @@ bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
     return ret;
 }
 
-bool Cx_PluginLoader::LoadDelayPlugin(const wchar_t* filename)
+bool Cx_PluginLoader::LoadDelayedPlugin_(const wchar_t* filename)
 {
     CLockCount locker(&m_loading);
     bool ret = false;
@@ -282,12 +282,15 @@ void Cx_PluginLoader::FireFirstEvent(const char* obtype, const wchar_t* subtype)
                 break;
             }
 
-            int moduleIndex = GetPluginIndex(shortflname.c_str());
-
-            if (moduleIndex >= 0 && !m_modules[moduleIndex]->hdll)
-            {
-                LoadDelayPlugin(m_modules[moduleIndex]->filename);
-            }
+            LoadDelayedPlugin(shortflname);
         }
     }
+}
+
+bool Cx_PluginLoader::LoadDelayedPlugin(const std::wstring& filename)
+{
+    int moduleIndex = GetPluginIndex(filename.c_str());
+
+    return moduleIndex >= 0 && (m_modules[moduleIndex]->hdll
+        || LoadDelayedPlugin_(m_modules[moduleIndex]->filename));
 }

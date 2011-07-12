@@ -53,6 +53,7 @@ public:
     //
     virtual void AddObserverPlugin(HMODULE hdll, const char* obtype, const wchar_t* subtype = L"");
     virtual void FireFirstEvent(const char* obtype, const wchar_t* subtype = L"");
+    virtual bool LoadDelayedPlugin(const std::wstring& filename);
 
     // Ix_AppWorkPath, implemented in Cx_PluginLoaderOut.
     virtual std::wstring GetWorkPath() { ASSERT(0); return L""; }
@@ -71,7 +72,7 @@ private:
         const wchar_t* path, const wchar_t* ext, bool recursive);
     long InLoadPlugins(const std::vector<std::wstring>& filenames);
     int GetPluginIndex(const wchar_t* filename);
-    virtual bool LoadDelayPlugin(const wchar_t* filename);
+    virtual bool LoadDelayedPlugin_(const wchar_t* filename);
     bool LoadPluginOrDelay(const wchar_t* pluginFile);
     bool BuildPluginCache(int moduleIndex);
     bool LoadClsidsFromCache(const wchar_t* pluginFile);

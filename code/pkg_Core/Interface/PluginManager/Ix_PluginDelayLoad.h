@@ -25,6 +25,13 @@ public:
 
     //! Load observer plugins when the event is first fired.
     virtual void FireFirstEvent(const char* obtype, const wchar_t* subtype = L"") = 0;
+
+    //! Load plugin immediately which is marked as delay-loading.
+    /*!
+        \param filename plugin filename regardless folder.
+        \return true if the plugin is loaded.
+    */
+    virtual bool LoadDelayedPlugin(const std::wstring& filename) = 0;
 };
 
 #endif // X3_MANAGER_IPLUGINDELAYLOAD_H_

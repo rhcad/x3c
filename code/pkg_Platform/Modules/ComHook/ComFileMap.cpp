@@ -4,6 +4,7 @@
 #include <UtilFunc/RelToAbs.h>
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/Cx_ConfigSection.h>
+#include <PluginManager/Ix_PluginDelayLoad.h>
 
 // CComFileMap
 //
@@ -83,14 +84,33 @@ CComModules::~CComModules()
 
 void CComModules::Free()
 {
+    for (std::vector<HMODULE>::iterator it = m_modules.begin();
+        it != m_modules.end(); ++it)
+    {
+        FreeLibrary(*it);
+    }
+    m_modules.clear();
 }
 
 HMODULE CComModules::GetModule(const std::wstring& filename)
 {
+    Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
+    SafeCall(pIFLoader, LoadDelayedPlugin(filename));
+
     HMODULE hmod = GetModuleHandleW(PathFindFileNameW(filename.c_str()));
 
     if (NULL == hmod)
     {
+        hmod = LoadLibraryExW(filename.c_str());
+        if (NULL == hmod)
+        {
+            DWORD errcode = GetLastError();
+            X3LOG_WARNING2(L"Fail to load module.", errcode << L", " << filename);
+        }
+        else
+        {
+            m_modules.push_back(hmod);
+        }
     }
 
     return hmod;

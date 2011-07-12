@@ -77,7 +77,7 @@ private:
     void operator=(const Cx_ObjectFactory&);
 
     bool RegisterClass(int moduleIndex, const X3CLASSENTRY& cls);
-    virtual bool LoadDelayPlugin(const wchar_t* filename) = 0;
+    virtual bool LoadDelayedPlugin_(const wchar_t* filename) = 0;
 };
 
 #endif // _X3_CORE_OBJECTFACTORY_H

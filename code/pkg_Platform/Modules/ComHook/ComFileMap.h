@@ -25,6 +25,9 @@ public:
 
     void Free();
     HMODULE GetModule(const std::wstring& filename);
+
+private:
+    std::vector<HMODULE>    m_modules;
 };
 
 #endif // _COMHOOK_COMFILEMAP_H

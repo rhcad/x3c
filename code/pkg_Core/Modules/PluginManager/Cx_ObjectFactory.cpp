@@ -37,7 +37,7 @@ int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
 
     if (pEntry && !pEntry->pfnObjectCreator && moduleIndex >= 0)
     {
-        if (!LoadDelayPlugin(m_modules[moduleIndex]->filename)
+        if (!LoadDelayedPlugin_(m_modules[moduleIndex]->filename)
             && 0 == m_unloading)
         {
             CLSMAP::iterator it = m_clsmap.find(clsid.str());
