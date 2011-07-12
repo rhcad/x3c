@@ -75,7 +75,7 @@ HRESULT CComCreator::CreateInstance(
 
         if (pfnGet != NULL)
         {
-            const CLSID IID_IClassFactory = {1,0,0,{0xC0,0,0,0,0,0,0,0x46}};
+            const IID IID_IClassFactory = {1,0,0,{0xC0,0,0,0,0,0,0,0x46}};
             hr = (*pfnGet)(rclsid, IID_IClassFactory, (void**)&factory);
         }
         if (factory != NULL)

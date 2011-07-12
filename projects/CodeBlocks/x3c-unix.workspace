@@ -12,7 +12,9 @@
 		<Project filename="unix/StringTable.cbp" />
 		<Project filename="unix/TextUtility.cbp" />
 		<Project filename="unix/Win32DllTempl.cbp" />
-		<Project filename="unix/TestCore.cbp" />
 		<Project filename="unix/ConfigXml.cbp" />
+		<Project filename="unix/TestCore.cbp" />
+		<Project filename="unix/TestPlatform.cbp" />
+		<Project filename="unix/TestUtility.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

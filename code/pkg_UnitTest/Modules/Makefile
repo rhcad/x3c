@@ -7,17 +7,23 @@ SUBDIRS = $(filter-out Public/, $(sort $(dir $(wildcard */))))
 CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
 
-.PHONY: TestCore TestUtility
+.PHONY: TestCore  TestUtility  TestPlatform
+all: TestCore  TestUtility  TestPlatform
 
 TestCore:
 	@echo
 	@echo Making all in subdirectory $@...
 	$(MAKE) -C TestCore
 
-#TestUtility:
-#	@echo
-#	@echo Making all in subdirectory $@...
-#	$(MAKE) -C TestUtility
+TestUtility:
+	@echo
+	@echo Making all in subdirectory $@...
+	$(MAKE) -C TestUtility
+
+TestPlatform:
+	@echo
+	@echo Making all in subdirectory $@...
+	$(MAKE) -C TestPlatform
 
 clean:	$(CLEANSUBDIRS)
 

@@ -6,8 +6,8 @@ include $(ROOTDIR)/config.mk
 SUBDIRS = $(filter-out  bin/  pkg_Utility/  pkg_AppUI/, $(sort $(dir $(wildcard */))))
 CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
-.PHONY:  pkg_Core   pkg_Example   pkg_UnitTest
-all:  pkg_Core   pkg_Utility   pkg_Example   pkg_UnitTest
+.PHONY:  pkg_Core   pkg_Example   pkg_UnitTest  pkg_Platform
+all:  pkg_Core   pkg_Utility   pkg_Example   pkg_UnitTest  pkg_Platform
 
 pkg_Core:
 	@echo
@@ -24,8 +24,12 @@ pkg_Example:
 #	@echo Making all in subdirectory $@...
 #	$(MAKE) -C pkg_UnitTest
 
+#pkg_Platform:
+#	@echo
+#	@echo Making all in subdirectory $@...
+#	$(MAKE) -C pkg_Platform
+
 clean:	$(CLEANSUBDIRS)
 
 $(CLEANSUBDIRS):
 	@cd $(basename $@) ; $(MAKE) clean
-

@@ -18,6 +18,7 @@
 typedef void* HMODULE;
 typedef void* HANDLE;
 typedef void* HWND;
+typedef void* PROC;
 typedef unsigned char BYTE;
 typedef unsigned short WORD;
 typedef unsigned long DWORD;
@@ -31,7 +32,7 @@ bool FreeLibrary(HMODULE hdll);
 HMODULE LoadLibraryW(const wchar_t* filename);
 HMODULE LoadLibraryExW(const wchar_t* filename);
 HMODULE GetModuleHandleW(const wchar_t* filename);
-void* GetProcAddress(HMODULE hdll, const char* name);
+PROC GetProcAddress(HMODULE hdll, const char* name);
 void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size);
 void GetModuleFileNameA(HMODULE hdll, char* filename, int size);
 
