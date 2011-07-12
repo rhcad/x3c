@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * Add UtilFunc/LoadDllHelper.h
     * Add ComHook plugin and TestPlatform to hook CoCreateInstance on Windows.
+    * COM plugin is marked as delay-loading plugin.
 
 2011-07-08
 

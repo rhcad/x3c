@@ -66,8 +66,14 @@ void CComFileMap::LoadMapFile(const std::wstring& filename)
         {
             break;
         }
-        ASSERT(m_map.find(clsid) == m_map.end());
-        m_map[clsid] = file;
+        if (m_map.find(clsid) == m_map.end())
+        {
+            m_map[clsid] = file;
+        }
+        else
+        {
+            X3LOG_WARNING2(L"The classid is already registered", clsid);
+        }
     }
 }
 

@@ -67,13 +67,18 @@ bool Cx_PluginLoader::LoadDelayedPlugin_(const wchar_t* filename)
 bool Cx_PluginLoader::BuildPluginCache(int moduleIndex)
 {
     ASSERT(moduleIndex >= 0);
-    const wchar_t* pluginFile = m_modules[moduleIndex]->filename;
+    const MODULE* module = m_modules[moduleIndex];
+
+    if (GetProcAddress(module->hdll, "DllGetClassObject") != NULL)
+    {
+        AddObserverPlugin(module->hdll, "x3::complugin");
+    }
 
     CLSIDS oldids;
-    LoadClsids(oldids, pluginFile);
+    LoadClsids(oldids, module->filename);
 
-    return oldids != m_modules[moduleIndex]->clsids
-        && SaveClsids(m_modules[moduleIndex]->clsids, pluginFile);
+    return oldids != module->clsids
+        && SaveClsids(module->clsids, module->filename);
 }
 
 bool Cx_PluginLoader::LoadClsidsFromCache(const wchar_t* filename)
