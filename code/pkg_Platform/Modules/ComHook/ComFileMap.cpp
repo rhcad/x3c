@@ -101,11 +101,16 @@ void CComModules::Free()
 
 HMODULE CComModules::GetModule(const std::wstring& filename)
 {
-    Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
-    SafeCall(pIFLoader, LoadDelayedPlugin(filename));
+    const wchar_t* name = PathFindFileNameW(filename.c_str());
+    HMODULE hmod = GetModuleHandleW(name);
 
-    HMODULE hmod = GetModuleHandleW(PathFindFileNameW(filename.c_str()));
+    if (NULL == hmod)
+    {
+        Cx_Interface<Ix_PluginDelayLoad> pIFLoader(x3::CLSID_PluginDelayLoad);
+        SafeCall(pIFLoader, LoadDelayedPlugin(filename));
 
+        hmod = GetModuleHandleW(name);
+    }
     if (NULL == hmod)
     {
         hmod = LoadLibraryExW(filename.c_str());

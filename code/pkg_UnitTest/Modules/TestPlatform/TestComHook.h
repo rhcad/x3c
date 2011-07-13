@@ -9,6 +9,7 @@ class TestComHook : public BaseTest
 {
     CPPUNIT_TEST_SUITE( TestComHook );
     CPPUNIT_TEST( testSimpleAtlCom );
+    CPPUNIT_TEST( testMultiCreate );
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -18,4 +19,5 @@ public:
     virtual void tearDown();
 
     void testSimpleAtlCom();
+    void testMultiCreate();
 };
