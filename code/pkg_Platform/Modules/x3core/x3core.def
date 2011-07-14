@@ -1,0 +1,9 @@
+; x3core.def : Declares the module parameters.
+
+LIBRARY      "x3core.com.dll"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

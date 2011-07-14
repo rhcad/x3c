@@ -36,7 +36,18 @@ private:
     {
         if (m_path.empty())
         {
-            m_path = GetLocalAppDataPath(L"x3c");
+            if (IsOnVistaDisk())
+            {
+                m_path = GetLocalAppDataPath(L"x3c");
+            }
+            else
+            {
+                wchar_t path[MAX_PATH] = { 0 };
+                GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+                PathRemoveFileSpecW(path);
+                PathAddBackslashW(path);
+                m_path = path;
+            }
         }
         return m_path;
     }
@@ -72,6 +83,7 @@ private:
         return path;
     }
 
+    bool IsOnVistaDisk();
     bool GetLocalAppDataPath_(wchar_t* path);
 };
 
@@ -115,6 +127,23 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, void* lpReserved)
     return TRUE;
 }
 #endif // _USRDLL
+
+bool Cx_PluginLoaderOut::IsOnVistaDisk()
+{
+    bool ret = false;
+#ifdef WINOLEAPI_
+    OSVERSIONINFO osvi = { sizeof(OSVERSIONINFO) };
+    WCHAR winpath[MAX_PATH], exepath[MAX_PATH];
+    
+    if (GetVersionEx(&osvi) && osvi.dwMajorVersion >= 6)
+    {
+        GetSystemDirectoryW(winpath, MAX_PATH);
+        GetModuleFileNameW(GetMainModuleHandle(), exepath, MAX_PATH);
+        ret = (StrCmpNIW(winpath, exepath, 2) == 0);
+    }
+#endif
+    return ret;
+}
 
 bool Cx_PluginLoaderOut::GetLocalAppDataPath_(wchar_t* path)
 {

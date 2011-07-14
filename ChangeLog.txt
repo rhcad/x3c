@@ -1,5 +1,13 @@
 X3 C++ PluginFramework
 
+2011-07-14
+
+    * Add 'x3core' ATLCOM project.
+    * The default path of GetAppWorkPath() is %LocalAppData% on Vista
+      and later, otherwise is the executable file's folder.
+
+------v1.1.2------
+
 2011-07-10
 
     * Add UtilFunc/LoadDllHelper.h
@@ -27,7 +35,6 @@ X3 C++ PluginFramework
 
     * Add GetLocalAppDataPath() using SHGetKnownFolderPath for Vista, Win7 and Win2008.
     * Move delay-load implement code into DelayLoad.cpp
-    * Update plugin version to 1.0.1.0 in Version.rc2
 
 2011-07-01
 
