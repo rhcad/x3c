@@ -5,7 +5,8 @@
 #include "Cx_PluginLoader.h"
 #include <UtilFunc/LockCount.h>
 
-bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
+bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile,
+                                        bool enableDelayLoading)
 {
     if (GetPluginIndex(pluginFile) >= 0)    // Already loaded.
     {
@@ -18,7 +19,7 @@ bool Cx_PluginLoader::LoadPluginOrDelay(const wchar_t* pluginFile)
 
     bool ret = false;
 
-    if (m_cache.IsNotNull())                // Enable delay-loading.
+    if (enableDelayLoading && m_cache.IsNotNull())
     {
         ret = LoadClsidsFromCache(pluginFile);
         if (!ret && LoadPlugin(pluginFile))
@@ -71,6 +72,7 @@ bool Cx_PluginLoader::BuildPluginCache(int moduleIndex)
 
     if (GetProcAddress(module->hdll, "DllGetClassObject") != NULL)
     {
+        CLockCount locker(&m_loading);
         AddObserverPlugin(module->hdll, "x3::complugin");
     }
 

@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-07-18
+
+    * Add parameter 'enableDelayLoading' in Ix_PluginLoader.
+    * Enable multiple hosts of plugin manager in PluginManager.h
+
 2011-07-14
 
     * Add 'x3core' ATLCOM project.

@@ -61,7 +61,7 @@ public:
 
         if (GetModuleHandleW(m_filename) || Handle())
         {
-            return true;
+            return !!GetObjectFactory();
         }
 
         Handle() = LoadLibraryW(m_filename);
@@ -73,10 +73,22 @@ public:
     /*!
         \param subdir plugin path, absolute path or relative to instance.
         \param instance used if subdir is a relative path.
+        \param enableDelayLoading enable delay-loading feature or not.
         \return true if any plugin is loaded.
     */
-    bool LoadCorePlugins(const wchar_t* subdir, HMODULE instance = NULL)
+    bool LoadCorePlugins(const wchar_t* subdir, HMODULE instance = NULL,
+        bool enableDelayLoading = true)
     {
+        const wchar_t plugins[] = 
+            L"LogManager.plugin" PLNEXT
+            L",LogWriter.plugin" PLNEXT
+            L",ConfigXml.plugin" PLNEXT
+            L",StringTable.plugin" PLNEXT
+            L",ChangeManager.plugin" PLNEXT
+            L",FileUtility.plugin" PLNEXT
+            L",TextUtility.plugin" PLNEXT
+            L",PluginManagerEx.plugin" PLNEXT;
+
         if (!LoadPluginManager(subdir, instance))
         {
             return false;
@@ -85,20 +97,11 @@ public:
         Ix_PluginLoader* pLoader = GetPluginLoader();
         if (pLoader)
         {
-            long n = pLoader->LoadPluginFiles(subdir,
-                L"LogManager.plugin" PLNEXT
-                L",LogWriter.plugin" PLNEXT
-                L",ConfigXml.plugin" PLNEXT
-                L",StringTable.plugin" PLNEXT
-                L",ChangeManager.plugin" PLNEXT
-                L",FileUtility.plugin" PLNEXT
-                L",TextUtility.plugin" PLNEXT
-                L",PluginManagerEx.plugin" PLNEXT, instance);
+            pLoader->LoadPluginFiles(subdir, plugins,
+                instance, enableDelayLoading);
+            pLoader->InitializePlugins();
 
-            if (pLoader->InitializePlugins() > 0 && n > 0)
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;
@@ -116,7 +119,7 @@ public:
             FUNC pfn = (FUNC)GetProcAddress(hdll, "x3GetRegisterBank");
 
             p = pfn ? (*pfn)() : NULL;
-            if (p && Handle())
+            if (p)
             {
                 Factory() = p;
             }

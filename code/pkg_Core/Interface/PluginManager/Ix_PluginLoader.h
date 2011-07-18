@@ -25,12 +25,14 @@ public:
         \param ext suffix of plugin filename, ignorecase, no * or ?, allow chars before dot.
             eg: '.plugin', '.plugin.dll', '_core.dll'.
         \param recursive true: include all child folders. false: only one folder.
-        \return count of plugins loaded.
+        \param enableDelayLoading enable delay-loading feature or not.
+        \return count of plugins loaded this time regardless enableDelayLoading.
         \note need to call InitializePlugins() after.
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
     virtual long LoadPlugins(HMODULE instance, const wchar_t* path, 
-        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true) = 0;
+        const wchar_t* ext = L".plugin" PLNEXT, 
+        bool recursive = true, bool enableDelayLoading = true) = 0;
 
     //! Load all plugins in the application's path.
     /*!
@@ -38,23 +40,27 @@ public:
         \param ext suffix of plugin filename, ignorecase, no * or ?, allow chars before dot.
             eg: '.plugin', '.plugin.dll', '_core.dll'.
         \param recursive true: include all child folders. false: only one folder.
-        \return count of plugins loaded.
+        \param enableDelayLoading enable delay-loading feature or not.
+        \return count of plugins loaded this time regardless enableDelayLoading.
         \note need to call InitializePlugins() after.
         \see InitializePlugins, LoadPlugins, LoadPluginFiles
     */
     virtual long LoadPlugins(const wchar_t* path, 
-        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true) = 0;
+        const wchar_t* ext = L".plugin" PLNEXT, 
+        bool recursive = true, bool enableDelayLoading = true) = 0;
 
     //! Load the specified plugins in the specified path.
     /*!
         \param path relative path or empty, such as 'Plugins'.
         \param files include filename of plugins, separated by spaces or comma, such as '1.dll, 2.dll'.
         \param instance used as relative base.
-        \return count of plugins loaded.
+        \param enableDelayLoading enable delay-loading feature or not.
+        \return count of plugins loaded this time regardless enableDelayLoading.
         \note need to call InitializePlugins() after.
         \see InitializePlugins, LoadPlugins
     */
-    virtual long LoadPluginFiles(const wchar_t* path, const wchar_t* files, HMODULE instance = NULL) = 0;
+    virtual long LoadPluginFiles(const wchar_t* path, const wchar_t* files, 
+        HMODULE instance = NULL, bool enableDelayLoading = true) = 0;
 
     //! Initialize all plugins after they are loaded.
     /*! Initialize a plugin by calling it's x3InitializePlugin() export function.\n

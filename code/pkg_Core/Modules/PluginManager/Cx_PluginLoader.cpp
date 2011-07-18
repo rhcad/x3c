@@ -58,18 +58,19 @@ void Cx_PluginLoader::MakeFullPath(wchar_t* fullpath, HMODULE instance,
 }
 
 long Cx_PluginLoader::LoadPlugins(HMODULE instance, const wchar_t* path,
-                                  const wchar_t* ext, bool recursive)
+                                  const wchar_t* ext, bool recursive,
+                                  bool enableDelayLoading)
 {
     wchar_t fullpath[MAX_PATH];
 
     m_instance = instance;
     MakeFullPath(fullpath, instance, path);
 
-    return LoadPlugins(fullpath, ext, recursive);
+    return LoadPlugins(fullpath, ext, recursive, enableDelayLoading);
 }
 
 long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
-                                  bool recursive)
+                                  bool recursive, bool enableDelayLoading)
 {
     wchar_t fullpath[MAX_PATH];
     std::vector<std::wstring> filenames;
@@ -77,21 +78,25 @@ long Cx_PluginLoader::LoadPlugins(const wchar_t* path, const wchar_t* ext,
     MakeFullPath(fullpath, NULL, path);
     FindPlugins(filenames, fullpath, ext, recursive);
 
-    return InLoadPlugins(filenames);
+    return InLoadPlugins(filenames, enableDelayLoading);
 }
 
-long Cx_PluginLoader::InLoadPlugins(const std::vector<std::wstring>& filenames)
+long Cx_PluginLoader::InLoadPlugins(const std::vector<std::wstring>& filenames,
+                                    bool enableDelayLoading)
 {
     long count = 0;
     std::vector<std::wstring>::const_iterator it;
 
     if (!filenames.empty())
     {
-        LoadCacheFile(filenames.front().c_str());
+        if (enableDelayLoading)
+        {
+            LoadCacheFile(filenames.front().c_str());
+        }
 
         for (it = filenames.begin(); it != filenames.end(); ++it)
         {
-            if (LoadPluginOrDelay(it->c_str()))
+            if (LoadPluginOrDelay(it->c_str(), enableDelayLoading))
             {
                 count++;
             }
@@ -144,7 +149,8 @@ bool Cx_PluginLoader::issep(wchar_t c)
 
 long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
                                       const wchar_t* files,
-                                      HMODULE instance)
+                                      HMODULE instance,
+                                      bool enableDelayLoading)
 {
     wchar_t filename[MAX_PATH];
 
@@ -177,7 +183,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
         i = j;
     }
 
-    return InLoadPlugins(filenames);
+    return InLoadPlugins(filenames, enableDelayLoading);
 }
 
 long Cx_PluginLoader::InitializePlugins()

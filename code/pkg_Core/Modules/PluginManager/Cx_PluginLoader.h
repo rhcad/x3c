@@ -33,11 +33,13 @@ public:
     // From Ix_PluginLoader
     //
     virtual long LoadPlugins(HMODULE instance, const wchar_t* path,
-        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true);
+        const wchar_t* ext = L".plugin" PLNEXT, 
+        bool recursive = true, bool enableDelayLoading = true);
     virtual long LoadPlugins(const wchar_t* path,
-        const wchar_t* ext = L".plugin" PLNEXT, bool recursive = true);
-    virtual long LoadPluginFiles(const wchar_t* path,
-        const wchar_t* files, HMODULE instance = NULL);
+        const wchar_t* ext = L".plugin" PLNEXT, 
+        bool recursive = true, bool enableDelayLoading = true);
+    virtual long LoadPluginFiles(const wchar_t* path,const wchar_t* files, 
+        HMODULE instance = NULL, bool enableDelayLoading = true);
     virtual long InitializePlugins();
     virtual bool RegisterPlugin(HMODULE instance);
     virtual bool LoadPlugin(const wchar_t* filename);
@@ -70,10 +72,10 @@ private:
     void MakeFullPath(wchar_t* fullpath, HMODULE instance, const wchar_t* path);
     void FindPlugins(std::vector<std::wstring>& filenames,
         const wchar_t* path, const wchar_t* ext, bool recursive);
-    long InLoadPlugins(const std::vector<std::wstring>& filenames);
+    long InLoadPlugins(const std::vector<std::wstring>& filenames, bool enableDelayLoading);
     int GetPluginIndex(const wchar_t* filename);
     virtual bool LoadDelayedPlugin_(const wchar_t* filename);
-    bool LoadPluginOrDelay(const wchar_t* pluginFile);
+    bool LoadPluginOrDelay(const wchar_t* pluginFile, bool enableDelayLoading);
     bool BuildPluginCache(int moduleIndex);
     bool LoadClsidsFromCache(const wchar_t* pluginFile);
     bool LoadCacheFile(const wchar_t* pluginFile);
