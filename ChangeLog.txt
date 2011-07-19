@@ -5,6 +5,7 @@ X3 C++ PluginFramework
     * Add parameter 'enableDelayLoading' in Ix_PluginLoader.
     * Enable multiple hosts of plugin manager in PluginManager.h
     * Add Cx_ConfigTransaction(Ix_ConfigData* p).
+    * Enable COM plugin to load other plugins.
 
 2011-07-14
 

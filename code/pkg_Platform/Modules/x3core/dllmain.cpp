@@ -4,6 +4,7 @@
 #include "resource.h"
 #include "x3core_i.c"
 #include "dllmain.h"
+#include <complugin_impl.h>
 
 CoreComModule _AtlModule;
 
@@ -13,9 +14,3 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpRes
 	hInstance;
 	return _AtlModule.DllMain(dwReason, lpReserved); 
 }
-
-#include <Module/XModuleMacro.h>
-#include <Module/XModuleImpl.h>
-
-XBEGIN_DEFINE_MODULE()
-XEND_DEFINE_MODULE()
