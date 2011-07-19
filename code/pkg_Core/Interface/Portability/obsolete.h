@@ -2,6 +2,7 @@
 #define _X3_OBSOLETE_H
 
 #include <UtilFunc/X3Portability.h>
+#include <Module/XClassMacro.h>
 
 #define XCLSID              X3CLSID
 #define CAutoLogGroup       X3LogGroup

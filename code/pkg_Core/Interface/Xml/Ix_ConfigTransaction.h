@@ -51,7 +51,15 @@ public:
 
 #ifdef X3_XML_ICONFIGDATA_H_
     //! Begin to change configure data.
-    Cx_ConfigTransaction(const Cx_Interface<Ix_ConfigData>& p) : m_trans(p)
+    explicit Cx_ConfigTransaction(const Cx_Interface<Ix_ConfigData>& p) : m_trans(p)
+    {
+        if (m_trans)
+        {
+            m_trans->BeginTransaction();
+        }
+    }
+    //! Begin to change configure data.
+    explicit Cx_ConfigTransaction(Ix_ConfigData* p) : m_trans(p)
     {
         if (m_trans)
         {
