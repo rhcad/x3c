@@ -195,7 +195,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TestUtility"=.\vcproj\TestUtility.dsp - Package Owner=<4>
+Project: "TestPlatform"=.\vcproj\TestPlatform.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -207,7 +207,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "TestPlatform"=.\vcproj\TestPlatform.dsp - Package Owner=<4>
+Project: "TestUtility"=.\vcproj\TestUtility.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -232,6 +232,18 @@ Package=<4>
 ###############################################################################
 
 Project: "Win32DllTempl"=.\vcproj\Win32DllTempl.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "x3core"=.\vcproj\x3core.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

@@ -14,6 +14,11 @@
 XBEGIN_DEFINE_MODULE()
 XEND_DEFINE_MODULE()
 
+#if _MSC_VER <= 1200
+BEGIN_OBJECT_MAP(ObjectMap)
+END_OBJECT_MAP()
+#endif
+
 static CPluginManager*  s_loader = NULL;
 
 bool AtlPluginImpl::IsInitialized()
