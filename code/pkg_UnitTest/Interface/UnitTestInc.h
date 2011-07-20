@@ -11,6 +11,7 @@
 #endif
 
 #include <UtilFunc/X3Portability.h>
+#include <UtilFunc/vecfunc.h>
 
 #ifdef _CONSOLE                 // Console application
 
@@ -34,7 +35,7 @@
 
 #ifdef _MSC_VER                 // hide warnings
 #pragma warning(disable:4097)   // typedef-name used as synonym for TestFixture class
-#pragma warning (push, 3)
+#pragma warning (push, 1)
 #endif
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>

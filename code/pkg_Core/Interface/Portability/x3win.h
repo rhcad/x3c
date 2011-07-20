@@ -3,12 +3,10 @@
 #ifndef X3WIN_PORTABILITY_H
 #define X3WIN_PORTABILITY_H
 
+#if !defined(_MSC_VER) || _MSC_VER > 1200 // not VC6
+
 #ifndef WINVER
-#if defined(_MSC_VER) && _MSC_VER <= 1200 // VC6
-#define WINVER 0x0400
-#else
 #define WINVER 0x0501           // WinXP or later.
-#endif
 #endif
 
 #ifndef _WIN32_WINNT
@@ -20,6 +18,8 @@
 #ifndef _WIN32_IE
 #define _WIN32_IE 0x0600        // IE6 or later.
 #endif
+
+#endif // _MSC_VER
 
 #ifdef _AFXDLL
 #define VC_EXTRALEAN

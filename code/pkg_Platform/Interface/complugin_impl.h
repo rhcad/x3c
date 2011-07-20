@@ -9,6 +9,7 @@
 #include <Module/XModuleMacro.h>
 #include <Module/XModuleImpl.h>
 #include <PluginManager/PluginManager.h>
+#include "complugin_inc.h"
 
 XBEGIN_DEFINE_MODULE()
 XEND_DEFINE_MODULE()
@@ -31,6 +32,7 @@ long AtlPluginImpl::Initialize(bool delay, LPCWSTR subdir, LPCWSTR plugins)
     s_loader = new CPluginManager;
     if (s_loader->LoadCorePlugins(subdir, instance, delay))
     {
+        s_loader->GetPluginLoader()->RegisterPlugin(instance);
         count = s_loader->GetPluginLoader()->LoadPluginFiles(
             subdir, plugins, instance, delay);
         s_loader->GetPluginLoader()->InitializePlugins();

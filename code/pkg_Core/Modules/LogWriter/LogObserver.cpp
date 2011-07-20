@@ -17,6 +17,7 @@
 #include <UtilFunc/ctrim.h>
 
 #ifdef _MSC_VER                     // hide warnings
+#pragma warning (push, 3)
 #pragma warning(disable:4127)       // conditional expression is constant
 #endif
 #include <log4cplus/configurator.h>
@@ -302,4 +303,5 @@ void CLogObserver::OnWriteLog(int type,
 
 #ifdef _MSC_VER     // hide warnings
 #pragma warning(default:4127)
+#pragma warning (pop)
 #endif
