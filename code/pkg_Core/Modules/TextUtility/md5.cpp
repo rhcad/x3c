@@ -8,7 +8,7 @@ CMD5::CMD5()
 /* 
 Digests a string and prints the result. 
 */ 
-std::string CMD5::MD5( IN const char *szText)
+std::string CMD5::MD5(const char *szText)
 {
 	char szMD5StringBuffer[33];
 	memset(szMD5StringBuffer,0,sizeof(szMD5StringBuffer));
@@ -28,6 +28,31 @@ std::string CMD5::MD5( IN const char *szText)
 	return std::string(szMD5StringBuffer);
 }
 
+std::string CMD5::MD5(IRead* p)
+{
+    char szMD5StringBuffer[33];
+	memset(szMD5StringBuffer,0,sizeof(szMD5StringBuffer));
+
+    BYTE buf[1024];
+    DWORD bufsize = 0;
+
+	MD5_CTX context; 
+	MD5Init( &context); 
+
+    while (p->Read(buf, sizeof(buf), &bufsize))
+    {
+        MD5Update( &context, buf, bufsize );
+    }
+
+	unsigned char digest[16]; 
+	MD5Final( digest, &context ); 
+	for (int i = 0; i < 16; i++) 
+	{ 
+		sprintf_s(&(szMD5StringBuffer[2*i]),3,"%02x",digest[i]);
+	}
+
+	return std::string(szMD5StringBuffer);
+}
 
 /* 
 MD5 initialization. Begins an MD5 operation, writing a new context. 

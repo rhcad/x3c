@@ -62,6 +62,7 @@ private:
     // From Ix_StringCoding
     //
     virtual std::wstring MD5(const std::wstring& text);
+    virtual bool FileMD5(std::wstring& md5, const std::wstring& filename);
     virtual std::wstring& Base64(std::wstring& text, 
         const BYTE* data, int size,
         const wchar_t* codetype = L"+/=");

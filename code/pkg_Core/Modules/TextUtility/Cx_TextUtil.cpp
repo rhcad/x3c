@@ -540,6 +540,54 @@ std::wstring Cx_TextUtil::MD5(const std::wstring& text)
     return x3::a2w(CMD5().MD5(x3::w2a(text).c_str()));
 }
 
+class CReadMD5 : public CMD5::IRead
+{
+public:
+    CReadMD5(const std::wstring& filename) : m_hFile(NULL)
+    {
+        if (!OpenFileForRead(m_hFile, filename.c_str()))
+        {
+            DWORD err = GetLastError();
+            X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
+                x3::GetSystemErrorString(err) << L", " << filename);
+        }
+    }
+
+    ~CReadMD5()
+    {
+        if (m_hFile)
+        {
+            CloseFile(m_hFile);
+        }
+    }
+
+    bool IsOpened() const
+    {
+        return !!m_hFile;
+    }
+
+private:
+    HANDLE  m_hFile;
+
+    virtual bool Read(void* buf, DWORD size, DWORD* readed)
+    {
+        return !!ReadFile(m_hFile, buf, size, readed, NULL);
+    }
+};
+
+bool Cx_TextUtil::FileMD5(std::wstring& md5, const std::wstring& filename)
+{
+    CReadMD5 file(filename);
+
+    md5.resize(0);
+    if (file.IsOpened())
+    {
+        md5 = x3::a2w(CMD5().MD5(&file));
+    }
+
+    return !md5.empty();
+}
+
 std::wstring& Cx_TextUtil::Base64(std::wstring& text, 
                                   const BYTE* data, int size,
                                   const wchar_t* codetype)

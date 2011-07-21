@@ -87,7 +87,14 @@ public:
 	CMD5(void);
 
 public:
-	std::string MD5( IN const char *szText);
+	std::string MD5(const char *szText);
+
+    struct IRead
+    {
+        virtual bool Read(void* buf, DWORD size, DWORD* readed) = 0;
+    };
+    std::string MD5(IRead* p);
+
 private:
 	CMD5(CMD5& ObjMd5);//禁用拷贝构造函数
 	CMD5& operator=(CMD5& ObjMd5);//禁用等号

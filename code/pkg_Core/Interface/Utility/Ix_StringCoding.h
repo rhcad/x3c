@@ -26,6 +26,14 @@ public:
     */
     virtual std::wstring MD5(const std::wstring& text) = 0;
 
+    //! Returns the md5 hash of a file.
+    /*!
+        \param[out] md5 the hash as a lowercase 32-character hexadecimal number.
+        \param[in] filename absolute file name.
+        \return true if successful to open file.
+    */
+    virtual bool FileMD5(std::wstring& md5, const std::wstring& filename) = 0;
+
     //! Encodes binary data to Base64 code.
     /*!
         \param[out] text string of encoded data.
