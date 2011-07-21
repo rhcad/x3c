@@ -2,7 +2,7 @@
 使用方法：
 
 CMD5 md5;
-std::wstring csMd5Buffer=md5.MD5("a string");
+std::string csMd5Buffer=md5.MD5("a string");
 执行完成之后csMd5Buffer中即存储了由"a string"计算得到的MD5值:
 3a315533c0f34762e0c45e3d4e9d525c
 
@@ -87,7 +87,7 @@ public:
 	CMD5(void);
 
 public:
-	std::wstring MD5( IN const wchar_t *szText);
+	std::string MD5( IN const char *szText);
 private:
 	CMD5(CMD5& ObjMd5);//禁用拷贝构造函数
 	CMD5& operator=(CMD5& ObjMd5);//禁用等号
@@ -99,7 +99,7 @@ private:
 	void MD5Init PROTO_LIST ((MD5_CTX *)); 
 	void MD5Update PROTO_LIST ((MD5_CTX *, unsigned char *, size_t)); 
 	void MD5Final PROTO_LIST ((unsigned char [16], MD5_CTX *)); 
-	void StringAddOne PROTO_LIST ((wchar_t *)); 
+	void StringAddOne PROTO_LIST ((char *)); 
 	void Encode PROTO_LIST ((unsigned char *, UINT4 *, size_t)); 
 	void Decode PROTO_LIST ((UINT4 *, unsigned char *, size_t)); 
 };

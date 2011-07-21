@@ -61,11 +61,16 @@ private:
 
     // From Ix_StringCoding
     //
-    virtual std::wstring ToMD5(const std::wstring& text);
-    virtual void EncodeBase64(std::wstring& text, const BYTE* data, int size,
+    virtual std::wstring MD5(const std::wstring& text);
+    virtual std::wstring& Base64(std::wstring& text, 
+        const BYTE* data, int size,
         const wchar_t* codetype = L"+/=");
-    virtual void DecodeBase64(std::vector<BYTE>& data, const std::wstring& text,
-        const wchar_t* codetype = L"+/=");
+    virtual std::vector<BYTE>& UnBase64(std::vector<BYTE>& data, 
+        const std::wstring& text, const wchar_t* codetype = L"+/=");
+    virtual std::wstring& Base64(std::wstring& text, 
+        const std::string& data, const wchar_t* codetype = L"+/=");
+    virtual std::string& UnBase64(std::string& data, 
+        const std::wstring& text, const wchar_t* codetype = L"+/=");
 
 private:
     DWORD GetHeadBytes(const std::wstring& wstrFileName, BYTE buf[5]);

@@ -1,6 +1,5 @@
 X3 C++ PluginFramework
 
-
 2011-07-21
 
     * Add Ix_StringCoding (about MD5 and Base64) in TextUtility plugin.

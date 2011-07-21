@@ -8,24 +8,24 @@ CMD5::CMD5()
 /* 
 Digests a string and prints the result. 
 */ 
-std::wstring CMD5::MD5( IN const wchar_t *szText)
+std::string CMD5::MD5( IN const char *szText)
 {
-	wchar_t szMD5StringBuffer[33];
-	memset(szMD5StringBuffer,0,33);
+	char szMD5StringBuffer[33];
+	memset(szMD5StringBuffer,0,sizeof(szMD5StringBuffer));
 
 	MD5_CTX context; 
 	MD5Init( &context); 
 
-	MD5Update( &context, (unsigned char*)szText, wcslen (szText) );
+	MD5Update( &context, (unsigned char*)szText, strlen (szText) );
 
 	unsigned char digest[16]; 
 	MD5Final( digest, &context ); 
 	for (int i = 0; i < 16; i++) 
 	{ 
-		swprintf_s(&(szMD5StringBuffer[2*i]),3,L"%02x",digest[i]);
+		sprintf_s(&(szMD5StringBuffer[2*i]),3,"%02x",digest[i]);
 	}
 
-	return std::wstring(szMD5StringBuffer);
+	return std::string(szMD5StringBuffer);
 }
 
 
@@ -275,7 +275,7 @@ Note: Replace "for loop" with standard memset if possible.
 	size_t i; 
 	
 	for (i = 0; i < len; i++) 
-		((wchar_t *)output)[i] = (wchar_t)value; 
+		((char *)output)[i] = (char)value; 
 } 
 
 
@@ -283,12 +283,12 @@ Note: Replace "for loop" with standard memset if possible.
 /* 
 get the string add one. 
 */ 
- void CMD5::StringAddOne( wchar_t * orstring ) 
+ void CMD5::StringAddOne( char * orstring ) 
 { 
 	size_t len; 
 	size_t i,n; 
 	
-	len = wcslen(orstring); 
+	len = strlen(orstring); 
 	n = len - 1; 
 	for(i = n; i >= 0; i--) 
 	{ 

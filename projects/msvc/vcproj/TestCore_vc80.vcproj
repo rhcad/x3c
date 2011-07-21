@@ -212,6 +212,10 @@
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestTextUtil.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -244,6 +248,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestStringTable.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestTextUtil.h"
 				>
 			</File>
 		</Filter>

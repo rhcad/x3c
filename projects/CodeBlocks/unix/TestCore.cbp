@@ -76,6 +76,8 @@
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestPluginManager.h" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestStringTable.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestStringTable.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestTextUtil.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestTextUtil.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

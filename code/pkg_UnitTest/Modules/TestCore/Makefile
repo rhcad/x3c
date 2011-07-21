@@ -20,6 +20,7 @@ all:
 	$(CC) $(CFLAGS) -c  TestLoadPlugin.cpp
 	$(CC) $(CFLAGS) -c  TestStringTable.cpp
 	$(CC) $(CFLAGS) -c  TestFileUtil.cpp
+	$(CC) $(CFLAGS) -c  TestTextUtil.cpp
 	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestCore.app *.o -ldl -lcppunit
 clean:
 	rm -rf *.so

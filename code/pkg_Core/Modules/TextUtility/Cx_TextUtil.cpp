@@ -535,22 +535,23 @@ std::wstring Cx_TextUtil::ToUnicode(const std::string& text, int codepage)
 #include "md5.h"
 #include "Base64.h"
 
-std::wstring Cx_TextUtil::ToMD5(const std::wstring& text)
+std::wstring Cx_TextUtil::MD5(const std::wstring& text)
 {
-    return CMD5().MD5(text.c_str());
+    return x3::a2w(CMD5().MD5(x3::w2a(text).c_str()));
 }
 
-void Cx_TextUtil::EncodeBase64(std::wstring& text, 
-                               const BYTE* data, int size,
-                               const wchar_t* codetype)
+std::wstring& Cx_TextUtil::Base64(std::wstring& text, 
+                                  const BYTE* data, int size,
+                                  const wchar_t* codetype)
 {
     Base64::Encode(data, size, text,
         codetype[0], codetype[1], codetype[2]);
+    return text;
 }
 
-void Cx_TextUtil::DecodeBase64(std::vector<BYTE>& data, 
-                               const std::wstring& text,
-                               const wchar_t* codetype)
+std::vector<BYTE>& Cx_TextUtil::UnBase64(std::vector<BYTE>& data, 
+                                         const std::wstring& text,
+                                         const wchar_t* codetype)
 {
     data.resize(Base64::GetDataLength(text.size()));
     if (!data.empty())
@@ -558,4 +559,25 @@ void Cx_TextUtil::DecodeBase64(std::vector<BYTE>& data,
         Base64::Decode(text, text.size(), &data[0],
             codetype[0], codetype[1], codetype[2]);
     }
+    return data;
+}
+
+std::wstring& Cx_TextUtil::Base64(std::wstring& text, 
+                                  const std::string& data, 
+                                  const wchar_t* codetype)
+{
+    return Base64(text, (const BYTE*)data.c_str(), data.size(), codetype);
+}
+
+std::string& Cx_TextUtil::UnBase64(std::string& data, 
+                                   const std::wstring& text, 
+                                   const wchar_t* codetype)
+{
+    data.resize(Base64::GetDataLength(text.size()));
+    if (!data.empty())
+    {
+        Base64::Decode(text, text.size(), (BYTE*)&data[0],
+            codetype[0], codetype[1], codetype[2]);
+    }
+    return data;
 }
