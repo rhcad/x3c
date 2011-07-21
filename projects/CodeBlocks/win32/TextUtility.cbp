@@ -61,6 +61,10 @@
 		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/Cx_TextUtil.cpp" />
 		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/Cx_TextUtil.h" />
 		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/Module.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/base64.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/base64.h" />
+		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/md5.cpp" />
+		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/md5.h" />
 		<Unit filename="../../../code/pkg_Core/Modules/TextUtility/TextUtility.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

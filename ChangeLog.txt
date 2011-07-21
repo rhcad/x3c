@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+
+2011-07-21
+
+    * Add Ix_StringCoding (about MD5 and Base64) in TextUtility plugin.
+
 2011-07-18
 
     * Add parameter 'enableDelayLoading' in Ix_PluginLoader.

@@ -6,14 +6,17 @@
 
 #include <Utility/Ix_StringConvert.h>
 #include <Utility/Ix_TextFileUtil.h>
+#include <Utility/Ix_StringCoding.h>
 
 class Cx_TextUtil
     : public Ix_StringConvert
     , public Ix_TextFileUtil
+    , public Ix_StringCoding
 {
     X3BEGIN_CLASS_DECLARE(Cx_TextUtil)
         X3DEFINE_INTERFACE_ENTRY(Ix_StringConvert)
         X3DEFINE_INTERFACE_ENTRY(Ix_TextFileUtil)
+        X3DEFINE_INTERFACE_ENTRY(Ix_StringCoding)
     X3END_CLASS_DECLARE()
 protected:
     Cx_TextUtil() {}
@@ -55,6 +58,14 @@ private:
     virtual bool ToDBC(std::wstring& text, bool punct = false);
     virtual std::string ToAnsi(const std::wstring& text, int codepage = 0);
     virtual std::wstring ToUnicode(const std::string& text, int codepage = 0);
+
+    // From Ix_StringCoding
+    //
+    virtual std::wstring ToMD5(const std::wstring& text);
+    virtual void EncodeBase64(std::wstring& text, const BYTE* data, int size,
+        const wchar_t* codetype = L"+/=");
+    virtual void DecodeBase64(std::vector<BYTE>& data, const std::wstring& text,
+        const wchar_t* codetype = L"+/=");
 
 private:
     DWORD GetHeadBytes(const std::wstring& wstrFileName, BYTE buf[5]);

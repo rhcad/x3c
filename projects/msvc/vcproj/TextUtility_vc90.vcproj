@@ -178,6 +178,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\base64.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.cpp"
 				>
 			</File>
@@ -187,6 +191,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\md5.cpp"
 				>
 			</File>
 			<File
@@ -200,6 +208,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\base64.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.h"
 				>
 			</File>
@@ -209,6 +221,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Modules\TextUtility\md5.h"
 				>
 			</File>
 		</Filter>
@@ -242,6 +258,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Utility\Ix_StringCoding.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Core\Interface\Utility\Ix_StringConvert.h"
 				>
 			</File>
@@ -250,6 +270,7 @@
 				>
 			</File>
 		</Filter>
+	</Files>
 	</Files>
 	<Globals>
 	</Globals>

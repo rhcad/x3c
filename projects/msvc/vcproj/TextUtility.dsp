@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\TextUtility"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GR- /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
+# ADD CPP /nologo /MD /W4 /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\TextUtility"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GR- /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -102,6 +102,10 @@ SOURCE=..\..\..\code\pkg_Core\Interface\Utility\Ix_TextFileUtil.h
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\base64.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.h
 # End Source File
 # Begin Source File
@@ -112,10 +116,18 @@ SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\Cx_GuidGenerator.h
 
 SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.h
 # End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\md5.h
+# End Source File
 # End Group
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\base64.cpp
+# End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\Cx_ClipboardUtil.cpp
@@ -127,6 +139,10 @@ SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\Cx_GuidGenerator.cpp
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\Cx_TextUtil.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\md5.cpp
 # End Source File
 # Begin Source File
 

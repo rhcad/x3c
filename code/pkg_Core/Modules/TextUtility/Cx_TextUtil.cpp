@@ -531,3 +531,31 @@ std::wstring Cx_TextUtil::ToUnicode(const std::string& text, int codepage)
 {
     return x3::a2w(text, codepage);
 }
+
+#include "md5.h"
+#include "Base64.h"
+
+std::wstring Cx_TextUtil::ToMD5(const std::wstring& text)
+{
+    return CMD5().MD5(text.c_str());
+}
+
+void Cx_TextUtil::EncodeBase64(std::wstring& text, 
+                               const BYTE* data, int size,
+                               const wchar_t* codetype)
+{
+    Base64::Encode(data, size, text,
+        codetype[0], codetype[1], codetype[2]);
+}
+
+void Cx_TextUtil::DecodeBase64(std::vector<BYTE>& data, 
+                               const std::wstring& text,
+                               const wchar_t* codetype)
+{
+    data.resize(Base64::GetDataLength(text.size()));
+    if (!data.empty())
+    {
+        Base64::Decode(text, text.size(), &data[0],
+            codetype[0], codetype[1], codetype[2]);
+    }
+}
