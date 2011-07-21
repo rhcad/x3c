@@ -47,8 +47,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,0,1,3
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -63,14 +62,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "TODO: <Company name>"
-            VALUE "FileDescription", "TODO: <File description>"
-            VALUE "FileVersion", "1.0.0.1"
-            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
-            VALUE "InternalName", "x3core.dll"
-            VALUE "OriginalFilename", "x3core.dll"
-            VALUE "ProductName", "TODO: <Product name>"
-            VALUE "ProductVersion", "1.0.0.1"
+            VALUE "FileDescription", "X3 COM Wrapper Module"
+            VALUE "FileVersion", "1.0.1.3\0"
+            VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
+            VALUE "OriginalFilename", "x3core.com.dll"
+            VALUE "ProductName", "X3 C++ PluginFramework\0"
             VALUE "OLESelfRegister", ""
         END
     END
@@ -92,7 +88,8 @@ BEGIN
 	IDS_PROJNAME					"x3core"
 END
 
-IDR_X3CORECOM REGISTRY "x3core.rgs"
+IDR_X3CORECOM           REGISTRY                "x3core.rgs"
+
 ////////////////////////////////////////////////////////////////////////////
 
 

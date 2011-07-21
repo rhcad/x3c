@@ -10,7 +10,7 @@ import "ocidl.idl";
 [
     uuid(687E32A6-EDE4-453A-84BD-2C9436BB2071),
     version(1.0),
-    helpstring("x3core 1.0 Type Library")
+    helpstring("X3 COM Wrapper Type Library 1.0")
 ]
 library X3Core
 {

@@ -11,5 +11,5 @@ CoreComModule _AtlModule;
 // DLL Entry Point
 extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 {
-	return ATLDLLMAIN(hInstance, dwReason, lpReserved);
+	return _AtlModule.DllMain(hInstance, dwReason, lpReserved);
 }
