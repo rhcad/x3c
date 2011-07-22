@@ -533,7 +533,7 @@ std::wstring Cx_TextUtil::ToUnicode(const std::string& text, int codepage)
 }
 
 #include "md5.h"
-#include "Base64.h"
+#include "base64.h"
 
 std::wstring Cx_TextUtil::MD5(const std::wstring& text)
 {
@@ -588,7 +588,7 @@ bool Cx_TextUtil::FileMD5(std::wstring& md5, const std::wstring& filename)
     return !md5.empty();
 }
 
-std::wstring& Cx_TextUtil::Base64(std::wstring& text, 
+std::wstring& Cx_TextUtil::Base64(std::wstring& text,
                                   const BYTE* data, int size,
                                   const wchar_t* codetype)
 {
@@ -597,7 +597,7 @@ std::wstring& Cx_TextUtil::Base64(std::wstring& text,
     return text;
 }
 
-std::vector<BYTE>& Cx_TextUtil::UnBase64(std::vector<BYTE>& data, 
+std::vector<BYTE>& Cx_TextUtil::UnBase64(std::vector<BYTE>& data,
                                          const std::wstring& text,
                                          const wchar_t* codetype)
 {
@@ -610,15 +610,15 @@ std::vector<BYTE>& Cx_TextUtil::UnBase64(std::vector<BYTE>& data,
     return data;
 }
 
-std::wstring& Cx_TextUtil::Base64(std::wstring& text, 
-                                  const std::string& data, 
+std::wstring& Cx_TextUtil::Base64(std::wstring& text,
+                                  const std::string& data,
                                   const wchar_t* codetype)
 {
     return Base64(text, (const BYTE*)data.c_str(), data.size(), codetype);
 }
 
-std::string& Cx_TextUtil::UnBase64(std::string& data, 
-                                   const std::wstring& text, 
+std::string& Cx_TextUtil::UnBase64(std::string& data,
+                                   const std::wstring& text,
                                    const wchar_t* codetype)
 {
     data.resize(Base64::GetDataLength(text.size()));

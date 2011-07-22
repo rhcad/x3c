@@ -22,7 +22,7 @@ void CComCreator::Free()
 HRESULT WINAPI CComCreator::Hook_CoCreateInstance(
         REFCLSID rclsid, 
         LPUNKNOWN pUnkOuter, DWORD context, 
-        REFIID riid, LPVOID FAR* ppv)
+        REFIID riid, LPVOID* ppv)
 {
     if (NULL == ppv)
         return E_POINTER;
@@ -33,7 +33,7 @@ HRESULT WINAPI CComCreator::Hook_CoCreateInstance(
     if (FAILED(hr))
     {
         typedef HRESULT (WINAPI *FUNC_CREATE)(
-            REFCLSID, LPUNKNOWN, DWORD, REFIID, OUT LPVOID FAR*);
+            REFCLSID, LPUNKNOWN, DWORD, REFIID, LPVOID*);
         hr = ((FUNC_CREATE)s_oldfunc)(rclsid, pUnkOuter, context, riid, ppv);
     }
 
@@ -61,7 +61,7 @@ static inline std::wstring tostr(REFCLSID rclsid)
 }
 
 HRESULT CComCreator::CreateInstance(
-        REFCLSID rclsid, REFIID riid, LPVOID FAR* ppv)
+        REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
     HMODULE hmod = s_modules.GetModule(s_filemap.GetComFile(tostr(rclsid)));
     HRESULT hr = hmod ? E_FAIL : REGDB_E_CLASSNOTREG;

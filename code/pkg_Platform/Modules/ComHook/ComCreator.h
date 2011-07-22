@@ -10,8 +10,8 @@ public:
 private:
     static HRESULT WINAPI Hook_CoCreateInstance(REFCLSID rclsid, 
         LPUNKNOWN pUnkOuter, DWORD dwClsContext, 
-        REFIID riid, LPVOID FAR* ppv);
-    static HRESULT CreateInstance(REFCLSID rclsid, REFIID riid, LPVOID FAR* ppv);
+        REFIID riid, LPVOID* ppv);
+    static HRESULT CreateInstance(REFCLSID rclsid, REFIID riid, LPVOID* ppv);
 };
 
 #endif // _COMHOOK_COMCREATOR_H

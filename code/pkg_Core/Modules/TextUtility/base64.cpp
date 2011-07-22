@@ -7,22 +7,22 @@ http://www.coolsoft-sd.com/
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the
-use of this software. 
+use of this software.
 
 Permission is granted to anyone to use this software for any purpose, including
 commercial applications, and to alter it and redistribute it freely, subject to
-the following restrictions: 
+the following restrictions:
 
  * The origin of this software must not be misrepresented; you must not claim that
    you wrote the original software. If you use this software in a product, an
    acknowledgment in the product documentation would be appreciated but is not required.
  * Altered source versions must be plainly marked as such, and must not be misrepresented
-   as being the original software. 
- * This notice may not be removed or altered from any source distribution. 
+   as being the original software.
+ * This notice may not be removed or altered from any source distribution.
 
 */
 
-#include "Base64.h"
+#include "base64.h"
 
 // Encodes binary data to Base64 code
 // Returns size of encoded data.
@@ -41,8 +41,8 @@ int Base64::Encode(BYTE_DATA_IN inData,
 	wchar_t* out = new wchar_t[ len ];
 
 	// charachers used by Base64
-	static const wchar_t alph[] = 
-	{ 
+	static const wchar_t alph[] =
+	{
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 		'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 		'0','1','2','3','4','5','6','7','8','9',CHAR_63,CHAR_64
