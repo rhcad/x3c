@@ -38,7 +38,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "_UNICODE" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W4 /Gm /ZI /Od /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\obj\vc60\Debug\x3core" /D "_WINDOWS" /D "WIN32" /D "_DEBUG" /D "_UNICODE" /D "UNICODE" /D "_USRDLL" /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_Platform\Modules\Public" /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\obj\vc60\Debug\x3core" /D "_WINDOWS" /D "WIN32" /D "_DEBUG" /D "_UNICODE" /D "UNICODE" /D "_USRDLL" /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
 # ADD RSC /l 0x804 /i "..\..\..\obj\vc60\Debug\x3core" /d "_DEBUG"
 BSC32=bscmake.exe
@@ -58,7 +58,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /O1 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "_UNICODE" /D "_ATL_DLL" /D "_ATL_MIN_CRT" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W4 /O1 /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\obj\vc60\Release\x3core" /D "_WINDOWS" /D "WIN32" /D "NDEBUG" /D "_UNICODE" /D "UNICODE" /D "_USRDLL" /D "_ATL_DLL" /D "_ATL_MIN_CRT" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /GX /O1 /I "..\..\..\code\pkg_Platform\Modules\Public" /I "..\..\..\code\pkg_Platform\Interface" /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\obj\vc60\Release\x3core" /D "_WINDOWS" /D "WIN32" /D "NDEBUG" /D "_UNICODE" /D "UNICODE" /D "_USRDLL" /D "_ATL_DLL" /D "_ATL_MIN_CRT" /Yu"stdafx.h" /FD /c
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
 # ADD RSC /l 0x804 /i "..\..\..\obj\vc60\Release\x3core" /d "NDEBUG"
 BSC32=bscmake.exe

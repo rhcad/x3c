@@ -20,9 +20,9 @@ pkg_Example:
 	$(MAKE) -C pkg_Example
 
 #pkg_UnitTest:
-#	@echo
-#	@echo Making all in subdirectory $@...
-#	$(MAKE) -C pkg_UnitTest
+	@echo
+	@echo Making all in subdirectory $@...
+	$(MAKE) -C pkg_UnitTest
 
 #pkg_Platform:
 #	@echo

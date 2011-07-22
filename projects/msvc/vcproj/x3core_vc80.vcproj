@@ -51,7 +51,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface;&quot;$(IntDir)&quot;"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Modules\Public;..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface;&quot;$(IntDir)&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -149,7 +149,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface;&quot;$(IntDir)&quot;"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Modules\Public;..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface;&quot;$(IntDir)&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"

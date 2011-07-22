@@ -53,7 +53,7 @@ public:
     {
     }
 
-    BOOL WINAPI DllMain(DWORD dwReason, LPVOID lpReserved) throw()
+    BOOL WINAPI DllMain(DWORD dwReason, LPVOID) throw()
     {
         if (dwReason == DLL_PROCESS_ATTACH)
         {
