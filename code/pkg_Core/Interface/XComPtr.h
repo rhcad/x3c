@@ -154,9 +154,9 @@ public:
     }
 
 
-    void Release()
+    long Release()
     {
-        Unload();
+        return Unload();
     }
 
     IF_Type* DetachInterface()
@@ -196,13 +196,20 @@ public:
     }
 
 private:
-    void Unload()
+    long Unload()
     {
+        long refcount = -1;
+
         if (m_pInterface)
         {
-            m_pInterface->InterfaceRelease(x3GetModuleHandle());
+            refcount = m_pInterface->InterfaceRelease(x3GetModuleHandle());
             m_pInterface = NULL;
+#ifdef ASSERT
+            ASSERT(refcount >= 0);
+#endif
         }
+
+        return refcount;
     }
 
     void Load(IF_Type* pIF)
@@ -364,9 +371,9 @@ public:
     }
 
 
-    void Release()
+    long Release()
     {
-        Unload();
+        return Unload();
     }
 
     Ix_Object* DetachInterface()
@@ -389,13 +396,20 @@ public:
     }
 
 private:
-    void Unload()
+    long Unload()
     {
+        long refcount = -1;
+
         if (m_pInterface)
         {
-            m_pInterface->InterfaceRelease(x3GetModuleHandle());
+            refcount = m_pInterface->InterfaceRelease(x3GetModuleHandle());
             m_pInterface = NULL;
+#ifdef ASSERT
+            ASSERT(refcount >= 0);
+#endif
         }
+
+        return refcount;
     }
 
     void Load(Ix_Object* pIF)
