@@ -25,6 +25,11 @@ public:
     {
     }
 
+    Cx_ConfigSection(Ix_ConfigSection* p)
+        : Cx_Interface<Ix_ConfigSection>(p)
+    {
+    }
+
     Cx_ConfigSection(const Cx_Ptr& objConfigIO)
         : Cx_Interface<Ix_ConfigSection>(objConfigIO)
     {
