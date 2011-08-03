@@ -23,7 +23,7 @@ Cx_CfgDatabase::Cx_CfgDatabase()
 Cx_CfgDatabase::~Cx_CfgDatabase()
 {
     CloseConnection();
-    SafeCall(m_pSQLParser, Release());
+    SafeCall(m_pSQLParser, InterfaceRelease());
 }
 
 bool Cx_CfgDatabase::OpenConnection(const std::wstring& connection,

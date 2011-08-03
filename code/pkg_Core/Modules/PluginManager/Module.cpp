@@ -23,7 +23,7 @@ public:
         if (x3::CLSID_AppWorkPath == clsid
             || x3::CLSID_PluginDelayLoad == clsid)
         {
-            return QueryInterface(iid, ppv, fromdll) ? 0 : 1;
+            return QueryObject(iid, ppv, fromdll) ? 0 : 1;
         }
         return Cx_PluginLoader::CreateObject(clsid, iid, ppv, fromdll);
     }

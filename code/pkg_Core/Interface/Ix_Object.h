@@ -21,9 +21,9 @@ class Ix_Object
 {
 public:
     virtual ~Ix_Object() {}
-    virtual long AddRef(HMODULE fromdll) = 0;
-    virtual long Release(HMODULE fromdll) = 0;
-    virtual bool QueryInterface(X3IID iid, Ix_Object** ppv, HMODULE fromdll) = 0;
+    virtual long InterfaceAddRef(HMODULE fromdll) = 0;
+    virtual long InterfaceRelease(HMODULE fromdll) = 0;
+    virtual bool QueryObject(X3IID iid, Ix_Object** ppv, HMODULE fromdll) = 0;
     virtual const char* GetClassName() const = 0;
 };
 

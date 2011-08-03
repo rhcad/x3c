@@ -67,7 +67,7 @@ void TestPluginManager::testCreateObject()
 
     //Ix_Object* ixObject=NULL;
     //VERIFY(0==pFactory->CreateObject(x3::CLSID_LogManager, &ixObject,NULL));
-    //ixObject->Release(NULL);
+    //ixObject->InterfaceRelease(NULL);
 
     VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
 }

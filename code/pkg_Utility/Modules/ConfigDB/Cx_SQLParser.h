@@ -13,7 +13,7 @@ public:
     {
     }
 
-    void Release()
+    void InterfaceRelease()
     {
         delete this;
     }
@@ -41,7 +41,7 @@ public:
     {
     }
 
-    void Release()
+    void InterfaceRelease()
     {
         delete this;
     }

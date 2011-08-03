@@ -74,7 +74,7 @@ public:
 
         if (pInterface)
         {
-            pInterface->QueryInterface(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle());
+            pInterface->QueryObject(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle());
         }
 
         return *this;
@@ -179,9 +179,9 @@ public:
 
         if (pIF)
         {
-            if (!pIF->QueryInterface(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle()))
+            if (!pIF->QueryObject(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle()))
             {
-                pIF->Release(x3GetModuleHandle());
+                pIF->InterfaceRelease(x3GetModuleHandle());
                 return false;
             }
         }
@@ -200,7 +200,7 @@ private:
     {
         if (m_pInterface)
         {
-            m_pInterface->Release(x3GetModuleHandle());
+            m_pInterface->InterfaceRelease(x3GetModuleHandle());
             m_pInterface = NULL;
         }
     }
@@ -211,11 +211,11 @@ private:
         {
             if (pIF)
             {
-                pIF->AddRef(x3GetModuleHandle());
+                pIF->InterfaceAddRef(x3GetModuleHandle());
             }
             if (m_pInterface)
             {
-                m_pInterface->Release(x3GetModuleHandle());
+                m_pInterface->InterfaceRelease(x3GetModuleHandle());
             }
             m_pInterface = pIF;
         }
@@ -225,7 +225,7 @@ private:
     {
         if (p && addref)
         {
-            p->AddRef(x3GetModuleHandle());
+            p->InterfaceAddRef(x3GetModuleHandle());
         }
         return p;
     }
@@ -235,7 +235,7 @@ private:
         IF_Type* ret = NULL;
         if (p)
         {
-            p->QueryInterface(IF_Type::GetIID(), (Ix_Object**)&ret, x3GetModuleHandle());
+            p->QueryObject(IF_Type::GetIID(), (Ix_Object**)&ret, x3GetModuleHandle());
         }
         return ret;
     }
@@ -393,7 +393,7 @@ private:
     {
         if (m_pInterface)
         {
-            m_pInterface->Release(x3GetModuleHandle());
+            m_pInterface->InterfaceRelease(x3GetModuleHandle());
             m_pInterface = NULL;
         }
     }
@@ -404,11 +404,11 @@ private:
         {
             if (pIF)
             {
-                pIF->AddRef(x3GetModuleHandle());
+                pIF->InterfaceAddRef(x3GetModuleHandle());
             }
             if (m_pInterface)
             {
-                m_pInterface->Release(x3GetModuleHandle());
+                m_pInterface->InterfaceRelease(x3GetModuleHandle());
             }
             m_pInterface = pIF;
         }
@@ -418,7 +418,7 @@ private:
     {
         if (p)
         {
-            p->AddRef(x3GetModuleHandle());
+            p->InterfaceAddRef(x3GetModuleHandle());
         }
         return p;
     }
@@ -434,7 +434,7 @@ Cx_Interface<IF_Type>::Cx_Interface(const Cx_Ptr& src) : m_pInterface(NULL)
 {
     if (src.P())
     {
-        src.P()->QueryInterface(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle());
+        src.P()->QueryObject(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle());
     }
 }
 
@@ -445,7 +445,7 @@ Cx_Interface<IF_Type>& Cx_Interface<IF_Type>::operator=(const Cx_Ptr& src)
 
     if (src.P())
     {
-        src.P()->QueryInterface(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle());
+        src.P()->QueryObject(IF_Type::GetIID(), (Ix_Object**)&m_pInterface, x3GetModuleHandle());
     }
 
     return *this;

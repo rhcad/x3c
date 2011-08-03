@@ -31,7 +31,7 @@ protected:
     }
 
 protected:
-    virtual long AddRef(HMODULE fromdll)
+    virtual long InterfaceAddRef(HMODULE fromdll)
     {
         if (fromdll != x3GetModuleHandle())
         {
@@ -40,7 +40,7 @@ protected:
         return InterlockedIncrement(&m_refcount);
     }
 
-    virtual long Release(HMODULE fromdll)
+    virtual long InterfaceRelease(HMODULE fromdll)
     {
         if (fromdll != x3GetModuleHandle())
         {
@@ -57,7 +57,7 @@ protected:
         return ret;
     }
 
-    virtual bool QueryInterface(X3IID iid, Ix_Object** ppv, HMODULE fromdll)
+    virtual bool QueryObject(X3IID iid, Ix_Object** ppv, HMODULE fromdll)
     {
         return ClsType::DoQueryInterface(this, iid, ppv, fromdll);
     }
@@ -73,8 +73,8 @@ public:
         Ix_Object* ret = NULL;
         Cx_Object<ClsType>* p = new Cx_Object<ClsType>();
 
-        p->QueryInterface(iid, &ret, fromdll);
-        p->Release(fromdll);
+        p->QueryObject(iid, &ret, fromdll);
+        p->InterfaceRelease(fromdll);
 
         return ret;
     }

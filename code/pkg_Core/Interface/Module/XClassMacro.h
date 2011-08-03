@@ -49,7 +49,7 @@ public: \
         if (iid == _Interface::GetIID())        \
         {   \
             *ppv = static_cast<Ix_Object*>(static_cast<_Interface*>(self)); \
-            (*ppv)->AddRef(fromdll);            \
+            (*ppv)->InterfaceAddRef(fromdll);            \
             return true;    \
         }
 

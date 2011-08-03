@@ -10,7 +10,7 @@ public:
     virtual ~Ix_SQLParser() {}
 
     //! 销毁本对象
-    virtual void Release() = 0;
+    virtual void InterfaceRelease() = 0;
 
     //! 返回当前的系统日期
     virtual std::wstring GetFunc_CURDATE() = 0;
