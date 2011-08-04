@@ -88,6 +88,12 @@ public:
         return ret;
     }
 
+    //! Return true if the configure data has changed.
+    bool IsModified() const
+    {
+        return m_trans && m_trans->GetModifiedCount() > 0;
+    }
+
 private:
     Cx_Interface<Ix_ConfigTransaction>  m_trans;
 };
