@@ -1,5 +1,7 @@
 X3 C++ PluginFramework
 
+------v1.1.3------
+
 2011-08-03
 
     * Change function name of Ix_Object.
