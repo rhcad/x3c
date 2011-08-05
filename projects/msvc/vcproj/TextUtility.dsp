@@ -127,6 +127,7 @@ SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\md5.h
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Core\Modules\TextUtility\base64.cpp
+# ADD CPP /W3
 # End Source File
 # Begin Source File
 
