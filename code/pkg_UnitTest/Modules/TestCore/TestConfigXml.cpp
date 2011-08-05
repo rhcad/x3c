@@ -36,7 +36,8 @@ void TestConfigXml::testNewDoc()
     Cx_Interface<Ix_ConfigXml> pIFXml(x3::CLSID_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());
 
-    Cx_ConfigSection root(pIFXml->GetData()->GetSection(L""));
+    Cx_Ptr obj;
+    Cx_ConfigSection root(pIFXml->GetData()->GetSection(obj, L""));
     std::wstring content;
 
     VERIFY(pIFXml->GetXmlContent(content, root.P()));

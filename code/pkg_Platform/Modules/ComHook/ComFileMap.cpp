@@ -54,11 +54,12 @@ void CComFileMap::LoadMapFile(const std::wstring& filename)
     pIFFile->SetFileName(filename.c_str());
     pIFFile->SetRootName(L"commap");
 
-    Cx_ConfigSection root(pIFFile->GetData()->GetSection(L"", false));
+    Cx_Ptr obj;
+    Cx_ConfigSection root(pIFFile->GetData()->GetSection(obj, L"", false));
 
     for (int i = 0; ; i++)
     {
-        Cx_ConfigSection item(root.GetSectionByIndex(L"item", i));
+        Cx_ConfigSection item(root.GetSectionByIndex(obj, L"item", i));
         std::wstring clsid(item->GetString(L"classid"));
         std::wstring file(item->GetString(L"filename"));
 

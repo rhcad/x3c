@@ -21,50 +21,51 @@ class Ix_ConfigData : public Ix_Object
 public:
     X3DEFINE_IID(Ix_ConfigData)
 
-    //! A data node, same as Cx_ConfigSection.
-    typedef Cx_Interface<Ix_ConfigSection> ConfigSection;
-
     //! Get a child node of the root node.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param name The child node name.\n
             The name may contains slash chars for multiple levels.\n
             Empty string is represented as getting the root node.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         const wchar_t* name, bool autoCreate = true) = 0;
     
     //! Returns a child node by node name and integer property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param parent the parent node. Empty string is represented as the root node.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
         \param attrValue the field value of the child node.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, ULONG attrValue, 
         bool autoCreate = true) = 0;
 
     //! Returns a child node by node name and string property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param parent the parent node. Empty string is represented as the root node.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
         \param attrValue the field value of the child node.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, const wchar_t* attrValue, 
         bool autoCreate = true) = 0;
 
     //! Returns a child node by node name and string property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param parent the parent node. Empty string is represented as the root node.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
@@ -72,9 +73,9 @@ public:
         \param attrName2 another field name of the child node.
         \param attrValue2 the field value of attrName2.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, const wchar_t* attrValue, 
         const wchar_t* attrName2, const wchar_t* attrValue2, 
@@ -82,6 +83,7 @@ public:
 
     //! Returns a child node by node name and integer property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param parent the parent node. Empty string is represented as the root node.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
@@ -89,9 +91,9 @@ public:
         \param attrName2 another field name of the child node.
         \param attrValue2 the field value of attrName2.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name, 
         const wchar_t* attrName, ULONG attrValue, 
         const wchar_t* attrName2, ULONG attrValue2, 
@@ -109,23 +111,25 @@ public:
 
     //! Returns the child node of the specified order.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection) even not exist actually.\n
+             I/O operations will be ignored when the internal object is not exist.\n
         \param parent the parent node. Empty string is represented as the root node.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param index the child index (0 to GetSectionCount()).
-        \return the child node (Cx_ConfigSection) even not exist actually.\n
-             I/O operations will be ignored when the internal object is not exist.\n
+        \return reference to newnode (Cx_ConfigSection).
         \see GetSectionCount, Ix_ConfigSection::IsValid().
     */
-    virtual ConfigSection GetSectionByIndex(
+    virtual Cx_Ptr& GetSectionByIndex(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name, long index) = 0;
     
     //! Add a child node.
     /*!
+        \param[out] newnode the new node (Cx_ConfigSection).
         \param parent the parent node. Empty string is represented as the root node.
         \param name the child node name. the name may contains slash chars for multiple levels.
-        \return the new node (Cx_ConfigSection).
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection AddSection(
+    virtual Cx_Ptr& AddSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name) = 0;
 
     //! Removes a child nodes.
@@ -159,11 +163,12 @@ public:
 
     //! Returns the parent node of the specified node.
     /*!
-        \param sec the specified node.
-        \return the parent node. The result node will be invalid
+        \param[out] newnode the parent node. The result node will be invalid
             (Ix_ConfigSection::IsValid()==false) if sec is root node.
+        \param sec the specified node.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    virtual ConfigSection GetParentSection(Ix_ConfigSection* sec) = 0;
+    virtual Cx_Ptr& GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection* sec) = 0;
 };
 
 #endif // X3_XML_ICONFIGDATA_H_

@@ -51,85 +51,90 @@ public:
 
     //! Returns a child node by node name.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection GetSection(
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         const wchar_t* name, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, L"", L"", autoCreate);
+        return pIFData->GetSection(newnode, P(), name, L"", L"", autoCreate);
     }
 
     //! Returns a child node by node name and integer property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
         \param attrValue the field value of the child node.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection GetSection(const wchar_t* name,
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue, bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, attrName, attrValue, autoCreate);
+        return pIFData->GetSection(newnode, P(), name, attrName, attrValue, autoCreate);
     }
 
     //! Returns a child node by node name and string property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
         \param attrValue the field value of the child node.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection GetSection(const wchar_t* name,
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, const wchar_t* name,
         const wchar_t* attrName, const wchar_t* attrValue,
         bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, attrName, attrValue, autoCreate);
+        return pIFData->GetSection(newnode, P(), name, attrName, attrValue, autoCreate);
     }
 
     //! Returns a child node by node name and string property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
         \param attrValue the field value of the child node.
         \param attrName2 another field name of the child node.
         \param attrValue2 the field value of attrName2.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection GetSection(const wchar_t* name,
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, const wchar_t* name,
         const wchar_t* attrName, const wchar_t* attrValue,
         const wchar_t* attrName2, const wchar_t* attrValue2,
         bool autoCreate = true) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, attrName, attrValue,
+        return pIFData->GetSection(newnode, P(), name, attrName, attrValue,
             attrName2, attrValue2, autoCreate);
     }
 
     //! Returns a child node by node name and integer property value.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param attrName a field name of the child node.
         \param attrValue the field value of the child node.
         \param attrName2 another field name of the child node.
         \param attrValue2 the field value of attrName2.
         \param autoCreate true if enable to auto create new node.
-        \return the child node (Cx_ConfigSection). The node will be created when not exist and autoCreate is true.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection GetSection(const wchar_t* name,
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue,
         const wchar_t* attrName2, ULONG attrValue2,
         bool autoCreate = true)
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSection(P(), name, attrName, attrValue,
+        return pIFData->GetSection(newnode, P(), name, attrName, attrValue,
             attrName2, attrValue2, autoCreate);
     }
 
@@ -147,27 +152,29 @@ public:
 
     //! Returns the child node of the specified order.
     /*!
+        \param[out] newnode the child node (Cx_ConfigSection) even not exist actually.\n
+             I/O operations will be ignored when the internal object is not exist.\n
         \param name the child node name. the name may contains slash chars for multiple levels.
         \param index the child index (0 to GetSectionCount()).
-        \return the child node (Cx_ConfigSection) even not exist actually.\n
-             I/O operations will be ignored when the internal object is not exist.\n
+        \return reference to newnode (Cx_ConfigSection).
         \see GetSectionCount, Ix_ConfigSection::IsValid().
     */
-    Cx_ConfigSection GetSectionByIndex(const wchar_t* name, long index) const
+    Cx_Ptr& GetSectionByIndex(Cx_Ptr& newnode, const wchar_t* name, long index) const
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetSectionByIndex(P(), name, index);
+        return pIFData->GetSectionByIndex(newnode, P(), name, index);
     }
 
     //! Add a child node.
     /*!
+        \param[out] newnode the new node (Cx_ConfigSection).
         \param name the child node name. the name may contains slash chars for multiple levels.
-        \return the new node (Cx_ConfigSection).
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection AddSection(const wchar_t* name)
+    Cx_Ptr& AddSection(Cx_Ptr& newnode, const wchar_t* name)
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->AddSection(P(), name);
+        return pIFData->AddSection(newnode, P(), name);
     }
 
     //! Removes all child nodes.
@@ -198,13 +205,14 @@ public:
 
     //! Returns the parent node.
     /*!
-        \return the parent node. The result node will be invalid
-            (Ix_ConfigSection::IsValid()==false) if this node is root node.
+        \param[out] newnode the parent node. The result node will be invalid
+            (Ix_ConfigSection::IsValid()==false) if sec is root node.
+        \return reference to newnode (Cx_ConfigSection).
     */
-    Cx_ConfigSection GetParentSection()
+    Cx_Ptr& GetParentSection(Cx_Ptr& newnode)
     {
         Ix_ConfigData* pIFData = P()->GetData();
-        return pIFData->GetParentSection(P());
+        return pIFData->GetParentSection(newnode, P());
     }
 };
 

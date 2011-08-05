@@ -182,7 +182,7 @@ static std::wstring EnsureSQLHasSelect(const std::wstring& sql)
     return sql;
 }
 
-Cx_Section Cx_CfgDatabase::OpenRecordset(const std::wstring& sqlSelect)
+Cx_Ptr& Cx_CfgDatabase::OpenRecordset(Cx_Ptr& newnode, const std::wstring& sqlSelect)
 {
     Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_CfgRecordset);
     Cx_CfgRecordset* pRecordset = static_cast<Cx_CfgRecordset*>(pIFRet.P());
@@ -190,29 +190,30 @@ Cx_Section Cx_CfgDatabase::OpenRecordset(const std::wstring& sqlSelect)
 
     pRecordset->InitializeBySQL(this, EnsureSQLHasSelect(sqlSelect));
 
-    return pIFRet;
+    newnode = pIFRet;
+    return newnode;
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(const wchar_t* sqlSelect, bool)
+Cx_Ptr& Cx_CfgDatabase::GetSection(Cx_Ptr& newnode, const wchar_t* sqlSelect, bool)
 {
-    return OpenRecordset(sqlSelect);
+    return OpenRecordset(newnode, sqlSelect);
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
-                                      const wchar_t* field, ULONG condValue, bool)
+Cx_Ptr& Cx_CfgDatabase::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
+                                   const wchar_t* field, ULONG condValue, bool)
 {
-    return GetSection(pParent, sqlSelect, field, condValue, L"", 0L);
+    return GetSection(newnode, pParent, sqlSelect, field, condValue, L"", 0L);
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* pszNodeName,
-                                      const wchar_t* field, const wchar_t* pszAttrValue, bool)
+Cx_Ptr& Cx_CfgDatabase::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* pParent, const wchar_t* pszNodeName,
+                                   const wchar_t* field, const wchar_t* pszAttrValue, bool)
 {
-    return GetSection(pParent, pszNodeName, field, pszAttrValue, L"", L"");
+    return GetSection(newnode, pParent, pszNodeName, field, pszAttrValue, L"", L"");
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
-                                      const wchar_t* field, const wchar_t* condValue,
-                                      const wchar_t* field2Name, const wchar_t* condValue2, bool)
+Cx_Ptr& Cx_CfgDatabase::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
+                                   const wchar_t* field, const wchar_t* condValue,
+                                   const wchar_t* field2Name, const wchar_t* condValue2, bool)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::GetSection(pParent, ...): pParent must be NULL");
 
@@ -238,12 +239,12 @@ Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* 
         sql << field2Name << L"='" << condValue2 << L"'";
     }
 
-    return OpenRecordset(sql.str());
+    return OpenRecordset(newnode, sql.str());
 }
 
-Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
-                                      const wchar_t* field, ULONG condValue,
-                                      const wchar_t* field2Name, ULONG condValue2, bool)
+Cx_Ptr& Cx_CfgDatabase::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* pParent, const wchar_t* sqlSelect,
+                                   const wchar_t* field, ULONG condValue,
+                                   const wchar_t* field2Name, ULONG condValue2, bool)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::GetSection(pParent, ...): pParent must be NULL");
 
@@ -269,7 +270,7 @@ Cx_Section Cx_CfgDatabase::GetSection(Ix_ConfigSection* pParent, const wchar_t* 
         sql << L" AND " << field2Name << L"=" << condValue2;
     }
 
-    return OpenRecordset(sql.str());
+    return OpenRecordset(newnode, sql.str());
 }
 
 long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, const wchar_t*)
@@ -281,7 +282,7 @@ long Cx_CfgDatabase::GetSectionCount(Ix_ConfigSection* pParent, const wchar_t*)
     return pRecordset->GetRecordCount();
 }
 
-Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, const wchar_t*, long nIndex)
+Cx_Ptr& Cx_CfgDatabase::GetSectionByIndex(Cx_Ptr& newnode, Ix_ConfigSection* pParent, const wchar_t*, long nIndex)
 {
     Cx_CfgRecordset* pRecordset = static_cast<Cx_CfgRecordset*>(pParent);
     ASSERT_MESSAGE(pRecordset != NULL, "Database::GetSectionByIndex(pParent, ...): "
@@ -312,10 +313,11 @@ Cx_Section Cx_CfgDatabase::GetSectionByIndex(Ix_ConfigSection* pParent, const wc
         CreateNullSection(pIFRet);
     }
 
-    return pIFRet;
+    newnode = pIFRet;
+    return newnode;
 }
 
-Cx_Section Cx_CfgDatabase::AddSection(Ix_ConfigSection* pParent, const wchar_t* table)
+Cx_Ptr& Cx_CfgDatabase::AddSection(Cx_Ptr& newnode, Ix_ConfigSection* pParent, const wchar_t* table)
 {
     ASSERT_MESSAGE(NULL == pParent, "Database::AddSection(pParent, ...): pParent must be NULL");
     ASSERT_MESSAGE(DbFunc::IsDBName(table), "Invalid table name.");
@@ -326,7 +328,8 @@ Cx_Section Cx_CfgDatabase::AddSection(Ix_ConfigSection* pParent, const wchar_t* 
 
     pRecord->InitializeForAdd(this, table);
 
-    return pIFRet;
+    newnode = pIFRet;
+    return newnode;
 }
 
 bool Cx_CfgDatabase::RemoveSection(Ix_ConfigSection*)
@@ -335,10 +338,10 @@ bool Cx_CfgDatabase::RemoveSection(Ix_ConfigSection*)
     return false;
 }
 
-Cx_Section Cx_CfgDatabase::GetParentSection(Ix_ConfigSection*)
+Cx_Ptr& Cx_CfgDatabase::GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection*)
 {
     ASSERT_MESSAGE(0, "The function is not supportable. [Database::GetParentSection(Ix_ConfigSection*)]");
-    return Cx_Section();
+    return newnode;
 }
 
 long Cx_CfgDatabase::RemoveChildren(Ix_ConfigSection* pParent, const wchar_t* table,

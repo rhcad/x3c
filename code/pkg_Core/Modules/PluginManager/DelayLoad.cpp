@@ -161,7 +161,9 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
             pIFFile->SetRootName(L"cache");
             m_cache = pIFFile;
 
-            Cx_ConfigSection root(pIFFile->GetData()->GetSection(L""));
+            Cx_Ptr obj;
+            Cx_ConfigSection root(pIFFile->GetData()->GetSection(obj, L""));
+
             root->SetString(L"appname", appname.c_str());
         }
     }
@@ -174,22 +176,21 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* pluginFile)
     const wchar_t* name = PathFindFileNameW(pluginFile);
     Cx_Interface<Ix_ConfigXml> pIFFile(m_cache);
     Cx_ConfigSection secPlugin;
+    Cx_Ptr obj;
 
     clsids.clear();
 
     if (pIFFile)
     {
-        secPlugin = pIFFile->GetData()->GetSection(NULL,
+        secPlugin = pIFFile->GetData()->GetSection(obj, NULL,
             L"plugins/plugin", L"name", name, false);
-        Cx_ConfigSection seclist(secPlugin.GetSection(L"clsids", false));
+        Cx_ConfigSection seclist(secPlugin.GetSection(obj, L"clsids", false));
 
         for (int i = 0; i < 999; i++)
         {
-            Cx_ConfigSection sec(seclist.GetSectionByIndex(L"clsid", i));
+            Cx_ConfigSection sec(seclist.GetSectionByIndex(obj, L"clsid", i));
             if (!sec->IsValid())
-            {
                 break;
-            }
             X3CLSID clsid(x3::w2a(sec->GetString(L"id")).c_str());
             if (clsid.valid() && x3::find_value(clsids, clsid) < 0)
             {
@@ -201,7 +202,7 @@ bool Cx_PluginLoader::LoadClsids(CLSIDS& clsids, const wchar_t* pluginFile)
     bool has = !clsids.empty();
     if (!has && secPlugin)
     {
-        Cx_ConfigSection seclist(secPlugin.GetSection(L"observers", false));
+        Cx_ConfigSection seclist(secPlugin.GetSection(obj, L"observers", false));
         has = (seclist.GetSectionCount(L"observer") > 0);
     }
 
@@ -214,9 +215,10 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* pluginFile
 
     if (pIFFile)
     {
-        Cx_ConfigSection secPlugin(pIFFile->GetData()->GetSection(NULL,
+        Cx_Ptr obj;
+        Cx_ConfigSection secPlugin(pIFFile->GetData()->GetSection(obj, NULL,
             L"plugins/plugin", L"name", PathFindFileNameW(pluginFile)));
-        Cx_ConfigSection seclist(secPlugin.GetSection(L"clsids"));
+        Cx_ConfigSection seclist(secPlugin.GetSection(obj, L"clsids"));
 
         secPlugin->SetString(L"filename", pluginFile);
         seclist.RemoveChildren(L"clsid");
@@ -224,8 +226,9 @@ bool Cx_PluginLoader::SaveClsids(const CLSIDS& clsids, const wchar_t* pluginFile
         for (CLSIDS::const_iterator it = clsids.begin();
             it != clsids.end(); ++it)
         {
-            Cx_ConfigSection sec(seclist.GetSection(
-                L"clsid", L"id", x3::a2w(it->str()).c_str()));
+            seclist.GetSection(
+                obj, L"clsid", L"id", x3::a2w(it->str()).c_str());
+            Cx_ConfigSection sec(obj);
 
             X3CLASSENTRY* pEntry = FindEntry(*it);
             if (pEntry && pEntry->pfnObjectCreator)
@@ -255,16 +258,17 @@ void Cx_PluginLoader::AddObserverPlugin(HMODULE hdll, const char* obtype,
         GetModuleFileNameW(hdll, filename, MAX_PATH);
         const wchar_t* name = PathFindFileNameW(filename);
 
-        Cx_ConfigSection secObserver(pIFFile->GetData()->GetSection(NULL,
+        Cx_Ptr obj;
+        Cx_ConfigSection secObserver(pIFFile->GetData()->GetSection(obj, NULL,
             L"observers/observer", 
             L"type", x3::a2w(obtype).c_str(), 
             L"subtype", subtype));
-        secObserver.GetSection(L"plugin", L"name", name);
+        secObserver.GetSection(obj, L"plugin", L"name", name);
 
-        Cx_ConfigSection secPlugin(pIFFile->GetData()->GetSection(NULL,
+        Cx_ConfigSection secPlugin(pIFFile->GetData()->GetSection(obj, NULL,
             L"plugins/plugin", L"name", name));
         secPlugin->SetString(L"filename", filename);
-        secPlugin.GetSection(L"observers/observer", L"type", x3::a2w(obtype).c_str());
+        secPlugin.GetSection(obj, L"observers/observer", L"type", x3::a2w(obtype).c_str());
     }
 }
 
@@ -274,14 +278,15 @@ void Cx_PluginLoader::FireFirstEvent(const char* obtype, const wchar_t* subtype)
 
     if (pIFFile)
     {
-        Cx_ConfigSection secObserver(pIFFile->GetData()->GetSection(NULL,
+        Cx_Ptr obj;
+        Cx_ConfigSection secObserver(pIFFile->GetData()->GetSection(obj, NULL,
             L"observers/observer", 
             L"type", x3::a2w(obtype).c_str(), 
             L"subtype", subtype, false));
 
         for (int i = 0; i < 999; i++)
         {
-            Cx_ConfigSection sec(secObserver.GetSectionByIndex(L"plugin", i));
+            Cx_ConfigSection sec(secObserver.GetSectionByIndex(obj, L"plugin", i));
             std::wstring shortflname(sec->GetString(L"name"));
 
             if (shortflname.empty())

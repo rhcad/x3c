@@ -50,7 +50,7 @@ public:
     bool GetRecordCount(long& count, const std::wstring& sqlSelect);
 
     //! 执行SQL语句，返回记录集
-    ConfigSection OpenRecordset(const std::wstring& sqlSelect);
+    Cx_Ptr& OpenRecordset(Cx_Ptr& newnode, const std::wstring& sqlSelect);
 
     //! 返回SQL指令翻译对象
     Ix_SQLParser* GetSQLParser();
@@ -86,7 +86,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigSection GetSection(const wchar_t* sqlSelect, bool ignore = true);
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, const wchar_t* sqlSelect, bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
     /*! 本函数可用于根据编号条件查找并修改记录，例如： \code
@@ -104,7 +104,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigSection GetSection(
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, ULONG condValue, 
         bool ignore = true);
@@ -118,7 +118,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigSection GetSection(
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, const wchar_t* condValue, 
         bool ignore = true);
@@ -134,7 +134,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigSection GetSection(
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, const wchar_t* condValue, 
         const wchar_t* fieldName2, const wchar_t* condValue2, 
@@ -151,7 +151,7 @@ protected:
         \param ignore 忽略本参数
         \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
     */
-    ConfigSection GetSection(
+    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, ULONG condValue, 
         const wchar_t* fieldName2, ULONG condValue2, 
@@ -186,7 +186,7 @@ protected:
         \param index 记录的序号，取值必须为0、记录集的当前序号、或当前序号+1
         \return 记录对象 Cx_CfgRecord ,不为空
     */
-    ConfigSection GetSectionByIndex(
+    Cx_Ptr& GetSectionByIndex(Cx_Ptr& newnode, 
         Ix_ConfigSection* pRecordset, const wchar_t* ignore, long index);
 
     //! 增加一个新记录，待设置各个字段的值
@@ -202,7 +202,7 @@ protected:
         \param table 数据库表名，例如“book”
         \return 新记录对象 Cx_CfgRecord
     */
-    ConfigSection AddSection(Ix_ConfigSection* nullP, const wchar_t* table);
+    Cx_Ptr& AddSection(Cx_Ptr& newnode, Ix_ConfigSection* nullP, const wchar_t* table);
 
     //! 不支持本函数
     bool RemoveSection(Ix_ConfigSection*);
@@ -234,7 +234,7 @@ protected:
         const wchar_t* field, ULONG condValue);
 
     //! Returns the parent node of the specified node.(This function is not supported.)
-    ConfigSection GetParentSection(Ix_ConfigSection*);
+    Cx_Ptr& GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection*);
 };
 
 #endif // _X3_CONFIGDB_CFGDATABASE_H

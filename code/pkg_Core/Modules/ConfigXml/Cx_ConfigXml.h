@@ -50,38 +50,38 @@ private:
 
     // From Ix_ConfigData
     //
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         const wchar_t* name, bool autoCreate = true);
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue,
         bool autoCreate = true);
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName, const wchar_t* attrValue,
         bool autoCreate = true);
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName, const wchar_t* attrValue,
         const wchar_t* attrName2, const wchar_t* attrValue2,
         bool autoCreate = true);
-    virtual ConfigSection GetSection(
+    virtual Cx_Ptr& GetSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue,
         const wchar_t* attrName2, ULONG attrValue2,
         bool autoCreate = true);
     virtual long GetSectionCount(
         Ix_ConfigSection* parent, const wchar_t* name);
-    virtual ConfigSection GetSectionByIndex(
+    virtual Cx_Ptr& GetSectionByIndex(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name, long index);
-    virtual ConfigSection AddSection(
+    virtual Cx_Ptr& AddSection(Cx_Ptr& newnode, 
         Ix_ConfigSection* parent, const wchar_t* name);
     virtual bool RemoveSection(Ix_ConfigSection* sec);
     virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName = L"", const wchar_t* attrValue = L"");
     virtual long RemoveChildren(Ix_ConfigSection* parent, const wchar_t* name,
         const wchar_t* attrName, ULONG attrValue);
-    virtual ConfigSection GetParentSection(Ix_ConfigSection* sec);
+    virtual Cx_Ptr& GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection* sec);
 
 private:
     Cx_ConfigXml(const Cx_ConfigXml&);

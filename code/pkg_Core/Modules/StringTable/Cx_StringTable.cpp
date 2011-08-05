@@ -86,7 +86,9 @@ bool Cx_StringTable::GetValue(std::wstring& value,
         Cx_ConfigSection group(it->group);
         ASSERT(group.IsNotNull());
 
-        Cx_ConfigSection sec(group.GetSection(L"string", L"id", id.c_str(), false));
+        Cx_Ptr obj;
+        Cx_ConfigSection sec(group.GetSection(obj, L"string", L"id", id.c_str(), false));
+
         value = sec->GetString(L"value");
         ReplaceLf(value);
     }
@@ -139,7 +141,8 @@ long Cx_StringTable::RegisterFile(const std::wstring& filename)
     long count = 0;
     for (int i = 0; i < 99; i++)
     {
-        Cx_ConfigSection sec (pIFFile->GetData()->GetSectionByIndex(NULL, L"module", i));
+        Cx_Ptr obj;
+        Cx_ConfigSection sec (pIFFile->GetData()->GetSectionByIndex(obj, NULL, L"module", i));
         ITEM item;
 
         item.file = pIFFile->GetData();
