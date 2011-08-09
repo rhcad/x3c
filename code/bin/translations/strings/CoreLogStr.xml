@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<module name="StringTable">
+		<string id="IDS_NO_STRVALUE" value="没有找到本地化字符串值"/>
+		<string id="IDS_NO_STRFILE" value="没有配置本地化字符串XML文件"/>
+		<string id="IDS_LOAD_STRFILE" value="加载本地化字符串XML文件"/>
+		<string id="IDS_IGNORE_STRGROUP" value="忽略了重复的本地化字符串组"/>
+	</module>
+	<module name="ConfigXml">
+		<string id="IDS_CREATEINSTANCE_FAIL" value="不能创建XML文档COM对象"/>
+		<string id="IDS_LOADXML_ROOT_MISMATCH" value="装载XML文件失败，不是预期的XML根节点名"/>
+		<string id="IDS_LOADXML_FAIL" value="装载XML文件失败，可能不是正确的XML格式"/>
+		<string id="IDS_LOADXML_EMPTY" value="XML内容为空，解析XML失败"/>
+		<string id="IDS_LOADXMLSTR_FAIL" value="不是正确格式的XML内容，解析XML失败"/>
+		<string id="IDS_SAVEXML_OK" value="保存XML文件成功"/>
+		<string id="IDS_SAVEXML_FAIL" value="保存XML文件失败"/>
+		<string id="IDS_CHANGE_FAIL" value="修改XML内容失败"/>
+	</module>
+	<module name="ConfigDB">
+		<string id="IDS_CREATEINSTANCE_FAIL" value="不能创建数据库连接COM对象"/>
+		<string id="IDS_CONNECT_FAIL" value="不能连接数据库"/>
+		<string id="IDS_NO_FILE" value="数据库文件不存在"/>
+		<string id="IDS_FILE_READONLY" value="数据库文件为只读的，数据改动结果将无法保存"/>
+		<string id="IDS_SQL_ERROR" value="执行数据库命令操作失败"/>
+		<string id="IDS_DB_ERROR" value="执行数据库操作失败"/>
+		<string id="IDS_DB_INFO" value="数据库操作消息"/>
+	</module>
+	<module name="FileUtility">
+		<string id="IDS_FILE_NOTEXIST" value="文件不存在"/>
+		<string id="IDS_CREATEDIR_FAIL" value="无法创建文件夹"/>
+		<string id="IDS_FILE_CANNOT_WRITE" value="文件无法写入"/>
+		<string id="IDS_DELFILE_FAIL" value="无法删除文件"/>
+		<string id="IDS_DELFOLDER_FAIL" value="无法删除文件夹"/>
+		<string id="IDS_MOVEFILE_FAIL" value="无法移动文件"/>
+		<string id="IDS_RENFILE_FAIL" value="无法重命名文件"/>
+		<string id="IDS_COPYFILE_FAIL" value="无法复制文件"/>
+		<string id="IDS_DELETEFILE_ROLLBACK" value="因前一任务回滚，取消删除文件的操作"/>
+	</module>
+	<module name="TextUtility">
+		<string id="IDS_OPEN_FAIL" value="不能打开文件"/>
+		<string id="IDS_HUGE_FILE" value="文件太大，只读取部分内容"/>
+		<string id="IDS_WRITE_FAIL" value="不能保存文件"/>
+		<string id="IDS_NOT_ANSIFILE" value="文件编码未知，读取的内容可能不对"/>
+		<string id="IDS_OPENCLIP_FAIL" value="打开剪贴板失败"/>
+		<string id="IDS_ALLOCMEM_FAIL" value="分配内存失败"/>
+		<string id="IDS_SETCLIP_FAIL" value="设置剪贴板数据失败"/>
+		<string id="IDS_CLIP_NOTEXT" value="剪贴板上没有文本内容"/>
+		<string id="IDS_COCREATEGUID_FAIL" value="创建GUID失败"/>
+	</module>
+	<module name="LogManager">
+		<string id="IDS_ASSERTION_FAILED" value="程序发生断言错误"/>
+	</module>
+	<module name="PluginManager">
+		<string id="IDS_INITPLUGIN_FAIL" value="初始化插件失败"/>
+	</module>
+</root>

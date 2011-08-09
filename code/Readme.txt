@@ -5,6 +5,7 @@ pkg_UnitTest: unittest projects, using cppunit 1.12.1.
 pkg_Utility: other frequently-used utility plugins.
 
 ..\projects: C++ workspace files (Linux GCC, MSVC++, MinGW GCC, ...).
+Makefile is used to compile x3c on Linux or Unix.
 
 
 Bug reports and suggestions are welcome.  Please use the SourceForge bug tracking
