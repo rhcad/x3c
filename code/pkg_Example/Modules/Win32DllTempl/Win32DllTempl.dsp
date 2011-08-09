@@ -33,7 +33,7 @@ RSC=rc.exe
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\..\bin\vc60\Release\Plugins"
+# PROP Output_Dir "..\..\..\bin\vc60\Release\plugins"
 # PROP Intermediate_Dir "..\..\..\..\obj\vc60\Release\Win32DllTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
@@ -45,14 +45,14 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\..\obj\vc60\Release\Symbols/Win32DllTempl.pdb" /map:"..\..\..\..\obj\vc60\Release\Symbols/Win32DllTempl.map" /machine:I386 /out:"..\..\..\bin\vc60\Release\Plugins/Win32DllTempl.plugin.dll" /implib:"..\..\..\..\obj\vc60\Release\Lib/Win32DllTempl.lib"
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\..\obj\vc60\Release\Symbols/Win32DllTempl.pdb" /map:"..\..\..\..\obj\vc60\Release\Symbols/Win32DllTempl.map" /machine:I386 /out:"..\..\..\bin\vc60\Release\plugins/Win32DllTempl.plugin.dll" /implib:"..\..\..\..\obj\vc60\Release\Lib/Win32DllTempl.lib"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "Win32DllTempl - Win32 Debug"
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\..\bin\vc60\Debug\Plugins"
+# PROP Output_Dir "..\..\..\bin\vc60\Debug\plugins"
 # PROP Intermediate_Dir "..\..\..\..\obj\vc60\Debug\Win32DllTempl"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\..\obj\vc60\Debug\Symbols/Win32DllTempl.pdb" /debug /machine:I386 /out:"..\..\..\bin\vc60\Debug\Plugins/Win32DllTempl.plugin.dll" /implib:"..\..\..\..\obj\vc60\Debug\Lib/Win32DllTempl.lib" /pdbtype:sept
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\..\obj\vc60\Debug\Symbols/Win32DllTempl.pdb" /debug /machine:I386 /out:"..\..\..\bin\vc60\Debug\plugins/Win32DllTempl.plugin.dll" /implib:"..\..\..\..\obj\vc60\Debug\Lib/Win32DllTempl.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF

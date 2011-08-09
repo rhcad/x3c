@@ -75,7 +75,7 @@ bool Cx_StringTable::GetValue(std::wstring& value,
 {
     if (!m_loaded)
     {
-        LoadFiles(x3::RelToAbsWithPlugin(L"../Translations/Strings", false));
+        LoadFiles(x3::RelToAbsWithPlugin(L"../translations/strings", false));
     }
 
     IT_ITEM it = Find(module);

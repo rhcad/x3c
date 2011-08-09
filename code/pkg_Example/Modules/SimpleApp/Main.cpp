@@ -14,9 +14,9 @@ int main()
 {
     CPluginManager loader;
 
-    if (loader.LoadPluginManager(L"../Plugins"))
+    if (loader.LoadPluginManager(L"../plugins"))
     {
-        loader.GetPluginLoader()->LoadPluginFiles(L"../Plugins",
+        loader.GetPluginLoader()->LoadPluginFiles(L"../plugins",
             L"Win32DllTempl.plugin" PLNEXT);
         loader.GetPluginLoader()->InitializePlugins();
 

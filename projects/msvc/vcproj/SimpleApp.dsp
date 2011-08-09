@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\..\code\bin\vc60\Release\UnitTests"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Release\tests"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\SimpleApp"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
@@ -62,7 +62,7 @@ LINK32=link.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\UnitTests"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\tests"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\SimpleApp"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""

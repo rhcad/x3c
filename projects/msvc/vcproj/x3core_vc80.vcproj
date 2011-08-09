@@ -16,7 +16,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\Plugins"
+			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="2"
 			UseOfATL="2"
@@ -114,7 +114,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\Plugins"
+			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="2"
 			UseOfATL="2"

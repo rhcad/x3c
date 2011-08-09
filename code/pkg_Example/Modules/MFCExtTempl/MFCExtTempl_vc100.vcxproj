@@ -42,13 +42,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\bin\vc100\$(Configuration)\Plugins\</OutDir>
+    <OutDir>..\..\..\bin\vc100\$(Configuration)\plugins\</OutDir>
     <IntDir>..\..\..\..\obj\vc100\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetExt>.plugin.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\bin\vc100\$(Configuration)\Plugins\</OutDir>
+    <OutDir>..\..\..\bin\vc100\$(Configuration)\plugins\</OutDir>
     <IntDir>..\..\..\..\obj\vc100\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetExt>.plugin.dll</TargetExt>
   </PropertyGroup>

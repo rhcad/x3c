@@ -33,7 +33,7 @@ RSC=rc.exe
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\..\code\bin\vc60\Release\Plugins"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Release\plugins"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\ComHook"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
@@ -45,14 +45,14 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 ole32.lib /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/ComHook.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/ComHook.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\Plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/ComHook.lib"
+# ADD LINK32 ole32.lib /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/ComHook.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/ComHook.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/ComHook.lib"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "ComHook - Win32 Debug"
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\Plugins"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\plugins"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\ComHook"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 ole32.lib /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/ComHook.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/ComHook.lib" /pdbtype:sept
+# ADD LINK32 ole32.lib /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/ComHook.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/ComHook.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/ComHook.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 

@@ -16,11 +16,11 @@ int main()
 {
     LoadDllHelper dll (NULL, &g_hPluginDll);
 
-    if (dll.Load(L"../Plugins/Win32DllTempl.plugin" PLNEXT))
+    if (dll.Load(L"../plugins/Win32DllTempl.plugin" PLNEXT))
     {
         Test();
     }
-    if (dll.Load( L"../Plugins/MFCExtTempl.plugin" PLNEXT))
+    if (dll.Load( L"../plugins/MFCExtTempl.plugin" PLNEXT))
     {
         Test();
     }

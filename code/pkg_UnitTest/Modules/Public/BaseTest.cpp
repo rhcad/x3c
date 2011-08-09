@@ -21,12 +21,12 @@ long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
 #ifdef _WIN32
         VERIFY(SUCCEEDED(CoInitialize(NULL)));
 #endif
-        VERIFY(s_loader.LoadPluginManager(L"../Plugins"));
+        VERIFY(s_loader.LoadPluginManager(L"../plugins"));
     }
 
     if (loadCore)
     {
-        VERIFY(s_loader.LoadCorePlugins(L"../Plugins"));
+        VERIFY(s_loader.LoadCorePlugins(L"../plugins"));
     }
 
     long count = 1;
@@ -36,7 +36,7 @@ long BaseTest::LoadPlugins(const wchar_t* plugins, bool loadCore)
         Ix_PluginLoader* pPluginLoader = s_loader.GetPluginLoader();
         ASSERT(pPluginLoader != NULL);
 
-        count = pPluginLoader->LoadPluginFiles(L"../Plugins", plugins);
+        count = pPluginLoader->LoadPluginFiles(L"../plugins", plugins);
         pPluginLoader->InitializePlugins();
     }
 

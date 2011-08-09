@@ -3,8 +3,8 @@
 INCLUDE_DIR   =$(ROOTDIR)/code
 
 INSTALL_DIR   =$(ROOTDIR)/code/bin
-PLUGINS_DIR   =$(INSTALL_DIR)/Plugins
-UNITTESTS_DIR =$(INSTALL_DIR)/UnitTests
+PLUGINS_DIR   =$(INSTALL_DIR)/plugins
+UNITTESTS_DIR =$(INSTALL_DIR)/tests
 
 CC          = g++
 CFLAGS     += -g

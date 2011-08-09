@@ -30,18 +30,18 @@ void TestPluginManager::testLoadUnloadPlugin()
 {
     Ix_PluginLoader* pLoader = GetManagerLoader();
     VERIFY(pLoader);
-    VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
-    VERIFY(NULL!=GetModuleHandleW(L"../Plugins/LogManager.plugin" PLNEXT));
+    VERIFY(pLoader->LoadPlugin(L"../plugins/LogManager.plugin" PLNEXT));
+    VERIFY(NULL!=GetModuleHandleW(L"../plugins/LogManager.plugin" PLNEXT));
 
-    VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
-    VERIFY(NULL==GetModuleHandleW(L"../Plugins/LogManager.plugin" PLNEXT));
+    VERIFY(pLoader->UnloadPlugin(L"../plugins/LogManager.plugin" PLNEXT));
+    VERIFY(NULL==GetModuleHandleW(L"../plugins/LogManager.plugin" PLNEXT));
 }
 
 void TestPluginManager::testLoadUnloadPlugins()
 {
     Ix_PluginLoader* pLoader = GetManagerLoader();
     VERIFY(pLoader);
-    VERIFY(pLoader->LoadPlugins(L"../Plugins") > 0);
+    VERIFY(pLoader->LoadPlugins(L"../plugins") > 0);
     VERIFY(pLoader->UnloadPlugins() > 0);
 }
 
@@ -63,13 +63,13 @@ void TestPluginManager::testCreateObject()
     Cx_Interface<Ix_PluginLoader> pLoader(pFactory);
 
     VERIFY(pLoader);
-    VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
+    VERIFY(pLoader->LoadPlugin(L"../plugins/LogManager.plugin" PLNEXT));
 
     //Ix_Object* ixObject=NULL;
     //VERIFY(0==pFactory->CreateObject(x3::CLSID_LogManager, &ixObject,NULL));
     //ixObject->InterfaceRelease(NULL);
 
-    VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
+    VERIFY(pLoader->UnloadPlugin(L"../plugins/LogManager.plugin" PLNEXT));
 }
 
 void TestPluginManager::testIsCreatorRegister()
@@ -81,11 +81,11 @@ void TestPluginManager::testIsCreatorRegister()
 
     Cx_Interface<Ix_PluginLoader> pLoader(pFactory);
     VERIFY(pLoader);
-    VERIFY(pLoader->LoadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
+    VERIFY(pLoader->LoadPlugin(L"../plugins/LogManager.plugin" PLNEXT));
 
     VERIFY(true == pFactory->IsCreatorRegister(x3::CLSID_LogManager));
 
-    VERIFY(pLoader->UnloadPlugin(L"../Plugins/LogManager.plugin" PLNEXT));
+    VERIFY(pLoader->UnloadPlugin(L"../plugins/LogManager.plugin" PLNEXT));
 }
 
 Ix_PluginLoader* TestPluginManager::GetManagerLoader(void)

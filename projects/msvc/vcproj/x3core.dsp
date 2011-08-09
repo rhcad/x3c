@@ -33,7 +33,7 @@ RSC=rc.exe
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\Plugins"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\plugins"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\x3core"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
@@ -46,14 +46,14 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /subsystem:windows /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/x3core.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/x3core.com.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/x3core.lib" /pdbtype:sept
+# ADD LINK32 /nologo /subsystem:windows /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/x3core.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/x3core.com.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/x3core.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "x3core - Win32 Release"
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\..\code\bin\vc60\Release\Plugins"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Release\plugins"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\x3core"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
@@ -66,7 +66,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /machine:I386
-# ADD LINK32 /nologo /subsystem:windows /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/x3core.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/x3core.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\Plugins/x3core.com.dll" /implib:"..\..\..\obj\vc60\Release\Lib/x3core.lib"
+# ADD LINK32 /nologo /subsystem:windows /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/x3core.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/x3core.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/x3core.com.dll" /implib:"..\..\..\obj\vc60\Release\Lib/x3core.lib"
 # SUBTRACT LINK32 /pdb:none
 
 !ENDIF 

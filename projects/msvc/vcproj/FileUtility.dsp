@@ -33,7 +33,7 @@ RSC=rc.exe
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\..\code\bin\vc60\Release\Plugins"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Release\plugins"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\FileUtility"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
@@ -45,14 +45,14 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/FileUtility.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/FileUtility.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\Plugins/FileUtility.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/FileUtility.lib"
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/FileUtility.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/FileUtility.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/FileUtility.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/FileUtility.lib"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "FileUtility - Win32 Debug"
 
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\Plugins"
+# PROP Output_Dir "..\..\..\code\bin\vc60\Debug\plugins"
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\FileUtility"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/FileUtility.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\Plugins/FileUtility.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/FileUtility.lib" /pdbtype:sept
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/FileUtility.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/FileUtility.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/FileUtility.lib" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 

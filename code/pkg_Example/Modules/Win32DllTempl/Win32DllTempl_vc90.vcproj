@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\bin\vc90\$(ConfigurationName)\Plugins"
+			OutputDirectory="..\..\..\bin\vc90\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -93,7 +93,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\bin\vc90\$(ConfigurationName)\Plugins"
+			OutputDirectory="..\..\..\bin\vc90\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="2"
 			CharacterSet="1"

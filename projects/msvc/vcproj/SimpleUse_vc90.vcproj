@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\UnitTests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -91,7 +91,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\UnitTests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			CharacterSet="1"

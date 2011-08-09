@@ -1,0 +1,19 @@
+X3 C++ PluginFramework
+http://sourceforge.net/projects/x3c/
+
+x3c is designed as a plugin-framework that uses C++ (Linux GCC, MSVC++, MinGW GCC) and STL.
+This framework has many frequently-used and lightweight plugins.
+x3c can be used to easily develop plugins and applications for multiple platforms.
+
+License: Apache License V2.0
+
+Bug reports and suggestions are welcome.  Please use the SourceForge bug tracking
+system at http://sourceforge.net/projects/x3c/develop.
+
+Email to the current maintainers may be sent to <rhcad@hotmail.com>.
+Some documents in chinese may be found at http://www.cnblogs.com/rhcad .
+
+projects: C++ workspace files (Linux GCC, VC++, MinGW GCC, ...).
+code: source code of plugins.
+doc: development documents and doxygen files.
+tools: some useful tools for development.

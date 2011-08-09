@@ -11,8 +11,8 @@
 X3CLSID_DEFINE(CLSID_StringTable, "b8c36b29-59c3-4db2-be43-fd4982e6e71d");
 
 //! The localization string table interface.
-/*! The string table's xml file is saved under the path: exepath/Translations/Strings/ ,
-    just same as x3::FileNameRelToAbs(L"Translations/Strings", false).
+/*! The string table's xml file is saved under the path: exepath/translations/strings/ ,
+    just same as x3::FileNameRelToAbs(L"translations/strings", false).
     \interface Ix_StringTable
     \ingroup _GROUP_PLUGIN_XML_
     \see x3::CLSID_StringTable
@@ -46,8 +46,8 @@ public:
     //! Load string table's xml files in the specified path.
     /*!
         \param path the specified path contains xml files,
-            empty string is represented as the default path: exepath/Translations/Strings/ ,
-            just same as x3::FileNameRelToAbs(L"Translations/Strings", false).
+            empty string is represented as the default path: exepath/translations/strings/ ,
+            just same as x3::FileNameRelToAbs(L"translations/strings", false).
         \return the count of files loaded.
     */
     virtual long LoadFiles(const std::wstring& path) = 0;
