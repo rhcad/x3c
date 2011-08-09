@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="../../../code/bin/UnitTests/TestPlatform" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../code/bin/tests/TestPlatform" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../../obj/gcc/Release/TestPlatform" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -29,11 +29,11 @@
 				</Compiler>
 				<Linker>
 					<Add library="cppunit_dll" />
-					<Add directory="../../../code/bin/UnitTests" />
+					<Add directory="../../../code/bin/tests" />
 				</Linker>
 			</Target>
 			<Target title="Debug">
-				<Option output="../../../code/bin/UnitTests/TestPlatform" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../code/bin/tests/TestPlatform" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../../obj/gcc/Debug/TestPlatform" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -55,7 +55,7 @@
 				</Compiler>
 				<Linker>
 					<Add library="cppunitd_dll" />
-					<Add directory="../../../code/bin/UnitTests" />
+					<Add directory="../../../code/bin/tests" />
 				</Linker>
 			</Target>
 		</Build>
@@ -65,7 +65,7 @@
 		</Linker>
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.h" />
-		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/UnitTests.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/tests.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestPlatform/TestComHook.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestPlatform/TestComHook.h" />
 		<Extensions>

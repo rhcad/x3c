@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="../../../code/bin/UnitTests/TestCore" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../code/bin/tests/TestCore" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../../obj/unix/Release/TestCore" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -28,11 +28,11 @@
 					<Add directory="../../../code/pkg_Core/Interface" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../code/bin/UnitTests" />
+					<Add directory="../../../code/bin/tests" />
 				</Linker>
 			</Target>
 			<Target title="Debug">
-				<Option output="../../../code/bin/UnitTests/TestCore" prefix_auto="1" extension_auto="1" />
+				<Option output="../../../code/bin/tests/TestCore" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../../obj/unix/Debug/TestCore" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -53,7 +53,7 @@
 					<Add directory="../../../code/pkg_Core/Interface" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../../code/bin/UnitTests" />
+					<Add directory="../../../code/bin/tests" />
 				</Linker>
 			</Target>
 		</Build>
@@ -63,7 +63,7 @@
 		</Linker>
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.h" />
-		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/UnitTests.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/tests.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestChangeObserver.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestChangeObserver.h" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestCore/TestConfigXml.cpp" />
