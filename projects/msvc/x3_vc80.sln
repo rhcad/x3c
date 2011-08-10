@@ -60,8 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{A8FE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0Readme", "0Readme", "{1A9818B9-C5C9-45BC-8B0D-7540F81A5609}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\ChangeLog = ..\..\ChangeLog
-		..\..\README = ..\..\README
+		..\..\ChangeLog.txt = ..\..\ChangeLog.txt
+		..\..\README.txt = ..\..\README.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HollowView", "vcproj\HollowView_vc80.vcproj", "{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}"

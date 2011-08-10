@@ -64,8 +64,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{4BD9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0Readme", "0Readme", "{581B89F5-3B76-47CF-91A3-EB837D99F333}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\ChangeLog = ..\..\ChangeLog
-		..\..\README = ..\..\README
+		..\..\ChangeLog.txt = ..\..\ChangeLog.txt
+		..\..\README.txt = ..\..\README.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Platform", "pkg_Platform", "{115715F3-C4A9-4FC5-8199-466F5F2AF6FA}"
