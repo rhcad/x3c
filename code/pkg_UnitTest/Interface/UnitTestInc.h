@@ -13,7 +13,7 @@
 #include <UtilFunc/X3Portability.h>
 #include <UtilFunc/vecfunc.h>
 
-#ifdef _CONSOLE                 // Console application
+#ifndef _AFXDLL                 // Console application
 
 #ifdef _MSC_VER                 // hide warnings
 #pragma warning(disable:4710)   // function not inlined
@@ -22,7 +22,7 @@
 #pragma warning(disable:4511 4512)
 #endif
 #include <iostream>
-#include <cppunit/config/SourcePrefix.h>
+#include <cppunit/config/SourcePrefix.h>    // See pkg_UnitTest\Interface\Readme.txt
 #include <cppunit/XmlOutputter.h>
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
@@ -37,7 +37,7 @@
 #pragma warning(disable:4097)   // typedef-name used as synonym for TestFixture class
 #pragma warning (push, 1)
 #endif
-#include <cppunit/TestCase.h>
+#include <cppunit/TestCase.h>   // See pkg_UnitTest\Interface\Readme.txt
 #include <cppunit/extensions/HelperMacros.h>
 #ifdef _MSC_VER                 // hide warnings
 #pragma warning (pop)
