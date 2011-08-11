@@ -254,7 +254,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\tests.cpp"
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp"
 				>
 			</File>
 		</Filter>

@@ -65,7 +65,7 @@
 		</Linker>
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/BaseTest.h" />
-		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/tests.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/UnitTests.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestUtility/TestConfigDB.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestUtility/TestConfigDB.h" />
 		<Extensions>

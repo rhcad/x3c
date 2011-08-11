@@ -113,7 +113,7 @@ SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\tests.cpp
+SOURCE=..\..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp
 # End Source File
 # End Group
 # End Target
