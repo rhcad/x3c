@@ -93,6 +93,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\..\config\&quot;  /S/Q/Y&#x0D;&#x0A;xcopy ..\..\..\code\bin\tests &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
 			/>
 		</Configuration>
 		<Configuration
@@ -173,6 +175,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\..\config\&quot;  /S/Q/Y&#x0D;&#x0A;xcopy ..\..\..\code\bin\tests &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
 			/>
 		</Configuration>
 	</Configurations>
