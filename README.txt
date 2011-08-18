@@ -8,7 +8,7 @@ x3c can be used to easily develop plugins and applications for multiple platform
 
 Makefile and config.mk are used to compile x3c on Linux or Unix.
 
-projects: C++ workspace files (MSVC++, Linux GCC, MinGW GCC, ...).
+projects: C++ workspace files (MS VC++, Code::Blocks + Linux GCC / MinGW GCC, ...).
 code: source code of plugins.
 doc: development documents and doxygen files.
 tools: some useful tools for development.

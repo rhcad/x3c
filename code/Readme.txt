@@ -4,7 +4,7 @@ pkg_Example: example projects.
 pkg_UnitTest: unittest projects, using cppunit 1.12.1.
 pkg_Utility: other frequently-used utility plugins.
 
-..\projects: C++ workspace files (Linux GCC, MSVC++, MinGW GCC, ...).
+..\projects: C++ workspace files (MS VC++, Code::Blocks + Linux GCC / MinGW GCC, ...).
 Makefile is used to compile x3c on Linux or Unix.
 
 
