@@ -3,6 +3,10 @@
 #ifndef X3WIN_PORTABILITY_H
 #define X3WIN_PORTABILITY_H
 
+#if defined(_WIN64) && !defined(_WIN32)
+#define _WIN32
+#endif
+
 #if !defined(_MSC_VER) || _MSC_VER > 1200 // not VC6
 
 #ifndef WINVER

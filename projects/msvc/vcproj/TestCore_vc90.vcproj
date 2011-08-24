@@ -99,6 +99,86 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="_WIN64;WINDOWS;_DEBUG"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				WarningLevel="4"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="cppunitd_dll.lib TestRunnerud.lib ole32.lib"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(TargetDir)"
+				IgnoreDefaultLibraryNames=""
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
+				SubSystem="1"
+				EntryPointSymbol="wWinMainCRTStartup"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\..\translations\&quot;  /S/Q/Y"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
@@ -178,89 +258,9 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
-			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="1"
-			UseOfMFC="2"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="3"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface"
-				PreprocessorDefinitions="_WIN64;WINDOWS;_DEBUG"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				WarningLevel="4"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="cppunitd_dll.lib TestRunnerud.lib ole32.lib"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(TargetDir)"
-				IgnoreDefaultLibraryNames=""
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				SubSystem="1"
-				EntryPointSymbol="wWinMainCRTStartup"
-				TargetMachine="17"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-				Description="copy test files"
-				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\..\translations\&quot;  /S/Q/Y"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Release|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
-			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
@@ -408,6 +408,42 @@
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestTextUtil.h"
 				>
 			</File>
+			<Filter
+				Name="Portability"
+				>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\linuximpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\macimpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\pathstr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portimpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\win32impl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\X3Portability.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3unix.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3win.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Public"

@@ -84,6 +84,7 @@
 		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/property.cxx" />
 		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/rootlogger.cxx" />
 		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/sleep.cxx" />
+		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socket-unix.cxx" />
 		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socket.cxx" />
 		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socketappender.cxx" />
 		<Unit filename="../../../code/pkg_Core/Modules/LogWriter/log4cplus/src/socketbuffer.cxx" />

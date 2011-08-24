@@ -98,7 +98,7 @@ inline int _ultow_s(unsigned long value, wchar_t *str, size_t size, int radix)
 
 #endif
 
-#if defined(_INC_STDLIB) || defined(_STDLIB_H_)
+#if (defined(_INC_STDLIB) || defined(_STDLIB_H_)) && defined(_WIN32)
 
 inline int _splitpath_s(
     const char * path, char * drive, size_t,
@@ -122,11 +122,17 @@ inline int _wsplitpath_s(
 
 inline int _makepath_s(char *path, size_t,
     const char *drive, const char *dir, const char *fname, const char *ext)
-    { _makepath(path, drive, dir, fname, ext); return errno; }
+{
+    _makepath(path, drive, dir, fname, ext);
+    return errno;
+}
 
 inline int _wmakepath_s(wchar_t *path, size_t,
     const wchar_t *drive, const wchar_t *dir, const wchar_t *fname, const wchar_t *ext)
-    { _wmakepath(path, drive, dir, fname, ext); return errno; }
+{
+    _wmakepath(path, drive, dir, fname, ext);
+    return errno;
+}
 
 #endif // _INC_STDLIB
 

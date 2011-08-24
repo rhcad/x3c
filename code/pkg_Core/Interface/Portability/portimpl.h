@@ -10,7 +10,7 @@
     #include "pathstr.h"
     #if defined (__linux__)
     #include "linuximpl.h"
-    #elif defined (MACOS) || defined (_MAC)
+    #elif defined (MACOSX)
     #include "macimpl.h"
     #endif
 #endif // _WIN32

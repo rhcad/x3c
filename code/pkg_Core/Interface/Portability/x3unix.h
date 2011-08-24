@@ -9,10 +9,15 @@
 
 #define DECLEXPORT
 #define OUTAPI      extern "C" DECLEXPORT
+
+#if defined (MACOSX)
+#define PLNEXT      L".dylib"
+#else
 #define PLNEXT      L".so"
+#endif
 
 #ifndef MAX_PATH
-#define MAX_PATH 256
+#define MAX_PATH    512
 #endif
 
 typedef void* HMODULE;
@@ -69,11 +74,8 @@ int MultiByteToWideChar(int codepage, DWORD flags,
                         const char* astr, int achars,
                         wchar_t* wstr, int wchars);
 
-inline int _stricmp(const char* s1, const char* s2)
-    { return strncasecmp(s1, s2, strlen(s1)); }
-inline int _wcsicmp(const wchar_t* s1, const wchar_t* s2)
-    { return wcsncasecmp(s1, s2, wcslen(s1)); }
-inline int _wcsnicmp(const wchar_t* s1, const wchar_t* s2, int count)
-    { return wcsncasecmp(s1, s2, count); }
+int _stricmp(const char* s1, const char* s2);
+int _wcsncmp(const wchar_t* s1, const wchar_t* s2);
+int _wcsncmp(const wchar_t* s1, const wchar_t* s2, int count);
 
 #endif // X3UNIX_PORTABILITY_H

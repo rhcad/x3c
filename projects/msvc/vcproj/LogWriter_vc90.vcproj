@@ -96,6 +96,83 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\plugins"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
+				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;INSIDE_LOG4CPLUS;LOG4CPLUS_STATIC"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				WarningLevel="4"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="wsock32.lib"
+				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
+				LinkIncremental="2"
+				IgnoreDefaultLibraryNames=""
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
+				SubSystem="2"
+				ImportLibrary="$(IntDir)\$(ProjectName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
@@ -174,86 +251,9 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\plugins"
-			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="2"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="3"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Core\Modules\LogWriter\log4cplus\include"
-				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;INSIDE_LOG4CPLUS;LOG4CPLUS_STATIC"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				WarningLevel="4"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="wsock32.lib"
-				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
-				LinkIncremental="2"
-				IgnoreDefaultLibraryNames=""
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				SubSystem="2"
-				ImportLibrary="$(IntDir)\$(ProjectName).lib"
-				TargetMachine="17"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Release|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\plugins"
-			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\plugins"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
 			ConfigurationType="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -366,7 +366,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -375,7 +375,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -406,7 +406,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -415,7 +415,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -446,7 +446,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -455,7 +455,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -486,7 +486,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -495,7 +495,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -526,7 +526,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -535,7 +535,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -566,7 +566,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -575,7 +575,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -606,7 +606,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -615,7 +615,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -646,7 +646,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -655,7 +655,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -686,7 +686,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -695,7 +695,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -726,7 +726,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -735,7 +735,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -766,7 +766,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -775,7 +775,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -806,7 +806,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -815,7 +815,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -846,7 +846,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -855,7 +855,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -886,7 +886,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -895,7 +895,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -926,7 +926,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -935,7 +935,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -966,7 +966,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -975,7 +975,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1006,7 +1006,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1015,7 +1015,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1046,7 +1046,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1055,7 +1055,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1086,7 +1086,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1095,7 +1095,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1126,7 +1126,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1135,7 +1135,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1166,7 +1166,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1175,7 +1175,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1206,7 +1206,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1215,7 +1215,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1246,7 +1246,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1255,7 +1255,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1286,7 +1286,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1295,7 +1295,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1326,7 +1326,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1335,7 +1335,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1366,7 +1366,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1375,7 +1375,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1406,7 +1406,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1415,7 +1415,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1446,7 +1446,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1455,7 +1455,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1486,7 +1486,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1495,7 +1495,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1526,7 +1526,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1535,7 +1535,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1566,7 +1566,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1575,7 +1575,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1606,7 +1606,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1615,7 +1615,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1646,7 +1646,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1655,7 +1655,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1686,7 +1686,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1695,7 +1695,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1726,7 +1726,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1735,7 +1735,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1766,7 +1766,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1775,7 +1775,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1806,7 +1806,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
+						Name="Debug|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1815,7 +1815,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|x64"
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"

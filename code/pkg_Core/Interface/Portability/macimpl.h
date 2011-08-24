@@ -1,7 +1,7 @@
-// Included by portimpl.h to implement functions on Linux.
+// Included by portimpl.h to implement functions on Mac OS X.
 
-#ifndef X3LINUX_PORTABILITY_IMPL_H
-#define X3LINUX_PORTABILITY_IMPL_H
+#ifndef X3MAC_PORTABILITY_IMPL_H
+#define X3MAC_PORTABILITY_IMPL_H
 
 #include "x3unix.h"
 #include "../PluginManager/Ix_PluginLoader2.h"
@@ -97,7 +97,7 @@ Ix_ObjectFactory* x3GetObjectFactory();
 HMODULE GetModuleHandleW(const wchar_t* filename)
 {
     if (CPluginManager::Handle()
-        && _wcsicmp(filename, L"PluginManagerX3" PLNEXT) == 0)
+        && wcsncmp(filename, L"PluginManagerX3" PLNEXT) == 0)
     {
         return CPluginManager::Handle();
     }
@@ -275,17 +275,17 @@ int MultiByteToWideChar(int /*codepage*/, DWORD /*flags*/,
 
 int _stricmp(const char* s1, const char* s2)
 {
-    return strncasecmp(s1, s2, strlen(s1));
+    return stricmp(s1, s2, strlen(s1));
 }
 
 int _wcsncmp(const wchar_t* s1, const wchar_t* s2)
 {
-    return wcsncasecmp(s1, s2, wcslen(s1));
+    return wcsncmp(s1, s2, wcslen(s1));
 }
 
 int _wcsncmp(const wchar_t* s1, const wchar_t* s2, int count)
 {
-    return wcsncasecmp(s1, s2, count);
+    return wcsncmp(s1, s2, count);
 }
 
 long InterlockedIncrement(long* p)
@@ -305,4 +305,4 @@ long InterlockedExchange(long* p, long v)
     return old;
 }
 
-#endif // X3LINUX_PORTABILITY_IMPL_H
+#endif // X3MAC_PORTABILITY_IMPL_H
