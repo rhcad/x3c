@@ -46,5 +46,9 @@
 
 #include <log4cplus/helpers/thread-config.h>
 
+#if !defined(LONG_PTR) && !defined(_W64)
+typedef long LONG_PTR, *PLONG_PTR;
+typedef unsigned long ULONG_PTR, *PULONG_PTR;
+#endif
 
 #endif // LOG4CPLUS_CONFIG_HXX

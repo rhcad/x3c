@@ -10,7 +10,7 @@
 #define DECLEXPORT
 #define OUTAPI      extern "C" DECLEXPORT
 
-#if defined (MACOSX)
+#if defined (__APPLE__)
 #define PLNEXT      L".dylib"
 #else
 #define PLNEXT      L".so"
@@ -75,7 +75,7 @@ int MultiByteToWideChar(int codepage, DWORD flags,
                         wchar_t* wstr, int wchars);
 
 int _stricmp(const char* s1, const char* s2);
-int _wcsncmp(const wchar_t* s1, const wchar_t* s2);
-int _wcsncmp(const wchar_t* s1, const wchar_t* s2, int count);
+int _wcsicmp(const wchar_t* s1, const wchar_t* s2);
+int _wcsnicmp(const wchar_t* s1, const wchar_t* s2, int count);
 
 #endif // X3UNIX_PORTABILITY_H

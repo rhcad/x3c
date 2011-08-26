@@ -97,7 +97,7 @@ Ix_ObjectFactory* x3GetObjectFactory();
 HMODULE GetModuleHandleW(const wchar_t* filename)
 {
     if (CPluginManager::Handle()
-        && wcsncmp(filename, L"PluginManagerX3" PLNEXT) == 0)
+        && _wcsicmp(filename, L"PluginManagerX3" PLNEXT) == 0)
     {
         return CPluginManager::Handle();
     }
@@ -275,15 +275,15 @@ int MultiByteToWideChar(int /*codepage*/, DWORD /*flags*/,
 
 int _stricmp(const char* s1, const char* s2)
 {
-    return stricmp(s1, s2, strlen(s1));
+    return strncasecmp(s1, s2, strlen(s1));
 }
 
-int _wcsncmp(const wchar_t* s1, const wchar_t* s2)
+int _wcsicmp(const wchar_t* s1, const wchar_t* s2)
 {
     return wcsncmp(s1, s2, wcslen(s1));
 }
 
-int _wcsncmp(const wchar_t* s1, const wchar_t* s2, int count)
+int _wcsnicmp(const wchar_t* s1, const wchar_t* s2, int count)
 {
     return wcsncmp(s1, s2, count);
 }
