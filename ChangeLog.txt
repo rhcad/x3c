@@ -1,8 +1,13 @@
 X3 C++ PluginFramework
 
+2011-08-26
+
+    * Compile x3c on Mac OS X 10.6 using Code::Blocks IDE and XCode GCC.
+    * Add log4cplus-1.0.4 source files and cppunit-1.12.1 header files.
+
 2011-08-18
 
-    * Compile x3c on WIN64 platform(Win2008, VC++ 2008 x64).
+    * Compile x3c on WIN64 platform(Win2008 x64, VC++ 2008 x64).
 
 2011-08-09
 

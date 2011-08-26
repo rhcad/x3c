@@ -8,11 +8,25 @@ x3c can be used to easily develop plugins and applications for multiple platform
 
 Makefile and config.mk are used to compile x3c on Linux or Unix.
 
-projects: C++ workspace files (MS VC++, Code::Blocks + Linux GCC / MinGW GCC, ...).
+projects: C++ workspace files using IDE (MS VC++, Code::Blocks + Linux GCC / MinGW GCC, ...).
 code: source code of plugins.
 doc: development documents and doxygen files.
 tools: some useful tools for development.
 
+--------------------------------------------------------
+You may need to download the following files:
+
+1. download cppunit-1.12.1 from one of the following sites, then copy cppunit's lib 
+   and dll files to the folder 'code\bin\vcxx\xxx\tests'.
+   
+   http://files.cnblogs.com/rhcad/cppunit-1.12.1-vc689&gcc.zip (fix for vc6 and gcc)
+   http://sourceforge.net/projects/cppunit/files/cppunit/1.12.1/
+   \\dampub\Tools\CodeCheck\C++\CppUnit\cppunit-1.12.1  (Founder server)
+
+2. log4cplus-1.0.4 fixed for vc6 has already been included in LogWriter plugin.
+   You can download another version from http://sourceforge.net/projects/log4cplus/ .
+
+--------------------------------------------------------
 License: Apache License V2.0
 
 Bug reports and suggestions are welcome. Please use the SourceForge bug tracking
