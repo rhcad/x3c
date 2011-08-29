@@ -42,7 +42,7 @@
 
 #include <errno.h>
 
-#ifdef LOG4CPLUS_HAVE_NETDB_H
+#if defined(LOG4CPLUS_HAVE_NETDB_H) || defined(__APPLE__)
 #include <netdb.h>
 #endif
 
