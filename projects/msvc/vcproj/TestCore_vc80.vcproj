@@ -276,44 +276,68 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Portability"
+			Name="Core"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\func_s.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\Ix_Object.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\linuximpl.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\Ix_ObjectFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\pathstr.h"
+				RelativePath="..\..\..\code\pkg_Core\Interface\XComPtr.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\PluginInc.h"
+			<Filter
+				Name="Portability"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portimpl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\win32impl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\X3Portability.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3unix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3win.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\func_s.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\linuximpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\macimpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\obsolete.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\pathstr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\PluginInc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\portimpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\win32impl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\UtilFunc\X3Portability.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3unix.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\x3win.h"
+					>
+				</File>
+			</Filter>
 			<Filter
 				Name="Module"
 				>

@@ -2,14 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Example", "pkg_Example", "{DCB7E9CB-9405-45AD-8585-8D8662F2B357}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_Example\Readme.txt = ..\..\code\pkg_Example\Readme.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Utility", "pkg_Utility", "{0ED0E7DC-EB46-4C14-A562-3427886E2415}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_Utility\Readme.txt = ..\..\code\pkg_Utility\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32DllTempl", "vcproj\Win32DllTempl_vc90.vcproj", "{24CFB065-736B-4230-AF7E-5C3C3ABF8D41}"
 EndProject
@@ -22,9 +16,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeObserverExample", "vcproj\ChangeObserverExample_vc90.vcproj", "{147FB08D-271B-45CB-A2A1-48CFE4D2AB98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Core", "pkg_Core", "{E20E78F8-8C7C-4DE5-B6FF-13DC09F4FBE9}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_Core\Readme.txt = ..\..\code\pkg_Core\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeManager", "vcproj\ChangeManager_vc90.vcproj", "{F490531F-5245-4D7C-8C39-9CA5CC075C23}"
 EndProject
@@ -45,9 +36,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileUtility", "vcproj\FileUtility_vc90.vcproj", "{503629A7-8C6B-41CD-87D5-64FF2A214A87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_UnitTest", "pkg_UnitTest", "{A2AEF2DD-3E35-47E7-A9E7-8FBB0B58A5DA}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_UnitTest\Readme.txt = ..\..\code\pkg_UnitTest\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCore", "vcproj\TestCore_vc90.vcproj", "{D26563C9-C48F-45FB-8EB6-1560B663F353}"
 EndProject
@@ -56,9 +44,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestPlatform", "vcproj\TestPlatform_vc90.vcproj", "{AE57CB5B-F334-4486-89EC-4D393D2E5A04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_AppUI", "pkg_AppUI", "{912655C8-FC42-4541-9A9A-284A334EECCE}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_AppUI\Readme.txt = ..\..\code\pkg_AppUI\Readme.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{4BD90ADB-FDD5-4F18-ACD9-D6656A53B986}"
 EndProject

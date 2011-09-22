@@ -408,6 +408,78 @@
 				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestCore\TestTextUtil.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Public"
+			>
+			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Core"
+			>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Ix_Object.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Ix_ObjectFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\XComPtr.h"
+				>
+			</File>
+			<Filter
+				Name="Plugin"
+				>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_Module.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_Object.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Cx_SingletonObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\Ix_Module.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XClassItem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XClassMacro.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XModuleImpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XModuleItem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Module\XModuleMacro.h"
+					>
+				</File>
+			</Filter>
 			<Filter
 				Name="Portability"
 				>
@@ -417,6 +489,10 @@
 				</File>
 				<File
 					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\macimpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\code\pkg_Core\Interface\Portability\obsolete.h"
 					>
 				</File>
 				<File
@@ -444,22 +520,6 @@
 					>
 				</File>
 			</Filter>
-		</Filter>
-		<Filter
-			Name="Public"
-			>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

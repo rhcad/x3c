@@ -2,14 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Example", "pkg_Example", "{3AE65EE0-0307-4F6C-AC30-6465686E5F92}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_Example\Readme.txt = ..\..\code\pkg_Example\Readme.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Utility", "pkg_Utility", "{7209CBCB-D7E6-46D6-91B8-7142033271E5}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_Utility\Readme.txt = ..\..\code\pkg_Utility\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32DllTempl", "vcproj\Win32DllTempl_vc80.vcproj", "{24CFB065-736B-4230-AF7E-5C3C3ABF8D41}"
 EndProject
@@ -22,9 +16,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeObserverExample", "vcproj\ChangeObserverExample_vc80.vcproj", "{392088E1-0ABC-4222-9014-578BEC6ACF6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Core", "pkg_Core", "{B7C4A024-AE85-4AD5-B160-CC63E66D9686}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_Core\Readme.txt = ..\..\code\pkg_Core\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeManager", "vcproj\ChangeManager_vc80.vcproj", "{CA68A7E4-8D73-4F50-9A8F-7697F8020D90}"
 EndProject
@@ -45,16 +36,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileUtility", "vcproj\FileUtility_vc80.vcproj", "{A7BD5375-A38D-485A-B899-6E4839C63EBB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_UnitTest", "pkg_UnitTest", "{91A62255-728F-4824-9B40-22C5DA7E6BF8}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_UnitTest\Readme.txt = ..\..\code\pkg_UnitTest\Readme.txt
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCore", "vcproj\TestCore_vc80.vcproj", "{0C5734A1-D1C5-4015-95D3-397AFF87D592}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_AppUI", "pkg_AppUI", "{45E71DAE-9619-4CF2-B2EE-2F537699B83B}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\code\pkg_AppUI\Readme.txt = ..\..\code\pkg_AppUI\Readme.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{A8FE873D-D0BD-4CF8-B612-D3B7BEFFF530}"
 EndProject
