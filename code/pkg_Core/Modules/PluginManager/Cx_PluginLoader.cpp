@@ -287,6 +287,12 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
 
 bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 {
+    if (!InMainThread())
+    {
+        X3LOG_WARNING2(L"Can't load plugin in sub thread.", filename);
+        return false;
+    }
+
     CLockCount locker(&m_loading);
     int existIndex = GetPluginIndex(filename);
 

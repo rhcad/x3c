@@ -305,4 +305,9 @@ long InterlockedExchange(long* p, long v)
     return old;
 }
 
+bool InMainThread()
+{
+    return pthread_main_np() != 0;
+}
+
 #endif // X3MAC_PORTABILITY_IMPL_H

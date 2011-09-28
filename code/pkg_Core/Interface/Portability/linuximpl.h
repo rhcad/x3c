@@ -305,4 +305,9 @@ long InterlockedExchange(long* p, long v)
     return old;
 }
 
+bool InMainThread()
+{
+    return syscall(SYS_gettid) == getpid();
+}
+
 #endif // X3LINUX_PORTABILITY_IMPL_H

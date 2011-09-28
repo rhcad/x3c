@@ -1,5 +1,9 @@
 X3 C++ PluginFramework
 
+2011-09-28
+
+    * PluginManager: Load a plugin only in the main thread.
+
 2011-08-26
 
     * Compile x3c on Mac OS X 10.6 using Code::Blocks IDE and XCode GCC.

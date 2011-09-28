@@ -55,4 +55,6 @@ HMODULE LoadLibraryExW(const wchar_t* filename);
 bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
 bool SetFileAttributesNormal(const wchar_t* filename);
 
+bool InMainThread();
+
 #endif // X3WIN_PORTABILITY_H

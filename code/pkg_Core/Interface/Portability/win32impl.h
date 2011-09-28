@@ -46,4 +46,12 @@ bool SetFileAttributesNormal(const wchar_t* filename)
     return !!SetFileAttributesW(filename, FILE_ATTRIBUTE_NORMAL);
 }
 
+bool InMainThread()
+{
+    static DWORD s_id = 0;
+    if (s_id == 0)
+        s_id = GetCurrentThreadId();
+    return GetCurrentThreadId() == s_id;
+}
+
 #endif // X3WIN32_PORTABILITY_IMPL_H

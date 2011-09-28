@@ -32,6 +32,7 @@ typedef DWORD ULONG;
 long InterlockedIncrement(long* p);
 long InterlockedDecrement(long* p);
 long InterlockedExchange(long* p, long v);
+bool InMainThread();
 
 bool FreeLibrary(HMODULE hdll);
 HMODULE LoadLibraryW(const wchar_t* filename);
