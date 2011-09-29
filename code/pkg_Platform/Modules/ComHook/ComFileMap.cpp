@@ -114,7 +114,7 @@ HMODULE CComModules::GetModule(const std::wstring& filename)
     }
     if (NULL == hmod)
     {
-        hmod = LoadLibraryExW(filename.c_str());
+        hmod = x3LoadLibrary(filename.c_str());
         if (NULL == hmod)
         {
             DWORD errcode = GetLastError();

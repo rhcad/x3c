@@ -67,7 +67,7 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         PathAppendW(path, name);        // bin\vc80\name
 
 #ifdef _WIN32
-        SetFileAttributesNormal(filename);
+        x3SetFileAttributesNormal(filename);
         GetPrivateProfileStringW(L"Path", name, path,
             path, MAX_PATH, filename);
         WritePrivateProfileStringW(L"Path", name, path, filename);

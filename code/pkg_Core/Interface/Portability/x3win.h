@@ -48,13 +48,13 @@
 #define OUTAPI      extern "C" DECLEXPORT
 #define PLNEXT      L".dll"
 
-bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename);
-bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename);
-bool CloseFile(HANDLE file);
-HMODULE LoadLibraryExW(const wchar_t* filename);
-bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
-bool SetFileAttributesNormal(const wchar_t* filename);
+bool x3OpenFileForRead(HANDLE& hfile, const wchar_t* filename);
+bool x3OpenFileForWrite(HANDLE& hfile, const wchar_t* filename);
+bool x3CloseFile(HANDLE file);
+HMODULE x3LoadLibrary(const wchar_t* filename);
+bool x3CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
+bool x3SetFileAttributesNormal(const wchar_t* filename);
 
-bool InMainThread();
+bool x3InMainThread();
 
 #endif // X3WIN_PORTABILITY_H

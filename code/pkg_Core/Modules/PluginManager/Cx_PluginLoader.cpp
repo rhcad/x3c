@@ -117,7 +117,7 @@ public:
 private:
     virtual void OnCheckFile(const wchar_t* filename, const wchar_t*, bool&)
     {
-        int len = wcslen(filename);
+        size_t len = wcslen(filename);
         if (len >= m_extlen && _wcsicmp(&filename[len - m_extlen], m_ext) == 0)
         {
             m_files->push_back(filename);
@@ -131,7 +131,7 @@ private:
 
     std::vector<std::wstring>*  m_files;
     const wchar_t*              m_ext;
-    const int                   m_extlen;
+    const size_t                m_extlen;
 };
 
 void Cx_PluginLoader::FindPlugins(std::vector<std::wstring>& filenames,
@@ -157,7 +157,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
     m_instance = instance;
     MakeFullPath(filename, instance, path);
 
-    const int len0 = wcslen(filename);
+    const size_t len0 = wcslen(filename);
     wchar_t* nameend = filename + len0;
 
     std::vector<std::wstring> filenames;
@@ -287,7 +287,7 @@ bool Cx_PluginLoader::RegisterPlugin(HMODULE instance)
 
 bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
 {
-    if (!InMainThread())
+    if (!x3InMainThread())
     {
         X3LOG_WARNING2(L"Can't load plugin in sub thread.", filename);
         return false;
@@ -306,7 +306,7 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
         return false;
     }
 
-    HMODULE hdll = LoadLibraryExW(filename);
+    HMODULE hdll = x3LoadLibrary(filename);
     DWORD errcode = GetLastError();
 
     if (hdll)

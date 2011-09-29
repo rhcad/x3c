@@ -64,7 +64,7 @@ HMODULE LoadLibraryW(const wchar_t* filename)
     return hdll;
 }
 
-HMODULE LoadLibraryExW(const wchar_t* filename)
+HMODULE x3LoadLibrary(const wchar_t* filename)
 {
     return LoadLibraryW(filename);
 }
@@ -197,17 +197,17 @@ void GetModuleFileNameA(HMODULE hdll, char* filename, int size)
 }
 
 
-bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename)
+bool x3OpenFileForRead(HANDLE& hfile, const wchar_t* filename)
 {
     return false;
 }
 
-bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename)
+bool x3OpenFileForWrite(HANDLE& hfile, const wchar_t* filename)
 {
     return false;
 }
 
-bool CloseFile(HANDLE file)
+bool x3CloseFile(HANDLE file)
 {
     return false;
 }
@@ -242,12 +242,12 @@ DWORD GetFileSize(HANDLE file, DWORD* high)
     return 0;
 }
 
-bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder)
+bool x3CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder)
 {
     return false;
 }
 
-bool SetFileAttributesNormal(const wchar_t* filename)
+bool x3SetFileAttributesNormal(const wchar_t* filename)
 {
     return false;
 }
@@ -305,7 +305,7 @@ long InterlockedExchange(long* p, long v)
     return old;
 }
 
-bool InMainThread()
+bool x3InMainThread()
 {
     return syscall(SYS_gettid) == getpid();
 }

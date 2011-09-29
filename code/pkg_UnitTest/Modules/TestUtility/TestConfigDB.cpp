@@ -31,7 +31,7 @@ void TestConfigDB::tearDown()
 {
     UnloadPlugins();
 
-    VERIFY(SetFileAttributesNormal(m_dbfile.c_str()));
+    VERIFY(x3SetFileAttributesNormal(m_dbfile.c_str()));
     VERIFY(DeleteFileW(m_dbfile.c_str()));
 }
 

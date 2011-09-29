@@ -7,6 +7,7 @@
 Cx_ObjectFactory::Cx_ObjectFactory()
     : m_unloading(0), m_loading(0)
 {
+    ASSERT(x3InMainThread());   // see win32impl.h
 }
 
 Cx_ObjectFactory::~Cx_ObjectFactory()
@@ -38,7 +39,7 @@ int Cx_ObjectFactory::CreateObject(const X3CLSID& clsid,
     if (pEntry && !pEntry->pfnObjectCreator && moduleIndex >= 0)
     {
         if (!LoadDelayedPlugin_(m_modules[moduleIndex]->filename)
-            && 0 == m_unloading && InMainThread())
+            && 0 == m_unloading && x3InMainThread())
         {
             CLSMAP::iterator it = m_clsmap.find(clsid.str());
             if (it != m_clsmap.end())

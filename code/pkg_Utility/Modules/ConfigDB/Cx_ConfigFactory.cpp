@@ -26,7 +26,7 @@ Cx_Ptr Cx_ConfigFactory::OpenAccessDB(const std::wstring& filename,
                                       const std::wstring& password)
 {
     bool readonly = false;
-    bool exist = CheckFileAttributes(filename.c_str(), &readonly, NULL);
+    bool exist = x3CheckFileAttributes(filename.c_str(), &readonly, NULL);
 
     if (!exist)
     {

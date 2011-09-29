@@ -24,10 +24,10 @@ DWORD Cx_TextUtil::GetHeadBytes(const std::wstring& filename, BYTE head[5])
     DWORD dwBytesRead = 0;
     HANDLE hFile = NULL;
 
-    if (OpenFileForRead(hFile, filename.c_str()))
+    if (x3OpenFileForRead(hFile, filename.c_str()))
     {
         ::ReadFile(hFile, head, 5, &dwBytesRead, NULL);
-        CloseFile(hFile);
+        x3CloseFile(hFile);
     }
     else
     {
@@ -129,7 +129,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
     bool bRet = false;
     HANDLE hFile = NULL;
 
-    if (!OpenFileForRead(hFile, filename.c_str()))
+    if (!x3OpenFileForRead(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
@@ -167,7 +167,7 @@ bool Cx_TextUtil::ReadTextFile(BYTE head[5], std::wstring& content,
             }
         }
 
-        CloseFile(hFile);
+        x3CloseFile(hFile);
     }
 
     return bRet;
@@ -188,9 +188,9 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
     bool bRet = false;
     HANDLE hFile = NULL;
 
-    ::SetFileAttributesNormal(filename.c_str());
+    ::x3SetFileAttributesNormal(filename.c_str());
 
-    if (!OpenFileForWrite(hFile, filename.c_str()))
+    if (!x3OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
@@ -218,7 +218,7 @@ bool Cx_TextUtil::SaveTextFile(const std::wstring& content,
             bRet = (dwBytes == dwLen);
         }
 
-        CloseFile(hFile);
+        x3CloseFile(hFile);
     }
 
     return bRet;
@@ -231,9 +231,9 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
     bool bRet = false;
     HANDLE hFile = NULL;
 
-    ::SetFileAttributesNormal(filename.c_str());
+    ::x3SetFileAttributesNormal(filename.c_str());
 
-    if (!OpenFileForWrite(hFile, filename.c_str()))
+    if (!x3OpenFileForWrite(hFile, filename.c_str()))
     {
         DWORD err = GetLastError();
         X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL",
@@ -261,7 +261,7 @@ bool Cx_TextUtil::SaveTextFile(const std::string& content,
             bRet = (dwBytes == dwLen);
         }
 
-        CloseFile(hFile);
+        x3CloseFile(hFile);
     }
 
     return bRet;
@@ -472,8 +472,8 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
         int ret = LCMapStringW(
             MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED),
             LCMAP_HALFWIDTH,
-            text.c_str(), text.size(),
-            &dest[0], dest.size() + 1);
+            text.c_str(), x3::GetSize(text),
+            &dest[0], x3::GetSize(dest) + 1);
 
         if (ret > 0 && dest != text)
         {
@@ -545,7 +545,7 @@ class CReadMD5 : public CMD5::IRead
 public:
     CReadMD5(const std::wstring& filename) : m_hFile(NULL)
     {
-        if (!OpenFileForRead(m_hFile, filename.c_str()))
+        if (!x3OpenFileForRead(m_hFile, filename.c_str()))
         {
             DWORD err = GetLastError();
             X3LOG_ERROR2(L"@TextUtility:IDS_OPEN_FAIL",
@@ -557,7 +557,7 @@ public:
     {
         if (m_hFile)
         {
-            CloseFile(m_hFile);
+            x3CloseFile(m_hFile);
         }
     }
 
@@ -601,10 +601,10 @@ std::vector<BYTE>& Cx_TextUtil::UnBase64(std::vector<BYTE>& data,
                                          const std::wstring& text,
                                          const wchar_t* codetype)
 {
-    data.resize(Base64::GetDataLength(text.size()));
+    data.resize(Base64::GetDataLength(x3::GetSize(text)));
     if (!data.empty())
     {
-        Base64::Decode(text, text.size(), &data[0],
+        Base64::Decode(text, x3::GetSize(text), &data[0],
             codetype[0], codetype[1], codetype[2]);
     }
     return data;
@@ -614,17 +614,17 @@ std::wstring& Cx_TextUtil::Base64(std::wstring& text,
                                   const std::string& data,
                                   const wchar_t* codetype)
 {
-    return Base64(text, (const BYTE*)data.c_str(), data.size(), codetype);
+    return Base64(text, (const BYTE*)data.c_str(), x3::GetSize(data), codetype);
 }
 
 std::string& Cx_TextUtil::UnBase64(std::string& data,
                                    const std::wstring& text,
                                    const wchar_t* codetype)
 {
-    data.resize(Base64::GetDataLength(text.size()));
+    data.resize(Base64::GetDataLength(x3::GetSize(text)));
     if (!data.empty())
     {
-        Base64::Decode(text, text.size(), (BYTE*)&data[0],
+        Base64::Decode(text, x3::GetSize(text), (BYTE*)&data[0],
             codetype[0], codetype[1], codetype[2]);
     }
     return data;

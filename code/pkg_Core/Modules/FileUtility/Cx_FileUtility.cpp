@@ -46,7 +46,7 @@ static bool IsPathFileExists_(const wchar_t* filename, bool bWrite)
 #ifdef _WIN32
     return _waccess(filename, bWrite ? 6 : 0) == 0;
 #else
-    return CheckFileAttributes(filename, NULL, NULL);
+    return x3CheckFileAttributes(filename, NULL, NULL);
 #endif
 }
 
@@ -62,7 +62,7 @@ static bool IsPath_(const wchar_t* filename, bool bCheckExists)
         if (bCheckExists)
         {
             bool folder = false;
-            if (CheckFileAttributes(filename, NULL, &folder))
+            if (x3CheckFileAttributes(filename, NULL, &folder))
             {
                 return folder;
             }
@@ -87,7 +87,7 @@ Cx_FileUtility::Cx_FileUtility()
 bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
 {
     wchar_t path[MAX_PATH];
-    int i, nLen;
+    size_t i, nLen;
     wchar_t cSaveChar;
 
     if (!IsNotNull(filename))
@@ -111,7 +111,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
 #ifdef _WIN32
     if (_waccess(path, 0) == 0)
 #else
-    if (CheckFileAttributes(path, NULL, NULL))
+    if (x3CheckFileAttributes(path, NULL, NULL))
 #endif
     {
         return true;
@@ -124,7 +124,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
             cSaveChar = path[i];
             path[i] = 0;
             ::CreateDirectoryW(path, NULL);
-            ::SetFileAttributesNormal(path);
+            ::x3SetFileAttributesNormal(path);
             path[i] = cSaveChar;
         }
     }
@@ -133,7 +133,7 @@ bool Cx_FileUtility::CreateDirectory(const wchar_t* filename, bool bIsPath)
 #ifdef _WIN32
     if (_waccess(path, 0) != 0)
 #else
-    if (!CheckFileAttributes(path, NULL, NULL))
+    if (!x3CheckFileAttributes(path, NULL, NULL))
 #endif
     {
         std::wostringstream buf;
@@ -161,7 +161,7 @@ bool Cx_FileUtility::VerifyFileCanWrite(const wchar_t* filename)
     }
 
     if (IsPathFileExists(filename)
-        && !SetFileAttributesNormal(filename))
+        && !x3SetFileAttributesNormal(filename))
     {
         X3LOG_ERROR2(L"@FileUtility:IDS_FILE_CANNOT_WRITE", filename);
         return false;
@@ -603,7 +603,7 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
     wchar_t szTime[20] = { 0 };
     HANDLE hFile = NULL;
 
-    if (OpenFileForRead(hFile, wstrFileName.c_str()))
+    if (x3OpenFileForRead(hFile, wstrFileName.c_str()))
     {
 #ifdef _WIN32
         FILETIME ftCreate, ftAccess, ftWrite;
@@ -620,7 +620,7 @@ std::wstring Cx_FileUtility::GetModifyTime(const std::wstring& wstrFileName)
         }
 #endif
 
-        CloseFile(hFile);
+        x3CloseFile(hFile);
     }
 
     return szTime;
@@ -631,14 +631,14 @@ DWORD Cx_FileUtility::GetFileSize(const std::wstring& wstrFileName)
     DWORD nFileSize = 0;
     HANDLE hFile = NULL;
 
-    if (OpenFileForRead(hFile, wstrFileName.c_str()))
+    if (x3OpenFileForRead(hFile, wstrFileName.c_str()))
     {
         DWORD dwFileSizeHigh = 0;
         nFileSize = ::GetFileSize(hFile, &dwFileSizeHigh);
         if (dwFileSizeHigh > 0)
             nFileSize = (DWORD)-1;
 
-        CloseFile(hFile);
+        x3CloseFile(hFile);
     }
 
     return nFileSize;
@@ -678,8 +678,8 @@ int Cx_FileUtility::CompareFileName(const wchar_t* filename1, const wchar_t* fil
 
     while (0 == nRet && (*pszFile1 != 0 || *pszFile2 != 0))
     {
-        int nPos1 = wcscspn(pszFile1, L"\\/");
-        int nPos2 = wcscspn(pszFile2, L"\\/");
+        size_t nPos1 = wcscspn(pszFile1, L"\\/");
+        size_t nPos2 = wcscspn(pszFile2, L"\\/");
 
         nRet = _wcsnicmp(pszFile1, pszFile2, nPos1 > nPos2 ? nPos1 : nPos2);
         if (0 == nRet && nPos1 > 0)

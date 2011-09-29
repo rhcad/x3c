@@ -32,19 +32,19 @@ typedef DWORD ULONG;
 long InterlockedIncrement(long* p);
 long InterlockedDecrement(long* p);
 long InterlockedExchange(long* p, long v);
-bool InMainThread();
+bool x3InMainThread();
 
 bool FreeLibrary(HMODULE hdll);
 HMODULE LoadLibraryW(const wchar_t* filename);
-HMODULE LoadLibraryExW(const wchar_t* filename);
+HMODULE x3LoadLibrary(const wchar_t* filename);
 HMODULE GetModuleHandleW(const wchar_t* filename);
 PROC GetProcAddress(HMODULE hdll, const char* name);
 void GetModuleFileNameW(HMODULE hdll, wchar_t* filename, int size);
 void GetModuleFileNameA(HMODULE hdll, char* filename, int size);
 
-bool OpenFileForRead(HANDLE& hfile, const wchar_t* filename);
-bool OpenFileForWrite(HANDLE& hfile, const wchar_t* filename);
-bool CloseFile(HANDLE file);
+bool x3OpenFileForRead(HANDLE& hfile, const wchar_t* filename);
+bool x3OpenFileForWrite(HANDLE& hfile, const wchar_t* filename);
+bool x3CloseFile(HANDLE file);
 bool ReadFile(HANDLE file, void* buf, DWORD size, DWORD* readed, void*);
 bool WriteFile(HANDLE file, const void* buf, DWORD size, DWORD* written, void*);
 bool PathFileExistsW(const wchar_t* path);
@@ -63,8 +63,8 @@ void PathAppendW(wchar_t* path, const wchar_t* more);
 wchar_t* PathAddBackslashW(wchar_t* path);
 void PathRenameExtensionW(wchar_t* path, const wchar_t* more);
 
-bool CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
-bool SetFileAttributesNormal(const wchar_t* filename);
+bool x3CheckFileAttributes(const wchar_t* filename, bool* readonly, bool* folder);
+bool x3SetFileAttributesNormal(const wchar_t* filename);
 DWORD GetLastError();
 
 int WideCharToMultiByte(int codepage, DWORD flags,
