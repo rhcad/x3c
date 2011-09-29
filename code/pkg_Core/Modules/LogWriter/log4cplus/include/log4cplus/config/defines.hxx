@@ -59,6 +59,6 @@
 /* Defined if the compiler understands __declspec(import) or __attribute__((import)) construct. */
 #undef LOG4CPLUS_DECLSPEC_IMPORT
 
-
+#define LOG4CPLUS_HAVE_NETDB_H
 
 #endif // LOG4CPLUS_CONFIG_DEFINES_HXX

@@ -28,7 +28,7 @@ HRESULT WINAPI CComCreator::Hook_CoCreateInstance(
         return E_POINTER;
     *ppv = NULL;
 
-    HRESULT hr = CreateInstance(rclsid, riid, ppv);
+    HRESULT hr = LocalCreateInstance(rclsid, riid, ppv);
 
     if (FAILED(hr))
     {
@@ -60,7 +60,7 @@ static inline std::wstring tostr(REFCLSID rclsid)
     return clsid;
 }
 
-HRESULT CComCreator::CreateInstance(
+HRESULT CComCreator::LocalCreateInstance(
         REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
     HMODULE hmod = s_modules.GetModule(s_filemap.GetComFile(tostr(rclsid)));
