@@ -48,10 +48,15 @@ bool x3SetFileAttributesNormal(const wchar_t* filename)
 
 bool x3InMainThread()
 {
-    static DWORD s_id = 0;
-    if (s_id == 0)
-        s_id = GetCurrentThreadId();
-    return GetCurrentThreadId() == s_id;
+    static DWORD s_mainid = 0;
+    DWORD id = GetCurrentThreadId();
+
+    if (s_mainid == 0)
+    {
+        s_mainid = GetCurrentThreadId();
+    }
+
+    return id == s_mainid;
 }
 
 #endif // X3WIN32_PORTABILITY_IMPL_H

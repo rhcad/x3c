@@ -5,6 +5,7 @@
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/Cx_ConfigSection.h>
 #include <PluginManager/Ix_PluginDelayLoad.h>
+#include <UtilFunc/SysErrStr.h>
 
 // CComFileMap
 //
@@ -118,7 +119,8 @@ HMODULE CComModules::GetModule(const std::wstring& filename)
         if (NULL == hmod)
         {
             DWORD errcode = GetLastError();
-            X3LOG_WARNING2(L"Fail to load module.", errcode << L", " << filename);
+            X3LOG_WARNING2(L"Fail to load module.", 
+                x3::GetSystemErrorString(errcode) << L", " << filename);
         }
         else
         {

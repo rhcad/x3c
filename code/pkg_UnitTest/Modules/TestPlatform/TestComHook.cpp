@@ -14,7 +14,8 @@ TestComHook::TestComHook()
 
 void TestComHook::setUp()
 {
-    VERIFY(LoadPlugins(L"ComHook.plugin" PLNEXT, false) > 0);
+    VERIFY(LoadPlugins(L"ComHook.plugin" PLNEXT
+        L" LogManager.plugin" PLNEXT, false) == 2);
 }
 
 void TestComHook::tearDown()

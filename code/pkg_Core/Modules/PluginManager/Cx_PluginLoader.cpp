@@ -6,6 +6,7 @@
 #include <PluginManager/Ix_AppWorkPath.h>
 #include <UtilFunc/LockCount.h>
 #include <UtilFunc/ScanFiles.h>
+#include <UtilFunc/SysErrStr.h>
 
 Cx_PluginLoader::Cx_PluginLoader()
     : m_instance(NULL)
@@ -331,7 +332,8 @@ bool Cx_PluginLoader::LoadPlugin(const wchar_t* filename)
     }
     else if (PathFileExistsW(filename))
     {
-        X3LOG_WARNING2(L"Fail to load plugin.", errcode << L", " << filename);
+        X3LOG_WARNING2(L"Fail to load plugin.", 
+            x3::GetSystemErrorString(errcode) << L", " << filename);
     }
 
     return hdll != NULL;
