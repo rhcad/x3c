@@ -7,7 +7,7 @@ Usage:      makeplugin.py projname pkgname basetype
             projname: name of the new project.
             pkgname: package name of the new project, the default value
                 is 'pkg_Example'.
-            basetype: 'mfc', 'win32', 'view' or project name in pkg_Example, 
+            basetype: 'mfc', 'win32', 'view' or project name in pkg_Example,
                 the default value is 'win32'.
 
 Creator:    ooyg <rhcad@hotmail.com>
@@ -87,7 +87,7 @@ if __name__=="__main__":
         return ret
     
     projname = inputparam(1, 'Project name: ')
-    pkgname  = inputparam(2, 'Package name (default: pkg_Example): ', 'pkg_Example')
+    pkgname  = inputparam(2, 'Package name (pkg_Example): ', 'pkg_Example')
     baseproj = inputparam(3, 'Template project (win32, mfc, view, '   \
                              'or project name in pkg_Example): ', 'win32')
                 
