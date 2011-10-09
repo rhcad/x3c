@@ -3,7 +3,7 @@
 ROOTDIR = ../../..
 include $(ROOTDIR)/config.mk
 
-SUBDIRS = $(filter-out Public/ x3core/, $(sort $(dir $(wildcard */))))
+SUBDIRS = $(filter-out Public/ x3core/ ComHook/, $(sort $(dir $(wildcard */))))
 CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
 .PHONY: ComHook
