@@ -1,24 +1,24 @@
-# Microsoft Developer Studio Project File - Name="HollowViewApp" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="HelloViewApp" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (x86) Application" 0x0101
 
-CFG=HollowViewApp - Win32 Debug
+CFG=HelloViewApp - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
-!MESSAGE NMAKE /f "HollowViewApp.mak".
+!MESSAGE NMAKE /f "HelloViewApp.mak".
 !MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "HollowViewApp.mak" CFG="HollowViewApp - Win32 Debug"
+!MESSAGE NMAKE /f "HelloViewApp.mak" CFG="HelloViewApp - Win32 Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "HollowViewApp - Win32 Release" (based on "Win32 (x86) Application")
-!MESSAGE "HollowViewApp - Win32 Debug" (based on "Win32 (x86) Application")
+!MESSAGE "HelloViewApp - Win32 Release" (based on "Win32 (x86) Application")
+!MESSAGE "HelloViewApp - Win32 Debug" (based on "Win32 (x86) Application")
 !MESSAGE 
 
 # Begin Project
@@ -29,7 +29,7 @@ CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "HollowViewApp - Win32 Release"
+!IF  "$(CFG)" == "HelloViewApp - Win32 Release"
 
 # PROP BASE Use_MFC 6
 # PROP BASE Use_Debug_Libraries 0
@@ -39,7 +39,7 @@ RSC=rc.exe
 # PROP Use_MFC 6
 # PROP Use_Debug_Libraries 0
 # PROP Output_Dir "..\..\..\code\bin\vc60\Release\tests"
-# PROP Intermediate_Dir "..\..\..\obj\vc60\Release\HollowViewApp"
+# PROP Intermediate_Dir "..\..\..\obj\vc60\Release\HelloViewApp"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
@@ -54,10 +54,10 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /pdb:"..\..\..\obj\vc60\Release\Symbols/HollowViewApp.pdb" /machine:I386
+# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /pdb:"..\..\..\obj\vc60\Release\Symbols/HelloViewApp.pdb" /machine:I386
 # SUBTRACT LINK32 /pdb:none
 
-!ELSEIF  "$(CFG)" == "HollowViewApp - Win32 Debug"
+!ELSEIF  "$(CFG)" == "HelloViewApp - Win32 Debug"
 
 # PROP BASE Use_MFC 6
 # PROP BASE Use_Debug_Libraries 1
@@ -67,7 +67,7 @@ LINK32=link.exe
 # PROP Use_MFC 6
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "..\..\..\code\bin\vc60\Debug\tests"
-# PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\HollowViewApp"
+# PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\HelloViewApp"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
@@ -82,29 +82,29 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /pdb:"..\..\..\obj\vc60\Debug\Symbols/HollowViewApp.pdb" /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /pdb:"..\..\..\obj\vc60\Debug\Symbols/HelloViewApp.pdb" /debug /machine:I386 /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none
 
 !ENDIF 
 
 # Begin Target
 
-# Name "HollowViewApp - Win32 Release"
-# Name "HollowViewApp - Win32 Debug"
+# Name "HelloViewApp - Win32 Release"
+# Name "HelloViewApp - Win32 Debug"
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\ChildView.cpp
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\ChildView.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\HollowViewApp.cpp
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\HelloViewApp.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\MainFrm.cpp
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\MainFrm.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -112,15 +112,15 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\MainFrm.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\ChildView.h
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\ChildView.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\MainFrm.h
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\MainFrm.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\Resource.h
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\Resource.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
@@ -128,11 +128,11 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\Resource.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\HollowViewApp.ico
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\HelloViewApp.ico
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HollowViewApp\HollowViewApp.rc
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloViewApp\HelloViewApp.rc
 # End Source File
 # End Group
 # End Target

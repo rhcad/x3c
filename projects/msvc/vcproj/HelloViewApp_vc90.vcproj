@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="gb2312"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
-	Name="HollowView"
-	ProjectGUID="{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}"
-	RootNamespace="HollowView"
-	Keyword="MFCDLLProj"
+	Version="9.00"
+	Name="HelloViewApp"
+	ProjectGUID="{0BEB8E4D-22AA-43B6-AF1E-F0C38187F7CB}"
+	RootNamespace="HelloViewApp"
+	Keyword="MFCProj"
 	>
 	<Platforms>
 		<Platform
@@ -20,9 +20,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\plugins"
-			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="2"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
 			>
@@ -42,12 +42,13 @@
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
 				MkTypLibCompatible="false"
+				ValidateParameters="false"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_AFXEXT"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -61,20 +62,18 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
 				SubSystem="2"
-				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -104,9 +103,9 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)64\plugins"
-			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)64\$(ProjectName)"
-			ConfigurationType="2"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
 			>
@@ -131,8 +130,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface"
-				PreprocessorDefinitions="_WIN64;_WINDOWS;_DEBUG;_AFXEXT"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -146,20 +145,18 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
 				SubSystem="2"
-				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -189,9 +186,9 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)\plugins"
-			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="2"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -212,11 +209,13 @@
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
 				MkTypLibCompatible="false"
+				ValidateParameters="false"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_AFXEXT"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -228,24 +227,20 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				GenerateMapFile="true"
-				MapFileName="$(IntDir)\..\Symbols\$(ProjectName).map"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -275,9 +270,9 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="..\..\..\code\bin\vc80\$(ConfigurationName)64\plugins"
-			IntermediateDirectory="..\..\..\obj\vc80\$(ConfigurationName)64\$(ProjectName)"
-			ConfigurationType="2"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -302,8 +297,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface"
-				PreprocessorDefinitions="_WIN64;_WINDOWS;NDEBUG;_AFXEXT"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;NDEBUG"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -315,24 +311,20 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Example\Interface;..\..\..\code\pkg_Core\Interface"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				GenerateMapFile="true"
-				MapFileName="$(IntDir)\..\Symbols\$(ProjectName).map"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -370,15 +362,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\CmdObserver.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\ChildView.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\Module.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\HelloViewApp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\WndA.cpp"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\MainFrm.cpp"
 				>
 			</File>
 		</Filter>
@@ -388,15 +380,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\MoveObserver.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\ChildView.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\Resource.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\MainFrm.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\WndA.h"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\Resource.h"
 				>
 			</File>
 		</Filter>
@@ -406,19 +398,27 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HollowView\HollowView.rc"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\HelloViewApp.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloViewApp\HelloViewApp.rc"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="Interface"
+			Name="Public"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Interface\ClsID_ViewExample.h"
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\Cx_CreateWnd.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Interface\HollowViewRes.h"
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\Ix_CreateWnd.h"
 				>
 			</File>
 		</Filter>

@@ -75,7 +75,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "HollowView"=.\vcproj\HollowView.dsp - Package Owner=<4>
+Project: "HelloView"=.\vcproj\HelloView.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -87,7 +87,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "HollowViewApp"=.\vcproj\HollowViewApp.dsp - Package Owner=<4>
+Project: "HelloViewApp"=.\vcproj\HelloViewApp.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

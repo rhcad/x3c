@@ -49,9 +49,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0Readme", "0Readme", "{1A98
 		..\..\README.txt = ..\..\README.txt
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HollowView", "vcproj\HollowView_vc80.vcproj", "{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloView", "vcproj\HelloView_vc80.vcproj", "{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HollowViewApp", "vcproj\HollowViewApp_vc80.vcproj", "{0BEB8E4D-22AA-43B6-AF1E-F0C38187F7CB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloViewApp", "vcproj\HelloViewApp_vc80.vcproj", "{0BEB8E4D-22AA-43B6-AF1E-F0C38187F7CB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestUtility", "vcproj\TestUtility_vc80.vcproj", "{59922A29-CEB6-4723-9247-840BA51DBC6B}"
 EndProject

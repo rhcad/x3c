@@ -14,15 +14,15 @@ ChangeObserverExample:
 	@echo Making all in subdirectory $@...
 	$(MAKE) -C ChangeObserverExample
 
-HollowView:
+HelloView:
 	@echo
 	@echo Making all in subdirectory $@...
-	$(MAKE) -C HollowView
+	$(MAKE) -C HelloView
 
-HollowViewApp:
+HelloViewApp:
 	@echo
 	@echo Making all in subdirectory $@...
-	$(MAKE) -C HollowViewApp
+	$(MAKE) -C HelloViewApp
 
 MFCExtTempl:
 	@echo
