@@ -1,5 +1,10 @@
 X3 C++ PluginFramework
 
+2011-10-09
+
+    * Add a python script 'tools/makeplugin.py'.
+    * Replace 'Hollow' as 'Hello'.
+
 2011-09-28
 
     * PluginManager: Load a plugin only in the main thread.
