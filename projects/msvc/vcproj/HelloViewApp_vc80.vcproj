@@ -410,7 +410,7 @@
 			Name="Public"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_AppUI\Interface\Cx_CreateWnd.h"
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\mfc\Cx_CreateWnd.h"
 				>
 			</File>
 			<File

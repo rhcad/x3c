@@ -20,17 +20,20 @@ class Ix_CreateWnd : public Ix_Object
 public:
     X3DEFINE_IID(Ix_CreateWnd)
 
-    //! Return window handle.
+    //! Return the window handle.
     virtual HWND GetWindow() const = 0;
 
     //! Create window with a specified control id (eg: AFX_IDW_PANE_FIRST).
-    virtual bool CreateWnd(HWND hwndParent, int nID) = 0;
+    virtual bool CreateWnd(HWND hwndParent, int id) = 0;
 
     //! Destroy window and object.
     virtual void DestroyWnd() = 0;
 
-    //! Dispatch OnCmdMsg notify. See CCmdTarget::OnCmdMsg() in MSDN.
-    virtual bool DoCmdMsg(int nID, int nCode, void* pExtra, void* pInfo) = 0;
+    //! Dispatch a command message.
+    virtual bool OnCommand(int id, bool test = false) = 0;
+
+    //! Dispatch the update notify of a command UI object.
+    virtual bool OnUpdateUI(int id, bool& enabled, bool& checked, std::wstring& text) = 0;
 
     //! Refresh display.
     virtual void Refresh() = 0;

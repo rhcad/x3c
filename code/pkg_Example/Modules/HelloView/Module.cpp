@@ -2,7 +2,7 @@
 #include <Module/XModuleMacro.h>
 #include <Module/XModuleImpl.h>
 
-#include <Cx_CreateWnd.h>
+#include <mfc/Cx_CreateWnd.h>
 #include <ClsID_ViewExample.h>
 #include "WndA.h"
 

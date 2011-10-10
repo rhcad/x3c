@@ -5,8 +5,8 @@
  */
 #include <UtilFunc/PluginInc.h>
 #include "EmbedWnd.h"
+#include "Cx_CreateWnd.h"
 #include <UtilFunc/LockCount.h>
-#include <afxpriv.h>
 
 static UINT	s_nViewRefreshID = 0;
 
@@ -152,7 +152,7 @@ BOOL CEmbedWnd::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* 
 
  	if (m_pIFWnd && ::IsWindowVisible(m_pIFWnd->GetWindow()))
  	{
- 		if (m_pIFWnd->DoCmdMsg(nID, nCode, pExtra, pHandlerInfo))
+ 		if (DoCmdMsgHelper(m_pIFWnd.P(), nID, nCode, pExtra, pHandlerInfo))
 		{
 			return TRUE;
 		}
@@ -199,7 +199,7 @@ BOOL CEmbedWnd::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 
 	int nCode = MAKELONG(notify.pNMHDR->code, WM_REFLECT_BASE+WM_NOTIFY);
 
-	if (m_pIFWnd && m_pIFWnd->DoCmdMsg(0, nCode, &notify, NULL))
+	if (m_pIFWnd && DoCmdMsgHelper(m_pIFWnd.P(), 0, nCode, &notify, NULL))
     {
         return TRUE;
     }

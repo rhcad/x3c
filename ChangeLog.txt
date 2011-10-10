@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * Add a python script 'tools/makeplugin.py'.
     * Replace 'Hollow' as 'Hello'.
+    * Optimize Ix_CreateWnd and Cx_CreateWnd.
 
 2011-09-28
 
