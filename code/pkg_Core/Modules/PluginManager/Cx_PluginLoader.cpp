@@ -162,7 +162,7 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
     wchar_t* nameend = filename + len0;
 
     std::vector<std::wstring> filenames;
-    int i, j;
+    size_t i, j;
 
     for (i = 0; files[i] != 0; )
     {

@@ -23,6 +23,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ChangeManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -75,6 +78,42 @@ Package=<4>
 
 ###############################################################################
 
+Project: "FrameXtp"=.\vcproj\FrameXtp.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ChangeManager
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "HelloFrame"=.\vcproj\HelloFrame.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name PluginManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name FrameXtp
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name HelloView
+    End Project Dependency
+}}}
+
+###############################################################################
+
 Project: "HelloView"=.\vcproj\HelloView.dsp - Package Owner=<4>
 
 Package=<5>
@@ -83,6 +122,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ChangeManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -95,6 +137,15 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ChangeManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name HelloView
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PluginManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -119,6 +170,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name LogManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -155,6 +209,12 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name PluginManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Win32DllTempl
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -167,6 +227,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name Win32DllTempl
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -191,6 +254,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name PluginManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -203,6 +269,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name PluginManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -215,6 +284,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name PluginManager
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -251,6 +323,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name ComHook
+    End Project Dependency
 }}}
 
 ###############################################################################
