@@ -1,10 +1,10 @@
 /*! \file Cx_CreateWnd.h
  *  \brief Define template class (Cx_CreateWnd) to implement Ix_CreateWnd.
  *  \author Zhang Yun Gui, X3 C++ PluginFramework
- *  \date   2011.6.30
+ *  \date   2011.10.11
  */
-#ifndef X3_VIEW_CREATEWND_IMPL_H_
-#define X3_VIEW_CREATEWND_IMPL_H_
+#ifndef X3_VIEW_CREATEWND_MFCIMPL_H_
+#define X3_VIEW_CREATEWND_MFCIMPL_H_
 
 #ifdef _MSC_VER
 #pragma warning(disable:4097)   // typedef-name used as synonym
@@ -29,7 +29,7 @@
         reinterpret_cast<PFNXRefCountByOthers>(&Cx_Object<Cx_CreateWnd<cls> >::GetRefCountByOthers)),
 #endif
 
-#ifdef __AFX_H__
+#ifdef __AFXWIN_H__
 class Ix_CreateWndMfc : public Ix_Object
 {
 public:
@@ -49,7 +49,7 @@ public:
 */
 template <class BASEWND>
 class Cx_CreateWnd : public Ix_CreateWnd
-#ifdef __AFX_H__
+#ifdef __AFXWIN_H__
     , public Ix_CreateWndMfc
 #endif
 {
@@ -104,7 +104,7 @@ public:
 #ifdef _USRDLL
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
-#ifdef __AFX_H__
+#ifdef __AFXWIN_H__
         AFX_CMDHANDLERINFO info = { NULL };
         return !!m_pWnd->OnCmdMsg(id, CN_COMMAND, NULL, test ? &info: NULL);
 #else
@@ -117,7 +117,7 @@ public:
 #ifdef _USRDLL
         AFX_MANAGE_STATE(AfxGetStaticModuleState());
 #endif
-#ifdef __AFX_H__
+#ifdef __AFXWIN_H__
         class CTempCmdUI : public CCmdUI
         {
         public:
@@ -143,7 +143,7 @@ public:
 #endif
     }
 
-#ifdef __AFX_H__
+#ifdef __AFXWIN_H__
     virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, void* pHandlerInfo)
     {
 #ifdef _USRDLL
@@ -172,7 +172,7 @@ protected:
     BASEWND*    m_pWnd;
 };
 
-#ifdef __AFX_H__
+#ifdef __AFXWIN_H__
 static inline BOOL DoCmdMsgHelper(Ix_CreateWnd* pWnd, UINT nID, int nCode, 
                                   void* pExtra, void* pHandlerInfo)
 {
@@ -209,4 +209,4 @@ static inline BOOL DoCmdMsgHelper(Ix_CreateWnd* pWnd, UINT nID, int nCode,
 }
 #endif
 
-#endif // X3_VIEW_CREATEWND_IMPL_H_
+#endif // X3_VIEW_CREATEWND_MFCIMPL_H_
