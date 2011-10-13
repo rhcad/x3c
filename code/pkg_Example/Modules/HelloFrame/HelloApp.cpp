@@ -1,11 +1,13 @@
 #include <UtilFunc/PluginInc.h>
+#include <FrameApp/FrameAppImpl.h>
+#include <PluginManager/XComCreator.h>
 
-class HelloApp : public CWinApp
+class CHelloApp : public CFrameApp
 {
 public:
-    HelloApp()
+    CHelloApp()
     {
     }
 };
 
-HelloApp theApp;
+CHelloApp theApp;

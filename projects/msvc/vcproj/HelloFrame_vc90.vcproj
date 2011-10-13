@@ -21,7 +21,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -101,7 +101,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -181,7 +181,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -262,7 +262,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
 			ConfigurationType="1"
 			UseOfMFC="2"

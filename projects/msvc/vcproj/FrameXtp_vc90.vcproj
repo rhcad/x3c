@@ -359,6 +359,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.cpp"
 				>
 			</File>
@@ -376,6 +380,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.h"
 				>
@@ -406,6 +414,18 @@
 		<Filter
 			Name="Interface"
 			>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\FrameApp\FrameApp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\FrameApp\FrameAppImpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Interface\FrameApp\Ix_FrameWndFactory.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
