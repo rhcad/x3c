@@ -44,6 +44,10 @@ BOOL CFrameApp::LoadPlugins()
 
 int CFrameApp::ExitInstance()
 {
+    Cx_Interface<Ix_FrameWndFactory> pIFFactory(x3::CLSID_FrameWndFactory);
+    SafeCall(pIFFactory, OnQuit());
+    pIFFactory.Release();
+
     m_loader->Unload();
 
     return CWinApp::ExitInstance();
@@ -59,7 +63,8 @@ BOOL CFrameApp::CreateFrameWnd()
 
 BOOL CFrameApp::ProcessShellCommand()
 {
-    return TRUE;
+    Cx_Interface<Ix_FrameWndFactory> pIFFactory(x3::CLSID_FrameWndFactory);
+    return pIFFactory->ProcessShellCommand();
 }
 
 BOOL CFrameApp::OnIdle(LONG lCount)

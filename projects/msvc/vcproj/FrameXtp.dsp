@@ -76,10 +76,26 @@ LINK32=link.exe
 # Begin Group "Interface"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Interface\FrameApp\FrameApp.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Interface\FrameApp\FrameAppImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Interface\FrameApp\Ix_FrameWndFactory.h
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.h
+# End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.h
@@ -96,6 +112,10 @@ SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\StdAfx.h
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.cpp
+# End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.cpp

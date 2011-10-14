@@ -12,6 +12,8 @@ protected:
     virtual ~Cx_FrameWndFactory();
 
 private:
+    virtual void OnQuit();
     virtual bool CreateSDIFrame();
     virtual bool CreateMDIFrame();
+    virtual bool ProcessShellCommand();
 };

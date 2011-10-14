@@ -10,8 +10,10 @@ class Ix_FrameWndFactory : public Ix_Object
 public:
     X3DEFINE_IID(Ix_FrameWndFactory)
 
+    virtual void OnQuit() = 0;
     virtual bool CreateSDIFrame() = 0;
     virtual bool CreateMDIFrame() = 0;
+    virtual bool ProcessShellCommand() = 0;
 };
 
 #endif // X3_UI_FRAMEWND_FACTORY_H_
