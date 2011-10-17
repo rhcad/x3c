@@ -72,8 +72,8 @@ bool CXmlUtil::NewXMLFile(XMLDOMDocumentPtr& doc,
     if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
         && FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
     {
-#ifdef LOGHEAD
-        LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
+#ifdef X3LOG_WARNING2
+        X3LOG_WARNING2(L"@ConfigXml:IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
 #endif
         return false;
     }
@@ -128,6 +128,26 @@ bool CXmlUtil::NewXMLFile2(XMLDOMDocumentPtr& doc,
     return doc != NULL;
 }
 
+static void OutputParseError(XMLDOMDocumentPtr& doc, const wchar_t* filename)
+{
+#if defined(_XMLDOM_HELPERS_H) && defined(X3LOG_WARNING2)
+    XML::IXMLDOMParseErrorPtr err;
+    BSTR bstrDesc = NULL;
+    long line, linepos;
+
+    if (SUCCEEDED(doc->get_parseError(&err)))
+    {
+        err->get_reason(&bstrDesc);
+        err->get_line(&line);
+        err->get_linepos(&linepos);
+
+        X3LOG_WARNING2(L"@ConfigXml:IDS_PARSEXML_FAIL", 
+            filename << L", " << bstrDesc << L" @" << line << L"," << linepos);
+        ::SysFreeString(bstrDesc);
+    }
+#endif
+}
+
 bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
                            const wchar_t* filename,
                            IXmlFileCrypt* pCryptHandler)
@@ -142,14 +162,12 @@ bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
         return true;
     }
 
-    VARIANT_BOOL bLoad;
-
     doc = NULL;
     if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
         && FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
     {
-#ifdef LOGHEAD
-        LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
+#ifdef X3LOG_WARNING2
+        X3LOG_WARNING2(L"@ConfigXml:IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
 #endif
         return false;
     }
@@ -160,9 +178,11 @@ bool CXmlUtil::LoadXMLFile(XMLDOMDocumentPtr& doc,
 
     try
     {
+        VARIANT_BOOL bLoad = VARIANT_FALSE;
         hr = doc->put_async(VARIANT_FALSE);
         if (FAILED(hr = doc->load(vt, &bLoad)) || !bLoad)
         {
+            OutputParseError(doc, filename);
             doc = NULL;
         }
     }
@@ -240,8 +260,8 @@ bool CXmlUtil::LoadXMLFromString(XMLDOMDocumentPtr& doc, LPCSTR pszXML)
     if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
         && FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
     {
-#ifdef LOGHEAD
-        LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
+#ifdef X3LOG_WARNING2
+        X3LOG_WARNING2(L"@ConfigXml:IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
 #endif
         return false;
     }
@@ -250,6 +270,7 @@ bool CXmlUtil::LoadXMLFromString(XMLDOMDocumentPtr& doc, LPCSTR pszXML)
     hr = doc->put_async(VARIANT_FALSE);
     if (FAILED(hr = doc->loadXML(_bstr_t(pszXML), &bRet)) || !bRet)
     {
+        OutputParseError(doc, L"string");
         doc = NULL;
     }
 
@@ -270,8 +291,8 @@ bool CXmlUtil::LoadXMLFromString(XMLDOMDocumentPtr& doc, const wchar_t* pszXML)
     if (FAILED(hr = doc.CreateInstance(CLSID_XmlDocument60))
         && FAILED(hr = doc.CreateInstance(CLSID_XmlDocument40)))
     {
-#ifdef LOGHEAD
-        LOG_ERROR2(LOGHEAD L"IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
+#ifdef X3LOG_WARNING2
+        X3LOG_WARNING2(L"@ConfigXml:IDS_CREATEINSTANCE_FAIL", L"CLSID_XmlDocument");
 #endif
         return false;
     }
@@ -280,6 +301,7 @@ bool CXmlUtil::LoadXMLFromString(XMLDOMDocumentPtr& doc, const wchar_t* pszXML)
     hr = doc->put_async(VARIANT_FALSE);
     if (FAILED(hr = doc->loadXML(_bstr_t(pszXML), &bRet)) || !bRet)
     {
+        OutputParseError(doc, pszXML);
         doc = NULL;
     }
 
