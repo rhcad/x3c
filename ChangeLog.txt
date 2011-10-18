@@ -1,5 +1,9 @@
 X3 C++ PluginFramework
 
+2011-10-18
+
+    * Fix constructors of Cx_ConfigSection.
+
 2011-10-09
 
     * Add a python script 'tools/makeplugin.py'.
@@ -32,7 +36,7 @@ X3 C++ PluginFramework
     * Change function name of Ix_Object.
     * Change plugin version to 1.1.3.0.
     
-    * Fix Ix_ConfigData and Cx_ConfigSection: Cx_Ptr& GetSection(Cx_Ptr& newnode, ...)
+    * Fix Ix_ConfigData and Cx_ConfigSection: Cx_Ptr GetSection(...)
 
 2011-07-21
 

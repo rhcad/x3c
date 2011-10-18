@@ -64,8 +64,7 @@ void TestConfigDB::testOpenAccessDB()
 void TestConfigDB::testAddRecord()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-    Cx_ConfigSection secRec(pIFDb->AddSection(obj, NULL, L"book"));
+    Cx_ConfigSection secRec(pIFDb->AddSection(NULL, L"book"));
 
     secRec->SetUInt32(L"id", 2);
     secRec->SetString(L"title", L"test1");
@@ -74,8 +73,7 @@ void TestConfigDB::testAddRecord()
 void TestConfigDB::testAddRecordUseMaxID()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-    Cx_ConfigSection secRec(pIFDb->AddSection(obj, NULL, L"book"));
+    Cx_ConfigSection secRec(pIFDb->AddSection(NULL, L"book"));
 
     secRec->SetString(L"id", L"@NEWID");
     secRec->SetString(L"title", L"test2");
@@ -84,8 +82,7 @@ void TestConfigDB::testAddRecordUseMaxID()
 void TestConfigDB::testAddRecordUseMaxIDAndReturnNewID()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-    Cx_ConfigSection secNewRec(pIFDb->AddSection(obj, NULL, L"book"));
+    Cx_ConfigSection secNewRec(pIFDb->AddSection(NULL, L"book"));
 
     secNewRec->SetString(L"id", L"@NEWID");
     secNewRec->SetString(L"title", L"test12");
@@ -99,13 +96,12 @@ void TestConfigDB::testAddRecordUseMaxIDAndReturnNewID()
 void TestConfigDB::testSelectSQL()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, 
+        Cx_ConfigSection secRecordset(pIFDb->GetSection(
         L"SELECT id,title FROM article WHERE id=4"));
 
     for (long iRec = 0; iRec < 99; iRec++)
     {
-        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", iRec));
+        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", iRec));
         if (!secRec->IsValid())
             break;
 
@@ -119,13 +115,12 @@ void TestConfigDB::testSelectSQL()
 void TestConfigDB::testSQLWithOrderBy()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, 
+        Cx_ConfigSection secRecordset(pIFDb->GetSection(
         L"SELECT id,title FROM article WHERE id=4 Or id=1 ORDER BY id"));
 
     for (long iRec = 0; iRec < 99; iRec++)
     {
-        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", iRec));
+        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", iRec));
         if (!secRec->IsValid())
             break;
 
@@ -139,8 +134,7 @@ void TestConfigDB::testSQLWithOrderBy()
 void TestConfigDB::testSQLWithLike()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, 
+        Cx_ConfigSection secRecordset(pIFDb->GetSection(
         L"SELECT id, title, author, country, times, subject, style "
         L"FROM article WHERE author like '%text%' "));
 
@@ -149,7 +143,7 @@ void TestConfigDB::testSQLWithLike()
 
     for (long iRec = 0; iRec < 99; iRec++)
     {
-        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", iRec));
+        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", iRec));
         if (!secRec->IsValid())
             break;
 
@@ -163,9 +157,8 @@ void TestConfigDB::testEditRecord()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
 
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+        Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
 
     CPPUNIT_ASSERT_EQUAL(1L, secRecordset.GetSectionCount(L""));
 
@@ -176,9 +169,8 @@ void TestConfigDB::testEditFieldDateTime()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
 
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
 
     secRec->SetDateTime(L"create_time", 2010, 3, 10, 9, 30, 10);
 }
@@ -187,9 +179,8 @@ void TestConfigDB::testEditFieldDate()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
 
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
 
     secRec->SetDate(L"create_time", 2010, 3, 10);
 }
@@ -198,9 +189,8 @@ void TestConfigDB::testEditFieldGetCurDate()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
 
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
 
     secRec->SetString(L"create_time", L"@CURDATE()");
     VERIFY(Cx_ConfigTransaction(Cx_Ptr(secRec.P())).Submit());
@@ -215,17 +205,16 @@ void TestConfigDB::testEditFieldGetCurDate()
 void TestConfigDB::testReadFieldDate()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
-    Cx_Ptr obj;
-
+    
     {
-        Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+        Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+        Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
 
         secRec->SetDateTime(L"create_time", 2010, 3, 10, 9, 30, 10);
     }
 
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
     ASSERT(secRec->IsValid());
 
     int year, month, day;
@@ -242,9 +231,8 @@ void TestConfigDB::testRecordsetTransaction()
 {
     Cx_Interface<Ix_ConfigData> pIFDb(GetDatabase());
 
-    Cx_Ptr obj;
-    Cx_ConfigSection secRecordset(pIFDb->GetSection(obj, NULL, L"book", L"id", 1));
-    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(obj, L"", 0));
+    Cx_ConfigSection secRecordset(pIFDb->GetSection(NULL, L"book", L"id", 1));
+    Cx_ConfigSection secRec(secRecordset.GetSectionByIndex(L"", 0));
 
     secRec->SetString(L"title", L"test4");
 

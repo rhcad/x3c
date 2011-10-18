@@ -397,7 +397,7 @@ bool Cx_ConfigXml::Save(const wchar_t* filename) const
     return bRet;
 }
 
-Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, const wchar_t* name, bool autoCreate)
+Cx_Ptr Cx_ConfigXml::GetSection(const wchar_t* name, bool autoCreate)
 {
     Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
     Cx_XmlSection* pIFCfg = static_cast<Cx_XmlSection*>(pIFRet.P());
@@ -421,11 +421,10 @@ Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, const wchar_t* name, bool auto
             pIFCfg->m_xmlParent, strName.c_str());
     }
 
-    newnode = pIFRet;
-    return newnode;
+    return Cx_Ptr(pIFRet);
 }
 
-Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
+Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
                                  const wchar_t* name,
                                  const wchar_t* attrName,
                                  ULONG attrValue,
@@ -433,10 +432,10 @@ Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
 {
     wchar_t buf[35] = { 0 };
     _ultow_s(attrValue, buf, 35, 10);
-    return GetSection(newnode, parent, name, attrName, buf, autoCreate);
+    return GetSection(parent, name, attrName, buf, autoCreate);
 }
 
-Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
+Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
                                  const wchar_t* name,
                                  const wchar_t* attrName,
                                  ULONG attrValue,
@@ -448,20 +447,20 @@ Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
     wchar_t buf2[35] = { 0 };
     _ultow_s(attrValue, buf1, 35, 10);
     _ultow_s(attrValue2, buf2, 35, 10);
-    return GetSection(newnode, parent, name, attrName, buf1, attrName2, buf2, autoCreate);
+    return GetSection(parent, name, attrName, buf1, attrName2, buf2, autoCreate);
 }
 
-Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
+Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
                                  const wchar_t* name,
                                  const wchar_t* attrName,
                                  const wchar_t* attrValue,
                                  bool autoCreate)
 {
-    return GetSection(newnode, parent, name,
+    return GetSection(parent, name,
         attrName, attrValue, L"", L"", autoCreate);
 }
 
-Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
+Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
                                  const wchar_t* name,
                                  const wchar_t* attrName,
                                  const wchar_t* attrValue,
@@ -497,8 +496,7 @@ Cx_Ptr& Cx_ConfigXml::GetSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
     pIFCfg->m_xmlParent = xmlParent;
     pIFCfg->m_xmlNode = xmlNode;
 
-    newnode = pIFRet;
-    return newnode;
+    return Cx_Ptr(pIFRet);
 }
 
 long Cx_ConfigXml::GetSectionCount(Ix_ConfigSection* parent,
@@ -509,7 +507,7 @@ long Cx_ConfigXml::GetSectionCount(Ix_ConfigSection* parent,
     return CXmlUtil::GetChildCount(xmlParent, strName.c_str());
 }
 
-Cx_Ptr& Cx_ConfigXml::GetSectionByIndex(Cx_Ptr& newnode, 
+Cx_Ptr Cx_ConfigXml::GetSectionByIndex(
                                         Ix_ConfigSection* parent, const wchar_t* name, long index)
 {
     std::wstring strName (name ? name : L"");
@@ -522,11 +520,10 @@ Cx_Ptr& Cx_ConfigXml::GetSectionByIndex(Cx_Ptr& newnode,
     CXmlUtil::GetChild(pIFCfg->m_xmlNode, pIFCfg->m_xmlParent,
         strName.c_str(), index);
 
-    newnode = pIFRet;
-    return newnode;
+    return Cx_Ptr(pIFRet);
 }
 
-Cx_Ptr& Cx_ConfigXml::GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection* sec)
+Cx_Ptr Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
 {
     std::wstring strName(L"");
     Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
@@ -545,11 +542,10 @@ Cx_Ptr& Cx_ConfigXml::GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection* sec)
         pIFCfg->m_xmlNode = NULL;
     }
 
-    newnode = pIFRet;
-    return newnode;
+    return Cx_Ptr(pIFRet);
 }
 
-Cx_Ptr& Cx_ConfigXml::AddSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
+Cx_Ptr Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
                                  const wchar_t* name)
 {
     std::wstring strName (name ? name : L"");
@@ -570,8 +566,7 @@ Cx_Ptr& Cx_ConfigXml::AddSection(Cx_Ptr& newnode, Ix_ConfigSection* parent,
         X3LOG_INFO2(L"@ConfigXml:IDS_CHANGE_FAIL", L"AddSection");
     }
 
-    newnode = pIFRet;
-    return newnode;
+    return Cx_Ptr(pIFRet);
 }
 
 bool Cx_ConfigXml::RemoveSection(Ix_ConfigSection* sec)

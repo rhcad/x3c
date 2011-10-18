@@ -50,7 +50,7 @@ public:
     bool GetRecordCount(long& count, const std::wstring& sqlSelect);
 
     //! 执行SQL语句，返回记录集
-    Cx_Ptr& OpenRecordset(Cx_Ptr& newnode, const std::wstring& sqlSelect);
+    Cx_Ptr OpenRecordset(const std::wstring& sqlSelect);
 
     //! 返回SQL指令翻译对象
     Ix_SQLParser* GetSQLParser();
@@ -82,12 +82,11 @@ protected:
 protected:
     //! 执行SQL语句，返回记录集
     /*! 本函数常用于读取多条记录，可以使用记录集的 GetSectionByIndex() 进行遍历读取，见 GetSectionByIndex() 的代码示例。
-        \param[out] newnode 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
+        \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
         \param sqlSelect SQL语句，以“SELECT ”开始，包含“FROM ”，可包含查询条件或排序等子语句
         \param ignore 忽略本参数
-        \return reference to newnode.
     */
-    Cx_Ptr& GetSection(Cx_Ptr& newnode, const wchar_t* sqlSelect, bool ignore = true);
+    Cx_Ptr GetSection(const wchar_t* sqlSelect, bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
     /*! 本函数可用于根据编号条件查找并修改记录，例如： \code
@@ -98,37 +97,35 @@ protected:
     secRec->SetDate(L"update_date", 2010, 3, 10);
     VERIFY(Cx_ConfigTransaction(Cx_Ptr(secRec.P())).Submit());
         \endcode
-        \param[out] newnode 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
+        \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
         \param nullP 必须为NULL
         \param sqlSelect SQL语句，以“SELECT ”开始，包含“FROM ”，可包含查询条件等子语句
         \param field 查询条件中的第一个比较字段
         \param condValue field对应的值，用于在查询中比较相等
         \param ignore 忽略本参数
-        \return reference to newnode.
     */
-    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
+    Cx_Ptr GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, ULONG condValue, 
         bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
     /*! 本函数常用于读取多条记录，可以使用记录集的 GetSectionByIndex() 进行遍历读取，见 GetSectionByIndex() 的代码示例。
-        \param[out] newnode 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
+        \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
         \param nullP 必须为NULL
         \param sqlSelect SQL语句，以“SELECT ”开始，包含“FROM ”，可包含查询条件等子语句
         \param field 查询条件中的第一个比较字段
         \param condValue field对应的值，用于在查询中比较相等
         \param ignore 忽略本参数
-        \return reference to newnode.
     */
-    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
+    Cx_Ptr GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, const wchar_t* condValue, 
         bool ignore = true);
 
     //! 执行SQL语句和查询条件，返回记录集
     /*!
-        \param[out] newnode 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
+        \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
         \param nullP 必须为NULL
         \param sqlSelect SQL语句，以“SELECT ”开始，包含“FROM ”，可包含查询条件等子语句
         \param field 查询条件中的第一个比较字段
@@ -136,9 +133,8 @@ protected:
         \param fieldName2 查询条件中的第二个比较字段，为空则忽略该条件
         \param condValue2 fieldName2对应的值，用于在查询中比较相等，fieldName2非空时有效
         \param ignore 忽略本参数
-        \return reference to newnode.
     */
-    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
+    Cx_Ptr GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, const wchar_t* condValue, 
         const wchar_t* fieldName2, const wchar_t* condValue2, 
@@ -146,7 +142,7 @@ protected:
 
     //! 执行SQL语句和查询条件，返回记录集
     /*!
-        \param[out] newnode 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
+        \return 记录集对象 Cx_CfgRecordset 或空对象 Cx_CfgDbSection
         \param nullP 必须为NULL
         \param sqlSelect SQL语句，以“SELECT ”开始，包含“FROM ”，可包含查询条件等子语句
         \param field 查询条件中的第一个比较字段
@@ -154,9 +150,8 @@ protected:
         \param fieldName2 查询条件中的第二个比较字段，为空则忽略该条件
         \param condValue2 fieldName2对应的值，用于在查询中比较相等，fieldName2非空时有效
         \param ignore 忽略本参数
-        \return reference to newnode.
     */
-    Cx_Ptr& GetSection(Cx_Ptr& newnode, 
+    Cx_Ptr GetSection(
         Ix_ConfigSection* nullP, const wchar_t* sqlSelect, 
         const wchar_t* field, ULONG condValue, 
         const wchar_t* fieldName2, ULONG condValue2, 
@@ -186,13 +181,12 @@ protected:
         std::wstring wstrName = secRec->GetString(L"title");
     }
         \endcode
-        \param[out] newnode 记录对象 Cx_CfgRecord ,不为空
+        \return 记录对象 Cx_CfgRecord ,不为空
         \param pRecordset 记录集对象，通过 GetSection() 得到的
         \param ignore 忽略本参数
         \param index 记录的序号，取值必须为0、记录集的当前序号、或当前序号+1
-        \return reference to newnode.
     */
-    Cx_Ptr& GetSectionByIndex(Cx_Ptr& newnode, 
+    Cx_Ptr GetSectionByIndex(
         Ix_ConfigSection* pRecordset, const wchar_t* ignore, long index);
 
     //! 增加一个新记录，待设置各个字段的值
@@ -204,12 +198,11 @@ protected:
     VERIFY(Cx_ConfigTransaction(Cx_Ptr(secNewRec.P())).Submit());
     ULONG nID = secNewRec->GetUInt32(L"id");
         \endcode
-        \param[out] newnode 新记录对象 Cx_CfgRecord
+        \return 新记录对象 Cx_CfgRecord
         \param nullP 必须为NULL
         \param table 数据库表名，例如“book”
-        \return reference to newnode.
     */
-    Cx_Ptr& AddSection(Cx_Ptr& newnode, Ix_ConfigSection* nullP, const wchar_t* table);
+    Cx_Ptr AddSection(Ix_ConfigSection* nullP, const wchar_t* table);
 
     //! 不支持本函数
     bool RemoveSection(Ix_ConfigSection*);
@@ -241,7 +234,7 @@ protected:
         const wchar_t* field, ULONG condValue);
 
     //! Returns the parent node of the specified node.(This function is not supported.)
-    Cx_Ptr& GetParentSection(Cx_Ptr& newnode, Ix_ConfigSection*);
+    Cx_Ptr GetParentSection(Ix_ConfigSection*);
 };
 
 #endif // _X3_CONFIGDB_CFGDATABASE_H
