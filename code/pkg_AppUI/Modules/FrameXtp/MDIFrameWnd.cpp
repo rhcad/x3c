@@ -15,18 +15,12 @@ BEGIN_MESSAGE_MAP(CMainMDIFrame, CXTPMDIFrameWnd)
     ON_COMMAND(XTP_ID_RIBBONCUSTOMIZE, OnCustomizeQuickAccess)
 END_MESSAGE_MAP()
 
-CMainMDIFrame::CMainMDIFrame()
+CMainMDIFrame::CMainMDIFrame() : m_id(0)
 {
 }
 
 CMainMDIFrame::~CMainMDIFrame()
 {
-}
-
-UINT CMainMDIFrame::GetFrameID() const
-{
-    ASSERT(m_frameNode.IsNotNull());
-    return m_frameNode->GetUInt32(L"id");
 }
 
 BOOL CMainMDIFrame::PreCreateWindow(CREATESTRUCT& cs)
@@ -36,7 +30,7 @@ BOOL CMainMDIFrame::PreCreateWindow(CREATESTRUCT& cs)
 
     cs.lpszClass = _T("XTPMainFrame");
     CXTPDrawHelpers::RegisterWndClass(AfxGetInstanceHandle(), cs.lpszClass, 
-        CS_DBLCLKS, AfxGetApp()->LoadIcon(GetFrameID()));
+        CS_DBLCLKS, AfxGetApp()->LoadIcon(m_id));
 
     return TRUE;
 }
@@ -45,8 +39,9 @@ BOOL CMainMDIFrame::LoadFrame(const Cx_ConfigSection& root)
 {
     m_frameNode = root.GetSection(L"mainframe");
     m_ribbonNode = root.GetSection(L"ribbon");
+    m_id = m_frameNode->GetUInt32(L"id");
 
-    BOOL ret = CXTPMDIFrameWnd::LoadFrame(GetFrameID());
+    BOOL ret = CXTPMDIFrameWnd::LoadFrame(m_id);
 
     m_frameNode.Release();
     m_ribbonNode.Release();
@@ -83,7 +78,7 @@ int CMainMDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     pCommandBars->GetCommandBarsOptions()->ShowKeyboardCues(xtpKeyboardCuesShowWindowsDefault);
     pCommandBars->GetCommandBarsOptions()->bToolBarAccelTips = TRUE;
 
-    pCommandBars->GetShortcutManager()->SetAccelerators(GetFrameID());
+    pCommandBars->GetShortcutManager()->SetAccelerators(m_id);
 
     if (InitRibbonTheme() && (!LoadRibbonIcons() || !CreateRibbonBar()))
     {
@@ -271,7 +266,7 @@ void CMainMDIFrame::OnClose()
 void CMainMDIFrame::ShowCustomizeDialog(int nSelectedPage)
 {
     CXTPCustomizeSheet cs(GetCommandBars());
-    UINT resid = GetFrameID();
+    UINT resid = m_id;
 
     CXTPRibbonCustomizeQuickAccessPage pageQuickAccess(&cs);
     cs.AddPage(&pageQuickAccess);

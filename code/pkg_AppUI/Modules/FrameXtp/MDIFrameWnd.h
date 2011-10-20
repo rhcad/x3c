@@ -10,7 +10,7 @@ public:
 
 // Attributes
 public:
-    UINT GetFrameID() const;
+    UINT GetFrameID() const { return m_id; }
 
 // Operations
 public:
@@ -34,6 +34,7 @@ private:
 
 // Implementation
 private:
+    UINT                m_id;
     CXTPStatusBar       m_wndStatusBar;
     CXTPTabClientWnd    m_wndClient;
     Cx_ConfigSection    m_frameNode;
