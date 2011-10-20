@@ -52,6 +52,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="4"
 			/>
@@ -134,6 +135,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -213,6 +215,7 @@
 				AdditionalIncludeDirectories="..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_AFXEXT"
 				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -297,6 +300,7 @@
 				AdditionalIncludeDirectories="..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;NDEBUG;_AFXEXT"
 				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
@@ -359,11 +363,59 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\ChildFrm.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\DummyDoc.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\EmbedView.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.cpp"
 				>
 			</File>
 			<File
@@ -373,6 +425,38 @@
 			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\StdAfx.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -381,11 +465,27 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\ChildFrm.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.h"
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\DummyDoc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\EmbedView.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.h"
 				>
 			</File>
 			<File

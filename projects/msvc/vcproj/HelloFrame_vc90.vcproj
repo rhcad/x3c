@@ -97,6 +97,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\config\&quot;  /S/Q/Y"
 			/>
 		</Configuration>
 		<Configuration
@@ -177,6 +179,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\config\&quot;  /S/Q/Y"
 			/>
 		</Configuration>
 		<Configuration
@@ -258,6 +262,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\config\&quot;  /S/Q/Y"
 			/>
 		</Configuration>
 		<Configuration
@@ -339,6 +345,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy test files"
+				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\config\&quot;  /S/Q/Y"
 			/>
 		</Configuration>
 	</Configurations>
@@ -371,11 +379,19 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\HelloFrame.ico"
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\HelloFrame.ico"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\HelloFrame.rc"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\LargeIcons.png"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\SmallIcons.png"
 				>
 			</File>
 		</Filter>

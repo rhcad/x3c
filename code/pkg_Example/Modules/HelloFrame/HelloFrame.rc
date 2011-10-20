@@ -12,6 +12,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 #ifdef _WIN32
@@ -32,7 +33,7 @@ END
 
 2 TEXTINCLUDE 
 BEGIN
-    "#include ""afxres.h\0"
+    "#include ""afxres.h""\0"
 END
 
 3 TEXTINCLUDE 
@@ -48,16 +49,18 @@ BEGIN
     "#pragma code_page(1252)\r\n"
     "#endif //_WIN32\r\n"
     "#include ""afxres.rc""         // Standard components\r\n"
-    "#endif\r\n"
+    "#endif\r\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif
+#endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -71,7 +74,45 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "HelloFrame.ico"
+IDR_MAINFRAME           ICON                    "res\\HelloFrame.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PNG
+//
+
+IDR_SMALLICONS          PNG                     "res\\SmallIcons.png"
+IDR_LARGEICONS          PNG                     "res\\LargeIcons.png"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_SMALLICONS TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    BUTTON      ID_EDIT_UNDO
+    BUTTON      ID_EDIT_REDO
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_APP_EXIT
+    BUTTON      ID_APP_OPTIONS
+END
+
+IDR_LARGEICONS TOOLBAR  32, 32
+BEGIN
+    BUTTON      ID_EDIT_PASTE
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -82,7 +123,17 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print",                      ID_FILE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "Close",                       ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "Opt&ions",                    ID_APP_OPTIONS
+        MENUITEM "E&xit Sample",                ID_APP_EXIT
     END
     POPUP "&View"
     BEGIN
@@ -127,12 +178,12 @@ BEGIN
     BEGIN
         BLOCK "040904B0"
         BEGIN
-            VALUE "FileDescription", "HelloFrame MFC Application using FrameXtp"
+            VALUE "FileDescription", "HelloFrame MFC Application"
             VALUE "FileVersion", "1, 0, 0, 1"
             VALUE "InternalName", "HelloFrame"
             VALUE "LegalCopyright", "Copyright (C) 2011"
             VALUE "OriginalFilename", "HelloFrame.EXE"
-            VALUE "ProductName", "X3C Example\0"
+            VALUE "ProductName", "X3C Example"
             VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
@@ -156,12 +207,32 @@ END
 STRINGTABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "HelloFrame"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
 END
 
 STRINGTABLE 
 BEGIN
     ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
     ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_OPTIONS          "Op&tions"
+END
+
+STRINGTABLE 
+BEGIN
     ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
 END
 
@@ -182,7 +253,7 @@ BEGIN
     AFX_IDS_SCTASKLIST      "Activate Task List"
 END
 
-#endif
+#endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

@@ -2,6 +2,8 @@
 
 #include <FrameApp/Ix_FrameWndFactory.h>
 
+class Cx_ConfigSection;
+
 class Cx_FrameWndFactory : public Ix_FrameWndFactory
 {
     X3BEGIN_CLASS_DECLARE(Cx_FrameWndFactory)
@@ -12,8 +14,10 @@ protected:
     virtual ~Cx_FrameWndFactory();
 
 private:
-    virtual void OnQuit();
-    virtual bool CreateSDIFrame();
-    virtual bool CreateMDIFrame();
+    virtual bool CreateFrameWnd(LPCWSTR factoryFile);
     virtual bool ProcessShellCommand();
+    virtual void OnQuit();
+
+private:
+    void RegisterDocTemplate(const Cx_ConfigSection& node);
 };

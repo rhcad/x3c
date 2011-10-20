@@ -1,15 +1,17 @@
 #ifndef X3_UI_FRAME_APPIMPL_H_
 #define X3_UI_FRAME_APPIMPL_H_
 
+#include <UtilFunc/PluginInc.h>
 #include "FrameApp.h"
 #include "Ix_FrameWndFactory.h"
 #include <PluginManager/PluginManager.h>
 
 BEGIN_MESSAGE_MAP(CFrameApp, CWinApp)
+    ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
+	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
 END_MESSAGE_MAP()
 
-CFrameApp::CFrameApp(bool mdi)
-    : m_mdi(mdi)
+CFrameApp::CFrameApp()
 {
     m_loader = new CPluginManager;
 }
@@ -55,10 +57,10 @@ int CFrameApp::ExitInstance()
 
 BOOL CFrameApp::CreateFrameWnd()
 {
-    Cx_Interface<Ix_FrameWndFactory> pIFFactory(x3::CLSID_FrameWndFactory);
-    ASSERT(pIFFactory.IsNotNull());
+    Cx_Interface<Ix_FrameWndFactory> pIFFrameFactory(x3::CLSID_FrameWndFactory);
+    ASSERT(pIFFrameFactory.IsNotNull());
 
-    return m_mdi ? pIFFactory->CreateMDIFrame() : pIFFactory->CreateSDIFrame();
+    return pIFFrameFactory->CreateFrameWnd(GetFactoryFile());
 }
 
 BOOL CFrameApp::ProcessShellCommand()
@@ -75,6 +77,11 @@ BOOL CFrameApp::OnIdle(LONG lCount)
 int CFrameApp::DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt)
 {
     return CWinApp::DoMessageBox(lpszPrompt, nType, nIDPrompt);
+}
+
+HINSTANCE CFrameApp::LoadAppLangResourceDLL()
+{
+    return NULL;
 }
 
 #endif // X3_UI_FRAME_APPIMPL_H_

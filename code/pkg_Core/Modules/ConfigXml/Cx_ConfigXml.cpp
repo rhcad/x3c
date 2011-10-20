@@ -208,7 +208,8 @@ std::wstring Cx_ConfigXml::GetFileName() const
 
 void Cx_ConfigXml::SetFileName(const wchar_t* filename)
 {
-    ASSERT_MESSAGE(0 == m_pImpl->m_nTransaction, "Must call SetFileName() before calling BeginTransaction().");
+    ASSERT_MESSAGE(0 == m_pImpl->m_nTransaction, 
+        "Must call SetFileName() before calling BeginTransaction().");
     m_pImpl->m_strFileName = filename;
     m_pImpl->m_bNeedLoad = true;
 }
@@ -236,7 +237,8 @@ void Cx_ConfigXml::SetRootName(const wchar_t* rootName,
                                const wchar_t* encoding,
                                const wchar_t* nmspace)
 {
-    ASSERT_MESSAGE(0 == m_pImpl->m_nTransaction, "Must call SetRootName() before calling BeginTransaction().");
+    ASSERT_MESSAGE(0 == m_pImpl->m_nTransaction, 
+        "Must call SetRootName() before calling BeginTransaction().");
     m_pImpl->m_strRootName = rootName;
     m_pImpl->m_strEncoding = encoding;
     m_pImpl->m_strNameSpace = nmspace;
@@ -425,10 +427,10 @@ Cx_Ptr Cx_ConfigXml::GetSection(const wchar_t* name, bool autoCreate)
 }
 
 Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
-                                 const wchar_t* name,
-                                 const wchar_t* attrName,
-                                 ULONG attrValue,
-                                 bool autoCreate)
+                                const wchar_t* name,
+                                const wchar_t* attrName,
+                                ULONG attrValue,
+                                bool autoCreate)
 {
     wchar_t buf[35] = { 0 };
     _ultow_s(attrValue, buf, 35, 10);
@@ -436,12 +438,12 @@ Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
 }
 
 Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
-                                 const wchar_t* name,
-                                 const wchar_t* attrName,
-                                 ULONG attrValue,
-                                 const wchar_t* attrName2,
-                                 ULONG attrValue2,
-                                 bool autoCreate)
+                                const wchar_t* name,
+                                const wchar_t* attrName,
+                                ULONG attrValue,
+                                const wchar_t* attrName2,
+                                ULONG attrValue2,
+                                bool autoCreate)
 {
     wchar_t buf1[35] = { 0 };
     wchar_t buf2[35] = { 0 };
@@ -451,22 +453,22 @@ Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
 }
 
 Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
-                                 const wchar_t* name,
-                                 const wchar_t* attrName,
-                                 const wchar_t* attrValue,
-                                 bool autoCreate)
+                                const wchar_t* name,
+                                const wchar_t* attrName,
+                                const wchar_t* attrValue,
+                                bool autoCreate)
 {
     return GetSection(parent, name,
         attrName, attrValue, L"", L"", autoCreate);
 }
 
 Cx_Ptr Cx_ConfigXml::GetSection(Ix_ConfigSection* parent,
-                                 const wchar_t* name,
-                                 const wchar_t* attrName,
-                                 const wchar_t* attrValue,
-                                 const wchar_t* attrName2,
-                                 const wchar_t* attrValue2,
-                                 bool autoCreate)
+                                const wchar_t* name,
+                                const wchar_t* attrName,
+                                const wchar_t* attrValue,
+                                const wchar_t* attrName2,
+                                const wchar_t* attrValue2,
+                                bool autoCreate)
 {
     std::wstring strName (name ? name : L"");
     XMLDOMElementPtr xmlParent = m_pImpl->GetParentNode(parent, strName);
@@ -507,8 +509,8 @@ long Cx_ConfigXml::GetSectionCount(Ix_ConfigSection* parent,
     return CXmlUtil::GetChildCount(xmlParent, strName.c_str());
 }
 
-Cx_Ptr Cx_ConfigXml::GetSectionByIndex(
-                                        Ix_ConfigSection* parent, const wchar_t* name, long index)
+Cx_Ptr Cx_ConfigXml::GetSectionByIndex(Ix_ConfigSection* parent, 
+                                       const wchar_t* name, long index)
 {
     std::wstring strName (name ? name : L"");
     Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);
@@ -546,7 +548,7 @@ Cx_Ptr Cx_ConfigXml::GetParentSection(Ix_ConfigSection* sec)
 }
 
 Cx_Ptr Cx_ConfigXml::AddSection(Ix_ConfigSection* parent,
-                                 const wchar_t* name)
+                                const wchar_t* name)
 {
     std::wstring strName (name ? name : L"");
     Cx_Interface<Ix_ConfigSection> pIFRet(CLSID_XmlSection);

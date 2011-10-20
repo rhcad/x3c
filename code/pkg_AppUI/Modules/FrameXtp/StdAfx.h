@@ -15,9 +15,17 @@
 #define _XTP_EXCLUDE_TASKPANEL
 #define _XTP_EXCLUDE_SHORTCUTBAR
 #define _XTP_EXCLUDE_SKINFRAMEWORK
-#define _XTP_EXCLUDE_RIBBON
+//#define _XTP_EXCLUDE_RIBBON
 #define _XTP_EXCLUDE_SYNTAXEDIT
 #define _XTP_EXCLUDE_MARKUP
 #define _XTP_EXCLUDE_CHART
 #define _XTP_EXCLUDE_FLOWGRAPH
 #include <XTToolkitPro.h>    // Xtreme Toolkit Pro components
+
+class CLocalResource
+{
+    HINSTANCE   m_oldResource;
+public:
+    CLocalResource();
+    ~CLocalResource();
+};

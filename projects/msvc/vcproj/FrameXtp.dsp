@@ -94,11 +94,27 @@ SOURCE=..\..\..\code\pkg_AppUI\Interface\FrameApp\Ix_FrameWndFactory.h
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\ChildFrm.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\DummyDoc.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\EmbedView.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.h
 # End Source File
 # Begin Source File
 
@@ -114,11 +130,27 @@ SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\StdAfx.h
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\ChildFrm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\Cx_FrameWndFactory.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\DummyDoc.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\EmbedView.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.cpp
 # End Source File
 # Begin Source File
 

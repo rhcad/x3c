@@ -56,6 +56,11 @@ LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
 # ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /pdb:"..\..\..\obj\vc60\Release\Symbols/HelloFrame.pdb" /machine:I386
 # SUBTRACT LINK32 /pdb:none
+# Begin Special Build Tool
+SOURCE="$(InputPath)"
+PostBuild_Desc=copy test files
+PostBuild_Cmds=xcopy ..\..\..\code\bin\config ..\..\..\code\bin\vc60\release\config\  /S/Q/Y
+# End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "HelloFrame - Win32 Debug"
 
@@ -84,6 +89,11 @@ LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
 # ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /pdb:"..\..\..\obj\vc60\Debug\Symbols/HelloFrame.pdb" /debug /machine:I386 /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none
+# Begin Special Build Tool
+SOURCE="$(InputPath)"
+PostBuild_Desc=copy test files
+PostBuild_Cmds=xcopy ..\..\..\code\bin\config ..\..\..\code\bin\vc60\debug\config\  /S/Q/Y
+# End Special Build Tool
 
 !ENDIF 
 
@@ -112,12 +122,20 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\Resource.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\HelloFrame.ico
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\HelloFrame.ico
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\HelloFrame.rc
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\LargeIcons.png
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\SmallIcons.png
+# End Source File
 # End Target
 # End Project

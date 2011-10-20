@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root language="ZhCn">
+	<mainframe id="128 IDR_MAINFRAME" themeDll="translations/Office2010.dll" themeName="OFFICE2010SILVER.INI">
+		<toolbars>
+			<bar id="128 IDR_SMALLICONS"/>
+			<bar id="129 IDR_LARGEICONS"/>
+		</toolbars>
+	</mainframe>
+	<ribbon>
+		<tab caption="Home">
+			<group id="" showOption="false">
+				<button id=""/>
+			</group>
+		</tab>
+	</ribbon>
+</root>

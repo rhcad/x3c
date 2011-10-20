@@ -1,4 +1,3 @@
-#include <UtilFunc/PluginInc.h>
 #include <FrameApp/FrameAppImpl.h>
 #include <PluginManager/XComCreator.h>
 
