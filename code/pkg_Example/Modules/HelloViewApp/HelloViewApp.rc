@@ -14,10 +14,10 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
-LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
-#pragma code_page(936)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
 #endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
@@ -34,7 +34,7 @@ END
 2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
-    "#include ""../../Interface/HelloViewRes.h\0"
+    "#include ""../../Interface/HelloViewRes.h""\0"
 END
 
 3 TEXTINCLUDE 
@@ -132,7 +132,7 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040904B0"
+	BLOCK "040904B0"
         BEGIN
             VALUE "FileDescription", "HelloViewApp MFC Application"
             VALUE "FileVersion", "1, 0, 0, 1"

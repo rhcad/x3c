@@ -470,7 +470,7 @@ bool Cx_TextUtil::ToDBC(std::wstring& text, bool punct)
     if (!text.empty() && punct)
     {
         int ret = LCMapStringW(
-            MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED),
+            MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),
             LCMAP_HALFWIDTH,
             text.c_str(), x3::GetSize(text),
             &dest[0], x3::GetSize(dest) + 1);

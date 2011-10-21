@@ -36,10 +36,10 @@ BEGIN
     "#define _AFX_NO_TRACKER_RESOURCES\r\n"
     "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
 	"\r\n"
-	"#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+	"#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
 	"#ifdef _WIN32\r\n"
-	"LANGUAGE 4, 2\r\n"
-	"#pragma code_page(936)\r\n"
+	"LANGUAGE 9, 1\r\n"
+	"#pragma code_page(1252)\r\n"
 	"#endif //_WIN32\r\n"
 	"#include ""l.chs\\afxres.rc""  	// Standard components\r\n"
 	"#endif\r\n"
@@ -52,10 +52,10 @@ END
 
 
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
-LANGUAGE 4, 2
-#pragma code_page(936)
+LANGUAGE 9, 1
+#pragma code_page(1252)
 #endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ VS_VERSION_INFO     VERSIONINFO
 BEGIN
 	BLOCK "StringFileInfo"
 	BEGIN
-        BLOCK "080404B0"
+	BLOCK "040904B0"
 		BEGIN 
 			VALUE "CompanyName",     "\0"
 			VALUE "FileDescription", "MFCExtTempl plugin\0"
@@ -87,13 +87,13 @@ BEGIN
 			VALUE "LegalCopyright",  "\0"
 			VALUE "LegalTrademarks", "\0"
 			VALUE "OriginalFilename","MFCExtTempl.dll\0"
-			VALUE "ProductName",     "TODO: ²úÆ·Ãû³Æ\0"
+			VALUE "ProductName",     "TODO: ProductName\0"
 			VALUE "ProductVersion",  "1.0.0.0\0"
 		END
 	END
 	BLOCK "VarFileInfo" 
 	BEGIN 
-		VALUE "Translation", 0x0804, 1200
+		VALUE "Translation", 0x409, 1200
     END
 END
 
@@ -109,12 +109,12 @@ END
 #define _AFX_NO_TRACKER_RESOURCES
 #define _AFX_NO_PROPERTY_RESOURCES
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
-LANGUAGE 4, 2
-#pragma code_page(936)
+LANGUAGE 9, 1
+#pragma code_page(1252)
 #endif //_WIN32
-#include "l.chs\\afxres.rc"  	// Standard components
+#include "afxres.rc"         // Standard components
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

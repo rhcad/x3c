@@ -154,6 +154,9 @@ bool Cx_PluginLoader::LoadCacheFile(const wchar_t* pluginFile)
 
             // Make cache file name.
             wcscpy_s(m_clsfile, MAX_PATH, GetWorkPath().c_str());
+            PathAppendW(m_clsfile, L"config");
+            if (!PathFileExistsW(m_clsfile))
+                PathRemoveFileSpecW(m_clsfile);
             PathAppendW(m_clsfile, appname.c_str());
             PathRenameExtensionW(m_clsfile, L".clsbuf");
 
