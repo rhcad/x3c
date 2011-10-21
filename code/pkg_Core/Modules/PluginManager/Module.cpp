@@ -82,6 +82,13 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, void* lpReserved)
 }
 #endif // _USRDLL
 
+static inline void GetBasePath(wchar_t* path)
+{
+    GetModuleFileNameW(x3GetModuleHandle(), path, MAX_PATH);
+    PathRemoveFileSpecW(path);
+    PathRemoveFileSpecW(path);
+}
+
 std::wstring Cx_PluginLoaderOut::GetWorkPath()
 {
     if (m_path.empty())
@@ -93,8 +100,7 @@ std::wstring Cx_PluginLoaderOut::GetWorkPath()
         else
         {
             wchar_t path[MAX_PATH] = { 0 };
-            GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
-            PathRemoveFileSpecW(path);
+            GetBasePath(path);
             PathAddBackslashW(path);
             m_path = path;
         }
@@ -125,8 +131,7 @@ std::wstring Cx_PluginLoaderOut::GetLocalAppDataPath(const wchar_t* company)
     }
     else
     {
-        GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
-        PathRemoveFileSpecW(path);
+        GetBasePath(path);
         PathAddBackslashW(path);
     }
 
@@ -151,9 +156,7 @@ std::wstring Cx_PluginLoaderOut::GetTranslationsPath(const wchar_t* subfolder)
     }
 #endif
 
-    GetModuleFileNameW(x3GetModuleHandle(), path, MAX_PATH);
-    PathRemoveFileSpecW(path);
-    PathRemoveFileSpecW(path);
+    GetBasePath(path);
     PathAppendW(path, L"translations");
     PathAppendW(path, code);
     if (subfolder && *subfolder)

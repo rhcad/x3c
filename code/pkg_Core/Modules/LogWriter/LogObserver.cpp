@@ -68,8 +68,7 @@ bool CLogObserver::CopyLogFilesToServer()
     unsigned long namesize = 33;
 
     if (pIFUtility && GetServerPath(path)
-        && GetComputerNameW(hostname, &namesize)
-        )
+        && GetComputerNameW(hostname, &namesize))
     {
         PathAppendW(path, hostname);
         PathAddBackslashW(path);
