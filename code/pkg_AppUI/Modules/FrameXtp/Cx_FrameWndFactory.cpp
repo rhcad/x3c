@@ -18,9 +18,6 @@ static CInstanceChecker*    s_checker = NULL;
 
 Cx_FrameWndFactory::Cx_FrameWndFactory()
 {
-    std::wstring filename(x3::GetTranslationsPath(L"ToolkitPro.Resource.xml"));
-    TRACE1("Load resource file: %s\n", filename);
-	XTPResourceManager()->SetResourceFile(filename.c_str());
 }
 
 Cx_FrameWndFactory::~Cx_FrameWndFactory()
@@ -49,6 +46,10 @@ bool Cx_FrameWndFactory::CheckAppInstance(LPCWSTR appid)
 bool Cx_FrameWndFactory::CreateFrameWnd(LPCWSTR factoryFile)
 {
     CXTPWinDwmWrapper().SetProcessDPIAware();   // Support high DPI on Vista or above.
+
+    std::wstring xtpfile(x3::GetTranslationsPath(L"ToolkitPro.Resource.xml"));
+    TRACE1("Load resource file: %s\n", xtpfile);
+	XTPResourceManager()->SetResourceFile(xtpfile.c_str());
 
     Cx_Interface<Ix_ConfigXml> pIFXml(x3::CLSID_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());

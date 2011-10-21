@@ -151,7 +151,8 @@ std::wstring Cx_PluginLoaderOut::GetTranslationsPath(const wchar_t* subfolder)
     }
 #endif
 
-    GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+    GetModuleFileNameW(x3GetModuleHandle(), path, MAX_PATH);
+    PathRemoveFileSpecW(path);
     PathRemoveFileSpecW(path);
     PathAppendW(path, L"translations");
     PathAppendW(path, code);
