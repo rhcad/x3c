@@ -4,6 +4,7 @@ X3 C++ PluginFramework
 
     * Fix constructors of Cx_ConfigSection.
     * PluginManager\DelayLoad.cpp: change default file name of class cache as "<exepath>\config\<appname>.clsbuf".
+    * Add GetTranslationsPath() in Ix_AppWorkPath.
 
 2011-10-09
 

@@ -1,6 +1,3 @@
-#ifndef X3_UI_FRAME_APPIMPL_H_
-#define X3_UI_FRAME_APPIMPL_H_
-
 #include <UtilFunc/PluginInc.h>
 #include "FrameApp.h"
 #include "Ix_FrameWndFactory.h"
@@ -33,6 +30,7 @@ BOOL CFrameApp::InitInstance()
     VERIFY(AfxOleInit());
 
     return LoadPlugins()
+        && CheckAppInstance()
         && CreateFrameWnd()
         && ProcessShellCommand();
 }
@@ -53,6 +51,19 @@ int CFrameApp::ExitInstance()
     m_loader->Unload();
 
     return CWinApp::ExitInstance();
+}
+
+BOOL CFrameApp::CheckAppInstance()
+{
+    if (*GetSingletonAppUID())
+    {
+        Cx_Interface<Ix_FrameWndFactory> pIFFrameFactory(x3::CLSID_FrameWndFactory);
+        ASSERT(pIFFrameFactory.IsNotNull());
+
+        return pIFFrameFactory->CheckAppInstance(GetSingletonAppUID());
+    }
+
+    return TRUE;
 }
 
 BOOL CFrameApp::CreateFrameWnd()
@@ -79,9 +90,37 @@ int CFrameApp::DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt)
     return CWinApp::DoMessageBox(lpszPrompt, nType, nIDPrompt);
 }
 
+// <exepath>\translations\<exename>Chs.dll
 HINSTANCE CFrameApp::LoadAppLangResourceDLL()
 {
-    return NULL;
+    HINSTANCE hResDll = NULL;
+
+#if _MSC_VER > 1400     // not VC6
+    TCHAR szPath[MAX_PATH], szTitle[60];
+
+    GetModuleFileName(m_hInstance, szPath, MAX_PATH);
+    StrCpyN(szTitle, PathFindFileName(szPath), _countof(szTitle));
+    PathRemoveExtension(szTitle);
+    PathRemoveFileSpec(szPath);
+    PathAppendW(szPath, L"translations");
+    PathAppendW(szPath, szTitle);
+
+    hResDll = AfxLoadLangResourceDLL(_T("%s%s.dll"), szPath);
+    TRACE2("Load resource file: %s (%s)\n", szPath, hResDll ? L"ok" : L"fail");
+#endif
+
+    return hResDll;
 }
 
-#endif // X3_UI_FRAME_APPIMPL_H_
+
+#if _MSC_VER > 1400     // not VC6
+#if defined _M_IX86
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_IA64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='ia64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_X64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#else
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#endif
+#endif

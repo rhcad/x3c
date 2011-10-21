@@ -19,8 +19,10 @@ public:
     DECLARE_MESSAGE_MAP()
 
 protected:
+    virtual LPCWSTR GetSingletonAppUID() { return L""; }
     virtual LPCWSTR GetFactoryFile() { return L"config/uifactory.xml"; }
     virtual BOOL LoadPlugins();
+    virtual BOOL CheckAppInstance();
     virtual BOOL CreateFrameWnd();
     virtual BOOL ProcessShellCommand();
 

@@ -7,6 +7,7 @@
 #include <Xml/Ix_ConfigXml.h>
 #include <Xml/Cx_ConfigSection.h>
 #include <UtilFunc/RelToAbs.h>
+#include <PluginManager/Ix_AppWorkPath.h>
 
 Cx_StringTable::Cx_StringTable()
     : m_loaded(false)
@@ -75,6 +76,7 @@ bool Cx_StringTable::GetValue(std::wstring& value,
 {
     if (!m_loaded)
     {
+        LoadFiles(x3::GetTranslationsPath(L"strings"));
         LoadFiles(x3::RelToAbsWithPlugin(L"../translations/strings", false));
     }
 
@@ -118,7 +120,7 @@ long Cx_StringTable::LoadFiles(const std::wstring& path)
         }
     }
     
-    if (0 == count)
+    if (0 == count && m_groups.empty())
     {
         X3LOG_INFO2(L"@StringTable:IDS_NO_STRFILE", path);
     }

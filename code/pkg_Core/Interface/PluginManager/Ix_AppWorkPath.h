@@ -38,6 +38,13 @@ public:
         \return the absolute path.
     */
     virtual std::wstring GetLocalAppDataPath(const wchar_t* company) = 0;
+
+    //! Return the language translation path of the current user.
+    /*! eg: <exepath>\translations\chs\subfolder (not end with slash char).
+        \param subfolder sub folder name in the translation path.
+        \return the language translation path which not end with slash char.
+    */
+    virtual std::wstring GetTranslationsPath(const wchar_t* subfolder) = 0;
 };
 
 namespace x3 {
@@ -51,6 +58,20 @@ inline std::wstring GetAppWorkPath()
     ASSERT(pIFPath.IsNotNull());
 #endif
     return pIFPath->GetWorkPath();
+}
+
+//! Return the language translation path of the current user.
+/*! eg: <exepath>\translations\chs\subfolder
+    \param subfolder sub folder name in the translation path.
+    \return the language translation path which may not end with slash char.
+*/
+inline std::wstring GetTranslationsPath(const wchar_t* subfolder = L"")
+{
+    Cx_Interface<Ix_AppWorkPath> pIFPath(x3::CLSID_AppWorkPath);
+#ifdef ASSERT
+    ASSERT(pIFPath.IsNotNull());
+#endif
+    return pIFPath->GetTranslationsPath(subfolder);
 }
 
 } // x3

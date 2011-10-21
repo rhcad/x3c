@@ -80,7 +80,8 @@ int CMainMDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
     pCommandBars->GetShortcutManager()->SetAccelerators(m_id);
 
-    if (InitRibbonTheme() && (!LoadRibbonIcons() || !CreateRibbonBar()))
+    if (InitRibbonTheme() &&
+        (!LoadRibbonIcons() || !CreateRibbonBar()))
     {
         TRACE0("Failed to create ribbon\n");
         return -1;
@@ -107,6 +108,11 @@ BOOL CMainMDIFrame::InitRibbonTheme()
 
         XTPPaintManager()->SetTheme(xtpThemeRibbon);
         pCommandBars->SetTheme(xtpThemeRibbon);
+    }
+    else
+    {
+        XTPPaintManager()->SetTheme(xtpThemeWhidbey);
+        pCommandBars->SetTheme(xtpThemeWhidbey);
     }
 
     return hThemeDll != NULL;

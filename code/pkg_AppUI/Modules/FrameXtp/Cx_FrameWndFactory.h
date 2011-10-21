@@ -14,6 +14,7 @@ protected:
     virtual ~Cx_FrameWndFactory();
 
 private:
+    virtual bool CheckAppInstance(LPCWSTR appid);
     virtual bool CreateFrameWnd(LPCWSTR factoryFile);
     virtual bool ProcessShellCommand();
     virtual void OnQuit();

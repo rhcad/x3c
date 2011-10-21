@@ -32,56 +32,10 @@ private:
     Cx_PluginLoaderOut(const Cx_PluginLoaderOut&);
     void operator=(const Cx_PluginLoaderOut&);
 
-    std::wstring GetWorkPath()
-    {
-        if (m_path.empty())
-        {
-            if (IsOnVistaDisk())
-            {
-                m_path = GetLocalAppDataPath(L"x3c");
-            }
-            else
-            {
-                wchar_t path[MAX_PATH] = { 0 };
-                GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
-                PathRemoveFileSpecW(path);
-                PathAddBackslashW(path);
-                m_path = path;
-            }
-        }
-        return m_path;
-    }
-
-    void SetWorkPath(const std::wstring& path)
-    {
-        m_path = path;
-        x3::EnsurePathHasSlash(m_path);
-    }
-
-    std::wstring GetLocalAppDataPath(const wchar_t* company)
-    {
-        wchar_t path[MAX_PATH] = { 0 };
-
-        if (GetLocalAppDataPath_(path))
-        {
-            wchar_t appname[MAX_PATH];
-            GetModuleFileNameW(GetMainModuleHandle(), appname, MAX_PATH);
-
-            if (company)
-                PathAppendW(path, company);
-            PathAppendW(path, PathFindFileNameW(appname));
-            PathRenameExtensionW(path, L"");
-            PathAddBackslashW(path);
-        }
-        else
-        {
-            GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
-            PathRemoveFileSpecW(path);
-            PathAddBackslashW(path);
-        }
-
-        return path;
-    }
+    std::wstring GetWorkPath();
+    void SetWorkPath(const std::wstring& path);
+    std::wstring GetLocalAppDataPath(const wchar_t* company);
+    std::wstring GetTranslationsPath(const wchar_t* subfolder);
 
     bool IsOnVistaDisk();
     bool GetLocalAppDataPath_(wchar_t* path);
@@ -128,13 +82,92 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, void* lpReserved)
 }
 #endif // _USRDLL
 
+std::wstring Cx_PluginLoaderOut::GetWorkPath()
+{
+    if (m_path.empty())
+    {
+        if (IsOnVistaDisk())
+        {
+            m_path = GetLocalAppDataPath(L"x3c");
+        }
+        else
+        {
+            wchar_t path[MAX_PATH] = { 0 };
+            GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+            PathRemoveFileSpecW(path);
+            PathAddBackslashW(path);
+            m_path = path;
+        }
+    }
+    return m_path;
+}
+
+void Cx_PluginLoaderOut::SetWorkPath(const std::wstring& path)
+{
+    m_path = path;
+    x3::EnsurePathHasSlash(m_path);
+}
+
+std::wstring Cx_PluginLoaderOut::GetLocalAppDataPath(const wchar_t* company)
+{
+    wchar_t path[MAX_PATH] = { 0 };
+
+    if (GetLocalAppDataPath_(path))
+    {
+        wchar_t appname[MAX_PATH];
+        GetModuleFileNameW(GetMainModuleHandle(), appname, MAX_PATH);
+
+        if (company)
+            PathAppendW(path, company);
+        PathAppendW(path, PathFindFileNameW(appname));
+        PathRenameExtensionW(path, L"");
+        PathAddBackslashW(path);
+    }
+    else
+    {
+        GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+        PathRemoveFileSpecW(path);
+        PathAddBackslashW(path);
+    }
+
+    return path;
+}
+
+std::wstring Cx_PluginLoaderOut::GetTranslationsPath(const wchar_t* subfolder)
+{
+    wchar_t code[4] = L"chs";
+    wchar_t path[MAX_PATH] = { 0 };
+
+#ifdef _WIN32
+    typedef LANGID (WINAPI*PFNGETUSERDEFAULTUILANGUAGE)();
+    PFNGETUSERDEFAULTUILANGUAGE pfnGetLang;
+
+    pfnGetLang = (PFNGETUSERDEFAULTUILANGUAGE)::GetProcAddress(
+        ::GetModuleHandleW(L"kernel32.dll"), "GetUserDefaultUILanguage");
+    if (pfnGetLang != NULL)
+    {
+        LANGID langid = pfnGetLang();
+        ::GetLocaleInfoW(langid, LOCALE_SABBREVLANGNAME, code, 4);
+    }
+#endif
+
+    GetModuleFileNameW(GetMainModuleHandle(), path, MAX_PATH);
+    PathRemoveFileSpecW(path);
+    PathAppendW(path, L"translations");
+    PathAppendW(path, code);
+    if (subfolder && *subfolder)
+        PathAppendW(path, subfolder);
+
+    return path;
+}
+
 bool Cx_PluginLoaderOut::IsOnVistaDisk()
 {
     bool ret = false;
 #ifdef WINOLEAPI_
     OSVERSIONINFO osvi = { sizeof(OSVERSIONINFO) };
     WCHAR winpath[MAX_PATH], exepath[MAX_PATH];
-    
+
     if (GetVersionEx(&osvi) && osvi.dwMajorVersion >= 6)
     {
         GetSystemDirectoryW(winpath, MAX_PATH);

@@ -10,6 +10,7 @@ class Ix_FrameWndFactory : public Ix_Object
 public:
     X3DEFINE_IID(Ix_FrameWndFactory)
 
+    virtual bool CheckAppInstance(LPCWSTR appid) = 0;
     virtual bool CreateFrameWnd(LPCWSTR factoryFile) = 0;
     virtual bool ProcessShellCommand() = 0;
     virtual void OnQuit() = 0;
