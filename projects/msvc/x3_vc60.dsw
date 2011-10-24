@@ -23,9 +23,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name ChangeManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -86,12 +83,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name ChangeManager
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name ConfigXml
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -104,15 +95,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name PluginManager
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name FrameXtp
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name HelloView
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -125,9 +107,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name ChangeManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -140,15 +119,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name ChangeManager
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name HelloView
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name PluginManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -173,9 +143,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name LogManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -212,12 +179,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name PluginManager
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name Win32DllTempl
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -230,9 +191,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name Win32DllTempl
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -257,9 +215,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name PluginManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -272,9 +227,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name PluginManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -287,9 +239,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name PluginManager
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -326,9 +275,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name ComHook
-    End Project Dependency
 }}}
 
 ###############################################################################

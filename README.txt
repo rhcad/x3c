@@ -1,14 +1,14 @@
-		    x3c --- C++ Plugin Framework
-		------------------------------------
-		http://sourceforge.net/projects/x3c/
+		    x3c - C++ Plugin Framework
+		-----------------------------------
+		http://sourceforge.net/projects/x3c
 
 x3c is designed as a plugin-framework that uses C++ and STL.
 This framework has many frequently-used and lightweight plugins.
 x3c can be used to easily develop plugins and applications for multiple platforms.
 
-Makefile and config.mk are used to compile x3c on Linux or Unix.
+Makefile and config.mk are used to compile x3c on Linux, Mac or Unix.
 
-projects: C++ workspace files using IDE (MS VC++, Code::Blocks + Linux GCC / MinGW GCC, ...).
+projects: C++ workspace files using IDE (MS VC++, Code::Blocks + GCC, ...).
 code: source code of plugins.
 doc: development documents and doxygen files.
 tools: some useful tools for development.
@@ -22,9 +22,6 @@ You may need to download the following files:
    http://files.cnblogs.com/rhcad/cppunit-1.12.1-vc689&gcc.zip (fix for vc6 and gcc)
    http://sourceforge.net/projects/cppunit/files/cppunit/1.12.1/
    \\dampub\Tools\CodeCheck\C++\CppUnit\cppunit-1.12.1  (Founder server)
-
-2. log4cplus-1.0.4 fixed for vc6 has already been included in LogWriter plugin.
-   You can download another version from http://sourceforge.net/projects/log4cplus/ .
 
 --------------------------------------------------------
 License: Apache License V2.0

@@ -10,20 +10,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MFCExtTempl", "vcproj\MFCExtTempl_vc90.vcproj", "{651F7373-89B1-4E67-AE79-599D8ABB59DC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleUse", "vcproj\SimpleUse_vc90.vcproj", "{F5022746-4449-44F3-A10A-641ADE2CFEB4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{24CFB065-736B-4230-AF7E-5C3C3ABF8D41} = {24CFB065-736B-4230-AF7E-5C3C3ABF8D41}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleApp", "vcproj\SimpleApp_vc90.vcproj", "{411B7A4B-EA8C-4868-BF47-9CBFADCA81BF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{24CFB065-736B-4230-AF7E-5C3C3ABF8D41} = {24CFB065-736B-4230-AF7E-5C3C3ABF8D41}
-		{686F7780-B33C-40B5-BBF6-06C3F782E6EC} = {686F7780-B33C-40B5-BBF6-06C3F782E6EC}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChangeObserverExample", "vcproj\ChangeObserverExample_vc90.vcproj", "{147FB08D-271B-45CB-A2A1-48CFE4D2AB98}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F490531F-5245-4D7C-8C39-9CA5CC075C23} = {F490531F-5245-4D7C-8C39-9CA5CC075C23}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_Core", "pkg_Core", "{E20E78F8-8C7C-4DE5-B6FF-13DC09F4FBE9}"
 EndProject
@@ -42,28 +32,16 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextUtility", "vcproj\TextUtility_vc90.vcproj", "{F394F1CA-6694-4FAA-AE8B-68D71FFBE405}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogWriter", "vcproj\LogWriter_vc90.vcproj", "{78541BB2-523B-475B-9BAC-49632B228043}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8B8DE09B-41A4-49AA-B2EE-84A16925A9D6} = {8B8DE09B-41A4-49AA-B2EE-84A16925A9D6}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileUtility", "vcproj\FileUtility_vc90.vcproj", "{503629A7-8C6B-41CD-87D5-64FF2A214A87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_UnitTest", "pkg_UnitTest", "{A2AEF2DD-3E35-47E7-A9E7-8FBB0B58A5DA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCore", "vcproj\TestCore_vc90.vcproj", "{D26563C9-C48F-45FB-8EB6-1560B663F353}"
-	ProjectSection(ProjectDependencies) = postProject
-		{686F7780-B33C-40B5-BBF6-06C3F782E6EC} = {686F7780-B33C-40B5-BBF6-06C3F782E6EC}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestUtility", "vcproj\TestUtility_vc90.vcproj", "{80F24908-2D45-44C9-8550-A9FA2FFEB30E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{686F7780-B33C-40B5-BBF6-06C3F782E6EC} = {686F7780-B33C-40B5-BBF6-06C3F782E6EC}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestPlatform", "vcproj\TestPlatform_vc90.vcproj", "{AE57CB5B-F334-4486-89EC-4D393D2E5A04}"
-	ProjectSection(ProjectDependencies) = postProject
-		{686F7780-B33C-40B5-BBF6-06C3F782E6EC} = {686F7780-B33C-40B5-BBF6-06C3F782E6EC}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pkg_AppUI", "pkg_AppUI", "{912655C8-FC42-4541-9A9A-284A334EECCE}"
 EndProject
@@ -80,34 +58,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ComHook", "vcproj\ComHook_vc90.vcproj", "{364CBDB7-2DA3-41B2-89CE-34BEC15384FE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "x3core", "vcproj\x3core_vc90.vcproj", "{AC4752C1-7456-4717-9624-C83C0E9B55AD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{364CBDB7-2DA3-41B2-89CE-34BEC15384FE} = {364CBDB7-2DA3-41B2-89CE-34BEC15384FE}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloView", "vcproj\HelloView_vc90.vcproj", "{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F490531F-5245-4D7C-8C39-9CA5CC075C23} = {F490531F-5245-4D7C-8C39-9CA5CC075C23}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloViewApp", "vcproj\HelloViewApp_vc90.vcproj", "{0BEB8E4D-22AA-43B6-AF1E-F0C38187F7CB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F490531F-5245-4D7C-8C39-9CA5CC075C23} = {F490531F-5245-4D7C-8C39-9CA5CC075C23}
-		{686F7780-B33C-40B5-BBF6-06C3F782E6EC} = {686F7780-B33C-40B5-BBF6-06C3F782E6EC}
-		{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0} = {E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameXtp", "vcproj\FrameXtp_vc90.vcproj", "{DB1254E9-EAD5-4B93-B053-3E4384831B9A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F490531F-5245-4D7C-8C39-9CA5CC075C23} = {F490531F-5245-4D7C-8C39-9CA5CC075C23}
-		{4FC1867D-DA2A-40A1-B2AB-CCD1C099C96C} = {4FC1867D-DA2A-40A1-B2AB-CCD1C099C96C}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloFrame", "vcproj\HelloFrame_vc90.vcproj", "{B5342A97-2405-46D1-A446-B59CB908A953}"
-	ProjectSection(ProjectDependencies) = postProject
-		{686F7780-B33C-40B5-BBF6-06C3F782E6EC} = {686F7780-B33C-40B5-BBF6-06C3F782E6EC}
-		{E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0} = {E244CF83-9AB0-4FB6-86BC-5A0F7069FDA0}
-		{DB1254E9-EAD5-4B93-B053-3E4384831B9A} = {DB1254E9-EAD5-4B93-B053-3E4384831B9A}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

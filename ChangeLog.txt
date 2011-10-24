@@ -1,4 +1,9 @@
-X3 C++ PluginFramework
+x3c - C++ Plugin Framework
+
+2011-10-24
+
+    * Remove dependency of VC++ projects.
+    * Auto copy files when building projects (HelloFrame and TestPlatform).
 
 2011-10-18
 

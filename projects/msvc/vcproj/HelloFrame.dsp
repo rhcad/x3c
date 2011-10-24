@@ -128,7 +128,6 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\HelloFrame.ico
 
 SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\HelloFrame.rc
 # End Source File
-# End Group
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\LargeIcons.png
@@ -136,6 +135,40 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\LargeIcons.png
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\SmallIcons.png
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\uifactory.xml
+
+!IF  "$(CFG)" == "HelloFrame - Win32 Release"
+
+# Begin Custom Build
+IntDir=.\..\..\..\obj\vc60\Release\HelloFrame
+TargetDir=\x3c\code\bin\vc60\Release
+InputPath=..\..\..\code\pkg_Example\Modules\HelloFrame\uifactory.xml
+InputName=uifactory
+
+"$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	xcopy $(InputPath) "$(TargetDir)\config\"  /S/Q/Y
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "HelloFrame - Win32 Debug"
+
+# Begin Custom Build
+IntDir=.\..\..\..\obj\vc60\Debug\HelloFrame
+TargetDir=\x3c\code\bin\vc60\Debug
+InputPath=..\..\..\code\pkg_Example\Modules\HelloFrame\uifactory.xml
+InputName=uifactory
+
+"$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	xcopy $(InputPath) "$(TargetDir)\config\"  /S/Q/Y
+
+# End Custom Build
+
+!ENDIF 
+
 # End Source File
 # End Target
 # End Project

@@ -96,8 +96,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="copy test files"
-				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\..\config\&quot;  /S/Q/Y&#x0D;&#x0A;xcopy ..\..\..\code\bin\tests &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -179,8 +178,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="copy test files"
-				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\..\config\&quot;  /S/Q/Y&#x0D;&#x0A;xcopy ..\..\..\code\bin\tests &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -261,8 +259,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="copy test files"
-				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\..\config\&quot;  /S/Q/Y&#x0D;&#x0A;xcopy ..\..\..\code\bin\tests &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -344,8 +341,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="copy test files"
-				CommandLine="xcopy ..\..\..\code\bin\config &quot;$(TargetDir)\..\config\&quot;  /S/Q/Y&#x0D;&#x0A;xcopy ..\..\..\code\bin\tests &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -388,6 +384,86 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\atlcom.dll"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Debug|x64"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|x64"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+		</File>
+		<File
+			RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\test.xml"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Debug|x64"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|x64"
+				>
+				<Tool
+					Name="VCCustomBuildTool"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					Outputs="$(IntDir)\$(InputName)"
+				/>
+			</FileConfiguration>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
