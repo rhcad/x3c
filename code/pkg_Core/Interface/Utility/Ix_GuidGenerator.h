@@ -1,6 +1,6 @@
 /*! \file Ix_GuidGenerator.h
  *  \brief Define GUID generator interface: Ix_GuidGenerator
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IGUIDGENERATOR_H_

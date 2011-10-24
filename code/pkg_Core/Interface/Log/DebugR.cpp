@@ -1,6 +1,6 @@
 /*! \file DebugR.cpp
  *  \brief Implement x3CrtDbgReport().
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 

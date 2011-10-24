@@ -2,7 +2,7 @@
  *  \brief Implement plugin's export functions and x3CreateObject.
  *  \note Include this file in one and only one CPP file of your plugin project.\n
  *        If you don't want to use XModuleMacro.h and this file, then you can use XComCreator.h file.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.07.11
  */
 #ifndef X3_PLUGINIMPL_MODULEIMPL_H_

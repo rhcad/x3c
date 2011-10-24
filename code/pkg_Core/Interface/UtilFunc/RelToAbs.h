@@ -1,6 +1,6 @@
 /*! \file RelToAbs.h
  *  \brief Define functions converting relative path to absolute path: RelToAbsWithPlugin, FileNameRelToAbs
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef UTILFUNC_RELTOABS_H_

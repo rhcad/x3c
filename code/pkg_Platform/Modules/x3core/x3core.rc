@@ -64,7 +64,7 @@ BEGIN
         BEGIN
             VALUE "FileDescription", "X3 COM Wrapper Module"
             VALUE "FileVersion", "1.1.3.0\0"
-            VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
+            VALUE "LegalCopyright", "(C) 2008-2011, X3 C++ PluginFramework\0"
             VALUE "OriginalFilename", "x3core.com.dll"
             VALUE "ProductName", "X3 C++ PluginFramework\0"
             VALUE "OLESelfRegister", ""

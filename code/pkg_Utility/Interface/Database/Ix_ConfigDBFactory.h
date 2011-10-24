@@ -1,6 +1,6 @@
 /*! \file Ix_ConfigDBFactory.h
  *  \brief Define database I/O operator's creator interface: Ix_ConfigDBFactory
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ICONFIGDBFACTORY_H_

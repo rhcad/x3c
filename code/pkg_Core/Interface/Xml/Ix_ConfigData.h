@@ -1,6 +1,6 @@
 /*! \file Ix_ConfigData.h
  *  \brief Define the configure data interface: Ix_ConfigData
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGDATA_H_

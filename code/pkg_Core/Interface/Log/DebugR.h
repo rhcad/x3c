@@ -1,6 +1,6 @@
 /*! \file DebugR.h
  *  \brief Redefine ASSERT and VERIFY to show assert info in InterfaceRelease configure.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 #ifndef X3_LOG_DEBUGR_H_

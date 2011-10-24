@@ -12,7 +12,7 @@
  *    - If just use only one plugin, you can do as following and not need PluginManager.h :\n
  *    define USE_ONE_PLUGIN then include this file, and assign module handle (using LoadLibrary) to g_hPluginDll.
  *
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
  #ifndef _X3_COMCREATOR_IMPL_H

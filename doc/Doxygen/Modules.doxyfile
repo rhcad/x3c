@@ -926,7 +926,7 @@ CHM_FILE               = ../x3full.chm
 # the HTML help compiler (hhc.exe). If non-empty doxygen will try to run
 # the HTML help compiler on the generated index.hhp.
 
-HHC_LOCATION           = "D:/Program Files/HTML Help Workshop/hhc.exe"
+HHC_LOCATION           = "C:/Program Files/HTML Help Workshop/hhc.exe"
 
 # If the GENERATE_HTMLHELP tag is set to YES, the GENERATE_CHI flag
 # controls if a separate .chi index file is generated (YES) or that
@@ -1362,9 +1362,9 @@ SEARCH_INCLUDES        = YES
 # contain include files that are not input files but should be processed by
 # the preprocessor.
 
-INCLUDE_PATH           = "D:/Program Files/Microsoft Visual Studio/VC98/INCLUDE" \
-                         "D:/Program Files/Microsoft Visual Studio/VC98/MFC/INCLUDE" \
-                         "D:/Program Files/Microsoft Visual Studio/VC98/ATL/INCLUDE"
+INCLUDE_PATH           = "C:/Program Files/Microsoft Visual Studio/VC98/INCLUDE" \
+                         "C:/Program Files/Microsoft Visual Studio/VC98/MFC/INCLUDE" \
+                         "C:/Program Files/Microsoft Visual Studio/VC98/ATL/INCLUDE"
 
 # You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard
 # patterns (like *.h and *.hpp) to filter out the header-files in the
@@ -1467,7 +1467,7 @@ CLASS_DIAGRAMS         = YES
 # the mscgen tool resides. If left empty the tool is assumed to be found in the
 # default search path.
 
-MSCGEN_PATH            = D:/Soft/mscgen/bin
+MSCGEN_PATH            = C:/Tools/mscgen/bin
 
 # If set to YES, the inheritance and collaboration graphs will hide
 # inheritance and usage relations if the target is undocumented
@@ -1594,7 +1594,7 @@ DOT_IMAGE_FORMAT       = png
 # The tag DOT_PATH can be used to specify the path where the dot tool can be
 # found. If left blank, it is assumed the dot tool can be found in the path.
 
-DOT_PATH               = D:/Soft/Graphviz/bin
+DOT_PATH               = C:/Tools/Graphviz/bin
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that
 # contain dot files that are included in the documentation (see the

@@ -1,9 +1,7 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
+// x3c - C++ PluginFramework
 // XmlUtil.cpp: implementation of the CXmlUtil class.
 // changes:
-//    2011-01-10, Zhang Yun Gui: support MSXML6 and MSXML4
+//    2011-01-10, Zhang Yungui: support MSXML6 and MSXML4
 //
 
 #include <UtilFunc/PluginInc.h>

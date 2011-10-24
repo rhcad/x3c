@@ -21,7 +21,7 @@ BEGIN
         BEGIN
             VALUE "FileDescription", "Plugin for hooking CoCreateInstance\0"
             VALUE "FileVersion", "1.0.1.2\0"
-            VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
+            VALUE "LegalCopyright", "(C) 2008-2011, X3 C++ PluginFramework\0"
             VALUE "OriginalFilename", "ComHook.plugin.dll\0"
             VALUE "ProductName", "X3 C++ PluginFramework\0"
         END

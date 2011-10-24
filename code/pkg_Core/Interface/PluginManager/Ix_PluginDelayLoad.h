@@ -1,6 +1,6 @@
 /*! \file Ix_PluginDelayLoad.h
  *  \brief Define plugin delay-loading interface: Ix_PluginDelayLoad
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.02.08
  */
 #ifndef X3_MANAGER_IPLUGINDELAYLOAD_H_

@@ -1,6 +1,6 @@
 /*! \file Ix_ObjectFactory.h
  *  \brief Define object creator interface: Ix_ObjectFactory
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_CORE_IOBJECTFACTORY_H_

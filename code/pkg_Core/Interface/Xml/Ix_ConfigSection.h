@@ -1,6 +1,6 @@
 /*! \file Ix_ConfigSection.h
  *  \brief Define the configure data node interface: Ix_ConfigSection
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGSECTION_H_

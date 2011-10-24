@@ -1,6 +1,6 @@
 /*! \file CmdMsgObserverSimple.h
  *  \brief Define window's command message observer: RawCmdMsgObserver
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.29
  */
 #ifndef X3_OBSERVER_CMDMSG_OBSERVER_SIMPLE_H_

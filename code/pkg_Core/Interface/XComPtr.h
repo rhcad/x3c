@@ -1,6 +1,6 @@
 /*! \file XComPtr.h
  *  \brief Define autoptr class: Cx_Interface, Cx_Ptr
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_CORE_XCOMPTR_H_

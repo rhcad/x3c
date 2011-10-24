@@ -1,6 +1,6 @@
 /*! \file Cx_SingletonObject.h
  *  \brief Define single instance implement template class: Cx_SingletonObject<cls>
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_CX_SINGLETONOBJECT_H_

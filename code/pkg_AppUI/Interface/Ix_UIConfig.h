@@ -1,6 +1,6 @@
 /*! \file Ix_UIConfig.h
  *  \brief Define UI config options interface: Ix_UIConfig
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.11.2
  */
 #ifndef X3_APPUI_IUICONFIG_H_

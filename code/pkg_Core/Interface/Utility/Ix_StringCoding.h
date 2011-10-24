@@ -1,6 +1,6 @@
 /*! \file Ix_StringCoding.h
  *  \brief Define string coding converter interface: Ix_StringCoding
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.07.21
  */
 #ifndef X3_UTIL_ISTRINGCODING_H_

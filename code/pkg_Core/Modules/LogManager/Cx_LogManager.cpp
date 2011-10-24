@@ -1,5 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 // Changes:
 // 2011-02-28: Avoid reenter in WriteLog.
 // 2011-07-01: Support delay-load feature for logging observer plugins.

@@ -1,6 +1,6 @@
 /*! \file Ix_StringConvert.h
  *  \brief Define text format converter interface: Ix_StringConvert
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ISTRINGCONVERT_H_

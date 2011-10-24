@@ -1,6 +1,6 @@
 /*! \file UnitTestInc.h
  *  \brief Include frequently-used files for unittest project.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.5.18
  */
 #ifndef _UNITTEST_PUBLIC_INC_H

@@ -1,6 +1,6 @@
 /*! \file LogHelper.h
  *  \brief Define logging macros such as X3LOG_WARNING and X3LogGroup.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.07.01
  */
 #ifndef X3_LOG_LOGHELPER_H_

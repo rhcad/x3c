@@ -1,6 +1,6 @@
 /*! \file Ix_ChangeManager.h
  *  \brief Define interface of change observer manager: Ix_ChangeManager
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \version
  *      2010.10.22: First release.
  *      2011.02.08: Add parameter 'fromdll' in RegisterObserver.

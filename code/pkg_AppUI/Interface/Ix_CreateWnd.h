@@ -1,6 +1,6 @@
 /*! \file Ix_CreateWnd.h
  *  \brief Define window creator interface: Ix_CreateWnd
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.10.11
  */
 #ifndef X3_VIEW_ICREATEWND_H_

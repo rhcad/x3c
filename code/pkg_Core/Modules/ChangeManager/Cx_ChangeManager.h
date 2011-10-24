@@ -1,7 +1,5 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
-// author: Zhang Yun Gui
+// x3c - C++ PluginFramework
+// author: Zhang Yungui
 // v2, 2011.1.5: Change to hash_multimap
 // v3, 2011.2.8: Support delay-load feature for observer plugins.
 // v4, 2011.06.30: Remove RTTI.

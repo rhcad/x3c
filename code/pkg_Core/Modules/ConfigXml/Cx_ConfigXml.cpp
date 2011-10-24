@@ -1,5 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 // Changes:
 // 2011-01-18: Delay call CoUninitialize until plugin is unloading.
 // 2011-02-18: Not call CoUninitialize if another plugin (eg. StringTable) is using this plugin.

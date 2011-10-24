@@ -1,6 +1,6 @@
 /*! \file Ix_AppWorkPath.h
  *  \brief Define interface of getting applicaton's writtable path: Ix_AppWorkPath
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.07.04
  */
 #ifndef X3_MANAGER_IWORKPATH_H_

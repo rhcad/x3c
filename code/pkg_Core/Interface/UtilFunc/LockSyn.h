@@ -1,6 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
+// x3c - C++ PluginFramework
 //! \file LockSyn.h
 //! \brief 定义同步控制的辅助类 CLockCs 和 CLockRW
 

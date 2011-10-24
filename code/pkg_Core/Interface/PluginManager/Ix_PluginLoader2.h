@@ -1,6 +1,6 @@
 /*! \file Ix_PluginLoader2.h
  *  \brief Define plugin loading interface: Ix_PluginLoader2
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_MANAGER_IPLUGINLOADER2_H_

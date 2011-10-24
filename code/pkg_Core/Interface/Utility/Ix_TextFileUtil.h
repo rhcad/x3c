@@ -1,6 +1,6 @@
 /*! \file Ix_TextFileUtil.h
  *  \brief Define text format file I/O operation interface: Ix_TextFileUtil
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ITEXTFILEUTIL_H_

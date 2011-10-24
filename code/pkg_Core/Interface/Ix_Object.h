@@ -1,6 +1,6 @@
 /*! \file Ix_Object.h
  *  \brief Define Ix_Object (the basic interface) and X3CLSID
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.6.30
  */
 #ifndef X3_CORE_IOBJECT_H_

@@ -1,6 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
+// x3c - C++ PluginFramework
 #pragma once
 
 //! 不同数据库提供源的SQL指令的接口

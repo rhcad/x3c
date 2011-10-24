@@ -1,6 +1,6 @@
 /*! \file pathstr.h
  *  \brief Included by portimpl.h to implement path functions.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.5.23
  */
 #ifndef X3_PORTABILITY_PATHSTR_IMPL_H

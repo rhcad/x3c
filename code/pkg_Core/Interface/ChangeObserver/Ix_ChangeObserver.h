@@ -1,6 +1,6 @@
 /*! \file Ix_ChangeObserver.h
  *  \brief Define change observer interface: Ix_ChangeObserver
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef X3_OBSERVER_ICHANGEOBSERVER_H_

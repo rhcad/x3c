@@ -1,6 +1,6 @@
 /*! \file Ix_ConfigXml.h
  *  \brief Define the interface for xml data initialization: Ix_ConfigXml
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGXML_H_

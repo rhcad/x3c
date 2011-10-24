@@ -1,5 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 // Changes:
 // 2011.2.14, ooyg: Support MFC dialog application and console application.
 //

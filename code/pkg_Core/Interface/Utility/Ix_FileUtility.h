@@ -1,6 +1,6 @@
 /*! \file Ix_FileUtility.h
  *  \brief Define file operation interface: Ix_FileUtility
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IFILEUTILITY_H_

@@ -1,6 +1,6 @@
 /*! \file Cx_ChangeObserver.h
  *  \brief Define the base classes of change observer data: ChangeNotifyData, Cx_ChangeObserver.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \version
  *      2010.10.22: First release.
  *      2011.02.08: Add parameter 'fromdll' in RegisterObserver.

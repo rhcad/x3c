@@ -2,7 +2,7 @@
  *  \brief  Define macros of class factory registry, such as XBEGIN_DEFINE_MODULE.
  *  \note   This file and XModuleImpl.h may be included in different CPP files.\n
  *      if you don't want to use this file and XModuleImpl.h, then you can use XComCreator.h file.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 #ifndef X3_PLUGINIMPL_MODULEMACRO_H_

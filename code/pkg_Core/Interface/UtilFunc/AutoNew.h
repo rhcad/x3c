@@ -1,6 +1,6 @@
 /*! \file AutoNew.h
  *  \brief Define helper classes to auto free memory: KAutoNew, KAutoNewArr, KAutoMalloc, KAutoNewArr2d
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.5.19
  */
 #ifndef __AUTOFREE_NEW_H

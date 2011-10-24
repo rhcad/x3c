@@ -1,6 +1,6 @@
 /*! \file EmbedWnd.cpp
  *  \brief Implement the proxy window class of CEmbedWnd.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.5.26
  */
 #include <UtilFunc/PluginInc.h>

@@ -1,8 +1,7 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 //
 // Changes:
-// 2010-01-12, Zhang Yun Gui: Remove Ix_FileUtility.
+// 2010-01-12, Zhang Yungui: Remove Ix_FileUtility.
 //      Open access connection readonly if file is readonly.
 //
 

@@ -1,6 +1,6 @@
 /*! \file Cx_ConfigSection.h
  *  \brief the configure data node class: Cx_ConfigSection
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef X3_XML_CONFIGIOSECTION_H_

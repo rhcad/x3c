@@ -1,6 +1,6 @@
 /*! \file Cx_Module.h
  *  \brief Define the implement class of plugin module. (for internal use only)
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 #ifndef X3_PLUGINIMPL_MODULE_H_

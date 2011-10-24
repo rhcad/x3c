@@ -1,6 +1,6 @@
 /*! \file Ix_LogManager.h
  *  \brief Define interface of logging output observer manager: Ix_LogManager
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_LOG_ILOGMANAGER_H_

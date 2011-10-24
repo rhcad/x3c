@@ -1,6 +1,6 @@
 /*! \file IFileCryptHandler.h
  *  \brief Define interface of file encryption and decryption: IFileCryptHandler
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef X3_IFILECRYPTHANDLER_H_

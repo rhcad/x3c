@@ -21,7 +21,7 @@ BEGIN
         BEGIN
             VALUE "FileDescription", "String Table Plugin\0"
             VALUE "FileVersion", "1.1.3.0\0"
-            VALUE "LegalCopyright", "(C) 2008-2011, http://sourceforge.net/projects/x3c/\0"
+            VALUE "LegalCopyright", "(C) 2008-2011, X3 C++ PluginFramework\0"
             VALUE "OriginalFilename", "StringTable.plugin.dll\0"
             VALUE "ProductName", "X3 C++ PluginFramework\0"
         END

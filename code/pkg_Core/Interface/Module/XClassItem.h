@@ -1,6 +1,6 @@
 /*! \file   XClassItem.h
  *  \brief  Internal used definitions of class factory.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_PLUGINIMPL_CLASSITEM_H_

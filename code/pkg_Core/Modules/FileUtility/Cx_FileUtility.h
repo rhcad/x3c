@@ -1,6 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
-
+// x3c - C++ PluginFramework
 #ifndef _X3_UTILITY_FILEUTILITY_H
 #define _X3_UTILITY_FILEUTILITY_H
 

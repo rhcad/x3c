@@ -1,6 +1,6 @@
 /*! \file Ix_ConfigSectionXml.h
  *  \brief Define the xml node interface: Ix_ConfigSectionXml
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_XML_ICONFIGSECTIONXML_H_

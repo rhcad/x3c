@@ -1,6 +1,6 @@
 /*! \file PluginInc.h
  *  \brief Include frequently-used files for plugin project.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3PLUGIN_INC_H

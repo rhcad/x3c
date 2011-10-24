@@ -1,6 +1,6 @@
 /*! \file   XClassMacro.h
  *  \brief  Define macros of class definition in plugin, such as X3BEGIN_CLASS_DECLARE.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_PLUGINIMPL_CLASSMACRO_H_

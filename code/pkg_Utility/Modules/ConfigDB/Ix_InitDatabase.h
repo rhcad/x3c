@@ -1,8 +1,7 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 //
 // Changes:
-// 2010-01-12, Zhang Yun Gui: Add readonly param in OpenConnection()
+// 2010-01-12, Zhang Yungui: Add readonly param in OpenConnection()
 // 2011.06.30: Remove RTTI.
 
 #ifndef _X3_CONFIGDB_INITDATABASE_INTERFACE_H

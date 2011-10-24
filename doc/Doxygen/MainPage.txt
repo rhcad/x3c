@@ -13,18 +13,18 @@
 
     \section sectinoIntro Summary
 
-    X3 C++ PluginFramework is a plugin-framework using C++ and STL, not using MFC/ATL/COM. \n
+    x3c is a plugin-framework using C++ and STL, not using MFC/ATL/COM. \n
     It has many frequently-used and lightweight plugins (raw dll). \n
     We can use it to develop more plugins and applications easily on Windows and Linux.
 
-    X3 C++ PluginFramework is compatible for the following compilers:
+    x3c is compatible for the following compilers:
         - MS VC++ 6.0, 8.0 (2005), 9.0(2008), or 10.0 (2010).
         - MinGW GCC + Code::Blocks (IDE).
         - Linux GCC (Code::Blocks or Makefile).
 
     This framework is licensed under the Apache Public License 2.0.\n
     Bug reports and suggestions are welcome.
-    Please use the tracking system or forums at http://sourceforge.net/projects/x3c/develop .\n
+    Email to the current maintainers may be sent to <rhcad@hotmail.com>.\n
     Some documents in chinese may be found at http://www.cnblogs.com/rhcad .
 
     X3 C++ PluginFramework includes the following sections:

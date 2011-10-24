@@ -1,6 +1,6 @@
 /*! \file Ix_ClipboardUtil.h
  *  \brief Define clipboard operation interface: Ix_ClipboardUtil
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ICLIPBOARDUTIL_H_

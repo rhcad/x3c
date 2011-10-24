@@ -1,6 +1,6 @@
 /*! \file ScanFiles.h
  *  \brief Define directory scanning function (ScanFiles) and callback class CScanFilesCallback.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.22
  */
 #ifndef UTILFUNC_SCANFILES_H_

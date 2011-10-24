@@ -1,5 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 // Changes:
 // 2011-02-28: Add FOF_SILENT flag for SHFileOperationW.
 

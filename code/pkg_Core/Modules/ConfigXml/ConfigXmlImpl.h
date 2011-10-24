@@ -1,7 +1,6 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 // Changes:
-// 2011-01-18, Zhang Yun Gui: Delay call CoUninitialize until plugin is unloading.
+// 2011-01-18, Zhang Yungui: Delay call CoUninitialize until plugin is unloading.
 
 #ifndef _X3_CONFIGXML_CONFIGXMLIMPL_H
 #define _X3_CONFIGXML_CONFIGXMLIMPL_H

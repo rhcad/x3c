@@ -1,5 +1,4 @@
-// Copyright 2008-2011 Zhang Yun Gui, rhcad@hotmail.com
-// http://sourceforge.net/projects/x3c/
+// x3c - C++ PluginFramework
 // 2011.02.07: Using Ix_AppWorkPath to get logging path.
 // 2011.02.21: Replace "\n" to "\\n" in LogWriter plugin.
 // 2011.02.24: Copy log files to server if error message has fired.

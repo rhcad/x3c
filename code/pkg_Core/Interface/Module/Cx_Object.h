@@ -1,6 +1,6 @@
 /*! \file Cx_Object.h
  *  \brief Define the regular implement template class: Cx_Object<cls>
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_PLUGINIMPL_OBJECT_H_

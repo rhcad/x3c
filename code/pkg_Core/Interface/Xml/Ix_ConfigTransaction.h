@@ -1,6 +1,6 @@
 /*! \file Ix_ConfigTransaction.h
  *  \brief Define configure transaction helper class: Cx_ConfigTransaction
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_XML_CONFIGTRANSACTION_H_

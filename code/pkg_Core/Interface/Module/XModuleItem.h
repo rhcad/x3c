@@ -1,6 +1,6 @@
 /*! \file XModuleItem.h
  *  \brief Define the base class of single instance classes. (for internal use only)
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 #ifndef X3_PLUGINIMPL_MODULEITEM_H_

@@ -1,6 +1,6 @@
 /*! \file Ix_Module.h
  *  \brief Define the plugin module interface: Ix_Module
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.10.19
  */
 #ifndef X3_PLUGINIMPL_IMODULE_H_

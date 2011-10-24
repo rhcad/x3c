@@ -1,6 +1,6 @@
 /*! \file EmbedWnd.h
  *  \brief Define the proxy window class for Ix_CreateWnd.
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.5.26
  */
 #ifndef X3_VIEW_MFC_EMBEDWND_H_

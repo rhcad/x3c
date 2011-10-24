@@ -1,6 +1,6 @@
 /*! \file LockCount.h
  *  \brief Define helper class to auto increment and decrement: CLockCount
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2010.5.19
  */
 #ifndef UTILFUNC_LOCKCOUNT_H_

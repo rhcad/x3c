@@ -1,6 +1,6 @@
 /*! \file Ix_TempFolder.h
  *  \brief Define temporary directory operation interface: Ix_TempFolder
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_ITEMPFOLDER_H_

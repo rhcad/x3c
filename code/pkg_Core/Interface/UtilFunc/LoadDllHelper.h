@@ -1,6 +1,6 @@
 /*! \file LoadDllHelper.h
  *  \brief Define helper class to load library: LoadDllHelper
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.7.10
  */
 #ifndef UTILFUNC_LOADDLLHELPER_H_

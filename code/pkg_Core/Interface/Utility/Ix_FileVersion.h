@@ -1,6 +1,6 @@
 /*! \file Ix_FileVersion.h
  *  \brief Define interface for getting file version: Ix_FileVersion
- *  \author Zhang Yun Gui, X3 C++ PluginFramework
+ *  \author Zhang Yungui, X3 C++ PluginFramework
  *  \date   2011.06.30
  */
 #ifndef X3_UTIL_IFILEVERSION_H_
