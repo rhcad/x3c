@@ -381,7 +381,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -390,7 +390,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -399,7 +399,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -408,7 +408,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -421,7 +421,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -430,7 +430,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -439,7 +439,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -448,7 +448,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y"
+					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
