@@ -4,6 +4,7 @@ x3c - C++ Plugin Framework
 
     * Remove dependency of VC++ projects.
     * Auto copy files when building projects (HelloFrame and TestPlatform).
+    * Release v1.1.4 (revision 274).
 
 2011-10-18
 
