@@ -27,6 +27,8 @@ Cx_FrameWndFactory::~Cx_FrameWndFactory()
 
 bool Cx_FrameWndFactory::CheckAppInstance(LPCWSTR appid)
 {
+    m_appid = appid;
+
     ASSERT(NULL == s_checker);
     s_checker = new CInstanceChecker(appid);
 
@@ -55,11 +57,12 @@ bool Cx_FrameWndFactory::CreateFrameWnd(LPCWSTR factoryFile)
     ASSERT(pIFXml.IsNotNull());
     pIFXml->SetFileName(x3::FileNameRelToAbs(factoryFile).c_str());
     Cx_ConfigSection root(pIFXml->GetData()->GetSection(L""));
+    Cx_ConfigSection mainframe(root.GetSection(L"mainframe"));
 
-    RegisterDocTemplate(Cx_ConfigSection(root.GetSection(L"mainframe")));
+    RegisterDocTemplate(mainframe);
 
     CMainMDIFrame* pFrame = new CMainMDIFrame;
-    if (!pFrame->LoadFrame(root))
+    if (!pFrame->LoadFrame(m_appid, root))
         return false;
     AfxGetApp()->m_pMainWnd = pFrame;
 
@@ -97,4 +100,11 @@ bool Cx_FrameWndFactory::ProcessShellCommand()
 
 void Cx_FrameWndFactory::OnQuit()
 {
+}
+
+bool Cx_FrameWndFactory::OnIdle(long)
+{
+    bool more = false;
+
+    return more;
 }

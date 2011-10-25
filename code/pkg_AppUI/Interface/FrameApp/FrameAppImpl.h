@@ -44,9 +44,10 @@ BOOL CFrameApp::LoadPlugins()
 
 int CFrameApp::ExitInstance()
 {
-    Cx_Interface<Ix_FrameWndFactory> pIFFactory(x3::CLSID_FrameWndFactory);
+    Cx_Interface<Ix_FrameWndFactory> pIFFactory(m_factory);
     SafeCall(pIFFactory, OnQuit());
     pIFFactory.Release();
+    m_factory.Release();
 
     m_loader->Unload();
 
@@ -55,39 +56,33 @@ int CFrameApp::ExitInstance()
 
 BOOL CFrameApp::CheckAppInstance()
 {
-    if (*GetSingletonAppUID())
-    {
-        Cx_Interface<Ix_FrameWndFactory> pIFFrameFactory(x3::CLSID_FrameWndFactory);
-        ASSERT(pIFFrameFactory.IsNotNull());
+    Cx_Interface<Ix_FrameWndFactory> pIFFrameWndFactory(x3::CLSID_FrameWndFactory);
+    ASSERT(pIFFrameWndFactory.IsNotNull());
 
-        return pIFFrameFactory->CheckAppInstance(GetSingletonAppUID());
-    }
+    m_factory = pIFFrameWndFactory;
 
-    return TRUE;
+    return 0 == *GetSingletonAppUID()
+        || pIFFrameWndFactory && pIFFrameWndFactory->CheckAppInstance(GetSingletonAppUID());
 }
 
 BOOL CFrameApp::CreateFrameWnd()
 {
-    Cx_Interface<Ix_FrameWndFactory> pIFFrameFactory(x3::CLSID_FrameWndFactory);
-    ASSERT(pIFFrameFactory.IsNotNull());
-
-    return pIFFrameFactory->CreateFrameWnd(GetFactoryFile());
+    Cx_Interface<Ix_FrameWndFactory> pIFFactory(m_factory);
+    return pIFFactory->CreateFrameWnd(GetFactoryFile());
 }
 
 BOOL CFrameApp::ProcessShellCommand()
 {
-    Cx_Interface<Ix_FrameWndFactory> pIFFactory(x3::CLSID_FrameWndFactory);
+    Cx_Interface<Ix_FrameWndFactory> pIFFactory(m_factory);
     return pIFFactory->ProcessShellCommand();
 }
 
 BOOL CFrameApp::OnIdle(LONG lCount)
 {
-    return CWinApp::OnIdle(lCount);
-}
+    Cx_Interface<Ix_FrameWndFactory> pIFFactory(m_factory);
+    BOOL more = CWinApp::OnIdle(lCount);
 
-int CFrameApp::DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt)
-{
-    return CWinApp::DoMessageBox(lpszPrompt, nType, nIDPrompt);
+    return pIFFactory->OnIdle(lCount) || more;
 }
 
 // <exepath>\translations\<exename>Chs.dll

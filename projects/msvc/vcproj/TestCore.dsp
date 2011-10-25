@@ -55,7 +55,7 @@ LINK32=link.exe
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Desc=copy test files
-PostBuild_Cmds=@xcopy ..\..\..\code\bin\translations ..\..\..\code\bin\vc60\release\translations\  /S/Q/Y/D
+PostBuild_Cmds=xcopy ..\..\..\code\bin\translations ..\..\..\code\bin\vc60\release\translations\  /S/Q/Y/D
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "TestCore - Win32 Debug"
@@ -85,7 +85,7 @@ LINK32=link.exe
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Desc=copy test files
-PostBuild_Cmds=@xcopy ..\..\..\code\bin\translations ..\..\..\code\bin\vc60\debug\translations\  /S/Q/Y/D
+PostBuild_Cmds=xcopy ..\..\..\code\bin\translations ..\..\..\code\bin\vc60\debug\translations\  /S/Q/Y/D
 # End Special Build Tool
 
 !ENDIF 

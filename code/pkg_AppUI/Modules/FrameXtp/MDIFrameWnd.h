@@ -14,7 +14,7 @@ public:
 
 // Operations
 public:
-    BOOL LoadFrame(const Cx_ConfigSection& root);
+    BOOL LoadFrame(const std::wstring& appid, const Cx_ConfigSection& root);
 
 // Overrides
     // ClassWizard generated virtual function overrides
@@ -35,6 +35,7 @@ private:
 // Implementation
 private:
     UINT                m_id;
+    std::wstring        m_appid;
     CXTPStatusBar       m_wndStatusBar;
     CXTPTabClientWnd    m_wndClient;
     Cx_ConfigSection    m_frameNode;

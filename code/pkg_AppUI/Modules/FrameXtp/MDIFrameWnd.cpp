@@ -28,15 +28,17 @@ BOOL CMainMDIFrame::PreCreateWindow(CREATESTRUCT& cs)
     if (!CXTPMDIFrameWnd::PreCreateWindow(cs))
         return FALSE;
 
-    cs.lpszClass = _T("XTPMainFrame");
+    cs.lpszClass = m_appid.empty() ? _T("XTPMainFrame") : m_appid.c_str();
+    cs.lpszName = m_appid.c_str();
     CXTPDrawHelpers::RegisterWndClass(AfxGetInstanceHandle(), cs.lpszClass, 
         CS_DBLCLKS, AfxGetApp()->LoadIcon(m_id));
 
     return TRUE;
 }
 
-BOOL CMainMDIFrame::LoadFrame(const Cx_ConfigSection& root)
+BOOL CMainMDIFrame::LoadFrame(const std::wstring& appid, const Cx_ConfigSection& root)
 {
+    m_appid = appid;
     m_frameNode = root.GetSection(L"mainframe");
     m_ribbonNode = root.GetSection(L"ribbon");
     m_id = m_frameNode->GetUInt32(L"id");
@@ -54,21 +56,15 @@ int CMainMDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if (CXTPMDIFrameWnd::OnCreate(lpCreateStruct) == -1)
         return -1;
 
-    if (!CreateStatusBar())
+    if (!InitCommandBars())
         return -1;
 
-    if (!InitCommandBars())
+    if (!CreateStatusBar())
         return -1;
 
     CXTPCommandBars* pCommandBars = GetCommandBars();
 
-    m_wndStatusBar.SetCommandBars(pCommandBars);
-    m_wndStatusBar.SetDrawDisabledText(FALSE);
-    m_wndStatusBar.SetCommandBars(pCommandBars);
-    m_wndStatusBar.GetStatusBarCtrl().SetMinHeight(22);
-    m_wndStatusBar.GetPane(0)->SetMargins(8, 1, 2, 1);
-
-    CXTPToolTipContext* pToolTipContext = GetCommandBars()->GetToolTipContext();
+    CXTPToolTipContext* pToolTipContext = pCommandBars->GetToolTipContext();
     pToolTipContext->SetStyle(xtpToolTipResource);
     pToolTipContext->ShowTitleAndDescription();
     pToolTipContext->SetMargin(CRect(2, 2, 2, 2));
@@ -86,6 +82,8 @@ int CMainMDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
         TRACE0("Failed to create ribbon\n");
         return -1;
     }
+
+    XTPPaintManager()->SetFontHeight(-12);
 
     m_wndClient.Attach(this, FALSE);
     m_wndClient.GetToolTipContext()->SetStyle(xtpToolTipResource);
@@ -128,8 +126,15 @@ BOOL CMainMDIFrame::CreateStatusBar()
         ID_INDICATOR_SCRL,
     };
 
-    return m_wndStatusBar.Create(this)
-        && m_wndStatusBar.SetIndicators(indicators, _countof(indicators));
+    VERIFY(m_wndStatusBar.Create(this)
+        && m_wndStatusBar.SetIndicators(indicators, _countof(indicators)));
+
+    m_wndStatusBar.SetCommandBars(GetCommandBars());
+    m_wndStatusBar.SetDrawDisabledText(FALSE);
+    m_wndStatusBar.GetStatusBarCtrl().SetMinHeight(22);
+    m_wndStatusBar.GetPane(0)->SetMargins(8, 1, 2, 1);
+
+    return TRUE;
 }
 
 BOOL CMainMDIFrame::LoadRibbonIcons()

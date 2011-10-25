@@ -98,7 +98,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -180,7 +180,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -263,7 +263,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -346,7 +346,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)translations\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -403,7 +403,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -412,7 +412,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -421,7 +421,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -430,7 +430,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="@xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>

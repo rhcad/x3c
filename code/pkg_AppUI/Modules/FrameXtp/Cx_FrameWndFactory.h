@@ -18,7 +18,11 @@ private:
     virtual bool CreateFrameWnd(LPCWSTR factoryFile);
     virtual bool ProcessShellCommand();
     virtual void OnQuit();
+    virtual bool OnIdle(long count);
 
 private:
     void RegisterDocTemplate(const Cx_ConfigSection& node);
+
+private:
+    std::wstring    m_appid;
 };

@@ -14,6 +14,7 @@ public:
     virtual bool CreateFrameWnd(LPCWSTR factoryFile) = 0;
     virtual bool ProcessShellCommand() = 0;
     virtual void OnQuit() = 0;
+    virtual bool OnIdle(long count) = 0;
 };
 
 #endif // X3_UI_FRAMEWND_FACTORY_H_

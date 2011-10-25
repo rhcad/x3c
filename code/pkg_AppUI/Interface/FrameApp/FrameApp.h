@@ -13,10 +13,7 @@ public:
     virtual BOOL InitInstance();
     virtual int ExitInstance();
     virtual BOOL OnIdle(LONG lCount);
-    virtual int DoMessageBox(LPCTSTR lpszPrompt, UINT nType, UINT nIDPrompt);
     virtual HINSTANCE LoadAppLangResourceDLL();
-
-    DECLARE_MESSAGE_MAP()
 
 protected:
     virtual LPCWSTR GetSingletonAppUID() { return L""; }
@@ -27,7 +24,11 @@ protected:
     virtual BOOL ProcessShellCommand();
 
 protected:
+    DECLARE_MESSAGE_MAP()
+
+protected:
     CPluginManager*     m_loader;
+    Cx_Ptr              m_factory;
 };
 
 #endif // X3_UI_FRAME_APP_H_

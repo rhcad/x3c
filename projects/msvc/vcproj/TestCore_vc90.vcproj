@@ -95,7 +95,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\..\translations\&quot;  /S/Q/Y/D"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)..\translations\&quot;  /S/Q/Y/D"
 			/>
 		</Configuration>
 		<Configuration
@@ -175,7 +175,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\..\translations\&quot;  /S/Q/Y/D"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)..\translations\&quot;  /S/Q/Y/D"
 			/>
 		</Configuration>
 		<Configuration
@@ -254,7 +254,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\..\translations\&quot;  /S/Q/Y/D"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)..\translations\&quot;  /S/Q/Y/D"
 			/>
 		</Configuration>
 		<Configuration
@@ -334,7 +334,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="copy test files"
-				CommandLine="@xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)\..\translations\&quot;  /S/Q/Y/D"
+				CommandLine="xcopy ..\..\..\code\bin\translations &quot;$(TargetDir)..\translations\&quot;  /S/Q/Y/D"
 			/>
 		</Configuration>
 	</Configurations>
