@@ -40,7 +40,7 @@ public:
     virtual std::wstring GetLocalAppDataPath(const wchar_t* company) = 0;
 
     //! Return the language translation path of the current user.
-    /*! eg: <exepath>\translations\chs\subfolder (not end with slash char).
+    /*! eg: exepath/translations/chs/subfolder (not end with slash char).
         \param subfolder sub folder name in the translation path.
         \return the language translation path which not end with slash char.
     */
@@ -61,7 +61,7 @@ inline std::wstring GetAppWorkPath()
 }
 
 //! Return the language translation path of the current user.
-/*! eg: <exepath>\translations\chs\subfolder
+/*! eg: exepath/translations/chs/subfolder
     \param subfolder sub folder name in the translation path.
     \return the language translation path which may not end with slash char.
 */
