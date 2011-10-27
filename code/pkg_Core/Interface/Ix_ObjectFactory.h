@@ -8,7 +8,7 @@
 
 #include "Ix_Object.h"
 
-/*! \ingroup _GROUP_PLUGIN_CORE_
+/*! \ingroup _GROUP_PLUGIN_CORE2_
  *  \interface Ix_ObjectFactory
  *  \brief Object creator interface
  *  \see   Ix_Object, Ix_Module

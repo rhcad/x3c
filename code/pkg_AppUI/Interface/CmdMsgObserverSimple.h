@@ -21,7 +21,7 @@ struct MENU_MSG_MAP;
         ON_MENU_UPDATE_CMDUI_RANGE(idMin, idMax, memberFxn)
     END_MENU_MSG_MAP()
     \endcode
-    \ingroup _GROUP_CHANGE_OBSERVER_
+    \ingroup _GROUP_CHANGE_OBSERVER_, _GROUP_APPUI_
     \see MenuMsgMapFunctions
 */
 class CmdMsgObserverSimple : public RawCmdMsgObserver

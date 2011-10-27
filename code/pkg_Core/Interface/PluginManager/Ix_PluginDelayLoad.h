@@ -10,7 +10,7 @@
 
 X3CLSID_DEFINE(CLSID_PluginDelayLoad, "8f2a7b90-8134-4e16-9830-861df9b7f42a");
 
-/*! \ingroup _GROUP_PLUGIN_CORE_
+/*! \ingroup _GROUP_PLUGIN_CORE2_
  *  \interface Ix_PluginDelayLoad
  *  \brief Plugin delay-loading interface.
  *  \see   x3::CLSID_PluginDelayLoad

@@ -1,3 +1,9 @@
+/*! \file FrameAppImpl.h
+ *  \brief Implement the base application class: CFrameApp
+ *  \note Include this file in one and only one CPP file of your MFC application project.
+ *  \author Zhang Yungui, X3 C++ PluginFramework
+ *  \date   2011.10.27
+ */
 #include <UtilFunc/PluginInc.h>
 #include "FrameApp.h"
 #include "Ix_FrameWndFactory.h"
