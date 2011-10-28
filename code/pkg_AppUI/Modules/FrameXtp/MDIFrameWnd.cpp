@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MDIFrameWnd.h"
+#include <Xml/Ix_StringTable.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -42,6 +43,7 @@ BOOL CMainMDIFrame::LoadFrame(const std::wstring& appid, const Cx_ConfigSection&
     m_frameNode = root.GetSection(L"mainframe");
     m_ribbonNode = root.GetSection(L"ribbon");
     m_id = m_frameNode->GetUInt32(L"id");
+    m_appname = root->GetString(L"appname");
 
     BOOL ret = CXTPMDIFrameWnd::LoadFrame(m_id);
 
@@ -83,7 +85,7 @@ int CMainMDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
     }
 
-    XTPPaintManager()->SetFontHeight(-12);
+    XTPPaintManager()->SetFontHeight(-12);  // for win7
 
     m_wndClient.Attach(this, FALSE);
     m_wndClient.GetToolTipContext()->SetStyle(xtpToolTipResource);
@@ -143,7 +145,7 @@ BOOL CMainMDIFrame::LoadRibbonIcons()
 
     for (int ibar = 0; ; ibar++)
     {
-        Cx_ConfigSection barNode(m_frameNode.GetSectionByIndex(L"toolbars/bar", ibar));
+        Cx_ConfigSection barNode(m_frameNode.GetSectionByIndex(L"toolbars/toolbar", ibar));
         UINT barID = barNode->GetUInt32(L"id");
         if (0 == barID)
             break;
@@ -161,12 +163,16 @@ BOOL CMainMDIFrame::LoadRibbonIcons()
 
         if (ids.empty())
         {
-            pImageManager->SetIcons(barID);
+            UINT nIDResourceToolBar = barID;
+            pImageManager->SetIcons(nIDResourceToolBar);
         }
         else
         {
+            UINT nIDResourceBitmap = barID;
             long cy = barNode->GetBool(L"large", false) ? 32 : 16;
-            pImageManager->SetIcons(barID, &ids.front(), x3::GetSize(ids), CSize(cy, cy));
+
+            pImageManager->SetIcons(nIDResourceBitmap, 
+                &ids.front(), x3::GetSize(ids), CSize(cy, cy));
         }
     }
 
@@ -175,8 +181,10 @@ BOOL CMainMDIFrame::LoadRibbonIcons()
 
 BOOL CMainMDIFrame::CreateRibbonBar()
 {
-    CXTPRibbonBar* pRibbonBar = (CXTPRibbonBar*)GetCommandBars()->Add(_T("The Ribbon"), 
+    CXTPRibbonBar* pRibbonBar = (CXTPRibbonBar*)GetCommandBars()->Add(
+        x3::GetStringValue(L"FrameXtp", L"RibbonTitle").c_str(), 
         xtpBarTop, RUNTIME_CLASS(CXTPRibbonBar));
+
     if (!pRibbonBar)
     {
         return FALSE;
@@ -197,32 +205,155 @@ BOOL CMainMDIFrame::CreateRibbonBar()
     CXTPControl* pControlAbout = pRibbonBar->GetControls()->Add(xtpControlButton, ID_APP_ABOUT);
     pControlAbout->SetFlags(xtpFlagRightAlign);
 
-    pRibbonBar->GetQuickAccessControls()->Add(xtpControlButton, ID_FILE_SAVE);
-    pRibbonBar->GetQuickAccessControls()->Add(xtpControlButton, ID_EDIT_UNDO);
-    pRibbonBar->GetQuickAccessControls()->Add(xtpControlButton, ID_FILE_PRINT);
-    pRibbonBar->GetQuickAccessControls()->CreateOriginalControls();
-
+    for (int iQuick = 0; ; iQuick++)
+    {
+        Cx_ConfigSection node(m_ribbonNode.GetSectionByIndex(
+            L"originalQuickAccessControls/button", iQuick));
+        UINT id = node->GetUInt32(L"id");
+        if (0 == id)
+            break;
+        pRibbonBar->GetQuickAccessControls()->Add(xtpControlButton, id);
+    }
     pRibbonBar->EnableFrameTheme();
 
     return TRUE;
+}
+
+std::wstring CMainMDIFrame::GetLocalizationString(const std::wstring& name) const
+{
+    std::wstring text(x3::GetStringValue(m_appname.c_str(), name.c_str()));
+
+    if (text.empty())
+    {
+        size_t pos = name.rfind(L'|');
+        text = (pos != name.npos) ? name.substr(pos + 1) : name;
+    }
+
+    return text;
 }
 
 void CMainMDIFrame::CreateRibbonTabs(CXTPRibbonBar* pRibbonBar)
 {
     for (int iTab = 0; ; iTab++)
     {
-        Cx_ConfigSection tabNode(m_ribbonNode.GetSectionByIndex(L"tab", iTab));
+        Cx_ConfigSection tabNode(m_ribbonNode.GetSectionByIndex(L"tabs/tab", iTab));
         std::wstring caption(tabNode->GetString(L"caption"));
         if (caption.empty())
             break;
 
-        CXTPRibbonTab* pTab = pRibbonBar->AddTab(caption.c_str());
+        CXTPRibbonTab* pTab = pRibbonBar->AddTab(GetLocalizationString(caption).c_str());
+
+        for (int iGroup = 0; ; iGroup++)
+        {
+            Cx_ConfigSection group(tabNode.GetSectionByIndex(L"group", iGroup));
+            if (!group->IsValid())
+                break;
+            CreateRibbonGroup(pTab, group);
+        }
     }
+}
+
+void CMainMDIFrame::CreateRibbonGroup(CXTPRibbonTab* pTab, 
+                                      const Cx_ConfigSection& group)
+{
+    UINT groupID = group->GetUInt32(L"id");
+    CXTPRibbonGroup* pGroup = groupID ? pTab->AddGroup(groupID)
+        : pTab->AddGroup(GetLocalizationString(group->GetString(L"caption")).c_str());
+
+    if (pTab->GetGroups()->GetCount() > 1)
+    {
+        pGroup->SetControlsGrouping();
+    }
+
+    UINT optionButtonID = group->GetUInt32(L"optionButtonID");
+    if (optionButtonID != 0)
+    {
+        pGroup->ShowOptionButton();
+        pGroup->GetControlGroupOption()->SetID(optionButtonID);
+    }
+
+    for (int iButton = 0; ; iButton++)
+    {
+        Cx_ConfigSection button(group.GetSectionByIndex(L"button", iButton));
+        if (!button->IsValid())
+            break;
+
+        CreateRibbonButton(pGroup, button);
+    }
+}
+
+CXTPControl* CMainMDIFrame::CreateRibbonButton(CXTPRibbonGroup* pGroup, 
+                                               const Cx_ConfigSection& button)
+{
+    CXTPControl* pControl = NULL;
+    const std::wstring type(button->GetString(L"type"));    
+
+    if (type == L"combo" || type == L"combolist")
+    {
+        pControl = CreateRibbonComboButton(pGroup, button);
+    }
+    else if (type == L"popup")
+    {
+        pControl = CreateRibbonPopupButton(pGroup, button);
+    }
+    else
+    {
+        pControl = pGroup->Add(xtpControlButton, button->GetUInt32(L"id"));
+    }
+
+    pControl->SetBeginGroup(button->GetBool(L"beginGroup", false));
+
+    return pControl;
+}
+
+CXTPControl* CMainMDIFrame::CreateRibbonPopupButton(CXTPRibbonGroup* pGroup, 
+                                                    const Cx_ConfigSection& button)
+{
+    UINT buttonID = button->GetUInt32(L"id");
+    std::vector<UINT> popupIds;
+
+    for (int iPopup = 0; ; iPopup++)
+    {
+        Cx_ConfigSection popup(button.GetSectionByIndex(L"popupButtons/button", iPopup));
+        UINT id = popup->GetUInt32(L"id");
+        if (0 == id)
+            break;
+        popupIds.push_back(id);
+    }
+
+    CXTPControlPopup* pControl = (CXTPControlPopup*)pGroup->Add(xtpControlSplitButtonPopup, buttonID);
+    while (!popupIds.empty())
+    {
+        pControl->GetCommandBar()->GetControls()->Add(xtpControlButton, popupIds.front());
+        popupIds.erase(popupIds.begin());
+    }
+
+    const std::wstring style(button->GetString(L"style"));
+    if (style == L"icon")
+        pControl->SetStyle(xtpButtonIcon);
+
+    return pControl;
+}
+
+CXTPControl* CMainMDIFrame::CreateRibbonComboButton(CXTPRibbonGroup* pGroup, 
+                                                    const Cx_ConfigSection& button)
+{
+    CXTPControlComboBox* pCombo = new CXTPControlComboBox();
+
+    pGroup->Add(pCombo, button->GetUInt32(L"id"));
+    if (button->GetString(L"type") == L"combolist")
+    {
+        pCombo->SetDropDownListStyle();
+    }
+    pCombo->SetWidth(button->GetInt32(L"width", 50));
+
+    return pCombo;
 }
 
 void CMainMDIFrame::OnUpdateRibbonTab(CCmdUI* pCmdUI)
 {
-    CXTPRibbonControlTab* pControl = DYNAMIC_DOWNCAST(CXTPRibbonControlTab, CXTPControl::FromUI(pCmdUI));
+    CXTPRibbonControlTab* pControl = DYNAMIC_DOWNCAST(
+        CXTPRibbonControlTab, CXTPControl::FromUI(pCmdUI));
     if (!pControl)
         return;
 
@@ -232,7 +363,8 @@ void CMainMDIFrame::OnUpdateRibbonTab(CCmdUI* pCmdUI)
 
 void CMainMDIFrame::SetSystemButtonStyle(const CMenu& menu)
 {
-    CXTPRibbonBar* pRibbonBar = DYNAMIC_DOWNCAST(CXTPRibbonBar, GetCommandBars()->GetMenuBar());
+    CXTPRibbonBar* pRibbonBar = DYNAMIC_DOWNCAST(
+        CXTPRibbonBar, GetCommandBars()->GetMenuBar());
     std::wstring themeName(m_frameNode->GetString(L"themeName"));
 
     if (themeName.find(L"WINDOWS7") != std::wstring::npos

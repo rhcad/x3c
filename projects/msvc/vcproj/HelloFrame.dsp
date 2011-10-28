@@ -59,7 +59,7 @@ LINK32=link.exe
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Desc=copy test files
-PostBuild_Cmds=xcopy ..\..\..\code\bin\config ..\..\..\code\bin\vc60\release\config\  /S/Q/Y/D
+PostBuild_Cmds=xcopy ..\..\..\code\bin\translations ..\..\..\code\bin\vc60\release\translations\  /S/Q/Y/D
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "HelloFrame - Win32 Debug"
@@ -92,7 +92,7 @@ LINK32=link.exe
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Desc=copy test files
-PostBuild_Cmds=xcopy ..\..\..\code\bin\config ..\..\..\code\bin\vc60\debug\config\  /S/Q/Y/D
+PostBuild_Cmds=xcopy ..\..\..\code\bin\translations ..\..\..\code\bin\vc60\debug\translations\  /S/Q/Y/D
 # End Special Build Tool
 
 !ENDIF 
@@ -136,6 +136,18 @@ SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\LargeIcons.png
 
 SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\SmallIcons.png
 # End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\GroupClipboard.png
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\GroupFind.png
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_Example\Modules\HelloFrame\res\GroupFont.png
+# End Source File
 # End Group
 # Begin Source File
 
@@ -150,7 +162,7 @@ InputPath=..\..\..\code\pkg_Example\Modules\HelloFrame\uifactory.xml
 InputName=uifactory
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)config\"  /S/Q/Y/D
+	xcopy $(InputPath) "$(TargetDir)\config\"  /S/Q/Y/D
 
 # End Custom Build
 
@@ -163,7 +175,7 @@ InputPath=..\..\..\code\pkg_Example\Modules\HelloFrame\uifactory.xml
 InputName=uifactory
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)config\"  /S/Q/Y/D
+	xcopy $(InputPath) "$(TargetDir)\config\"  /S/Q/Y/D
 
 # End Custom Build
 

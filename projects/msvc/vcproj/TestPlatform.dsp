@@ -129,7 +129,7 @@ InputPath=..\..\..\code\pkg_UnitTest\Modules\TestPlatform\atlcom.dll
 InputName=atlcom
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)..\tests\"  /S/Q/Y/D
+	xcopy $(InputPath) "$(TargetDir)\..\tests\"  /S/Q/Y/D
 
 # End Custom Build
 
@@ -142,7 +142,7 @@ InputPath=..\..\..\code\pkg_UnitTest\Modules\TestPlatform\atlcom.dll
 InputName=atlcom
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)..\tests\"  /S/Q/Y/D
+	xcopy $(InputPath) "$(TargetDir)\..\tests\"  /S/Q/Y/D
 
 # End Custom Build
 
@@ -162,7 +162,7 @@ InputPath=..\..\..\code\pkg_UnitTest\Modules\TestPlatform\test.xml
 InputName=test
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)..\config\commap\"  /S/Q/Y/D
+	xcopy $(InputPath) "$(TargetDir)\..\config\commap\"  /S/Q/Y/D
 
 # End Custom Build
 
@@ -175,7 +175,7 @@ InputPath=..\..\..\code\pkg_UnitTest\Modules\TestPlatform\test.xml
 InputName=test
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)..\config\commap\"  /S/Q/Y/D
+	xcopy $(InputPath) "$(TargetDir)\..\config\commap\"  /S/Q/Y/D
 
 # End Custom Build
 

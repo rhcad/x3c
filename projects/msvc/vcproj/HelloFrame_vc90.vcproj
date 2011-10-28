@@ -379,6 +379,18 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\GroupClipboard.png"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\GroupFind.png"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\GroupFont.png"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Example\Modules\HelloFrame\res\HelloFrame.ico"
 				>
 			</File>
@@ -403,7 +415,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -412,7 +424,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -421,7 +433,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -430,7 +442,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\config\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>

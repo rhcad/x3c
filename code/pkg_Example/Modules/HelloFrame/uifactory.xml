@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
-	<mainframe id="128 IDR_MAINFRAME" themeDll="translations/Office2010.dll" themeName="OFFICE2010SILVER.INI">
-		<toolbars>
-			<bar id="128 IDR_SMALLICONS"/>
-			<bar id="129 IDR_LARGEICONS"/>
-		</toolbars>
-	</mainframe>
-	<ribbon>
-		<tab caption="Home">
-			<group id="" showOption="false">
-				<button id=""/>
-			</group>
-		</tab>
-	</ribbon>
+<root appname="HelloFrame">
+  <mainframe id="128 IDR_MAINFRAME"
+             themeDll="translations/Office2010.dll"
+             themeName="OFFICE2010SILVER.INI">
+    <toolbars>
+      <toolbar id="128 IDR_SMALLICONS"/>
+      <toolbar id="129 IDR_LARGEICONS"/>
+      <toolbar id="6020 ID_GROUP_CLIPBOARD">
+        <button id="0xE125 ID_EDIT_PASTE"/>
+        <button id="0xE123 ID_EDIT_CUT"/>
+        <button id="0xE122 ID_EDIT_COPY"/>
+        <button id="7616 ID_FORMAT_PAINTER"/>
+      </toolbar>
+      <toolbar id="6021 ID_GROUP_FONT">
+        <button id="2792 ID_FONT_GROW"/>
+        <button id="2793 ID_FONT_SHRINK"/>
+        <button id="2794 ID_FONT_CLEAR"/>
+        <button id="7608 ID_CHAR_BOLD"/>
+        <button id="7610 ID_CHAR_ITALIC"/>
+        <button id="7611 ID_CHAR_UNDERLINE"/>
+        <button id="7620 ID_CHAR_STRIKETHROUGH"/>
+        <button id="7621 ID_TEXT_SUBSCRIPT"/>
+        <button id="7622 ID_TEXT_SUPERSCRIPT"/>
+        <button id="2795 ID_TEXT_CHANGECASE"/>
+        <button id="7623 ID_TEXT_COLOR"/>
+        <button id="2806 ID_TEXT_HIGHLIGHTCOLOR"/>
+      </toolbar>
+      <toolbar id="6022 ID_GROUP_FIND">
+        <button id="0xE124 ID_EDIT_FIND"/>
+        <button id="0xE129 ID_EDIT_REPLACE"/>
+        <button id="7612 ID_EDIT_GOTO"/>
+        <button id="7614 ID_EDIT_SELECT"/>
+      </toolbar>
+    </toolbars>
+  </mainframe>
+  <ribbon>
+    <tabs>
+      <tab caption="Ribbon|Home">
+        <group id="6020 ID_GROUP_CLIPBOARD"
+               optionButtonID="2790 ID_GROUP_CLIPBOARD_OPTION">
+          <button id="0xE125 ID_EDIT_PASTE" type="popup">
+            <popupButtons>
+              <button id="0xE125 ID_EDIT_PASTE"/>
+              <button id="0xE127 ID_EDIT_PASTE_SPECIAL"/>
+            </popupButtons>
+          </button>
+          <button id="0xE123 ID_EDIT_CUT"/>
+          <button id="0xE122 ID_EDIT_COPY"/>
+          <button id="7616 ID_FORMAT_PAINTER"/>
+        </group>
+        <group caption="Ribbon|Font"
+               optionButtonID="6025 ID_GROUP_FONT_OPTION">
+          <button id="7618 ID_FONT_FACE" type="combolist" width="130"/>
+          <button id="7619 ID_FONT_SIZE" type="combolist" width="45"/>
+          <button id="2792 ID_FONT_GROW" beginGroup="true"/>
+          <button id="2793 ID_FONT_SHRINK"/>
+          <button id="2794 ID_FONT_CLEAR" beginGroup="true"/>
+          <button id="7608 ID_CHAR_BOLD" beginGroup="true"/>
+          <button id="7610 ID_CHAR_ITALIC"/>
+          <button id="7611 ID_CHAR_UNDERLINE" type="popup"/>
+          <button id="7620 ID_CHAR_STRIKETHROUGH"/>
+          <button id="7621 ID_TEXT_SUBSCRIPT" type="popup"/>
+          <button id="7622 ID_TEXT_SUPERSCRIPT"/>
+          <button id="7623 ID_TEXT_COLOR"/>
+          <button id="2795 ID_TEXT_CHANGECASE" type="popup" style="icon"/>
+          <button id="2806 ID_TEXT_HIGHLIGHTCOLOR"
+                  type="color" beginGroup="true"/>
+        </group>
+      </tab>
+    </tabs>
+    <originalQuickAccessControls>
+      <button id="0xE103 ID_FILE_SAVE"/>
+      <button id="0xE12B ID_EDIT_UNDO"/>
+      <button id="0xE107 ID_FILE_PRINT"/>
+    </originalQuickAccessControls>
+  </ribbon>
 </root>

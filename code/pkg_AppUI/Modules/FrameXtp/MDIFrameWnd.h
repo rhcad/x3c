@@ -15,6 +15,7 @@ public:
 // Operations
 public:
     BOOL LoadFrame(const std::wstring& appid, const Cx_ConfigSection& root);
+    std::wstring GetLocalizationString(const std::wstring& name) const;
 
 // Overrides
     // ClassWizard generated virtual function overrides
@@ -29,17 +30,27 @@ private:
     BOOL CreateRibbonBar();
     BOOL LoadRibbonIcons();
     void CreateRibbonTabs(CXTPRibbonBar* pRibbonBar);
+    void CreateRibbonGroup(CXTPRibbonTab* pTab, const Cx_ConfigSection& group);
+    CXTPControl* CreateRibbonButton(CXTPRibbonGroup* pGroup, 
+        const Cx_ConfigSection& button);
+    CXTPControl* CreateRibbonPopupButton(CXTPRibbonGroup* pGroup, 
+        const Cx_ConfigSection& button);
+    CXTPControl* CreateRibbonComboButton(CXTPRibbonGroup* pGroup, 
+        const Cx_ConfigSection& button);
+
     void SetSystemButtonStyle(const CMenu& menu);
     void ShowCustomizeDialog(int nSelectedPage);
 
 // Implementation
 private:
-    UINT                m_id;
-    std::wstring        m_appid;
     CXTPStatusBar       m_wndStatusBar;
     CXTPTabClientWnd    m_wndClient;
     Cx_ConfigSection    m_frameNode;
     Cx_ConfigSection    m_ribbonNode;
+
+    UINT                m_id;
+    std::wstring        m_appid;
+    std::wstring        m_appname;
 
 // Generated message map functions
 protected:

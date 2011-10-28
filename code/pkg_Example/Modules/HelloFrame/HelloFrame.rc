@@ -54,18 +54,6 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // English (U.S.) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -83,6 +71,9 @@ IDR_MAINFRAME           ICON                    "res\\HelloFrame.ico"
 
 IDR_SMALLICONS          PNG                     "res\\SmallIcons.png"
 IDR_LARGEICONS          PNG                     "res\\LargeIcons.png"
+ID_GROUP_CLIPBOARD      PNG                     "res\\GroupClipboard.png"
+ID_GROUP_FIND           PNG                     "res\\GroupFind.png"
+ID_GROUP_FONT           PNG                     "res\\GroupFont.png"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -111,6 +102,7 @@ END
 IDR_LARGEICONS TOOLBAR  32, 32
 BEGIN
     BUTTON      ID_EDIT_PASTE
+    BUTTON      ID_EDIT_FIND
 END
 
 
@@ -176,7 +168,7 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-	BLOCK "040904B0"
+        BLOCK "040904B0"
         BEGIN
             VALUE "FileDescription", "HelloFrame MFC Application"
             VALUE "FileVersion", "1, 0, 0, 1"
@@ -233,6 +225,44 @@ END
 
 STRINGTABLE 
 BEGIN
+    ID_GROUP_CLIPBOARD      "\n&Clipboard"
+    ID_GROUP_FONT_OPTION    "Show the Font dialog box\nF&ont"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_CLIPBOARD_OPTION "Show the Office clipboard Task Pane\nClipboard"
+    ID_FONT_GROW            "\nGrow Font"
+    ID_FONT_SHRINK          "\nShrink Font"
+    ID_FONT_CLEAR           "\nClear Formatting"
+    ID_TEXT_CHANGECASE      "Change Case"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FORMAT_PAINTER       "Copy formatting from one place and apply it to another\nFormat Painter"
+    ID_FONT_FACE            "\nFont Face"
+    ID_FONT_SIZE            "\nFont Size"
+    ID_CHAR_STRIKETHROUGH   "Draw a line through the middle of the selected text\nStrikethrough"
+    ID_TEXT_SUBSCRIPT       "Subscript"
+    ID_TEXT_SUPERSCRIPT     "\nSuperscript"
+    ID_TEXT_COLOR           "\nColor"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CHAR_BOLD            "Makes the selection bold (toggle).\nBold"
+    ID_CHAR_ITALIC          "Makes the selection italic (toggle)\nItalic"
+    ID_CHAR_UNDERLINE       "Formats the selection with a continuous underline (toggle)\nUnderline"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TEXT_HIGHLIGHTCOLOR  "\nHighlight Color"
+END
+
+STRINGTABLE 
+BEGIN
     ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
 END
 
@@ -274,8 +304,7 @@ LANGUAGE 9, 1
 #pragma code_page(1252)
 #endif //_WIN32
 #include "afxres.rc"         // Standard components
-#endif
-
+#endif
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 
