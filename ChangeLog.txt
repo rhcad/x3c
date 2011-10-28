@@ -1,10 +1,15 @@
 x3c - C++ Plugin Framework
 
+2011-10-28
+
+    * Support '0x' prefix in CXmlUtil::GetAttributeInt() [ConfigXml.plugin].
+
+------v1.1.4------
+
 2011-10-24
 
     * Remove dependency of VC++ projects.
     * Auto copy files when building projects (HelloFrame and TestPlatform).
-    * Release v1.1.4.
 
 2011-10-18
 

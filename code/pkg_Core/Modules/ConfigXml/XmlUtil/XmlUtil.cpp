@@ -790,7 +790,13 @@ UINT CXmlUtil::GetAttributeInt(const XMLDOMElementPtr& ele,
         return 0;
 
     if (!str.empty())
-        nRet = _wtoi(str.c_str());
+    {
+        wchar_t* endptr;
+        if (_wcsnicmp(str.c_str(), L"0x", 2) == 0)
+            nRet = wcstol(str.c_str(), &endptr, 16);
+        else
+            nRet = _wtoi(str.c_str());
+    }
 
     return nRet;
 }
