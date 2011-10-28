@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "MDIFrameWnd.h"
 #include <Xml/Ix_StringTable.h>
+#include <UtilFunc/LockCount.h>
+#include <RawCmdMsgObserver.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -438,4 +440,20 @@ void CMainMDIFrame::OnCustomize()
 void CMainMDIFrame::OnCustomizeQuickAccess()
 {
     ShowCustomizeDialog(2);
+}
+
+BOOL CMainMDIFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, 
+                             AFX_CMDHANDLERINFO* pInfo)
+{
+    static long s_nLocker = 0;
+    CLockCount locker (&s_nLocker);
+    if (s_nLocker > 1)
+        return FALSE;
+
+    if (NotifyCmdMsgEvent(nID, nCode, pExtra, pInfo))
+    {
+        return TRUE;
+    }
+
+    return CXTPMDIFrameWnd::OnCmdMsg(nID, nCode, pExtra, pInfo);
 }

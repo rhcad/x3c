@@ -22,6 +22,7 @@ public:
     //{{AFX_VIRTUAL(CMainMDIFrame)
     virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
     virtual void OnSetPreviewMode(BOOL bPreview, CPrintPreviewState* pState);
+    virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*);
     //}}AFX_VIRTUAL
     
 private:

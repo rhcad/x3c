@@ -3,6 +3,7 @@ x3c - C++ Plugin Framework
 2011-10-28
 
     * Support '0x' prefix in CXmlUtil::GetAttributeInt() [ConfigXml.plugin].
+    * Add NotifyCmdMsgEvent(). Add a param of 'test' in RawCmdMsgObserver.
 
 ------v1.1.4------
 

@@ -18,11 +18,12 @@ struct RawCmdMsgEventData : public ChangeNotifyData
     //! Constructor for dispatching command execute message.
     /*!
         \param _id resource id of the menu item.
-        \param _sender additional infomation interpreted by message sender.
+        \param _test only check a handler is exist or not.
+        \param _sender additional information interpreted by message sender.
     */
-    RawCmdMsgEventData(UINT _id, int _sender = 0)
+    RawCmdMsgEventData(UINT _id, bool _test = false, int _sender = 0)
         : ChangeNotifyData("RawCmdMsgEvent")
-        , ret(false), id(_id), sender(_sender)
+        , ret(false), id(_id), sender(_sender), test(_test)
         , enabled(NULL), checked(NULL), text(NULL)
     {
     }
@@ -33,7 +34,7 @@ struct RawCmdMsgEventData : public ChangeNotifyData
         \param[in,out] _enabled enables or disables.
         \param[in,out] _checked checks or unchecks.
         \param[in,out] _text sets display text.
-        \param[in] _sender additional infomation interpreted by message sender.
+        \param[in] _sender additional information interpreted by message sender.
     */
     RawCmdMsgEventData(UINT _id, bool& _enabled, bool& _checked,
         std::wstring& _text, int _sender = 0)
@@ -46,6 +47,7 @@ struct RawCmdMsgEventData : public ChangeNotifyData
     bool    ret;
     UINT    id;
     int     sender;
+    bool    test;
     bool*   enabled;
     bool*   checked;
     std::wstring*   text;
@@ -68,12 +70,13 @@ protected:
     //! Handle the command execute message.
     /*!
         \param id resource id of the menu item.
-        \param sender additional infomation interpreted by message sender.
+        \param test only check a handler is exist or not.
+        \param sender additional information interpreted by message sender.
         \return The message is handled by the derived class or not.
     */
-    virtual bool OnRawCommand(UINT id, int sender)
+    virtual bool OnRawCommand(UINT id, bool test, int sender)
     {
-        id; sender;
+        id; test; sender;
         return false;
     }
 
@@ -83,7 +86,7 @@ protected:
         \param[in,out] enabled enables or disables.
         \param[in,out] checked checks or unchecks.
         \param[in,out] text sets display text.
-        \param[in] sender additional infomation interpreted by message sender.
+        \param[in] sender additional information interpreted by message sender.
         \return The message is handled by the derived class or not.
     */
     virtual bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked,
@@ -112,9 +115,47 @@ private:
         else
         {
             mydata->ret = mydata->ret
-                || OnRawCommand(mydata->id, mydata->sender);
+                || OnRawCommand(mydata->id, mydata->test, mydata->sender);
         }
     }
 };
+
+#ifdef __AFXWIN_H__
+static inline BOOL NotifyCmdMsgEvent(UINT nID, int nCode, void* pExtra, 
+                                     void* pHandlerInfo, int sender = 0)
+{
+    BOOL ret = FALSE;
+
+    if (CN_COMMAND == nCode)
+    {
+        RawCmdMsgEventData data(nID, pHandlerInfo != NULL, sender);
+        data.Notify();
+        ret = data.ret;
+    }
+    else if (CN_UPDATE_COMMAND_UI == nCode)
+    {
+        bool enabled = true;
+        bool checked = false;
+        std::wstring text;
+
+        RawCmdMsgEventData data(nID, enabled, checked, text, sender);
+        CCmdUI* pCmdUI = (CCmdUI*)pExtra;
+
+        data.Notify();
+        if (data.ret)
+        {
+            pCmdUI->Enable(enabled);
+            pCmdUI->SetCheck(checked ? 1 : 0);
+            if (!text.empty())
+            {
+                pCmdUI->SetText(text.c_str());
+            }
+            ret = TRUE;
+        }
+    }
+
+    return ret;
+}
+#endif // __AFXWIN_H__
 
 #endif // X3_OBSERVER_RAWCMDMSG_OBSERVER_H_

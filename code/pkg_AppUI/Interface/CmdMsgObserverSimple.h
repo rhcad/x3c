@@ -35,7 +35,7 @@ protected:
     int GetCurrentCommandSender() const;
 
 private:
-    bool OnRawCommand(UINT id, int sender);
+    bool OnRawCommand(UINT id, bool test, int sender);
     bool OnRawUpdateCmdUI(UINT id, bool& enabled, bool& checked,
         std::wstring& text, int sender);
     virtual const MENU_MSG_MAP* GetMsgMapEntry() const = 0;
@@ -159,7 +159,7 @@ inline int CmdMsgObserverSimple::GetCurrentCommandSender() const
     return m_sender;
 }
 
-inline bool CmdMsgObserverSimple::OnRawCommand(UINT id, int sender)
+inline bool CmdMsgObserverSimple::OnRawCommand(UINT id, bool test, int sender)
 {
     const MENU_MSG_MAP* pMsgMap = GetMsgMapEntry();
 
@@ -172,13 +172,15 @@ inline bool CmdMsgObserverSimple::OnRawCommand(UINT id, int sender)
         if (pMsgMap[i].type == kMenuMsgCommand
             && id == pMsgMap[i].id)
         {
-            (this->*mmf.pfn_COMMAND)();
+            if (!test)
+                (this->*mmf.pfn_COMMAND)();
             return true;
         }
         else if (pMsgMap[i].type == kMenuMsgCommandRange
             && id >= pMsgMap[i].id && id <= pMsgMap[i].lastid)
         {
-            (this->*mmf.pfn_COMMAND_RANGE)(id);
+            if (!test)
+                (this->*mmf.pfn_COMMAND_RANGE)(id);
             return true;
         }
     }

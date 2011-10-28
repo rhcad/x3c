@@ -12,7 +12,7 @@
 enum x3LogType
 {
     x3LogType_Debug,     //!< debug info
-    x3LogType_Info,      //!< infomation
+    x3LogType_Info,      //!< information
     x3LogType_Warning,   //!< warning info.
     x3LogType_Error,     //!< error info.
     x3LogType_Fatal      //!< fatal error info.

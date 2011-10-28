@@ -58,46 +58,20 @@ BOOL CChildView::DestroyWindow()
 
 BOOL CChildView::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pInfo)
 {
+    CLockCount locker (&m_locker);
+    if (m_locker > 1)
+        return FALSE;
+
     if (m_wndLeft.OnCmdMsg(nID, nCode, pExtra, pInfo)
         || m_wndRight.OnCmdMsg(nID, nCode, pExtra, pInfo))
     {
         return TRUE;
     }
 
-    CLockCount locker (&m_locker);
-    if (1 == m_locker)
+    
+    if (NotifyCmdMsgEvent(nID, nCode, pExtra, pInfo))
     {
-        if (CN_COMMAND == nCode)
-        {
-            RawCmdMsgEventData data(nID);
-            data.Notify();
-            if (data.ret)
-            {
-                return TRUE;
-            }
-        }
-        else if (CN_UPDATE_COMMAND_UI == nCode)
-        {
-            bool enabled = true;
-            bool checked = false;
-            std::wstring text;
-
-            RawCmdMsgEventData data(nID, enabled, checked, text);
-            CCmdUI* pCmdUI = (CCmdUI*)pExtra;
-
-            data.Notify();
-            if (data.ret)
-            {
-                pCmdUI->Enable(enabled);
-                pCmdUI->SetCheck(checked ? 1 : 0);
-                if (!text.empty())
-                {
-                    pCmdUI->SetText(text.c_str());
-                }
-
-                return TRUE;
-            }
-        }
+        return TRUE;
     }
     
     return CWnd::OnCmdMsg(nID, nCode, pExtra, pInfo);
