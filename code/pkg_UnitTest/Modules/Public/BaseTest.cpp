@@ -56,13 +56,16 @@ void BaseTest::MakeRootPath(wchar_t* path, const wchar_t* name)
         wchar_t filename[MAX_PATH];
 
         wcscpy_s(filename, MAX_PATH, x3::GetAppWorkPath().c_str());
-        PathAppendW(filename, L"UnitTests.ini");
+        PathAppendW(filename, L"tests.ini");
 
         wcscpy_s(path, MAX_PATH, filename);
-        PathRemoveFileSpecW(path);      // bin\vc80\debug\tests
         PathRemoveFileSpecW(path);      // bin\vc80\debug
-        PathRemoveFileSpecW(path);      // bin\vc80
-        PathAppendW(path, name);        // bin\vc80\name
+        if (_wcsicmp(name, L"temp") != 0)
+        {
+            PathRemoveFileSpecW(path);  // bin\vc80
+            PathRemoveFileSpecW(path);  // bin
+        }
+        PathAppendW(path, name);        // bin\name
 
 #ifdef _WIN32
         x3SetFileAttributesNormal(filename);
@@ -78,17 +81,20 @@ std::wstring BaseTest::MakeDataPath(const wchar_t* folder, const wchar_t* file)
 {
     wchar_t filename[MAX_PATH] = { 0 };
 
-    if (folder && *folder)
+    if (folder && *folder && _wcsicmp(folder, L"temp") != 0)
     {
-        MakeRootPath(s_datapath, L"../TestData");
+        MakeRootPath(s_datapath, L"testdata");
         wcscpy_s(filename, MAX_PATH, s_datapath);
         PathAppendW(filename, folder);
     }
-    else if (0 == s_temppath[0])
+    else
     {
-        MakeRootPath(s_temppath, L"Temp");
+        if (0 == s_temppath[0])
+        {
+            MakeRootPath(s_temppath, L"temp");
+            ::CreateDirectoryW(s_temppath, NULL);
+        }
         wcscpy_s(filename, MAX_PATH, s_temppath);
-        ::CreateDirectoryW(s_temppath, NULL);
     }
 
     if (file && *file)
