@@ -1,3 +1,4 @@
+// x3c - C++ PluginFramework
 #pragma once
 
 class CDummyDoc : public CDocument

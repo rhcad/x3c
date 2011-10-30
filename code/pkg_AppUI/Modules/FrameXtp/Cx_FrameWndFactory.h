@@ -1,3 +1,4 @@
+// x3c - C++ PluginFramework
 #pragma once
 
 #include <FrameApp/Ix_FrameWndFactory.h>
@@ -16,12 +17,12 @@ protected:
 private:
     virtual bool CheckAppInstance(LPCWSTR appid);
     virtual bool CreateFrameWnd(LPCWSTR factoryFile);
-    virtual bool ProcessShellCommand();
     virtual void OnQuit();
     virtual bool OnIdle(long count);
 
 private:
-    void RegisterDocTemplate(const Cx_ConfigSection& node);
+    void RegisterDocTemplate(bool mdi, const Cx_ConfigSection& node);
+    bool ProcessShellCommand();
 
 private:
     std::wstring    m_appid;

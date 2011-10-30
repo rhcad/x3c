@@ -1,3 +1,4 @@
+// x3c - C++ PluginFramework
 #include "stdafx.h"
 #include "DummyDoc.h"
 

@@ -3,12 +3,12 @@
 
 #include "MainFrm.h"
 
-class CMainMDIFrame : public CXTPMDIFrameWnd, CMainFrame
+class CMainSDIFrame : public CXTPFrameWnd, CMainFrame
 {
 public:
-    DECLARE_DYNCREATE(CMainMDIFrame)
-    CMainMDIFrame();
-    virtual ~CMainMDIFrame();
+    DECLARE_DYNCREATE(CMainSDIFrame)
+    CMainSDIFrame();
+    virtual ~CMainSDIFrame();
 
 // Attributes
 public:
@@ -20,19 +20,17 @@ public:
 
 // Overrides
     // ClassWizard generated virtual function overrides
-    //{{AFX_VIRTUAL(CMainMDIFrame)
+    //{{AFX_VIRTUAL(CMainSDIFrame)
     virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-    virtual void OnSetPreviewMode(BOOL bPreview, CPrintPreviewState* pState);
     virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*);
     //}}AFX_VIRTUAL
 
 // Implementation
 private:
-    CXTPTabClientWnd    m_wndClient;
 
 // Generated message map functions
 protected:
-    //{{AFX_MSG(CMainMDIFrame)
+    //{{AFX_MSG(CMainSDIFrame)
     afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
     afx_msg void OnClose();
     //}}AFX_MSG

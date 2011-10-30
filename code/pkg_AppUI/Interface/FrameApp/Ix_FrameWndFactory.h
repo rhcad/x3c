@@ -22,7 +22,6 @@ public:
 
     virtual bool CheckAppInstance(LPCWSTR appid) = 0;
     virtual bool CreateFrameWnd(LPCWSTR factoryFile) = 0;
-    virtual bool ProcessShellCommand() = 0;
     virtual void OnQuit() = 0;
     virtual bool OnIdle(long count) = 0;
 };

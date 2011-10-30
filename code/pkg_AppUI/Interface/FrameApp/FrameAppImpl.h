@@ -37,8 +37,7 @@ BOOL CFrameApp::InitInstance()
 
     return LoadPlugins()
         && CheckAppInstance()
-        && CreateFrameWnd()
-        && ProcessShellCommand();
+        && CreateFrameWnd();
 }
 
 BOOL CFrameApp::LoadPlugins()
@@ -75,12 +74,6 @@ BOOL CFrameApp::CreateFrameWnd()
 {
     Cx_Interface<Ix_FrameWndFactory> pIFFactory(m_factory);
     return pIFFactory->CreateFrameWnd(GetFactoryFile());
-}
-
-BOOL CFrameApp::ProcessShellCommand()
-{
-    Cx_Interface<Ix_FrameWndFactory> pIFFactory(m_factory);
-    return pIFFactory->ProcessShellCommand();
 }
 
 BOOL CFrameApp::OnIdle(LONG lCount)

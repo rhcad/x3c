@@ -1,3 +1,4 @@
+// x3c - C++ PluginFramework
 #include "stdafx.h"
 #include "Cx_FrameWndFactory.h"
 #include <xml/Ix_ConfigXml.h>
@@ -7,6 +8,7 @@
 #include "DummyDoc.h"
 #include "ChildFrm.h"
 #include "EmbedView.h"
+#include "SDIFrameWnd.h"
 #include "MDIFrameWnd.h"
 #include "../Public/sinstance.cpp"
 
@@ -15,6 +17,7 @@
 #endif
 
 static CInstanceChecker*    s_checker = NULL;
+extern Cx_ConfigSection     g_factoryRoot;
 
 Cx_FrameWndFactory::Cx_FrameWndFactory()
 {
@@ -56,28 +59,45 @@ bool Cx_FrameWndFactory::CreateFrameWnd(LPCWSTR factoryFile)
     Cx_Interface<Ix_ConfigXml> pIFXml(x3::CLSID_ConfigXmlFile);
     ASSERT(pIFXml.IsNotNull());
     pIFXml->SetFileName(x3::FileNameRelToAbs(factoryFile).c_str());
+
     Cx_ConfigSection root(pIFXml->GetData()->GetSection(L""));
     Cx_ConfigSection mainframe(root.GetSection(L"mainframe"));
+    bool mdi = root->GetBool(L"mdi", false);
 
-    RegisterDocTemplate(mainframe);
+    g_factoryRoot = root;
+    g_factoryRoot->SetString(L"appid", m_appid.c_str());
+    RegisterDocTemplate(mdi, mainframe);
 
-    CMainMDIFrame* pFrame = new CMainMDIFrame;
-    if (!pFrame->LoadFrame(m_appid, root))
-        return false;
-    AfxGetApp()->m_pMainWnd = pFrame;
+    if (mdi)
+    {
+        CMainMDIFrame* pFrame = new CMainMDIFrame;
+        if (!pFrame->LoadFrame(0))
+            return FALSE;
+    }
 
-    return true;
+    return ProcessShellCommand();
 }
 
-void Cx_FrameWndFactory::RegisterDocTemplate(const Cx_ConfigSection& node)
+void Cx_FrameWndFactory::RegisterDocTemplate(bool mdi, const Cx_ConfigSection& node)
 {
     CDocTemplate* pDocTemplate;
 
-    pDocTemplate = new CMultiDocTemplate(
-        node->GetUInt32(L"id"),
-        RUNTIME_CLASS(CDummyDoc),
-        RUNTIME_CLASS(CChildFrame),
-        RUNTIME_CLASS(CEmbedView));
+    if (mdi)
+    {
+        pDocTemplate = new CMultiDocTemplate(
+            node->GetUInt32(L"id"),
+            RUNTIME_CLASS(CDummyDoc),
+            RUNTIME_CLASS(CChildFrame),
+            RUNTIME_CLASS(CEmbedView));
+    }
+    else
+    {
+        pDocTemplate = new CSingleDocTemplate(
+            node->GetUInt32(L"id"),
+            RUNTIME_CLASS(CDummyDoc),
+            RUNTIME_CLASS(CMainSDIFrame),
+            RUNTIME_CLASS(CEmbedView));
+    }
     AfxGetApp()->AddDocTemplate(pDocTemplate);
 }
 

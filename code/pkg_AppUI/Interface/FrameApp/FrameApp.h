@@ -37,11 +37,8 @@ protected:
     //! Check the current application instance can be ran or not.
     virtual BOOL CheckAppInstance();
     
-    //! Create the main frame window.
+    //! Create and show the main frame window.
     virtual BOOL CreateFrameWnd();
-    
-    //! Called after the main window has been created.
-    virtual BOOL ProcessShellCommand();
 
 protected:
     DECLARE_MESSAGE_MAP()
