@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root appname="HelloFrame">
   <mainframe id="128 IDR_MAINFRAME"
-             themeDll="translations/Office2010.dll"
+             themeDll="../../translations/Office2010.dll"
              themeName="OFFICE2010SILVER.INI">
     <toolbars>
       <toolbar id="128 IDR_SMALLICONS"/>
