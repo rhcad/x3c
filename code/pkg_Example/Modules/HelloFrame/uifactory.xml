@@ -51,8 +51,8 @@
         </group>
         <group caption="Ribbon|Font"
                optionButtonID="6025 ID_GROUP_FONT_OPTION">
-          <button id="7618 ID_FONT_FACE" type="combolist" width="130"/>
-          <button id="7619 ID_FONT_SIZE" type="combolist" width="45"/>
+          <button id="7618 ID_FONT_FACE" type="combo" width="130"/>
+          <button id="7619 ID_FONT_SIZE" type="combo" width="45"/>
           <button id="2792 ID_FONT_GROW" beginGroup="true"/>
           <button id="2793 ID_FONT_SHRINK"/>
           <button id="2794 ID_FONT_CLEAR" beginGroup="true"/>

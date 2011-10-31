@@ -114,11 +114,19 @@ SOURCE=..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\MainFrm.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.h
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\SDIFrameWnd.h
 # End Source File
 # Begin Source File
 
@@ -150,11 +158,19 @@ SOURCE=..\..\..\code\pkg_AppUI\Interface\mfc\EmbedWnd.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\MainFrm.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\Module.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\code\pkg_AppUI\Modules\FrameXtp\SDIFrameWnd.cpp
 # End Source File
 # Begin Source File
 

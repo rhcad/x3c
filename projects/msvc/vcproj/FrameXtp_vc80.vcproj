@@ -426,11 +426,19 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\MainFrm.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\Module.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\SDIFrameWnd.cpp"
 				>
 			</File>
 			<File
@@ -496,11 +504,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\MainFrm.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\MDIFrameWnd.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_AppUI\Modules\FrameXtp\SDIFrameWnd.h"
 				>
 			</File>
 			<File

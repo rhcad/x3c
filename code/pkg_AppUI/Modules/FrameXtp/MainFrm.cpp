@@ -215,9 +215,7 @@ BOOL CMainFrame::CreateRibbonBar()
         xtpBarTop, RUNTIME_CLASS(CXTPRibbonBar));
 
     if (!pRibbonBar)
-    {
         return FALSE;
-    }
 
     pRibbonBar->EnableDocking(0);
 
@@ -277,9 +275,7 @@ void CMainFrame::CreateRibbonGroup(CXTPRibbonTab* pTab,
         : pTab->AddGroup(GetLocalizationString(group->GetString(L"caption")).c_str());
 
     if (pTab->GetGroups()->GetCount() > 1)
-    {
         pGroup->SetControlsGrouping();
-    }
 
     UINT optionButtonID = group->GetUInt32(L"optionButtonID");
     if (optionButtonID != 0)
@@ -293,7 +289,6 @@ void CMainFrame::CreateRibbonGroup(CXTPRibbonTab* pTab,
         Cx_ConfigSection button(group.GetSectionByIndex(L"button", iButton));
         if (!button->IsValid())
             break;
-
         CreateRibbonButton(pGroup, button);
     }
 }
@@ -302,24 +297,17 @@ CXTPControl* CMainFrame::CreateRibbonButton(CXTPRibbonGroup* pGroup,
                                                const Cx_ConfigSection& button)
 {
     CXTPControl* pControl = NULL;
-    const std::wstring type(button->GetString(L"type"));    
+    const std::wstring type(button->GetString(L"type"));
+    UINT id = button->GetUInt32(L"id");
 
     if (type == L"combo" || type == L"combolist")
-    {
         pControl = CreateRibbonComboButton(pGroup, button);
-    }
     else if (type == L"popup")
-    {
         pControl = CreateRibbonPopupButton(pGroup, button);
-    }
     else if (type == L"checkbox")
-    {
-        pControl = pGroup->Add(xtpControlCheckBox, button->GetUInt32(L"id"));
-    }
+        pControl = pGroup->Add(xtpControlCheckBox, id);
     else
-    {
-        pControl = pGroup->Add(xtpControlButton, button->GetUInt32(L"id"));
-    }
+        pControl = pGroup->Add(xtpControlButton, id);
 
     pControl->SetBeginGroup(button->GetBool(L"beginGroup", false));
 
@@ -361,10 +349,8 @@ CXTPControl* CMainFrame::CreateRibbonComboButton(CXTPRibbonGroup* pGroup,
     CXTPControlComboBox* pCombo = new CXTPControlComboBox();
 
     pGroup->Add(pCombo, button->GetUInt32(L"id"));
-    if (button->GetString(L"type") == L"combolist")
-    {
-        pCombo->SetDropDownListStyle();
-    }
+    if (button->GetString(L"type") == L"combo")
+        pCombo->SetDropDownListStyle();     // has an edit control
     pCombo->SetWidth(button->GetInt32(L"width", 50));
 
     return pCombo;
