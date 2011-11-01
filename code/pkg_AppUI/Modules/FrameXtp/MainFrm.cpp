@@ -32,7 +32,7 @@ BOOL CMainFrame::BeforeLoadFrame(CFrameWnd* pMainWnd)
     m_ribbonNode = g_factoryRoot.GetSection(L"ribbon");
     m_appid = g_factoryRoot->GetString(L"appid");
     m_appname = g_factoryRoot->GetString(L"appname");
-    m_id = m_frameNode->GetUInt32(L"id");
+    m_id = GetNodeID(m_frameNode, L"id");
 
     return TRUE;
 }
@@ -201,7 +201,7 @@ BOOL CMainFrame::LoadRibbonIcons()
     for (int ibar = 0; ; ibar++)
     {
         Cx_ConfigSection barNode(m_frameNode.GetSectionByIndex(L"toolbars/toolbar", ibar));
-        UINT barID = barNode->GetUInt32(L"id");
+        UINT barID = GetNodeID(barNode, L"id");
         if (0 == barID)
             break;
 
@@ -210,7 +210,7 @@ BOOL CMainFrame::LoadRibbonIcons()
         for (int ibtn = 0; ; ibtn++)
         {
             Cx_ConfigSection btnNode(barNode.GetSectionByIndex(L"button", ibtn));
-            UINT id = btnNode->GetUInt32(L"id");
+            UINT id = GetNodeID(btnNode, L"id");
             if (0 == id)
                 break;
             ids.push_back(id);
@@ -262,7 +262,7 @@ BOOL CMainFrame::CreateRibbonBar()
     {
         Cx_ConfigSection node(m_ribbonNode.GetSectionByIndex(
             L"originalQuickAccessControls/button", iQuick));
-        UINT id = node->GetUInt32(L"id");
+        UINT id = GetNodeID(node, L"id");
         if (0 == id)
             break;
         pRibbonBar->GetQuickAccessControls()->Add(xtpControlButton, id);
@@ -296,14 +296,14 @@ void CMainFrame::CreateRibbonTabs(CXTPRibbonBar* pRibbonBar)
 void CMainFrame::CreateRibbonGroup(CXTPRibbonTab* pTab, 
                                    const Cx_ConfigSection& group)
 {
-    UINT groupID = group->GetUInt32(L"id");
+    UINT groupID = GetNodeID(group, L"id");
     CXTPRibbonGroup* pGroup = groupID ? pTab->AddGroup(groupID)
         : pTab->AddGroup(GetLocalizationString(group->GetString(L"caption")).c_str());
 
     if (pTab->GetGroups()->GetCount() > 1)
         pGroup->SetControlsGrouping();
 
-    UINT optionButtonID = group->GetUInt32(L"optionButtonID");
+    UINT optionButtonID = GetNodeID(group, L"optionButtonID");
     if (optionButtonID != 0)
     {
         pGroup->ShowOptionButton();
@@ -324,12 +324,12 @@ CXTPControl* CMainFrame::CreateRibbonButton(CXTPRibbonGroup* pGroup,
 {
     CXTPControl* pControl = NULL;
     const std::wstring type(button->GetString(L"type"));
-    UINT id = button->GetUInt32(L"id");
+    UINT id = GetNodeID(button, L"id");
 
     if (type == L"combo" || type == L"combolist")
-        pControl = CreateRibbonComboButton(pGroup, button);
+        pControl = CreateRibbonComboButton(pGroup, id, button);
     else if (type == L"popup")
-        pControl = CreateRibbonPopupButton(pGroup, button);
+        pControl = CreateRibbonPopupButton(pGroup, id, button);
     else if (type == L"checkbox")
         pControl = pGroup->Add(xtpControlCheckBox, id);
     else
@@ -341,15 +341,15 @@ CXTPControl* CMainFrame::CreateRibbonButton(CXTPRibbonGroup* pGroup,
 }
 
 CXTPControl* CMainFrame::CreateRibbonPopupButton(CXTPRibbonGroup* pGroup, 
+                                                 UINT buttonID, 
                                                  const Cx_ConfigSection& button)
 {
-    UINT buttonID = button->GetUInt32(L"id");
     std::vector<UINT> popupIds;
 
     for (int iPopup = 0; ; iPopup++)
     {
         Cx_ConfigSection popup(button.GetSectionByIndex(L"popupButtons/button", iPopup));
-        UINT id = popup->GetUInt32(L"id");
+        UINT id = GetNodeID(popup, L"id");
         if (0 == id)
             break;
         popupIds.push_back(id);
@@ -370,13 +370,16 @@ CXTPControl* CMainFrame::CreateRibbonPopupButton(CXTPRibbonGroup* pGroup,
 }
 
 CXTPControl* CMainFrame::CreateRibbonComboButton(CXTPRibbonGroup* pGroup, 
+                                                 UINT buttonID, 
                                                  const Cx_ConfigSection& button)
 {
     CXTPControlComboBox* pCombo = new CXTPControlComboBox();
 
-    pGroup->Add(pCombo, button->GetUInt32(L"id"));
+    pGroup->Add(pCombo, buttonID);
     if (button->GetString(L"type") == L"combo")
+    {
         pCombo->SetDropDownListStyle();     // has an edit control
+    }
     pCombo->SetWidth(button->GetInt32(L"width", 50));
 
     return pCombo;
@@ -441,6 +444,34 @@ void CMainFrame::OnCustomize()
 void CMainFrame::OnCustomizeQuickAccess()
 {
     ShowCustomizeDialog(2);
+}
+
+UINT CMainFrame::GetNodeID(const Cx_ConfigSection& node, LPCWSTR name)
+{
+    UINT id = node->GetUInt32(name);
+    std::wstring str(node->GetString(name));
+    size_t pos = str.find(L' ');
+
+    if (id != 0 && pos != str.npos)
+    {
+        str = str.substr(pos + 1);
+
+        TRACE2("ID %d: %s\n", id, str.c_str());
+        ASSERT(str.find(L' ') == str.npos && !str.empty());
+
+        std::map<std::wstring, UINT>::iterator it = m_idnames.find(str);
+        ASSERT(it == m_idnames.end() || it->second == id);
+
+        m_idnames[str] = id;
+    }
+
+    return id;
+}
+
+UINT CMainFrame::FindID(const std::wstring& name) const
+{
+    std::map<std::wstring, UINT>::const_iterator it = m_idnames.find(name);
+    return it != m_idnames.end() ? it->second : 0;
 }
 
 std::wstring CMainFrame::GetLocalizationString(const std::wstring& name) const

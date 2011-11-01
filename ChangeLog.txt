@@ -1,5 +1,9 @@
 x3c - C++ Plugin Framework
 
+2011-11-01
+
+    * Add HookManager plugin and test case.
+
 2011-10-28
 
     * Support '0x' prefix in CXmlUtil::GetAttributeInt() [ConfigXml.plugin].

@@ -12,16 +12,23 @@ public:
 public:
     UINT GetFrameID() const { return m_id; }
     std::wstring GetLocalizationString(const std::wstring& name) const;
+    UINT FindID(const std::wstring& name) const;
 
 protected:
     BOOL PreCreateWindow(CREATESTRUCT& cs);
     BOOL BeforeLoadFrame(CFrameWnd* pMainWnd);
     BOOL AfterLoadFrame();
-    BOOL InitRibbonBars(CXTPCommandBars* pCommandBars);
     BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*);
+    BOOL InitRibbonBars(CXTPCommandBars* pCommandBars);
     void LoadCommandBars();
     void SaveCommandBars();
 
+    afx_msg void OnUpdateRibbonTab(CCmdUI* pCmdUI);
+    afx_msg void OnCustomize();
+    afx_msg void OnCustomizeQuickAccess();
+    int OnCreateControl(LPCREATECONTROLSTRUCT lpCreateControl);
+
+private:
     void SetRibbonFont();
     BOOL InitRibbonTheme();
     BOOL CreateStatusBar();
@@ -29,14 +36,14 @@ protected:
     BOOL LoadRibbonIcons();
     void CreateRibbonTabs(CXTPRibbonBar* pRibbonBar);
     void CreateRibbonGroup(CXTPRibbonTab* pTab, const Cx_ConfigSection& group);
-    CXTPControl* CreateRibbonButton(CXTPRibbonGroup* pGroup, const Cx_ConfigSection& button);
-    CXTPControl* CreateRibbonPopupButton(CXTPRibbonGroup* pGroup, const Cx_ConfigSection& button);
-    CXTPControl* CreateRibbonComboButton(CXTPRibbonGroup* pGroup, const Cx_ConfigSection& button);
+    CXTPControl* CreateRibbonButton(CXTPRibbonGroup* pGroup, 
+        const Cx_ConfigSection& button);
+    CXTPControl* CreateRibbonPopupButton(CXTPRibbonGroup* pGroup, 
+        UINT buttonID, const Cx_ConfigSection& button);
+    CXTPControl* CreateRibbonComboButton(CXTPRibbonGroup* pGroup, 
+        UINT buttonID, const Cx_ConfigSection& button);
 
-    afx_msg void OnUpdateRibbonTab(CCmdUI* pCmdUI);
-    afx_msg void OnCustomize();
-    afx_msg void OnCustomizeQuickAccess();
-    int OnCreateControl(LPCREATECONTROLSTRUCT lpCreateControl);
+    UINT GetNodeID(const Cx_ConfigSection& node, LPCWSTR name);
     void SetSystemButtonStyle(const CMenu& menu);
     void ShowCustomizeDialog(int nSelectedPage);
 
@@ -51,4 +58,5 @@ protected:
 private:
     CFrameWnd*          m_pMainWnd;
     CXTPCommandBars*    m_pCommandBars;
+    std::map<std::wstring, UINT>    m_idnames;
 };

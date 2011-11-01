@@ -109,6 +109,7 @@ bool Cx_FrameWndFactory::ProcessShellCommand()
     if (!AfxGetApp()->ProcessShellCommand(cmdInfo))
         return false;
 
+    ASSERT(dynamic_cast<CMainFrame*>(AfxGetMainWnd()));
     AfxGetMainWnd()->ShowWindow(AfxGetApp()->m_nCmdShow);
     AfxGetMainWnd()->UpdateWindow();
 
