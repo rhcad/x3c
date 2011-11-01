@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="TestPlatform"
-	ProjectGUID="{AE57CB5B-F334-4486-89EC-4D393D2E5A04}"
-	RootNamespace="TestPlatform"
+	Name="HookManager"
+	ProjectGUID="{AF6098FC-2331-4D7D-AFCD-A16DC9F11642}"
+	RootNamespace="HookManager"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -21,10 +21,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="1"
-			UseOfMFC="2"
+			ConfigurationType="2"
 			CharacterSet="1"
 			>
 			<Tool
@@ -45,8 +44,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Platform\Interface"
-				PreprocessorDefinitions="WIN32;WINDOWS;_DEBUG"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -64,14 +63,14 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="cppunitd_dll.lib TestRunnerud.lib ole32.lib"
+				AdditionalDependencies="ole32.lib"
+				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(TargetDir)"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				SubSystem="1"
-				EntryPointSymbol="wWinMainCRTStartup"
+				SubSystem="2"
+				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -94,15 +93,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\plugins"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
-			ConfigurationType="1"
-			UseOfMFC="2"
+			ConfigurationType="2"
 			CharacterSet="1"
 			>
 			<Tool
@@ -124,8 +121,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Platform\Interface"
-				PreprocessorDefinitions="_WIN64;WINDOWS;_DEBUG"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -143,14 +140,14 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="cppunitd_dll.lib TestRunnerud.lib ole32.lib"
+				AdditionalDependencies="ole32.lib"
+				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(TargetDir)"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				SubSystem="1"
-				EntryPointSymbol="wWinMainCRTStartup"
+				SubSystem="2"
+				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -173,15 +170,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)\plugins"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)\$(ProjectName)"
-			ConfigurationType="1"
-			UseOfMFC="2"
+			ConfigurationType="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -202,8 +197,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Platform\Interface"
-				PreprocessorDefinitions="WIN32;WINDOWS;NDEBUG"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -219,16 +214,18 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="cppunit_dll.lib TestRunneru.lib ole32.lib"
+				AdditionalDependencies="ole32.lib"
+				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(TargetDir)"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				SubSystem="1"
+				GenerateMapFile="true"
+				MapFileName="$(IntDir)\..\Symbols\$(ProjectName).map"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				EntryPointSymbol="wWinMainCRTStartup"
+				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -251,15 +248,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\tests"
+			OutputDirectory="..\..\..\code\bin\vc90\$(ConfigurationName)64\plugins"
 			IntermediateDirectory="..\..\..\obj\vc90\$(ConfigurationName)64\$(ProjectName)"
-			ConfigurationType="1"
-			UseOfMFC="2"
+			ConfigurationType="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -281,8 +276,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_UnitTest\Modules\Public;..\..\..\code\pkg_UnitTest\Interface;..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_Platform\Interface"
-				PreprocessorDefinitions="_WIN64;WINDOWS;NDEBUG"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Platform\Interface;..\..\..\code\pkg_Core\Interface"
+				PreprocessorDefinitions="_WIN64;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="2"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -298,16 +293,18 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="cppunit_dll.lib TestRunneru.lib ole32.lib"
+				AdditionalDependencies="ole32.lib"
+				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(TargetDir)"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
-				SubSystem="1"
+				GenerateMapFile="true"
+				MapFileName="$(IntDir)\..\Symbols\$(ProjectName).map"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				EntryPointSymbol="wWinMainCRTStartup"
+				ImportLibrary="$(IntDir)\$(ProjectName).lib"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -330,7 +327,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -343,11 +339,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\TestComHook.cpp"
+				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\Cx_HookManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\TestHookManager.cpp"
+				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\Module.cpp"
 				>
 			</File>
 		</Filter>
@@ -357,110 +353,32 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\TestComHook.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\TestHookManager.h"
+				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\Cx_HookManager.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="Public"
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.cpp"
+				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\HookManager.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\BaseTest.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\code\pkg_UnitTest\Modules\Public\UnitTests.cpp"
+				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\Version.rc2"
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\atlcom.dll"
+		<Filter
+			Name="Interface"
 			>
-			<FileConfiguration
-				Name="Debug|Win32"
+			<File
+				RelativePath="..\..\..\code\pkg_Platform\Interface\Ix_HookManager.h"
 				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Debug|x64"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|x64"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-		</File>
-		<File
-			RelativePath="..\..\..\code\pkg_UnitTest\Modules\TestPlatform\test.xml"
-			>
-			<FileConfiguration
-				Name="Debug|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Debug|x64"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|x64"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
-					Outputs="$(IntDir)\$(InputName)"
-				/>
-			</FileConfiguration>
-		</File>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

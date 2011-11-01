@@ -26,6 +26,7 @@
 					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
 					<Add directory="../../../code/pkg_UnitTest/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Platform/Interface" />
 				</Compiler>
 				<Linker>
 					<Add library="cppunit_dll" />
@@ -52,6 +53,7 @@
 					<Add directory="../../../code/pkg_UnitTest/Modules/Public" />
 					<Add directory="../../../code/pkg_UnitTest/Interface" />
 					<Add directory="../../../code/pkg_Core/Interface" />
+					<Add directory="../../../code/pkg_Platform/Interface" />
 				</Compiler>
 				<Linker>
 					<Add library="cppunitd_dll" />
@@ -68,6 +70,8 @@
 		<Unit filename="../../../code/pkg_UnitTest/Modules/Public/UnitTests.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestPlatform/TestComHook.cpp" />
 		<Unit filename="../../../code/pkg_UnitTest/Modules/TestPlatform/TestComHook.h" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestPlatform/TestHookManager.cpp" />
+		<Unit filename="../../../code/pkg_UnitTest/Modules/TestPlatform/TestHookManager.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

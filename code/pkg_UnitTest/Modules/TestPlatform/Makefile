@@ -16,6 +16,7 @@ all:
 	$(CC) $(CFLAGS) -c  ../Public/BaseTest.cpp
 	$(CC) $(CFLAGS) -c  ../Public/UnitTests.cpp
 	$(CC) $(CFLAGS) -c  TestComHook.cpp
+	$(CC) $(CFLAGS) -c  TestHookManager.cpp
 	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestPlatform.app *.o -ldl -lcppunit
 clean:
 	rm -rf *.so

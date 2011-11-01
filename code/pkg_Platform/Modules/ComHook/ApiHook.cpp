@@ -2,27 +2,48 @@
 #include <UtilFunc/PluginInc.h>
 #include <UtilFunc/LoadDllHelper.h>
 
+static PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry();
 static PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname);
 static PROC* FindFunctionAddress(PIMAGE_THUNK_DATA thunk, PROC oldproc);
 static bool ReplaceFunction(PROC* addr, PROC newproc);
 
 bool HookModuleFunction(LPCSTR dllname, PROC oldproc, PROC newproc)
 {
-    ASSERT(dllname && oldproc && newproc);
+    ASSERT(oldproc && newproc);
+    PIMAGE_THUNK_DATA thunk = NULL;
+    PROC* pfunc = NULL;
 
-    PIMAGE_THUNK_DATA thunk = FindThunkData(dllname);
-    PROC* pfunc = thunk ? FindFunctionAddress(thunk, oldproc) : NULL;
+    if (dllname && *dllname)
+    {
+        thunk = FindThunkData(dllname);
+        pfunc = thunk ? FindFunctionAddress(thunk, oldproc) : NULL;
+    }
+    else
+    {
+        HMODULE hmod = GetModuleHandleW(NULL);
+        PIMAGE_IMPORT_DESCRIPTOR importDesc = GetImportAddressEntry();
+
+        if (importDesc == NULL)
+        {
+            return NULL;
+        }
+
+        for (; importDesc->Name && !pfunc; importDesc++)
+        {
+            thunk = (PIMAGE_THUNK_DATA)((PBYTE)hmod + importDesc->FirstThunk);
+            pfunc = FindFunctionAddress(thunk, oldproc);
+        }
+    }
 
     return pfunc && ReplaceFunction(pfunc, newproc);
 }
 
-PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname)
+// Get the import directory of the current process.
+PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry()
 {
     HMODULE hmod = GetModuleHandleW(NULL);
     PIMAGE_IMPORT_DESCRIPTOR importDesc = NULL;
 
-    // Get the import directory of the current process.
-    //
     try
     {
         typedef PVOID (__stdcall * FUNC)(PVOID, BOOLEAN, USHORT, PULONG);
@@ -36,13 +57,20 @@ PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname)
     {
     }
 
+    return importDesc;
+}
+
+// Find the import address table of the module.
+PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname)
+{
+    HMODULE hmod = GetModuleHandleW(NULL);
+    PIMAGE_IMPORT_DESCRIPTOR importDesc = GetImportAddressEntry();
+
     if (importDesc == NULL)
     {
         return NULL;
     }
 
-    // Find the import address table of the module.
-    //
     for (; importDesc->Name; importDesc++)
     {
         LPCSTR name = (LPCSTR)((PBYTE)hmod + importDesc->Name);
