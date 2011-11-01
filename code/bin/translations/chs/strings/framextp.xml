@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<module name="FrameXtp">
-		<string id="RibbonTitle" value="功能区"/>
+    <string id="RibbonFont" value="宋体,12"/>
+    <string id="RibbonTitle" value="功能区"/>
 	</module>
 </root>

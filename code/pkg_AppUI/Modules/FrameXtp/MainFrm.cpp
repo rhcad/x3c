@@ -7,7 +7,7 @@
 
 Cx_ConfigSection    g_factoryRoot;
 
-CMainFrame::CMainFrame() : m_id(0), m_this(NULL), m_cmdbars(NULL)
+CMainFrame::CMainFrame() : m_id(0), m_pMainWnd(NULL), m_pCommandBars(NULL)
 {
 }
 
@@ -25,9 +25,9 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
     return TRUE;
 }
 
-BOOL CMainFrame::BeforeLoadFrame(CFrameWnd* pThis)
+BOOL CMainFrame::BeforeLoadFrame(CFrameWnd* pMainWnd)
 {
-    m_this = pThis;
+    m_pMainWnd = pMainWnd;
     m_frameNode = g_factoryRoot.GetSection(L"mainframe");
     m_ribbonNode = g_factoryRoot.GetSection(L"ribbon");
     m_appid = g_factoryRoot->GetString(L"appid");
@@ -42,30 +42,19 @@ BOOL CMainFrame::AfterLoadFrame()
     m_frameNode.Release();
     m_ribbonNode.Release();
     g_factoryRoot.Release();
-    AfxGetApp()->m_pMainWnd = m_this;
+    AfxGetApp()->m_pMainWnd = m_pMainWnd;
 
     return TRUE;
 }
 
 BOOL CMainFrame::InitRibbonBars(CXTPCommandBars* pCommandBars)
 {
-    m_cmdbars = pCommandBars;
+    m_pCommandBars = pCommandBars;
 
-    if (!CreateStatusBar())
-        return FALSE;
-
-    CXTPToolTipContext* pToolTipContext = m_cmdbars->GetToolTipContext();
-    pToolTipContext->SetStyle(xtpToolTipResource);
-    pToolTipContext->ShowTitleAndDescription();
-    pToolTipContext->SetMargin(CRect(2, 2, 2, 2));
-    pToolTipContext->SetMaxTipWidth(180);
-    pToolTipContext->SetFont(m_cmdbars->GetPaintManager()->GetIconFont());
-
-    m_cmdbars->GetCommandBarsOptions()->ShowKeyboardCues(xtpKeyboardCuesShowWindowsDefault);
-    m_cmdbars->GetCommandBarsOptions()->bToolBarAccelTips = TRUE;
-    m_cmdbars->GetCommandBarsOptions()->bShowKeyboardTips = TRUE;
-
-    m_cmdbars->GetShortcutManager()->SetAccelerators(m_id);
+    m_pCommandBars->GetCommandBarsOptions()->ShowKeyboardCues(xtpKeyboardCuesShowWindowsDefault);
+    m_pCommandBars->GetCommandBarsOptions()->bToolBarAccelTips = TRUE;
+    m_pCommandBars->GetCommandBarsOptions()->bShowKeyboardTips = TRUE;
+    m_pCommandBars->GetShortcutManager()->SetAccelerators(m_id);
 
     if (InitRibbonTheme() &&
         (!LoadRibbonIcons() || !CreateRibbonBar()))
@@ -74,18 +63,53 @@ BOOL CMainFrame::InitRibbonBars(CXTPCommandBars* pCommandBars)
         return FALSE;
     }
 
-    XTPPaintManager()->SetFontHeight(-12);  // for win7
+    if (!CreateStatusBar())
+        return FALSE;
+
+    CXTPToolTipContext* pToolTipContext = m_pCommandBars->GetToolTipContext();
+    pToolTipContext->SetStyle(xtpToolTipResource);
+    pToolTipContext->ShowTitleAndDescription();
+    pToolTipContext->SetMargin(CRect(2, 2, 2, 2));
+    pToolTipContext->SetMaxTipWidth(180);
+
     LoadCommandBars();
 
     return TRUE;
 }
 
+void CMainFrame::SetRibbonFont()
+{
+    CXTPOffice2007Theme* pOfficeTheme = (CXTPOffice2007Theme*)(m_pCommandBars->GetPaintManager());
+    std::wstring fontcfg(x3::GetStringValue(L"FrameXtp", L"RibbonFont"));
+    CString fontname, sizestr;
+
+    AfxExtractSubString(fontname, fontcfg.c_str(), 0, ',');
+    AfxExtractSubString(sizestr, fontcfg.c_str(), 1, ',');
+    long fontsize = _wtol(sizestr);
+
+    if (!fontname.IsEmpty() && pOfficeTheme->FontExists(fontname))
+    {
+        pOfficeTheme->m_strOfficeFont = fontname;
+        XTPPaintManager()->m_strOfficeFont = fontname;
+    }
+    if (fontsize != 0)
+    {
+        pOfficeTheme->SetFontHeight(fontsize);
+    }
+    else
+    {
+        pOfficeTheme->UpdateFonts();
+    }
+
+    m_pCommandBars->GetToolTipContext()->SetFont(m_pCommandBars->GetPaintManager()->GetRegularFont());
+}
+
 void CMainFrame::LoadCommandBars()
 {
     LPCTSTR profileName = _T("CommandBars");
-    m_cmdbars->LoadOptions(profileName);
-    m_cmdbars->LoadBarState(profileName, FALSE);
-    m_cmdbars->GetShortcutManager()->LoadShortcuts(profileName);
+    m_pCommandBars->LoadOptions(profileName);
+    m_pCommandBars->LoadBarState(profileName, FALSE);
+    m_pCommandBars->GetShortcutManager()->LoadShortcuts(profileName);
 }
 
 void CMainFrame::SaveCommandBars()
@@ -105,14 +129,14 @@ void CMainFrame::SaveCommandBars()
     }*/
 
     LPCTSTR profileName = _T("CommandBars");
-    m_cmdbars->SaveOptions(profileName);
-    m_cmdbars->SaveBarState(profileName);
-    m_cmdbars->GetShortcutManager()->SaveShortcuts(profileName);
+    m_pCommandBars->SaveOptions(profileName);
+    m_pCommandBars->SaveBarState(profileName);
+    m_pCommandBars->GetShortcutManager()->SaveShortcuts(profileName);
 }
 
 BOOL CMainFrame::InitRibbonTheme()
 {
-    CXTPOffice2007Theme* pOfficeTheme = (CXTPOffice2007Theme*)(m_cmdbars->GetPaintManager());
+    CXTPOffice2007Theme* pOfficeTheme = (CXTPOffice2007Theme*)(m_pCommandBars->GetPaintManager());
 
     HMODULE hThemeDll = LoadLibrary(m_frameNode->GetString(L"themeDll").c_str());
     if (hThemeDll != NULL)
@@ -121,13 +145,15 @@ BOOL CMainFrame::InitRibbonTheme()
         pOfficeTheme->SetImageHandle(hThemeDll, m_frameNode->GetString(L"themeName").c_str());
 
         XTPPaintManager()->SetTheme(xtpThemeRibbon);
-        m_cmdbars->SetTheme(xtpThemeRibbon);
+        m_pCommandBars->SetTheme(xtpThemeRibbon);
     }
     else
     {
         XTPPaintManager()->SetTheme(xtpThemeWhidbey);
-        m_cmdbars->SetTheme(xtpThemeWhidbey);
+        m_pCommandBars->SetTheme(xtpThemeWhidbey);
     }
+
+    SetRibbonFont();
 
     return hThemeDll != NULL;
 }
@@ -157,10 +183,10 @@ BOOL CMainFrame::CreateStatusBar()
         ID_INDICATOR_SCRL,
     };
 
-    VERIFY(m_wndStatusBar.Create(m_this)
+    VERIFY(m_wndStatusBar.Create(m_pMainWnd)
         && m_wndStatusBar.SetIndicators(indicators, _countof(indicators)));
 
-    m_wndStatusBar.SetCommandBars(m_cmdbars);
+    m_wndStatusBar.SetCommandBars(m_pCommandBars);
     m_wndStatusBar.SetDrawDisabledText(FALSE);
     m_wndStatusBar.GetStatusBarCtrl().SetMinHeight(22);
     m_wndStatusBar.GetPane(0)->SetMargins(8, 1, 2, 1);
@@ -170,7 +196,7 @@ BOOL CMainFrame::CreateStatusBar()
 
 BOOL CMainFrame::LoadRibbonIcons()
 {
-    CXTPImageManager* pImageManager = m_cmdbars->GetImageManager();
+    CXTPImageManager* pImageManager = m_pCommandBars->GetImageManager();
 
     for (int ibar = 0; ; ibar++)
     {
@@ -210,7 +236,7 @@ BOOL CMainFrame::LoadRibbonIcons()
 
 BOOL CMainFrame::CreateRibbonBar()
 {
-    CXTPRibbonBar* pRibbonBar = (CXTPRibbonBar*)m_cmdbars->Add(
+    CXTPRibbonBar* pRibbonBar = (CXTPRibbonBar*)m_pCommandBars->Add(
         x3::GetStringValue(L"FrameXtp", L"RibbonTitle").c_str(), 
         xtpBarTop, RUNTIME_CLASS(CXTPRibbonBar));
 
@@ -220,8 +246,8 @@ BOOL CMainFrame::CreateRibbonBar()
     pRibbonBar->EnableDocking(0);
 
     CMenu menu;
-    menu.Attach(::GetMenu(m_this->GetSafeHwnd()));
-    m_this->SetMenu(NULL);
+    menu.Attach(::GetMenu(m_pMainWnd->GetSafeHwnd()));
+    m_pMainWnd->SetMenu(NULL);
 
     CXTPControlPopup* pControlFile = (CXTPControlPopup*)pRibbonBar->AddSystemButton(0);
     pControlFile->SetCommandBar(menu.GetSubMenu(0));
@@ -268,7 +294,7 @@ void CMainFrame::CreateRibbonTabs(CXTPRibbonBar* pRibbonBar)
 }
 
 void CMainFrame::CreateRibbonGroup(CXTPRibbonTab* pTab, 
-                                      const Cx_ConfigSection& group)
+                                   const Cx_ConfigSection& group)
 {
     UINT groupID = group->GetUInt32(L"id");
     CXTPRibbonGroup* pGroup = groupID ? pTab->AddGroup(groupID)
@@ -294,7 +320,7 @@ void CMainFrame::CreateRibbonGroup(CXTPRibbonTab* pTab,
 }
 
 CXTPControl* CMainFrame::CreateRibbonButton(CXTPRibbonGroup* pGroup, 
-                                               const Cx_ConfigSection& button)
+                                            const Cx_ConfigSection& button)
 {
     CXTPControl* pControl = NULL;
     const std::wstring type(button->GetString(L"type"));
@@ -315,7 +341,7 @@ CXTPControl* CMainFrame::CreateRibbonButton(CXTPRibbonGroup* pGroup,
 }
 
 CXTPControl* CMainFrame::CreateRibbonPopupButton(CXTPRibbonGroup* pGroup, 
-                                                    const Cx_ConfigSection& button)
+                                                 const Cx_ConfigSection& button)
 {
     UINT buttonID = button->GetUInt32(L"id");
     std::vector<UINT> popupIds;
@@ -344,7 +370,7 @@ CXTPControl* CMainFrame::CreateRibbonPopupButton(CXTPRibbonGroup* pGroup,
 }
 
 CXTPControl* CMainFrame::CreateRibbonComboButton(CXTPRibbonGroup* pGroup, 
-                                                    const Cx_ConfigSection& button)
+                                                 const Cx_ConfigSection& button)
 {
     CXTPControlComboBox* pCombo = new CXTPControlComboBox();
 
@@ -370,7 +396,7 @@ void CMainFrame::OnUpdateRibbonTab(CCmdUI* pCmdUI)
 void CMainFrame::SetSystemButtonStyle(const CMenu& menu)
 {
     CXTPRibbonBar* pRibbonBar = DYNAMIC_DOWNCAST(
-        CXTPRibbonBar, m_cmdbars->GetMenuBar());
+        CXTPRibbonBar, m_pCommandBars->GetMenuBar());
     std::wstring themeName(m_frameNode->GetString(L"themeName"));
 
     if (themeName.find(L"WINDOWS7") != std::wstring::npos
@@ -385,7 +411,7 @@ void CMainFrame::SetSystemButtonStyle(const CMenu& menu)
 
 void CMainFrame::ShowCustomizeDialog(int nSelectedPage)
 {
-    CXTPCustomizeSheet cs(m_cmdbars);
+    CXTPCustomizeSheet cs(m_pCommandBars);
     UINT resid = m_id;
 
     CXTPRibbonCustomizeQuickAccessPage pageQuickAccess(&cs);

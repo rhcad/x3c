@@ -15,13 +15,14 @@ public:
 
 protected:
     BOOL PreCreateWindow(CREATESTRUCT& cs);
-    BOOL BeforeLoadFrame(CFrameWnd* pThis);
+    BOOL BeforeLoadFrame(CFrameWnd* pMainWnd);
     BOOL AfterLoadFrame();
     BOOL InitRibbonBars(CXTPCommandBars* pCommandBars);
     BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*);
     void LoadCommandBars();
     void SaveCommandBars();
 
+    void SetRibbonFont();
     BOOL InitRibbonTheme();
     BOOL CreateStatusBar();
     BOOL CreateRibbonBar();
@@ -48,6 +49,6 @@ protected:
     std::wstring        m_appname;
 
 private:
-    CFrameWnd*          m_this;
-    CXTPCommandBars*    m_cmdbars;
+    CFrameWnd*          m_pMainWnd;
+    CXTPCommandBars*    m_pCommandBars;
 };
