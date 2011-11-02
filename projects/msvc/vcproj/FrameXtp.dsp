@@ -45,7 +45,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/FrameXtp.lib" /libpath:"..\..\..\obj\vc60"
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/FrameXtp.lib" /libpath:"..\..\..\code\bin\vc60"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "FrameXtp - Win32 Debug"
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/FrameXtp.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/FrameXtp.lib" /pdbtype:sept /libpath:"..\..\..\obj\vc60"
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/FrameXtp.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/FrameXtp.lib" /pdbtype:sept /libpath:"..\..\..\code\bin\vc60"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 
