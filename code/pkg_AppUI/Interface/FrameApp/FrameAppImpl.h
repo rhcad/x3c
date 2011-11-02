@@ -35,9 +35,6 @@ BOOL CFrameApp::InitInstance()
     CWinApp::InitInstance();
     VERIFY(AfxOleInit());
 
-    CoInitialize(NULL);
-    CoCreateInstance(IID_IUnknown, NULL, 0, IID_IUnknown, NULL); // for ComHook.plugin
-
     return LoadPlugins()
         && CheckAppInstance()
         && CreateFrameWnd();

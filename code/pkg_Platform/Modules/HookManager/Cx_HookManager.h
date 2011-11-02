@@ -14,14 +14,14 @@ protected:
     ~Cx_HookManager();
 
 private:
-    virtual bool HookProc(PROC oldproc, PROC newproc);
-    virtual bool UnhookProc(PROC newproc);
-    virtual bool HookProc(LPCWSTR dllname, LPCSTR func, PROC newproc);
-    virtual bool UnhookProc(LPCWSTR dllname, LPCSTR funcname);
+    virtual long HookPlugins(LPCWSTR dllname, LPCSTR func, PROC newproc);
+    virtual long UnhookPlugins(PROC newproc);
+    virtual bool HookProc(PROC oldproc, PROC newproc, HMODULE hmod = NULL);
+    virtual bool UnhookProc(PROC newproc, HMODULE hmod = NULL);
 
 private:
-    std::map<PROC, HMODULE>     m_dlls;
-    std::map<PROC, PROC>        m_new2old;
+    typedef std::pair<PROC, HMODULE>    KEY;
+    std::map<KEY, PROC>        m_new2old;
 };
 
 #endif // _X3_HOOKMANAGER_IMPL_H

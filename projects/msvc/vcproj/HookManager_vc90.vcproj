@@ -339,6 +339,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\Public\ApiHook.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\Cx_HookManager.cpp"
 				>
 			</File>
@@ -352,6 +356,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\Public\ApiHook.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\code\pkg_Platform\Modules\HookManager\Cx_HookManager.h"
 				>

@@ -1,22 +1,26 @@
 #include <UtilFunc/PluginInc.h>
 #include "ComCreator.h"
-#include "ApiHook.h"
 #include "ComFileMap.h"
+#include "../Public/ApiHook.h"
 
 static const PROC   s_oldfunc = (PROC)CoCreateInstance;
 static CComFileMap  s_filemap;
 static CComModules  s_modules;
 
-bool CComCreator::Init()
-{
-    return HookModuleFunction("ole32.dll", s_oldfunc, (PROC)Hook_CoCreateInstance);
-}
-
 void CComCreator::Free()
 {
-    HookModuleFunction("ole32.dll", (PROC)Hook_CoCreateInstance, s_oldfunc);
     s_modules.Free();
     s_filemap.Free();
+}
+
+bool CComCreator::Hook(HMODULE hmod)
+{
+    return HookModuleFunction("ole32.dll", s_oldfunc, (PROC)Hook_CoCreateInstance, hmod);
+}
+
+bool CComCreator::Unhook(HMODULE hmod)
+{
+    return HookModuleFunction("ole32.dll", (PROC)Hook_CoCreateInstance, s_oldfunc, hmod);
 }
 
 HRESULT WINAPI CComCreator::Hook_CoCreateInstance(

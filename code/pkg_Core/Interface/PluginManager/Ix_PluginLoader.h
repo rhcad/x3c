@@ -73,7 +73,7 @@ public:
     //! Register a plugin (not load dll).
     /*! It can used to static-link dll or main appliction module.
         \param instance the module to register.
-        \return if register success.
+        \return true if register successful.
         \note need to call InitializePlugins() after.
         \see InitializePlugins
     */
@@ -82,7 +82,7 @@ public:
     //! Load a plugin.
     /*! Use LoadLibraryEx() and RegisterPlugin() to load.
         \param filename absolute file name or relative to the application.
-        \return if load success.
+        \return true if load successful.
         \note need to call InitializePlugins() after.
         \see InitializePlugins
     */
@@ -91,7 +91,7 @@ public:
     //! Unload a plugin.
     /*! Automatic call plugin's x3CanUnloadPlugin() and x3UninitializePlugin() export functions.
         \param name plugin filename regardless folder, such as 'MyData.plugin.dll'.
-        \return if unload success.
+        \return true if unload successful.
         \see optional export function: OUTAPI void x3UninitializePlugin()
     */
     virtual bool UnloadPlugin(const wchar_t* name) = 0;

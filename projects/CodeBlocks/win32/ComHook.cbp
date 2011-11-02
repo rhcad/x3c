@@ -46,8 +46,8 @@
 			<Add library="shlwapi" />
 			<Add library="ole32" />
 		</Linker>
-		<Unit filename="..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.cpp" />
-		<Unit filename="..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.h" />
+		<Unit filename="..\..\..\code\pkg_Platform\Modules\Public\ApiHook.cpp" />
+		<Unit filename="..\..\..\code\pkg_Platform\Modules\Public\ApiHook.h" />
 		<Unit filename="..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.cpp" />
 		<Unit filename="..\..\..\code\pkg_Platform\Modules\ComHook\ComCreator.h" />
 		<Unit filename="..\..\..\code\pkg_Platform\Modules\ComHook\ComFileMap.cpp" />

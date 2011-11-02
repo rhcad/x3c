@@ -2,28 +2,32 @@
 #include <UtilFunc/PluginInc.h>
 #include <UtilFunc/LoadDllHelper.h>
 
-static PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry();
-static PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname);
+static PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry(HMODULE hmod);
+static PIMAGE_THUNK_DATA FindThunkData(HMODULE hmod, LPCSTR dllname);
 static PROC* FindFunctionAddress(PIMAGE_THUNK_DATA thunk, PROC oldproc);
 static bool ReplaceFunction(PROC* addr, PROC newproc);
 
-bool HookModuleFunction(LPCSTR dllname, PROC oldproc, PROC newproc)
+bool HookModuleFunction(LPCSTR dllname, PROC oldproc, PROC newproc, HMODULE hmod = NULL)
 {
     ASSERT(oldproc && newproc);
     PIMAGE_THUNK_DATA thunk = NULL;
     PROC* pfunc = NULL;
 
+    if (!hmod)
+    {
+        hmod = GetModuleHandleW(NULL);
+    }
+
     if (dllname && *dllname)
     {
-        thunk = FindThunkData(dllname);
+        thunk = FindThunkData(hmod, dllname);
         pfunc = thunk ? FindFunctionAddress(thunk, oldproc) : NULL;
     }
     else
     {
-        HMODULE hmod = GetModuleHandleW(NULL);
-        PIMAGE_IMPORT_DESCRIPTOR importDesc = GetImportAddressEntry();
+        PIMAGE_IMPORT_DESCRIPTOR importDesc = GetImportAddressEntry(hmod);
 
-        if (importDesc == NULL)
+        if (!importDesc)
         {
             return NULL;
         }
@@ -38,10 +42,9 @@ bool HookModuleFunction(LPCSTR dllname, PROC oldproc, PROC newproc)
     return pfunc && ReplaceFunction(pfunc, newproc);
 }
 
-// Get the import directory of the current process.
-PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry()
+// Get the import directory of the specified module in the current process.
+PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry(HMODULE hmod)
 {
-    HMODULE hmod = GetModuleHandleW(NULL);
     PIMAGE_IMPORT_DESCRIPTOR importDesc = NULL;
 
     try
@@ -61,12 +64,11 @@ PIMAGE_IMPORT_DESCRIPTOR GetImportAddressEntry()
 }
 
 // Find the import address table of the module.
-PIMAGE_THUNK_DATA FindThunkData(LPCSTR dllname)
+PIMAGE_THUNK_DATA FindThunkData(HMODULE hmod, LPCSTR dllname)
 {
-    HMODULE hmod = GetModuleHandleW(NULL);
-    PIMAGE_IMPORT_DESCRIPTOR importDesc = GetImportAddressEntry();
+    PIMAGE_IMPORT_DESCRIPTOR importDesc = GetImportAddressEntry(hmod);
 
-    if (importDesc == NULL)
+    if (!importDesc)
     {
         return NULL;
     }

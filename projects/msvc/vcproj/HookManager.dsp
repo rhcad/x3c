@@ -90,6 +90,10 @@ SOURCE=..\..\..\code\pkg_Platform\Modules\HookManager\Cx_HookManager.h
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=..\..\..\code\pkg_Platform\Modules\Public\ApiHook.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\code\pkg_Platform\Modules\HookManager\Cx_HookManager.cpp
 # End Source File
 # Begin Source File

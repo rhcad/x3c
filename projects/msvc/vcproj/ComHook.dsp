@@ -82,7 +82,7 @@ LINK32=link.exe
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.h
+SOURCE=..\..\..\code\pkg_Platform\Modules\Public\ApiHook.h
 # End Source File
 # Begin Source File
 
@@ -98,7 +98,7 @@ SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ComFileMap.h
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=..\..\..\code\pkg_Platform\Modules\ComHook\ApiHook.cpp
+SOURCE=..\..\..\code\pkg_Platform\Modules\Public\ApiHook.cpp
 # End Source File
 # Begin Source File
 

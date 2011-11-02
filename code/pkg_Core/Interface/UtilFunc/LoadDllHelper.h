@@ -20,7 +20,7 @@ public:
         \param assign a optional pointer to a variable that receives the library handle.
     */
     LoadDllHelper(const wchar_t* filename = NULL, HMODULE* assign = NULL)
-        : m_hmod(NULL), m_assign(assign)
+        : m_hmod(NULL), m_assign(assign), m_loadnew(false)
     {
         if (filename)
         {
@@ -39,7 +39,10 @@ public:
     {
         if (m_hmod)
         {
-            FreeLibrary(m_hmod);
+            if (m_loadnew)
+            {
+                FreeLibrary(m_hmod);
+            }
             m_hmod = NULL;
 
             if (m_assign)
@@ -54,7 +57,12 @@ public:
     {
         Unload();
 
-        m_hmod = LoadLibraryW(filename);
+        m_hmod = GetModuleHandleW(filename);
+        m_loadnew = !m_hmod;
+        if (!m_hmod)
+        {
+            m_hmod = LoadLibraryW(filename);
+        }
         if (m_assign)
         {
             *m_assign = m_hmod;
@@ -78,6 +86,7 @@ public:
 private:
     HMODULE     m_hmod;
     HMODULE*    m_assign;
+    bool        m_loadnew;
 };
 
 #endif // UTILFUNC_LOADDLLHELPER_H_
