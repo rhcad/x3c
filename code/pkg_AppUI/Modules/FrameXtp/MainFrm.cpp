@@ -84,8 +84,11 @@ BOOL CMainFrame::InitRibbonBars(CXTPCommandBars* pCommandBars)
 void CMainFrame::SetRibbonFont()
 {
     CXTPOffice2007Theme* pOfficeTheme = (CXTPOffice2007Theme*)(m_pCommandBars->GetPaintManager());
-    std::wstring fontcfg(x3::GetStringValue(L"FrameXtp", L"RibbonFont"));
     CString fontname, sizestr;
+
+    std::wstring fontcfg(x3::GetStringValue(m_appname.c_str(), L"RibbonFont"));
+    if (fontcfg.empty())
+        fontcfg = x3::GetStringValue(L"FrameXtp", L"RibbonFont");
 
     AfxExtractSubString(fontname, fontcfg.c_str(), 0, ',');
     AfxExtractSubString(sizestr, fontcfg.c_str(), 1, ',');
@@ -184,16 +187,22 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra,
 
 BOOL CMainFrame::CreateStatusBar()
 {
-    static UINT indicators[] =
+    std::vector<UINT> indicators(1, ID_SEPARATOR);
+    Cx_ConfigSection items(m_frameNode.GetSection(L"statusbar/indicators"));
+
+    for (int i = 0; ; i++)
     {
-        ID_SEPARATOR,
-        ID_INDICATOR_CAPS,
-        ID_INDICATOR_NUM,
-        ID_INDICATOR_SCRL,
-    };
+        Cx_ConfigSection item(items.GetSectionByIndex(L"item", i));
+        UINT id = GetNodeID(item, L"id");
+        if (0 == id)
+            break;
+        indicators.push_back(id);
+        if (ID_SEPARATOR == id && indicators.front() == id)
+            indicators.erase(indicators.begin());
+    }
 
     VERIFY(m_wndStatusBar.Create(m_pMainWnd)
-        && m_wndStatusBar.SetIndicators(indicators, _countof(indicators)));
+        && m_wndStatusBar.SetIndicators(&indicators[0], x3::GetSize(indicators)));
 
     m_wndStatusBar.SetCommandBars(m_pCommandBars);
     m_wndStatusBar.SetDrawDisabledText(FALSE);

@@ -27,7 +27,8 @@ END_MESSAGE_MAP()
 
 void CHelloApp::OnCommands(UINT nID)
 {
-    CString str;
-    str.Format(L"OnCommands: %d", nID);
-    AfxMessageBox(str);
+    CString str, text;
+    str.LoadString(nID);
+    text.Format(L"OnCommands: %d\n%s", nID, str);
+    AfxMessageBox(text);
 }

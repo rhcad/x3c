@@ -33,6 +33,12 @@
         <button id="7614 ID_EDIT_SELECT"/>
       </toolbar>
     </toolbars>
+    <statusbar>
+      <indicators>
+        <item id="0xE701 ID_INDICATOR_CAPS"/>
+        <item id="0xE702 ID_INDICATOR_NUM"/>
+      </indicators>
+    </statusbar>
   </mainframe>
   <ribbon>
     <tabs>
