@@ -13,10 +13,10 @@ BEGIN_MESSAGE_MAP(CMainSDIFrame, CXTPFrameWnd)
     ON_WM_CREATE()
     ON_WM_CLOSE()
     //}}AFX_MSG_MAP
-    ON_UPDATE_COMMAND_UI(XTP_ID_RIBBONCONTROLTAB, OnUpdateRibbonTab)
-    ON_COMMAND(XTP_ID_CUSTOMIZE, OnCustomize)
-    ON_COMMAND(XTP_ID_RIBBONCUSTOMIZE, OnCustomizeQuickAccess)
     ON_XTP_CREATECONTROL()
+    ON_COMMAND(XTP_ID_CUSTOMIZE, OnCustomize)
+    ON_UPDATE_COMMAND_UI(XTP_ID_RIBBONCONTROLTAB, OnUpdateRibbonTab)
+    ON_COMMAND(XTP_ID_RIBBONCUSTOMIZE, OnCustomizeQuickAccess)
 END_MESSAGE_MAP()
 
 CMainSDIFrame::CMainSDIFrame()
@@ -52,10 +52,9 @@ int CMainSDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     return 0;
 }
 
-void CMainSDIFrame::OnClose() 
+void CMainSDIFrame::OnClose()
 {
-    CMainFrame::SaveCommandBars();
-
+    CMainFrame::OnClose();
     CXTPFrameWnd::OnClose();
 }
 

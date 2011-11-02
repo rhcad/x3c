@@ -38,7 +38,7 @@ int CChildFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     CXTPPaintManager* pPaintManager = ((CXTPMDIFrameWnd*)GetParentFrame()
         )->GetCommandBars()->GetPaintManager();
 
-    if (pPaintManager->GetCurrentTheme() >= xtpThemeResource)
+    if (pPaintManager->GetCurrentTheme() > xtpThemeWhidbey)
     {
         EnableOffice2007Frame(this, pPaintManager);
     }

@@ -7,6 +7,10 @@
 
 Cx_ConfigSection    g_factoryRoot;
 
+#if _XTPLIB_VERSION_MAJOR <= 13
+inline CXTPOffice2007Images* XTPResourceImages() { return XTPOffice2007Images(); }
+#endif
+
 CMainFrame::CMainFrame() : m_id(0), m_pMainWnd(NULL), m_pCommandBars(NULL)
 {
 }
@@ -67,7 +71,7 @@ BOOL CMainFrame::InitRibbonBars(CXTPCommandBars* pCommandBars)
         return FALSE;
 
     CXTPToolTipContext* pToolTipContext = m_pCommandBars->GetToolTipContext();
-    pToolTipContext->SetStyle(xtpToolTipResource);
+    pToolTipContext->SetStyle((XTPToolTipStyle)(xtpToolTipLuna + 1));
     pToolTipContext->ShowTitleAndDescription();
     pToolTipContext->SetMargin(CRect(2, 2, 2, 2));
     pToolTipContext->SetMaxTipWidth(180);
@@ -94,7 +98,13 @@ void CMainFrame::SetRibbonFont()
     }
     if (fontsize != 0)
     {
+#if _XTPLIB_VERSION_MAJOR > 13
         pOfficeTheme->SetFontHeight(fontsize);
+#else
+        CXTPRibbonBar* pRibbonBar = DYNAMIC_DOWNCAST(
+            CXTPRibbonBar, m_pCommandBars->GetMenuBar());
+        pRibbonBar->SetFontHeight(fontsize);
+#endif
     }
     else
     {
@@ -136,26 +146,25 @@ void CMainFrame::SaveCommandBars()
 
 BOOL CMainFrame::InitRibbonTheme()
 {
-    CXTPOffice2007Theme* pOfficeTheme = (CXTPOffice2007Theme*)(m_pCommandBars->GetPaintManager());
+    std::wstring themeName(m_frameNode->GetString(L"themeName"));
+    std::wstring themeDll(m_frameNode->GetString(L"themeDll"));
 
-    HMODULE hThemeDll = LoadLibrary(m_frameNode->GetString(L"themeDll").c_str());
-    if (hThemeDll != NULL)
+    XTThemeManager()->SetTheme(xtThemeVisualStudio2008);
+	XTPPaintManager()->SetTheme(xtpThemeVisualStudio2008);
+
+    BOOL ret = XTPResourceImages()->SetHandle(themeDll.c_str(), themeName.c_str());
+    if (ret)
     {
-        pOfficeTheme->SetImages(XTPResourceImages());
-        pOfficeTheme->SetImageHandle(hThemeDll, m_frameNode->GetString(L"themeName").c_str());
-
         XTPPaintManager()->SetTheme(xtpThemeRibbon);
         m_pCommandBars->SetTheme(xtpThemeRibbon);
     }
-    else
-    {
-        XTPPaintManager()->SetTheme(xtpThemeWhidbey);
-        m_pCommandBars->SetTheme(xtpThemeWhidbey);
-    }
 
-    SetRibbonFont();
+    return ret;
+}
 
-    return hThemeDll != NULL;
+void CMainFrame::OnClose()
+{
+    SaveCommandBars();
 }
 
 BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, 
@@ -244,6 +253,7 @@ BOOL CMainFrame::CreateRibbonBar()
         return FALSE;
 
     pRibbonBar->EnableDocking(0);
+    SetRibbonFont();
 
     CMenu menu;
     menu.Attach(::GetMenu(m_pMainWnd->GetSafeHwnd()));

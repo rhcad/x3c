@@ -55,7 +55,6 @@ int CFrameApp::ExitInstance()
     m_factory.Release();
 
     m_loader->Unload();
-    CoUninitialize();
 
     return CWinApp::ExitInstance();
 }
@@ -90,7 +89,7 @@ HINSTANCE CFrameApp::LoadAppLangResourceDLL()
 {
     HINSTANCE hResDll = NULL;
 
-#if _MSC_VER > 1400     // not VC6
+#if _MSC_VER > 1400
     TCHAR szPath[MAX_PATH], szTitle[60];
 
     GetModuleFileName(m_hInstance, szPath, MAX_PATH);
@@ -102,13 +101,16 @@ HINSTANCE CFrameApp::LoadAppLangResourceDLL()
 
     hResDll = AfxLoadLangResourceDLL(_T("%s%s.dll"), szPath);
     TRACE2("Load resource file: %s (%s)\n", szPath, hResDll ? L"ok" : L"fail");
+
+#elif _MSC_VER > 1200
+    hResDll = AfxLoadLangResourceDLL(_T("%s%s.dll"));
 #endif
 
     return hResDll;
 }
 
 
-#if _MSC_VER > 1400     // not VC6
+#if _MSC_VER >= 1200     // not VC6
 #if defined _M_IX86
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #elif defined _M_IA64

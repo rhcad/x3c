@@ -13,10 +13,10 @@ BEGIN_MESSAGE_MAP(CMainMDIFrame, CXTPMDIFrameWnd)
     ON_WM_CREATE()
     ON_WM_CLOSE()
     //}}AFX_MSG_MAP
-    ON_UPDATE_COMMAND_UI(XTP_ID_RIBBONCONTROLTAB, OnUpdateRibbonTab)
-    ON_COMMAND(XTP_ID_CUSTOMIZE, OnCustomize)
-    ON_COMMAND(XTP_ID_RIBBONCUSTOMIZE, OnCustomizeQuickAccess)
     ON_XTP_CREATECONTROL()
+    ON_COMMAND(XTP_ID_CUSTOMIZE, OnCustomize)
+    ON_UPDATE_COMMAND_UI(XTP_ID_RIBBONCONTROLTAB, OnUpdateRibbonTab)
+    ON_COMMAND(XTP_ID_RIBBONCUSTOMIZE, OnCustomizeQuickAccess)
 END_MESSAGE_MAP()
 
 CMainMDIFrame::CMainMDIFrame()
@@ -50,7 +50,7 @@ int CMainMDIFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
 
     m_wndClient.Attach(this, FALSE);
-    m_wndClient.GetToolTipContext()->SetStyle(xtpToolTipResource);
+    m_wndClient.GetToolTipContext()->SetStyle((XTPToolTipStyle)(xtpToolTipLuna + 1));
 
     return 0;
 }
@@ -63,10 +63,9 @@ void CMainMDIFrame::OnSetPreviewMode(BOOL bPreview, CPrintPreviewState* pState)
     CXTPMDIFrameWnd::OnSetPreviewMode(bPreview, pState);
 }
 
-void CMainMDIFrame::OnClose() 
+void CMainMDIFrame::OnClose()
 {
-    CMainFrame::SaveCommandBars();
-
+    CMainFrame::OnClose();
     CXTPMDIFrameWnd::OnClose();
 }
 

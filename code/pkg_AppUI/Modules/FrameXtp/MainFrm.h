@@ -23,6 +23,7 @@ protected:
     void LoadCommandBars();
     void SaveCommandBars();
 
+    afx_msg void OnClose();
     afx_msg void OnUpdateRibbonTab(CCmdUI* pCmdUI);
     afx_msg void OnCustomize();
     afx_msg void OnCustomizeQuickAccess();
