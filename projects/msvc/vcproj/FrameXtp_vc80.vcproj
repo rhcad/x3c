@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\XTP_Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_AFXEXT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -71,6 +71,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="..\..\..\code\bin\vc80"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
@@ -132,7 +133,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\XTP_Include"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;_DEBUG;_AFXEXT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -157,6 +158,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="..\..\..\code\bin\vc80"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
@@ -217,7 +219,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\XTP_Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_AFXEXT"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -240,6 +242,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\..\code\bin\vc80"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"
@@ -305,7 +308,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_Core\Interface"
+				AdditionalIncludeDirectories="..\..\..\code\pkg_Core\Interface;..\..\..\code\pkg_AppUI\Interface;..\..\..\code\pkg_AppUI\Interface\XTP_Include"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;NDEBUG;_AFXEXT"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -328,6 +331,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(ProjectName).plugin.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\..\code\bin\vc80"
 				IgnoreDefaultLibraryNames="oldnames.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)\..\Symbols\$(ProjectName).pdb"

@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\FrameXtp"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GX /O2 /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /YX"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_AppUI\Interface\XTP_Include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /YX"stdafx.h" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG" /d "_UNICODE" /d "_AFXDLL"
@@ -45,7 +45,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/FrameXtp.lib"
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.pdb" /map:"..\..\..\obj\vc60\Release\Symbols/FrameXtp.map" /machine:I386 /out:"..\..\..\code\bin\vc60\Release\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Release\Lib/FrameXtp.lib" /libpath:"..\..\..\obj\vc60"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "FrameXtp - Win32 Debug"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\FrameXtp"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_Core\Interface" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /YX"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_AppUI\Interface" /I "..\..\..\code\pkg_AppUI\Interface\XTP_Include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /D "_WINDLL" /D "_AFXDLL" /D "_AFXEXT" /YX"stdafx.h" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG" /d "_UNICODE" /d "_AFXDLL"
@@ -64,7 +64,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/FrameXtp.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/FrameXtp.lib" /pdbtype:sept
+# ADD LINK32 /nologo /dll /pdb:"..\..\..\obj\vc60\Debug\Symbols/FrameXtp.pdb" /debug /machine:I386 /out:"..\..\..\code\bin\vc60\Debug\plugins/FrameXtp.plugin.dll" /implib:"..\..\..\obj\vc60\Debug\Lib/FrameXtp.lib" /pdbtype:sept /libpath:"..\..\..\obj\vc60"
 # SUBTRACT LINK32 /pdb:none /map
 
 !ENDIF 
