@@ -525,20 +525,21 @@ void CMainFrame::OnCustomizeQuickAccess()
 UINT CMainFrame::GetNodeID(const Cx_ConfigSection& node, LPCWSTR name)
 {
     UINT id = node->GetUInt32(name);
-    std::wstring str(node->GetString(name));
-    size_t pos = str.find(L' ');
+    std::wstring strname(node->GetString(name));
+    size_t pos = strname.find(L' ');
 
-    if (id != 0 && pos != str.npos)
+    if (id != 0 && pos != strname.npos)
     {
-        str = str.substr(pos + 1);
+        strname = strname.substr(pos + 1);
 
-        TRACE2("ID %d: %s\n", id, str.c_str());
-        ASSERT(str.find(L' ') == str.npos && !str.empty());
+        TRACE2("String ID: %d, %s\n", id, strname.c_str());
+        ASSERT(strname.find(L' ') == strname.npos && !strname.empty());
 
-        std::map<std::wstring, UINT>::iterator it = m_idnames.find(str);
-        ASSERT(it == m_idnames.end() || it->second == id);
+        std::map<std::wstring, UINT>::iterator it = m_idnames.find(strname);
+        ASSERT_MESSAGE(it == m_idnames.end() || it->second == id,
+            "A string name must has only one ID value in the factory xml.");
 
-        m_idnames[str] = id;
+        m_idnames[strname] = id;
     }
 
     return id;
