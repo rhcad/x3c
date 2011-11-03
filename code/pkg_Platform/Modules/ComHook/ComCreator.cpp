@@ -2,6 +2,7 @@
 #include "ComCreator.h"
 #include "ComFileMap.h"
 #include "../Public/ApiHook.h"
+#include <UtilFunc/RelToAbs.h>
 
 static const PROC   s_oldfunc = (PROC)CoCreateInstance;
 static CComFileMap  s_filemap;
@@ -38,7 +39,9 @@ HRESULT WINAPI CComCreator::Hook_CoCreateInstance(
     {
         typedef HRESULT (WINAPI *FUNC_CREATE)(
             REFCLSID, LPUNKNOWN, DWORD, REFIID, LPVOID*);
-        hr = ((FUNC_CREATE)s_oldfunc)(rclsid, pUnkOuter, context, riid, ppv);
+        HRESULT hr2 = ((FUNC_CREATE)s_oldfunc)(rclsid, pUnkOuter, context, riid, ppv);
+        if (hr2 != REGDB_E_CLASSNOTREG)
+            hr = hr2;
     }
 
     return hr;
@@ -67,7 +70,11 @@ static inline std::wstring tostr(REFCLSID rclsid)
 HRESULT CComCreator::LocalCreateInstance(
         REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
-    HMODULE hmod = s_modules.GetModule(s_filemap.GetComFile(tostr(rclsid)));
+    std::wstring filename(s_filemap.GetComFile(tostr(rclsid)));
+    if (PathIsRelativeW(filename.c_str()))
+        filename = x3::FileNameRelToAbs(filename.c_str());
+
+    HMODULE hmod = s_modules.GetModule(filename);
     HRESULT hr = hmod ? E_FAIL : REGDB_E_CLASSNOTREG;
 
     if (hmod != NULL)

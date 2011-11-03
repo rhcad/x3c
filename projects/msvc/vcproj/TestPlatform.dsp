@@ -137,7 +137,7 @@ InputPath=..\..\..\code\pkg_UnitTest\Modules\TestPlatform\atlcom.dll
 InputName=atlcom
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)\..\tests\"  /S/Q/Y/D
+	if exist $(InputPath) xcopy $(InputPath) "$(TargetDir)\..\tests\"  /S/Q/Y/D
 
 # End Custom Build
 
@@ -150,7 +150,7 @@ InputPath=..\..\..\code\pkg_UnitTest\Modules\TestPlatform\atlcom.dll
 InputName=atlcom
 
 "$(IntDir)\$(InputName)" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	xcopy $(InputPath) "$(TargetDir)\..\tests\"  /S/Q/Y/D
+	if exist $(InputPath) xcopy $(InputPath) "$(TargetDir)\..\tests\"  /S/Q/Y/D
 
 # End Custom Build
 

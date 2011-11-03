@@ -389,7 +389,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -398,7 +398,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -407,7 +407,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -416,7 +416,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\tests\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -429,7 +429,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -438,7 +438,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -447,7 +447,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
@@ -456,7 +456,7 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					CommandLine="xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+					CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)\..\config\commap\&quot;  /S/Q/Y/D&#x0D;&#x0A;"
 					Outputs="$(IntDir)\$(InputName)"
 				/>
 			</FileConfiguration>
