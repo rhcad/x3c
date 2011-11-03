@@ -227,26 +227,28 @@ STRINGTABLE
 BEGIN
     ID_GROUP_CLIPBOARD      "\n&Clipboard"
     ID_GROUP_FONT_OPTION    "Show the Font dialog box\nF&ont"
+    ID_GALLERY_FONTFACE     "Font Face"
+    ID_GALLERY_FONTSIZE     "Font Size"
 END
 
 STRINGTABLE 
 BEGIN
     ID_GROUP_CLIPBOARD_OPTION "Show the Office clipboard Task Pane\nClipboard"
-    ID_FONT_GROW            "\nGrow Font"
-    ID_FONT_SHRINK          "\nShrink Font"
-    ID_FONT_CLEAR           "\nClear Formatting"
+    ID_FONT_GROW            "Grow font size\nGrow Font"
+    ID_FONT_SHRINK          "Shrink font size\nShrink Font"
+    ID_FONT_CLEAR           "Clear formatting\nClear Formatting"
     ID_TEXT_CHANGECASE      "Change Case"
 END
 
 STRINGTABLE 
 BEGIN
     ID_FORMAT_PAINTER       "Copy formatting from one place and apply it to another\nFormat Painter"
-    ID_FONT_FACE            "\nFont Face"
-    ID_FONT_SIZE            "\nFont Size"
+    ID_FONT_FACE            "Select font face\nFont Face"
+    ID_FONT_SIZE            "Select font Size\nFont Size"
     ID_CHAR_STRIKETHROUGH   "Draw a line through the middle of the selected text\nStrikethrough"
     ID_TEXT_SUBSCRIPT       "Subscript"
-    ID_TEXT_SUPERSCRIPT     "\nSuperscript"
-    ID_TEXT_COLOR           "\nColor"
+    ID_TEXT_SUPERSCRIPT     "Superscript toggle\nSuperscript"
+    ID_TEXT_COLOR           "Select color\nColor"
 END
 
 STRINGTABLE 
@@ -258,7 +260,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_TEXT_HIGHLIGHTCOLOR  "\nHighlight Color"
+    ID_TEXT_HIGHLIGHTCOLOR  "Highlight Color"
 END
 
 STRINGTABLE 
@@ -304,7 +306,8 @@ LANGUAGE 9, 1
 #pragma code_page(1252)
 #endif //_WIN32
 #include "afxres.rc"         // Standard components
-#endif
+#endif
+
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 

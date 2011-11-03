@@ -178,6 +178,8 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra,
 
     if (1 == s_nLocker)
     {
+        if (CN_COMMAND == nCode && pInfo && FindGalleryItems(nID))
+            return TRUE;
         if (NotifyCmdMsgEvent(nID, nCode, pExtra, pInfo))
             return TRUE;
     }
@@ -393,6 +395,8 @@ CXTPControl* CMainFrame::CreateRibbonComboButton(CXTPRibbonGroup* pGroup,
                                                  const Cx_ConfigSection& button)
 {
     CXTPControlComboBox* pCombo = new CXTPControlComboBox();
+    CXTPPopupBar* pPopupBarGallery = CXTPControlComboBoxGalleryPopupBar::CreateComboBoxGalleryPopupBar(m_pCommandBars);
+    CXTPControlGallery* pControlGallery = new CXTPControlGallery();
 
     pGroup->Add(pCombo, buttonID);
     if (button->GetString(L"type") == L"combo")
@@ -401,7 +405,60 @@ CXTPControl* CMainFrame::CreateRibbonComboButton(CXTPRibbonGroup* pGroup,
     }
     pCombo->SetWidth(button->GetInt32(L"width", 50));
 
+    pCombo->SetCommandBar(pPopupBarGallery);
+
+    Cx_ConfigSection gallery(button.GetSection(L"gallery"));
+    UINT galleryID = gallery->GetUInt32(L"id", buttonID);
+    int showCount = gallery->GetInt32(L"showCount", 10);
+    CXTPControlGalleryItems* pItems = AddGalleryItems(galleryID);
+
+	pControlGallery->SetControlSize(CSize(
+        gallery->GetInt32(L"width", pCombo->GetWidth()), 
+        16 * min(24, max(2, 1 + showCount))));
+	pControlGallery->SetResizable(FALSE, gallery->GetBool(L"resizable", TRUE));
+	pControlGallery->SetItems(pItems);
+	pPopupBarGallery->GetControls()->Add(pControlGallery, galleryID);
+
+	pPopupBarGallery->InternalRelease();
+
     return pCombo;
+}
+
+CXTPControlGalleryItems* CMainFrame::AddGalleryItems(UINT id)
+{
+    CXTPControlGalleryItems* pItems = FindGalleryItems(id);
+
+    if (!pItems)
+    {
+        pItems = CXTPControlGalleryItems::CreateItems(m_pCommandBars, id);
+        m_mapGallery[id] = pItems;
+
+        pItems->SetItemSize(CSize(0, 17));
+        pItems->AddItem(_T("8"));
+        pItems->AddItem(_T("9"));
+        pItems->AddItem(_T("10"));
+        pItems->AddItem(_T("11"));
+        pItems->AddItem(_T("12"));
+        pItems->AddItem(_T("14"));
+        pItems->AddItem(_T("16"));
+        pItems->AddItem(_T("18"));
+        pItems->AddItem(_T("20"));
+        pItems->AddItem(_T("22"));
+        pItems->AddItem(_T("24"));
+        pItems->AddItem(_T("26"));
+        pItems->AddItem(_T("28"));
+        pItems->AddItem(_T("36"));
+        pItems->AddItem(_T("48"));
+        pItems->AddItem(_T("72"));
+    }
+
+    return pItems;
+}
+
+CXTPControlGalleryItems* CMainFrame::FindGalleryItems(UINT id) const
+{
+    std::map<UINT, CXTPControlGalleryItems*>::const_iterator it = m_mapGallery.find(id);
+    return it != m_mapGallery.end() ? it->second : NULL;
 }
 
 void CMainFrame::OnUpdateRibbonTab(CCmdUI* pCmdUI)

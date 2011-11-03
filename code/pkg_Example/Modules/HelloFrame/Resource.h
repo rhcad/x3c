@@ -5,6 +5,8 @@
 #define IDR_MAINFRAME                   128
 #define IDR_SMALLICONS                  128
 #define IDR_LARGEICONS                  129
+#define ID_GALLERY_FONTSIZE             2716
+#define ID_GALLERY_FONTFACE             2773
 #define ID_GROUP_CLIPBOARD_OPTION       2790
 #define ID_FONT_GROW                    2792
 #define ID_FONT_SHRINK                  2793

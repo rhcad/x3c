@@ -43,6 +43,8 @@ private:
         UINT buttonID, const Cx_ConfigSection& button);
     CXTPControl* CreateRibbonComboButton(CXTPRibbonGroup* pGroup, 
         UINT buttonID, const Cx_ConfigSection& button);
+    CXTPControlGalleryItems* AddGalleryItems(UINT id);
+    CXTPControlGalleryItems* FindGalleryItems(UINT id) const;
 
     UINT GetNodeID(const Cx_ConfigSection& node, LPCWSTR name);
     void SetSystemButtonStyle(const CMenu& menu);
@@ -60,4 +62,5 @@ private:
     CFrameWnd*          m_pMainWnd;
     CXTPCommandBars*    m_pCommandBars;
     std::map<std::wstring, UINT>    m_idnames;
+    std::map<UINT, CXTPControlGalleryItems*>    m_mapGallery;
 };
