@@ -386,11 +386,11 @@
 			Name="Interface"
 			>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\ClsID_Example.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\ClsID_Example.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\code\pkg_Core\Interface\Ix_Example.h"
+				RelativePath="..\..\..\code\pkg_Example\Interface\Ix_Example.h"
 				>
 			</File>
 		</Filter>

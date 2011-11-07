@@ -26,8 +26,8 @@ class Cx_Ptr;
 template <class IF_Type>
 class Cx_Interface
 {
-    typedef Cx_Interface<IF_Type> thisClass;
 public:
+    typedef Cx_Interface<IF_Type> thisClass;
     Cx_Interface(Ix_Object* pInterface = NULL)
         : m_pInterface(copyi(pInterface))
     {

@@ -31,9 +31,6 @@ public:
     HMODULE SetModuleResourceHandle(HMODULE hResource);
 
 private:
-    Cx_Module(const Cx_Module&);
-    void operator=(const Cx_Module&);
-
     Ix_ObjectFactory*   m_pFactory;
     HMODULE         m_hModule;
     HMODULE         m_hResource;
