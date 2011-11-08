@@ -6,6 +6,7 @@ x3c - C++ Plugin Framework
     * Auto call x3UninitializePlugin() when a plugin is unloading.
     * LogWriter.plugin: Can work regardless no PluginManager, FileUtility or TextUtility plugins.
     * LogHelper.h: Add X3LOG_GROUP(name) and X3LOG_GROUP2(name, extra).
+    * Add LogHelper2.h for non-plugin projects.
 
 2011-11-01
 

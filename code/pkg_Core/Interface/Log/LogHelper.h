@@ -191,12 +191,16 @@ inline void UnRegisterLogObserver(Ix_LogObserver* observer)
     \ingroup _GROUP_PLUGIN_LOG_
     \param name UNICODE string, the first char is '@' and leading as 'Module:StrID' format.
     \param extra additional context info, can be UNICODE string or other type number (not ANSI string).
-    \see X3LOG_GROUP2, X3LOG_ERROR
+    \see X3LOG_GROUP, X3LOG_ERROR
 */
-#define X3LOG_GROUP(name, extra)    \
-    X3LOG_GROUP2(name, NULL)
 #define X3LOG_GROUP2(name, extra)   \
-    X3LogGroup group##__LINE__(name, extra, __FILE__, __LINE__)
+    std::wostringstream _buf;       \
+    _buf << extra;                  \
+    X3LogGroup group##__LINE__(name, _buf.str().c_str(), __FILE__, __LINE__)
+
+//! \copydoc X3LOG_GROUP2
+#define X3LOG_GROUP(name)           \
+    X3LogGroup group##__LINE__(name, NULL, __FILE__, __LINE__)
 
 //! Helper class for logging group, auto begin and end group.
 /*! Use this class to define variable in local function, eg:
