@@ -215,6 +215,21 @@ void Cx_Module::ClearModuleItems()
     Cx_ModuleItem::ClearModuleItems();
 }
 
+Ix_ObjectFactory* Cx_Module::GetObjectFactory() const
+{
+    typedef Ix_ObjectFactory* (*FUNC)();
+
+    if (!m_pFactory)
+    {
+        HMODULE hManager = GetModuleHandleW(L"PluginManagerX3" PLNEXT);
+        FUNC pfn = (FUNC)GetProcAddress(hManager, "x3GetRegisterBank");
+
+        m_pFactory = pfn ? pfn() : NULL;
+    }
+
+    return m_pFactory;
+}
+
 void Cx_Module::Initialize(Ix_ObjectFactory* pFactory, HMODULE hModule)
 {
     bool changed = false;

@@ -25,13 +25,13 @@ public:
 public:
     void ClearModuleItems();
     long GetUnfreeObjectCount();
-    Ix_ObjectFactory* GetObjectFactory() const { return m_pFactory; }
+    Ix_ObjectFactory* GetObjectFactory() const;
     HMODULE GetModuleInstance() const { return m_hModule; }
     HMODULE GetModuleResourceHandle() const { return m_hResource; }
     HMODULE SetModuleResourceHandle(HMODULE hResource);
 
 private:
-    Ix_ObjectFactory*   m_pFactory;
+    mutable Ix_ObjectFactory*   m_pFactory;
     HMODULE         m_hModule;
     HMODULE         m_hResource;
 };

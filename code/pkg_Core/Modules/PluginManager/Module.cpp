@@ -84,7 +84,8 @@ static inline void GetBasePath(wchar_t* path)
 {
     GetModuleFileNameW(x3GetModuleHandle(), path, MAX_PATH);
     PathRemoveFileSpecW(path);
-    PathRemoveFileSpecW(path);
+    if (_wcsicmp(L"plugins", PathFindFileNameW(path)) == 0)
+        PathRemoveFileSpecW(path);
 }
 
 std::wstring Cx_PluginLoaderOut::GetWorkPath()

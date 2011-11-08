@@ -181,7 +181,7 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxBackupIndex=3" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.layout=log4cplus::TTCCLayout" << std::endl;
 
-    std::wstring content(buf.str());
+    std::string content(x3::w2a(buf.str()));
     HANDLE hFile = NULL;
 
     if (!x3OpenFileForWrite(hFile, filename))
@@ -191,7 +191,9 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     }
     else
     {
-        ::WriteFile(hFile, content.c_str(), x3::GetSize(content), NULL, NULL);
+        DWORD written = 0;
+        DWORD len = x3::GetSize(content);
+        ::WriteFile(hFile, content.c_str(), len, &written, NULL);
         x3CloseFile(hFile);
     }
 }
