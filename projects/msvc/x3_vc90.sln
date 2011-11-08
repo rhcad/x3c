@@ -67,7 +67,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloFrame", "vcproj\HelloF
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookManager", "vcproj\HookManager_vc90.vcproj", "{AF6098FC-2331-4D7D-AFCD-A16DC9F11642}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "x3c_swig", "vcproj\x3c_swig_vc90.vcproj", "{55E440C7-B89C-4A2C-A72F-D8EB2D5F7D31}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "x3core", "vcproj\x3core_vc90.vcproj", "{55E440C7-B89C-4A2C-A72F-D8EB2D5F7D31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
