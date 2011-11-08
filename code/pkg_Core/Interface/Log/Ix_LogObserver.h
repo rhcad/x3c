@@ -6,7 +6,7 @@
 #ifndef X3_LOG_ILOGOBSERVER_H_
 #define X3_LOG_ILOGOBSERVER_H_
 
-#include "Ix_Object.h"
+#include <string>
 
 //! logging output observer interface.
 /*! Use RegisterLogObserver(Ix_LogObserver*) to register a observer,

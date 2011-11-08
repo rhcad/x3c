@@ -1,5 +1,10 @@
 x3c - C++ Plugin Framework
 
+2011-11-08
+
+    * Add GetLogObserver() export function in LogWriter.plugin
+    * Auto call x3UninitializePlugin() when a plugin is unloading.
+
 2011-11-01
 
     * Add HookManager plugin and test case.

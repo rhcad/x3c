@@ -208,6 +208,10 @@ Cx_Module::~Cx_Module()
 
 void Cx_Module::ClearModuleItems()
 {
+    typedef void (*F)();
+    F f = (F)GetProcAddress(m_hModule, "x3UninitializePlugin");
+    if (f) f();
+
     Cx_ModuleItem::ClearModuleItems();
 }
 

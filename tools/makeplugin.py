@@ -3,12 +3,13 @@
 Function:   Create a plugin project based on Win32DllTempl or MFCExtTempl.
             This script has been tested with ActivePython 2.7.
 
-Usage:      makeplugin.py projname pkgname basetype
+Usage:      python makeplugin.py projname [pkgname] [basetype] [basepkg]
+            or double click the file 'makeplugin.py'.
+
             projname: name of the new project.
-            pkgname: package name of the new project, the default value
-                is 'pkg_Example'.
-            basetype: 'mfc', 'win32', 'view' or project name in pkg_Example,
-                the default value is 'win32'.
+            pkgname: package name of the new project, the default value is 'pkg_Example'.
+            basetype: 'mfc', 'win32', 'view' or project name in pkg_Example, the default value is 'win32'.
+            basepkg: package name of the template project, the default value is 'pkg_Example'.
 
 Creator:    ooyg <rhcad@hotmail.com>
 Date:       2011.10.9
@@ -27,7 +28,7 @@ def multireplace(text, adict):
     return rx.sub(xlat, text)
 
 def copyfiles(srcdir, destdir, pairs, callback=None):
-    if srcdir.find(".svn") > 0:
+    if srcdir.find(".svn") > 0 or srcdir.find(".user") > 0:
         return
     if not os.path.exists(destdir):
         os.makedirs(destdir)
@@ -49,9 +50,9 @@ def copyfiles(srcdir, destdir, pairs, callback=None):
             else:
                 print(destfile)
 
-def makeproj(projname, pkgname, baseproj):
+def makeproj(projname, pkgname, baseproj, basepkg):
     codepath = os.path.abspath('../code')
-    basepath = os.path.join(codepath, 'pkg_Example', 'Modules', baseproj)
+    basepath = os.path.join(codepath, basepkg, 'Modules', baseproj)
     
     if not os.path.exists(basepath):
         raise OSError, basepath
@@ -61,7 +62,7 @@ def makeproj(projname, pkgname, baseproj):
         raise AttributeError, projname
 
     destdir = os.path.join(codepath, pkgname, 'Modules', projname)
-    pairs = {baseproj:projname, 'pkg_Example':pkgname}
+    pairs = {baseproj:projname, basepkg:pkgname}
     
     def matchfile(filename, pairs):
         if filename.find(".dsp") > 0 or filename.find(".vc") > 0:
@@ -78,7 +79,7 @@ def makeproj(projname, pkgname, baseproj):
     copyfiles(projects, projects, pairs, matchproj)
 
 if __name__=="__main__":
-    def inputparam(index, prompt, default=''):
+    def inputparam(index, prompt, the default=''):
         if len(sys.argv) > index:
             ret = sys.argv[index]
         else:
@@ -87,12 +88,13 @@ if __name__=="__main__":
         return ret
     
     projname = inputparam(1, 'Project name: ')
-    pkgname  = inputparam(2, 'Package name (pkg_Example): ', 'pkg_Example')
+    pkgname  = inputparam(2, 'Target package name (pkg_Example): ', 'pkg_Example')
     baseproj = inputparam(3, 'Template project (win32, mfc, view, '   \
                              'or project name in pkg_Example): ', 'win32')
+    basepkg  = inputparam(4, 'Source package name (pkg_Example): ', 'pkg_Example')
                 
     if baseproj == 'win32': baseproj = 'Win32DllTempl'
     if baseproj == 'mfc':   baseproj = 'MFCExtTempl'
     if baseproj == 'view':  baseproj = 'HelloView'
     
-    makeproj(projname, pkgname, baseproj)
+    makeproj(projname, pkgname, baseproj, basepkg)
