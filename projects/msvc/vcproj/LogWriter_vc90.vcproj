@@ -1862,6 +1862,10 @@
 		<Filter
 			Name="Interface"
 			>
+			<File
+				RelativePath="..\..\..\code\pkg_Core\Interface\Log\Ix_LogObserver.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

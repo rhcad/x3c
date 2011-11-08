@@ -66,7 +66,8 @@ void Cx_LogManager::FireFirstEvent()
     }
 }
 
-bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra)
+bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra, 
+                              const char* file, long line)
 {
     std::wstring msg2, extra2, module, idname;
     CheckMsgParam(msg2, extra2, module, idname, msg, extra);
@@ -76,7 +77,7 @@ bool Cx_LogManager::PushGroup(const wchar_t* msg, const wchar_t* extra)
 
     for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
-        it->first->OnPushGroup(m_groupLevel, msg2, extra2, module, idname);
+        it->first->OnPushGroup(m_groupLevel, msg2, extra2, module, idname, file, line);
     }
 
     return true;
@@ -102,16 +103,16 @@ bool Cx_LogManager::WriteLog(x3LogType type, const wchar_t* msg,
         return false;
     }
 
-    std::wstring wstrFile(x3::a2w(TrimFileName(file)));
     std::wstring msg2, extra2, module, idname;
 
     CheckMsgParam(msg2, extra2, module, idname, msg, extra);
+    file = TrimFileName(file);
     FireFirstEvent();
 
     for (ObserverIt it = m_observers.begin(); it != m_observers.end(); ++it)
     {
         it->first->OnWriteLog(type, msg2, extra2,
-            module, idname, wstrFile, line);
+            module, idname, file, line);
     }
 
 #if defined(_DEBUG) && defined(OutputDebugString)
@@ -168,23 +169,23 @@ const char* Cx_LogManager::TrimFileName(const char* file)
 {
     ASSERT(file && *file);
 
-    const char* pszName = PathFindFileNameA(file);
+    const char* name = PathFindFileNameA(file);
     int folder = 0;
 
-    while (pszName > file)
+    while (name > file)
     {
-        pszName--;
-        if ('\\' == *pszName || '/' == *pszName)
+        name--;
+        if ('\\' == *name || '/' == *name)
         {
             if (++folder > 2)
             {
-                pszName++;
+                name++;
                 break;
             }
         }
     }
 
-    return pszName;
+    return name;
 }
 
 bool Cx_LogManager::CheckMsgParam(std::wstring& msg2,

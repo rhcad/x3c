@@ -1,7 +1,7 @@
 /*! \file Ix_LogObserver.h
  *  \brief Define logging output observer interface: Ix_LogObserver
  *  \author Zhang Yungui, X3 C++ PluginFramework
- *  \date   2010.10.19
+ *  \date   2011.11.08
  */
 #ifndef X3_LOG_ILOGOBSERVER_H_
 #define X3_LOG_ILOGOBSERVER_H_
@@ -27,10 +27,13 @@ public:
         \param extra additional context info.
         \param module module name extracting from group message text.
         \param idname string id name extracting from group message text.
+        \param file source file name.
+        \param line code line in source file.
     */
     virtual void OnPushGroup(long level, 
         const std::wstring& msg, const std::wstring& extra, 
-        const std::wstring& module, const std::wstring& idname) = 0;
+        const std::wstring& module, const std::wstring& idname, 
+        const char* file, long line) = 0;
 
     //! Notification of ending a logging group.
     /*!
@@ -51,7 +54,7 @@ public:
     virtual void OnWriteLog(int type, 
         const std::wstring& msg, const std::wstring& extra, 
         const std::wstring& module, const std::wstring& idname, 
-        const std::wstring& file, long line) = 0;
+        const char* file, long line) = 0;
 };
 
 //! Default implement of logging output observer.
@@ -66,9 +69,10 @@ public:
 
     virtual void OnPushGroup(long level, 
         const std::wstring& msg, const std::wstring& extra, 
-        const std::wstring& module, const std::wstring& idname)
+        const std::wstring& module, const std::wstring& idname, 
+        const char* file, long line)
     {
-        level; msg; extra; module; idname;
+        level; msg; extra; module; idname; file; line;
     }
 
     virtual void OnPopGroup(long level)
@@ -79,7 +83,7 @@ public:
     virtual void OnWriteLog(int type, 
         const std::wstring& msg, const std::wstring& extra, 
         const std::wstring& module, const std::wstring& idname, 
-        const std::wstring& file, long line)
+        const char* file, long line)
     {
         type; msg; extra; module; idname; file; line;
     }

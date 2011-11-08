@@ -133,9 +133,10 @@ public:
 private:
     virtual void OnPushGroup(long nLevel,
         const std::wstring& wstrMsg, const std::wstring& wstrExtra,
-        const std::wstring& wstrModule, const std::wstring& wstrID)
+        const std::wstring& wstrModule, const std::wstring& wstrID,
+        const char* file, long line)
     {
-        nLevel; wstrMsg; wstrExtra; wstrModule; wstrID;
+        nLevel; wstrMsg; wstrExtra; wstrModule; wstrID; file; line;
         m_count++;
     }
 

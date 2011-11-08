@@ -4,16 +4,17 @@
 // 2011.02.24: Copy log files to server if error message has fired.
 // 2011.02.28: Hide progress UI in CopyLogFilesToServer.
 // 2011-07-01: Support delay-load feature for logging observer plugins.
+// 2011-11-08: Can work regardless no PluginManager, FileUtility or TextUtility plugins.
 
 #include <UtilFunc/PluginInc.h>
 #include "LogObserver.h"
 
 #include <UtilFunc/RelToAbs.h>
 #include <Utility/Ix_FileUtility.h>
-#include <Utility/Ix_TextFileUtil.h>
 #include <Log/Ix_LogManager.h>
 #include <PluginManager/Ix_AppWorkPath.h>
 #include <UtilFunc/ctrim.h>
+#include <UtilFunc/ConvStr.h>
 
 #ifdef _MSC_VER                     // hide warnings
 #pragma warning (push, 3)
@@ -116,15 +117,16 @@ void CLogObserver::InitLogFile()
 
         MakerInitVars();
 
-        Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
-        SafeCall(pIFUtility, CreateDirectory(m_path.c_str(), true));
-
         wchar_t propfile[MAX_PATH] = {0};
         wcscpy_s(propfile, MAX_PATH, m_path.c_str());
         PathAppendW(propfile, m_appname.c_str());
         wcscat_s(propfile, _countof(propfile), L".properties");
 
-        if (pIFUtility && !pIFUtility->IsPathFileExists(propfile))
+        Cx_Interface<Ix_FileUtility> pIFUtility(x3::CLSID_FileUtility);
+        SafeCall(pIFUtility, CreateDirectory(m_path.c_str(), true));
+        ::CreateDirectoryW(m_path.c_str(), NULL);
+
+        if (!PathFileExistsW(propfile))
         {
             WritePropFile(propfile);
         }
@@ -139,7 +141,18 @@ void CLogObserver::MakerInitVars()
 
     if (m_path.empty())
     {
-        m_path = x3::GetAppWorkPath() + L"log";
+        Cx_Interface<Ix_AppWorkPath> pIFPath(x3::CLSID_AppWorkPath);
+        if (pIFPath)
+        {
+            m_path = pIFPath->GetWorkPath() + L"log";
+        }
+        else
+        {
+            GetModuleFileNameW(x3::GetMainModuleHandle(), path, MAX_PATH);
+            PathRemoveFileSpecW(path);
+            PathAppendW(path, L"log");
+            m_path = path;
+        }
     }
 
     wcscpy_s(path, MAX_PATH, m_path.c_str());
@@ -168,15 +181,50 @@ void CLogObserver::WritePropFile(const wchar_t* filename)
     buf << L"log4cplus.appender.ROOTAPPENDER.MaxBackupIndex=3" << std::endl;
     buf << L"log4cplus.appender.ROOTAPPENDER.layout=log4cplus::TTCCLayout" << std::endl;
 
-    Cx_Interface<Ix_TextFileUtil> pIFTextUtil(x3::CLSID_TextUtil);
-    InterfaceSafeCall(pIFTextUtil, SaveTextFile(buf.str(), filename, false));
+    std::wstring content(buf.str());
+    HANDLE hFile = NULL;
+
+    if (!x3OpenFileForWrite(hFile, filename))
+    {
+        DWORD err = GetLastError();
+        X3LOG_ERROR2(L"@TextUtility:IDS_WRITE_FAIL", err << L", " << filename);
+    }
+    else
+    {
+        ::WriteFile(hFile, content.c_str(), x3::GetSize(content), NULL, NULL);
+        x3CloseFile(hFile);
+    }
+}
+
+const char* CLogObserver::TrimFileName(const char* file)
+{
+    ASSERT(file && *file);
+
+    const char* name = PathFindFileNameA(file);
+    int folder = 0;
+
+    while (name > file)
+    {
+        name--;
+        if ('\\' == *name || '/' == *name)
+        {
+            if (++folder > 2)
+            {
+                name++;
+                break;
+            }
+        }
+    }
+
+    return name;
 }
 
 void CLogObserver::OnPushGroup(long level,
                                const std::wstring& msg,
                                const std::wstring& extra,
                                const std::wstring& module,
-                               const std::wstring& idname)
+                               const std::wstring& idname,
+                               const char* file, long line)
 {
     std::wostringstream buf(L"");
 
@@ -211,6 +259,10 @@ void CLogObserver::OnPushGroup(long level,
     {
         buf << L" @" << module << L":" << idname;
     }
+    if (file && *file)
+    {
+        buf << L" [" << x3::a2w(TrimFileName(file)) << L" L" << line << L"]";
+    }
 
     LOG4CPLUS_INFO_STR(GetLogger(), buf.str());
     m_level = level;
@@ -238,7 +290,7 @@ void CLogObserver::OnWriteLog(int type,
                               const std::wstring& extra,
                               const std::wstring& module,
                               const std::wstring& idname,
-                              const std::wstring& file,
+                              const char* file,
                               long line)
 {
     std::wostringstream buf;
@@ -275,7 +327,7 @@ void CLogObserver::OnWriteLog(int type,
     {
         buf << L" @" << module << L":" << idname;
     }
-    buf << L" [" << file << L" L" << line << L"]";
+    buf << L" [" << x3::a2w(TrimFileName(file)) << L" L" << line << L"]";
 
     switch (type)
     {

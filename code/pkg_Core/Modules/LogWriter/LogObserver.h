@@ -16,12 +16,13 @@ public:
 protected:
     virtual void OnPushGroup(long level, 
         const std::wstring& msg, const std::wstring& extra, 
-        const std::wstring& module, const std::wstring& idname);
+        const std::wstring& module, const std::wstring& idname, 
+        const char* file, long line);
     virtual void OnPopGroup(long level);
     virtual void OnWriteLog(int type, 
         const std::wstring& msg, const std::wstring& extra, 
         const std::wstring& module, const std::wstring& idname, 
-        const std::wstring& file, long line);
+        const char* file, long line);
 
 private:
     Logger GetLogger();
@@ -30,6 +31,7 @@ private:
     void WritePropFile(const wchar_t* filename);
     bool GetServerPath(wchar_t* path);
     bool CopyLogFilesToServer();
+    const char* TrimFileName(const char* file);
 
 private:
     std::wstring    m_path;         // logging path ending with backslash.

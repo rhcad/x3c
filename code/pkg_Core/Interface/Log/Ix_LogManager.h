@@ -1,7 +1,7 @@
 /*! \file Ix_LogManager.h
  *  \brief Define interface of logging output observer manager: Ix_LogManager
  *  \author Zhang Yungui, X3 C++ PluginFramework
- *  \date   2011.06.30
+ *  \date   2011.11.08
  */
 #ifndef X3_LOG_ILOGMANAGER_H_
 #define X3_LOG_ILOGMANAGER_H_
@@ -46,10 +46,13 @@ public:
             if the first char is '@' and leading as 'Module:StrID' format 
             then the manager will translate into localization text using Ix_StringTable.
         \param extra additional context info.
+        \param file source file name, __FILE__
+        \param line code line, __LINE__
         \return true if successful.
         \see X3LogGroup, PopGroup
     */
-    virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra) = 0;
+    virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra, 
+        const char* file, long line) = 0;
 
     //! Ending a logging group.
     /*!

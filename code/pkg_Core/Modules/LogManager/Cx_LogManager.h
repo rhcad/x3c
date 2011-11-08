@@ -17,7 +17,8 @@ protected:
 private:
     virtual bool RegisterObserver(Ix_LogObserver* observer, HMODULE fromdll);
     virtual void UnRegisterObserver(Ix_LogObserver* observer);
-    virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra);
+    virtual bool PushGroup(const wchar_t* msg, const wchar_t* extra, 
+        const char* file, long line);
     virtual bool PopGroup();
     virtual bool WriteLog(x3LogType type, const wchar_t* msg, 
         const wchar_t* extra, const char* file, long line);
