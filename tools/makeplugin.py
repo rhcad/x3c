@@ -28,7 +28,7 @@ def multireplace(text, adict):
     return rx.sub(xlat, text)
 
 def copyfiles(srcdir, destdir, pairs, callback=None):
-    if srcdir.find(".svn") > 0 or srcdir.find(".user") > 0:
+    if srcdir.find(".svn") > 0:
         return
     if not os.path.exists(destdir):
         os.makedirs(destdir)
@@ -71,19 +71,17 @@ def makeproj(projname, pkgname, baseproj, basepkg):
     copyfiles(basepath, destdir, pairs, matchfile)
 
     def matchproj(filename, pairs):
+        if filename.find(".user") > 0: return False
         for key in pairs.keys():
-            if filename.startswith(key):
-                return True
+            if filename.startswith(key): return True
         return False
     projects = os.path.abspath('../projects/msvc/vcproj')
     copyfiles(projects, projects, pairs, matchproj)
 
 if __name__=="__main__":
-    def inputparam(index, prompt, the default=''):
-        if len(sys.argv) > index:
-            ret = sys.argv[index]
-        else:
-            ret = raw_input(prompt)
+    def inputparam(index, prompt, default=''):
+        if len(sys.argv) > index: ret = sys.argv[index]
+        else: ret = raw_input(prompt)
         if ret == '': ret = default
         return ret
     

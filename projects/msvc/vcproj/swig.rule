@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualStudioToolFile
+	Name="Swig Convertor"
+	>
+	<Rules>
+		<CustomBuildRule
+			Name="swig -c++"
+			DisplayName="swig generating"
+			CommandLine="swig.exe -c++ -python $(InputPath) -outdir $(IntDir)"
+			Outputs="$(IntDir)\$(InputName)._swig"
+			FileExtensions="*.i"
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+	</Rules>
+</VisualStudioToolFile>
