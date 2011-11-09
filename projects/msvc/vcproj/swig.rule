@@ -4,10 +4,10 @@
 	>
 	<Rules>
 		<CustomBuildRule
-			Name="Swig Convertor"
-			DisplayName="swig"
-			CommandLine="swig.exe -c++ -I$(ProjectDir)..\..\..\code\pkg_Core\Interface -python $(InputPath)"
-			Outputs="$(IntDir)\$(InputName)._swig"
+			Name="swig -python"
+			DisplayName="swig -python"
+			CommandLine="swig.exe -c++ -python -I$(ProjectDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)"
+			Outputs="$(InputName)._swig"
 			FileExtensions="*.i"
 			ExecutionDescription="swig generating"
 			>

@@ -35,7 +35,7 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="Swig Convertor"
+				Name="swig -python"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -68,7 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\_x3c.pyd"
+				OutputFile="$(OutDir)\_x3core.pyd"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
@@ -116,7 +116,7 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="Swig Convertor"
+				Name="swig -python"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -150,7 +150,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\_x3c.pyd"
+				OutputFile="$(OutDir)\_x3core.pyd"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
@@ -199,7 +199,7 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="Swig Convertor"
+				Name="swig -python"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -229,7 +229,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\_x3c.pyd"
+				OutputFile="$(OutDir)\_x3core.pyd"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
@@ -282,7 +282,7 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="Swig Convertor"
+				Name="swig -python"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -313,7 +313,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)\_x3c.pyd"
+				OutputFile="$(OutDir)\_x3core.pyd"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
@@ -364,6 +364,46 @@
 				RelativePath="..\..\..\code\pkg_Platform\Modules\x3core\Module.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\x3core\x3core.py"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+						Outputs="$(IntDir)\$(InputName)"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+						Outputs="$(IntDir)\$(InputName)"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+						Outputs="$(IntDir)\$(InputName)"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="if exist $(InputPath) xcopy $(InputPath) &quot;$(TargetDir)&quot;  /S/Q/Y/D&#x0D;&#x0A;"
+						Outputs="$(IntDir)\$(InputName)"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -388,11 +428,11 @@
 		<Filter
 			Name="Interface"
 			>
+			<File
+				RelativePath="..\..\..\code\pkg_Platform\Modules\x3core\x3core.i"
+				>
+			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\code\pkg_Platform\Modules\x3core\x3core.i"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -177,6 +177,8 @@ long Cx_PluginLoader::LoadPluginFiles(const wchar_t* path,
                 MAX_PATH - len0 < j - i ? MAX_PATH - len0 : j - i);
             nameend[j - i] = 0;
             ReplaceSlashes(filename);
+            if (wcschr(nameend, L'.') == NULL)
+                wcscat_s(filename, MAX_PATH, L".plugin" PLNEXT);
             filenames.push_back(filename);
         }
         i = j;

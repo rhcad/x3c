@@ -80,14 +80,8 @@ public:
         bool enableDelayLoading = true)
     {
         const wchar_t plugins[] = 
-            L"LogManager.plugin" PLNEXT
-            L",LogWriter.plugin" PLNEXT
-            L",ConfigXml.plugin" PLNEXT
-            L",StringTable.plugin" PLNEXT
-            L",ChangeManager.plugin" PLNEXT
-            L",FileUtility.plugin" PLNEXT
-            L",TextUtility.plugin" PLNEXT
-            L",PluginManagerEx.plugin" PLNEXT;
+            L"LogManager LogWriter ConfigXml StringTable ChangeManager "
+            L"FileUtility TextUtility PluginManagerEx";
 
         if (!LoadPluginManager(subdir, instance))
         {
