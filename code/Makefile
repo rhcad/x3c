@@ -24,10 +24,10 @@ pkg_Example:
 #	@echo Making all in subdirectory $@...
 #	$(MAKE) -C pkg_UnitTest
 
-#pkg_Platform:
-#	@echo
-#	@echo Making all in subdirectory $@...
-#	$(MAKE) -C pkg_Platform
+pkg_Platform:
+	@echo
+	@echo Making all in subdirectory $@...
+	$(MAKE) -C pkg_Platform
 
 clean:	$(CLEANSUBDIRS)
 
