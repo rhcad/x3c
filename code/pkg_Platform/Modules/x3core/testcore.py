@@ -1,6 +1,7 @@
 import x3core as C
 
-assert(C.LoadPluginFiles("ChangeManager"))
+C.LoadPluginFiles("ChangeManager")
+assert(C.LoadAllPlugins() > 0)
 for f in C.GetPluginFiles(): print(f)
 
 C.UnloadPlugins()

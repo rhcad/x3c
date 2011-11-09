@@ -3,16 +3,16 @@
 ROOTDIR = ../../..
 include $(ROOTDIR)/config.mk
 
-SUBDIRS = $(filter-out Public/ x3core/ ComHook/, $(sort $(dir $(wildcard */))))
+SUBDIRS = $(filter-out Public/ HookManager/ ComHook/, $(sort $(dir $(wildcard */))))
 CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
-.PHONY: ComHook
-all: ComHook
+.PHONY: x3core
+all: x3core
 
-ComHook:
+x3core:
 	@echo
 	@echo Making all in subdirectory $@...
-	$(MAKE) -C ComHook
+	$(MAKE) -C x3core
 
 clean:	$(CLEANSUBDIRS)
 
