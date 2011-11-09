@@ -6,7 +6,7 @@
 		<CustomBuildRule
 			Name="swig -python"
 			DisplayName="swig -python"
-			CommandLine="swig.exe -c++ -python -I$(ProjectDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)"
+			CommandLine="if not exist $(OutDir) mkdir $(OutDir)&#x0D;&#x0A;swig.exe -c++ -python -I$(ProjectDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)"
 			Outputs="$(InputName)._swig"
 			FileExtensions="*.i"
 			ExecutionDescription="swig generating"

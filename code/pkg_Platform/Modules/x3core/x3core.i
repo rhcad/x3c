@@ -1,24 +1,24 @@
 %module x3core
 
 %{
-#include <UtilFunc/vecfunc.h>
-using namespace std;
-typedef vector<wstring> WStrVector;
+#include <vector>
+#include <string>
 
 bool LoadCorePlugins();
 bool LoadAllPlugins();
 bool LoadPluginFiles(const char* files);
 void UnloadPlugins();
-std::vector<std::wstring> GetPluginFiles();
+std::vector<std::string> GetPluginFiles();
 %}
 
 %include stl.i
-using namespace std;
+%include std_vector.i
+%include std_string.i
 
-%template(WStrVector)    vector<wstring>;
+%template(StrVector) std::vector<std::string>;
 
 bool LoadCorePlugins();
 bool LoadAllPlugins();
 bool LoadPluginFiles(const char* files);
 void UnloadPlugins();
-WStrVector GetPluginFiles();
+std::vector<std::string> GetPluginFiles();

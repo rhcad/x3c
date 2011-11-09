@@ -67,18 +67,18 @@ void UnloadPlugins()
     s_loader.Unload();
 }
 
-std::vector<std::wstring> GetPluginFiles()
+std::vector<std::string> GetPluginFiles()
 {
     Cx_Interface<Ix_PluginLoader2> loader(s_loader.GetPluginLoader());
     ASSERT(loader.IsNotNull());
 
-    std::vector<std::wstring> filenames;
+    std::vector<std::string> filenames;
     HMODULE hdll;
     std::wstring filename;
 
     for (int i = 0; loader->GetPluginFileName(i, hdll, filename); i++)
     {
-        filenames.push_back(filename);
+        filenames.push_back(x3::w2a(filename));
     }
 
     return filenames;
