@@ -15,8 +15,6 @@ std::vector<std::string> GetPluginFiles();
 %include std_vector.i
 %include std_string.i
 
-%template(StrVector) std::vector<std::string>;
-
 bool LoadCorePlugins();
 bool LoadAllPlugins();
 bool LoadPluginFiles(const char* files);
