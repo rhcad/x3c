@@ -37,7 +37,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Release\x3core"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MD /W4 /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Platform\Interface" /I "$(IntDir)" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
+# ADD CPP /nologo /MD /W4 /GR /GX /O2 /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Platform\Interface" /I "$(IntDir)" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /c
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "NDEBUG"
@@ -56,7 +56,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "..\..\..\obj\vc60\Debug\x3core"
 # PROP Ignore_Export_Lib 1
 # PROP Target_Dir ""
-# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Platform\Interface" /I "$(IntDir)" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GR /GX /ZI /Od /I "..\..\..\code\pkg_Core\Interface" /I "..\..\..\code\pkg_Platform\Interface" /I "$(IntDir)" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "UNICODE" /D "_UNICODE" /FD /GZ /c
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x804
 # ADD RSC /l 0x804 /d "_DEBUG"
@@ -113,11 +113,12 @@ SOURCE=..\..\..\code\pkg_Platform\Modules\x3core\x3core.i
 
 # Begin Custom Build
 OutDir=.\..\..\..\code\bin\vc60\Release\python
+ProjDir=.
 InputPath=..\..\..\code\pkg_Platform\Modules\x3core\x3core.i
 InputName=x3core
 
-"$(InputName)._swig" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	swig.exe -c++ -python -I$(ProjectDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)
+"$(InputName)_wrap.cxx" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	swig.exe -c++ -python -I$(ProjDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)
 
 # End Custom Build
 
@@ -125,11 +126,12 @@ InputName=x3core
 
 # Begin Custom Build
 OutDir=.\..\..\..\code\bin\vc60\Debug\python
+ProjDir=.
 InputPath=..\..\..\code\pkg_Platform\Modules\x3core\x3core.i
 InputName=x3core
 
-"$(InputName)._swig" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	swig.exe -c++ -python -I$(ProjectDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)
+"$(InputName)_wrap.cxx" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	swig.exe -c++ -python -I$(ProjDir)..\..\..\code\pkg_Core\Interface -outdir $(OutDir) $(InputPath)
 
 # End Custom Build
 
