@@ -13,4 +13,4 @@ CFLAGS     += -g
 C_FLAGS    += -Wall -g
 CFLAGS_SO   = $(CFLAGS) -fPIC
 C_FLAGS_SO  = $(C_FLAGS) -shared -fPIC
-SWIG        = swig.exe -c++ -python
+SWIG        = swig -c++ -python
