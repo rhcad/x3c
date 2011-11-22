@@ -38,7 +38,7 @@ def copyfiles(srcdir, destdir, pairs, callback=None):
         destfile = os.path.join(destdir, multireplace(fn, pairs))
         
         if os.path.isdir(srcfile):
-            copyfiles(srcfile, destfile, pairs)
+            copyfiles(srcfile, destfile, pairs, callback)
         if os.path.isfile(srcfile) and not os.path.exists(destfile) \
                 and (not callback or callback(fn, pairs)):
             open(destfile, "wb").write(open(srcfile, "rb").read())
