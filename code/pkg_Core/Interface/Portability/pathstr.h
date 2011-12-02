@@ -18,7 +18,7 @@ char* PathFindFileNameA(const char* path)
 
     p1 = !p1 || (p2 && p2 > p1) ? p2 : p1;
 
-    return const_cast<char*>(p1 ? p1 + 1 : p1);
+    return const_cast<char*>(p1 ? p1 + 1 : path);
 }
 
 wchar_t* PathFindFileNameW(const wchar_t* path)
