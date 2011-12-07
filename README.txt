@@ -1,6 +1,6 @@
 		    x3c - C++ Plugin Framework
 		-----------------------------------
-		http://sourceforge.net/projects/x3c
+		   http://github.com/rhcad/x3c
 
 x3c is designed as a plugin-framework that uses C++ and STL.
 This framework has many frequently-used and lightweight plugins.
@@ -26,8 +26,6 @@ You may need to download the following files:
 --------------------------------------------------------
 License: Apache License V2.0
 
-Bug reports and suggestions are welcome. Please use the SourceForge bug tracking
-system at http://sourceforge.net/projects/x3c/develop.
-
+Bug reports and suggestions are welcome.
 Email to the current maintainers may be sent to <rhcad@hotmail.com>.
 Some documents in chinese may be found at http://www.cnblogs.com/rhcad .
