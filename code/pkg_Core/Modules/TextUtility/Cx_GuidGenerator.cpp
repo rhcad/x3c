@@ -2,7 +2,7 @@
 #include <UtilFunc/PluginInc.h>
 #include "Cx_GuidGenerator.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__GNUC__)
 #include <time.h>
 #include <UtilFunc/SysErrStr.h>
 #include <objbase.h>

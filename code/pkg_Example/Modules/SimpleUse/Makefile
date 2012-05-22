@@ -8,7 +8,7 @@ CFLAGS   +=   -D_CONSOLE
 
 all:
 	$(CC) $(CFLAGS) -c  Main.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/SimpleUse.app *.o -ldl
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/SimpleUse.app *.o $(LIBS)
 clean:
 	rm -rf *.so
 	rm -rf *.o

@@ -9,7 +9,7 @@
 
 XBEGIN_DEFINE_MODULE()
     XDEFINE_CLASSMAP_ENTRY_Singleton(x3::CLSID_TextUtil, Cx_TextUtil)
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__GNUC__)
     XDEFINE_CLASSMAP_ENTRY_Singleton(x3::CLSID_GuidGenerator, Cx_GuidGenerator)
     XDEFINE_CLASSMAP_ENTRY_Singleton(x3::CLSID_ClipboardUtil, Cx_ClipboardUtil)
 #endif

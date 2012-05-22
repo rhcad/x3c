@@ -16,7 +16,7 @@ all:
 	$(CC) $(CFLAGS) -c  ../Public/BaseTest.cpp
 	$(CC) $(CFLAGS) -c  ../Public/UnitTests.cpp
 	$(CC) $(CFLAGS) -c  TestConfigDB.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestUtility.app *.o -ldl -lcppunit
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestUtility.app *.o $(LIBS) -lcppunit
 clean:
 	rm -rf *.so
 	rm -rf *.o

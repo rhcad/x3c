@@ -21,7 +21,7 @@ all:
 	$(CC) $(CFLAGS) -c  TestStringTable.cpp
 	$(CC) $(CFLAGS) -c  TestFileUtil.cpp
 	$(CC) $(CFLAGS) -c  TestTextUtil.cpp
-	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestCore.app *.o -ldl -lcppunit
+	$(CC) $(C_FLAGS) -o $(UNITTESTS_DIR)/TestCore.app *.o $(LIBS) -lcppunit
 clean:
 	rm -rf *.so
 	rm -rf *.o

@@ -8,7 +8,6 @@
 #include <UtilFunc/RelToAbs.h>
 
 #ifdef _WIN32
-#include <io.h>
 #include <shellapi.h>
 #ifdef _MSC_VER
 #pragma comment(lib,"shell32.lib")

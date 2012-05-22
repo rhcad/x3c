@@ -6,8 +6,8 @@ include $(ROOTDIR)/config.mk
 SUBDIRS = $(filter-out Interface/, $(sort $(dir $(wildcard */))))
 CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
-.PHONY: ChangeManager  ConfigXml  FileUtility  LogManager  LogWriter  PluginManager  StringTable  TextUtility
-all: ChangeManager  ConfigXml  FileUtility  LogManager  LogWriter  PluginManager  StringTable  TextUtility
+.PHONY: ChangeManager  ConfigXml  FileUtility  LogManager PluginManager  StringTable  TextUtility
+all: ChangeManager  ConfigXml  FileUtility  LogManager PluginManager  StringTable  TextUtility
 
 ChangeManager:
 	@echo
