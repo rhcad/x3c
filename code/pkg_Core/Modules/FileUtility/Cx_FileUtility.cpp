@@ -186,6 +186,7 @@ bool DeletePathFile_(const wchar_t* filename, bool bRecycle, HWND hwnd)
     wcscpy_s(szFile, MAX_PATH, filename);
     ReplaceSlash(szFile);
     PathRemoveBackslashW(szFile);
+    szFile[wcslen(szFile) + 1] = 0; // end with two zero chars for SHFileOperationW
 
 #ifdef _WIN32
     SHFILEOPSTRUCTW op;
