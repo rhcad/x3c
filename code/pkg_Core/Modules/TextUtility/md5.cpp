@@ -34,14 +34,14 @@ std::string CMD5::MD5(IRead* p)
 	memset(szMD5StringBuffer,0,sizeof(szMD5StringBuffer));
 
     BYTE buf[1024];
-    DWORD bufsize = 0;
+    DWORD bytesRead = 0;
 
 	MD5_CTX context; 
 	MD5Init( &context); 
 
-    while (p->Read(buf, sizeof(buf), &bufsize))
+    while (p->Read(buf, sizeof(buf), &bytesRead) && bytesRead > 0)
     {
-        MD5Update( &context, buf, bufsize );
+        MD5Update( &context, buf, bytesRead );
     }
 
 	unsigned char digest[16]; 
@@ -74,8 +74,7 @@ MD5 block update operation. Continues an MD5 message-digest
 operation, processing another message block, and updating the 
 context. 
 */ 
- void CMD5::MD5Update( 
-					  MD5_CTX *context, /* context */ 
+ void CMD5::MD5Update(MD5_CTX *context, /* context */ 
 					  unsigned char *input, /* input block */ 
 					  size_t inputLen /* length of input block */ 
 					  ) 
@@ -95,17 +94,19 @@ context.
 	
 	/* Transform as many times as possible. */ 
 	if (inputLen >= partLen) { 
-		MD5_memcpy 
-			((POINTER)&context->buffer[index], (POINTER)input, partLen); 
+		MD5_memcpy ((POINTER)&context->buffer[index], 
+            (POINTER)input, partLen); 
 		MD5Transform (context->state, context->buffer); 
 		
-		for (i = partLen; i + 63 < inputLen; i += 64) 
+        for (i = partLen; i + 63 < inputLen; i += 64) {
 			MD5Transform (context->state, &input[i]); 
+        }
 		
 		index = 0; 
 	} 
-	else 
-		i = 0; 
+    else {
+		i = 0;
+    }
 	
 	/* Buffer remaining input */ 
 	MD5_memcpy 
@@ -117,8 +118,7 @@ context.
 MD5 finalization. Ends an MD5 message-digest operation, writing the 
 the message digest and zeroizing the context. 
 */ 
- void CMD5::MD5Final( 
-					 unsigned char digest[16], /* message digest */ 
+ void CMD5::MD5Final(unsigned char digest[16], /* message digest */ 
 					 MD5_CTX *context /* context */ 
 					 ) 
 { 
@@ -146,8 +146,7 @@ the message digest and zeroizing the context.
 /* 
 MD5 basic transformation. Transforms state based on block. 
 */ 
- void CMD5::MD5Transform( 
-						 UINT4 state[4], 
+ void CMD5::MD5Transform(UINT4 state[4], 
 						 unsigned char block[64] 
 						 ) 
 { 
@@ -240,8 +239,7 @@ MD5 basic transformation. Transforms state based on block.
 Encodes input (UINT4) into output (unsigned char). 
 Assumes len is a multiple of 4. 
 */ 
- void CMD5::Encode( 
-				   unsigned char *output, 
+ void CMD5::Encode(unsigned char *output, 
 				   UINT4 *input, 
 				   size_t len 
 				   ) 
@@ -260,8 +258,7 @@ Assumes len is a multiple of 4.
 Decodes input (unsigned char) into output (UINT4). 
 Assumes len is a multiple of 4. 
 */ 
- void CMD5::Decode( 
-				   UINT4 *output, 
+ void CMD5::Decode(UINT4 *output, 
 				   unsigned char *input, 
 				   size_t len 
 				   ) 
@@ -276,8 +273,7 @@ Assumes len is a multiple of 4.
 /* 
 Note: Replace "for loop" with standard memcpy if possible. 
 */ 
- void CMD5::MD5_memcpy( 
-					   POINTER output, 
+ void CMD5::MD5_memcpy(POINTER output, 
 					   POINTER input, 
 					   size_t len 
 					   ) 
@@ -291,8 +287,7 @@ Note: Replace "for loop" with standard memcpy if possible.
 /* 
 Note: Replace "for loop" with standard memset if possible. 
 */ 
- void CMD5::MD5_memset( 
-					   POINTER output, 
+ void CMD5::MD5_memset(POINTER output, 
 					   int value, 
 					   size_t len 
 					   ) 
@@ -332,8 +327,9 @@ get the string add one.
 			orstring[i]='0'; 
 			continue; 
 		} 
-		else 
+        else {
 			orstring[i] += 1; 
+        }
 		break; 
 	} 
 } 
