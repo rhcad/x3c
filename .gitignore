@@ -8,3 +8,5 @@ obj
 *_wrap.cxx
 *.ncb
 *.opt
+*.suo
+*.user
