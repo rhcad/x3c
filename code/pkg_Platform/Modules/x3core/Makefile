@@ -8,7 +8,7 @@ SWIG        +=   -I$(INCLUDE_DIR)/pkg_Core/Interface
 SWIG        +=   -outdir $(SWIGOUT_DIR)
 
 all:
-	-@mkdir $(SWIGOUT_DIR)
+	-@mkdir -p $(SWIGOUT_DIR)
 	$(SWIG) x3core.i
 	$(CC) $(CFLAGS_SO) -c  Module.cpp
 	$(CC) $(C_FLAGS_SO) -o $(SWIGOUT_DIR)/_x3core$(SWIGOUT_EXT) *.o

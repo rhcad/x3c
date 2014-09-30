@@ -9,6 +9,7 @@
 #include "../UtilFunc/ConvStr.h"
 #include <dlfcn.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define W2A(wstr)   x3::w2a(wstr).c_str()
 

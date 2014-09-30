@@ -10,7 +10,7 @@ CLEANSUBDIRS = $(addsuffix .clean, $(SUBDIRS))
 
 Modules:
 	@echo
-	-@mkdir ../bin/plugins
+	-@mkdir -p ../bin/plugins
 	@echo Making all in subdirectory $@...
 	$(MAKE) -C Modules
 

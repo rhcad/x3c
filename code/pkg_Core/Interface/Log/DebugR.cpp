@@ -6,19 +6,20 @@
 
 #ifndef _WIN32
 
+#ifdef LOG_EVENT_ANSI
 int x3CrtDbgReport(const char* file, long line, const char* msg)
 {
-#ifdef LOG_EVENT_ANSI
     Cx_Interface<Ix_LogManager> pIFManager(CLSID_LogManager);
     if (pIFManager)
     {
         pIFManager->CrtDbgReport(msg, file, line);
     }
-#else
-    file;line;msg;
-#endif
     return 0;
 }
+#else
+int x3CrtDbgReport(const char*, long, const char*) { return 0; }
+#endif
+
 
 #else // _WIN32
 

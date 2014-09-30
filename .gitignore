@@ -1,0 +1,10 @@
+.DS_Store
+*.so
+*.a
+*.o
+*.d
+bin
+obj
+*_wrap.cxx
+*.ncb
+*.opt
