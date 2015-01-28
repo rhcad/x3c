@@ -149,9 +149,9 @@ private:
     virtual void OnWriteLog(int nType,
         const std::wstring& wstrMsg, const std::wstring& wstrExtra,
         const std::wstring& wstrModule, const std::wstring& wstrID,
-        const std::wstring& wstrFile, long nLine)
+        const char* file, long nLine)
     {
-        nType; wstrMsg; wstrExtra; wstrModule; wstrID; wstrFile; nLine;
+        nType; wstrMsg; wstrExtra; wstrModule; wstrID; file; nLine;
         m_count++;
     }
 
