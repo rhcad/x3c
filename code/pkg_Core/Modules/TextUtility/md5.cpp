@@ -306,13 +306,13 @@ get the string add one.
  void CMD5::StringAddOne( char * orstring ) 
 { 
 	size_t len; 
-	size_t i,n; 
+	size_t n;
 	
 	len = strlen(orstring); 
 	n = len - 1; 
-	for(i = n; i >= 0; i--) 
+	for(int i = (int)n; i >= 0; i--)
 	{ 
-		if(orstring[i]=='9') 
+		if(orstring[i]=='9')
 		{ 
 			orstring[i] = 'A'; 
 			break; 

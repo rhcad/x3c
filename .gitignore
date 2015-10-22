@@ -10,3 +10,11 @@ obj
 *.opt
 *.suo
 *.user
+*.obj
+*.aps
+*.*sdf
+ipch
+.idea/
+build
+*.tmp
+*~

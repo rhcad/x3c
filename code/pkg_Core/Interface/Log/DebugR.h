@@ -8,12 +8,16 @@
 
 int x3CrtDbgReport(const char* file, long line, const char* msg);
 
-#if !defined(__MINGW_INTRIN_INLINE) && defined(_WIN32)
-#ifndef _MSC_VER
-inline void __debugbreak() {}
-#elif _MSC_VER <= 1200 // VC6
-#define __debugbreak DebugBreak
-#endif
+#if !defined(__MINGW_INTRIN_INLINE)
+    #ifdef _WIN32
+        #ifndef _MSC_VER
+            inline void __debugbreak() {}
+        #elif _MSC_VER <= 1200 // VC6
+            #define __debugbreak DebugBreak
+        #endif
+    #else
+        inline void __debugbreak() {}
+    #endif
 #endif
 
 #undef ASSERT
