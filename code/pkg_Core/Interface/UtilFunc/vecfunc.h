@@ -4,6 +4,9 @@
 #ifndef __STL_VECTOR_FUNCTIONS_H
 #define __STL_VECTOR_FUNCTIONS_H
 
+#undef max
+#undef min
+
 #ifdef _MSC_VER                 // hide warnings
 #pragma warning(disable:4710)   // inline function not expanded
 #pragma warning(disable:4786)   // identifier was truncated
