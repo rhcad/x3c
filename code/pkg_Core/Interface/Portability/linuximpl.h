@@ -7,6 +7,7 @@
 #include "../PluginManager/Ix_PluginLoader2.h"
 #include "../PluginManager/PluginManager.h"
 #include "../UtilFunc/ConvStr.h"
+#include <unistd.h>
 #include <dlfcn.h>
 #include <stdio.h>
 #include <sys/syscall.h>    // for SYS_xxx definitions
